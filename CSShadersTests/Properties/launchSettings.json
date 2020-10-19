@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSShadersTests": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}

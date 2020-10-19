@@ -1,0 +1,22 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct StructWithPrimitiveFields
+    {
+      bool BoolValue;
+      int IntValue;
+      uint UIntValue;
+      float FloatValue;
+      //double DoubleValue;
+      // Float2 mFloat2Value;
+      // Float3 mFloat3Value;
+      // Float4 mFloat4Value;
+      // Int2 mIntValue;
+      // Int3 mIntValue;
+      // Int4 mIntValue;
+      // Bool2 mBoolValue;
+      // Bool3 mBoolValue;
+      // Bool4 mBoolValue;
+    }
+}
+

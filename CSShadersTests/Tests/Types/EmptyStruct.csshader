@@ -1,0 +1,8 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct EmptyStruct
+    {
+    }
+}
+

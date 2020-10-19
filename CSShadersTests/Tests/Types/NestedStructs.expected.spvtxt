@@ -1,0 +1,133 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 98
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Struct1 "Struct1"
+               OpMemberName %Struct1 0 "IntValue"
+               OpName %Struct2 "Struct2"
+               OpMemberName %Struct2 0 "Struct1Data"
+               OpMemberName %Struct2 1 "FloatValue"
+               OpName %NestedStructs "NestedStructs"
+               OpMemberName %NestedStructs 0 "Value"
+               OpMemberName %NestedStructs 1 "Struct2Data"
+               OpMemberName %NestedStructs 2 "Struct1Data"
+               OpMemberName %NestedStructs 3 "FloatValue"
+               OpName %PreConstructor_Struct1 "PreConstructor_Struct1"
+               OpName %self "self"
+               OpName %DefaultConstructor_Struct1 "DefaultConstructor_Struct1"
+               OpName %self_0 "self"
+               OpName %PreConstructor_Struct2 "PreConstructor_Struct2"
+               OpName %self_1 "self"
+               OpName %tempStruct1 "tempStruct1"
+               OpName %DefaultConstructor_Struct2 "DefaultConstructor_Struct2"
+               OpName %self_2 "self"
+               OpName %PreConstructor_NestedStructs "PreConstructor_NestedStructs"
+               OpName %self_3 "self"
+               OpName %tempStruct2 "tempStruct2"
+               OpName %tempStruct1_0 "tempStruct1"
+               OpName %DefaultConstructor_NestedStructs "DefaultConstructor_NestedStructs"
+               OpName %self_4 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_5 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_5 "self"
+       %uint = OpTypeInt 32 0
+%_ptr_Function_uint = OpTypePointer Function %uint
+        %int = OpTypeInt 32 1
+%_ptr_Function_int = OpTypePointer Function %int
+    %Struct1 = OpTypeStruct %int
+%_ptr_Function_Struct1 = OpTypePointer Function %Struct1
+       %void = OpTypeVoid
+%_ptr_Function_void = OpTypePointer Function %void
+          %9 = OpTypeFunction %void %_ptr_Function_Struct1
+      %float = OpTypeFloat 32
+%_ptr_Function_float = OpTypePointer Function %float
+    %Struct2 = OpTypeStruct %Struct1 %float
+%_ptr_Function_Struct2 = OpTypePointer Function %Struct2
+         %15 = OpTypeFunction %void %_ptr_Function_Struct2
+       %bool = OpTypeBool
+%_ptr_Function_bool = OpTypePointer Function %bool
+%NestedStructs = OpTypeStruct %bool %Struct2 %Struct1 %float
+%_ptr_Function_NestedStructs = OpTypePointer Function %NestedStructs
+         %21 = OpTypeFunction %void %_ptr_Function_NestedStructs
+         %23 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+   %uint_0_0 = OpConstant %uint 0
+    %float_0 = OpConstant %float 0
+     %uint_1 = OpConstant %uint 1
+      %false = OpConstantFalse %bool
+   %uint_0_1 = OpConstant %uint 0
+   %uint_1_0 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
+  %float_0_0 = OpConstant %float 0
+     %uint_3 = OpConstant %uint 3
+%PreConstructor_Struct1 = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_Struct1
+         %39 = OpLabel
+         %40 = OpAccessChain %_ptr_Function_int %self %uint_0
+               OpStore %40 %int_0
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_Struct1 = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_Struct1
+         %46 = OpLabel
+         %47 = OpFunctionCall %void %PreConstructor_Struct1 %self_0
+               OpReturn
+               OpFunctionEnd
+%PreConstructor_Struct2 = OpFunction %void None %15
+     %self_1 = OpFunctionParameter %_ptr_Function_Struct2
+         %52 = OpLabel
+%tempStruct1 = OpVariable %_ptr_Function_Struct1 Function
+         %54 = OpFunctionCall %void %DefaultConstructor_Struct1 %tempStruct1
+         %55 = OpAccessChain %_ptr_Function_Struct1 %self_1 %uint_0_0
+         %56 = OpLoad %Struct1 %tempStruct1
+               OpStore %55 %56
+         %58 = OpAccessChain %_ptr_Function_float %self_1 %uint_1
+               OpStore %58 %float_0
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_Struct2 = OpFunction %void None %15
+     %self_2 = OpFunctionParameter %_ptr_Function_Struct2
+         %64 = OpLabel
+         %65 = OpFunctionCall %void %PreConstructor_Struct2 %self_2
+               OpReturn
+               OpFunctionEnd
+%PreConstructor_NestedStructs = OpFunction %void None %21
+     %self_3 = OpFunctionParameter %_ptr_Function_NestedStructs
+         %70 = OpLabel
+%tempStruct2 = OpVariable %_ptr_Function_Struct2 Function
+%tempStruct1_0 = OpVariable %_ptr_Function_Struct1 Function
+         %73 = OpAccessChain %_ptr_Function_bool %self_3 %uint_0_1
+               OpStore %73 %false
+         %75 = OpFunctionCall %void %DefaultConstructor_Struct2 %tempStruct2
+         %76 = OpAccessChain %_ptr_Function_Struct2 %self_3 %uint_1_0
+         %77 = OpLoad %Struct2 %tempStruct2
+               OpStore %76 %77
+         %79 = OpFunctionCall %void %DefaultConstructor_Struct1 %tempStruct1_0
+         %80 = OpAccessChain %_ptr_Function_Struct1 %self_3 %uint_2
+         %81 = OpLoad %Struct1 %tempStruct1_0
+               OpStore %80 %81
+         %83 = OpAccessChain %_ptr_Function_float %self_3 %uint_3
+               OpStore %83 %float_0_0
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_NestedStructs = OpFunction %void None %21
+     %self_4 = OpFunctionParameter %_ptr_Function_NestedStructs
+         %89 = OpLabel
+         %90 = OpFunctionCall %void %PreConstructor_NestedStructs %self_4
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %23
+         %94 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_NestedStructs Function
+         %96 = OpFunctionCall %void %DefaultConstructor_NestedStructs %self_5
+               OpReturn
+               OpFunctionEnd

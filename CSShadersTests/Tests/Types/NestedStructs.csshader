@@ -1,0 +1,23 @@
+namespace Shaders
+{
+    struct Struct1
+    {
+      int IntValue;
+    }
+
+    struct Struct2
+    {
+      Struct1 Struct1Data;
+      float FloatValue;
+    }
+
+    [UnitTest]
+    struct NestedStructs
+    {
+      bool Value;
+      Struct2 Struct2Data;
+      Struct1 Struct1Data;
+      float FloatValue;
+    }
+}
+
