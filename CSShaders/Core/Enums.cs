@@ -11,7 +11,7 @@ namespace CSShaders
 
   public enum StorageClass
   {
-    Function, Generic
+    Function, Generic, Private
   }
 
 

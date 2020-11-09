@@ -9,5 +9,6 @@
     public ShaderType mType;
     /// The meta information about this field from the original source language.
     public ShaderFieldMeta mMeta = null;
+    public bool IsStatic = false;
   }
 }

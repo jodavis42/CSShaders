@@ -10,6 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Libraries\Core\Attributes.csshader">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Libraries\Utilities\Attributes.csshader">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Shaders\Test.csshader">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

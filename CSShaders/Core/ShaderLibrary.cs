@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 
 namespace CSShaders
@@ -6,12 +6,15 @@ namespace CSShaders
   public class ShaderLibrary
   {
     public ShaderModule mDependencies;
-    public Dictionary<TypeKey, ShaderType> mTypeMap = new Dictionary<TypeKey, ShaderType>();
+    public CSharpCompilation SourceCompilation;
+
+    public Dictionary<ConstantOpKey, ShaderConstantLiteral> mConstantLiterals = new Dictionary<ConstantOpKey, ShaderConstantLiteral>();
     public Dictionary<ConstantOpKey, ShaderOp> mConstantOps = new Dictionary<ConstantOpKey, ShaderOp>();
+    public Dictionary<ShaderField, ShaderOp> mStaticGlobals = new Dictionary<ShaderField, ShaderOp>();
+    public Dictionary<TypeKey, ShaderType> mTypeMap = new Dictionary<TypeKey, ShaderType>();
     public Dictionary<FunctionKey, ShaderFunction> mFunctionMap = new Dictionary<FunctionKey, ShaderFunction>();
 
-    public Dictionary<string, ShaderConstantLiteral> mConstantLiterals = new Dictionary<string, ShaderConstantLiteral>();
-
+    //---------------------------------------------------------------Types
     public bool AddType(TypeKey key, ShaderType shaderType)
     {
       return mTypeMap.TryAdd(key, shaderType);
@@ -45,7 +48,7 @@ namespace CSShaders
       return mTypeMap.Values;
     }
 
-
+    //---------------------------------------------------------------Constants
     public bool AddConstant(ConstantOpKey key, ShaderOp shaderOp)
     {
       return mConstantOps.TryAdd(key, shaderOp);
@@ -101,14 +104,10 @@ namespace CSShaders
       return result;
     }
 
-
-
-
-
-
+    //---------------------------------------------------------------Constant Literals
     public ShaderConstantLiteral GetOrCreateConstantLiteral(ShaderConstantLiteral constantLiteral)
     {
-      var key = constantLiteral.mValue.ToString();
+      var key = new ConstantOpKey(constantLiteral);
       var result = mConstantLiterals.GetValueOrDefault(key);
       if(result == null)
       {
@@ -117,6 +116,5 @@ namespace CSShaders
       }
       return result;
     }
-
   }
 }

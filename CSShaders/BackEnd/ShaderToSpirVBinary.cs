@@ -5,18 +5,14 @@ namespace CSShaders
 {
   public class ShaderToSpirVBinary
   {
+    const UInt32 MagicNumber = 0x07230203;
 
-    UInt32 MagicNumber = 0x07230203;
-    ShaderLibrary mLibrary;
     SpirVStreamWriter mWriter;
+    ShaderLibrary mLibrary;
     FrontEndTranslator mFrontEnd;
     TypeDependencyCollector mTypeCollector;
+    SpirvIdGenerator IdGenerator = new SpirvIdGenerator();
 
-
-    UInt32 mId = 1;
-    Dictionary<IShaderIR, UInt32> mIdMap = new Dictionary<IShaderIR, UInt32>();
-    
-    
     public void Write(SpirVStreamWriter writer, ShaderLibrary library, FrontEndTranslator frontEnd)
     {
       mWriter = writer;
@@ -25,67 +21,26 @@ namespace CSShaders
 
       mTypeCollector = new TypeDependencyCollector(mLibrary);
       mTypeCollector.VisitLibrary();
+
       CreateDummyEntryPoint();
-      GenerateIds();
+      IdGenerator.GenerateIds(mLibrary, mTypeCollector);
       WriteHeader();
       WriteDebugInstructions();
       WriteTypeDeclarations();
       WriteConstants();
+      WriteGlobalStatics();
       WriteTypeFunctions();
+    }
+
+    UInt32 GetId(IShaderIR ir)
+    {
+      return IdGenerator.GetId(ir);
     }
 
     void CreateDummyEntryPoint()
     {
-      var unitTestTypes = new List<ShaderType>();
-      foreach(var type in mTypeCollector.mReferencedTypes)
-      {
-        if (type.mMeta.mAttributes.Contains("UnitTest"))
-          unitTestTypes.Add(type);
-      }
-      foreach (var type in unitTestTypes)
-        CreateDummyEntryPoint(mTypeCollector, type);
-      
-    }
-
-    void CreateDummyEntryPoint(TypeDependencyCollector typeCollector, ShaderType shaderType)
-    {
-      
-      var voidType = mLibrary.FindType(new TypeKey(typeof(void)));
-      var dummyMain = mFrontEnd.CreateFunction(shaderType, voidType, "dummyMain", null, null);
-      dummyMain.mResultType = mFrontEnd.CreateFunctionType(voidType, null, null);
-      dummyMain.DebugInfo.Name = "dummyMain";
-      dummyMain.mBlocks.Add(new ShaderBlock());
-      var context = new FrontEndContext();
-      context.mCurrentType = shaderType;
-      context.mCurrentFunction = dummyMain;
-      context.mCurrentBlock = dummyMain.mBlocks[0];
-      var selfOp = mFrontEnd.CreateOpVariable(shaderType, context);
-      selfOp.DebugInfo.Name = "self";
-      if(shaderType.mImplicitConstructor != null)
-      {
-        var fnParamOps = new List<IShaderIR>();
-        fnParamOps.Add(shaderType.mImplicitConstructor);
-        fnParamOps.Add(selfOp);
-        mFrontEnd.CreateOp(context.mCurrentBlock, OpInstructionType.OpFunctionCall, voidType, fnParamOps);
-      }
-      else if(shaderType.mPreConstructor != null)
-      {
-        var fnParamOps = new List<IShaderIR>();
-        fnParamOps.Add(shaderType.mPreConstructor);
-        fnParamOps.Add(selfOp);
-        mFrontEnd.CreateOp(context.mCurrentBlock, OpInstructionType.OpFunctionCall, voidType, fnParamOps);
-      }
-
-      mFrontEnd.FixupBlockTerminators(dummyMain);
-      typeCollector.Visit(dummyMain);
-
-      var dummyEntryPoint = new ShaderEntryPointInfo();
-      dummyEntryPoint.mEntryPointFunction = dummyMain;
-      dummyEntryPoint.mStageType = shaderType.mFragmentType;
-      var executionModeLiteral = mFrontEnd.CreateConstantLiteral(mLibrary.FindType(new TypeKey(typeof(int))), ((int)(Spv.ExecutionMode.ExecutionModeOriginUpperLeft)).ToString());
-      var executionModeOp = mFrontEnd.CreateOp(OpInstructionType.OpExecutionMode, null, new List<IShaderIR> { dummyMain, executionModeLiteral });
-      dummyEntryPoint.mExecutionModesBlock.mOps.Add(executionModeOp);
-      typeCollector.Visit(dummyEntryPoint);
+      var dummyGenerator = new SpirVDummyEntryPointGenerator();
+      dummyGenerator.CreateDummyEntryPoint(mTypeCollector, mLibrary, mFrontEnd);
     }
 
     void WriteHeader()
@@ -93,7 +48,7 @@ namespace CSShaders
       mWriter.Write(MagicNumber);
       mWriter.Write(0, 1, 4, 0);
       mWriter.Write(0);
-      mWriter.Write(mIdMap.Count + 1);
+      mWriter.Write(IdGenerator.Count + 1);
       mWriter.Write(0);
 
       mWriter.WriteInstruction(2, Spv.Op.OpCapability, (UInt32)Spv.Capability.CapabilityShader);
@@ -107,7 +62,8 @@ namespace CSShaders
         var entryPointName = entryPointFn.DebugInfo.Name;
         var byteCount = mWriter.GetPaddedByteCount(entryPointName);
         var wordCount = byteCount / 4;
-        UInt16 totalSize = (UInt16)(3 + wordCount);//+interfaceSize
+        var interfaceSize = entryPoint.mGlobalVariablesBlock.mLocalVariables.Count;
+        UInt16 totalSize = (UInt16)(3 + wordCount + interfaceSize);
 
         Spv.ExecutionModel executionModel = Spv.ExecutionModel.ExecutionModelFragment;
         if (entryPoint.mStageType == FragmentType.Vertex)
@@ -117,6 +73,10 @@ namespace CSShaders
 
         mWriter.WriteInstruction(totalSize, Spv.Op.OpEntryPoint, (UInt32)executionModel, entryPointId);
         mWriter.Write(entryPointFn.DebugInfo.Name);
+        foreach(var interfaceVar in entryPoint.mGlobalVariablesBlock.mLocalVariables)
+        {
+          mWriter.Write(GetId(interfaceVar));
+        }
       }
       // ExecutionMode (per entry point)
       foreach(var entryPoint in mTypeCollector.mEntryPoints)
@@ -131,68 +91,6 @@ namespace CSShaders
       //{
       //  foreach(var capability in entryPoint.m)
       //}
-
-
-    }
-
-    void GenerateIds()
-    {
-      foreach (var type in mTypeCollector.mReferencedTypes)
-      {
-        GetId(type);
-        if (type.mTypeStorage != null)
-          GetId(type.mTypeStorage.mPointerType);
-        foreach (var field in type.mFields)
-          GetId(field.mType);
-      }
-      foreach (var constantLiteral in mLibrary.mConstantLiterals.Values)
-      {
-        //builder.AppendFormat("%{0} = %{1} %{2}", GetId(constantLiteral), GetId(constantLiteral.mType), constantLiteral.mValue.ToString());
-        //builder.AppendLine();
-      }
-      foreach (var constantOp in mLibrary.mConstantOps.Values)
-      {
-        GenerateIds(constantOp);
-        //builder.AppendFormat("%{0} = %{1} %{2}", GetId(constantLiteral), GetId(constantLiteral.mType), constantLiteral.mValue.ToString());
-        //builder.AppendLine();
-      }
-      foreach (var function in mTypeCollector.mReferencedFunctions)
-      {
-        GenerateIds(function);
-      }
-    }
-
-    void GenerateIds(ShaderFunction function)
-    {
-      GetId(function);
-      GenerateIds(function.mParametersBlock);
-      foreach (var block in function.mBlocks)
-        GenerateIds(block);
-    }
-
-    void GenerateIds(ShaderBlock block)
-    {
-      GetId(block);
-      foreach (var op in block.mLocalVariables)
-        GenerateIds(op);
-      foreach (var op in block.mOps)
-        GenerateIds(op);
-    }
-
-    void GenerateIds(IShaderIR ir)
-    {
-      var op = ir as ShaderOp;
-      if (op != null)
-        GenerateIds(op);
-    }
-
-    void GenerateIds(ShaderOp op)
-    {
-      if(op.mResultType != null)
-        GetId(op.mResultType);
-      GetId(op);
-      foreach (var arg in op.mParameters)
-        GenerateIds(arg);
     }
 
     void WriteDebugInstructions()
@@ -206,6 +104,10 @@ namespace CSShaders
       foreach (var function in mTypeCollector.mReferencedFunctions)
       {
         WriteDebugInstructions(function);
+      }
+      foreach (var globalStatic in mTypeCollector.mReferencedStatics)
+      {
+        WriteDebugName(globalStatic, globalStatic.DebugInfo.Name);
       }
       foreach (var entryPoint in mTypeCollector.mEntryPoints)
       {
@@ -255,6 +157,17 @@ namespace CSShaders
       mWriter.Write(debugName);
     }
 
+    Spv.StorageClass ConvertStorageClass(StorageClass storageClass)
+    {
+      if (storageClass == StorageClass.Function)
+        return Spv.StorageClass.StorageClassFunction;
+      else if (storageClass == StorageClass.Private)
+        return Spv.StorageClass.StorageClassPrivate;
+      else if (storageClass == StorageClass.Generic)
+        return Spv.StorageClass.StorageClassGeneric;
+      return Spv.StorageClass.StorageClassFunction;
+    }
+
     void WriteTypeDeclarations()
     {
       foreach (var type in mTypeCollector.mReferencedTypes)
@@ -279,8 +192,12 @@ namespace CSShaders
         }
         else if (type.mBaseType == OpType.Pointer)
         {
-          if(type.mTypeStorage.mDereferenceType.mBaseType != OpType.Function)
-            mWriter.WriteInstruction(4, Spv.Op.OpTypePointer, GetId(type), (UInt32)Spv.StorageClass.StorageClassFunction, GetId(type.mTypeStorage.mDereferenceType));
+          var dereferenceType = type.GetDereferenceType();
+          if(dereferenceType.mBaseType != OpType.Function)
+          {
+            var storageClass = ConvertStorageClass(type.mStorageClass);
+            mWriter.WriteInstruction(4, Spv.Op.OpTypePointer, GetId(type), (UInt32)storageClass, GetId(dereferenceType));
+          }
         }
         else if (type.mBaseType == OpType.Struct)
         {
@@ -305,6 +222,17 @@ namespace CSShaders
       foreach (var constantOp in mLibrary.mConstantOps.Values)
       {
         WriteOp(constantOp);
+      }
+    }
+
+    void WriteGlobalStatics()
+    {
+      foreach (var constantOp in mTypeCollector.mReferencedStatics)
+      {
+        mWriter.WriteInstruction((UInt16)(4), Spv.Op.OpVariable);
+        mWriter.Write(GetId(constantOp.mResultType));
+        mWriter.Write(GetId(constantOp));
+        mWriter.Write((UInt32)Spv.StorageClass.StorageClassPrivate);
       }
     }
 
@@ -339,44 +267,18 @@ namespace CSShaders
     {
       foreach (var ir in instructions)
       {
-        var blockOp = ir as ShaderOp;
-        WriteOp(blockOp);
+        WriteIR(ir);
       }
     }
 
     void WriteIR(IShaderIR ir)
     {
-      var op = ir as ShaderOp;
-      if (op != null)
+      if (ir is ShaderOp op)
         WriteOp(op);
-      else
-      {
-        var constantLiteral = ir as ShaderConstantLiteral;
+      else if (ir is ShaderConstantLiteral constantLiteral)
         WriteConstantLiteral(constantLiteral);
-      }
-    }
-
-    void WriteBasicOp(ShaderOp op, Spv.Op spvOpType)
-    {
-      UInt16 totalSize = (UInt16)(2 + op.mParameters.Count);
-      if (op.mResultType != null)
-        ++totalSize;
-      mWriter.WriteInstruction(totalSize, spvOpType);
-      if (op.mResultType != null)
-        mWriter.Write(GetId(op.mResultType));
-      mWriter.Write(GetId(op));
-      WriteArgs(op.mParameters);
-    }
-
-    void WriteBasicOpNoResultId(ShaderOp op, Spv.Op spvOpType)
-    {
-      UInt16 totalSize = (UInt16)(1 + op.mParameters.Count);
-      if (op.mResultType != null)
-        ++totalSize;
-      mWriter.WriteInstruction(totalSize, spvOpType);
-      if (op.mResultType != null)
-        mWriter.Write(GetId(op.mResultType));
-      WriteArgs(op.mParameters);
+      else
+        throw new Exception();
     }
 
     void WriteOp(ShaderOp op)
@@ -425,7 +327,14 @@ namespace CSShaders
           else if (constantLiteral.mValue is uint uintVal)
             mWriter.Write(uintVal);
           else if (constantLiteral.mValue is float floatVal)
-            mWriter.Write((int)floatVal);
+          {
+            byte[] raw = BitConverter.GetBytes(floatVal);
+            int floatAsInt = BitConverter.ToInt32(raw, 0);
+            mWriter.Write(floatAsInt);
+          }
+          else
+            throw new Exception();
+            
           break;
         case OpInstructionType.OpAccessChain:
           WriteBasicOp(op, Spv.Op.OpAccessChain);
@@ -436,11 +345,33 @@ namespace CSShaders
           mWriter.Write(GetId(op.mResultType));
           mWriter.Write(GetId(op));
           WriteArgs(op.mParameters);
-
           break;
         default:
           throw new Exception();
       }
+    }
+
+    void WriteBasicOp(ShaderOp op, Spv.Op spvOpType)
+    {
+      UInt16 totalSize = (UInt16)(2 + op.mParameters.Count);
+      if (op.mResultType != null)
+        ++totalSize;
+      mWriter.WriteInstruction(totalSize, spvOpType);
+      if (op.mResultType != null)
+        mWriter.Write(GetId(op.mResultType));
+      mWriter.Write(GetId(op));
+      WriteArgs(op.mParameters);
+    }
+
+    void WriteBasicOpNoResultId(ShaderOp op, Spv.Op spvOpType)
+    {
+      UInt16 totalSize = (UInt16)(1 + op.mParameters.Count);
+      if (op.mResultType != null)
+        ++totalSize;
+      mWriter.WriteInstruction(totalSize, spvOpType);
+      if (op.mResultType != null)
+        mWriter.Write(GetId(op.mResultType));
+      WriteArgs(op.mParameters);
     }
 
     void WriteArgs(List<IShaderIR> args)
@@ -468,24 +399,11 @@ namespace CSShaders
           mWriter.Write(intValue);
         else if (constantLiteral.mValue is uint uintValue)
           mWriter.Write(uintValue);
+        else
+          throw new Exception();
       }
       else
         throw new Exception();
     }
-
-    UInt32 GetId(IShaderIR ir)
-    {
-      if (!mIdMap.ContainsKey(ir))
-      {
-        mIdMap.Add(ir, mId);
-        ++mId;
-      }
-      return mIdMap[ir];
-    }
-
-
-
-
-
   }
 }

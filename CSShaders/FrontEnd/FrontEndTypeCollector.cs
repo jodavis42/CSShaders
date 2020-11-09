@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 
 namespace CSShaders
 {
@@ -10,14 +11,15 @@ namespace CSShaders
   {
     public override void VisitClassDeclaration(ClassDeclarationSyntax node)
     {
-      AddError(node, "Keyword 'class' not allowed. Use 'struct' instead");
+      if(!IsValidClassDeclaration(node))
+        AddError(node, "Keyword 'class' not allowed. Use 'struct' instead");
     }
 
     public override void VisitStructDeclaration(StructDeclarationSyntax node)
     {
       var structSymbol = GetDeclaredSymbol(node);
       var shaderType = CreateType(structSymbol, OpType.Struct);
-      shaderType.mMeta.mAttributes = mFrontEnd.ParseAttributes(structSymbol);
+      ParseAttributes(shaderType.mMeta, structSymbol);
       ExtractDebugInfo(shaderType, structSymbol, node);
     }
   }

@@ -19,6 +19,12 @@ namespace CSShaders
       base.Visit(node);
     }
 
+    public override void VisitClassDeclaration(ClassDeclarationSyntax node)
+    {
+      if (!IsValidClassDeclaration(node))
+        AddError(node, "Keyword 'class' not allowed. Use 'struct' instead");
+    }
+
     public void AddError(SyntaxNode node, string errorMsg)
     {
       Console.WriteLine(String.Format("Error {0}: {1}", node.GetLocation().ToString(), errorMsg));
@@ -81,7 +87,7 @@ namespace CSShaders
       return mFrontEnd.CreateType(symbol, opType);
     }
 
-    public ShaderFunction FindFunction(MethodDeclarationSyntax node)
+    public ShaderFunction FindFunction(BaseMethodDeclarationSyntax node)
     {
       var symbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
       if (symbol == null)
@@ -105,6 +111,22 @@ namespace CSShaders
       op.mResultType = fieldType;
       op.mParameters.Add(fieldType);
       return op;
+    }
+
+    public ShaderOp FindStaticField(ISymbol symbol)
+    {
+      // Try and find the type that owns this symbol
+      var owningType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(symbol.ContainingType));
+      if (owningType == null)
+        return null;
+
+      // Find the field on this symbol
+      ShaderField shaderField;
+      int fieldIndex;
+      mFrontEnd.FindField(owningType, symbol.Name, out shaderField, out fieldIndex);
+      // Look up the stored spirv field in the library
+      var staticOp = mFrontEnd.mCurrentLibrary.mStaticGlobals.GetValueOrDefault(shaderField);
+      return staticOp;
     }
 
     public ShaderOp CreateOp(OpInstructionType opType, ShaderType resultType, List<IShaderIR> arguments)
@@ -143,6 +165,35 @@ namespace CSShaders
     {
       ir.DebugInfo.Name = symbol.Name;
       ir.DebugInfo.Location = node.GetLocation();
+    }
+
+    public void ParseAttributes(ShaderIRMeta shaderMeta, ISymbol symbol)
+    {
+      shaderMeta.mAttributes = mFrontEnd.ParseAttributes(symbol);
+    }
+
+    public ShaderType FindParameterType(ShaderType paramType, IParameterSymbol paramSymbol)
+    {
+      if (paramSymbol == null || paramSymbol.RefKind == RefKind.None)
+        return paramType;
+
+      return paramType.StorageClassCollection.FindPointerType(StorageClass.Function);
+    }
+
+    public ShaderType FindParameterType(ParameterSyntax paramSyntaxNode)
+    {
+      var paramType = FindType(paramSyntaxNode.Type);
+      var paramSymbol = GetDeclaredSymbol(paramSyntaxNode) as IParameterSymbol;
+      if (paramSymbol == null || paramSymbol.RefKind == RefKind.None)
+        return paramType;
+
+      return paramType.StorageClassCollection.FindPointerType(StorageClass.Function);
+    }
+
+    public bool IsValidClassDeclaration(ClassDeclarationSyntax node)
+    {
+      var symbol = GetDeclaredSymbol(node) as ITypeSymbol;
+      return symbol.BaseType.Name == typeof(Attribute).Name;
     }
   }
 }

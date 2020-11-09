@@ -1,0 +1,32 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct GetSetStaticFields
+    {
+      static bool BoolValue;
+      static int IntValue;
+      static uint UIntValue;
+      static float FloatValue;
+
+      [EntryPoint]
+      void Main()
+      {
+        GetSetStaticFields.BoolValue = false;
+        var boolValue = GetSetStaticFields.BoolValue;
+        boolValue = BoolValue;
+
+        GetSetStaticFields.IntValue = 0;
+        var intValue = GetSetStaticFields.IntValue;
+        intValue = IntValue;
+
+        GetSetStaticFields.UIntValue = 0u;
+        var uintValue = GetSetStaticFields.UIntValue;
+        uintValue = UIntValue;
+
+        GetSetStaticFields.FloatValue = 0.0f;
+        var floatValue = GetSetStaticFields.FloatValue;
+        floatValue = FloatValue;
+      }
+    }
+}
+

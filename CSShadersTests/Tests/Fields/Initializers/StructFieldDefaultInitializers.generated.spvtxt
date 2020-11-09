@@ -1,0 +1,84 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 60
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %SubStruct "SubStruct"
+               OpMemberName %SubStruct 0 "Value"
+               OpName %StructFieldDefaultInitializers "StructFieldDefaultInitializers"
+               OpMemberName %StructFieldDefaultInitializers 0 "SubStruct"
+               OpName %PreConstructor_SubStruct "PreConstructor_SubStruct"
+               OpName %self "self"
+               OpName %DefaultConstructor_SubStruct "DefaultConstructor_SubStruct"
+               OpName %self_0 "self"
+               OpName %PreConstructor_StructFieldDefaultInitializers "PreConstructor_StructFieldDefaultInitializers"
+               OpName %self_1 "self"
+               OpName %tempSubStruct "tempSubStruct"
+               OpName %DefaultConstructor_StructFieldDefaultInitializers "DefaultConstructor_StructFieldDefaultInitializers"
+               OpName %self_2 "self"
+               OpName %Main "Main"
+               OpName %self_3 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_4 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+  %SubStruct = OpTypeStruct %int
+       %void = OpTypeVoid
+%_ptr_Function_SubStruct = OpTypePointer Function %SubStruct
+          %9 = OpTypeFunction %void %_ptr_Function_SubStruct
+%_ptr_Function_int = OpTypePointer Function %int
+%StructFieldDefaultInitializers = OpTypeStruct %SubStruct
+%_ptr_Function_StructFieldDefaultInitializers = OpTypePointer Function %StructFieldDefaultInitializers
+         %13 = OpTypeFunction %void %_ptr_Function_StructFieldDefaultInitializers
+         %15 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+%PreConstructor_SubStruct = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_SubStruct
+         %22 = OpLabel
+         %23 = OpAccessChain %_ptr_Function_int %self %uint_0
+               OpStore %23 %int_0
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_SubStruct = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_SubStruct
+         %29 = OpLabel
+         %30 = OpFunctionCall %void %PreConstructor_SubStruct %self_0
+               OpReturn
+               OpFunctionEnd
+%PreConstructor_StructFieldDefaultInitializers = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_StructFieldDefaultInitializers
+         %35 = OpLabel
+%tempSubStruct = OpVariable %_ptr_Function_SubStruct Function
+         %37 = OpFunctionCall %void %DefaultConstructor_SubStruct %tempSubStruct
+         %38 = OpLoad %SubStruct %tempSubStruct
+         %39 = OpAccessChain %_ptr_Function_SubStruct %self_1 %uint_0
+               OpStore %39 %38
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_StructFieldDefaultInitializers = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_StructFieldDefaultInitializers
+         %45 = OpLabel
+         %46 = OpFunctionCall %void %PreConstructor_StructFieldDefaultInitializers %self_2
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_StructFieldDefaultInitializers
+         %51 = OpLabel
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %15
+         %55 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_StructFieldDefaultInitializers Function
+         %57 = OpFunctionCall %void %DefaultConstructor_StructFieldDefaultInitializers %self_4
+         %58 = OpFunctionCall %void %Main %self_4
+               OpReturn
+               OpFunctionEnd

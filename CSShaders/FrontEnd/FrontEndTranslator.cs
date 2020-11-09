@@ -41,7 +41,7 @@ namespace CSShaders
       new FrontEndTypeCollector(),
       // Collect all functions/vars definitions
       new FrontEndDeclarationCollector(),
-      //new FrontEndPreconstructorPass(),
+      new FrontEndPreconstructorPass(),
       // Collect all function contents, var definitions
       new FrontEndDefinitionCollector()
     };
@@ -61,8 +61,9 @@ namespace CSShaders
     public ShaderType CreatePrimitive(Type type, OpType opType)
     {
       var shaderType = CreateType(new TypeKey(type), type.Name, opType, null);
+      // Clear out the debug names for primitives. The disassembler names are best for primitives.
       shaderType.DebugInfo.Name = "";
-      shaderType.mTypeStorage.mPointerType.DebugInfo.Name = "";
+      shaderType.FindPointerType(StorageClass.Function).DebugInfo.Name = "";
       return shaderType;
     }
 
@@ -77,11 +78,28 @@ namespace CSShaders
       shaderType.DebugInfo.Name = typeName;
       shaderType.mMeta.mName = typeName;
       shaderType.mBaseType = opType;
-      shaderType.mTypeStorage = new ShaderTypeStorage();
-      shaderType.mTypeStorage.mDereferenceType = shaderType;
+      shaderType.StorageClassCollection = new ShaderTypeStorageClassCollection(shaderType);
 
-      shaderType.mTypeStorage.mPointerType = CreatePointerType(key, typeName);
-      shaderType.mTypeStorage.mPointerType.mMeta.mName = typeName + "_ptr";
+      var pointerType = CreatePointerType(key, typeName);
+      pointerType.mMeta.mName = typeName + "_ptr";
+
+      return shaderType;
+    }
+
+    public ShaderType CreateType(ShaderType baseType, StorageClass storageClass, bool ispointerType)
+    {
+      var typeStorage = baseType.StorageClassCollection;
+      var pointerType = typeStorage.FindPointerType(storageClass);
+      if (pointerType != null)
+        return pointerType;
+      var shaderType = new ShaderType();
+      shaderType.DebugInfo.Name = "";
+      shaderType.mMeta.mName = baseType.mMeta.mName;
+      shaderType.mBaseType = OpType.Pointer;
+      shaderType.mStorageClass = storageClass;
+      shaderType.StorageClassCollection = typeStorage;
+      shaderType.mParameters.AddRange(baseType.mParameters);
+      typeStorage.AddPointerType(storageClass, shaderType);
 
       return shaderType;
     }
@@ -90,11 +108,27 @@ namespace CSShaders
     {
       string ptrTypeName = typeName + "_ptr";
       var baseType = mCurrentLibrary.FindType(key);
-      var pointerType = mCurrentLibrary.FindOrCreateType(new TypeKey(ptrTypeName));
+      var pointerType = new ShaderType();
       pointerType.mBaseType = OpType.Pointer;
-      pointerType.mTypeStorage = baseType.mTypeStorage;
       pointerType.DebugInfo.Name = "";
+      baseType.StorageClassCollection.AddPointerType(StorageClass.Function, pointerType);
       return pointerType;
+    }
+
+    public ShaderFunction CreateFunctionAndType(ShaderType owningType, ShaderType returnType, string name, ShaderType thisType, List<ShaderType> args)
+    {
+      var shaderFunction = new ShaderFunction();
+      shaderFunction.mMeta.mName = name;
+      shaderFunction.DebugInfo.Name = name;
+      shaderFunction.mResultType = FindOrCreateFunctionType(returnType, thisType, args);
+      shaderFunction.mParameters.Add(returnType);
+      if (thisType != null)
+        shaderFunction.mParameters.Add(thisType);
+      if (args != null)
+        shaderFunction.mParameters.AddRange(args);
+      shaderFunction.mMeta.IsStatic = shaderFunction.IsStatic = (thisType == null);
+      owningType.mFunctions.Add(shaderFunction);
+      return shaderFunction;
     }
 
     public ShaderFunction CreateFunction(ShaderType owningType, ShaderType returnType, string name, ShaderType thisType, List<ShaderType> args)
@@ -113,6 +147,11 @@ namespace CSShaders
     }
 
     public ShaderType CreateFunctionType(ShaderType returnType, ShaderType thisType, List<ShaderType> argTypes)
+    {
+      return FindOrCreateFunctionType(returnType, thisType, argTypes);
+    }
+
+    public ShaderType FindOrCreateFunctionType(ShaderType returnType, ShaderType thisType, List<ShaderType> argTypes)
     {
       var builder = new StringBuilder();
       builder.Append(returnType.mMeta.mName);
@@ -180,7 +219,10 @@ namespace CSShaders
           }
         case OpType.Int:
           {
-            constantOp.mValue = int.Parse(value);
+            if (ShaderType.IsSignedInt(constantType))
+              constantOp.mValue = int.Parse(value);
+            else
+              constantOp.mValue = uint.Parse(value);
             break;
           }
 
@@ -201,7 +243,7 @@ namespace CSShaders
       var constantOp = new ShaderConstantLiteral();
       constantOp.mType = mCurrentLibrary.FindType(new TypeKey(typeof(uint)));
       constantOp.mValue = value;
-      mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
+      constantOp = mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
       return constantOp;
     }
     public ShaderConstantLiteral CreateConstantLiteral(int value)
@@ -209,7 +251,7 @@ namespace CSShaders
       var constantOp = new ShaderConstantLiteral();
       constantOp.mType = mCurrentLibrary.FindType(new TypeKey(typeof(int)));
       constantOp.mValue = value;
-      mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
+      constantOp = mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
       return constantOp;
     }
 
@@ -219,8 +261,18 @@ namespace CSShaders
       var constantOp = mCurrentLibrary.FindConstant(constantOpKey);
       if (constantOp == null)
       {
-        constantOp = mCurrentLibrary.CreateConstant(constantOpKey);
-        InitializeOp(constantOp, OpInstructionType.OpConstant, constantType, new List<IShaderIR> { constantLiteral });
+        constantOp = mCurrentLibrary.FindOrCreateConstant(constantOpKey);
+        // Handle bools specially (they're special ops in spirv)
+        if(constantType.mBaseType == OpType.Bool)
+        {
+          var boolVal = (bool)constantLiteral.mValue;
+          if (boolVal == true)
+            InitializeOp(constantOp, OpInstructionType.OpConstantTrue, constantType, null);
+          else
+            InitializeOp(constantOp, OpInstructionType.OpConstantFalse, constantType, null);
+        }
+        else
+          InitializeOp(constantOp, OpInstructionType.OpConstant, constantType, new List<IShaderIR> { constantLiteral });
       }
       return constantOp;
     }
@@ -231,7 +283,7 @@ namespace CSShaders
       var constantOp = mCurrentLibrary.FindConstant(constantOpKey);
       if (constantOp == null)
       {
-        constantOp = mCurrentLibrary.CreateConstant(constantOpKey);
+        constantOp = mCurrentLibrary.FindOrCreateConstant(constantOpKey);
         if (constantLiteral == true)
           InitializeOp(constantOp, OpInstructionType.OpConstantTrue, constantType, null);
         else
@@ -242,7 +294,7 @@ namespace CSShaders
 
     public ShaderOp CreateOpVariable(ShaderType resultType, FrontEndContext context)
     {
-      var variableOp = CreateOp(OpInstructionType.OpVariable, resultType.mTypeStorage.mPointerType, null);
+      var variableOp = CreateOp(OpInstructionType.OpVariable, resultType.FindPointerType(resultType.mStorageClass), null);
       context.mCurrentFunction.mBlocks[0].mLocalVariables.Add(variableOp);
       return variableOp;
     }
@@ -297,12 +349,12 @@ namespace CSShaders
 
     static public ShaderType GetValueType(ShaderType shaderType)
     {
-      return shaderType.mTypeStorage.mDereferenceType;
+      return shaderType.GetDereferenceType();
     }
 
     static public ShaderType GetPointerType(ShaderType shaderType)
     {
-      return shaderType.mTypeStorage.mPointerType;
+      return shaderType.FindPointerType(StorageClass.Function);
     }
 
     public void FixupBlockTerminators(ShaderFunction shaderFunction)
@@ -351,6 +403,62 @@ namespace CSShaders
         }
       }
       return shaderAttributes;
+    }
+
+    public void FindField(ShaderType owningType, string fieldName, out ShaderField shaderField, out int fieldIndex)
+    {
+      for (var i = 0; i < owningType.mFields.Count; ++i)
+      {
+        var field = owningType.mFields[i];
+        if (field.mMeta.mName == fieldName)
+        {
+          shaderField = field;
+          fieldIndex = i;
+          return;
+        }
+      }
+      shaderField = null;
+      fieldIndex = -1;
+    }
+
+    public ShaderOp CreateStaticField(ShaderType owningType, ShaderField fieldType)
+    {
+      // Static fields are a special storage class. Create the pointer type if needed.
+      var staticFieldType = fieldType.mType.FindPointerType(StorageClass.Private);
+      if(staticFieldType == null)
+        staticFieldType = CreateType(fieldType.mType, StorageClass.Private, true);
+      
+      var op = new ShaderOp();
+      op.mOpType = OpInstructionType.OpVariable;
+      op.mResultType = staticFieldType;
+      op.mParameters.Add(staticFieldType);
+      mCurrentLibrary.mStaticGlobals.Add(fieldType, op);
+      return op;
+    }
+
+    public ShaderType FindType(Type type)
+    {
+      return mCurrentLibrary.FindType(new TypeKey(type));
+    }
+
+    public ShaderOp GenerateAccessChain(IShaderIR selfIR, string fieldName, FrontEndContext context)
+    {
+      var selfOp = selfIR as ShaderOp;
+      var selfType = selfOp.mResultType.GetDereferenceType();
+      ShaderField shaderField;
+      int fieldIndex;
+      FindField(selfType, fieldName, out shaderField, out fieldIndex);
+      return GenerateAccessChain(selfIR, shaderField.mType, (uint)fieldIndex, context);
+    }
+
+    public ShaderOp GenerateAccessChain(IShaderIR selfIR, ShaderType resultType, uint fieldIndex, FrontEndContext context)
+    {
+      var selfOp = selfIR as ShaderOp;
+      var constantLiteral = CreateConstantLiteral(fieldIndex);
+      var memberIndexConstant = CreateConstantOp(FindType(typeof(uint)), constantLiteral);
+      resultType = resultType.FindPointerType(selfOp.mResultType.mStorageClass);
+      var memberVariableOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpAccessChain, resultType, new List<IShaderIR> { selfOp, memberIndexConstant });
+      return memberVariableOp;
     }
   }
 }

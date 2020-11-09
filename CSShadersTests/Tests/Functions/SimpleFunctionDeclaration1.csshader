@@ -1,0 +1,12 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct SimpleFunctionDeclaration1
+    {
+      [EntryPoint]
+      void Main()
+      {
+      }
+    }
+}
+

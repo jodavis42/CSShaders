@@ -20,14 +20,35 @@ namespace CSShaders
       mOpType = OpInstructionType.OpFunction;
     }
 
-    public bool IsStatic()
-    {
-      return false;
-    }
+    public bool IsStatic { get; set; } = false;
 
     public ShaderType GetFunctionType()
     {
       return mResultType;
+    }
+
+    public ShaderType GetReturnType()
+    {
+      return mParameters[0] as ShaderType;
+    }
+
+    public int ExplicitParameterCount
+    {
+      get
+      {
+        // Arg 0 is fnType, arg1 might be the this
+        if(IsStatic)
+          return mParameters.Count - 2;
+        return mParameters.Count - 1;
+      }
+    }
+
+    public ShaderType GetExplicitParameterType(int paramIndex)
+    {
+      var actualIndex = 1 + (IsStatic ? 0 : 1) + paramIndex;
+      if (actualIndex >= mParameters.Count)
+        return null;
+      return mParameters[actualIndex] as ShaderType;
     }
   }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace CSShaders
 {
@@ -115,6 +114,5 @@ namespace CSShaders
     {
       return GetPaddedByteCount(text) / 4;
     }
-
   }
 }

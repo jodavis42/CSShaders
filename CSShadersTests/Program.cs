@@ -1,24 +1,32 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
+﻿using CSShaders;
 using System.IO;
-using CSShaders;
 
 namespace CSShadersTests
 {
   class Program
   {
-    static ShaderModule mDependencies;
-    static FrontEndTranslator mFrontEnd = new FrontEndTranslator();
+    static SimpleShaderGenerator SimpleGenerator = new SimpleShaderGenerator();
 
     static void Main(string[] args)
     {
-      mDependencies = new ShaderModule();
-      mDependencies.Add(new CoreShaderLibrary(mFrontEnd));
-      
-      RunTests("Tests");
+      LoadCoreLibraries();
+
+      var path = "Tests";
+      if (args.Length != 0)
+        path = args[0];
+
+      if (Directory.Exists(path))
+        RunTests(path);
+      else
+        RunTest(path);
     }
 
+    static void LoadCoreLibraries()
+    {
+      var path = Path.Combine("..", "CSShaders", "Libraries");
+      SimpleGenerator.LoadDependencies(path);
+    }
+    
     static void RunTests(string path)
     {
       foreach(var file in Directory.EnumerateFiles(path))
@@ -34,17 +42,16 @@ namespace CSShadersTests
 
     static void RunTest(string filePath)
     {
+      if (!File.Exists(filePath))
+        return;
+
       if (Path.GetExtension(filePath) != ".csshader")
         return;
 
-      SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(filePath));
-      var compilation = CSharpCompilation.Create("MyCompilation", new[] { tree }, new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
-      var semanticModel = compilation.GetSemanticModel(tree);
+      SimpleGenerator.ClearFragmentProject();
+      SimpleGenerator.LoadFragmentFile(filePath);
+      SimpleGenerator.CompileFragmentProject();
 
-      FrontEndTranslator frontEnd = new FrontEndTranslator();
-      frontEnd.mCurrentLibrary = new ShaderLibrary();
-      frontEnd.mCurrentLibrary.mDependencies = mDependencies;
-      frontEnd.Translate(tree, semanticModel);
 
       var binaryOutPath = Path.ChangeExtension(filePath, ".generated.spv");
       var validatorOutPath = Path.ChangeExtension(filePath, ".generated.spvval");
@@ -56,7 +63,7 @@ namespace CSShadersTests
       var writer = new BinaryWriter(new FileStream(binaryOutPath, FileMode.Create));
       var spirvWriter = new SpirVStreamWriter(writer);
       var spirVBinaryBackend = new ShaderToSpirVBinary();
-      spirVBinaryBackend.Write(spirvWriter, frontEnd.mCurrentLibrary, frontEnd);
+      spirVBinaryBackend.Write(spirvWriter, SimpleGenerator.FragmentLibrary, SimpleGenerator.FrontEnd);
       writer.Close();
 
       var validatorTool = new SpirVValidatorTool();

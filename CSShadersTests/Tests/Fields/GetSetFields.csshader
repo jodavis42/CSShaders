@@ -1,0 +1,32 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct GetSetFields
+    {
+      bool BoolValue;
+      int IntValue;
+      uint UIntValue;
+      float FloatValue;
+
+      [EntryPoint]
+      void Main()
+      {
+        this.BoolValue = false;
+        var boolValue = this.BoolValue;
+        boolValue = BoolValue;
+
+        this.IntValue = 0;
+        var intValue = this.IntValue;
+        intValue = IntValue;
+
+        this.UIntValue = 0u;
+        var uintValue = this.UIntValue;
+        uintValue = UIntValue;
+
+        this.FloatValue = 0.0f;
+        var floatValue = this.FloatValue;
+        floatValue = FloatValue;
+      }
+    }
+}
+

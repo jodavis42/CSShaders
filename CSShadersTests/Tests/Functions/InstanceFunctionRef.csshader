@@ -1,0 +1,20 @@
+
+namespace Shaders
+{
+    [UnitTest]
+    struct InstanceFunctionRef
+    {
+      void TestFn1(ref int value)
+      {
+        value = 3;
+      }
+
+      [EntryPoint]
+      void Main()
+      {
+        int value = 1;
+        this.TestFn1(ref value);
+      }
+    }
+}
+

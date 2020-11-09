@@ -1,0 +1,18 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct PrimitiveFieldDefaultInitializers
+    {
+      bool BoolValue;
+      int IntValue;
+      uint UIntValue;
+      float FloatValue;
+
+      [EntryPoint]
+      void Main()
+      {
+        
+      }
+    }
+}
+

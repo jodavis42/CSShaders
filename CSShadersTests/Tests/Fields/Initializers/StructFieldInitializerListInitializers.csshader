@@ -1,0 +1,21 @@
+namespace Shaders
+{
+    public struct SubStruct
+    {
+      public int IntValue = 0;
+      public float FloatVal = 1.0f;
+    }
+
+    [UnitTest]
+    struct StructFieldConstructorInitializers
+    {
+      SubStruct SubStruct = new SubStruct() { IntValue = 3, FloatVal = 3.1f };
+
+      [EntryPoint]
+      void Main()
+      {
+        
+      }
+    }
+}
+

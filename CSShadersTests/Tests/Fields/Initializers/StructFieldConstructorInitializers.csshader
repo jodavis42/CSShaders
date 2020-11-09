@@ -1,0 +1,24 @@
+namespace Shaders
+{
+    public struct SubStruct
+    {
+      public int Value = 0;
+      public SubStruct(int value)
+      {
+        Value = value;
+      }
+    }
+
+    [UnitTest]
+    struct StructFieldConstructorInitializers
+    {
+      SubStruct SubStruct = new SubStruct(1);
+
+      [EntryPoint]
+      void Main()
+      {
+        
+      }
+    }
+}
+

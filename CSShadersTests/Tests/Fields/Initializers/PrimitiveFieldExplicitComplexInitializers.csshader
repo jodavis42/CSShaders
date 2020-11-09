@@ -1,0 +1,41 @@
+namespace Shaders
+{
+    struct InitialValues
+    {
+      public static bool GetBool()
+      {
+        return false;
+      }
+
+      public static int GetInt()
+      {
+        return 1;
+      }
+
+      public static uint GetUint()
+      {
+        return 2u;
+      }
+
+      public static float GetFloat()
+      {
+        return 3.0f;
+      }
+    }
+
+    [UnitTest]
+    struct PrimitiveFieldExplicitComplexInitializers
+    {
+      bool BoolValue = InitialValues.GetBool();
+      int IntValue = InitialValues.GetInt();
+      uint UIntValue = InitialValues.GetUint();
+      float FloatValue = InitialValues.GetFloat();
+
+      [EntryPoint]
+      void Main()
+      {
+        
+      }
+    }
+}
+

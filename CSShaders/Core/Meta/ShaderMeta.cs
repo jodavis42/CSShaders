@@ -10,10 +10,11 @@
 
   public class ShaderFunctionMeta : ShaderIRMeta
   {
-
+    public bool IsStatic = false;
   }
 
   public class ShaderFieldMeta : ShaderIRMeta
   {
+    public bool IsStatic = false;
   }
 }

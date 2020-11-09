@@ -1,0 +1,68 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 48
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %SimpleFunctionDeclaration2 "SimpleFunctionDeclaration2"
+               OpName %PreConstructor_SimpleFunctionDeclaration2 "PreConstructor_SimpleFunctionDeclaration2"
+               OpName %self "self"
+               OpName %DefaultConstructor_SimpleFunctionDeclaration2 "DefaultConstructor_SimpleFunctionDeclaration2"
+               OpName %self_0 "self"
+               OpName %GetValue "GetValue"
+               OpName %self_1 "self"
+               OpName %value "value"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %value_0 "value"
+               OpName %dummyMain "dummyMain"
+               OpName %self_3 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_3 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%SimpleFunctionDeclaration2 = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_SimpleFunctionDeclaration2 = OpTypePointer Function %SimpleFunctionDeclaration2
+          %9 = OpTypeFunction %void %_ptr_Function_SimpleFunctionDeclaration2
+         %11 = OpTypeFunction %int %_ptr_Function_SimpleFunctionDeclaration2 %int
+%_ptr_Function_int = OpTypePointer Function %int
+         %13 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+%PreConstructor_SimpleFunctionDeclaration2 = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
+         %19 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_SimpleFunctionDeclaration2 = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
+         %24 = OpLabel
+         %25 = OpFunctionCall %void %PreConstructor_SimpleFunctionDeclaration2 %self_0
+               OpReturn
+               OpFunctionEnd
+   %GetValue = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
+      %value = OpFunctionParameter %int
+         %31 = OpLabel
+               OpReturnValue %value
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
+         %36 = OpLabel
+    %value_0 = OpVariable %_ptr_Function_int Function
+         %38 = OpFunctionCall %int %GetValue %self_2 %int_1
+               OpStore %value_0 %38
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %13
+         %43 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_SimpleFunctionDeclaration2 Function
+         %45 = OpFunctionCall %void %DefaultConstructor_SimpleFunctionDeclaration2 %self_3
+         %46 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd

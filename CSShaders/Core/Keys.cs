@@ -77,17 +77,66 @@ namespace CSShaders
     {
       mType = shaderType;
       mValue = value;
+      Validate();
     }
 
     public ConstantOpKey(ShaderConstantLiteral constant)
     {
       mType = constant.mType;
       mValue = constant.mValue;
+      Validate();
+    }
+
+    void Validate()
+    {
+      switch (mType.mBaseType)
+      {
+        case OpType.Bool:
+          {
+            if (!(mValue is bool value))
+              throw new Exception();
+            break;
+          }
+        case OpType.Int:
+          {
+            if (mType.mParameters.Count < 2)
+              return;
+            if (!ShaderType.IsSignedInt(mType))
+            {
+              if (!(mValue is uint value))
+                throw new Exception();
+            }
+            else
+            {
+              if (!(mValue is int value))
+                throw new Exception();
+            }
+            break;
+          }
+        case OpType.Float:
+          {
+            if (!(mValue is float value))
+              throw new Exception();
+            break;
+          }
+      }
     }
 
     public override int GetHashCode()
     {
       return HashCode.Combine(mType.GetHashCode(), mValue.GetHashCode());
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (obj is ConstantOpKey key)
+      {
+        if (key.mType != mType)
+          return false;
+
+        return mValue.Equals(key.mValue);
+      }
+      return false;
     }
   }
 }

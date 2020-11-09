@@ -1,0 +1,18 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct SimpleFunctionDeclaration2
+    {
+      int GetValue(int value)
+      {
+        return value;
+      }
+
+      [EntryPoint]
+      void Main()
+      {
+        int value = this.GetValue(1);
+      }
+    }
+}
+

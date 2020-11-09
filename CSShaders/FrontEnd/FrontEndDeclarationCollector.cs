@@ -13,72 +13,85 @@ namespace CSShaders
   {
     public override void VisitStructDeclaration(StructDeclarationSyntax node)
     {
-      // Set the current type and then recurse
-      mContext.mCurrentType = FindDeclaredType(node);
-      GeneratePreConstructor(GetDeclaredSymbol(node)as INamedTypeSymbol, mContext.mCurrentType);
-      GenerateDefaultConstructor(GetDeclaredSymbol(node) as INamedTypeSymbol, mContext.mCurrentType);
+      var shaderType = FindDeclaredType(node);
+      mContext.mCurrentType = shaderType;
+      
+      var namedTypeSymbol = GetDeclaredSymbol(node) as INamedTypeSymbol;
+
+      // Generate any preconstructor and default constructor functions if needed
+      GeneratePreConstructor(namedTypeSymbol, mContext.mCurrentType);
+      GenerateDefaultConstructor(namedTypeSymbol, mContext.mCurrentType);
+      // Walk all children (functions and fields)
       base.VisitStructDeclaration(node);
+
       mContext.mCurrentType = null;
     }
 
     public void GeneratePreConstructor(INamedTypeSymbol structSymbol, ShaderType owningType)
     {
-      var returnType = FindType(typeof(void));
-      var thisType = owningType.mTypeStorage.mPointerType;
+      // The preconstructor is an instance function that returns void and takes no args
       var preconstructorName = string.Format("{0}_{1}", "PreConstructor", owningType.DebugInfo.Name);
-      
-      var shaderFunctionType = mFrontEnd.CreateFunctionType(returnType, thisType, null);
-      var shaderFunction = mFrontEnd.CreateFunction(owningType, returnType, preconstructorName, thisType, null);
-      shaderFunction.mResultType = shaderFunctionType;
-      owningType.mPreConstructor = shaderFunction;
+      var returnType = FindType(typeof(void));
+      var thisType = owningType.FindPointerType(StorageClass.Function);
+      owningType.mPreConstructor = mFrontEnd.CreateFunctionAndType(owningType, returnType, preconstructorName, thisType, null);
+    }
+
+    private bool HasDefaultConstructor(INamedTypeSymbol structSymbol)
+    {
+      foreach (var constructor in structSymbol.Constructors)
+      {
+        if (constructor.IsImplicitlyDeclared)
+        {
+          return true;
+        }
+      }
+      return false;
     }
 
     public void GenerateDefaultConstructor(INamedTypeSymbol structSymbol, ShaderType owningType)
     {
-      bool hasDefaultConstructor = false;
-      foreach (var constructor in structSymbol.Constructors)
-      {
-        if(constructor.IsImplicitlyDeclared)
-        {
-          hasDefaultConstructor = true;
-          break;
-        }
-      }
-      if (!hasDefaultConstructor)
+      // Only generate a default constructor if needed
+      if (!HasDefaultConstructor(structSymbol))
         return;
 
+      var constructorName = string.Format("{0}_{1}", "DefaultConstructor", owningType.DebugInfo.Name);
       var returnType = FindType(typeof(void));
-      var thisType = owningType.mTypeStorage.mPointerType;
-      var preconstructorName = string.Format("{0}_{1}", "DefaultConstructor", owningType.DebugInfo.Name);
+      var thisType = owningType.FindPointerType(StorageClass.Function);
+      owningType.mImplicitConstructor = mFrontEnd.CreateFunctionAndType(owningType, returnType, constructorName, thisType, null); 
+    }
 
-      var shaderFunctionType = mFrontEnd.CreateFunctionType(returnType, thisType, null);
-      var shaderFunction = mFrontEnd.CreateFunction(owningType, returnType, preconstructorName, thisType, null);
-      shaderFunction.mResultType = shaderFunctionType;
-      owningType.mImplicitConstructor = shaderFunction;
+    public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+    {
+      var returnType = FindType(typeof(void));
+      var shaderConstructor = CreateFunction(node, node.Identifier.Text, returnType);
+      shaderConstructor.DebugInfo.Name = mContext.mCurrentType.GetPrettyName() + "Constructor";
     }
 
     public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
     {
-      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
+      var returnType = FindType(node.ReturnType);
+      CreateFunction(node, node.Identifier.Text, returnType);
+    }
+
+    public ShaderFunction CreateFunction(BaseMethodDeclarationSyntax node, string fnName, ShaderType returnType)
+    {
       var owningType = mContext.mCurrentType;
+      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
 
       // Collect function return and parameter types from the syntax node
-      var returnType = FindType(node.ReturnType);
+      var thisType = fnSymbol.IsStatic ? null : owningType.FindPointerType(StorageClass.Function);
       var paramTypes = new List<ShaderType>();
-      foreach (var param in node.ParameterList.Parameters)
+      foreach (var parameter in node.ParameterList.Parameters)
       {
-        var paramType = FindType(param.Type);
-        paramTypes.Add(paramType);
+        var parameterType = FindParameterType(parameter);
+        paramTypes.Add(parameterType);
       }
-      var thisType = owningType.mTypeStorage.mPointerType;
 
-      var shaderFunctionType = mFrontEnd.CreateFunctionType(returnType, thisType, paramTypes);
-      var shaderFunction = mFrontEnd.CreateFunction(owningType, returnType, node.Identifier.Text, thisType, paramTypes);
-      shaderFunction.mResultType = shaderFunctionType;
-
-      shaderFunction.mMeta.mAttributes = mFrontEnd.ParseAttributes(fnSymbol);
+      var shaderFunction = mFrontEnd.CreateFunctionAndType(owningType, returnType, fnName, thisType, paramTypes);
+      ParseAttributes(shaderFunction.mMeta, fnSymbol);
       ExtractDebugInfo(shaderFunction, fnSymbol, node);
       mFrontEnd.mCurrentLibrary.AddFunction(new FunctionKey(fnSymbol), shaderFunction);
+      return shaderFunction;
     }
 
     public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -89,13 +102,20 @@ namespace CSShaders
       // Fields can declare multiple variables. Create one shader field per variable declared.
       foreach (var variable in node.Declaration.Variables)
       {
-        var fieldSymbol = GetDeclaredSymbol(variable);
-        var shaderField = mFrontEnd.CreateField(owningType, shaderFieldType, variable.Identifier.ToString(), null);
-        shaderField.mMeta.mAttributes = mFrontEnd.ParseAttributes(fieldSymbol);
-        ExtractDebugInfo(shaderField, fieldSymbol, variable);
+        var variableSymbol = GetDeclaredSymbol(variable);
+        var shaderField = mFrontEnd.CreateField(owningType, shaderFieldType, variable.Identifier.Text, null);
+        shaderField.IsStatic = shaderField.mMeta.IsStatic = variableSymbol.IsStatic;
+        ParseAttributes(shaderField.mMeta, variableSymbol);
+        ExtractDebugInfo(shaderField, variableSymbol, variable);
+        
+        if(shaderField.IsStatic)
+        {
+          var shaderFieldOp = mFrontEnd.CreateStaticField(owningType, shaderField);
+          shaderFieldOp.DebugInfo.Name = variableSymbol.Name;
+          ExtractDebugInfo(shaderFieldOp, variable);
+        }
       }
     }
-
   }
 }
 

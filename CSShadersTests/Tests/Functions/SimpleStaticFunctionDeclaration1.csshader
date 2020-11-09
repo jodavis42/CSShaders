@@ -1,0 +1,17 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct SimpleStaticFunctionDeclaration1
+    {
+      static void StaticFn()
+      {
+        
+      }
+
+      [EntryPoint]
+      void Main()
+      {
+      }
+    }
+}
+

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Utilities;
 
 namespace CSShaders
@@ -15,34 +14,40 @@ namespace CSShaders
 
     public void VisitLibrary()
     {
-      foreach(var type in mOwningLibrary.GetTypes())
+      foreach (var constantOp in mOwningLibrary.mConstantOps.Values)
+      {
+        Visit(constantOp);
+      }
+      foreach (var staticField in mOwningLibrary.mStaticGlobals.Values)
+      {
+        mReferencedStatics.Add(staticField);
+        Visit(staticField);
+      }
+      foreach (var type in mOwningLibrary.GetTypes())
       {
         Visit(type);
       }
     }
-
 
     public void Visit(IEnumerable<ShaderType> types)
     {
       foreach (var type in types)
         Visit(type);
     }
+
     public void Visit(ShaderType type)
     {
-      if (mProcessedTypes.Contains(type))
+      // Don't double process a type
+      if (type == null || mProcessedTypes.Contains(type))
         return;
-
       mProcessedTypes.Add(type);
-
-      // Always visit value types before pointers
-      if (type.mBaseType == OpType.Pointer)
-        Visit(type.mTypeStorage.mDereferenceType);
 
       Visit(type.mParameters);
       Visit(type.mFields);
+      // Only add this as a reference type once we finish walking fields/parameters. This is so we have guaranteed visit any nested types (or dereference types).
       mReferencedTypes.Add(type);
-      Visit(type.mTypeStorage.mPointerType);
-      
+
+      // Now visit the body of the functions and all of their ops
       Visit(type.mFunctions);
     }
 
@@ -65,8 +70,22 @@ namespace CSShaders
 
     public void Visit(ShaderFunction function)
     {
-      Visit(function.mResultType);
       mReferencedFunctions.Add(function);
+      Visit(function.mResultType);
+      Visit(function.mParametersBlock);
+      Visit(function.mBlocks);
+    }
+
+    public void Visit(IEnumerable<ShaderBlock> blocks)
+    {
+      foreach (var block in blocks)
+        Visit(block);
+    }
+
+    public void Visit(ShaderBlock block)
+    {
+      Visit(block.mLocalVariables);
+      Visit(block.mOps);
     }
 
     public void Visit(IEnumerable<IShaderIR> irs)
@@ -80,7 +99,9 @@ namespace CSShaders
       if (ir is ShaderType shaderType)
         Visit(shaderType);
       else if (ir is ShaderConstantLiteral constantLiteral)
-          Visit(constantLiteral);
+        Visit(constantLiteral);
+      else if (ir is ShaderOp shaderOp)
+        Visit(shaderOp);
       else
         throw new Exception();
     }
@@ -90,16 +111,35 @@ namespace CSShaders
       Visit(constantLiteral.mType);
     }
 
+    public void Visit(ShaderOp shaderOp)
+    {
+      if (IsConstantOp(shaderOp))
+        mReferencedConstants.Add(shaderOp);
+      Visit(shaderOp.mResultType);
+    }
+
     public void Visit(ShaderEntryPointInfo entryPointInfo)
     {
       mEntryPoints.Add(entryPointInfo);
       Visit(entryPointInfo.mEntryPointFunction);
     }
 
+    private bool IsConstantOp(ShaderOp shaderOp)
+    {
+      return shaderOp.mOpType == OpInstructionType.OpConstant ||
+        shaderOp.mOpType == OpInstructionType.OpConstantComposite ||
+        shaderOp.mOpType == OpInstructionType.OpConstantTrue ||
+        shaderOp.mOpType == OpInstructionType.OpConstantFalse ||
+        shaderOp.mOpType == OpInstructionType.OpConstantSampler ||
+        shaderOp.mOpType == OpInstructionType.OpConstantNull;
+    }
+
     // Need a separate set to prevent infinite recursion but to not control the added order
     HashSet<ShaderType> mProcessedTypes = new HashSet<ShaderType>();
     public OrderedSet<ShaderType> mReferencedTypes = new OrderedSet<ShaderType>();
     public OrderedSet<ShaderFunction> mReferencedFunctions = new OrderedSet<ShaderFunction>();
+    public OrderedSet<ShaderOp> mReferencedStatics = new OrderedSet<ShaderOp>();
+    public OrderedSet<ShaderOp> mReferencedConstants = new OrderedSet<ShaderOp>();
     public OrderedSet<ShaderEntryPointInfo> mEntryPoints = new OrderedSet<ShaderEntryPointInfo>();
   }
 }

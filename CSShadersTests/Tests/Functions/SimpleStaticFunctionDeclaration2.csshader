@@ -1,0 +1,19 @@
+namespace Shaders
+{
+    [UnitTest]
+    struct SimpleStaticFunctionDeclaration2
+    {
+      static int GetValue(int value)
+      {
+        return value;
+      }
+
+      [EntryPoint]
+      void Main()
+      {
+        var value1 = GetValue(1);
+        var value2 = SimpleStaticFunctionDeclaration2.GetValue(2);
+      }
+    }
+}
+

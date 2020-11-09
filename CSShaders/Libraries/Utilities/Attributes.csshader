@@ -1,0 +1,29 @@
+using System;
+
+namespace Shaders
+{
+   [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct)]
+   public class UnitTest : Attribute
+   {
+   }
+
+   [System.AttributeUsage(AttributeTargets.Method)]
+   public class EntryPoint : Attribute
+   {
+   }
+
+   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+   public class Input : Attribute
+   {
+     Input() {}
+     Input(string name) {}
+   }
+
+   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+   public class Output : Attribute
+   {
+     Output() {}
+     Output(string name) {}
+   }
+}
+
