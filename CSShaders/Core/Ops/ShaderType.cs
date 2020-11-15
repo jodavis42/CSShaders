@@ -66,5 +66,10 @@ namespace CSShaders
       }
       return mMeta.mName;
     }
+
+    public bool IsPrimitiveType()
+    {
+      return !(mBaseType == OpType.Struct || mBaseType == OpType.Pointer || mBaseType == OpType.Function);
+    }
   }
 }

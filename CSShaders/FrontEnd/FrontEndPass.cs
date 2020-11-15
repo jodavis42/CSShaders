@@ -11,6 +11,7 @@ namespace CSShaders
   {
     public FrontEndTranslator mFrontEnd;
     public FrontEndContext mContext;
+    public SpecialResolvers SpecialResolvers = new SpecialResolvers();
 
     public virtual void Visit(FrontEndTranslator translator, SyntaxNode node, FrontEndContext context)
     {
@@ -194,6 +195,167 @@ namespace CSShaders
     {
       var symbol = GetDeclaredSymbol(node) as ITypeSymbol;
       return symbol.BaseType.Name == typeof(Attribute).Name;
+    }
+
+    public ShaderFunction CreateFunction(BaseMethodDeclarationSyntax node, string fnName, ShaderType returnType)
+    {
+      var owningType = mContext.mCurrentType;
+      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
+
+      // Collect function return and parameter types from the syntax node
+      var thisType = fnSymbol.IsStatic ? null : owningType.FindPointerType(StorageClass.Function);
+      var paramTypes = new List<ShaderType>();
+      foreach (var parameter in node.ParameterList.Parameters)
+      {
+        var parameterType = FindParameterType(parameter);
+        paramTypes.Add(parameterType);
+      }
+
+      var shaderFunction = mFrontEnd.CreateFunctionAndType(owningType, returnType, fnName, thisType, paramTypes);
+      ParseAttributes(shaderFunction.mMeta, fnSymbol);
+      ExtractDebugInfo(shaderFunction, fnSymbol, node);
+      mFrontEnd.mCurrentLibrary.AddFunction(new FunctionKey(fnSymbol), shaderFunction);
+      return shaderFunction;
+    }
+
+    public IShaderIR GetFunctionParameter(ShaderFunction shaderFunction, int paramIndex, IShaderIR argumentOp)
+    {
+      // Handle if the parameter types don't match (e.g. handle out params and whatnot)
+      var paramType = shaderFunction.GetExplicitParameterType(paramIndex);
+      // If the function expects a pointer
+      if (paramType.mBaseType == OpType.Pointer)
+      {
+        // If this isn't already a pointer then throw an exception. This might be valid, but has to be thought more about.
+        // With C# I think it'll always be a pointer when you pass something in to an out/ref param.
+        var op = argumentOp as ShaderOp;
+        if (op.mResultType != paramType)
+          throw new Exception();
+      }
+      // If this is a pointer but the function expects a value type then deref if necessary
+      else
+      {
+        argumentOp = mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, argumentOp);
+      }
+      return argumentOp;
+    }
+
+    public IShaderIR GetFunctionParameter(ShaderFunction shaderFunction, int paramIndex, CSharpSyntaxNode argument)
+    {
+      // Evaluate the expression
+      var argumentOp = WalkAndGetResult(argument);
+      return GetFunctionParameter(shaderFunction, paramIndex, argumentOp);
+    }
+
+    public void GenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<IShaderIR> arguments)
+    {
+      var argumentOps = new List<IShaderIR>();
+      argumentOps.Add(shaderFunction);
+      if (!shaderFunction.IsStatic)
+      {
+        argumentOps.Add(selfOp);
+      }
+
+      for (var i = 0; i < arguments.Count; ++i)
+      {
+        var argument = arguments[i];
+        var paramIR = GetFunctionParameter(shaderFunction, i, argument);
+        argumentOps.Add(paramIR);
+      }
+
+      var fnShaderReturnType = shaderFunction.GetReturnType();
+      var functionCallOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionCall, fnShaderReturnType, argumentOps);
+      mContext.Push(functionCallOp);
+    }
+
+    public void GenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<CSharpSyntaxNode> arguments)
+    {
+      var argumentOps = new List<IShaderIR>();
+      argumentOps.Add(shaderFunction);
+      if (!shaderFunction.IsStatic)
+      {
+        argumentOps.Add(selfOp);
+      }
+
+      for (var i = 0; i < arguments.Count; ++i)
+      {
+        var argument = arguments[i];
+        var paramIR = GetFunctionParameter(shaderFunction, i, argument);
+        argumentOps.Add(paramIR);
+      }
+
+      var fnShaderReturnType = shaderFunction.GetReturnType();
+      var functionCallOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionCall, fnShaderReturnType, argumentOps);
+      mContext.Push(functionCallOp);
+    }
+
+    public bool TryCallFunction(FunctionKey functionKey, CSharpSyntaxNode selfExpressionNode, CSharpSyntaxNode rhsNode)
+    {
+      var setterShaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(functionKey);
+      if (setterShaderFunction == null)
+        return false;
+
+
+      var selfInstanceIR = WalkAndGetResult(selfExpressionNode);
+      var rhsIR = WalkAndGetResult(rhsNode);
+      GenerateFunctionCall(setterShaderFunction, selfInstanceIR, new List<IShaderIR>() { rhsIR });
+      return true;
+    }
+
+    public bool TryCallIntrinsicsFunction(FunctionKey functionKey, CSharpSyntaxNode selfExpressionNode, IEnumerable<CSharpSyntaxNode> arguments)
+    {
+      var instrinsicDelegate = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(functionKey);
+      if (instrinsicDelegate == null)
+        return false;
+
+      // Build the arguments up
+      var argumentIRs = new List<IShaderIR>();
+      // Visit the self if it exists
+      if (selfExpressionNode != null)
+      {
+        var selfOp = WalkAndGetResult(selfExpressionNode);
+        argumentIRs.Add(selfOp);
+      }
+      // Visit all the args if they exist
+      if (arguments != null)
+      {
+        foreach (var argument in arguments)
+          argumentIRs.Add(WalkAndGetResult(argument));
+      }
+      instrinsicDelegate(mFrontEnd, argumentIRs, mContext);
+      return true;
+    }
+
+    public bool TryCallSetterFunction(FunctionKey functionKey, CSharpSyntaxNode selfExpressionNode, CSharpSyntaxNode rhsNode)
+    {
+      var setterShaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(functionKey);
+      if (setterShaderFunction == null)
+        return false;
+
+      var selfInstanceIR = WalkAndGetResult(selfExpressionNode);
+      var rhsIR = WalkAndGetResult(rhsNode);
+      GenerateFunctionCall(setterShaderFunction, selfInstanceIR, new List<IShaderIR>() { rhsIR });
+      return true;
+    }
+
+    public bool TryCallIntrinsicsSetterFunction(FunctionKey functionKey, CSharpSyntaxNode selfExpressionNode, CSharpSyntaxNode argument)
+    {
+      var instrinsicDelegate = mFrontEnd.mCurrentLibrary.FindIntrinsicSetterFunction(functionKey);
+      if (instrinsicDelegate == null)
+        return false;
+
+      // Build the arguments up
+      var argumentIRs = new List<IShaderIR>();
+      IShaderIR setter = WalkAndGetResult(selfExpressionNode);
+      IShaderIR argumentIR = WalkAndGetResult(argument);
+      instrinsicDelegate(mFrontEnd, setter, argumentIR, mContext);
+
+      return true;
+    }
+
+    public bool IsIntrinsic(ShaderAttributes attributes)
+    {
+      return attributes.Contains(typeof(Shader.IntrinsicFunction)) || attributes.Contains(typeof(Shader.SimpleIntrinsicFunction))
+        || attributes.Contains(typeof(Math.CompositeConstruct)) || attributes.Contains(typeof(Math.Swizzle));
     }
   }
 }

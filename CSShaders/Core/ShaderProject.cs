@@ -33,30 +33,55 @@ namespace CSShaders
       return true;
     }
 
+    public void LoadProjectDirectory(string path, HashSet<string> extensions, bool recursive = true)
+    {
+      if (!Directory.Exists(path))
+        return;
+
+      foreach (var file in Directory.GetFiles(path))
+      {
+        var extension = Path.GetExtension(file);
+        if (extensions.Contains(extension))
+          AddCodeFromFile(file, null);
+      }
+      if (recursive)
+      {
+        foreach (var subDir in Directory.GetDirectories(path))
+          LoadProjectDirectory(subDir, extensions, recursive);
+      }
+    }
+
     public void Clear()
     {
       CodeEntries.Clear();
     }
 
-    public ShaderLibrary CompileAndTranslate(ShaderModule dependencies, FrontEndTranslator translator)
+    public CSharpCompilation Compile(string compilationName, ShaderModule dependencies, FrontEndTranslator translator, out List<SyntaxTree> trees)
     {
       var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, false);
-      var trees = BuildSyntaxTrees();
+      trees = BuildSyntaxTrees();
       var references = BuildReferences(dependencies);
-      var compilation = CSharpCompilation.Create("MyCompilation", trees, references, options);
+      var compilation = CSharpCompilation.Create(compilationName, trees, references, options);
       CheckDiagnostics(compilation);
+      return compilation;
+    }
 
+    public void Translate(CSharpCompilation compilation, List<SyntaxTree> trees, ShaderModule dependencies, FrontEndTranslator translator, ShaderLibrary library)
+    {
       FrontEndTranslator frontEnd = new FrontEndTranslator();
-      translator.mCurrentLibrary = new ShaderLibrary();
+      translator.mCurrentLibrary = library;
       translator.mCurrentLibrary.SourceCompilation = compilation;
       translator.mCurrentLibrary.mDependencies = dependencies;
-      foreach(var tree in trees)
-      {
-        var semanticModel = compilation.GetSemanticModel(tree);
-        translator.Translate(tree, semanticModel);
-      }
+      translator.Translate(compilation, trees);
+    }
 
-      return translator.mCurrentLibrary;
+    public ShaderLibrary CompileAndTranslate(string compilationName, ShaderModule dependencies, FrontEndTranslator translator)
+    {
+      List<SyntaxTree> trees;
+      var compilation = Compile(compilationName, dependencies, translator, out trees);
+      var library = new ShaderLibrary();
+      Translate(compilation, trees, dependencies, translator, library);
+      return library;
     }
 
     private List<SyntaxTree> BuildSyntaxTrees()
@@ -78,8 +103,8 @@ namespace CSShaders
       var stack = new Stack<ShaderLibrary>();
 
       // Always forcibly add C#'s core library
-      var coreLibrary = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-      references.Add(coreLibrary);
+      var netStandardLibrary = MetadataReference.CreateFromFile(@"Binaries\netstandard.dll");
+      references.Add(netStandardLibrary);
 
       // Get the first level of dependencies
       if (dependencies != null)

@@ -1,0 +1,18 @@
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    float X, Y;
+    [Math.CompositeConstruct] public TestVectorPrimitive(float value) { X = value; Y = value; }
+    [Math.CompositeConstruct] public TestVectorPrimitive(float x, float y) { X = x; Y = y; }
+}
+
+[Shaders.UnitTest]
+struct VectorPrimitiveCompositeConstructorsTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var vector0 = new TestVectorPrimitive(1.0f);
+        var vector1 = new TestVectorPrimitive(1.0f, 2.0f);
+    }
+}

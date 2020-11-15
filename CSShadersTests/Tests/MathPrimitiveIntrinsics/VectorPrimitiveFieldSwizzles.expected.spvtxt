@@ -1,0 +1,67 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 48
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVectorPrimitive "TestVectorPrimitive"
+               OpName %VectorPrimitiveFieldSwizzlesTest "VectorPrimitiveFieldSwizzlesTest"
+               OpName %PreConstructor_VectorPrimitiveFieldSwizzlesTest "PreConstructor_VectorPrimitiveFieldSwizzlesTest"
+               OpName %self "self"
+               OpName %DefaultConstructor_VectorPrimitiveFieldSwizzlesTest "DefaultConstructor_VectorPrimitiveFieldSwizzlesTest"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %vector0 "vector0"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVectorPrimitive = OpTypeVector %float 2
+%VectorPrimitiveFieldSwizzlesTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_VectorPrimitiveFieldSwizzlesTest = OpTypePointer Function %VectorPrimitiveFieldSwizzlesTest
+         %11 = OpTypeFunction %void %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
+%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
+%_ptr_Function_float = OpTypePointer Function %float
+         %13 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_1 = OpConstant %uint 1
+%PreConstructor_VectorPrimitiveFieldSwizzlesTest = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
+         %20 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_VectorPrimitiveFieldSwizzlesTest = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
+         %25 = OpLabel
+         %26 = OpFunctionCall %void %PreConstructor_VectorPrimitiveFieldSwizzlesTest %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
+         %31 = OpLabel
+    %vector0 = OpVariable %_ptr_Function_TestVectorPrimitive Function
+         %33 = OpCompositeConstruct %TestVectorPrimitive %float_0 %float_0
+               OpStore %vector0 %33
+         %35 = OpLoad %TestVectorPrimitive %vector0
+         %36 = OpCompositeExtract %float %35 0
+         %37 = OpLoad %TestVectorPrimitive %vector0
+         %38 = OpAccessChain %_ptr_Function_float %vector0 %uint_1
+               OpStore %38 %36
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %13
+         %43 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_VectorPrimitiveFieldSwizzlesTest Function
+         %45 = OpFunctionCall %void %DefaultConstructor_VectorPrimitiveFieldSwizzlesTest %self_2
+         %46 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd

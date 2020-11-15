@@ -27,8 +27,15 @@ namespace CSShaders
     }
     public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
     {
+      var symbol = GetSymbol(node);
+      var fnKey = new FunctionKey(symbol);
       var resultSymbol = GetSymbol(node.Type);
       var resultType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(resultSymbol));
+
+      // Handle constructing intrinsics types
+      if (TryCallIntrinsicsFunction(fnKey, null, node.ArgumentList.Arguments))
+        return;
+
       if (resultType.mBaseType != OpType.Struct)
         throw new Exception("ToDo");
 
@@ -36,8 +43,7 @@ namespace CSShaders
       var localVariableOp = mFrontEnd.CreateOpVariable(fieldPtrType, mContext);
       localVariableOp.DebugInfo.Name = "temp" + resultType.mMeta.mName;
       
-      var symbol = GetSymbol(node);
-      var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
+      var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(fnKey);
       if (shaderFunction == null && node.ArgumentList.Arguments.Count != 0)
         throw new Exception("Failed to find function");
 
@@ -71,7 +77,14 @@ namespace CSShaders
       var symbol = GetSymbol(node);
       if (symbol is IFieldSymbol fieldSymbol)
       {
-        if(!fieldSymbol.IsStatic)
+        var instrinsicDelegate = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(symbol));
+        if (instrinsicDelegate != null)
+        {
+          instrinsicDelegate(mFrontEnd, new List<IShaderIR> { mContext.mThisOp }, mContext);
+          return;
+        }
+
+        if (!fieldSymbol.IsStatic)
         {
           var memberAccessOp = mFrontEnd.GenerateAccessChain(mContext.mThisOp, fieldSymbol.Name, mContext);
           mContext.Push(memberAccessOp);
@@ -81,6 +94,16 @@ namespace CSShaders
           var staticOp = FindStaticField(fieldSymbol);
           mContext.Push(staticOp);
         }
+      }
+      else if (symbol is IPropertySymbol propertySymbol)
+      {
+        var instrinsicDelegate = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(propertySymbol.GetMethod));
+        if (instrinsicDelegate != null)
+        {
+          instrinsicDelegate(mFrontEnd, new List<IShaderIR> { mContext.mThisOp }, mContext);
+          return;
+        }
+        throw new Exception("ToDo");
       }
       else if(symbol is ILocalSymbol localSymbol)
       {
@@ -95,6 +118,11 @@ namespace CSShaders
     public override void VisitInvocationExpression(InvocationExpressionSyntax node)
     {
       var symbol = GetSymbol(node);
+
+      var selfExpression = symbol.IsStatic ? null : node.Expression;
+      if (TryCallIntrinsicsFunction(new FunctionKey(symbol), selfExpression, node.ArgumentList.Arguments))
+        return;
+
       var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
       var fnShaderReturnType = shaderFunction.GetReturnType();
 
@@ -116,51 +144,6 @@ namespace CSShaders
       mContext.Push(functionCallOp);
     }
 
-    public IShaderIR GetFunctionParameter(ShaderFunction shaderFunction, int paramIndex, CSharpSyntaxNode argument)
-    {
-      // Evaluate the expression
-      var argumentOp = WalkAndGetResult(argument);
-
-      // Handle if the parameter types don't match (e.g. handle out params and whatnot)
-      var paramType = shaderFunction.GetExplicitParameterType(paramIndex);
-      // If the function expects a pointer
-      if (paramType.mBaseType == OpType.Pointer)
-      {
-        // If this isn't already a pointer then throw an exception. This might be valid, but has to be thought more about.
-        // With C# I think it'll always be a pointer when you pass something in to an out/ref param.
-        var op = argumentOp as ShaderOp;
-        if (op.mResultType != paramType)
-          throw new Exception();
-      }
-      // If this is a pointer but the function expects a value type then deref if necessary
-      else
-      {
-        argumentOp = mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, argumentOp);
-      }
-      return argumentOp;
-    }
-
-    public void GenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<CSharpSyntaxNode> arguments)
-    {
-      var argumentOps = new List<IShaderIR>();
-      argumentOps.Add(shaderFunction);
-      if (!shaderFunction.IsStatic)
-      {
-        argumentOps.Add(selfOp);
-      }
-
-      for (var i = 0; i < arguments.Count; ++i)
-      {
-        var argument = arguments[i];
-        var paramIR = GetFunctionParameter(shaderFunction, i, argument);
-        argumentOps.Add(paramIR);
-      }
-
-      var fnShaderReturnType = shaderFunction.GetReturnType();
-      var functionCallOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionCall, fnShaderReturnType, argumentOps);
-      mContext.Push(functionCallOp);
-    }
-
     public override void VisitThisExpression(ThisExpressionSyntax node)
     {
       mContext.Push(mContext.mThisOp);
@@ -175,8 +158,11 @@ namespace CSShaders
         base.VisitMemberAccessExpression(node);
         return;
       }
-      else if(symbol is IFieldSymbol fieldSymbol)
+      else if (symbol is IFieldSymbol fieldSymbol)
       {
+        if (TryCallIntrinsicsFunction(new FunctionKey(fieldSymbol), node.Expression, null))
+          return;
+
         if (!fieldSymbol.IsStatic)
         {
           var left = WalkAndGetResult(node.Expression);
@@ -190,6 +176,12 @@ namespace CSShaders
         }
         return;
       }
+      else if (symbol is IPropertySymbol propertySymbol)
+      {
+        if (TryCallIntrinsicsFunction(new FunctionKey(propertySymbol.GetMethod), node.Expression, null))
+          return;
+        // @JoshD: Handle property getter/setter function calls
+      }
     }
 
     public override void VisitLiteralExpression(LiteralExpressionSyntax node)
@@ -202,6 +194,29 @@ namespace CSShaders
 
     public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
     {
+      // If the left side is actually a setter, then we have to flip the assignment around to call the setter
+      var leftSymbol = GetSymbol(node.Left);
+      // One complicated case is if the left is actually a member access (e.g. Vec3.XY = rhs).
+      // In this case, we need to call the setter on Vec3 (the expression of the member access)
+      if (node.Left is MemberAccessExpressionSyntax memberAccessNode)
+      {
+        FunctionKey functionKey = null;
+        // Try and get the function key for this symbol depending on if it's a field, property, etc...
+        if (leftSymbol is IPropertySymbol propertySymbol && !propertySymbol.IsReadOnly)
+          functionKey = new FunctionKey(propertySymbol.SetMethod);
+        else if (leftSymbol is IFieldSymbol fieldSymbol)
+          functionKey = new FunctionKey(fieldSymbol);
+
+        // If we found a function key, then try and use it call the setter 
+        if(functionKey != null)
+        {
+          if (TryCallIntrinsicsSetterFunction(functionKey, memberAccessNode.Expression, node.Right))
+            return;
+          if (TryCallSetterFunction(functionKey, memberAccessNode.Expression, node.Right))
+            return;
+        }
+      }
+
       var leftOp = WalkAndGetResult(node.Left);
       var rightValueOp = WalkAndGetValueTypeResult(node.Right);
       var storeOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpStore, null, new List<IShaderIR> { leftOp, rightValueOp });
@@ -243,6 +258,27 @@ namespace CSShaders
 
     public override void VisitBinaryExpression(BinaryExpressionSyntax node)
     {
+      var symbol = GetSymbol(node);
+      // If the symbol for this binary op is actually a method, then try to either call the intrinsic or function if they exist
+      if(symbol is IMethodSymbol methodSymbol)
+      {
+        var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
+        if(intrinsicCallback != null)
+        {
+          var l = WalkAndGetValueTypeResult(node.Left) as ShaderOp;
+          var r = WalkAndGetValueTypeResult(node.Right) as ShaderOp;
+          intrinsicCallback(mFrontEnd, new List<IShaderIR> { l, r }, mContext);
+          return;
+        }
+
+        var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
+        if (shaderFunction != null)
+        {
+          // @JoshD: Call function later?
+        }
+        return;
+      }
+
       var leftOp = WalkAndGetValueTypeResult(node.Left) as ShaderOp;
       var rightOp = WalkAndGetValueTypeResult(node.Right) as ShaderOp;
 

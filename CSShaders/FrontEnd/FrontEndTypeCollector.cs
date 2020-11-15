@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 
 namespace CSShaders
 {
@@ -17,10 +18,26 @@ namespace CSShaders
 
     public override void VisitStructDeclaration(StructDeclarationSyntax node)
     {
-      var structSymbol = GetDeclaredSymbol(node);
-      var shaderType = CreateType(structSymbol, OpType.Struct);
-      ParseAttributes(shaderType.mMeta, structSymbol);
+      var structSymbol = GetDeclaredSymbol(node) as INamedTypeSymbol;
+      var attributes = mFrontEnd.ParseAttributes(structSymbol);
+
+      ShaderType shaderType = CreateShaderType(structSymbol, attributes);
+      shaderType.mMeta.mAttributes = attributes;
       ExtractDebugInfo(shaderType, structSymbol, node);
+    }
+
+    public ShaderType CreateShaderType(INamedTypeSymbol typeSymbol, ShaderAttributes attributes)
+    {
+      ShaderType shaderType = null;
+      // If there's a special resolver for this type then use that to get the shader type
+      foreach (var attribute in typeSymbol.GetAttributes())
+      {
+        var processor = SpecialResolvers.SpecialTypeCreationAttributeProcessors.GetValueOrDefault(attribute.AttributeClass.Name);
+        shaderType = processor?.Invoke(mFrontEnd, typeSymbol, attribute);
+        if (shaderType != null)
+          return shaderType;
+      }
+      return CreateType(typeSymbol, OpType.Struct);
     }
   }
 }

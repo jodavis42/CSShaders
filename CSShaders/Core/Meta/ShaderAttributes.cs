@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CSShaders
 {
@@ -36,6 +37,11 @@ namespace CSShaders
           return true;
       }
       return false;
+    }
+    
+    public bool Contains(Type attributeType)
+    {
+      return Contains(attributeType.Name);
     }
   }
 }

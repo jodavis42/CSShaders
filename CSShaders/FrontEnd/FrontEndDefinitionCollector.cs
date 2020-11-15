@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 
 namespace CSShaders
 {
@@ -35,6 +36,10 @@ namespace CSShaders
     {
       var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
       
+      // Handle intrinsics. If we have a resolver for a special handler then call that and return.
+      if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
+        return;
+
       // Add the current function as the active one and the parameter
       var shaderFunction = FindFunction(node);
       mContext.mCurrentFunction = shaderFunction;
@@ -74,6 +79,31 @@ namespace CSShaders
       mContext.mThisOp = null;
       mContext.mCurrentBlock = null;
       mContext.mCurrentFunction = null;
+    }
+
+    public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+    {
+      var propertySymbol = GetDeclaredSymbol(node) as IPropertySymbol;
+      var attributes = mFrontEnd.ParseAttributes(propertySymbol);
+      foreach (var fieldAttribute in propertySymbol.GetAttributes())
+      {
+        var processor = SpecialResolvers.FieldProcessors.GetValueOrDefault(fieldAttribute.AttributeClass.Name);
+        processor?.Invoke(mFrontEnd, propertySymbol.ContainingType, propertySymbol, fieldAttribute);
+      }
+    }
+
+    public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
+    {
+      foreach(var variable in node.Declaration.Variables)
+      {
+        var fieldSymbol = GetDeclaredSymbol(variable) as IFieldSymbol;
+        var attributes = mFrontEnd.ParseAttributes(fieldSymbol);
+        foreach (var fieldAttribute in fieldSymbol.GetAttributes())
+        {
+          var processor = SpecialResolvers.FieldProcessors.GetValueOrDefault(fieldAttribute.AttributeClass.Name);
+          processor?.Invoke(mFrontEnd, fieldSymbol.ContainingType, fieldSymbol, fieldAttribute);
+        }
+      }
     }
   }
 }

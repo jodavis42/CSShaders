@@ -8,11 +8,16 @@ namespace CSShaders
     public ShaderModule mDependencies;
     public CSharpCompilation SourceCompilation;
 
+    public delegate void InstrinsicDelegate(FrontEndTranslator translator, List<IShaderIR> arguments, FrontEndContext context);
+    public delegate void InstrinsicSetterDelegate(FrontEndTranslator translator, IShaderIR selfInstance, IShaderIR rhsIR, FrontEndContext context);
+
     public Dictionary<ConstantOpKey, ShaderConstantLiteral> mConstantLiterals = new Dictionary<ConstantOpKey, ShaderConstantLiteral>();
     public Dictionary<ConstantOpKey, ShaderOp> mConstantOps = new Dictionary<ConstantOpKey, ShaderOp>();
     public Dictionary<ShaderField, ShaderOp> mStaticGlobals = new Dictionary<ShaderField, ShaderOp>();
     public Dictionary<TypeKey, ShaderType> mTypeMap = new Dictionary<TypeKey, ShaderType>();
     public Dictionary<FunctionKey, ShaderFunction> mFunctionMap = new Dictionary<FunctionKey, ShaderFunction>();
+    public Dictionary<FunctionKey, InstrinsicDelegate> IntrinsicFunctions = new Dictionary<FunctionKey, InstrinsicDelegate>();
+    public Dictionary<FunctionKey, InstrinsicSetterDelegate> IntrinsicSetterFunctions = new Dictionary<FunctionKey, InstrinsicSetterDelegate>();
 
     //---------------------------------------------------------------Types
     public bool AddType(TypeKey key, ShaderType shaderType)
@@ -76,6 +81,7 @@ namespace CSShaders
       return result;
     }
 
+    //---------------------------------------------------------------Functions
     public bool AddFunction(FunctionKey key, ShaderFunction shaderFunction)
     {
       return mFunctionMap.TryAdd(key, shaderFunction);
@@ -101,6 +107,47 @@ namespace CSShaders
       var result = FindFunction(key, checkDependencies);
       if (result == null)
         result = CreateFunction(key);
+      return result;
+    }
+
+    //---------------------------------------------------------------IntrinsicFunctions
+    public void CreateIntrinsicFunction(FunctionKey key, InstrinsicDelegate intrinsic)
+    {
+      IntrinsicFunctions.TryAdd(key, intrinsic);
+    }
+
+    public InstrinsicDelegate FindIntrinsicFunction(FunctionKey key, bool checkDependencies = true)
+    {
+      var result = IntrinsicFunctions.GetValueOrDefault(key, null);
+      if(result == null && mDependencies != null)
+      {
+        foreach(var dependency in mDependencies)
+        {
+          result = dependency.FindIntrinsicFunction(key, checkDependencies);
+          if (result != null)
+            break;
+        }
+      }
+      return result;
+    }
+
+    public void CreateIntrinsicSetterFunction(FunctionKey key, InstrinsicSetterDelegate intrinsic)
+    {
+      IntrinsicSetterFunctions.TryAdd(key, intrinsic);
+    }
+
+    public InstrinsicSetterDelegate FindIntrinsicSetterFunction(FunctionKey key, bool checkDependencies = true)
+    {
+      var result = IntrinsicSetterFunctions.GetValueOrDefault(key, null);
+      if (result == null && mDependencies != null)
+      {
+        foreach (var dependency in mDependencies)
+        {
+          result = dependency.FindIntrinsicSetterFunction(key, checkDependencies);
+          if (result != null)
+            break;
+        }
+      }
       return result;
     }
 

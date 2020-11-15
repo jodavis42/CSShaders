@@ -1,0 +1,65 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 46
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVectorPrimitive "TestVectorPrimitive"
+               OpName %VectorPrimitiveCompositeConstructorsTest "VectorPrimitiveCompositeConstructorsTest"
+               OpName %PreConstructor_VectorPrimitiveCompositeConstructorsTest "PreConstructor_VectorPrimitiveCompositeConstructorsTest"
+               OpName %self "self"
+               OpName %DefaultConstructor_VectorPrimitiveCompositeConstructorsTest "DefaultConstructor_VectorPrimitiveCompositeConstructorsTest"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %vector0 "vector0"
+               OpName %vector1 "vector1"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVectorPrimitive = OpTypeVector %float 2
+%VectorPrimitiveCompositeConstructorsTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_VectorPrimitiveCompositeConstructorsTest = OpTypePointer Function %VectorPrimitiveCompositeConstructorsTest
+         %11 = OpTypeFunction %void %_ptr_Function_VectorPrimitiveCompositeConstructorsTest
+%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
+         %13 = OpTypeFunction %void
+    %float_1 = OpConstant %float 1
+    %float_2 = OpConstant %float 2
+%PreConstructor_VectorPrimitiveCompositeConstructorsTest = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_VectorPrimitiveCompositeConstructorsTest
+         %20 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_VectorPrimitiveCompositeConstructorsTest = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_VectorPrimitiveCompositeConstructorsTest
+         %25 = OpLabel
+         %26 = OpFunctionCall %void %PreConstructor_VectorPrimitiveCompositeConstructorsTest %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_VectorPrimitiveCompositeConstructorsTest
+         %31 = OpLabel
+    %vector0 = OpVariable %_ptr_Function_TestVectorPrimitive Function
+    %vector1 = OpVariable %_ptr_Function_TestVectorPrimitive Function
+         %34 = OpCompositeConstruct %TestVectorPrimitive %float_1 %float_1
+               OpStore %vector0 %34
+         %36 = OpCompositeConstruct %TestVectorPrimitive %float_1 %float_2
+               OpStore %vector1 %36
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %13
+         %41 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_VectorPrimitiveCompositeConstructorsTest Function
+         %43 = OpFunctionCall %void %DefaultConstructor_VectorPrimitiveCompositeConstructorsTest %self_2
+         %44 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd

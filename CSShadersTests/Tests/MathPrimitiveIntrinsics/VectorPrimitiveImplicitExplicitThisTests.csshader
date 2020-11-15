@@ -1,0 +1,38 @@
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    [Math.Swizzle(0)] public float X;
+    [Math.Swizzle(1)] public float Y;
+    [Math.Swizzle(0, 1)] public TestVectorPrimitive XY { get { return this; } set { X = value.X; Y = value.Y; } }
+
+    public float FieldThisExplicit()
+    {
+        return this.X;
+    }
+    public float FieldThisImplicit()
+    {
+        return X;
+    }
+    public TestVectorPrimitive PropertyThisExplicit()
+    {
+        return this.XY;
+    }
+    public TestVectorPrimitive PropertyThisImplicit()
+    {
+        return XY;
+    }
+}
+
+[Shaders.UnitTest]
+struct VectorPrimitiveImplicitExplicitThisTests
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var vector0 = new TestVectorPrimitive();
+        var fieldThisExplicit = vector0.FieldThisExplicit();
+        var fieldThisImplicit = vector0.FieldThisImplicit();
+        var propertyThisExplicit = vector0.PropertyThisExplicit();
+        var propertyThisImplicit = vector0.PropertyThisImplicit();
+    }
+}

@@ -1,0 +1,80 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 60
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVectorPrimitive "TestVectorPrimitive"
+               OpName %VectorPrimitivePropertySwizzlesTest "VectorPrimitivePropertySwizzlesTest"
+               OpName %PreConstructor_VectorPrimitivePropertySwizzlesTest "PreConstructor_VectorPrimitivePropertySwizzlesTest"
+               OpName %self "self"
+               OpName %DefaultConstructor_VectorPrimitivePropertySwizzlesTest "DefaultConstructor_VectorPrimitivePropertySwizzlesTest"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %vector0 "vector0"
+               OpName %vXX "vXX"
+               OpName %vYY "vYY"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVectorPrimitive = OpTypeVector %float 2
+%VectorPrimitivePropertySwizzlesTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_VectorPrimitivePropertySwizzlesTest = OpTypePointer Function %VectorPrimitivePropertySwizzlesTest
+         %11 = OpTypeFunction %void %_ptr_Function_VectorPrimitivePropertySwizzlesTest
+%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
+         %13 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%PreConstructor_VectorPrimitivePropertySwizzlesTest = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_VectorPrimitivePropertySwizzlesTest
+         %19 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_VectorPrimitivePropertySwizzlesTest = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_VectorPrimitivePropertySwizzlesTest
+         %24 = OpLabel
+         %25 = OpFunctionCall %void %PreConstructor_VectorPrimitivePropertySwizzlesTest %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_VectorPrimitivePropertySwizzlesTest
+         %30 = OpLabel
+    %vector0 = OpVariable %_ptr_Function_TestVectorPrimitive Function
+        %vXX = OpVariable %_ptr_Function_TestVectorPrimitive Function
+        %vYY = OpVariable %_ptr_Function_TestVectorPrimitive Function
+         %34 = OpCompositeConstruct %TestVectorPrimitive %float_0 %float_0
+               OpStore %vector0 %34
+         %36 = OpLoad %TestVectorPrimitive %vector0
+         %37 = OpVectorShuffle %TestVectorPrimitive %36 %36 0 0
+               OpStore %vXX %37
+         %39 = OpLoad %TestVectorPrimitive %vector0
+         %40 = OpVectorShuffle %TestVectorPrimitive %39 %39 1 1
+               OpStore %vYY %40
+         %42 = OpLoad %TestVectorPrimitive %vector0
+         %43 = OpVectorShuffle %TestVectorPrimitive %42 %42 1 0
+         %44 = OpLoad %TestVectorPrimitive %vector0
+         %45 = OpVectorShuffle %TestVectorPrimitive %44 %43 2 3
+               OpStore %vector0 %45
+         %47 = OpLoad %TestVectorPrimitive %vector0
+         %48 = OpVectorShuffle %TestVectorPrimitive %47 %47 0 1
+         %49 = OpLoad %TestVectorPrimitive %vector0
+         %50 = OpVectorShuffle %TestVectorPrimitive %49 %48 2 3
+               OpStore %vector0 %50
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %13
+         %55 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_VectorPrimitivePropertySwizzlesTest Function
+         %57 = OpFunctionCall %void %DefaultConstructor_VectorPrimitivePropertySwizzlesTest %self_2
+         %58 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd

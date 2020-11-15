@@ -9,7 +9,11 @@ namespace CSShaders
 
     public override void VisitStructDeclaration(StructDeclarationSyntax node)
     {
-      mContext.mCurrentType = FindDeclaredType(node);
+      var shaderType = FindDeclaredType(node);
+      if (shaderType.IsPrimitiveType())
+        return;
+
+      mContext.mCurrentType = shaderType;
       GeneratePreConstructor(mContext.mCurrentType, node);
       GenerateDefaultConstructor(mContext.mCurrentType, node);
 

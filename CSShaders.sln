@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSShaders", "CSShaders\CSSh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSShadersTests", "CSShadersTests\CSShadersTests.csproj", "{70DC5DA5-4ADD-470A-9654-1C1F8DE07FED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{792DC5E4-6BCF-44FB-91FF-9647FB5E62A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{792DC5E4-6BCF-44FB-91FF-9647FB5E62A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shader", "Shader\Shader.csproj", "{2C2BDBF2-B55A-41BF-9BC6-BA057C856BAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{792DC5E4-6BCF-44FB-91FF-9647FB5E62A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{792DC5E4-6BCF-44FB-91FF-9647FB5E62A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{792DC5E4-6BCF-44FB-91FF-9647FB5E62A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C2BDBF2-B55A-41BF-9BC6-BA057C856BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2BDBF2-B55A-41BF-9BC6-BA057C856BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2BDBF2-B55A-41BF-9BC6-BA057C856BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2BDBF2-B55A-41BF-9BC6-BA057C856BAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

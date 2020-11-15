@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CSShaders\CSShaders.csproj" />
+    <ProjectReference Include="..\Shader\Shader.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Binaries\netstandard.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Tests\Test.csshader">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

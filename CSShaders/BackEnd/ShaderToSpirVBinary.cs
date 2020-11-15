@@ -12,6 +12,66 @@ namespace CSShaders
     FrontEndTranslator mFrontEnd;
     TypeDependencyCollector mTypeCollector;
     SpirvIdGenerator IdGenerator = new SpirvIdGenerator();
+    Dictionary<OpInstructionType, Spv.Op> SimpleInstructions = new Dictionary<OpInstructionType, Spv.Op>();
+
+    public ShaderToSpirVBinary()
+    {
+      SimpleInstructions.Add(OpInstructionType.OpSNegate, Spv.Op.OpSNegate);
+      SimpleInstructions.Add(OpInstructionType.OpFNegate, Spv.Op.OpFNegate);
+      SimpleInstructions.Add(OpInstructionType.OpIAdd, Spv.Op.OpIAdd);
+      SimpleInstructions.Add(OpInstructionType.OpISub, Spv.Op.OpISub);
+      SimpleInstructions.Add(OpInstructionType.OpIMul, Spv.Op.OpIMul);
+      SimpleInstructions.Add(OpInstructionType.OpUDiv, Spv.Op.OpUDiv);
+      SimpleInstructions.Add(OpInstructionType.OpSDiv, Spv.Op.OpSDiv);
+      SimpleInstructions.Add(OpInstructionType.OpUMod, Spv.Op.OpUMod);
+      SimpleInstructions.Add(OpInstructionType.OpSMod, Spv.Op.OpSMod);
+      SimpleInstructions.Add(OpInstructionType.OpSRem, Spv.Op.OpSRem);
+      SimpleInstructions.Add(OpInstructionType.OpFAdd, Spv.Op.OpFAdd);
+      SimpleInstructions.Add(OpInstructionType.OpFSub, Spv.Op.OpFSub);
+      SimpleInstructions.Add(OpInstructionType.OpFMul, Spv.Op.OpFMul);
+      SimpleInstructions.Add(OpInstructionType.OpFDiv, Spv.Op.OpFDiv);
+      SimpleInstructions.Add(OpInstructionType.OpFMod, Spv.Op.OpFMod);
+
+      SimpleInstructions.Add(OpInstructionType.OpDot, Spv.Op.OpDot);
+      SimpleInstructions.Add(OpInstructionType.OpOuterProduct, Spv.Op.OpOuterProduct);
+      SimpleInstructions.Add(OpInstructionType.OpVectorShuffle, Spv.Op.OpVectorShuffle);
+      SimpleInstructions.Add(OpInstructionType.OpCompositeConstruct, Spv.Op.OpCompositeConstruct);
+      SimpleInstructions.Add(OpInstructionType.OpCompositeExtract, Spv.Op.OpCompositeExtract);
+      SimpleInstructions.Add(OpInstructionType.OpCompositeInsert, Spv.Op.OpCompositeInsert);
+      SimpleInstructions.Add(OpInstructionType.OpTranspose, Spv.Op.OpTranspose);
+
+      SimpleInstructions.Add(OpInstructionType.OpDPdx, Spv.Op.OpDPdx);
+      SimpleInstructions.Add(OpInstructionType.OpDPdy, Spv.Op.OpDPdy);
+
+      SimpleInstructions.Add(OpInstructionType.OpAny, Spv.Op.OpAny);
+      SimpleInstructions.Add(OpInstructionType.OpAll, Spv.Op.OpAll);
+      SimpleInstructions.Add(OpInstructionType.OpOrdered, Spv.Op.OpOrdered);
+      SimpleInstructions.Add(OpInstructionType.OpLessOrGreater, Spv.Op.OpLessOrGreater);
+      SimpleInstructions.Add(OpInstructionType.OpLogicalEqual, Spv.Op.OpLogicalEqual);
+      SimpleInstructions.Add(OpInstructionType.OpLogicalNotEqual, Spv.Op.OpLogicalNotEqual);
+      SimpleInstructions.Add(OpInstructionType.OpLogicalOr, Spv.Op.OpLogicalOr);
+      SimpleInstructions.Add(OpInstructionType.OpLogicalAnd, Spv.Op.OpLogicalAnd);
+      SimpleInstructions.Add(OpInstructionType.OpLogicalNot, Spv.Op.OpLogicalNot);
+      SimpleInstructions.Add(OpInstructionType.OpIEqual, Spv.Op.OpIEqual);
+      SimpleInstructions.Add(OpInstructionType.OpINotEqual, Spv.Op.OpINotEqual);
+      SimpleInstructions.Add(OpInstructionType.OpUGreaterThan, Spv.Op.OpUGreaterThan);
+      SimpleInstructions.Add(OpInstructionType.OpSGreaterThan, Spv.Op.OpSGreaterThan);
+      SimpleInstructions.Add(OpInstructionType.OpUGreaterThanEqual, Spv.Op.OpUGreaterThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpSGreaterThanEqual, Spv.Op.OpSGreaterThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpULessThan, Spv.Op.OpULessThan);
+      SimpleInstructions.Add(OpInstructionType.OpSLessThan, Spv.Op.OpSLessThan);
+      SimpleInstructions.Add(OpInstructionType.OpULessThanEqual, Spv.Op.OpULessThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpSLessThanEqual, Spv.Op.OpSLessThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFUnordLessThanEqual, Spv.Op.OpFUnordLessThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFOrdGreaterThanEqual, Spv.Op.OpFOrdGreaterThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFUnordGreaterThanEqual, Spv.Op.OpFUnordGreaterThanEqual);
+
+      SimpleInstructions.Add(OpInstructionType.OpAccessChain, Spv.Op.OpAccessChain);
+      SimpleInstructions.Add(OpInstructionType.OpLoad, Spv.Op.OpLoad);
+      SimpleInstructions.Add(OpInstructionType.OpFunctionParameter, Spv.Op.OpFunctionParameter);
+      SimpleInstructions.Add(OpInstructionType.OpConstantTrue, Spv.Op.OpConstantTrue);
+      SimpleInstructions.Add(OpInstructionType.OpConstantFalse, Spv.Op.OpConstantFalse);
+    }
 
     public void Write(SpirVStreamWriter writer, ShaderLibrary library, FrontEndTranslator frontEnd)
     {
@@ -170,8 +230,15 @@ namespace CSShaders
 
     void WriteTypeDeclarations()
     {
+      var visitedTypeIds = new HashSet<UInt32>();
       foreach (var type in mTypeCollector.mReferencedTypes)
       {
+        // Handle types existing more than once (for primitive deduping)
+        var id = GetId(type);
+        if (visitedTypeIds.Contains(id))
+          continue;
+        visitedTypeIds.Add(id);
+
         if (type.mBaseType == OpType.Void)
         {
           mWriter.WriteInstruction(2, Spv.Op.OpTypeVoid, GetId(type));
@@ -190,10 +257,15 @@ namespace CSShaders
           mWriter.WriteInstruction(3, Spv.Op.OpTypeFloat, GetId(type));
           WriteArgs(type.mParameters);
         }
+        else if (type.mBaseType == OpType.Vector)
+        {
+          mWriter.WriteInstruction(4, Spv.Op.OpTypeVector, GetId(type));
+          WriteArgs(type.mParameters);
+        }
         else if (type.mBaseType == OpType.Pointer)
         {
           var dereferenceType = type.GetDereferenceType();
-          if(dereferenceType.mBaseType != OpType.Function)
+          if (dereferenceType.mBaseType != OpType.Function)
           {
             var storageClass = ConvertStorageClass(type.mStorageClass);
             mWriter.WriteInstruction(4, Spv.Op.OpTypePointer, GetId(type), (UInt32)storageClass, GetId(dereferenceType));
@@ -214,12 +286,14 @@ namespace CSShaders
           mWriter.WriteInstruction((UInt16)(instructionSize), Spv.Op.OpTypeFunction, GetId(type));
           WriteArgs(type.mParameters);
         }
+        else
+          throw new Exception();
       }
     }
 
     void WriteConstants()
     {
-      foreach (var constantOp in mLibrary.mConstantOps.Values)
+      foreach (var constantOp in mTypeCollector.mReferencedConstants)
       {
         WriteOp(constantOp);
       }
@@ -288,17 +362,11 @@ namespace CSShaders
         case OpInstructionType.OpStore:
           WriteBasicOpNoResultId(op, Spv.Op.OpStore);
           break;
-        case OpInstructionType.OpLoad:
-          WriteBasicOp(op, Spv.Op.OpLoad);
-          break;
         case OpInstructionType.OpVariable:
           mWriter.WriteInstruction((UInt16)(4 + op.mParameters.Count), Spv.Op.OpVariable);
           mWriter.Write(GetId(op.mResultType));
           mWriter.Write(GetId(op));
           mWriter.Write((UInt32)Spv.StorageClass.StorageClassFunction);
-          break;
-        case OpInstructionType.OpFunctionParameter:
-          WriteBasicOp(op, Spv.Op.OpFunctionParameter);
           break;
         case OpInstructionType.OpReturn:
           mWriter.WriteInstruction(1, Spv.Op.OpReturn);
@@ -308,12 +376,6 @@ namespace CSShaders
           break;
         case OpInstructionType.OpExecutionMode:
           WriteBasicOpNoResultId(op, Spv.Op.OpExecutionMode);
-          break;
-        case OpInstructionType.OpConstantTrue:
-          WriteBasicOp(op, Spv.Op.OpConstantTrue);
-          break;
-        case OpInstructionType.OpConstantFalse:
-          WriteBasicOp(op, Spv.Op.OpConstantFalse);
           break;
         case OpInstructionType.OpConstant:
           mWriter.WriteInstruction(4, Spv.Op.OpConstant);
@@ -336,9 +398,6 @@ namespace CSShaders
             throw new Exception();
             
           break;
-        case OpInstructionType.OpAccessChain:
-          WriteBasicOp(op, Spv.Op.OpAccessChain);
-          break;
         case OpInstructionType.OpFunctionCall:
           UInt16 instructionCount = (UInt16)(3 + op.mParameters.Count);
           mWriter.WriteInstruction(instructionCount, Spv.Op.OpFunctionCall);
@@ -347,7 +406,11 @@ namespace CSShaders
           WriteArgs(op.mParameters);
           break;
         default:
-          throw new Exception();
+          Spv.Op spvOp;
+          if(!SimpleInstructions.TryGetValue(op.mOpType, out spvOp))
+            throw new Exception();
+          WriteBasicOp(op, spvOp);
+          break;
       }
     }
 

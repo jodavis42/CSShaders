@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace CSShaders
@@ -16,20 +17,8 @@ namespace CSShaders
 
     static void LoadProjectDirectory(string path, ShaderProject shaderProject, bool recursive = true)
     {
-      if (!Directory.Exists(path))
-        return;
-
-      foreach (var file in Directory.GetFiles(path))
-      {
-        var extension = Path.GetExtension(file);
-        if (extension == ".csshader")
-          shaderProject.AddCodeFromFile(file, null);
-      }
-      if(recursive)
-      {
-        foreach (var subDir in Directory.GetDirectories(path))
-          LoadProjectDirectory(subDir, shaderProject, recursive);
-      }
+      var extensions = new HashSet<string>() { ".csshader" };
+      shaderProject.LoadProjectDirectory(path, extensions, recursive);
     }
 
     static ShaderProject CreateProjectFromDirectory(string path, bool recursive = true)
@@ -63,7 +52,7 @@ namespace CSShaders
 
     public void CompileFragmentProject()
     {
-      this.FragmentLibrary = this.FragmentProject.CompileAndTranslate(this.CoreDependencies, this.FrontEnd);
+      this.FragmentLibrary = this.FragmentProject.CompileAndTranslate("Fragments", this.CoreDependencies, this.FrontEnd);
     }
 
     public void ClearFragmentProject()
@@ -77,7 +66,7 @@ namespace CSShaders
       shaderProject = CreateProjectFromDirectory(directory);
       shaderProject.ErrorHandlers.Add(this.OnTranslationError);
 
-      var shaderLibrary = shaderProject.CompileAndTranslate(dependencies, this.FrontEnd);
+      var shaderLibrary = shaderProject.CompileAndTranslate(projectName, dependencies, this.FrontEnd);
       return shaderLibrary;
     }
 

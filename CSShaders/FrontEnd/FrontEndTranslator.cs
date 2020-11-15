@@ -33,12 +33,14 @@ namespace CSShaders
   {
     public ShaderLibrary mCurrentLibrary;
     public SemanticModel mSemanticModel;
-    public SyntaxTree mSyntaxTree;
+    public CSharpCompilation Compilation;
 
     public List<FrontEndPass> mPasses = new List<FrontEndPass>()
     {
       // Collect all types
       new FrontEndTypeCollector(),
+      // Visit Intrinsics separately (e.g. Vector2)
+      new FrontEndPrimitiveDeclarationCollector(),
       // Collect all functions/vars definitions
       new FrontEndDeclarationCollector(),
       new FrontEndPreconstructorPass(),
@@ -46,14 +48,19 @@ namespace CSShaders
       new FrontEndDefinitionCollector()
     };
 
-    public void Translate(SyntaxTree tree, SemanticModel semanticModel)
+    public void Translate(CSharpCompilation compilation, List<SyntaxTree> trees)
     {
-      mSyntaxTree = tree;
-      mSemanticModel = semanticModel;
+      Compilation = compilation;
 
       FrontEndContext context = new FrontEndContext();
       foreach (var pass in mPasses)
-        pass.Visit(this, tree.GetRoot(), context);
+      {
+        foreach(var tree in trees)
+        {
+          mSemanticModel = Compilation.GetSemanticModel(tree);
+          pass.Visit(this, tree.GetRoot(), context);
+        }
+      }
 
       // Validation passes
     }
@@ -434,6 +441,10 @@ namespace CSShaders
       op.mParameters.Add(staticFieldType);
       mCurrentLibrary.mStaticGlobals.Add(fieldType, op);
       return op;
+    }
+    public ShaderType FindType(TypeKey typeKey)
+    {
+      return mCurrentLibrary.FindType(typeKey);
     }
 
     public ShaderType FindType(Type type)

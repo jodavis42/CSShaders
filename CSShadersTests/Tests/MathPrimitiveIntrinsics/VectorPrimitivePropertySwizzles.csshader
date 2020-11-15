@@ -1,0 +1,26 @@
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    public float X;
+    public float Y;
+    
+    [Math.CompositeConstruct] public TestVectorPrimitive(float x, float y) { X = x; Y = y; }
+    [Math.Swizzle(0, 1)] public TestVectorPrimitive XY { get { return this; } set { X = value.X; Y = value.Y; } }
+    [Math.Swizzle(1, 0)] public TestVectorPrimitive YX { get { return new TestVectorPrimitive(Y, X); } set { X = value.Y; Y = value.X; } }
+    [Math.Swizzle(0, 0)] public TestVectorPrimitive XX { get { return new TestVectorPrimitive(X, X); }}
+    [Math.Swizzle(1, 1)] public TestVectorPrimitive YY { get { return new TestVectorPrimitive(Y, Y); }}
+}
+
+[Shaders.UnitTest]
+struct VectorPrimitivePropertySwizzlesTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var vector0 = new TestVectorPrimitive();
+        var vXX = vector0.XX;
+        var vYY = vector0.YY;
+        vector0.XY = vector0.YX;
+        vector0.YX = vector0.XY;
+    }
+}

@@ -1,0 +1,15 @@
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    float X, Y;
+}
+
+[Shaders.UnitTest]
+struct VectorPrimitiveDeclarationTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var vector0 = new TestVectorPrimitive();
+    }
+}

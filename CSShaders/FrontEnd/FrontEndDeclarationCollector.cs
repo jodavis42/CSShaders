@@ -14,6 +14,10 @@ namespace CSShaders
     public override void VisitStructDeclaration(StructDeclarationSyntax node)
     {
       var shaderType = FindDeclaredType(node);
+      // Don't process primitives (this is handled by a different pass)
+      if (shaderType.IsPrimitiveType())
+        return;
+      
       mContext.mCurrentType = shaderType;
       
       var namedTypeSymbol = GetDeclaredSymbol(node) as INamedTypeSymbol;
@@ -69,29 +73,13 @@ namespace CSShaders
 
     public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
     {
+      // Don't process intrinsics
+      var attributes = mFrontEnd.ParseAttributes(GetDeclaredSymbol(node));
+      if (IsIntrinsic(attributes))
+        return;
+
       var returnType = FindType(node.ReturnType);
       CreateFunction(node, node.Identifier.Text, returnType);
-    }
-
-    public ShaderFunction CreateFunction(BaseMethodDeclarationSyntax node, string fnName, ShaderType returnType)
-    {
-      var owningType = mContext.mCurrentType;
-      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
-
-      // Collect function return and parameter types from the syntax node
-      var thisType = fnSymbol.IsStatic ? null : owningType.FindPointerType(StorageClass.Function);
-      var paramTypes = new List<ShaderType>();
-      foreach (var parameter in node.ParameterList.Parameters)
-      {
-        var parameterType = FindParameterType(parameter);
-        paramTypes.Add(parameterType);
-      }
-
-      var shaderFunction = mFrontEnd.CreateFunctionAndType(owningType, returnType, fnName, thisType, paramTypes);
-      ParseAttributes(shaderFunction.mMeta, fnSymbol);
-      ExtractDebugInfo(shaderFunction, fnSymbol, node);
-      mFrontEnd.mCurrentLibrary.AddFunction(new FunctionKey(fnSymbol), shaderFunction);
-      return shaderFunction;
     }
 
     public override void VisitFieldDeclaration(FieldDeclarationSyntax node)

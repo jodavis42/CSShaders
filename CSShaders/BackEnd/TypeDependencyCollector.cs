@@ -42,6 +42,11 @@ namespace CSShaders
         return;
       mProcessedTypes.Add(type);
 
+      if (type.mBaseType == OpType.Pointer)
+      {
+        Visit(type.GetDereferenceType());
+      }
+
       Visit(type.mParameters);
       Visit(type.mFields);
       // Only add this as a reference type once we finish walking fields/parameters. This is so we have guaranteed visit any nested types (or dereference types).
@@ -116,6 +121,8 @@ namespace CSShaders
       if (IsConstantOp(shaderOp))
         mReferencedConstants.Add(shaderOp);
       Visit(shaderOp.mResultType);
+      foreach (var param in shaderOp.mParameters)
+        Visit(param);
     }
 
     public void Visit(ShaderEntryPointInfo entryPointInfo)

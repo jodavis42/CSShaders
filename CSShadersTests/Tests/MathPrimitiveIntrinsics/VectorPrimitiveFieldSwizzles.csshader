@@ -1,0 +1,17 @@
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    [Math.Swizzle(0)] public float X;
+    [Math.Swizzle(1)] public float Y;
+}
+
+[Shaders.UnitTest]
+struct VectorPrimitiveFieldSwizzlesTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var vector0 = new TestVectorPrimitive();
+        vector0.Y = vector0.X;
+    }
+}
