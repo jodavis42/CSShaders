@@ -61,9 +61,13 @@ namespace CSShaders
       var dummyEntryPoint = new ShaderEntryPointInfo();
       dummyEntryPoint.mEntryPointFunction = dummyMain;
       dummyEntryPoint.mStageType = shaderType.mFragmentType;
-      var executionModeLiteral = frontEnd.CreateConstantLiteral(library.FindType(new TypeKey(typeof(int))), ((int)(Spv.ExecutionMode.ExecutionModeOriginUpperLeft)).ToString());
-      var executionModeOp = frontEnd.CreateOp(OpInstructionType.OpExecutionMode, null, new List<IShaderIR> { dummyMain, executionModeLiteral });
-      dummyEntryPoint.mExecutionModesBlock.mOps.Add(executionModeOp);
+      // Execution modes are only valid in pixel shaders
+      if(dummyEntryPoint.mStageType == FragmentType.Pixel)
+      {
+        var executionModeLiteral = frontEnd.CreateConstantLiteral(library.FindType(new TypeKey(typeof(int))), ((int)(Spv.ExecutionMode.ExecutionModeOriginUpperLeft)).ToString());
+        var executionModeOp = frontEnd.CreateOp(OpInstructionType.OpExecutionMode, null, new List<IShaderIR> { dummyMain, executionModeLiteral });
+        dummyEntryPoint.mExecutionModesBlock.mOps.Add(executionModeOp);
+      }
       foreach (var globalStatic in library.mStaticGlobals)
       {
         dummyEntryPoint.mGlobalVariablesBlock.mLocalVariables.Add(globalStatic.Value);

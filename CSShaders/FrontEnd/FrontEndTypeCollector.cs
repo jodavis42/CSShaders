@@ -31,6 +31,11 @@ namespace CSShaders
       var attributes = mFrontEnd.ParseAttributes(structSymbol);
 
       shaderType = CreateShaderType(structSymbol, attributes);
+      if (attributes.Contains(typeof(Shader.Vertex)))
+        shaderType.mFragmentType = FragmentType.Vertex;
+      else if (attributes.Contains(typeof(Shader.Pixel)))
+        shaderType.mFragmentType = FragmentType.Pixel;
+
       shaderType.mMeta.mAttributes = attributes;
       ExtractDebugInfo(shaderType, structSymbol, node);
     }
