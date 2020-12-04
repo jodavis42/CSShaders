@@ -1,0 +1,22 @@
+
+[Math.MatrixPrimitive(typeof(TestVectorPrimitive), 2)]
+public struct TestMatrixPrimitive
+{
+    TestVectorPrimitive C0, C1;
+}
+
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    float X, Y;
+}
+
+[Shaders.UnitTest]
+struct MatrixPrimitiveDeclarationTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var matrix0 = new TestMatrixPrimitive();
+    }
+}

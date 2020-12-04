@@ -36,9 +36,6 @@ namespace CSShaders
       if (TryCallIntrinsicsFunction(fnKey, null, node.ArgumentList.Arguments))
         return;
 
-      if (resultType.mBaseType != OpType.Struct)
-        throw new Exception("ToDo");
-
       var fieldPtrType = resultType.FindPointerType(StorageClass.Function);
       var localVariableOp = mFrontEnd.CreateOpVariable(fieldPtrType, mContext);
       localVariableOp.DebugInfo.Name = "temp" + resultType.mMeta.mName;

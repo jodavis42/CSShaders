@@ -19,9 +19,18 @@ namespace CSShaders
     public override void VisitStructDeclaration(StructDeclarationSyntax node)
     {
       var structSymbol = GetDeclaredSymbol(node) as INamedTypeSymbol;
+      ShaderType shaderType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(structSymbol));
+      // Primitive types already handled
+      if (shaderType != null)
+      {
+        if (shaderType.IsPrimitiveType())
+          return;
+        throw new Exception("Non primitive shader type already existed");
+      }
+
       var attributes = mFrontEnd.ParseAttributes(structSymbol);
 
-      ShaderType shaderType = CreateShaderType(structSymbol, attributes);
+      shaderType = CreateShaderType(structSymbol, attributes);
       shaderType.mMeta.mAttributes = attributes;
       ExtractDebugInfo(shaderType, structSymbol, node);
     }

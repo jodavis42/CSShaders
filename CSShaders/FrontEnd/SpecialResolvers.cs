@@ -21,6 +21,7 @@ namespace CSShaders
     {
       // Setup a few special processing functors here
       SpecialTypeCreationAttributeProcessors.Add(typeof(Math.VectorPrimitive).Name, VectorResolvers.ProcessVectorType);
+      SpecialTypeCreationAttributeProcessors.Add(typeof(Math.MatrixPrimitive).Name, MatrixResolvers.ProcessMatrixType);
       FieldProcessors.Add(typeof(Math.Swizzle).Name, VectorResolvers.ProcessVectorSwizzle);
       MethodProcessors.Add(typeof(Shader.SimpleIntrinsicFunction).Name, CreateSimpleIntrinsicType);
       MethodProcessors.Add(typeof(Math.CompositeConstruct).Name, CreateCompositeConstructIntrinsic);

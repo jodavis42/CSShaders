@@ -40,12 +40,17 @@ namespace CSShaders
       // Don't double process a type
       if (type == null || mProcessedTypes.Contains(type))
         return;
-      mProcessedTypes.Add(type);
-
+      
+      // If we're a pointer, visit the dereference type but don't yet add the pointer type to the processed types.
+      // This is because visiting the dereference type can visit functions that use the pointer type.
+      // This would cause the function type to then be declared before the pointer type here.
       if (type.mBaseType == OpType.Pointer)
       {
         Visit(type.GetDereferenceType());
+        if (mProcessedTypes.Contains(type))
+          return;
       }
+      mProcessedTypes.Add(type);
 
       Visit(type.mParameters);
       Visit(type.mFields);

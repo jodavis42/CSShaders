@@ -32,8 +32,14 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpFDiv, Spv.Op.OpFDiv);
       SimpleInstructions.Add(OpInstructionType.OpFMod, Spv.Op.OpFMod);
 
-      SimpleInstructions.Add(OpInstructionType.OpDot, Spv.Op.OpDot);
+      SimpleInstructions.Add(OpInstructionType.OpVectorTimesScalar, Spv.Op.OpVectorTimesScalar);
+      SimpleInstructions.Add(OpInstructionType.OpMatrixTimesScalar, Spv.Op.OpMatrixTimesScalar);
+      SimpleInstructions.Add(OpInstructionType.OpVectorTimesMatrix, Spv.Op.OpVectorTimesMatrix);
+      SimpleInstructions.Add(OpInstructionType.OpMatrixTimesVector, Spv.Op.OpMatrixTimesVector);
+      SimpleInstructions.Add(OpInstructionType.OpMatrixTimesMatrix, Spv.Op.OpMatrixTimesMatrix);
       SimpleInstructions.Add(OpInstructionType.OpOuterProduct, Spv.Op.OpOuterProduct);
+
+      SimpleInstructions.Add(OpInstructionType.OpDot, Spv.Op.OpDot);
       SimpleInstructions.Add(OpInstructionType.OpVectorShuffle, Spv.Op.OpVectorShuffle);
       SimpleInstructions.Add(OpInstructionType.OpCompositeConstruct, Spv.Op.OpCompositeConstruct);
       SimpleInstructions.Add(OpInstructionType.OpCompositeExtract, Spv.Op.OpCompositeExtract);
@@ -260,6 +266,11 @@ namespace CSShaders
         else if (type.mBaseType == OpType.Vector)
         {
           mWriter.WriteInstruction(4, Spv.Op.OpTypeVector, GetId(type));
+          WriteArgs(type.mParameters);
+        }
+        else if (type.mBaseType == OpType.Matrix)
+        {
+          mWriter.WriteInstruction(4, Spv.Op.OpTypeMatrix, GetId(type));
           WriteArgs(type.mParameters);
         }
         else if (type.mBaseType == OpType.Pointer)

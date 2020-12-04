@@ -13,6 +13,17 @@ namespace Math
     }
   }
 
+  public class MatrixPrimitive : Attribute
+  {
+    Type ColumnType;
+    UInt32 ColumnCount;
+    public MatrixPrimitive(Type columnType, UInt32 columnCount)
+    {
+      ColumnType = columnType;
+      ColumnCount = columnCount;
+    }
+  }
+
   public class Swizzle : System.Attribute
   {
     public Swizzle(params UInt32[] list)

@@ -1,0 +1,34 @@
+[Math.MatrixPrimitive(typeof(TestVectorPrimitive), 2)]
+public struct TestMatrixPrimitive
+{
+    [Math.Swizzle(0)] public TestVectorPrimitive C0;
+    [Math.Swizzle(1)] public TestVectorPrimitive C1;
+    
+    public TestVectorPrimitive FieldThisExplicit()
+    {
+        return this.C0;
+    }
+
+    public TestVectorPrimitive FieldThisImplicit()
+    {
+        return C0;
+    }
+}
+
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    float X, Y;
+}
+
+[Shaders.UnitTest]
+struct MatrixPrimitiveImplicitExplicitThisTests
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var matrix0 = new TestMatrixPrimitive();
+        var fieldThisExplicit = matrix0.FieldThisExplicit();
+        var fieldThisImplicit = matrix0.FieldThisImplicit();
+    }
+}

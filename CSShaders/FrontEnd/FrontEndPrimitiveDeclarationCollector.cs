@@ -24,10 +24,30 @@ namespace CSShaders
       mContext.mCurrentType = null;
     }
 
+    public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+    {
+
+      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
+      // Handle intrinsics. If we have a resolver for a special handler then call that and return.
+      if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
+        return;
+
+      var returnType = FindType(typeof(void));
+      var shaderConstructor = CreateFunction(node, node.Identifier.Text, returnType);
+      shaderConstructor.DebugInfo.Name = mContext.mCurrentType.GetPrettyName() + "Constructor";
+    }
+
     public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
     {
+      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
+
       // Visit any remaining methods (not intrinsics) on the primitive type. This is necessary for any helper functions to work
       var attributes = mFrontEnd.ParseAttributes(GetDeclaredSymbol(node));
+
+      // Handle intrinsics. If we have a resolver for a special handler then call that and return.
+      if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
+        return;
+
       if (IsIntrinsic(attributes))
         return;
 

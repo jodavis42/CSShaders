@@ -13,11 +13,21 @@ namespace CSShaders
     public FrontEndContext mContext;
     public SpecialResolvers SpecialResolvers = new SpecialResolvers();
 
-    public virtual void Visit(FrontEndTranslator translator, SyntaxNode node, FrontEndContext context)
+    public virtual void Visit(FrontEndTranslator translator, CSharpCompilation compilation, List<SyntaxTree> trees, FrontEndContext context)
     {
       mFrontEnd = translator;
       mContext = context;
-      base.Visit(node);
+      VisitTrees(compilation, trees);
+    }
+
+    public virtual void VisitTrees(CSharpCompilation compilation, List<SyntaxTree> trees)
+    {
+      foreach (var tree in trees)
+      {
+        mFrontEnd.mSemanticModel = compilation.GetSemanticModel(tree);
+
+        base.Visit(tree.GetRoot());
+      }
     }
 
     public override void VisitClassDeclaration(ClassDeclarationSyntax node)

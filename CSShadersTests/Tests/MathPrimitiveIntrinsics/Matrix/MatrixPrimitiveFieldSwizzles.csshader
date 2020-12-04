@@ -1,0 +1,25 @@
+[Math.MatrixPrimitive(typeof(TestVectorPrimitive), 2)]
+public struct TestMatrixPrimitive
+{
+    [Math.Swizzle(0)] public TestVectorPrimitive C0;
+    [Math.Swizzle(1)] public TestVectorPrimitive C1;
+}
+
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    [Math.Swizzle(0)] public float X;
+    [Math.Swizzle(1)] public float Y;
+}
+
+[Shaders.UnitTest]
+struct MatrixPrimitiveFieldSwizzlesTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var matrix0 = new TestMatrixPrimitive();
+        matrix0.C1 = matrix0.C0;
+        //matrix0.C0.X = matrix0.C1.Y;
+    }
+}

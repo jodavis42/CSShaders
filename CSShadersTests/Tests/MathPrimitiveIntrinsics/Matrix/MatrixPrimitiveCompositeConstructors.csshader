@@ -1,0 +1,26 @@
+
+[Math.MatrixPrimitive(typeof(TestVectorPrimitive), 2)]
+public struct TestMatrixPrimitive
+{
+    TestVectorPrimitive C0, C1;
+    
+    [Math.CompositeConstruct] public TestMatrixPrimitive(TestVectorPrimitive c0, TestVectorPrimitive c1) { C0 = c0; C1 = c1; }
+}
+
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    float X, Y;
+}
+
+[Shaders.UnitTest]
+struct VectorPrimitiveCompositeConstructorsTest
+{
+    [Shaders.EntryPoint]
+    public void Main()
+    {
+        var vector0 = new TestVectorPrimitive();
+        var vector1 = new TestVectorPrimitive();
+        var matrix0 = new TestMatrixPrimitive(vector0, vector1);
+    }
+}

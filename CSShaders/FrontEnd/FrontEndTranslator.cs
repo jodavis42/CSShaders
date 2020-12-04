@@ -38,8 +38,10 @@ namespace CSShaders
     public List<FrontEndPass> mPasses = new List<FrontEndPass>()
     {
       // Collect all types
+      new FrontEndPrimitiveTypeCollector(),
       new FrontEndTypeCollector(),
       // Visit Intrinsics separately (e.g. Vector2)
+      
       new FrontEndPrimitiveDeclarationCollector(),
       // Collect all functions/vars definitions
       new FrontEndDeclarationCollector(),
@@ -55,11 +57,7 @@ namespace CSShaders
       FrontEndContext context = new FrontEndContext();
       foreach (var pass in mPasses)
       {
-        foreach(var tree in trees)
-        {
-          mSemanticModel = Compilation.GetSemanticModel(tree);
-          pass.Visit(this, tree.GetRoot(), context);
-        }
+        pass.Visit(this, Compilation, trees, context);
       }
 
       // Validation passes

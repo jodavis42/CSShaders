@@ -1,0 +1,70 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 51
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %dummyMain "dummyMain"
+               OpExecutionMode %dummyMain OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVectorPrimitive "TestVectorPrimitive"
+               OpName %TestMatrixPrimitive "TestMatrixPrimitive"
+               OpName %MatrixPrimitiveFieldSwizzlesTest "MatrixPrimitiveFieldSwizzlesTest"
+               OpName %PreConstructor_MatrixPrimitiveFieldSwizzlesTest "PreConstructor_MatrixPrimitiveFieldSwizzlesTest"
+               OpName %self "self"
+               OpName %DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest "DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %matrix0 "matrix0"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+               OpName %dummyMain "dummyMain"
+               OpName %self_2 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVectorPrimitive = OpTypeVector %float 2
+%TestMatrixPrimitive = OpTypeMatrix %TestVectorPrimitive 2
+%MatrixPrimitiveFieldSwizzlesTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_MatrixPrimitiveFieldSwizzlesTest = OpTypePointer Function %MatrixPrimitiveFieldSwizzlesTest
+         %13 = OpTypeFunction %void %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
+%_ptr_Function_TestMatrixPrimitive = OpTypePointer Function %TestMatrixPrimitive
+%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
+         %15 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_1 = OpConstant %uint 1
+%PreConstructor_MatrixPrimitiveFieldSwizzlesTest = OpFunction %void None %13
+       %self = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest = OpFunction %void None %13
+     %self_0 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %PreConstructor_MatrixPrimitiveFieldSwizzlesTest %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
+         %33 = OpLabel
+    %matrix0 = OpVariable %_ptr_Function_TestMatrixPrimitive Function
+         %35 = OpCompositeConstruct %TestVectorPrimitive %float_0 %float_0
+         %36 = OpCompositeConstruct %TestMatrixPrimitive %35 %35
+               OpStore %matrix0 %36
+         %38 = OpLoad %TestMatrixPrimitive %matrix0
+         %39 = OpCompositeExtract %TestVectorPrimitive %38 0
+         %40 = OpLoad %TestMatrixPrimitive %matrix0
+         %41 = OpAccessChain %_ptr_Function_TestVectorPrimitive %matrix0 %uint_1
+               OpStore %41 %39
+               OpReturn
+               OpFunctionEnd
+  %dummyMain = OpFunction %void None %15
+         %46 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest Function
+         %48 = OpFunctionCall %void %DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest %self_2
+         %49 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd
