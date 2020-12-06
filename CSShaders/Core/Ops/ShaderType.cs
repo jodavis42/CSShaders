@@ -35,6 +35,8 @@ namespace CSShaders
     public FragmentType mFragmentType = FragmentType.None;
     public ShaderTypeMeta mMeta = new ShaderTypeMeta();
 
+    public List<ShaderEntryPointInfo> mEntryPoints = new List<ShaderEntryPointInfo>();
+
     public ShaderType FindPointerType(StorageClass storageClass)
     {
       return StorageClassCollection.FindPointerType(storageClass);

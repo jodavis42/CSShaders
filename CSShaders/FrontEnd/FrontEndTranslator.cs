@@ -326,6 +326,30 @@ namespace CSShaders
       return resultOp;
     }
 
+    public ShaderOp ConstructAndInitializeOpVariable(ShaderType shaderType, FrontEndContext context)
+    {
+      // Create the variable
+      var voidType = mCurrentLibrary.FindType(new TypeKey(typeof(void)));
+      var varOp = CreateOpVariable(shaderType, context);
+
+      // Either call the constructor or implicitly construct the type if needed.
+      if (shaderType.mImplicitConstructor != null)
+      {
+        var fnParamOps = new List<IShaderIR>();
+        fnParamOps.Add(shaderType.mImplicitConstructor);
+        fnParamOps.Add(varOp);
+        CreateOp(context.mCurrentBlock, OpInstructionType.OpFunctionCall, voidType, fnParamOps);
+      }
+      else if (shaderType.mPreConstructor != null)
+      {
+        var fnParamOps = new List<IShaderIR>();
+        fnParamOps.Add(shaderType.mPreConstructor);
+        fnParamOps.Add(varOp);
+        CreateOp(context.mCurrentBlock, OpInstructionType.OpFunctionCall, voidType, fnParamOps);
+      }
+      return varOp;
+    }
+
     public ShaderOp CreateStoreOp(ShaderBlock block, IShaderIR variable, IShaderIR result)
     {
       var valueResult = GetOrGenerateValueTypeFromIR(block, result);

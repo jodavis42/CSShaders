@@ -29,16 +29,20 @@ namespace CSShaders
 
     public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
     {
-      VisitMethod(node);
+      var shaderFunction = VisitMethod(node);
+      if(shaderFunction != null && shaderFunction.mMeta.mAttributes.Contains(typeof(Shader.EntryPoint)))
+      {
+        EntryPointGeneration.Generate(mFrontEnd, mContext.mCurrentType, shaderFunction);
+      }
     }
 
-    public void VisitMethod(BaseMethodDeclarationSyntax node)
+    public ShaderFunction VisitMethod(BaseMethodDeclarationSyntax node)
     {
       var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
       
       // Handle intrinsics. If we have a resolver for a special handler then call that and return.
       if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
-        return;
+        return null;
 
       // Add the current function as the active one and the parameter
       var shaderFunction = FindFunction(node);
@@ -79,6 +83,8 @@ namespace CSShaders
       mContext.mThisOp = null;
       mContext.mCurrentBlock = null;
       mContext.mCurrentFunction = null;
+
+      return shaderFunction;
     }
 
     public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)

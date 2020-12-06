@@ -59,6 +59,8 @@ namespace CSShaders
 
       // Now visit the body of the functions and all of their ops
       Visit(type.mFunctions);
+      foreach(var entryPoint in type.mEntryPoints)
+        Visit(entryPoint);
     }
 
     public void Visit(IEnumerable<ShaderField> fields)
