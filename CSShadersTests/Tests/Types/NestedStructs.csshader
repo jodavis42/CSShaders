@@ -11,7 +11,7 @@ namespace Shaders
       float FloatValue;
     }
 
-    [UnitTest]
+    [Shader.UnitTest]
     struct NestedStructs
     {
       bool Value;

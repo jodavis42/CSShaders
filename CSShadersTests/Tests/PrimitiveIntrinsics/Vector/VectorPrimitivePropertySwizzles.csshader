@@ -11,10 +11,10 @@ public struct TestVectorPrimitive
     [Math.Swizzle(1, 1)] public TestVectorPrimitive YY { get { return new TestVectorPrimitive(Y, Y); }}
 }
 
-[Shaders.UnitTest]
+[Shader.UnitTest]
 struct VectorPrimitivePropertySwizzlesTest
 {
-    [Shaders.EntryPoint]
+    [Shader.EntryPoint]
     public void Main()
     {
         var vector0 = new TestVectorPrimitive();

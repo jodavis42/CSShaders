@@ -2,6 +2,18 @@
 
 namespace Shader
 {
+
+
+  [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct)]
+  public class UnitTest : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Method)]
+  public class EntryPoint : Attribute
+  {
+  }
+
   public class IntrinsicFunction : Attribute
   {
   }

@@ -5,10 +5,10 @@ public struct TestVectorPrimitive
     [Math.Swizzle(1)] public float Y;
 }
 
-[Shaders.UnitTest]
+[Shader.UnitTest]
 struct VectorPrimitiveFieldSwizzlesTest
 {
-    [Shaders.EntryPoint]
+    [Shader.EntryPoint]
     public void Main()
     {
         var vector0 = new TestVectorPrimitive();

@@ -13,10 +13,10 @@ public struct TestVectorPrimitive
     float X, Y;
 }
 
-[Shaders.UnitTest]
+[Shader.UnitTest]
 struct VectorPrimitiveCompositeConstructorsTest
 {
-    [Shaders.EntryPoint]
+    [Shader.EntryPoint]
     public void Main()
     {
         var vector0 = new TestVectorPrimitive();

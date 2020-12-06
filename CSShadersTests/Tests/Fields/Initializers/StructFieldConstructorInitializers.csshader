@@ -9,12 +9,12 @@ namespace Shaders
       }
     }
 
-    [UnitTest]
+    [Shader.UnitTest]
     struct StructFieldConstructorInitializers
     {
       SubStruct SubStruct = new SubStruct(1);
 
-      [EntryPoint]
+      [Shader.EntryPoint]
       void Main()
       {
         

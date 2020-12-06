@@ -5,12 +5,12 @@ namespace Shaders
       public int Value = 0;
     }
 
-    [UnitTest]
+    [Shader.UnitTest]
     struct StructFieldDefaultInitializers
     {
       SubStruct SubStruct;
 
-      [EntryPoint]
+      [Shader.EntryPoint]
       void Main()
       {
         

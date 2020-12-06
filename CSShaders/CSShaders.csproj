@@ -16,9 +16,6 @@
     <None Update="Libraries\Core\Attributes.csshader">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Libraries\Utilities\Attributes.csshader">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Shaders\Test.csshader">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -63,6 +60,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Shader\Shader.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Libraries\Utilities\" />
   </ItemGroup>
 
 </Project>

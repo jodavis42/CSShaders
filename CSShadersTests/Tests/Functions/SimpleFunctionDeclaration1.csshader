@@ -1,9 +1,9 @@
 namespace Shaders
 {
-    [UnitTest]
+    [Shader.UnitTest]
     struct SimpleFunctionDeclaration1
     {
-      [EntryPoint]
+      [Shader.EntryPoint]
       void Main()
       {
       }

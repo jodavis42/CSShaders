@@ -1,7 +1,7 @@
 
 namespace Shaders
 {
-    [UnitTest]
+    [Shader.UnitTest]
     struct InstanceFunctionRef
     {
       void TestFn1(ref int value)
@@ -9,7 +9,7 @@ namespace Shaders
         value = 3;
       }
 
-      [EntryPoint]
+      [Shader.EntryPoint]
       void Main()
       {
         int value = 1;

@@ -1,6 +1,6 @@
 namespace Shaders
 {
-    [UnitTest]
+    [Shader.UnitTest]
     struct SimpleFunctionDeclaration2
     {
       int GetValue(int value)
@@ -8,7 +8,7 @@ namespace Shaders
         return value;
       }
 
-      [EntryPoint]
+      [Shader.EntryPoint]
       void Main()
       {
         int value = this.GetValue(1);

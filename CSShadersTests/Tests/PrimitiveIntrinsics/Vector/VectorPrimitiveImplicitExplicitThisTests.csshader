@@ -23,10 +23,10 @@ public struct TestVectorPrimitive
     }
 }
 
-[Shaders.UnitTest]
+[Shader.UnitTest]
 struct VectorPrimitiveImplicitExplicitThisTests
 {
-    [Shaders.EntryPoint]
+    [Shader.EntryPoint]
     public void Main()
     {
         var vector0 = new TestVectorPrimitive();

@@ -21,10 +21,10 @@ public struct TestVectorPrimitive
     float X, Y;
 }
 
-[Shaders.UnitTest]
+[Shader.UnitTest]
 struct MatrixPrimitiveImplicitExplicitThisTests
 {
-    [Shaders.EntryPoint]
+    [Shader.EntryPoint]
     public void Main()
     {
         var matrix0 = new TestMatrixPrimitive();

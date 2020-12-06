@@ -1,6 +1,6 @@
 namespace Shaders
 {
-    [UnitTest]
+    [Shader.UnitTest]
     struct SimpleStaticFunctionDeclaration1
     {
       static void StaticFn()
@@ -8,7 +8,7 @@ namespace Shaders
         
       }
 
-      [EntryPoint]
+      [Shader.EntryPoint]
       void Main()
       {
       }
