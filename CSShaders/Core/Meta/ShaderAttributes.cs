@@ -17,6 +17,7 @@ namespace CSShaders
 
   public class ShaderAttributes
   {
+    public delegate void AttributeCallback(ShaderAttribute attribute);
     List<ShaderAttribute> Attributes = new List<ShaderAttribute>();
 
     public void Add(ShaderAttribute attribute)
@@ -42,6 +43,20 @@ namespace CSShaders
     public bool Contains(Type attributeType)
     {
       return Contains(attributeType.Name);
+    }
+
+    public void ForeachAttribute(string attributeName, AttributeCallback callback)
+    {
+      foreach (var attribute in Attributes)
+      {
+        if (attribute.Name == attributeName)
+          callback(attribute);
+      }
+    }
+
+    public void ForeachAttribute(Type attributeType, AttributeCallback callback)
+    {
+      ForeachAttribute(attributeType.Name, callback);
     }
   }
 }
