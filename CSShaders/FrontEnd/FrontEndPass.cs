@@ -124,7 +124,7 @@ namespace CSShaders
       return op;
     }
 
-    public ShaderOp FindStaticField(ISymbol symbol)
+    public GlobalShaderField FindStaticField(ISymbol symbol)
     {
       // Try and find the type that owns this symbol
       var owningType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(symbol.ContainingType));
@@ -176,6 +176,11 @@ namespace CSShaders
     {
       ir.DebugInfo.Name = symbol.Name;
       ir.DebugInfo.Location = node.GetLocation();
+    }
+    public void ExtractDebugInfo(ShaderField field, ISymbol symbol, SyntaxNode node)
+    {
+      field.DebugInfo.Name = symbol.Name;
+      field.DebugInfo.Location = node.GetLocation();
     }
 
     public void ParseAttributes(ShaderIRMeta shaderMeta, ISymbol symbol)

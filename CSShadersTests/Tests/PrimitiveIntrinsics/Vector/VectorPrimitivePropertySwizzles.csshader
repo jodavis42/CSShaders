@@ -11,7 +11,7 @@ public struct TestVectorPrimitive
     [Math.Swizzle(1, 1)] public TestVectorPrimitive YY { get { return new TestVectorPrimitive(Y, Y); }}
 }
 
-[Shader.UnitTest]
+[Shader.UnitTest][Shader.Pixel]
 struct VectorPrimitivePropertySwizzlesTest
 {
     [Shader.EntryPoint]

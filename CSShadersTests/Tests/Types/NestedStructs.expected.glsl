@@ -19,49 +19,64 @@ struct NestedStructs
     float FloatValue;
 };
 
-void PreConstructor_Struct1(inout Struct1 self)
+void NestedStructs_InitGlobals()
+{
+}
+
+void Struct1_PreConstructor(inout Struct1 self)
 {
     self.IntValue = 0;
 }
 
-void DefaultConstructor_Struct1(inout Struct1 self)
+void Struct1_DefaultConstructor(inout Struct1 self)
 {
-    PreConstructor_Struct1(self);
+    Struct1_PreConstructor(self);
 }
 
-void PreConstructor_Struct2(inout Struct2 self)
+void Struct2_PreConstructor(inout Struct2 self)
 {
     Struct1 tempStruct1;
-    DefaultConstructor_Struct1(tempStruct1);
+    Struct1_DefaultConstructor(tempStruct1);
     self.Struct1Data = tempStruct1;
     self.FloatValue = 0.0;
 }
 
-void DefaultConstructor_Struct2(inout Struct2 self)
+void Struct2_DefaultConstructor(inout Struct2 self)
 {
-    PreConstructor_Struct2(self);
+    Struct2_PreConstructor(self);
 }
 
-void PreConstructor_NestedStructs(inout NestedStructs self)
+void NestedStructs_PreConstructor(inout NestedStructs self)
 {
     self.Value = false;
     Struct2 tempStruct2;
-    DefaultConstructor_Struct2(tempStruct2);
+    Struct2_DefaultConstructor(tempStruct2);
     self.Struct2Data = tempStruct2;
     Struct1 tempStruct1;
-    DefaultConstructor_Struct1(tempStruct1);
+    Struct1_DefaultConstructor(tempStruct1);
     self.Struct1Data = tempStruct1;
     self.FloatValue = 0.0;
 }
 
-void DefaultConstructor_NestedStructs(inout NestedStructs self)
+void NestedStructs_DefaultConstructor(inout NestedStructs self)
 {
-    PreConstructor_NestedStructs(self);
+    NestedStructs_PreConstructor(self);
+}
+
+void NestedStructs_CopyInputs(NestedStructs self)
+{
+}
+
+void NestedStructs_CopyOutputs(NestedStructs self)
+{
 }
 
 void main()
 {
+    NestedStructs_InitGlobals();
     NestedStructs self;
-    DefaultConstructor_NestedStructs(self);
+    NestedStructs_DefaultConstructor(self);
+    NestedStructs_CopyInputs(self);
+    NestedStructs_CopyOutputs(self);
 }
 

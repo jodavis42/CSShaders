@@ -8,7 +8,11 @@ struct PrimitiveFieldExplicitSimpleInitializers
     float FloatValue;
 };
 
-void PreConstructor_PrimitiveFieldExplicitSimpleInitializers(inout PrimitiveFieldExplicitSimpleInitializers self)
+void PrimitiveFieldExplicitSimpleInitializers_InitGlobals()
+{
+}
+
+void PrimitiveFieldExplicitSimpleInitializers_PreConstructor(inout PrimitiveFieldExplicitSimpleInitializers self)
 {
     self.BoolValue = true;
     self.IntValue = 1;
@@ -16,19 +20,30 @@ void PreConstructor_PrimitiveFieldExplicitSimpleInitializers(inout PrimitiveFiel
     self.FloatValue = 3.0;
 }
 
-void DefaultConstructor_PrimitiveFieldExplicitSimpleInitializers(inout PrimitiveFieldExplicitSimpleInitializers self)
+void PrimitiveFieldExplicitSimpleInitializers_DefaultConstructor(inout PrimitiveFieldExplicitSimpleInitializers self)
 {
-    PreConstructor_PrimitiveFieldExplicitSimpleInitializers(self);
+    PrimitiveFieldExplicitSimpleInitializers_PreConstructor(self);
+}
+
+void PrimitiveFieldExplicitSimpleInitializers_CopyInputs(PrimitiveFieldExplicitSimpleInitializers self)
+{
 }
 
 void Main(PrimitiveFieldExplicitSimpleInitializers self)
 {
 }
 
+void PrimitiveFieldExplicitSimpleInitializers_CopyOutputs(PrimitiveFieldExplicitSimpleInitializers self)
+{
+}
+
 void main()
 {
+    PrimitiveFieldExplicitSimpleInitializers_InitGlobals();
     PrimitiveFieldExplicitSimpleInitializers self;
-    DefaultConstructor_PrimitiveFieldExplicitSimpleInitializers(self);
+    PrimitiveFieldExplicitSimpleInitializers_DefaultConstructor(self);
+    PrimitiveFieldExplicitSimpleInitializers_CopyInputs(self);
     Main(self);
+    PrimitiveFieldExplicitSimpleInitializers_CopyOutputs(self);
 }
 

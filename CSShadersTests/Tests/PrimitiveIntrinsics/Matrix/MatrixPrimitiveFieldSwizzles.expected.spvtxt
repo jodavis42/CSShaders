@@ -1,28 +1,33 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 51
+; Bound: 68
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint "MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint"
+               OpExecutionMode %MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %TestVectorPrimitive "TestVectorPrimitive"
                OpName %TestMatrixPrimitive "TestMatrixPrimitive"
                OpName %MatrixPrimitiveFieldSwizzlesTest "MatrixPrimitiveFieldSwizzlesTest"
-               OpName %PreConstructor_MatrixPrimitiveFieldSwizzlesTest "PreConstructor_MatrixPrimitiveFieldSwizzlesTest"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_PreConstructor "MatrixPrimitiveFieldSwizzlesTest_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest "DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_DefaultConstructor "MatrixPrimitiveFieldSwizzlesTest_DefaultConstructor"
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
                OpName %matrix0 "matrix0"
-               OpName %dummyMain "dummyMain"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_InitGlobals "MatrixPrimitiveFieldSwizzlesTest_InitGlobals"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_CopyInputs "MatrixPrimitiveFieldSwizzlesTest_CopyInputs"
                OpName %self_2 "self"
-               OpName %dummyMain "dummyMain"
-               OpName %self_2 "self"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_CopyOutputs "MatrixPrimitiveFieldSwizzlesTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint "MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint "MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -36,15 +41,15 @@
          %15 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
-%PreConstructor_MatrixPrimitiveFieldSwizzlesTest = OpFunction %void None %13
+%MatrixPrimitiveFieldSwizzlesTest_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest = OpFunction %void None %13
+%MatrixPrimitiveFieldSwizzlesTest_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
          %27 = OpLabel
-         %28 = OpFunctionCall %void %PreConstructor_MatrixPrimitiveFieldSwizzlesTest %self_0
+         %28 = OpFunctionCall %void %MatrixPrimitiveFieldSwizzlesTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
        %Main = OpFunction %void None %13
@@ -61,10 +66,27 @@
                OpStore %41 %39
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %15
+%MatrixPrimitiveFieldSwizzlesTest_InitGlobals = OpFunction %void None %15
          %46 = OpLabel
-     %self_2 = OpVariable %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest Function
-         %48 = OpFunctionCall %void %DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest %self_2
-         %49 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd
+%MatrixPrimitiveFieldSwizzlesTest_CopyInputs = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
+         %51 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%MatrixPrimitiveFieldSwizzlesTest_CopyOutputs = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest
+         %56 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%MatrixPrimitiveFieldSwizzlesTest_Main_EntryPoint = OpFunction %void None %15
+         %60 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_MatrixPrimitiveFieldSwizzlesTest Function
+         %62 = OpFunctionCall %void %MatrixPrimitiveFieldSwizzlesTest_InitGlobals
+         %63 = OpFunctionCall %void %MatrixPrimitiveFieldSwizzlesTest_DefaultConstructor %self_4
+         %64 = OpFunctionCall %void %MatrixPrimitiveFieldSwizzlesTest_CopyInputs %self_4
+         %65 = OpFunctionCall %void %Main %self_4
+         %66 = OpFunctionCall %void %MatrixPrimitiveFieldSwizzlesTest_CopyOutputs %self_4
                OpReturn
                OpFunctionEnd

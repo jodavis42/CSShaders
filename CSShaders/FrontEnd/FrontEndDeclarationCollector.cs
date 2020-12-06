@@ -34,7 +34,7 @@ namespace CSShaders
     public void GeneratePreConstructor(INamedTypeSymbol structSymbol, ShaderType owningType)
     {
       // The preconstructor is an instance function that returns void and takes no args
-      var preconstructorName = string.Format("{0}_{1}", "PreConstructor", owningType.DebugInfo.Name);
+      var preconstructorName = "PreConstructor";
       var returnType = FindType(typeof(void));
       var thisType = owningType.FindPointerType(StorageClass.Function);
       owningType.mPreConstructor = mFrontEnd.CreateFunctionAndType(owningType, returnType, preconstructorName, thisType, null);
@@ -58,7 +58,7 @@ namespace CSShaders
       if (!HasDefaultConstructor(structSymbol))
         return;
 
-      var constructorName = string.Format("{0}_{1}", "DefaultConstructor", owningType.DebugInfo.Name);
+      var constructorName = "DefaultConstructor";
       var returnType = FindType(typeof(void));
       var thisType = owningType.FindPointerType(StorageClass.Function);
       owningType.mImplicitConstructor = mFrontEnd.CreateFunctionAndType(owningType, returnType, constructorName, thisType, null); 
@@ -67,8 +67,9 @@ namespace CSShaders
     public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
     {
       var returnType = FindType(typeof(void));
-      var shaderConstructor = CreateFunction(node, node.Identifier.Text, returnType);
-      shaderConstructor.DebugInfo.Name = mContext.mCurrentType.GetPrettyName() + "Constructor";
+      var functionName = "Constructor";
+      var shaderConstructor = CreateFunction(node, functionName, returnType);
+      shaderConstructor.DebugInfo.Name = mFrontEnd.GenerateDebugFunctionName(mContext.mCurrentType, functionName);
     }
 
     public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
@@ -78,8 +79,9 @@ namespace CSShaders
       if (IsIntrinsic(attributes))
         return;
 
+      var functionName = node.Identifier.Text;
       var returnType = FindType(node.ReturnType);
-      CreateFunction(node, node.Identifier.Text, returnType);
+      CreateFunction(node, functionName, returnType);
     }
 
     public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -91,16 +93,17 @@ namespace CSShaders
       foreach (var variable in node.Declaration.Variables)
       {
         var variableSymbol = GetDeclaredSymbol(variable);
-        var shaderField = mFrontEnd.CreateField(owningType, shaderFieldType, variable.Identifier.Text, null);
-        shaderField.IsStatic = shaderField.mMeta.IsStatic = variableSymbol.IsStatic;
-        ParseAttributes(shaderField.mMeta, variableSymbol);
-        ExtractDebugInfo(shaderField, variableSymbol, variable);
-        
-        if(shaderField.IsStatic)
+        if (variableSymbol.IsStatic)
         {
-          var shaderFieldOp = mFrontEnd.CreateStaticField(owningType, shaderField);
-          shaderFieldOp.DebugInfo.Name = variableSymbol.Name;
-          ExtractDebugInfo(shaderFieldOp, variable);
+          var shaderField = mFrontEnd.CreateStaticField(owningType, shaderFieldType, variable.Identifier.Text, null);
+          ParseAttributes(shaderField.mMeta, variableSymbol);
+          ExtractDebugInfo(shaderField.InstanceOp, variableSymbol, variable);
+        }
+        else
+        {
+          var shaderField = mFrontEnd.CreateField(owningType, shaderFieldType, variable.Identifier.Text, null);
+          ParseAttributes(shaderField.mMeta, variableSymbol);
+          ExtractDebugInfo(shaderField, variableSymbol, variable);
         }
       }
     }

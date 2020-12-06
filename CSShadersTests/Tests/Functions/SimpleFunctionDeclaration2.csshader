@@ -1,6 +1,6 @@
 namespace Shaders
 {
-    [Shader.UnitTest]
+    [Shader.UnitTest][Shader.Pixel]
     struct SimpleFunctionDeclaration2
     {
       int GetValue(int value)

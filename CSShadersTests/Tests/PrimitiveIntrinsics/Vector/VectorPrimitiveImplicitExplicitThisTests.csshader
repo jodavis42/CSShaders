@@ -23,7 +23,7 @@ public struct TestVectorPrimitive
     }
 }
 
-[Shader.UnitTest]
+[Shader.UnitTest][Shader.Pixel]
 struct VectorPrimitiveImplicitExplicitThisTests
 {
     [Shader.EntryPoint]

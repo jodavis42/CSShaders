@@ -6,7 +6,7 @@ namespace Shaders
       public float FloatVal = 1.0f;
     }
 
-    [Shader.UnitTest]
+    [Shader.UnitTest][Shader.Pixel]
     struct StructFieldConstructorInitializers
     {
       SubStruct SubStruct = new SubStruct() { IntValue = 3, FloatVal = 3.1f };

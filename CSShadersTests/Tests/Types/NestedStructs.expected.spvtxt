@@ -1,13 +1,13 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 94
+; Bound: 111
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %NestedStructs_EntryPoint "NestedStructs_EntryPoint"
+               OpExecutionMode %NestedStructs_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %Struct1 "Struct1"
                OpMemberName %Struct1 0 "IntValue"
@@ -19,24 +19,29 @@
                OpMemberName %NestedStructs 1 "Struct2Data"
                OpMemberName %NestedStructs 2 "Struct1Data"
                OpMemberName %NestedStructs 3 "FloatValue"
-               OpName %PreConstructor_Struct1 "PreConstructor_Struct1"
+               OpName %Struct1_PreConstructor "Struct1_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_Struct1 "DefaultConstructor_Struct1"
+               OpName %Struct1_DefaultConstructor "Struct1_DefaultConstructor"
                OpName %self_0 "self"
-               OpName %PreConstructor_Struct2 "PreConstructor_Struct2"
+               OpName %Struct2_PreConstructor "Struct2_PreConstructor"
                OpName %self_1 "self"
                OpName %tempStruct1 "tempStruct1"
-               OpName %DefaultConstructor_Struct2 "DefaultConstructor_Struct2"
+               OpName %Struct2_DefaultConstructor "Struct2_DefaultConstructor"
                OpName %self_2 "self"
-               OpName %PreConstructor_NestedStructs "PreConstructor_NestedStructs"
+               OpName %NestedStructs_PreConstructor "NestedStructs_PreConstructor"
                OpName %self_3 "self"
                OpName %tempStruct2 "tempStruct2"
                OpName %tempStruct1_0 "tempStruct1"
-               OpName %DefaultConstructor_NestedStructs "DefaultConstructor_NestedStructs"
+               OpName %NestedStructs_DefaultConstructor "NestedStructs_DefaultConstructor"
                OpName %self_4 "self"
-               OpName %dummyMain "dummyMain"
+               OpName %NestedStructs_EntryPoint "NestedStructs_EntryPoint"
                OpName %self_5 "self"
-               OpName %dummyMain "dummyMain"
+               OpName %NestedStructs_InitGlobals "NestedStructs_InitGlobals"
+               OpName %NestedStructs_CopyInputs "NestedStructs_CopyInputs"
+               OpName %self_6 "self"
+               OpName %NestedStructs_CopyOutputs "NestedStructs_CopyOutputs"
+               OpName %self_7 "self"
+               OpName %NestedStructs_EntryPoint "NestedStructs_EntryPoint"
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
@@ -63,24 +68,24 @@
       %false = OpConstantFalse %bool
      %uint_2 = OpConstant %uint 2
      %uint_3 = OpConstant %uint 3
-%PreConstructor_Struct1 = OpFunction %void None %13
+%Struct1_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_Struct1
          %35 = OpLabel
          %36 = OpAccessChain %_ptr_Function_int %self %uint_0
                OpStore %36 %int_0
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_Struct1 = OpFunction %void None %13
+%Struct1_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_Struct1
          %42 = OpLabel
-         %43 = OpFunctionCall %void %PreConstructor_Struct1 %self_0
+         %43 = OpFunctionCall %void %Struct1_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%PreConstructor_Struct2 = OpFunction %void None %17
+%Struct2_PreConstructor = OpFunction %void None %17
      %self_1 = OpFunctionParameter %_ptr_Function_Struct2
          %48 = OpLabel
 %tempStruct1 = OpVariable %_ptr_Function_Struct1 Function
-         %50 = OpFunctionCall %void %DefaultConstructor_Struct1 %tempStruct1
+         %50 = OpFunctionCall %void %Struct1_DefaultConstructor %tempStruct1
          %51 = OpLoad %Struct1 %tempStruct1
          %52 = OpAccessChain %_ptr_Function_Struct1 %self_1 %uint_0
                OpStore %52 %51
@@ -88,24 +93,24 @@
                OpStore %54 %float_0
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_Struct2 = OpFunction %void None %17
+%Struct2_DefaultConstructor = OpFunction %void None %17
      %self_2 = OpFunctionParameter %_ptr_Function_Struct2
          %60 = OpLabel
-         %61 = OpFunctionCall %void %PreConstructor_Struct2 %self_2
+         %61 = OpFunctionCall %void %Struct2_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-%PreConstructor_NestedStructs = OpFunction %void None %21
+%NestedStructs_PreConstructor = OpFunction %void None %21
      %self_3 = OpFunctionParameter %_ptr_Function_NestedStructs
          %66 = OpLabel
 %tempStruct2 = OpVariable %_ptr_Function_Struct2 Function
 %tempStruct1_0 = OpVariable %_ptr_Function_Struct1 Function
          %69 = OpAccessChain %_ptr_Function_bool %self_3 %uint_0
                OpStore %69 %false
-         %71 = OpFunctionCall %void %DefaultConstructor_Struct2 %tempStruct2
+         %71 = OpFunctionCall %void %Struct2_DefaultConstructor %tempStruct2
          %72 = OpLoad %Struct2 %tempStruct2
          %73 = OpAccessChain %_ptr_Function_Struct2 %self_3 %uint_1
                OpStore %73 %72
-         %75 = OpFunctionCall %void %DefaultConstructor_Struct1 %tempStruct1_0
+         %75 = OpFunctionCall %void %Struct1_DefaultConstructor %tempStruct1_0
          %76 = OpLoad %Struct1 %tempStruct1_0
          %77 = OpAccessChain %_ptr_Function_Struct1 %self_3 %uint_2
                OpStore %77 %76
@@ -113,15 +118,32 @@
                OpStore %79 %float_0
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_NestedStructs = OpFunction %void None %21
+%NestedStructs_DefaultConstructor = OpFunction %void None %21
      %self_4 = OpFunctionParameter %_ptr_Function_NestedStructs
          %85 = OpLabel
-         %86 = OpFunctionCall %void %PreConstructor_NestedStructs %self_4
+         %86 = OpFunctionCall %void %NestedStructs_PreConstructor %self_4
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %23
+%NestedStructs_EntryPoint = OpFunction %void None %23
          %90 = OpLabel
      %self_5 = OpVariable %_ptr_Function_NestedStructs Function
-         %92 = OpFunctionCall %void %DefaultConstructor_NestedStructs %self_5
+         %92 = OpFunctionCall %void %NestedStructs_InitGlobals
+         %94 = OpFunctionCall %void %NestedStructs_DefaultConstructor %self_5
+         %95 = OpFunctionCall %void %NestedStructs_CopyInputs %self_5
+         %97 = OpFunctionCall %void %NestedStructs_CopyOutputs %self_5
+               OpReturn
+               OpFunctionEnd
+%NestedStructs_InitGlobals = OpFunction %void None %23
+        %101 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%NestedStructs_CopyInputs = OpFunction %void None %21
+     %self_6 = OpFunctionParameter %_ptr_Function_NestedStructs
+        %105 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%NestedStructs_CopyOutputs = OpFunction %void None %21
+     %self_7 = OpFunctionParameter %_ptr_Function_NestedStructs
+        %109 = OpLabel
                OpReturn
                OpFunctionEnd

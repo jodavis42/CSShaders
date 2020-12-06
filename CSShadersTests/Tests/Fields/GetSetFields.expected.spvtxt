@@ -1,22 +1,22 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 91
+; Bound: 108
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %GetSetFields_Main_EntryPoint "GetSetFields_Main_EntryPoint"
+               OpExecutionMode %GetSetFields_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %GetSetFields "GetSetFields"
                OpMemberName %GetSetFields 0 "BoolValue"
                OpMemberName %GetSetFields 1 "IntValue"
                OpMemberName %GetSetFields 2 "UIntValue"
                OpMemberName %GetSetFields 3 "FloatValue"
-               OpName %PreConstructor_GetSetFields "PreConstructor_GetSetFields"
+               OpName %GetSetFields_PreConstructor "GetSetFields_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_GetSetFields "DefaultConstructor_GetSetFields"
+               OpName %GetSetFields_DefaultConstructor "GetSetFields_DefaultConstructor"
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
@@ -24,10 +24,15 @@
                OpName %intValue "intValue"
                OpName %uintValue "uintValue"
                OpName %floatValue "floatValue"
-               OpName %dummyMain "dummyMain"
+               OpName %GetSetFields_InitGlobals "GetSetFields_InitGlobals"
+               OpName %GetSetFields_CopyInputs "GetSetFields_CopyInputs"
                OpName %self_2 "self"
-               OpName %dummyMain "dummyMain"
-               OpName %self_2 "self"
+               OpName %GetSetFields_CopyOutputs "GetSetFields_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %GetSetFields_Main_EntryPoint "GetSetFields_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %GetSetFields_Main_EntryPoint "GetSetFields_Main_EntryPoint"
+               OpName %self_4 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
@@ -48,7 +53,7 @@
      %uint_2 = OpConstant %uint 2
     %float_0 = OpConstant %float 0
      %uint_3 = OpConstant %uint 3
-%PreConstructor_GetSetFields = OpFunction %void None %13
+%GetSetFields_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_GetSetFields
          %27 = OpLabel
          %28 = OpAccessChain %_ptr_Function_bool %self %uint_0
@@ -61,10 +66,10 @@
                OpStore %34 %float_0
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_GetSetFields = OpFunction %void None %13
+%GetSetFields_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_GetSetFields
          %40 = OpLabel
-         %41 = OpFunctionCall %void %PreConstructor_GetSetFields %self_0
+         %41 = OpFunctionCall %void %GetSetFields_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
        %Main = OpFunction %void None %13
@@ -108,10 +113,27 @@
                OpStore %floatValue %81
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %15
+%GetSetFields_InitGlobals = OpFunction %void None %15
          %86 = OpLabel
-     %self_2 = OpVariable %_ptr_Function_GetSetFields Function
-         %88 = OpFunctionCall %void %DefaultConstructor_GetSetFields %self_2
-         %89 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd
+%GetSetFields_CopyInputs = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_GetSetFields
+         %91 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%GetSetFields_CopyOutputs = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_GetSetFields
+         %96 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%GetSetFields_Main_EntryPoint = OpFunction %void None %15
+        %100 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_GetSetFields Function
+        %102 = OpFunctionCall %void %GetSetFields_InitGlobals
+        %103 = OpFunctionCall %void %GetSetFields_DefaultConstructor %self_4
+        %104 = OpFunctionCall %void %GetSetFields_CopyInputs %self_4
+        %105 = OpFunctionCall %void %Main %self_4
+        %106 = OpFunctionCall %void %GetSetFields_CopyOutputs %self_4
                OpReturn
                OpFunctionEnd

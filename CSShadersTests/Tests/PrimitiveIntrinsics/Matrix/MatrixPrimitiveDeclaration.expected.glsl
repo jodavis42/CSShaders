@@ -5,13 +5,21 @@ struct MatrixPrimitiveDeclarationTest
     int empty_struct_member;
 };
 
-void PreConstructor_MatrixPrimitiveDeclarationTest(MatrixPrimitiveDeclarationTest self)
+void MatrixPrimitiveDeclarationTest_InitGlobals()
 {
 }
 
-void DefaultConstructor_MatrixPrimitiveDeclarationTest(MatrixPrimitiveDeclarationTest self)
+void MatrixPrimitiveDeclarationTest_PreConstructor(MatrixPrimitiveDeclarationTest self)
 {
-    PreConstructor_MatrixPrimitiveDeclarationTest(self);
+}
+
+void MatrixPrimitiveDeclarationTest_DefaultConstructor(MatrixPrimitiveDeclarationTest self)
+{
+    MatrixPrimitiveDeclarationTest_PreConstructor(self);
+}
+
+void MatrixPrimitiveDeclarationTest_CopyInputs(MatrixPrimitiveDeclarationTest self)
+{
 }
 
 void Main(MatrixPrimitiveDeclarationTest self)
@@ -20,10 +28,17 @@ void Main(MatrixPrimitiveDeclarationTest self)
     mat2 matrix0 = mat2(_34, _34);
 }
 
+void MatrixPrimitiveDeclarationTest_CopyOutputs(MatrixPrimitiveDeclarationTest self)
+{
+}
+
 void main()
 {
+    MatrixPrimitiveDeclarationTest_InitGlobals();
     MatrixPrimitiveDeclarationTest self;
-    DefaultConstructor_MatrixPrimitiveDeclarationTest(self);
+    MatrixPrimitiveDeclarationTest_DefaultConstructor(self);
+    MatrixPrimitiveDeclarationTest_CopyInputs(self);
     Main(self);
+    MatrixPrimitiveDeclarationTest_CopyOutputs(self);
 }
 

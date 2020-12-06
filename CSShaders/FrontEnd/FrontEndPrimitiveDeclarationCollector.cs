@@ -32,9 +32,10 @@ namespace CSShaders
       if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
         return;
 
+      var functionName = "Constructor";
       var returnType = FindType(typeof(void));
-      var shaderConstructor = CreateFunction(node, node.Identifier.Text, returnType);
-      shaderConstructor.DebugInfo.Name = mContext.mCurrentType.GetPrettyName() + "Constructor";
+      var shaderConstructor = CreateFunction(node, functionName, returnType);
+      shaderConstructor.DebugInfo.Name = mFrontEnd.GenerateDebugFunctionName(mContext.mCurrentType, functionName);
     }
 
     public override void VisitMethodDeclaration(MethodDeclarationSyntax node)

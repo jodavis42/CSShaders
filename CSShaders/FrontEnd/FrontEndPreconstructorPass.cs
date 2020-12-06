@@ -73,6 +73,16 @@ namespace CSShaders
       mContext.mCurrentFunction = null;
     }
 
+    IShaderIR GetInitialValue(VariableDeclaratorSyntax variable, ShaderField shaderField)
+    {
+      // If this field has an initializer expression then walk and visit it.
+      if (variable.Initializer != null)
+        return mCommonPass.WalkAndGetValueTypeResult(variable.Initializer);
+      // Otherwise, build the default value based upon the type.
+      else
+        return GenerateDefaultValueOp(shaderField);
+    }
+
     public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
     {
       mCommonPass.mFrontEnd = mFrontEnd;
@@ -81,62 +91,62 @@ namespace CSShaders
       var declaredShaderType = FindType(node.Declaration.Type);
       foreach (var variable in node.Declaration.Variables)
       {
-        ShaderField shaderField;
-        int fieldIndex;
-        mFrontEnd.FindField(mContext.mCurrentType, variable.Identifier.ToString(), out shaderField, out fieldIndex);
-
-        IShaderIR initialValueOp = null;
-        // If this field has an initializer expression then walk and visit it.
-        if (variable.Initializer != null)
+        var variableSymbol = GetDeclaredSymbol(variable);
+        if(variableSymbol.IsStatic)
         {
-          initialValueOp = mCommonPass.WalkAndGetValueTypeResult(variable.Initializer);
+          GlobalShaderField shaderField;
+          int fieldIndex;
+          mFrontEnd.FindStaticField(mContext.mCurrentType, variable.Identifier.ToString(), out shaderField, out fieldIndex);
+          shaderField.InitialValue = GetInitialValue(variable, shaderField);
         }
-        // Otherwise, build the default value based upon the type.
         else
         {
-          initialValueOp = GenerateDefaultValueOp(shaderField);
-        }
+          ShaderField shaderField;
+          int fieldIndex;
+          mFrontEnd.FindField(mContext.mCurrentType, variable.Identifier.ToString(), out shaderField, out fieldIndex);
 
-        // If there is an initial value op then store it into the field
-        if (initialValueOp != null)
-        {
-          var variableOp = mFrontEnd.GenerateAccessChain(mContext.mThisOp, shaderField.mType, (uint)fieldIndex, mContext);
-          mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, variableOp, initialValueOp);
+          // If there is an initial value op then store it into the field
+          IShaderIR initialValueOp = GetInitialValue(variable, shaderField);
+          if (initialValueOp != null)
+          {
+            var variableOp = mFrontEnd.GenerateAccessChain(mContext.mThisOp, shaderField.mType, (uint)fieldIndex, mContext);
+            mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, variableOp, initialValueOp);
+          }
         }
       }
     }
 
     ShaderOp GenerateDefaultValueOp(ShaderField shaderField)
     {
-
-      if (shaderField.mType == FindType(typeof(bool)))
+      var shaderFieldDerefType = shaderField.mType.GetDereferenceType();
+      if (shaderFieldDerefType == FindType(typeof(bool)))
       {
-        return mFrontEnd.CreateConstantOp(shaderField.mType, false);
+        return mFrontEnd.CreateConstantOp(shaderFieldDerefType, false);
       }
-      else if (shaderField.mType == FindType(typeof(int)))
+      else if (shaderFieldDerefType == FindType(typeof(int)))
       {
         var contantLiteral = mFrontEnd.CreateConstantLiteral(0);
-        return mFrontEnd.CreateConstantOp(shaderField.mType, contantLiteral);
+        return mFrontEnd.CreateConstantOp(shaderFieldDerefType, contantLiteral);
       }
-      else if (shaderField.mType == FindType(typeof(uint)))
+      else if (shaderFieldDerefType == FindType(typeof(uint)))
       {
         var contantLiteral = mFrontEnd.CreateConstantLiteral(0u);
-        return mFrontEnd.CreateConstantOp(shaderField.mType, contantLiteral);
+        return mFrontEnd.CreateConstantOp(shaderFieldDerefType, contantLiteral);
       }
-      else if (shaderField.mType == FindType(typeof(float)))
+      else if (shaderFieldDerefType == FindType(typeof(float)))
       {
-        var contantLiteral = mFrontEnd.CreateConstantLiteral(shaderField.mType, 0.0f.ToString());
-        return mFrontEnd.CreateConstantOp(shaderField.mType, contantLiteral);
+        var contantLiteral = mFrontEnd.CreateConstantLiteral(shaderFieldDerefType, 0.0f.ToString());
+        return mFrontEnd.CreateConstantOp(shaderFieldDerefType, contantLiteral);
       }
-      else if(shaderField.mType.mBaseType == OpType.Struct)
+      else if(shaderFieldDerefType.mBaseType == OpType.Struct)
       {
-        var fieldPtrType = shaderField.mType.FindPointerType(StorageClass.Function);
+        var fieldPtrType = shaderFieldDerefType.FindPointerType(StorageClass.Function);
         var localVariableOp = mFrontEnd.CreateOpVariable(fieldPtrType, mContext);
-        localVariableOp.DebugInfo.Name = "temp" + shaderField.mType.mMeta.mName;
+        localVariableOp.DebugInfo.Name = "temp" + shaderFieldDerefType.mMeta.mName;
 
         var resultType = FindType(typeof(void));
-        var fnCall = CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionCall, resultType, new List<IShaderIR> { shaderField.mType.mImplicitConstructor, localVariableOp });
-        var loadOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpLoad, shaderField.mType, new List<IShaderIR> { localVariableOp });
+        var fnCall = CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionCall, resultType, new List<IShaderIR> { shaderFieldDerefType.mImplicitConstructor, localVariableOp });
+        var loadOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpLoad, shaderFieldDerefType, new List<IShaderIR> { localVariableOp });
         return loadOp;
       }
       return null;

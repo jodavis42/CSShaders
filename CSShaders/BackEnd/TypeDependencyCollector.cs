@@ -20,8 +20,8 @@ namespace CSShaders
       }
       foreach (var staticField in mOwningLibrary.mStaticGlobals.Values)
       {
-        mReferencedStatics.Add(staticField);
-        Visit(staticField);
+        mReferencedStatics.Add(staticField.InstanceOp);
+        Visit(staticField.InstanceOp);
       }
       foreach (var type in mOwningLibrary.GetTypes())
       {
@@ -110,6 +110,8 @@ namespace CSShaders
     {
       if (ir is ShaderType shaderType)
         Visit(shaderType);
+      else if (ir is ShaderFunction shaderFunction)
+        Visit(shaderFunction);
       else if (ir is ShaderConstantLiteral constantLiteral)
         Visit(constantLiteral);
       else if (ir is ShaderOp shaderOp)

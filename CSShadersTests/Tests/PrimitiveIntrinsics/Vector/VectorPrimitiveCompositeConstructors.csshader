@@ -6,7 +6,7 @@ public struct TestVectorPrimitive
     [Math.CompositeConstruct] public TestVectorPrimitive(float x, float y) { X = x; Y = y; }
 }
 
-[Shader.UnitTest]
+[Shader.UnitTest][Shader.Pixel]
 struct VectorPrimitiveCompositeConstructorsTest
 {
     [Shader.EntryPoint]

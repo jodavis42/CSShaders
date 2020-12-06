@@ -88,8 +88,8 @@ namespace CSShaders
         }
         else
         {
-          var staticOp = FindStaticField(fieldSymbol);
-          mContext.Push(staticOp);
+          var staticField = FindStaticField(fieldSymbol);
+          mContext.Push(staticField.InstanceOp);
         }
       }
       else if (symbol is IPropertySymbol propertySymbol)
@@ -168,8 +168,8 @@ namespace CSShaders
         }
         else
         {
-          var staticOp = FindStaticField(fieldSymbol);
-          mContext.Push(staticOp);
+          var staticField = FindStaticField(fieldSymbol);
+          mContext.Push(staticField.InstanceOp);
         }
         return;
       }
@@ -216,7 +216,7 @@ namespace CSShaders
 
       var leftOp = WalkAndGetResult(node.Left);
       var rightValueOp = WalkAndGetValueTypeResult(node.Right);
-      var storeOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpStore, null, new List<IShaderIR> { leftOp, rightValueOp });
+      var storeOp = mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, leftOp, rightValueOp);
       mContext.Push(storeOp);
     }
 

@@ -9,7 +9,7 @@ namespace Shaders
       }
     }
 
-    [Shader.UnitTest]
+    [Shader.UnitTest][Shader.Pixel]
     struct StructFieldConstructorInitializers
     {
       SubStruct SubStruct = new SubStruct(1);

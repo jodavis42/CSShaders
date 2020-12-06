@@ -120,11 +120,16 @@ namespace CSShaders
       return pointerType;
     }
 
+    public string GenerateDebugFunctionName(ShaderType owningType, string fnName)
+    {
+      return owningType.mMeta.mName + "_" + fnName;
+    }
+
     public ShaderFunction CreateFunctionAndType(ShaderType owningType, ShaderType returnType, string name, ShaderType thisType, List<ShaderType> args)
     {
       var shaderFunction = new ShaderFunction();
       shaderFunction.mMeta.mName = name;
-      shaderFunction.DebugInfo.Name = name;
+      shaderFunction.DebugInfo.Name = GenerateDebugFunctionName(owningType, name);
       shaderFunction.mResultType = FindOrCreateFunctionType(returnType, thisType, args);
       shaderFunction.mParameters.Add(returnType);
       if (thisType != null)
@@ -434,35 +439,64 @@ namespace CSShaders
       return shaderAttributes;
     }
 
-    public void FindField(ShaderType owningType, string fieldName, out ShaderField shaderField, out int fieldIndex)
+    void FindField<FieldType>(IEnumerable<FieldType> fieldList, string fieldName, out FieldType shaderField, out int fieldIndex) where FieldType : ShaderField
     {
-      for (var i = 0; i < owningType.mFields.Count; ++i)
+      fieldIndex = 0;
+      foreach(var field in fieldList)
       {
-        var field = owningType.mFields[i];
         if (field.mMeta.mName == fieldName)
         {
           shaderField = field;
-          fieldIndex = i;
           return;
         }
+        ++fieldIndex;
       }
+
       shaderField = null;
       fieldIndex = -1;
     }
 
-    public ShaderOp CreateStaticField(ShaderType owningType, ShaderField fieldType)
+    public void FindInstanceField(ShaderType owningType, string fieldName, out ShaderField shaderField, out int fieldIndex)
+    {
+      FindField(owningType.mFields, fieldName, out shaderField, out fieldIndex);
+    }
+
+    public void FindStaticField(ShaderType owningType, string fieldName, out GlobalShaderField shaderField, out int fieldIndex)
+    {
+      FindField(owningType.mStaticFields, fieldName, out shaderField, out fieldIndex);
+    }
+
+    public void FindField(ShaderType owningType, string fieldName, out ShaderField shaderField, out int fieldIndex)
+    {
+      FindInstanceField(owningType, fieldName, out shaderField, out fieldIndex);
+      if (shaderField == null)
+      {
+        GlobalShaderField globalShaderField;
+        FindStaticField(owningType, fieldName, out globalShaderField, out fieldIndex);
+        shaderField = globalShaderField;
+      }
+    }
+
+    public GlobalShaderField CreateStaticField(ShaderType owningType, ShaderType fieldType, string name, IShaderIR initializerExpression)
     {
       // Static fields are a special storage class. Create the pointer type if needed.
-      var staticFieldType = fieldType.mType.FindPointerType(StorageClass.Private);
-      if(staticFieldType == null)
-        staticFieldType = CreateType(fieldType.mType, StorageClass.Private, true);
+      var staticFieldType = fieldType.FindPointerType(StorageClass.Private);
+      if (staticFieldType == null)
+        staticFieldType = CreateType(fieldType, StorageClass.Private, true);
+
+      var shaderField = new GlobalShaderField();
+      shaderField.mMeta = new ShaderFieldMeta();
+      shaderField.mType = staticFieldType;
+      shaderField.mMeta.mName = name;
+      shaderField.DebugInfo.Name = name;
+      owningType.mStaticFields.Add(shaderField);
       
-      var op = new ShaderOp();
-      op.mOpType = OpInstructionType.OpVariable;
-      op.mResultType = staticFieldType;
-      op.mParameters.Add(staticFieldType);
-      mCurrentLibrary.mStaticGlobals.Add(fieldType, op);
-      return op;
+      shaderField.InstanceOp = new ShaderOp();
+      shaderField.InstanceOp.mOpType = OpInstructionType.OpVariable;
+      shaderField.InstanceOp.mResultType = staticFieldType;
+      shaderField.InstanceOp.mParameters.Add(staticFieldType);
+      mCurrentLibrary.mStaticGlobals.Add(shaderField, shaderField);
+      return shaderField;
     }
     public ShaderType FindType(TypeKey typeKey)
     {

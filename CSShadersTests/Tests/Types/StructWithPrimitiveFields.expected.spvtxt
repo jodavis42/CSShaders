@@ -1,26 +1,31 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 49
+; Bound: 66
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %StructWithPrimitiveFields_EntryPoint "StructWithPrimitiveFields_EntryPoint"
+               OpExecutionMode %StructWithPrimitiveFields_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %StructWithPrimitiveFields "StructWithPrimitiveFields"
                OpMemberName %StructWithPrimitiveFields 0 "BoolValue"
                OpMemberName %StructWithPrimitiveFields 1 "IntValue"
                OpMemberName %StructWithPrimitiveFields 2 "UIntValue"
                OpMemberName %StructWithPrimitiveFields 3 "FloatValue"
-               OpName %PreConstructor_StructWithPrimitiveFields "PreConstructor_StructWithPrimitiveFields"
+               OpName %StructWithPrimitiveFields_PreConstructor "StructWithPrimitiveFields_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_StructWithPrimitiveFields "DefaultConstructor_StructWithPrimitiveFields"
+               OpName %StructWithPrimitiveFields_DefaultConstructor "StructWithPrimitiveFields_DefaultConstructor"
                OpName %self_0 "self"
-               OpName %dummyMain "dummyMain"
+               OpName %StructWithPrimitiveFields_EntryPoint "StructWithPrimitiveFields_EntryPoint"
                OpName %self_1 "self"
-               OpName %dummyMain "dummyMain"
+               OpName %StructWithPrimitiveFields_InitGlobals "StructWithPrimitiveFields_InitGlobals"
+               OpName %StructWithPrimitiveFields_CopyInputs "StructWithPrimitiveFields_CopyInputs"
+               OpName %self_2 "self"
+               OpName %StructWithPrimitiveFields_CopyOutputs "StructWithPrimitiveFields_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %StructWithPrimitiveFields_EntryPoint "StructWithPrimitiveFields_EntryPoint"
                OpName %self_1 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
@@ -42,7 +47,7 @@
      %uint_2 = OpConstant %uint 2
     %float_0 = OpConstant %float 0
      %uint_3 = OpConstant %uint 3
-%PreConstructor_StructWithPrimitiveFields = OpFunction %void None %13
+%StructWithPrimitiveFields_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
          %27 = OpLabel
          %28 = OpAccessChain %_ptr_Function_bool %self %uint_0
@@ -55,15 +60,32 @@
                OpStore %34 %float_0
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_StructWithPrimitiveFields = OpFunction %void None %13
+%StructWithPrimitiveFields_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
          %40 = OpLabel
-         %41 = OpFunctionCall %void %PreConstructor_StructWithPrimitiveFields %self_0
+         %41 = OpFunctionCall %void %StructWithPrimitiveFields_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %15
+%StructWithPrimitiveFields_EntryPoint = OpFunction %void None %15
          %45 = OpLabel
      %self_1 = OpVariable %_ptr_Function_StructWithPrimitiveFields Function
-         %47 = OpFunctionCall %void %DefaultConstructor_StructWithPrimitiveFields %self_1
+         %47 = OpFunctionCall %void %StructWithPrimitiveFields_InitGlobals
+         %49 = OpFunctionCall %void %StructWithPrimitiveFields_DefaultConstructor %self_1
+         %50 = OpFunctionCall %void %StructWithPrimitiveFields_CopyInputs %self_1
+         %52 = OpFunctionCall %void %StructWithPrimitiveFields_CopyOutputs %self_1
+               OpReturn
+               OpFunctionEnd
+%StructWithPrimitiveFields_InitGlobals = OpFunction %void None %15
+         %56 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%StructWithPrimitiveFields_CopyInputs = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
+         %60 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%StructWithPrimitiveFields_CopyOutputs = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
+         %64 = OpLabel
                OpReturn
                OpFunctionEnd

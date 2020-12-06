@@ -21,33 +21,16 @@ namespace CSShaders
       var context = new FrontEndContext();
       context.mCurrentType = shaderType;
 
-      EntryPointGeneration.GenerateSpirVEntryPointFunction(frontEnd, shaderType, "dummyMain", context);
-      ShaderFunction spirvEntryPointFn = context.mCurrentFunction;
-      EntryPointGeneration.ConstructShaderType(frontEnd, shaderType, context);
-
-      foreach (var function in shaderType.mFunctions)
-      {
-        if (function.mMeta.mAttributes.Contains("EntryPoint"))
-        {
-          EntryPointGeneration.CallEntryPoint(frontEnd, function, context);
-          frontEnd.FixupBlockTerminators(spirvEntryPointFn);
-        }
-      }
-
-      frontEnd.FixupBlockTerminators(spirvEntryPointFn);
-      typeCollector.Visit(spirvEntryPointFn);
-
-      var dummyEntryPoint = new ShaderEntryPointInfo();
-      dummyEntryPoint.mEntryPointFunction = spirvEntryPointFn;
-      dummyEntryPoint.mStageType = shaderType.mFragmentType;
-      // Execution modes are only valid in pixel shaders
-      if(dummyEntryPoint.mStageType == FragmentType.Pixel || dummyEntryPoint.mStageType == FragmentType.None)
-        EntryPointGeneration.AddExecutionMode(frontEnd, dummyEntryPoint, dummyEntryPoint.mEntryPointFunction, Spv.ExecutionMode.ExecutionModeOriginUpperLeft);
+      if (shaderType.mEntryPoints.Count != 0)
+        return;
       
-      foreach (var globalStatic in library.mStaticGlobals)
-        dummyEntryPoint.mGlobalVariablesBlock.mLocalVariables.Add(globalStatic.Value);
-      
-      typeCollector.Visit(dummyEntryPoint);
+      ShaderEntryPointInfo entryPoint = null;
+      if(shaderType.mFragmentType == FragmentType.Pixel || shaderType.mFragmentType == FragmentType.None)
+        entryPoint = EntryPointGeneration.GeneratePixel(frontEnd, shaderType, null);
+      else if(shaderType.mFragmentType == FragmentType.Vertex)
+        entryPoint = EntryPointGeneration.GenerateVertex(frontEnd, shaderType, null);
+
+      typeCollector.Visit(entryPoint);
     }
   }
 }

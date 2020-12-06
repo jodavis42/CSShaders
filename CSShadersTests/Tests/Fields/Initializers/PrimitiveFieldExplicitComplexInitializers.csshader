@@ -23,7 +23,7 @@ namespace Shaders
       }
     }
 
-    [Shader.UnitTest]
+    [Shader.UnitTest][Shader.Pixel]
     struct PrimitiveFieldExplicitComplexInitializers
     {
       bool BoolValue = InitialValues.GetBool();

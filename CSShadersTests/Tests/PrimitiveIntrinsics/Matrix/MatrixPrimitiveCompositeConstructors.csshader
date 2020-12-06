@@ -13,7 +13,7 @@ public struct TestVectorPrimitive
     float X, Y;
 }
 
-[Shader.UnitTest]
+[Shader.UnitTest][Shader.Pixel]
 struct VectorPrimitiveCompositeConstructorsTest
 {
     [Shader.EntryPoint]

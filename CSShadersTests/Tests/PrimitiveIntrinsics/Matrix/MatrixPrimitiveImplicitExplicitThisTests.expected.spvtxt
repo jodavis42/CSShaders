@@ -1,13 +1,13 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 67
+; Bound: 84
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint "MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint"
+               OpExecutionMode %MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %TestVectorPrimitive "TestVectorPrimitive"
                OpName %TestMatrixPrimitive "TestMatrixPrimitive"
@@ -16,19 +16,24 @@
                OpName %self "self"
                OpName %FieldThisImplicit "FieldThisImplicit"
                OpName %self_0 "self"
-               OpName %PreConstructor_MatrixPrimitiveImplicitExplicitThisTests "PreConstructor_MatrixPrimitiveImplicitExplicitThisTests"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_PreConstructor "MatrixPrimitiveImplicitExplicitThisTests_PreConstructor"
                OpName %self_1 "self"
-               OpName %DefaultConstructor_MatrixPrimitiveImplicitExplicitThisTests "DefaultConstructor_MatrixPrimitiveImplicitExplicitThisTests"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor "MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor"
                OpName %self_2 "self"
                OpName %Main "Main"
                OpName %self_3 "self"
                OpName %matrix0 "matrix0"
                OpName %fieldThisExplicit "fieldThisExplicit"
                OpName %fieldThisImplicit "fieldThisImplicit"
-               OpName %dummyMain "dummyMain"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_InitGlobals "MatrixPrimitiveImplicitExplicitThisTests_InitGlobals"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_CopyInputs "MatrixPrimitiveImplicitExplicitThisTests_CopyInputs"
                OpName %self_4 "self"
-               OpName %dummyMain "dummyMain"
-               OpName %self_4 "self"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_CopyOutputs "MatrixPrimitiveImplicitExplicitThisTests_CopyOutputs"
+               OpName %self_5 "self"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint "MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint "MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint"
+               OpName %self_6 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -56,15 +61,15 @@
          %32 = OpCompositeExtract %TestVectorPrimitive %31 0
                OpReturnValue %32
                OpFunctionEnd
-%PreConstructor_MatrixPrimitiveImplicitExplicitThisTests = OpFunction %void None %15
+%MatrixPrimitiveImplicitExplicitThisTests_PreConstructor = OpFunction %void None %15
      %self_1 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
          %37 = OpLabel
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_MatrixPrimitiveImplicitExplicitThisTests = OpFunction %void None %15
+%MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor = OpFunction %void None %15
      %self_2 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
          %42 = OpLabel
-         %43 = OpFunctionCall %void %PreConstructor_MatrixPrimitiveImplicitExplicitThisTests %self_2
+         %43 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
        %Main = OpFunction %void None %15
@@ -82,10 +87,27 @@
                OpStore %fieldThisImplicit %57
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %17
+%MatrixPrimitiveImplicitExplicitThisTests_InitGlobals = OpFunction %void None %17
          %62 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests Function
-         %64 = OpFunctionCall %void %DefaultConstructor_MatrixPrimitiveImplicitExplicitThisTests %self_4
-         %65 = OpFunctionCall %void %Main %self_4
+               OpReturn
+               OpFunctionEnd
+%MatrixPrimitiveImplicitExplicitThisTests_CopyInputs = OpFunction %void None %15
+     %self_4 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
+         %67 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%MatrixPrimitiveImplicitExplicitThisTests_CopyOutputs = OpFunction %void None %15
+     %self_5 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
+         %72 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint = OpFunction %void None %17
+         %76 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests Function
+         %78 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_InitGlobals
+         %79 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor %self_6
+         %80 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_CopyInputs %self_6
+         %81 = OpFunctionCall %void %Main %self_6
+         %82 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_CopyOutputs %self_6
                OpReturn
                OpFunctionEnd

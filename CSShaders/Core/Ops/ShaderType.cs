@@ -28,6 +28,7 @@ namespace CSShaders
     public ShaderFunction mPreConstructor = null;
     public ShaderFunction mImplicitConstructor = null;
     public List<ShaderField> mFields = new List<ShaderField>();
+    public List<GlobalShaderField> mStaticFields = new List<GlobalShaderField>();
 
     public ShaderTypeStorageClassCollection StorageClassCollection = null;
 

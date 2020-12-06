@@ -12,7 +12,7 @@ public struct TestVectorPrimitive
     [Math.Swizzle(1)] public float Y;
 }
 
-[Shader.UnitTest]
+[Shader.UnitTest][Shader.Pixel]
 struct MatrixPrimitiveFieldSwizzlesTest
 {
     [Shader.EntryPoint]

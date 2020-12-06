@@ -5,13 +5,21 @@ struct InstanceFunctionRef
     int empty_struct_member;
 };
 
-void PreConstructor_InstanceFunctionRef(InstanceFunctionRef self)
+void InstanceFunctionRef_InitGlobals()
 {
 }
 
-void DefaultConstructor_InstanceFunctionRef(InstanceFunctionRef self)
+void InstanceFunctionRef_PreConstructor(InstanceFunctionRef self)
 {
-    PreConstructor_InstanceFunctionRef(self);
+}
+
+void InstanceFunctionRef_DefaultConstructor(InstanceFunctionRef self)
+{
+    InstanceFunctionRef_PreConstructor(self);
+}
+
+void InstanceFunctionRef_CopyInputs(InstanceFunctionRef self)
+{
 }
 
 void TestFn1(InstanceFunctionRef self, out int value)
@@ -25,10 +33,17 @@ void Main(InstanceFunctionRef self)
     TestFn1(self, value);
 }
 
+void InstanceFunctionRef_CopyOutputs(InstanceFunctionRef self)
+{
+}
+
 void main()
 {
+    InstanceFunctionRef_InitGlobals();
     InstanceFunctionRef self;
-    DefaultConstructor_InstanceFunctionRef(self);
+    InstanceFunctionRef_DefaultConstructor(self);
+    InstanceFunctionRef_CopyInputs(self);
     Main(self);
+    InstanceFunctionRef_CopyOutputs(self);
 }
 

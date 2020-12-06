@@ -1,42 +1,64 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 26
+; Bound: 43
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %EmptyStruct_EntryPoint "EmptyStruct_EntryPoint"
+               OpExecutionMode %EmptyStruct_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %EmptyStruct "EmptyStruct"
-               OpName %PreConstructor_EmptyStruct "PreConstructor_EmptyStruct"
+               OpName %EmptyStruct_PreConstructor "EmptyStruct_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_EmptyStruct "DefaultConstructor_EmptyStruct"
+               OpName %EmptyStruct_DefaultConstructor "EmptyStruct_DefaultConstructor"
                OpName %self_0 "self"
-               OpName %dummyMain "dummyMain"
+               OpName %EmptyStruct_EntryPoint "EmptyStruct_EntryPoint"
                OpName %self_1 "self"
-               OpName %dummyMain "dummyMain"
+               OpName %EmptyStruct_InitGlobals "EmptyStruct_InitGlobals"
+               OpName %EmptyStruct_CopyInputs "EmptyStruct_CopyInputs"
+               OpName %self_2 "self"
+               OpName %EmptyStruct_CopyOutputs "EmptyStruct_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %EmptyStruct_EntryPoint "EmptyStruct_EntryPoint"
                OpName %self_1 "self"
 %EmptyStruct = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_EmptyStruct = OpTypePointer Function %EmptyStruct
           %5 = OpTypeFunction %void %_ptr_Function_EmptyStruct
           %7 = OpTypeFunction %void
-%PreConstructor_EmptyStruct = OpFunction %void None %5
+%EmptyStruct_PreConstructor = OpFunction %void None %5
        %self = OpFunctionParameter %_ptr_Function_EmptyStruct
          %12 = OpLabel
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_EmptyStruct = OpFunction %void None %5
+%EmptyStruct_DefaultConstructor = OpFunction %void None %5
      %self_0 = OpFunctionParameter %_ptr_Function_EmptyStruct
          %17 = OpLabel
-         %18 = OpFunctionCall %void %PreConstructor_EmptyStruct %self_0
+         %18 = OpFunctionCall %void %EmptyStruct_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %7
+%EmptyStruct_EntryPoint = OpFunction %void None %7
          %22 = OpLabel
      %self_1 = OpVariable %_ptr_Function_EmptyStruct Function
-         %24 = OpFunctionCall %void %DefaultConstructor_EmptyStruct %self_1
+         %24 = OpFunctionCall %void %EmptyStruct_InitGlobals
+         %26 = OpFunctionCall %void %EmptyStruct_DefaultConstructor %self_1
+         %27 = OpFunctionCall %void %EmptyStruct_CopyInputs %self_1
+         %29 = OpFunctionCall %void %EmptyStruct_CopyOutputs %self_1
+               OpReturn
+               OpFunctionEnd
+%EmptyStruct_InitGlobals = OpFunction %void None %7
+         %33 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%EmptyStruct_CopyInputs = OpFunction %void None %5
+     %self_2 = OpFunctionParameter %_ptr_Function_EmptyStruct
+         %37 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%EmptyStruct_CopyOutputs = OpFunction %void None %5
+     %self_3 = OpFunctionParameter %_ptr_Function_EmptyStruct
+         %41 = OpLabel
                OpReturn
                OpFunctionEnd

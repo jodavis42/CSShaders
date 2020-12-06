@@ -1,6 +1,6 @@
 namespace Shaders
 {
-    [Shader.UnitTest]
+    [Shader.UnitTest][Shader.Pixel]
     struct PrimitiveFieldDefaultInitializers
     {
       bool BoolValue;

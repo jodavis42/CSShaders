@@ -5,13 +5,21 @@ struct VectorPrimitiveFieldSwizzlesTest
     int empty_struct_member;
 };
 
-void PreConstructor_VectorPrimitiveFieldSwizzlesTest(VectorPrimitiveFieldSwizzlesTest self)
+void VectorPrimitiveFieldSwizzlesTest_InitGlobals()
 {
 }
 
-void DefaultConstructor_VectorPrimitiveFieldSwizzlesTest(VectorPrimitiveFieldSwizzlesTest self)
+void VectorPrimitiveFieldSwizzlesTest_PreConstructor(VectorPrimitiveFieldSwizzlesTest self)
 {
-    PreConstructor_VectorPrimitiveFieldSwizzlesTest(self);
+}
+
+void VectorPrimitiveFieldSwizzlesTest_DefaultConstructor(VectorPrimitiveFieldSwizzlesTest self)
+{
+    VectorPrimitiveFieldSwizzlesTest_PreConstructor(self);
+}
+
+void VectorPrimitiveFieldSwizzlesTest_CopyInputs(VectorPrimitiveFieldSwizzlesTest self)
+{
 }
 
 void Main(VectorPrimitiveFieldSwizzlesTest self)
@@ -20,10 +28,17 @@ void Main(VectorPrimitiveFieldSwizzlesTest self)
     vector0.y = vector0.x;
 }
 
+void VectorPrimitiveFieldSwizzlesTest_CopyOutputs(VectorPrimitiveFieldSwizzlesTest self)
+{
+}
+
 void main()
 {
+    VectorPrimitiveFieldSwizzlesTest_InitGlobals();
     VectorPrimitiveFieldSwizzlesTest self;
-    DefaultConstructor_VectorPrimitiveFieldSwizzlesTest(self);
+    VectorPrimitiveFieldSwizzlesTest_DefaultConstructor(self);
+    VectorPrimitiveFieldSwizzlesTest_CopyInputs(self);
     Main(self);
+    VectorPrimitiveFieldSwizzlesTest_CopyOutputs(self);
 }
 

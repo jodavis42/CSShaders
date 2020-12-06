@@ -13,7 +13,7 @@ namespace CSShaders
 
     public Dictionary<ConstantOpKey, ShaderConstantLiteral> mConstantLiterals = new Dictionary<ConstantOpKey, ShaderConstantLiteral>();
     public Dictionary<ConstantOpKey, ShaderOp> mConstantOps = new Dictionary<ConstantOpKey, ShaderOp>();
-    public Dictionary<ShaderField, ShaderOp> mStaticGlobals = new Dictionary<ShaderField, ShaderOp>();
+    public Dictionary<ShaderField, GlobalShaderField> mStaticGlobals = new Dictionary<ShaderField, GlobalShaderField>();
     public Dictionary<TypeKey, ShaderType> mTypeMap = new Dictionary<TypeKey, ShaderType>();
     public Dictionary<FunctionKey, ShaderFunction> mFunctionMap = new Dictionary<FunctionKey, ShaderFunction>();
     public Dictionary<FunctionKey, InstrinsicDelegate> IntrinsicFunctions = new Dictionary<FunctionKey, InstrinsicDelegate>();

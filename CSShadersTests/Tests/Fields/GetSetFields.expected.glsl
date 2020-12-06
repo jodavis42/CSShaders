@@ -8,7 +8,11 @@ struct GetSetFields
     float FloatValue;
 };
 
-void PreConstructor_GetSetFields(inout GetSetFields self)
+void GetSetFields_InitGlobals()
+{
+}
+
+void GetSetFields_PreConstructor(inout GetSetFields self)
 {
     self.BoolValue = false;
     self.IntValue = 0;
@@ -16,9 +20,13 @@ void PreConstructor_GetSetFields(inout GetSetFields self)
     self.FloatValue = 0.0;
 }
 
-void DefaultConstructor_GetSetFields(inout GetSetFields self)
+void GetSetFields_DefaultConstructor(inout GetSetFields self)
 {
-    PreConstructor_GetSetFields(self);
+    GetSetFields_PreConstructor(self);
+}
+
+void GetSetFields_CopyInputs(GetSetFields self)
+{
 }
 
 void Main(inout GetSetFields self)
@@ -37,10 +45,17 @@ void Main(inout GetSetFields self)
     floatValue = self.FloatValue;
 }
 
+void GetSetFields_CopyOutputs(GetSetFields self)
+{
+}
+
 void main()
 {
+    GetSetFields_InitGlobals();
     GetSetFields self;
-    DefaultConstructor_GetSetFields(self);
+    GetSetFields_DefaultConstructor(self);
+    GetSetFields_CopyInputs(self);
     Main(self);
+    GetSetFields_CopyOutputs(self);
 }
 

@@ -1,18 +1,18 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 48
+; Bound: 65
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %SimpleFunctionDeclaration2_Main_EntryPoint "SimpleFunctionDeclaration2_Main_EntryPoint"
+               OpExecutionMode %SimpleFunctionDeclaration2_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %SimpleFunctionDeclaration2 "SimpleFunctionDeclaration2"
-               OpName %PreConstructor_SimpleFunctionDeclaration2 "PreConstructor_SimpleFunctionDeclaration2"
+               OpName %SimpleFunctionDeclaration2_PreConstructor "SimpleFunctionDeclaration2_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_SimpleFunctionDeclaration2 "DefaultConstructor_SimpleFunctionDeclaration2"
+               OpName %SimpleFunctionDeclaration2_DefaultConstructor "SimpleFunctionDeclaration2_DefaultConstructor"
                OpName %self_0 "self"
                OpName %GetValue "GetValue"
                OpName %self_1 "self"
@@ -20,10 +20,15 @@
                OpName %Main "Main"
                OpName %self_2 "self"
                OpName %value_0 "value"
-               OpName %dummyMain "dummyMain"
+               OpName %SimpleFunctionDeclaration2_InitGlobals "SimpleFunctionDeclaration2_InitGlobals"
+               OpName %SimpleFunctionDeclaration2_CopyInputs "SimpleFunctionDeclaration2_CopyInputs"
                OpName %self_3 "self"
-               OpName %dummyMain "dummyMain"
-               OpName %self_3 "self"
+               OpName %SimpleFunctionDeclaration2_CopyOutputs "SimpleFunctionDeclaration2_CopyOutputs"
+               OpName %self_4 "self"
+               OpName %SimpleFunctionDeclaration2_Main_EntryPoint "SimpleFunctionDeclaration2_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %SimpleFunctionDeclaration2_Main_EntryPoint "SimpleFunctionDeclaration2_Main_EntryPoint"
+               OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
 %SimpleFunctionDeclaration2 = OpTypeStruct
@@ -34,15 +39,15 @@
 %_ptr_Function_int = OpTypePointer Function %int
          %13 = OpTypeFunction %void
       %int_1 = OpConstant %int 1
-%PreConstructor_SimpleFunctionDeclaration2 = OpFunction %void None %9
+%SimpleFunctionDeclaration2_PreConstructor = OpFunction %void None %9
        %self = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_SimpleFunctionDeclaration2 = OpFunction %void None %9
+%SimpleFunctionDeclaration2_DefaultConstructor = OpFunction %void None %9
      %self_0 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
          %24 = OpLabel
-         %25 = OpFunctionCall %void %PreConstructor_SimpleFunctionDeclaration2 %self_0
+         %25 = OpFunctionCall %void %SimpleFunctionDeclaration2_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
    %GetValue = OpFunction %int None %11
@@ -59,10 +64,27 @@
                OpStore %value_0 %38
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %13
+%SimpleFunctionDeclaration2_InitGlobals = OpFunction %void None %13
          %43 = OpLabel
-     %self_3 = OpVariable %_ptr_Function_SimpleFunctionDeclaration2 Function
-         %45 = OpFunctionCall %void %DefaultConstructor_SimpleFunctionDeclaration2 %self_3
-         %46 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd
+%SimpleFunctionDeclaration2_CopyInputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
+         %48 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SimpleFunctionDeclaration2_CopyOutputs = OpFunction %void None %9
+     %self_4 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
+         %53 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SimpleFunctionDeclaration2_Main_EntryPoint = OpFunction %void None %13
+         %57 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_SimpleFunctionDeclaration2 Function
+         %59 = OpFunctionCall %void %SimpleFunctionDeclaration2_InitGlobals
+         %60 = OpFunctionCall %void %SimpleFunctionDeclaration2_DefaultConstructor %self_5
+         %61 = OpFunctionCall %void %SimpleFunctionDeclaration2_CopyInputs %self_5
+         %62 = OpFunctionCall %void %Main %self_5
+         %63 = OpFunctionCall %void %SimpleFunctionDeclaration2_CopyOutputs %self_5
                OpReturn
                OpFunctionEnd

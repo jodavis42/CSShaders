@@ -5,13 +5,21 @@ struct MatrixPrimitiveFieldSwizzlesTest
     int empty_struct_member;
 };
 
-void PreConstructor_MatrixPrimitiveFieldSwizzlesTest(MatrixPrimitiveFieldSwizzlesTest self)
+void MatrixPrimitiveFieldSwizzlesTest_InitGlobals()
 {
 }
 
-void DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest(MatrixPrimitiveFieldSwizzlesTest self)
+void MatrixPrimitiveFieldSwizzlesTest_PreConstructor(MatrixPrimitiveFieldSwizzlesTest self)
 {
-    PreConstructor_MatrixPrimitiveFieldSwizzlesTest(self);
+}
+
+void MatrixPrimitiveFieldSwizzlesTest_DefaultConstructor(MatrixPrimitiveFieldSwizzlesTest self)
+{
+    MatrixPrimitiveFieldSwizzlesTest_PreConstructor(self);
+}
+
+void MatrixPrimitiveFieldSwizzlesTest_CopyInputs(MatrixPrimitiveFieldSwizzlesTest self)
+{
 }
 
 void Main(MatrixPrimitiveFieldSwizzlesTest self)
@@ -21,10 +29,17 @@ void Main(MatrixPrimitiveFieldSwizzlesTest self)
     matrix0[1u] = matrix0[0];
 }
 
+void MatrixPrimitiveFieldSwizzlesTest_CopyOutputs(MatrixPrimitiveFieldSwizzlesTest self)
+{
+}
+
 void main()
 {
+    MatrixPrimitiveFieldSwizzlesTest_InitGlobals();
     MatrixPrimitiveFieldSwizzlesTest self;
-    DefaultConstructor_MatrixPrimitiveFieldSwizzlesTest(self);
+    MatrixPrimitiveFieldSwizzlesTest_DefaultConstructor(self);
+    MatrixPrimitiveFieldSwizzlesTest_CopyInputs(self);
     Main(self);
+    MatrixPrimitiveFieldSwizzlesTest_CopyOutputs(self);
 }
 

@@ -5,18 +5,33 @@ struct EmptyStruct
     int empty_struct_member;
 };
 
-void PreConstructor_EmptyStruct(EmptyStruct self)
+void EmptyStruct_InitGlobals()
 {
 }
 
-void DefaultConstructor_EmptyStruct(EmptyStruct self)
+void EmptyStruct_PreConstructor(EmptyStruct self)
 {
-    PreConstructor_EmptyStruct(self);
+}
+
+void EmptyStruct_DefaultConstructor(EmptyStruct self)
+{
+    EmptyStruct_PreConstructor(self);
+}
+
+void EmptyStruct_CopyInputs(EmptyStruct self)
+{
+}
+
+void EmptyStruct_CopyOutputs(EmptyStruct self)
+{
 }
 
 void main()
 {
+    EmptyStruct_InitGlobals();
     EmptyStruct self;
-    DefaultConstructor_EmptyStruct(self);
+    EmptyStruct_DefaultConstructor(self);
+    EmptyStruct_CopyInputs(self);
+    EmptyStruct_CopyOutputs(self);
 }
 

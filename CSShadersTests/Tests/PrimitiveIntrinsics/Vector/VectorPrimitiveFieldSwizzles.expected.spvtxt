@@ -1,27 +1,32 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 48
+; Bound: 65
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %dummyMain "dummyMain"
-               OpExecutionMode %dummyMain OriginUpperLeft
+               OpEntryPoint Fragment %VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint "VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint"
+               OpExecutionMode %VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %TestVectorPrimitive "TestVectorPrimitive"
                OpName %VectorPrimitiveFieldSwizzlesTest "VectorPrimitiveFieldSwizzlesTest"
-               OpName %PreConstructor_VectorPrimitiveFieldSwizzlesTest "PreConstructor_VectorPrimitiveFieldSwizzlesTest"
+               OpName %VectorPrimitiveFieldSwizzlesTest_PreConstructor "VectorPrimitiveFieldSwizzlesTest_PreConstructor"
                OpName %self "self"
-               OpName %DefaultConstructor_VectorPrimitiveFieldSwizzlesTest "DefaultConstructor_VectorPrimitiveFieldSwizzlesTest"
+               OpName %VectorPrimitiveFieldSwizzlesTest_DefaultConstructor "VectorPrimitiveFieldSwizzlesTest_DefaultConstructor"
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
                OpName %vector0 "vector0"
-               OpName %dummyMain "dummyMain"
+               OpName %VectorPrimitiveFieldSwizzlesTest_InitGlobals "VectorPrimitiveFieldSwizzlesTest_InitGlobals"
+               OpName %VectorPrimitiveFieldSwizzlesTest_CopyInputs "VectorPrimitiveFieldSwizzlesTest_CopyInputs"
                OpName %self_2 "self"
-               OpName %dummyMain "dummyMain"
-               OpName %self_2 "self"
+               OpName %VectorPrimitiveFieldSwizzlesTest_CopyOutputs "VectorPrimitiveFieldSwizzlesTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint "VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint "VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -34,15 +39,15 @@
          %13 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
-%PreConstructor_VectorPrimitiveFieldSwizzlesTest = OpFunction %void None %11
+%VectorPrimitiveFieldSwizzlesTest_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
          %20 = OpLabel
                OpReturn
                OpFunctionEnd
-%DefaultConstructor_VectorPrimitiveFieldSwizzlesTest = OpFunction %void None %11
+%VectorPrimitiveFieldSwizzlesTest_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
          %25 = OpLabel
-         %26 = OpFunctionCall %void %PreConstructor_VectorPrimitiveFieldSwizzlesTest %self_0
+         %26 = OpFunctionCall %void %VectorPrimitiveFieldSwizzlesTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
        %Main = OpFunction %void None %11
@@ -58,10 +63,27 @@
                OpStore %38 %36
                OpReturn
                OpFunctionEnd
-  %dummyMain = OpFunction %void None %13
+%VectorPrimitiveFieldSwizzlesTest_InitGlobals = OpFunction %void None %13
          %43 = OpLabel
-     %self_2 = OpVariable %_ptr_Function_VectorPrimitiveFieldSwizzlesTest Function
-         %45 = OpFunctionCall %void %DefaultConstructor_VectorPrimitiveFieldSwizzlesTest %self_2
-         %46 = OpFunctionCall %void %Main %self_2
+               OpReturn
+               OpFunctionEnd
+%VectorPrimitiveFieldSwizzlesTest_CopyInputs = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
+         %48 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%VectorPrimitiveFieldSwizzlesTest_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_VectorPrimitiveFieldSwizzlesTest
+         %53 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%VectorPrimitiveFieldSwizzlesTest_Main_EntryPoint = OpFunction %void None %13
+         %57 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_VectorPrimitiveFieldSwizzlesTest Function
+         %59 = OpFunctionCall %void %VectorPrimitiveFieldSwizzlesTest_InitGlobals
+         %60 = OpFunctionCall %void %VectorPrimitiveFieldSwizzlesTest_DefaultConstructor %self_4
+         %61 = OpFunctionCall %void %VectorPrimitiveFieldSwizzlesTest_CopyInputs %self_4
+         %62 = OpFunctionCall %void %Main %self_4
+         %63 = OpFunctionCall %void %VectorPrimitiveFieldSwizzlesTest_CopyOutputs %self_4
                OpReturn
                OpFunctionEnd

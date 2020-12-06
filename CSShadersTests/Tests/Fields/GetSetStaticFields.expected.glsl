@@ -2,10 +2,7 @@
 
 struct GetSetStaticFields
 {
-    bool BoolValue;
-    int IntValue;
-    uint UIntValue;
-    float FloatValue;
+    int empty_struct_member;
 };
 
 bool BoolValue;
@@ -13,17 +10,25 @@ int IntValue;
 uint UIntValue;
 float FloatValue;
 
-void PreConstructor_GetSetStaticFields(inout GetSetStaticFields self)
+void GetSetStaticFields_InitGlobals()
 {
-    self.BoolValue = false;
-    self.IntValue = 0;
-    self.UIntValue = 0u;
-    self.FloatValue = 0.0;
+    BoolValue = false;
+    IntValue = 0;
+    UIntValue = 0u;
+    FloatValue = 0.0;
 }
 
-void DefaultConstructor_GetSetStaticFields(inout GetSetStaticFields self)
+void GetSetStaticFields_PreConstructor(GetSetStaticFields self)
 {
-    PreConstructor_GetSetStaticFields(self);
+}
+
+void GetSetStaticFields_DefaultConstructor(GetSetStaticFields self)
+{
+    GetSetStaticFields_PreConstructor(self);
+}
+
+void GetSetStaticFields_CopyInputs(GetSetStaticFields self)
+{
 }
 
 void Main(GetSetStaticFields self)
@@ -42,10 +47,17 @@ void Main(GetSetStaticFields self)
     floatValue = FloatValue;
 }
 
+void GetSetStaticFields_CopyOutputs(GetSetStaticFields self)
+{
+}
+
 void main()
 {
+    GetSetStaticFields_InitGlobals();
     GetSetStaticFields self;
-    DefaultConstructor_GetSetStaticFields(self);
+    GetSetStaticFields_DefaultConstructor(self);
+    GetSetStaticFields_CopyInputs(self);
     Main(self);
+    GetSetStaticFields_CopyOutputs(self);
 }
 

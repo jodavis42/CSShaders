@@ -1,7 +1,7 @@
 
 namespace Shaders
 {
-    [Shader.UnitTest]
+    [Shader.UnitTest][Shader.Pixel]
     struct InstanceFunctionRef
     {
       void TestFn1(ref int value)

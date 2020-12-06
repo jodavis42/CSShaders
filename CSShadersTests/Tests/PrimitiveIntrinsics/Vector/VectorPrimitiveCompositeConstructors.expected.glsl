@@ -5,13 +5,21 @@ struct VectorPrimitiveCompositeConstructorsTest
     int empty_struct_member;
 };
 
-void PreConstructor_VectorPrimitiveCompositeConstructorsTest(VectorPrimitiveCompositeConstructorsTest self)
+void VectorPrimitiveCompositeConstructorsTest_InitGlobals()
 {
 }
 
-void DefaultConstructor_VectorPrimitiveCompositeConstructorsTest(VectorPrimitiveCompositeConstructorsTest self)
+void VectorPrimitiveCompositeConstructorsTest_PreConstructor(VectorPrimitiveCompositeConstructorsTest self)
 {
-    PreConstructor_VectorPrimitiveCompositeConstructorsTest(self);
+}
+
+void VectorPrimitiveCompositeConstructorsTest_DefaultConstructor(VectorPrimitiveCompositeConstructorsTest self)
+{
+    VectorPrimitiveCompositeConstructorsTest_PreConstructor(self);
+}
+
+void VectorPrimitiveCompositeConstructorsTest_CopyInputs(VectorPrimitiveCompositeConstructorsTest self)
+{
 }
 
 void Main(VectorPrimitiveCompositeConstructorsTest self)
@@ -20,10 +28,17 @@ void Main(VectorPrimitiveCompositeConstructorsTest self)
     vec2 vector1 = vec2(1.0, 2.0);
 }
 
+void VectorPrimitiveCompositeConstructorsTest_CopyOutputs(VectorPrimitiveCompositeConstructorsTest self)
+{
+}
+
 void main()
 {
+    VectorPrimitiveCompositeConstructorsTest_InitGlobals();
     VectorPrimitiveCompositeConstructorsTest self;
-    DefaultConstructor_VectorPrimitiveCompositeConstructorsTest(self);
+    VectorPrimitiveCompositeConstructorsTest_DefaultConstructor(self);
+    VectorPrimitiveCompositeConstructorsTest_CopyInputs(self);
     Main(self);
+    VectorPrimitiveCompositeConstructorsTest_CopyOutputs(self);
 }
 
