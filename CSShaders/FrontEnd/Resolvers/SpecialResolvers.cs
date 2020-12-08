@@ -22,9 +22,14 @@ namespace CSShaders
       // Setup a few special processing functors here
       SpecialTypeCreationAttributeProcessors.Add(typeof(Math.VectorPrimitive).Name, VectorResolvers.ProcessVectorType);
       SpecialTypeCreationAttributeProcessors.Add(typeof(Math.MatrixPrimitive).Name, MatrixResolvers.ProcessMatrixType);
+      SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.SamplerPrimitive).Name, SamplerResolvers.ProcessSamplerType);
+      SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.ImagePrimitive).Name, ImageResolvers.ProcessImageType);
+      SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.SampledImagePrimitive).Name, SampledSamplerResolvers.ProcessSampledImageType);
       FieldProcessors.Add(typeof(Math.Swizzle).Name, VectorResolvers.ProcessVectorSwizzle);
       MethodProcessors.Add(typeof(Shader.SimpleIntrinsicFunction).Name, CreateSimpleIntrinsicType);
       MethodProcessors.Add(typeof(Math.CompositeConstruct).Name, CreateCompositeConstructIntrinsic);
+      MethodProcessors.Add(typeof(Shader.ImageIntrinsicFunction).Name, ImageIntrinsicResolvers.CreateSampledImageIntrinsicType);
+      MethodProcessors.Add(typeof(Shader.SplitSampledImageIntrinsicFunction).Name, ImageIntrinsicResolvers.CreateSplitSampledImageIntrinsicFunction);
     }
 
     public bool TryProcessIntrinsicMethod(FrontEndTranslator translator, IMethodSymbol methodSymbol)
@@ -37,7 +42,6 @@ namespace CSShaders
           processor?.Invoke(translator, methodSymbol.ContainingType, methodSymbol, fieldAttribute);
           return true;
         }
-
       }
       return false;
     }
