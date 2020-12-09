@@ -17,7 +17,10 @@ namespace CSShaders
     {
       {typeof(Math.VectorPrimitive).Name, 1 },
       // Matrices depend on vectors
-      {typeof(Math.MatrixPrimitive).Name, 2 }
+      {typeof(Math.MatrixPrimitive).Name, 2 },
+      {typeof(Shader.SamplerPrimitive).Name, 3 },
+      {typeof(Shader.ImagePrimitive).Name, 4 },
+      {typeof(Shader.SampledImagePrimitive).Name, 5 },
     };
     public class PrimitiveData
     {

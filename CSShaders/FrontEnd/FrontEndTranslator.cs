@@ -479,10 +479,15 @@ namespace CSShaders
 
     public GlobalShaderField CreateStaticField(ShaderType owningType, ShaderType fieldType, string name, IShaderIR initializerExpression)
     {
-      // Static fields are a special storage class. Create the pointer type if needed.
-      var staticFieldType = fieldType.FindPointerType(StorageClass.Private);
+      // Static fields are a special storage class. Get the target storage class from the field type. If the field type is a special storage class then use that instead of private.
+      var storageClass = StorageClass.Private;
+      if (fieldType.mStorageClass == StorageClass.Uniform || fieldType.mStorageClass == StorageClass.UniformConstant)
+        storageClass = fieldType.mStorageClass;
+
+      // Also create the pointer type if needed.
+      var staticFieldType = fieldType.FindPointerType(storageClass);
       if (staticFieldType == null)
-        staticFieldType = CreateType(fieldType, StorageClass.Private, true);
+        staticFieldType = CreateType(fieldType, storageClass, true);
 
       var shaderField = new GlobalShaderField();
       shaderField.mMeta = new ShaderFieldMeta();

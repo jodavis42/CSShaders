@@ -77,6 +77,10 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpFunctionParameter, Spv.Op.OpFunctionParameter);
       SimpleInstructions.Add(OpInstructionType.OpConstantTrue, Spv.Op.OpConstantTrue);
       SimpleInstructions.Add(OpInstructionType.OpConstantFalse, Spv.Op.OpConstantFalse);
+
+      SimpleInstructions.Add(OpInstructionType.OpSampledImage, Spv.Op.OpSampledImage);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleImplicitLod, Spv.Op.OpImageSampleImplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleExplicitLod, Spv.Op.OpImageSampleExplicitLod);
     }
 
     public void Write(SpirVStreamWriter writer, ShaderLibrary library, FrontEndTranslator frontEnd)
@@ -231,6 +235,10 @@ namespace CSShaders
         return Spv.StorageClass.StorageClassPrivate;
       else if (storageClass == StorageClass.Generic)
         return Spv.StorageClass.StorageClassGeneric;
+      else if (storageClass == StorageClass.Uniform)
+        return Spv.StorageClass.StorageClassUniform;
+      else if (storageClass == StorageClass.UniformConstant)
+        return Spv.StorageClass.StorageClassUniformConstant;
       return Spv.StorageClass.StorageClassFunction;
     }
 
@@ -291,6 +299,23 @@ namespace CSShaders
             mWriter.Write(GetId(field.mType));
           }
         }
+        else if (type.mBaseType == OpType.Sampler)
+        {
+          UInt16 instructionSize = (UInt16)2;
+          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeSampler, GetId(type));
+        }
+        else if (type.mBaseType == OpType.Image)
+        {
+          UInt16 instructionSize = (UInt16)9;
+          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeImage, GetId(type));
+          WriteArgs(type.mParameters);
+        }
+        else if (type.mBaseType == OpType.SampledImage)
+        {
+          UInt16 instructionSize = (UInt16)3;
+          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeSampledImage, GetId(type));
+          WriteArgs(type.mParameters);
+        }
         else if (type.mBaseType == OpType.Function)
         {
           var instructionSize = 2 + type.mParameters.Count;
@@ -317,7 +342,8 @@ namespace CSShaders
         mWriter.WriteInstruction((UInt16)(4), Spv.Op.OpVariable);
         mWriter.Write(GetId(constantOp.mResultType));
         mWriter.Write(GetId(constantOp));
-        mWriter.Write((UInt32)Spv.StorageClass.StorageClassPrivate);
+        var spirvStorageClass = ConvertStorageClass(constantOp.mResultType.mStorageClass);
+        mWriter.Write((UInt32)spirvStorageClass);
       }
     }
 

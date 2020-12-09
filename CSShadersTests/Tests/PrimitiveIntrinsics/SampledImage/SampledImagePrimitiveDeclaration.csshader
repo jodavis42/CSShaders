@@ -1,0 +1,12 @@
+
+[Shader.ImagePrimitive(typeof(float), Shader.ImageDimension.Dim2D, Shader.ImageFormat.Unknown)]
+public struct SimpleFloatImage2d{}
+
+[Shader.SampledImagePrimitive(typeof(SimpleFloatImage2d))]
+public struct SimpleSampledFloatImage2d{}
+
+[Shader.UnitTest]
+struct SampledImagePrimitiveDeclaration
+{
+    public static SimpleSampledFloatImage2d SimpleSampledFloatImage2d;
+}

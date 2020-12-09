@@ -26,8 +26,14 @@
     [SimpleIntrinsicFunction("OpIAdd")] public extern static Math.Integer2 Add(Math.Integer2 lhs, Math.Integer2 rhs);
     [SimpleIntrinsicFunction("OpFOrdEqual")] public extern static Math.Bool2 Equal(Math.Vector2 lhs, Math.Vector2 rhs);
 
+    // Matrix Intrinsics ------------------------------------------------------
     [Shader.SimpleIntrinsicFunction("OpTranspose")] public extern static Math.Float2x2 Transpose(Math.Float2x2 matrix);
     [Shader.SimpleIntrinsicFunction("OpMatrixTimesMatrix")] public extern static Math.Float2x2 Multiply(Math.Float2x2 lhs, Math.Float2x2 rhs);
     [Shader.SimpleIntrinsicFunction("OpMatrixTimesVector")] public extern static Math.Vector2 Multiply(Math.Float2x2 lhs, Math.Vector2 rhs);
+
+
+    // Sampled Image Intrinsics -----------------------------------------------
+    [Shader.ImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 Sample(FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
+    [Shader.ImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 Sample(FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float lod);
   }
 }

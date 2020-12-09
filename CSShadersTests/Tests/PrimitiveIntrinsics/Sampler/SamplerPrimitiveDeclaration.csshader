@@ -1,0 +1,9 @@
+
+[Shader.SamplerPrimitive]
+public struct TestSamplerPrimitive {}
+
+[Shader.UnitTest]
+struct SamplerPrimitiveDeclarationTest
+{
+    public static TestSamplerPrimitive Sampler;
+}

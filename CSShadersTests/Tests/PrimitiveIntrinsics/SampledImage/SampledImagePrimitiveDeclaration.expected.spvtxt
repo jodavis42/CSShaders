@@ -1,0 +1,73 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 53
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %SampledImagePrimitiveDeclaration_EntryPoint "SampledImagePrimitiveDeclaration_EntryPoint" %SimpleSampledFloatImage2d_0
+               OpExecutionMode %SampledImagePrimitiveDeclaration_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %SimpleFloatImage2d "SimpleFloatImage2d"
+               OpName %SimpleSampledFloatImage2d "SimpleSampledFloatImage2d"
+               OpName %SampledImagePrimitiveDeclaration "SampledImagePrimitiveDeclaration"
+               OpName %SampledImagePrimitiveDeclaration_PreConstructor "SampledImagePrimitiveDeclaration_PreConstructor"
+               OpName %self "self"
+               OpName %SampledImagePrimitiveDeclaration_DefaultConstructor "SampledImagePrimitiveDeclaration_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %SampledImagePrimitiveDeclaration_EntryPoint "SampledImagePrimitiveDeclaration_EntryPoint"
+               OpName %self_1 "self"
+               OpName %SampledImagePrimitiveDeclaration_InitGlobals "SampledImagePrimitiveDeclaration_InitGlobals"
+               OpName %SampledImagePrimitiveDeclaration_CopyInputs "SampledImagePrimitiveDeclaration_CopyInputs"
+               OpName %self_2 "self"
+               OpName %SampledImagePrimitiveDeclaration_CopyOutputs "SampledImagePrimitiveDeclaration_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %SimpleSampledFloatImage2d_0 "SimpleSampledFloatImage2d"
+               OpName %SampledImagePrimitiveDeclaration_EntryPoint "SampledImagePrimitiveDeclaration_EntryPoint"
+               OpName %self_1 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%SimpleFloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
+%SimpleSampledFloatImage2d = OpTypeSampledImage %SimpleFloatImage2d
+%_ptr_UniformConstant_SimpleSampledFloatImage2d = OpTypePointer UniformConstant %SimpleSampledFloatImage2d
+%SampledImagePrimitiveDeclaration = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_SampledImagePrimitiveDeclaration = OpTypePointer Function %SampledImagePrimitiveDeclaration
+         %14 = OpTypeFunction %void %_ptr_Function_SampledImagePrimitiveDeclaration
+         %16 = OpTypeFunction %void
+%SimpleSampledFloatImage2d_0 = OpVariable %_ptr_UniformConstant_SimpleSampledFloatImage2d UniformConstant
+%SampledImagePrimitiveDeclaration_PreConstructor = OpFunction %void None %14
+       %self = OpFunctionParameter %_ptr_Function_SampledImagePrimitiveDeclaration
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SampledImagePrimitiveDeclaration_DefaultConstructor = OpFunction %void None %14
+     %self_0 = OpFunctionParameter %_ptr_Function_SampledImagePrimitiveDeclaration
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %SampledImagePrimitiveDeclaration_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%SampledImagePrimitiveDeclaration_EntryPoint = OpFunction %void None %16
+         %32 = OpLabel
+     %self_1 = OpVariable %_ptr_Function_SampledImagePrimitiveDeclaration Function
+         %34 = OpFunctionCall %void %SampledImagePrimitiveDeclaration_InitGlobals
+         %36 = OpFunctionCall %void %SampledImagePrimitiveDeclaration_DefaultConstructor %self_1
+         %37 = OpFunctionCall %void %SampledImagePrimitiveDeclaration_CopyInputs %self_1
+         %39 = OpFunctionCall %void %SampledImagePrimitiveDeclaration_CopyOutputs %self_1
+               OpReturn
+               OpFunctionEnd
+%SampledImagePrimitiveDeclaration_InitGlobals = OpFunction %void None %16
+         %43 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SampledImagePrimitiveDeclaration_CopyInputs = OpFunction %void None %14
+     %self_2 = OpFunctionParameter %_ptr_Function_SampledImagePrimitiveDeclaration
+         %47 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SampledImagePrimitiveDeclaration_CopyOutputs = OpFunction %void None %14
+     %self_3 = OpFunctionParameter %_ptr_Function_SampledImagePrimitiveDeclaration
+         %51 = OpLabel
+               OpReturn
+               OpFunctionEnd

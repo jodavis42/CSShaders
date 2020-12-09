@@ -1,0 +1,21 @@
+
+[Shader.ImagePrimitive(typeof(float), Shader.ImageDimension.Dim2D, Shader.ImageFormat.Unknown)]
+public struct SimpleFloatImage2d{}
+
+[Shader.ImagePrimitive(typeof(float), Shader.ImageDimension.Dim3D, Shader.ImageFormat.Unknown)]
+public struct SimpleFloatImage3d{}
+
+[Shader.ImagePrimitive(typeof(int), Shader.ImageDimension.Dim2D, Shader.ImageFormat.Rgba8)]
+public struct SimpleIntImage2d_Rgba8{}
+
+[Shader.ImagePrimitive(typeof(int), Shader.ImageDimension.Dim2D, Shader.ImageDepthMode.Depth, Shader.ImageArrayedMode.None, Shader.ImageMultiSampledMode.SingleSampled, Shader.ImageSampledMode.Sampling, Shader.ImageFormat.Rgba8)]
+public struct ComplexIntImage2d_Rgba8{}
+
+[Shader.UnitTest]
+struct ImagePrimitiveDeclarationTest
+{
+    public static SimpleFloatImage2d SimpleFloatImage2d;
+    public static SimpleFloatImage3d SimpleFloatImage3d;
+    public static SimpleIntImage2d_Rgba8 SimpleIntImage2d_Rgba8;
+    public static ComplexIntImage2d_Rgba8 ComplexIntImage2d_Rgba8;
+}

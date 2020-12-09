@@ -1,0 +1,69 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 47
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint" %Sampler
+               OpExecutionMode %SamplerPrimitiveDeclarationTest_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestSamplerPrimitive "TestSamplerPrimitive"
+               OpName %SamplerPrimitiveDeclarationTest "SamplerPrimitiveDeclarationTest"
+               OpName %SamplerPrimitiveDeclarationTest_PreConstructor "SamplerPrimitiveDeclarationTest_PreConstructor"
+               OpName %self "self"
+               OpName %SamplerPrimitiveDeclarationTest_DefaultConstructor "SamplerPrimitiveDeclarationTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint"
+               OpName %self_1 "self"
+               OpName %SamplerPrimitiveDeclarationTest_InitGlobals "SamplerPrimitiveDeclarationTest_InitGlobals"
+               OpName %SamplerPrimitiveDeclarationTest_CopyInputs "SamplerPrimitiveDeclarationTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %SamplerPrimitiveDeclarationTest_CopyOutputs "SamplerPrimitiveDeclarationTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %Sampler "Sampler"
+               OpName %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint"
+               OpName %self_1 "self"
+%TestSamplerPrimitive = OpTypeSampler
+%_ptr_UniformConstant_TestSamplerPrimitive = OpTypePointer UniformConstant %TestSamplerPrimitive
+%SamplerPrimitiveDeclarationTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_SamplerPrimitiveDeclarationTest = OpTypePointer Function %SamplerPrimitiveDeclarationTest
+          %8 = OpTypeFunction %void %_ptr_Function_SamplerPrimitiveDeclarationTest
+         %10 = OpTypeFunction %void
+    %Sampler = OpVariable %_ptr_UniformConstant_TestSamplerPrimitive UniformConstant
+%SamplerPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %8
+       %self = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
+         %16 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SamplerPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %8
+     %self_0 = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
+         %21 = OpLabel
+         %22 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%SamplerPrimitiveDeclarationTest_EntryPoint = OpFunction %void None %10
+         %26 = OpLabel
+     %self_1 = OpVariable %_ptr_Function_SamplerPrimitiveDeclarationTest Function
+         %28 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_InitGlobals
+         %30 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_DefaultConstructor %self_1
+         %31 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_CopyInputs %self_1
+         %33 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_CopyOutputs %self_1
+               OpReturn
+               OpFunctionEnd
+%SamplerPrimitiveDeclarationTest_InitGlobals = OpFunction %void None %10
+         %37 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SamplerPrimitiveDeclarationTest_CopyInputs = OpFunction %void None %8
+     %self_2 = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
+         %41 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SamplerPrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %8
+     %self_3 = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
+         %45 = OpLabel
+               OpReturn
+               OpFunctionEnd

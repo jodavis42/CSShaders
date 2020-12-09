@@ -1,0 +1,24 @@
+[Shader.ImagePrimitive(typeof(float), Shader.ImageDimension.Dim2D, Shader.ImageFormat.Unknown)]
+public struct SimpleFloatImage2d{}
+
+[Shader.SampledImagePrimitive(typeof(SimpleFloatImage2d))]
+public struct SimpleSampledFloatImage2d{}
+
+public struct TestIntrinsics
+{
+  [Shader.ImageIntrinsicFunction("OpImageSampleExplicitLod", Shader.ImageOperands.Lod, 2)] public extern static Math.Vector4 SampleLod(SimpleSampledFloatImage2d sampledImage, Math.Vector2 coordinates, float lod);
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct ComplexImageIntrinsicFunction
+{
+    public static SimpleSampledFloatImage2d SimpleSampledFloatImage2d;
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var uvs = new Math.Vector2();
+      var lod = 1.0f;
+      var value = TestIntrinsics.SampleLod(SimpleSampledFloatImage2d, uvs, lod);
+    }
+}
