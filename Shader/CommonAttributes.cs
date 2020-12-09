@@ -45,4 +45,63 @@ namespace Shader
   public class Pixel : Attribute
   {
   }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class Input : Attribute
+  {
+    Input() { }
+    Input(string name) { }
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class Output : Attribute
+  {
+    Output() { }
+    Output(string name) { }
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class UniformInput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class AppBuiltInInput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class SpecConstantInput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class FragmentInput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class StageInput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class HardwareBuiltInInput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class StageOutput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class HardwareBuiltInOutput : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class FragmentOutput : Attribute
+  {
+  }
 }
