@@ -35,5 +35,19 @@
     // Sampled Image Intrinsics -----------------------------------------------
     [Shader.ImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 Sample(FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
     [Shader.ImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 Sample(FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float lod);
+
+    // Extension Intrinsics: Glsl ---------------------------------------------
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sin")] public extern static float Sin(float value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sin")] public extern static float Sin(Math.Vector2 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sin")] public extern static float Sin(Math.Vector3 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sin")] public extern static float Sin(Math.Vector4 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Cos")] public extern static float Cos(float value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Cos")] public extern static float Cos(Math.Vector2 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Cos")] public extern static float Cos(Math.Vector3 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Cos")] public extern static float Cos(Math.Vector4 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sqrt")] public extern static float Sqrt(float value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sqrt")] public extern static float Sqrt(Math.Vector2 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sqrt")] public extern static float Sqrt(Math.Vector3 value);
+    [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sqrt")] public extern static float Sqrt(Math.Vector4 value);
   }
 }
