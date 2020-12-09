@@ -1,0 +1,22 @@
+[Math.VectorPrimitive(typeof(float), 3)]
+public struct TestVector3Primitive
+{
+    float X, Y, Z;
+}
+
+struct TestIntrinsics
+{
+  [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sin")] public extern static float Sin(float value);
+  [Shader.SimpleExtensionIntrinsic("GLSL.std.450", "Sin")] public extern static TestVector3Primitive Sin(TestVector3Primitive value);
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct SinExtensionIntrinsic
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        var floatResult = TestIntrinsics.Sin(1.0f);
+        var float3Reslt = TestIntrinsics.Sin(new TestVector3Primitive());
+    }
+}

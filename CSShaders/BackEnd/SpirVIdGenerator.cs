@@ -23,6 +23,10 @@ namespace CSShaders
 
     public void GenerateIds(ShaderLibrary library, TypeDependencyCollector typeCollector)
     {
+      foreach (var extLibraryImport in typeCollector.mReferencedExtensionLibraryImports)
+      {
+        GenerateIds(extLibraryImport);
+      }
       foreach (var type in typeCollector.mReferencedTypes)
       {
         GenerateIds(type);
@@ -122,8 +126,16 @@ namespace CSShaders
     {
       if (ir is ShaderOp op)
         GenerateIds(op);
-      else if(ir is ShaderType shaderType)
+      else if (ir is ExtensionLibraryImportOp extImportOp)
+        GetId(extImportOp);
+      else if (ir is ShaderType shaderType)
         GenerateIds(shaderType);
+      else if (ir is ShaderConstantLiteral constantLiteral)
+      {
+        // No op
+      }
+      else
+        throw new Exception();
     }
 
     void GenerateIds(ShaderOp op)

@@ -369,7 +369,7 @@ namespace CSShaders
 
     public bool IsIntrinsic(ShaderAttributes attributes)
     {
-      return attributes.Contains(typeof(Shader.IntrinsicFunction)) || attributes.Contains(typeof(Shader.SimpleIntrinsicFunction))
+      return attributes.Contains(typeof(Shader.IntrinsicFunction)) || attributes.Contains(typeof(Shader.SimpleIntrinsicFunction)) || attributes.Contains(typeof(Shader.SimpleExtensionIntrinsic))
         || attributes.Contains(typeof(Math.CompositeConstruct)) || attributes.Contains(typeof(Math.Swizzle))
         || attributes.Contains(typeof(Shader.ImageIntrinsicFunction)) || attributes.Contains(typeof(Shader.SplitSampledImageIntrinsicFunction));
     }

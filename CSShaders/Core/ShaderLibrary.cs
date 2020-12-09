@@ -18,6 +18,7 @@ namespace CSShaders
     public Dictionary<FunctionKey, ShaderFunction> mFunctionMap = new Dictionary<FunctionKey, ShaderFunction>();
     public Dictionary<FunctionKey, InstrinsicDelegate> IntrinsicFunctions = new Dictionary<FunctionKey, InstrinsicDelegate>();
     public Dictionary<FunctionKey, InstrinsicSetterDelegate> IntrinsicSetterFunctions = new Dictionary<FunctionKey, InstrinsicSetterDelegate>();
+    public Dictionary<string, ExtensionLibraryImportOp> ExtensionLibraryImports = new Dictionary<string, ExtensionLibraryImportOp>();
 
     //---------------------------------------------------------------Types
     public bool AddType(TypeKey key, ShaderType shaderType)
@@ -160,6 +161,34 @@ namespace CSShaders
       {
         result = constantLiteral;
         mConstantLiterals.Add(key, result);
+      }
+      return result;
+    }
+
+    //---------------------------------------------------------------Extension Library Import
+    public ExtensionLibraryImportOp FindExtensionLibraryImport(string extensionLibraryName, bool checkDependencies = true)
+    {
+      var result = ExtensionLibraryImports.GetValueOrDefault(extensionLibraryName, null);
+      if (result == null && checkDependencies == true && mDependencies != null)
+      {
+        foreach (var dependency in mDependencies)
+        {
+          result = dependency.FindExtensionLibraryImport(extensionLibraryName, checkDependencies);
+          if (result != null)
+            break;
+        }
+      }
+      return result;
+    }
+
+    public ExtensionLibraryImportOp GetOrCreateExtensionLibraryImport(string extensionLibraryName, bool checkDependencies = true)
+    {
+      var result = FindExtensionLibraryImport(extensionLibraryName, checkDependencies);
+      if(result == null)
+      {
+        result = new ExtensionLibraryImportOp();
+        result.ExtensionLibraryName = extensionLibraryName;
+        ExtensionLibraryImports.Add(extensionLibraryName, result);
       }
       return result;
     }

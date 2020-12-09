@@ -16,6 +16,7 @@ namespace CSShaders
 
     public ShaderToSpirVBinary()
     {
+      SimpleInstructions.Add(OpInstructionType.OpExtInst, Spv.Op.OpExtInst);
       SimpleInstructions.Add(OpInstructionType.OpSNegate, Spv.Op.OpSNegate);
       SimpleInstructions.Add(OpInstructionType.OpFNegate, Spv.Op.OpFNegate);
       SimpleInstructions.Add(OpInstructionType.OpIAdd, Spv.Op.OpIAdd);
@@ -121,8 +122,19 @@ namespace CSShaders
       mWriter.Write(IdGenerator.Count + 1);
       mWriter.Write(0);
 
+      // Capabilities
       mWriter.WriteInstruction(2, Spv.Op.OpCapability, (UInt32)Spv.Capability.CapabilityShader);
       mWriter.WriteInstruction(2, Spv.Op.OpCapability, (UInt32)Spv.Capability.CapabilityLinkage);
+      // Extension Instance Imports
+      foreach(var extLibraryImport in mTypeCollector.mReferencedExtensionLibraryImports)
+      {
+        var byteCount = mWriter.GetPaddedByteCount(extLibraryImport.ExtensionLibraryName);
+        var wordCount = byteCount / 4;
+        UInt16 totalSize = (UInt16)(2 + wordCount);
+        mWriter.WriteInstruction(totalSize, Spv.Op.OpExtInstImport, GetId(extLibraryImport));
+        mWriter.Write(extLibraryImport.ExtensionLibraryName);
+      }
+      // Memory Models
       mWriter.WriteInstruction(3, Spv.Op.OpMemoryModel, (UInt32)Spv.AddressingModel.AddressingModelLogical, (UInt32)Spv.MemoryModel.MemoryModelGLSL450);
       // EntryPoints
       foreach(var entryPoint in mTypeCollector.mEntryPoints)

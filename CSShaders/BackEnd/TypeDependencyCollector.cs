@@ -116,6 +116,8 @@ namespace CSShaders
         Visit(constantLiteral);
       else if (ir is ShaderOp shaderOp)
         Visit(shaderOp);
+      else if (ir is ExtensionLibraryImportOp extLibraryImportOp)
+        Visit(extLibraryImportOp);
       else
         throw new Exception();
     }
@@ -132,6 +134,11 @@ namespace CSShaders
       Visit(shaderOp.mResultType);
       foreach (var param in shaderOp.mParameters)
         Visit(param);
+    }
+
+    public void Visit(ExtensionLibraryImportOp extLibraryImportOp)
+    {
+      mReferencedExtensionLibraryImports.Add(extLibraryImportOp);
     }
 
     public void Visit(ShaderEntryPointInfo entryPointInfo)
@@ -156,6 +163,7 @@ namespace CSShaders
     public OrderedSet<ShaderFunction> mReferencedFunctions = new OrderedSet<ShaderFunction>();
     public OrderedSet<ShaderOp> mReferencedStatics = new OrderedSet<ShaderOp>();
     public OrderedSet<ShaderOp> mReferencedConstants = new OrderedSet<ShaderOp>();
+    public OrderedSet<ExtensionLibraryImportOp> mReferencedExtensionLibraryImports = new OrderedSet<ExtensionLibraryImportOp>();
     public OrderedSet<ShaderEntryPointInfo> mEntryPoints = new OrderedSet<ShaderEntryPointInfo>();
   }
 }
