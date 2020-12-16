@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct FClampTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Clamp(floatVal, floatVal, floatVal);
+    vector2Val = Shader.Intrinsics.Clamp(vector2Val, vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.Clamp(vector3Val, vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.Clamp(vector4Val, vector4Val, vector4Val);
+  }
+}

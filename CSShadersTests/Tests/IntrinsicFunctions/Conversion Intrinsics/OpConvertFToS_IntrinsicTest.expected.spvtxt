@@ -1,0 +1,139 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 103
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpConvertFToSTest_Main_EntryPoint "OpConvertFToSTest_Main_EntryPoint"
+               OpExecutionMode %OpConvertFToSTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpConvertFToSTest "OpConvertFToSTest"
+               OpName %Integer2 "Integer2"
+               OpName %Vector2 "Vector2"
+               OpName %Integer3 "Integer3"
+               OpName %Vector3 "Vector3"
+               OpName %Integer4 "Integer4"
+               OpName %Vector4 "Vector4"
+               OpName %OpConvertFToSTest_PreConstructor "OpConvertFToSTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpConvertFToSTest_DefaultConstructor "OpConvertFToSTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %intVal "intVal"
+               OpName %floatVal "floatVal"
+               OpName %integer2Val "integer2Val"
+               OpName %vector2Val "vector2Val"
+               OpName %integer3Val "integer3Val"
+               OpName %vector3Val "vector3Val"
+               OpName %integer4Val "integer4Val"
+               OpName %vector4Val "vector4Val"
+               OpName %OpConvertFToSTest_InitGlobals "OpConvertFToSTest_InitGlobals"
+               OpName %OpConvertFToSTest_CopyInputs "OpConvertFToSTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpConvertFToSTest_CopyOutputs "OpConvertFToSTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpConvertFToSTest_Main_EntryPoint "OpConvertFToSTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %OpConvertFToSTest_Main_EntryPoint "OpConvertFToSTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+      %float = OpTypeFloat 32
+%OpConvertFToSTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpConvertFToSTest = OpTypePointer Function %OpConvertFToSTest
+         %11 = OpTypeFunction %void %_ptr_Function_OpConvertFToSTest
+%_ptr_Function_int = OpTypePointer Function %int
+%_ptr_Function_float = OpTypePointer Function %float
+   %Integer2 = OpTypeVector %int 2
+%_ptr_Function_Integer2 = OpTypePointer Function %Integer2
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+   %Integer3 = OpTypeVector %int 3
+%_ptr_Function_Integer3 = OpTypePointer Function %Integer3
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+   %Integer4 = OpTypeVector %int 4
+%_ptr_Function_Integer4 = OpTypePointer Function %Integer4
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+         %25 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+    %float_0 = OpConstant %float 0
+%OpConvertFToSTest_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
+         %32 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpConvertFToSTest_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
+         %37 = OpLabel
+         %38 = OpFunctionCall %void %OpConvertFToSTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
+         %43 = OpLabel
+     %intVal = OpVariable %_ptr_Function_int Function
+   %floatVal = OpVariable %_ptr_Function_float Function
+%integer2Val = OpVariable %_ptr_Function_Integer2 Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+%integer3Val = OpVariable %_ptr_Function_Integer3 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+%integer4Val = OpVariable %_ptr_Function_Integer4 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+               OpStore %intVal %int_0
+               OpStore %floatVal %float_0
+         %54 = OpCompositeConstruct %Integer2 %int_0 %int_0
+               OpStore %integer2Val %54
+         %56 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %56
+         %58 = OpCompositeConstruct %Integer3 %int_0 %int_0 %int_0
+               OpStore %integer3Val %58
+         %60 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %60
+         %62 = OpCompositeConstruct %Integer4 %int_0 %int_0 %int_0 %int_0
+               OpStore %integer4Val %62
+         %64 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %64
+         %66 = OpLoad %float %floatVal
+         %67 = OpConvertFToS %int %66
+               OpStore %intVal %67
+         %69 = OpLoad %Vector2 %vector2Val
+         %70 = OpConvertFToS %Integer2 %69
+               OpStore %integer2Val %70
+         %72 = OpLoad %Vector3 %vector3Val
+         %73 = OpConvertFToS %Integer3 %72
+               OpStore %integer3Val %73
+         %75 = OpLoad %Vector4 %vector4Val
+         %76 = OpConvertFToS %Integer4 %75
+               OpStore %integer4Val %76
+               OpReturn
+               OpFunctionEnd
+%OpConvertFToSTest_InitGlobals = OpFunction %void None %25
+         %81 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpConvertFToSTest_CopyInputs = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
+         %86 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpConvertFToSTest_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
+         %91 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpConvertFToSTest_Main_EntryPoint = OpFunction %void None %25
+         %95 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpConvertFToSTest Function
+         %97 = OpFunctionCall %void %OpConvertFToSTest_InitGlobals
+         %98 = OpFunctionCall %void %OpConvertFToSTest_DefaultConstructor %self_4
+         %99 = OpFunctionCall %void %OpConvertFToSTest_CopyInputs %self_4
+        %100 = OpFunctionCall %void %Main %self_4
+        %101 = OpFunctionCall %void %OpConvertFToSTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

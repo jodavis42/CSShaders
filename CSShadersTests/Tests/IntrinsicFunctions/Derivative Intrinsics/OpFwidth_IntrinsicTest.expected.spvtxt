@@ -1,0 +1,112 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 83
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpFwidthTest_Main_EntryPoint "OpFwidthTest_Main_EntryPoint"
+               OpExecutionMode %OpFwidthTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpFwidthTest "OpFwidthTest"
+               OpName %Vector2 "Vector2"
+               OpName %Vector3 "Vector3"
+               OpName %Vector4 "Vector4"
+               OpName %OpFwidthTest_PreConstructor "OpFwidthTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpFwidthTest_DefaultConstructor "OpFwidthTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %floatVal "floatVal"
+               OpName %vector2Val "vector2Val"
+               OpName %vector3Val "vector3Val"
+               OpName %vector4Val "vector4Val"
+               OpName %OpFwidthTest_InitGlobals "OpFwidthTest_InitGlobals"
+               OpName %OpFwidthTest_CopyInputs "OpFwidthTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpFwidthTest_CopyOutputs "OpFwidthTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpFwidthTest_Main_EntryPoint "OpFwidthTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %OpFwidthTest_Main_EntryPoint "OpFwidthTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%OpFwidthTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpFwidthTest = OpTypePointer Function %OpFwidthTest
+          %9 = OpTypeFunction %void %_ptr_Function_OpFwidthTest
+%_ptr_Function_float = OpTypePointer Function %float
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+         %17 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%OpFwidthTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_OpFwidthTest
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpFwidthTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_OpFwidthTest
+         %28 = OpLabel
+         %29 = OpFunctionCall %void %OpFwidthTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_OpFwidthTest
+         %34 = OpLabel
+   %floatVal = OpVariable %_ptr_Function_float Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+               OpStore %floatVal %float_0
+         %40 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %40
+         %42 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %42
+         %44 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %44
+         %46 = OpLoad %float %floatVal
+         %47 = OpFwidth %float %46
+               OpStore %floatVal %47
+         %49 = OpLoad %Vector2 %vector2Val
+         %50 = OpFwidth %Vector2 %49
+               OpStore %vector2Val %50
+         %52 = OpLoad %Vector3 %vector3Val
+         %53 = OpFwidth %Vector3 %52
+               OpStore %vector3Val %53
+         %55 = OpLoad %Vector4 %vector4Val
+         %56 = OpFwidth %Vector4 %55
+               OpStore %vector4Val %56
+               OpReturn
+               OpFunctionEnd
+%OpFwidthTest_InitGlobals = OpFunction %void None %17
+         %61 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpFwidthTest_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_OpFwidthTest
+         %66 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpFwidthTest_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_OpFwidthTest
+         %71 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpFwidthTest_Main_EntryPoint = OpFunction %void None %17
+         %75 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpFwidthTest Function
+         %77 = OpFunctionCall %void %OpFwidthTest_InitGlobals
+         %78 = OpFunctionCall %void %OpFwidthTest_DefaultConstructor %self_4
+         %79 = OpFunctionCall %void %OpFwidthTest_CopyInputs %self_4
+         %80 = OpFunctionCall %void %Main %self_4
+         %81 = OpFunctionCall %void %OpFwidthTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

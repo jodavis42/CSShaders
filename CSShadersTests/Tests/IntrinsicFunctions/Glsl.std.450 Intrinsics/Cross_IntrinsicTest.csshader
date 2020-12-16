@@ -1,0 +1,10 @@
+[Shader.UnitTest][Shader.Pixel]
+struct CrossTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector3Val = new Math.Vector3();
+    vector3Val = Shader.Intrinsics.Cross(vector3Val, vector3Val);
+  }
+}

@@ -1,0 +1,112 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 83
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpDotTest_Main_EntryPoint "OpDotTest_Main_EntryPoint"
+               OpExecutionMode %OpDotTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpDotTest "OpDotTest"
+               OpName %Vector2 "Vector2"
+               OpName %Vector3 "Vector3"
+               OpName %Vector4 "Vector4"
+               OpName %OpDotTest_PreConstructor "OpDotTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpDotTest_DefaultConstructor "OpDotTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %floatVal "floatVal"
+               OpName %vector2Val "vector2Val"
+               OpName %vector3Val "vector3Val"
+               OpName %vector4Val "vector4Val"
+               OpName %OpDotTest_InitGlobals "OpDotTest_InitGlobals"
+               OpName %OpDotTest_CopyInputs "OpDotTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpDotTest_CopyOutputs "OpDotTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpDotTest_Main_EntryPoint "OpDotTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %OpDotTest_Main_EntryPoint "OpDotTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+  %OpDotTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpDotTest = OpTypePointer Function %OpDotTest
+          %9 = OpTypeFunction %void %_ptr_Function_OpDotTest
+%_ptr_Function_float = OpTypePointer Function %float
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+         %17 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%OpDotTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_OpDotTest
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpDotTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_OpDotTest
+         %28 = OpLabel
+         %29 = OpFunctionCall %void %OpDotTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_OpDotTest
+         %34 = OpLabel
+   %floatVal = OpVariable %_ptr_Function_float Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+               OpStore %floatVal %float_0
+         %40 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %40
+         %42 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %42
+         %44 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %44
+         %46 = OpLoad %Vector2 %vector2Val
+         %47 = OpLoad %Vector2 %vector2Val
+         %48 = OpDot %float %46 %47
+               OpStore %floatVal %48
+         %50 = OpLoad %Vector3 %vector3Val
+         %51 = OpLoad %Vector3 %vector3Val
+         %52 = OpDot %float %50 %51
+               OpStore %floatVal %52
+         %54 = OpLoad %Vector4 %vector4Val
+         %55 = OpLoad %Vector4 %vector4Val
+         %56 = OpDot %float %54 %55
+               OpStore %floatVal %56
+               OpReturn
+               OpFunctionEnd
+%OpDotTest_InitGlobals = OpFunction %void None %17
+         %61 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpDotTest_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_OpDotTest
+         %66 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpDotTest_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_OpDotTest
+         %71 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpDotTest_Main_EntryPoint = OpFunction %void None %17
+         %75 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpDotTest Function
+         %77 = OpFunctionCall %void %OpDotTest_InitGlobals
+         %78 = OpFunctionCall %void %OpDotTest_DefaultConstructor %self_4
+         %79 = OpFunctionCall %void %OpDotTest_CopyInputs %self_4
+         %80 = OpFunctionCall %void %Main %self_4
+         %81 = OpFunctionCall %void %OpDotTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

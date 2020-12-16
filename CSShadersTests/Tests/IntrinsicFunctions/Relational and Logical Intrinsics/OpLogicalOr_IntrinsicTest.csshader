@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpLogicalOrTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var boolVal = false;
+    var bool2Val = new Math.Bool2();
+    var bool3Val = new Math.Bool3();
+    var bool4Val = new Math.Bool4();
+    boolVal = Shader.Intrinsics.LogicalOr(boolVal, boolVal);
+    bool2Val = Shader.Intrinsics.LogicalOr(bool2Val, bool2Val);
+    bool3Val = Shader.Intrinsics.LogicalOr(bool3Val, bool3Val);
+    bool4Val = Shader.Intrinsics.LogicalOr(bool4Val, bool4Val);
+  }
+}

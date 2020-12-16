@@ -1,0 +1,88 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 66
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %CrossTest_Main_EntryPoint "CrossTest_Main_EntryPoint"
+               OpExecutionMode %CrossTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %CrossTest "CrossTest"
+               OpName %Vector3 "Vector3"
+               OpName %CrossTest_PreConstructor "CrossTest_PreConstructor"
+               OpName %self "self"
+               OpName %CrossTest_DefaultConstructor "CrossTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %vector3Val "vector3Val"
+               OpName %CrossTest_InitGlobals "CrossTest_InitGlobals"
+               OpName %CrossTest_CopyInputs "CrossTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %CrossTest_CopyOutputs "CrossTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %CrossTest_Main_EntryPoint "CrossTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %CrossTest_Main_EntryPoint "CrossTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+  %CrossTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_CrossTest = OpTypePointer Function %CrossTest
+         %10 = OpTypeFunction %void %_ptr_Function_CrossTest
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+        %int = OpTypeInt 32 1
+         %16 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%CrossTest_PreConstructor = OpFunction %void None %10
+       %self = OpFunctionParameter %_ptr_Function_CrossTest
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CrossTest_DefaultConstructor = OpFunction %void None %10
+     %self_0 = OpFunctionParameter %_ptr_Function_CrossTest
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %CrossTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %10
+     %self_1 = OpFunctionParameter %_ptr_Function_CrossTest
+         %33 = OpLabel
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+         %35 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %35
+         %37 = OpLoad %Vector3 %vector3Val
+         %38 = OpLoad %Vector3 %vector3Val
+         %39 = OpExtInst %Vector3 %1 Cross %37 %38
+               OpStore %vector3Val %39
+               OpReturn
+               OpFunctionEnd
+%CrossTest_InitGlobals = OpFunction %void None %16
+         %44 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CrossTest_CopyInputs = OpFunction %void None %10
+     %self_2 = OpFunctionParameter %_ptr_Function_CrossTest
+         %49 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CrossTest_CopyOutputs = OpFunction %void None %10
+     %self_3 = OpFunctionParameter %_ptr_Function_CrossTest
+         %54 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CrossTest_Main_EntryPoint = OpFunction %void None %16
+         %58 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_CrossTest Function
+         %60 = OpFunctionCall %void %CrossTest_InitGlobals
+         %61 = OpFunctionCall %void %CrossTest_DefaultConstructor %self_4
+         %62 = OpFunctionCall %void %CrossTest_CopyInputs %self_4
+         %63 = OpFunctionCall %void %Main %self_4
+         %64 = OpFunctionCall %void %CrossTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

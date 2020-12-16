@@ -1,0 +1,10 @@
+[Shader.UnitTest][Shader.Pixel]
+struct MatrixInverseTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var float2x2Val = new Math.Float2x2();
+    float2x2Val = Shader.Intrinsics.Inverse(float2x2Val);
+  }
+}

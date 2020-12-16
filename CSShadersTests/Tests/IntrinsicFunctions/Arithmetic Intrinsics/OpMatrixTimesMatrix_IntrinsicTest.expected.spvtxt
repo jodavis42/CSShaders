@@ -1,0 +1,128 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 96
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpMatrixTimesMatrixTest_Main_EntryPoint "OpMatrixTimesMatrixTest_Main_EntryPoint"
+               OpExecutionMode %OpMatrixTimesMatrixTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpMatrixTimesMatrixTest "OpMatrixTimesMatrixTest"
+               OpName %Vector2 "Vector2"
+               OpName %Float2x2 "Float2x2"
+               OpName %OpMatrixTimesMatrixTest_PreConstructor "OpMatrixTimesMatrixTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpMatrixTimesMatrixTest_DefaultConstructor "OpMatrixTimesMatrixTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %float2x2Val "float2x2Val"
+               OpName %Float2x2_Constructor "Float2x2_Constructor"
+               OpName %self_2 "self"
+               OpName %value "value"
+               OpName %v2 "v2"
+               OpName %Float2x2_Constructor_0 "Float2x2_Constructor"
+               OpName %self_3 "self"
+               OpName %m00 "m00"
+               OpName %m01 "m01"
+               OpName %m10 "m10"
+               OpName %m11 "m11"
+               OpName %OpMatrixTimesMatrixTest_InitGlobals "OpMatrixTimesMatrixTest_InitGlobals"
+               OpName %OpMatrixTimesMatrixTest_CopyInputs "OpMatrixTimesMatrixTest_CopyInputs"
+               OpName %self_4 "self"
+               OpName %OpMatrixTimesMatrixTest_CopyOutputs "OpMatrixTimesMatrixTest_CopyOutputs"
+               OpName %self_5 "self"
+               OpName %OpMatrixTimesMatrixTest_Main_EntryPoint "OpMatrixTimesMatrixTest_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %OpMatrixTimesMatrixTest_Main_EntryPoint "OpMatrixTimesMatrixTest_Main_EntryPoint"
+               OpName %self_6 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%OpMatrixTimesMatrixTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpMatrixTimesMatrixTest = OpTypePointer Function %OpMatrixTimesMatrixTest
+          %9 = OpTypeFunction %void %_ptr_Function_OpMatrixTimesMatrixTest
+    %Vector2 = OpTypeVector %float 2
+   %Float2x2 = OpTypeMatrix %Vector2 2
+%_ptr_Function_Float2x2 = OpTypePointer Function %Float2x2
+         %15 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+         %17 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
+         %19 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%OpMatrixTimesMatrixTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
+         %25 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpMatrixTimesMatrixTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
+         %30 = OpLabel
+         %31 = OpFunctionCall %void %OpMatrixTimesMatrixTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
+         %36 = OpLabel
+%float2x2Val = OpVariable %_ptr_Function_Float2x2 Function
+         %38 = OpCompositeConstruct %Vector2 %float_0 %float_0
+         %39 = OpCompositeConstruct %Float2x2 %38 %38
+               OpStore %float2x2Val %39
+         %41 = OpLoad %Float2x2 %float2x2Val
+         %42 = OpLoad %Float2x2 %float2x2Val
+         %43 = OpMatrixTimesMatrix %Float2x2 %41 %42
+               OpStore %float2x2Val %43
+               OpReturn
+               OpFunctionEnd
+%Float2x2_Constructor = OpFunction %void None %15
+     %self_2 = OpFunctionParameter %_ptr_Function_Float2x2
+      %value = OpFunctionParameter %float
+         %50 = OpLabel
+         %v2 = OpVariable %_ptr_Function_Vector2 Function
+         %52 = OpCompositeConstruct %Vector2 %value %value
+               OpStore %v2 %52
+         %54 = OpLoad %Vector2 %v2
+         %55 = OpLoad %Vector2 %v2
+         %56 = OpCompositeConstruct %Float2x2 %54 %55
+               OpStore %self_2 %56
+               OpReturn
+               OpFunctionEnd
+%Float2x2_Constructor_0 = OpFunction %void None %17
+     %self_3 = OpFunctionParameter %_ptr_Function_Float2x2
+        %m00 = OpFunctionParameter %float
+        %m01 = OpFunctionParameter %float
+        %m10 = OpFunctionParameter %float
+        %m11 = OpFunctionParameter %float
+         %66 = OpLabel
+         %67 = OpCompositeConstruct %Vector2 %m00 %m10
+         %68 = OpCompositeConstruct %Vector2 %m01 %m11
+         %69 = OpCompositeConstruct %Float2x2 %67 %68
+               OpStore %self_3 %69
+               OpReturn
+               OpFunctionEnd
+%OpMatrixTimesMatrixTest_InitGlobals = OpFunction %void None %19
+         %74 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpMatrixTimesMatrixTest_CopyInputs = OpFunction %void None %9
+     %self_4 = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
+         %79 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpMatrixTimesMatrixTest_CopyOutputs = OpFunction %void None %9
+     %self_5 = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
+         %84 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpMatrixTimesMatrixTest_Main_EntryPoint = OpFunction %void None %19
+         %88 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_OpMatrixTimesMatrixTest Function
+         %90 = OpFunctionCall %void %OpMatrixTimesMatrixTest_InitGlobals
+         %91 = OpFunctionCall %void %OpMatrixTimesMatrixTest_DefaultConstructor %self_6
+         %92 = OpFunctionCall %void %OpMatrixTimesMatrixTest_CopyInputs %self_6
+         %93 = OpFunctionCall %void %Main %self_6
+         %94 = OpFunctionCall %void %OpMatrixTimesMatrixTest_CopyOutputs %self_6
+               OpReturn
+               OpFunctionEnd

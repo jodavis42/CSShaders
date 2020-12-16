@@ -1,0 +1,32 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpSelectTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var boolVal = false;
+    var bool2Val = new Math.Bool2();
+    var bool3Val = new Math.Bool3();
+    var bool4Val = new Math.Bool4();
+    var intVal = 0;
+    var integer2Val = new Math.Integer2();
+    var integer3Val = new Math.Integer3();
+    var integer4Val = new Math.Integer4();
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    boolVal = Shader.Intrinsics.Select(boolVal, boolVal, boolVal);
+    bool2Val = Shader.Intrinsics.Select(bool2Val, bool2Val, bool2Val);
+    bool3Val = Shader.Intrinsics.Select(bool3Val, bool3Val, bool3Val);
+    bool4Val = Shader.Intrinsics.Select(bool4Val, bool4Val, bool4Val);
+    intVal = Shader.Intrinsics.Select(boolVal, intVal, intVal);
+    integer2Val = Shader.Intrinsics.Select(bool2Val, integer2Val, integer2Val);
+    integer3Val = Shader.Intrinsics.Select(bool3Val, integer3Val, integer3Val);
+    integer4Val = Shader.Intrinsics.Select(bool4Val, integer4Val, integer4Val);
+    floatVal = Shader.Intrinsics.Select(boolVal, floatVal, floatVal);
+    vector2Val = Shader.Intrinsics.Select(bool2Val, vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.Select(bool3Val, vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.Select(bool4Val, vector4Val, vector4Val);
+  }
+}

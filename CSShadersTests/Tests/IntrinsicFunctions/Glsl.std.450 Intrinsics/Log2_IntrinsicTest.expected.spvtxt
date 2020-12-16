@@ -1,0 +1,114 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 86
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %Log2Test_Main_EntryPoint "Log2Test_Main_EntryPoint"
+               OpExecutionMode %Log2Test_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Log2Test "Log2Test"
+               OpName %Vector2 "Vector2"
+               OpName %Vector3 "Vector3"
+               OpName %Vector4 "Vector4"
+               OpName %Log2Test_PreConstructor "Log2Test_PreConstructor"
+               OpName %self "self"
+               OpName %Log2Test_DefaultConstructor "Log2Test_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %floatVal "floatVal"
+               OpName %vector2Val "vector2Val"
+               OpName %vector3Val "vector3Val"
+               OpName %vector4Val "vector4Val"
+               OpName %Log2Test_InitGlobals "Log2Test_InitGlobals"
+               OpName %Log2Test_CopyInputs "Log2Test_CopyInputs"
+               OpName %self_2 "self"
+               OpName %Log2Test_CopyOutputs "Log2Test_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %Log2Test_Main_EntryPoint "Log2Test_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %Log2Test_Main_EntryPoint "Log2Test_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+   %Log2Test = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_Log2Test = OpTypePointer Function %Log2Test
+         %10 = OpTypeFunction %void %_ptr_Function_Log2Test
+%_ptr_Function_float = OpTypePointer Function %float
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+        %int = OpTypeInt 32 1
+         %20 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%Log2Test_PreConstructor = OpFunction %void None %10
+       %self = OpFunctionParameter %_ptr_Function_Log2Test
+         %26 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Log2Test_DefaultConstructor = OpFunction %void None %10
+     %self_0 = OpFunctionParameter %_ptr_Function_Log2Test
+         %31 = OpLabel
+         %32 = OpFunctionCall %void %Log2Test_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %10
+     %self_1 = OpFunctionParameter %_ptr_Function_Log2Test
+         %37 = OpLabel
+   %floatVal = OpVariable %_ptr_Function_float Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+               OpStore %floatVal %float_0
+         %43 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %43
+         %45 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %45
+         %47 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %47
+         %49 = OpLoad %float %floatVal
+         %50 = OpExtInst %float %1 Log2 %49
+               OpStore %floatVal %50
+         %52 = OpLoad %Vector2 %vector2Val
+         %53 = OpExtInst %Vector2 %1 Log2 %52
+               OpStore %vector2Val %53
+         %55 = OpLoad %Vector3 %vector3Val
+         %56 = OpExtInst %Vector3 %1 Log2 %55
+               OpStore %vector3Val %56
+         %58 = OpLoad %Vector4 %vector4Val
+         %59 = OpExtInst %Vector4 %1 Log2 %58
+               OpStore %vector4Val %59
+               OpReturn
+               OpFunctionEnd
+%Log2Test_InitGlobals = OpFunction %void None %20
+         %64 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Log2Test_CopyInputs = OpFunction %void None %10
+     %self_2 = OpFunctionParameter %_ptr_Function_Log2Test
+         %69 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Log2Test_CopyOutputs = OpFunction %void None %10
+     %self_3 = OpFunctionParameter %_ptr_Function_Log2Test
+         %74 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Log2Test_Main_EntryPoint = OpFunction %void None %20
+         %78 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_Log2Test Function
+         %80 = OpFunctionCall %void %Log2Test_InitGlobals
+         %81 = OpFunctionCall %void %Log2Test_DefaultConstructor %self_4
+         %82 = OpFunctionCall %void %Log2Test_CopyInputs %self_4
+         %83 = OpFunctionCall %void %Main %self_4
+         %84 = OpFunctionCall %void %Log2Test_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpISubTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var intVal = 0;
+    var integer2Val = new Math.Integer2();
+    var integer3Val = new Math.Integer3();
+    var integer4Val = new Math.Integer4();
+    intVal = Shader.Intrinsics.Subtract(intVal, intVal);
+    integer2Val = Shader.Intrinsics.Subtract(integer2Val, integer2Val);
+    integer3Val = Shader.Intrinsics.Subtract(integer3Val, integer3Val);
+    integer4Val = Shader.Intrinsics.Subtract(integer4Val, integer4Val);
+  }
+}

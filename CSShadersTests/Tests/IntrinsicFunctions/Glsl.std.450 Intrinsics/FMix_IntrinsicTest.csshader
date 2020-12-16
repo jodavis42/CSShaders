@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct FMixTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Lerp(floatVal, floatVal, floatVal);
+    vector2Val = Shader.Intrinsics.Lerp(vector2Val, vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.Lerp(vector3Val, vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.Lerp(vector4Val, vector4Val, vector4Val);
+  }
+}

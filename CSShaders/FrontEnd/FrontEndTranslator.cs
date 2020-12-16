@@ -216,6 +216,27 @@ namespace CSShaders
       return shaderField;
     }
 
+    public ShaderConstantLiteral CreateConstantLiteralZero(ShaderType constantType)
+    {
+      switch (constantType.mBaseType)
+      {
+        case OpType.Bool:
+            return CreateConstantLiteral(false);
+        case OpType.Int:
+          {
+            if (ShaderType.IsSignedInt(constantType))
+              return CreateConstantLiteral(0);
+            else
+              return CreateConstantLiteral(0u);
+          }
+
+        case OpType.Float:
+          return CreateConstantLiteral(0.0f);
+        default:
+          throw new Exception();
+      }
+    }
+
     public ShaderConstantLiteral CreateConstantLiteral(ShaderType constantType, string value)
     {
       var constantOp = new ShaderConstantLiteral();
@@ -241,25 +262,16 @@ namespace CSShaders
             constantOp.mValue = float.Parse(value);
             break;
           }
-
       }
 
       mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
       return constantOp;
     }
 
-    public ShaderConstantLiteral CreateConstantLiteral(uint value)
+    public ShaderConstantLiteral CreateConstantLiteral<T>(T value)
     {
       var constantOp = new ShaderConstantLiteral();
-      constantOp.mType = mCurrentLibrary.FindType(new TypeKey(typeof(uint)));
-      constantOp.mValue = value;
-      constantOp = mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
-      return constantOp;
-    }
-    public ShaderConstantLiteral CreateConstantLiteral(int value)
-    {
-      var constantOp = new ShaderConstantLiteral();
-      constantOp.mType = mCurrentLibrary.FindType(new TypeKey(typeof(int)));
+      constantOp.mType = mCurrentLibrary.FindType(new TypeKey(typeof(T)));
       constantOp.mValue = value;
       constantOp = mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
       return constantOp;

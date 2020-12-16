@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpFDivTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Divide(floatVal, floatVal);
+    vector2Val = Shader.Intrinsics.Divide(vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.Divide(vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.Divide(vector4Val, vector4Val);
+  }
+}

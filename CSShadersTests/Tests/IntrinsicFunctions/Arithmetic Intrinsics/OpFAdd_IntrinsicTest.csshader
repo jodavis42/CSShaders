@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpFAddTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Add(floatVal, floatVal);
+    vector2Val = Shader.Intrinsics.Add(vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.Add(vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.Add(vector4Val, vector4Val);
+  }
+}

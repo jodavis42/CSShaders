@@ -1,0 +1,15 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpDotTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Dot(vector2Val, vector2Val);
+    floatVal = Shader.Intrinsics.Dot(vector3Val, vector3Val);
+    floatVal = Shader.Intrinsics.Dot(vector4Val, vector4Val);
+  }
+}

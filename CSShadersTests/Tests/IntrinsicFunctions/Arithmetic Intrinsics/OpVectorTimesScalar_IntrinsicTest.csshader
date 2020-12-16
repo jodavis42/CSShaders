@@ -1,0 +1,15 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpVectorTimesScalarTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector2Val = new Math.Vector2();
+    var floatVal = 0.0f;
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    vector2Val = Shader.Intrinsics.Multiply(vector2Val, floatVal);
+    vector3Val = Shader.Intrinsics.Multiply(vector3Val, floatVal);
+    vector4Val = Shader.Intrinsics.Multiply(vector4Val, floatVal);
+  }
+}

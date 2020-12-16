@@ -1,0 +1,10 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpMatrixTimesMatrixTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var float2x2Val = new Math.Float2x2();
+    float2x2Val = Shader.Intrinsics.Multiply(float2x2Val, float2x2Val);
+  }
+}

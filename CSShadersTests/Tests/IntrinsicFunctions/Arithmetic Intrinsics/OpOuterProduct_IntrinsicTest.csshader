@@ -1,0 +1,11 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpOuterProductTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var float2x2Val = new Math.Float2x2();
+    var vector2Val = new Math.Vector2();
+    float2x2Val = Shader.Intrinsics.OuterProduct(vector2Val, vector2Val);
+  }
+}

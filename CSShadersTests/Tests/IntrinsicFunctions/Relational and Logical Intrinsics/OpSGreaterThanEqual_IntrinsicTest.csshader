@@ -1,0 +1,20 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpSGreaterThanEqualTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var boolVal = false;
+    var intVal = 0;
+    var bool2Val = new Math.Bool2();
+    var integer2Val = new Math.Integer2();
+    var bool3Val = new Math.Bool3();
+    var integer3Val = new Math.Integer3();
+    var bool4Val = new Math.Bool4();
+    var integer4Val = new Math.Integer4();
+    boolVal = Shader.Intrinsics.GreaterThanEqual(intVal, intVal);
+    bool2Val = Shader.Intrinsics.GreaterThanEqual(integer2Val, integer2Val);
+    bool3Val = Shader.Intrinsics.GreaterThanEqual(integer3Val, integer3Val);
+    bool4Val = Shader.Intrinsics.GreaterThanEqual(integer4Val, integer4Val);
+  }
+}

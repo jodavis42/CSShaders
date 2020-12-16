@@ -1,0 +1,20 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpBitcastTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var intVal = 0;
+    var vector2Val = new Math.Vector2();
+    var integer2Val = new Math.Integer2();
+    var vector3Val = new Math.Vector3();
+    var integer3Val = new Math.Integer3();
+    var vector4Val = new Math.Vector4();
+    var integer4Val = new Math.Integer4();
+    floatVal = Shader.Intrinsics.BitcastAsFloat(intVal);
+    vector2Val = Shader.Intrinsics.BitcastAsFloat(integer2Val);
+    vector3Val = Shader.Intrinsics.BitcastAsFloat(integer3Val);
+    vector4Val = Shader.Intrinsics.BitcastAsFloat(integer4Val);
+  }
+}

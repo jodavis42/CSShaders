@@ -1,0 +1,105 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 77
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpImageSampleExplicitLodTest_Main_EntryPoint "OpImageSampleExplicitLodTest_Main_EntryPoint" %FloatSampledImage2dVal
+               OpExecutionMode %OpImageSampleExplicitLodTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FloatImage2d "FloatImage2d"
+               OpName %FloatSampledImage2d "FloatSampledImage2d"
+               OpName %OpImageSampleExplicitLodTest "OpImageSampleExplicitLodTest"
+               OpName %Vector4 "Vector4"
+               OpName %Vector2 "Vector2"
+               OpName %OpImageSampleExplicitLodTest_PreConstructor "OpImageSampleExplicitLodTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpImageSampleExplicitLodTest_DefaultConstructor "OpImageSampleExplicitLodTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %vector4Val "vector4Val"
+               OpName %vector2Val "vector2Val"
+               OpName %floatVal "floatVal"
+               OpName %OpImageSampleExplicitLodTest_InitGlobals "OpImageSampleExplicitLodTest_InitGlobals"
+               OpName %OpImageSampleExplicitLodTest_CopyInputs "OpImageSampleExplicitLodTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpImageSampleExplicitLodTest_CopyOutputs "OpImageSampleExplicitLodTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpImageSampleExplicitLodTest_Main_EntryPoint "OpImageSampleExplicitLodTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
+               OpName %OpImageSampleExplicitLodTest_Main_EntryPoint "OpImageSampleExplicitLodTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%FloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
+%FloatSampledImage2d = OpTypeSampledImage %FloatImage2d
+%_ptr_UniformConstant_FloatSampledImage2d = OpTypePointer UniformConstant %FloatSampledImage2d
+%OpImageSampleExplicitLodTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpImageSampleExplicitLodTest = OpTypePointer Function %OpImageSampleExplicitLodTest
+         %14 = OpTypeFunction %void %_ptr_Function_OpImageSampleExplicitLodTest
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+%_ptr_Function_float = OpTypePointer Function %float
+         %20 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%FloatSampledImage2dVal = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
+%OpImageSampleExplicitLodTest_PreConstructor = OpFunction %void None %14
+       %self = OpFunctionParameter %_ptr_Function_OpImageSampleExplicitLodTest
+         %27 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpImageSampleExplicitLodTest_DefaultConstructor = OpFunction %void None %14
+     %self_0 = OpFunctionParameter %_ptr_Function_OpImageSampleExplicitLodTest
+         %32 = OpLabel
+         %33 = OpFunctionCall %void %OpImageSampleExplicitLodTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %14
+     %self_1 = OpFunctionParameter %_ptr_Function_OpImageSampleExplicitLodTest
+         %38 = OpLabel
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+   %floatVal = OpVariable %_ptr_Function_float Function
+         %42 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %42
+         %44 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %44
+               OpStore %floatVal %float_0
+         %47 = OpLoad %FloatSampledImage2d %FloatSampledImage2dVal
+         %48 = OpLoad %Vector2 %vector2Val
+         %49 = OpLoad %float %floatVal
+         %50 = OpImageSampleExplicitLod %Vector4 %47 %48 Lod %49
+               OpStore %vector4Val %50
+               OpReturn
+               OpFunctionEnd
+%OpImageSampleExplicitLodTest_InitGlobals = OpFunction %void None %20
+         %55 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpImageSampleExplicitLodTest_CopyInputs = OpFunction %void None %14
+     %self_2 = OpFunctionParameter %_ptr_Function_OpImageSampleExplicitLodTest
+         %60 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpImageSampleExplicitLodTest_CopyOutputs = OpFunction %void None %14
+     %self_3 = OpFunctionParameter %_ptr_Function_OpImageSampleExplicitLodTest
+         %65 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpImageSampleExplicitLodTest_Main_EntryPoint = OpFunction %void None %20
+         %69 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpImageSampleExplicitLodTest Function
+         %71 = OpFunctionCall %void %OpImageSampleExplicitLodTest_InitGlobals
+         %72 = OpFunctionCall %void %OpImageSampleExplicitLodTest_DefaultConstructor %self_4
+         %73 = OpFunctionCall %void %OpImageSampleExplicitLodTest_CopyInputs %self_4
+         %74 = OpFunctionCall %void %Main %self_4
+         %75 = OpFunctionCall %void %OpImageSampleExplicitLodTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

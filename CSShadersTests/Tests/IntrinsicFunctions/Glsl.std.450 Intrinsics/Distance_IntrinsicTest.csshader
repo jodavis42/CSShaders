@@ -1,0 +1,15 @@
+[Shader.UnitTest][Shader.Pixel]
+struct DistanceTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Distance(vector2Val, vector2Val);
+    floatVal = Shader.Intrinsics.Distance(vector3Val, vector3Val);
+    floatVal = Shader.Intrinsics.Distance(vector4Val, vector4Val);
+  }
+}

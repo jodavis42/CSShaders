@@ -1,0 +1,113 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 87
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %FaceForwardTest_Main_EntryPoint "FaceForwardTest_Main_EntryPoint"
+               OpExecutionMode %FaceForwardTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FaceForwardTest "FaceForwardTest"
+               OpName %Vector2 "Vector2"
+               OpName %Vector3 "Vector3"
+               OpName %Vector4 "Vector4"
+               OpName %FaceForwardTest_PreConstructor "FaceForwardTest_PreConstructor"
+               OpName %self "self"
+               OpName %FaceForwardTest_DefaultConstructor "FaceForwardTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %vector2Val "vector2Val"
+               OpName %vector3Val "vector3Val"
+               OpName %vector4Val "vector4Val"
+               OpName %FaceForwardTest_InitGlobals "FaceForwardTest_InitGlobals"
+               OpName %FaceForwardTest_CopyInputs "FaceForwardTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %FaceForwardTest_CopyOutputs "FaceForwardTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %FaceForwardTest_Main_EntryPoint "FaceForwardTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %FaceForwardTest_Main_EntryPoint "FaceForwardTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%FaceForwardTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_FaceForwardTest = OpTypePointer Function %FaceForwardTest
+         %10 = OpTypeFunction %void %_ptr_Function_FaceForwardTest
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+        %int = OpTypeInt 32 1
+         %20 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%FaceForwardTest_PreConstructor = OpFunction %void None %10
+       %self = OpFunctionParameter %_ptr_Function_FaceForwardTest
+         %26 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FaceForwardTest_DefaultConstructor = OpFunction %void None %10
+     %self_0 = OpFunctionParameter %_ptr_Function_FaceForwardTest
+         %31 = OpLabel
+         %32 = OpFunctionCall %void %FaceForwardTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %10
+     %self_1 = OpFunctionParameter %_ptr_Function_FaceForwardTest
+         %37 = OpLabel
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+         %41 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %41
+         %43 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %43
+         %45 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %45
+         %47 = OpLoad %Vector2 %vector2Val
+         %48 = OpLoad %Vector2 %vector2Val
+         %49 = OpLoad %Vector2 %vector2Val
+         %50 = OpExtInst %Vector2 %1 FaceForward %47 %48 %49
+               OpStore %vector2Val %50
+         %52 = OpLoad %Vector3 %vector3Val
+         %53 = OpLoad %Vector3 %vector3Val
+         %54 = OpLoad %Vector3 %vector3Val
+         %55 = OpExtInst %Vector3 %1 FaceForward %52 %53 %54
+               OpStore %vector3Val %55
+         %57 = OpLoad %Vector4 %vector4Val
+         %58 = OpLoad %Vector4 %vector4Val
+         %59 = OpLoad %Vector4 %vector4Val
+         %60 = OpExtInst %Vector4 %1 FaceForward %57 %58 %59
+               OpStore %vector4Val %60
+               OpReturn
+               OpFunctionEnd
+%FaceForwardTest_InitGlobals = OpFunction %void None %20
+         %65 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FaceForwardTest_CopyInputs = OpFunction %void None %10
+     %self_2 = OpFunctionParameter %_ptr_Function_FaceForwardTest
+         %70 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FaceForwardTest_CopyOutputs = OpFunction %void None %10
+     %self_3 = OpFunctionParameter %_ptr_Function_FaceForwardTest
+         %75 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FaceForwardTest_Main_EntryPoint = OpFunction %void None %20
+         %79 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_FaceForwardTest Function
+         %81 = OpFunctionCall %void %FaceForwardTest_InitGlobals
+         %82 = OpFunctionCall %void %FaceForwardTest_DefaultConstructor %self_4
+         %83 = OpFunctionCall %void %FaceForwardTest_CopyInputs %self_4
+         %84 = OpFunctionCall %void %Main %self_4
+         %85 = OpFunctionCall %void %FaceForwardTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

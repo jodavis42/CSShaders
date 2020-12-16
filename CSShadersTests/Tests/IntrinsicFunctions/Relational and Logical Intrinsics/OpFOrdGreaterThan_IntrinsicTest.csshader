@@ -1,0 +1,20 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpFOrdGreaterThanTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var boolVal = false;
+    var floatVal = 0.0f;
+    var bool2Val = new Math.Bool2();
+    var vector2Val = new Math.Vector2();
+    var bool3Val = new Math.Bool3();
+    var vector3Val = new Math.Vector3();
+    var bool4Val = new Math.Bool4();
+    var vector4Val = new Math.Vector4();
+    boolVal = Shader.Intrinsics.GreaterThan(floatVal, floatVal);
+    bool2Val = Shader.Intrinsics.GreaterThan(vector2Val, vector2Val);
+    bool3Val = Shader.Intrinsics.GreaterThan(vector3Val, vector3Val);
+    bool4Val = Shader.Intrinsics.GreaterThan(vector4Val, vector4Val);
+  }
+}

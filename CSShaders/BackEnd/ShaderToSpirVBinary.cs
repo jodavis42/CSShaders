@@ -17,38 +17,51 @@ namespace CSShaders
     public ShaderToSpirVBinary()
     {
       SimpleInstructions.Add(OpInstructionType.OpExtInst, Spv.Op.OpExtInst);
+
+      SimpleInstructions.Add(OpInstructionType.OpConvertFToS, Spv.Op.OpConvertFToS);
+      SimpleInstructions.Add(OpInstructionType.OpConvertSToF, Spv.Op.OpConvertSToF);
+      SimpleInstructions.Add(OpInstructionType.OpBitcast, Spv.Op.OpBitcast);
+      SimpleInstructions.Add(OpInstructionType.OpTranspose, Spv.Op.OpTranspose);
       SimpleInstructions.Add(OpInstructionType.OpSNegate, Spv.Op.OpSNegate);
       SimpleInstructions.Add(OpInstructionType.OpFNegate, Spv.Op.OpFNegate);
       SimpleInstructions.Add(OpInstructionType.OpIAdd, Spv.Op.OpIAdd);
-      SimpleInstructions.Add(OpInstructionType.OpISub, Spv.Op.OpISub);
-      SimpleInstructions.Add(OpInstructionType.OpIMul, Spv.Op.OpIMul);
-      SimpleInstructions.Add(OpInstructionType.OpUDiv, Spv.Op.OpUDiv);
-      SimpleInstructions.Add(OpInstructionType.OpSDiv, Spv.Op.OpSDiv);
-      SimpleInstructions.Add(OpInstructionType.OpUMod, Spv.Op.OpUMod);
-      SimpleInstructions.Add(OpInstructionType.OpSMod, Spv.Op.OpSMod);
-      SimpleInstructions.Add(OpInstructionType.OpSRem, Spv.Op.OpSRem);
       SimpleInstructions.Add(OpInstructionType.OpFAdd, Spv.Op.OpFAdd);
+      SimpleInstructions.Add(OpInstructionType.OpISub, Spv.Op.OpISub);
       SimpleInstructions.Add(OpInstructionType.OpFSub, Spv.Op.OpFSub);
+      SimpleInstructions.Add(OpInstructionType.OpIMul, Spv.Op.OpIMul);
       SimpleInstructions.Add(OpInstructionType.OpFMul, Spv.Op.OpFMul);
+      SimpleInstructions.Add(OpInstructionType.OpSDiv, Spv.Op.OpSDiv);
       SimpleInstructions.Add(OpInstructionType.OpFDiv, Spv.Op.OpFDiv);
+      SimpleInstructions.Add(OpInstructionType.OpSRem, Spv.Op.OpSRem);
+      SimpleInstructions.Add(OpInstructionType.OpSMod, Spv.Op.OpSMod);
+      SimpleInstructions.Add(OpInstructionType.OpFRem, Spv.Op.OpFRem);
       SimpleInstructions.Add(OpInstructionType.OpFMod, Spv.Op.OpFMod);
-
       SimpleInstructions.Add(OpInstructionType.OpVectorTimesScalar, Spv.Op.OpVectorTimesScalar);
       SimpleInstructions.Add(OpInstructionType.OpMatrixTimesScalar, Spv.Op.OpMatrixTimesScalar);
       SimpleInstructions.Add(OpInstructionType.OpVectorTimesMatrix, Spv.Op.OpVectorTimesMatrix);
       SimpleInstructions.Add(OpInstructionType.OpMatrixTimesVector, Spv.Op.OpMatrixTimesVector);
       SimpleInstructions.Add(OpInstructionType.OpMatrixTimesMatrix, Spv.Op.OpMatrixTimesMatrix);
       SimpleInstructions.Add(OpInstructionType.OpOuterProduct, Spv.Op.OpOuterProduct);
-
       SimpleInstructions.Add(OpInstructionType.OpDot, Spv.Op.OpDot);
+      SimpleInstructions.Add(OpInstructionType.OpShiftRightLogical, Spv.Op.OpShiftRightLogical);
+      SimpleInstructions.Add(OpInstructionType.OpShiftRightArithmetic, Spv.Op.OpShiftRightArithmetic);
+      SimpleInstructions.Add(OpInstructionType.OpShiftLeftLogical, Spv.Op.OpShiftLeftLogical);
+      SimpleInstructions.Add(OpInstructionType.OpBitwiseOr, Spv.Op.OpBitwiseOr);
+      SimpleInstructions.Add(OpInstructionType.OpBitwiseXor, Spv.Op.OpBitwiseXor);
+      SimpleInstructions.Add(OpInstructionType.OpBitwiseAnd, Spv.Op.OpBitwiseAnd);
+      SimpleInstructions.Add(OpInstructionType.OpNot, Spv.Op.OpNot);
+      SimpleInstructions.Add(OpInstructionType.OpBitReverse, Spv.Op.OpBitReverse);
+      SimpleInstructions.Add(OpInstructionType.OpBitCount, Spv.Op.OpBitCount);
+      SimpleInstructions.Add(OpInstructionType.OpSignBitSet, Spv.Op.OpSignBitSet);
+      SimpleInstructions.Add(OpInstructionType.OpSelect, Spv.Op.OpSelect);
+      SimpleInstructions.Add(OpInstructionType.OpDPdx, Spv.Op.OpDPdx);
+      SimpleInstructions.Add(OpInstructionType.OpDPdy, Spv.Op.OpDPdy);
+      SimpleInstructions.Add(OpInstructionType.OpFwidth, Spv.Op.OpFwidth);
+
       SimpleInstructions.Add(OpInstructionType.OpVectorShuffle, Spv.Op.OpVectorShuffle);
       SimpleInstructions.Add(OpInstructionType.OpCompositeConstruct, Spv.Op.OpCompositeConstruct);
       SimpleInstructions.Add(OpInstructionType.OpCompositeExtract, Spv.Op.OpCompositeExtract);
       SimpleInstructions.Add(OpInstructionType.OpCompositeInsert, Spv.Op.OpCompositeInsert);
-      SimpleInstructions.Add(OpInstructionType.OpTranspose, Spv.Op.OpTranspose);
-
-      SimpleInstructions.Add(OpInstructionType.OpDPdx, Spv.Op.OpDPdx);
-      SimpleInstructions.Add(OpInstructionType.OpDPdy, Spv.Op.OpDPdy);
 
       SimpleInstructions.Add(OpInstructionType.OpAny, Spv.Op.OpAny);
       SimpleInstructions.Add(OpInstructionType.OpAll, Spv.Op.OpAll);
@@ -69,9 +82,12 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpSLessThan, Spv.Op.OpSLessThan);
       SimpleInstructions.Add(OpInstructionType.OpULessThanEqual, Spv.Op.OpULessThanEqual);
       SimpleInstructions.Add(OpInstructionType.OpSLessThanEqual, Spv.Op.OpSLessThanEqual);
-      SimpleInstructions.Add(OpInstructionType.OpFUnordLessThanEqual, Spv.Op.OpFUnordLessThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFOrdEqual, Spv.Op.OpFOrdEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFOrdNotEqual, Spv.Op.OpFOrdNotEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFOrdLessThan, Spv.Op.OpFOrdLessThan);
+      SimpleInstructions.Add(OpInstructionType.OpFOrdLessThanEqual, Spv.Op.OpFOrdLessThanEqual);
+      SimpleInstructions.Add(OpInstructionType.OpFOrdGreaterThan, Spv.Op.OpFOrdGreaterThan);
       SimpleInstructions.Add(OpInstructionType.OpFOrdGreaterThanEqual, Spv.Op.OpFOrdGreaterThanEqual);
-      SimpleInstructions.Add(OpInstructionType.OpFUnordGreaterThanEqual, Spv.Op.OpFUnordGreaterThanEqual);
 
       SimpleInstructions.Add(OpInstructionType.OpAccessChain, Spv.Op.OpAccessChain);
       SimpleInstructions.Add(OpInstructionType.OpLoad, Spv.Op.OpLoad);

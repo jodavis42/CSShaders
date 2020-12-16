@@ -1,0 +1,112 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 83
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
+               OpExecutionMode %OpLogicalNotTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpLogicalNotTest "OpLogicalNotTest"
+               OpName %Bool2 "Bool2"
+               OpName %Bool3 "Bool3"
+               OpName %Bool4 "Bool4"
+               OpName %OpLogicalNotTest_PreConstructor "OpLogicalNotTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpLogicalNotTest_DefaultConstructor "OpLogicalNotTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %boolVal "boolVal"
+               OpName %bool2Val "bool2Val"
+               OpName %bool3Val "bool3Val"
+               OpName %bool4Val "bool4Val"
+               OpName %OpLogicalNotTest_InitGlobals "OpLogicalNotTest_InitGlobals"
+               OpName %OpLogicalNotTest_CopyInputs "OpLogicalNotTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpLogicalNotTest_CopyOutputs "OpLogicalNotTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %bool = OpTypeBool
+%OpLogicalNotTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpLogicalNotTest = OpTypePointer Function %OpLogicalNotTest
+          %7 = OpTypeFunction %void %_ptr_Function_OpLogicalNotTest
+%_ptr_Function_bool = OpTypePointer Function %bool
+       %uint = OpTypeInt 32 0
+      %Bool2 = OpTypeVector %bool 2
+%_ptr_Function_Bool2 = OpTypePointer Function %Bool2
+      %Bool3 = OpTypeVector %bool 3
+%_ptr_Function_Bool3 = OpTypePointer Function %Bool3
+      %Bool4 = OpTypeVector %bool 4
+%_ptr_Function_Bool4 = OpTypePointer Function %Bool4
+         %17 = OpTypeFunction %void
+      %false = OpConstantFalse %bool
+%OpLogicalNotTest_PreConstructor = OpFunction %void None %7
+       %self = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpLogicalNotTest_DefaultConstructor = OpFunction %void None %7
+     %self_0 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
+         %28 = OpLabel
+         %29 = OpFunctionCall %void %OpLogicalNotTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %7
+     %self_1 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
+         %34 = OpLabel
+    %boolVal = OpVariable %_ptr_Function_bool Function
+   %bool2Val = OpVariable %_ptr_Function_Bool2 Function
+   %bool3Val = OpVariable %_ptr_Function_Bool3 Function
+   %bool4Val = OpVariable %_ptr_Function_Bool4 Function
+               OpStore %boolVal %false
+         %40 = OpCompositeConstruct %Bool2 %false %false
+               OpStore %bool2Val %40
+         %42 = OpCompositeConstruct %Bool3 %false %false %false
+               OpStore %bool3Val %42
+         %44 = OpCompositeConstruct %Bool4 %false %false %false %false
+               OpStore %bool4Val %44
+         %46 = OpLoad %bool %boolVal
+         %47 = OpLogicalNot %bool %46
+               OpStore %boolVal %47
+         %49 = OpLoad %Bool2 %bool2Val
+         %50 = OpLogicalNot %Bool2 %49
+               OpStore %bool2Val %50
+         %52 = OpLoad %Bool3 %bool3Val
+         %53 = OpLogicalNot %Bool3 %52
+               OpStore %bool3Val %53
+         %55 = OpLoad %Bool4 %bool4Val
+         %56 = OpLogicalNot %Bool4 %55
+               OpStore %bool4Val %56
+               OpReturn
+               OpFunctionEnd
+%OpLogicalNotTest_InitGlobals = OpFunction %void None %17
+         %61 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpLogicalNotTest_CopyInputs = OpFunction %void None %7
+     %self_2 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
+         %66 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpLogicalNotTest_CopyOutputs = OpFunction %void None %7
+     %self_3 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
+         %71 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpLogicalNotTest_Main_EntryPoint = OpFunction %void None %17
+         %75 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpLogicalNotTest Function
+         %77 = OpFunctionCall %void %OpLogicalNotTest_InitGlobals
+         %78 = OpFunctionCall %void %OpLogicalNotTest_DefaultConstructor %self_4
+         %79 = OpFunctionCall %void %OpLogicalNotTest_CopyInputs %self_4
+         %80 = OpFunctionCall %void %Main %self_4
+         %81 = OpFunctionCall %void %OpLogicalNotTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

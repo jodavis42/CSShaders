@@ -1,0 +1,14 @@
+[Shader.UnitTest][Shader.Pixel]
+struct NormalizeTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    vector2Val = Shader.Intrinsics.Normalize(vector2Val);
+    vector3Val = Shader.Intrinsics.Normalize(vector3Val);
+    vector4Val = Shader.Intrinsics.Normalize(vector4Val);
+  }
+}

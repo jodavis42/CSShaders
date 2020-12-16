@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpShiftRightLogicalTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var intVal = 0;
+    var integer2Val = new Math.Integer2();
+    var integer3Val = new Math.Integer3();
+    var integer4Val = new Math.Integer4();
+    intVal = Shader.Intrinsics.ShiftRightLogical(intVal, intVal);
+    integer2Val = Shader.Intrinsics.ShiftRightLogical(integer2Val, integer2Val);
+    integer3Val = Shader.Intrinsics.ShiftRightLogical(integer3Val, integer3Val);
+    integer4Val = Shader.Intrinsics.ShiftRightLogical(integer4Val, integer4Val);
+  }
+}

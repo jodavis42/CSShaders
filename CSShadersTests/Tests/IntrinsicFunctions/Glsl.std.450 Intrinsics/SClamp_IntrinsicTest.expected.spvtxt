@@ -1,0 +1,121 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 92
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %SClampTest_Main_EntryPoint "SClampTest_Main_EntryPoint"
+               OpExecutionMode %SClampTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %SClampTest "SClampTest"
+               OpName %Integer2 "Integer2"
+               OpName %Integer3 "Integer3"
+               OpName %Integer4 "Integer4"
+               OpName %SClampTest_PreConstructor "SClampTest_PreConstructor"
+               OpName %self "self"
+               OpName %SClampTest_DefaultConstructor "SClampTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %intVal "intVal"
+               OpName %integer2Val "integer2Val"
+               OpName %integer3Val "integer3Val"
+               OpName %integer4Val "integer4Val"
+               OpName %SClampTest_InitGlobals "SClampTest_InitGlobals"
+               OpName %SClampTest_CopyInputs "SClampTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %SClampTest_CopyOutputs "SClampTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %SClampTest_Main_EntryPoint "SClampTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %SClampTest_Main_EntryPoint "SClampTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+ %SClampTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_SClampTest = OpTypePointer Function %SClampTest
+         %10 = OpTypeFunction %void %_ptr_Function_SClampTest
+%_ptr_Function_int = OpTypePointer Function %int
+   %Integer2 = OpTypeVector %int 2
+%_ptr_Function_Integer2 = OpTypePointer Function %Integer2
+   %Integer3 = OpTypeVector %int 3
+%_ptr_Function_Integer3 = OpTypePointer Function %Integer3
+   %Integer4 = OpTypeVector %int 4
+%_ptr_Function_Integer4 = OpTypePointer Function %Integer4
+         %18 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+%SClampTest_PreConstructor = OpFunction %void None %10
+       %self = OpFunctionParameter %_ptr_Function_SClampTest
+         %24 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SClampTest_DefaultConstructor = OpFunction %void None %10
+     %self_0 = OpFunctionParameter %_ptr_Function_SClampTest
+         %29 = OpLabel
+         %30 = OpFunctionCall %void %SClampTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %10
+     %self_1 = OpFunctionParameter %_ptr_Function_SClampTest
+         %35 = OpLabel
+     %intVal = OpVariable %_ptr_Function_int Function
+%integer2Val = OpVariable %_ptr_Function_Integer2 Function
+%integer3Val = OpVariable %_ptr_Function_Integer3 Function
+%integer4Val = OpVariable %_ptr_Function_Integer4 Function
+               OpStore %intVal %int_0
+         %41 = OpCompositeConstruct %Integer2 %int_0 %int_0
+               OpStore %integer2Val %41
+         %43 = OpCompositeConstruct %Integer3 %int_0 %int_0 %int_0
+               OpStore %integer3Val %43
+         %45 = OpCompositeConstruct %Integer4 %int_0 %int_0 %int_0 %int_0
+               OpStore %integer4Val %45
+         %47 = OpLoad %int %intVal
+         %48 = OpLoad %int %intVal
+         %49 = OpLoad %int %intVal
+         %50 = OpExtInst %int %1 SClamp %47 %48 %49
+               OpStore %intVal %50
+         %52 = OpLoad %Integer2 %integer2Val
+         %53 = OpLoad %Integer2 %integer2Val
+         %54 = OpLoad %Integer2 %integer2Val
+         %55 = OpExtInst %Integer2 %1 SClamp %52 %53 %54
+               OpStore %integer2Val %55
+         %57 = OpLoad %Integer3 %integer3Val
+         %58 = OpLoad %Integer3 %integer3Val
+         %59 = OpLoad %Integer3 %integer3Val
+         %60 = OpExtInst %Integer3 %1 SClamp %57 %58 %59
+               OpStore %integer3Val %60
+         %62 = OpLoad %Integer4 %integer4Val
+         %63 = OpLoad %Integer4 %integer4Val
+         %64 = OpLoad %Integer4 %integer4Val
+         %65 = OpExtInst %Integer4 %1 SClamp %62 %63 %64
+               OpStore %integer4Val %65
+               OpReturn
+               OpFunctionEnd
+%SClampTest_InitGlobals = OpFunction %void None %18
+         %70 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SClampTest_CopyInputs = OpFunction %void None %10
+     %self_2 = OpFunctionParameter %_ptr_Function_SClampTest
+         %75 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SClampTest_CopyOutputs = OpFunction %void None %10
+     %self_3 = OpFunctionParameter %_ptr_Function_SClampTest
+         %80 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SClampTest_Main_EntryPoint = OpFunction %void None %18
+         %84 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_SClampTest Function
+         %86 = OpFunctionCall %void %SClampTest_InitGlobals
+         %87 = OpFunctionCall %void %SClampTest_DefaultConstructor %self_4
+         %88 = OpFunctionCall %void %SClampTest_CopyInputs %self_4
+         %89 = OpFunctionCall %void %Main %self_4
+         %90 = OpFunctionCall %void %SClampTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

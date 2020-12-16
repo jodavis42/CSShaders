@@ -1,0 +1,111 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 83
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %LengthTest_Main_EntryPoint "LengthTest_Main_EntryPoint"
+               OpExecutionMode %LengthTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %LengthTest "LengthTest"
+               OpName %Vector2 "Vector2"
+               OpName %Vector3 "Vector3"
+               OpName %Vector4 "Vector4"
+               OpName %LengthTest_PreConstructor "LengthTest_PreConstructor"
+               OpName %self "self"
+               OpName %LengthTest_DefaultConstructor "LengthTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %floatVal "floatVal"
+               OpName %vector2Val "vector2Val"
+               OpName %vector3Val "vector3Val"
+               OpName %vector4Val "vector4Val"
+               OpName %LengthTest_InitGlobals "LengthTest_InitGlobals"
+               OpName %LengthTest_CopyInputs "LengthTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %LengthTest_CopyOutputs "LengthTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %LengthTest_Main_EntryPoint "LengthTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %LengthTest_Main_EntryPoint "LengthTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+ %LengthTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_LengthTest = OpTypePointer Function %LengthTest
+         %10 = OpTypeFunction %void %_ptr_Function_LengthTest
+%_ptr_Function_float = OpTypePointer Function %float
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+        %int = OpTypeInt 32 1
+         %20 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%LengthTest_PreConstructor = OpFunction %void None %10
+       %self = OpFunctionParameter %_ptr_Function_LengthTest
+         %26 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%LengthTest_DefaultConstructor = OpFunction %void None %10
+     %self_0 = OpFunctionParameter %_ptr_Function_LengthTest
+         %31 = OpLabel
+         %32 = OpFunctionCall %void %LengthTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %10
+     %self_1 = OpFunctionParameter %_ptr_Function_LengthTest
+         %37 = OpLabel
+   %floatVal = OpVariable %_ptr_Function_float Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+               OpStore %floatVal %float_0
+         %43 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %43
+         %45 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %45
+         %47 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %47
+         %49 = OpLoad %Vector2 %vector2Val
+         %50 = OpExtInst %float %1 Length %49
+               OpStore %floatVal %50
+         %52 = OpLoad %Vector3 %vector3Val
+         %53 = OpExtInst %float %1 Length %52
+               OpStore %floatVal %53
+         %55 = OpLoad %Vector4 %vector4Val
+         %56 = OpExtInst %float %1 Length %55
+               OpStore %floatVal %56
+               OpReturn
+               OpFunctionEnd
+%LengthTest_InitGlobals = OpFunction %void None %20
+         %61 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%LengthTest_CopyInputs = OpFunction %void None %10
+     %self_2 = OpFunctionParameter %_ptr_Function_LengthTest
+         %66 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%LengthTest_CopyOutputs = OpFunction %void None %10
+     %self_3 = OpFunctionParameter %_ptr_Function_LengthTest
+         %71 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%LengthTest_Main_EntryPoint = OpFunction %void None %20
+         %75 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_LengthTest Function
+         %77 = OpFunctionCall %void %LengthTest_InitGlobals
+         %78 = OpFunctionCall %void %LengthTest_DefaultConstructor %self_4
+         %79 = OpFunctionCall %void %LengthTest_CopyInputs %self_4
+         %80 = OpFunctionCall %void %Main %self_4
+         %81 = OpFunctionCall %void %LengthTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

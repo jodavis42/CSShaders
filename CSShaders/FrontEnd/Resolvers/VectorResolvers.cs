@@ -41,7 +41,7 @@ namespace CSShaders
       var componentType = vectorType.mParameters[0] as ShaderType;
       var componentCount = (UInt32)(vectorType.mParameters[1] as ShaderConstantLiteral).mValue;
 
-      var zeroConstantLiteral = translator.CreateConstantLiteral(componentType, "0");
+      var zeroConstantLiteral = translator.CreateConstantLiteralZero(componentType);
       var zeroConstant = translator.CreateConstantOp(componentType, zeroConstantLiteral);
       
       var constructorArgs = new List<IShaderIR>();

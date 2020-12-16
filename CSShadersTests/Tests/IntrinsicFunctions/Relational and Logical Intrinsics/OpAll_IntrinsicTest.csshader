@@ -1,0 +1,15 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpAllTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var boolVal = false;
+    var bool2Val = new Math.Bool2();
+    var bool3Val = new Math.Bool3();
+    var bool4Val = new Math.Bool4();
+    boolVal = Shader.Intrinsics.All(bool2Val);
+    boolVal = Shader.Intrinsics.All(bool3Val);
+    boolVal = Shader.Intrinsics.All(bool4Val);
+  }
+}

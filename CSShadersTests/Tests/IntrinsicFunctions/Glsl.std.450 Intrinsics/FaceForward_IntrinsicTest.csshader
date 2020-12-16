@@ -1,0 +1,14 @@
+[Shader.UnitTest][Shader.Pixel]
+struct FaceForwardTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    vector2Val = Shader.Intrinsics.FaceForward(vector2Val, vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.FaceForward(vector3Val, vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.FaceForward(vector4Val, vector4Val, vector4Val);
+  }
+}

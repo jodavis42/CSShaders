@@ -1,0 +1,12 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpImageSampleImplicitLodTest
+{
+  public static Shader.FloatSampledImage2d FloatSampledImage2dVal;
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector4Val = new Math.Vector4();
+    var vector2Val = new Math.Vector2();
+    vector4Val = Shader.Intrinsics.Sample(FloatSampledImage2dVal, vector2Val);
+  }
+}

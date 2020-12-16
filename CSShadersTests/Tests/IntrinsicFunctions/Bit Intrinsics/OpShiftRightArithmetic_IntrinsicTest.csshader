@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpShiftRightArithmeticTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var intVal = 0;
+    var integer2Val = new Math.Integer2();
+    var integer3Val = new Math.Integer3();
+    var integer4Val = new Math.Integer4();
+    intVal = Shader.Intrinsics.ShiftRightArithmetic(intVal, intVal);
+    integer2Val = Shader.Intrinsics.ShiftRightArithmetic(integer2Val, integer2Val);
+    integer3Val = Shader.Intrinsics.ShiftRightArithmetic(integer3Val, integer3Val);
+    integer4Val = Shader.Intrinsics.ShiftRightArithmetic(integer4Val, integer4Val);
+  }
+}

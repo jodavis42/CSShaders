@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct AcoshTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Acosh(floatVal);
+    vector2Val = Shader.Intrinsics.Acosh(vector2Val);
+    vector3Val = Shader.Intrinsics.Acosh(vector3Val);
+    vector4Val = Shader.Intrinsics.Acosh(vector4Val);
+  }
+}

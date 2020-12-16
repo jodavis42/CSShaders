@@ -1,0 +1,139 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 103
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpBitcastTest_Main_EntryPoint "OpBitcastTest_Main_EntryPoint"
+               OpExecutionMode %OpBitcastTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpBitcastTest "OpBitcastTest"
+               OpName %Vector2 "Vector2"
+               OpName %Integer2 "Integer2"
+               OpName %Vector3 "Vector3"
+               OpName %Integer3 "Integer3"
+               OpName %Vector4 "Vector4"
+               OpName %Integer4 "Integer4"
+               OpName %OpBitcastTest_PreConstructor "OpBitcastTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpBitcastTest_DefaultConstructor "OpBitcastTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %floatVal "floatVal"
+               OpName %intVal "intVal"
+               OpName %vector2Val "vector2Val"
+               OpName %integer2Val "integer2Val"
+               OpName %vector3Val "vector3Val"
+               OpName %integer3Val "integer3Val"
+               OpName %vector4Val "vector4Val"
+               OpName %integer4Val "integer4Val"
+               OpName %OpBitcastTest_InitGlobals "OpBitcastTest_InitGlobals"
+               OpName %OpBitcastTest_CopyInputs "OpBitcastTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpBitcastTest_CopyOutputs "OpBitcastTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpBitcastTest_Main_EntryPoint "OpBitcastTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %OpBitcastTest_Main_EntryPoint "OpBitcastTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+        %int = OpTypeInt 32 1
+%OpBitcastTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpBitcastTest = OpTypePointer Function %OpBitcastTest
+         %11 = OpTypeFunction %void %_ptr_Function_OpBitcastTest
+%_ptr_Function_float = OpTypePointer Function %float
+%_ptr_Function_int = OpTypePointer Function %int
+    %Vector2 = OpTypeVector %float 2
+%_ptr_Function_Vector2 = OpTypePointer Function %Vector2
+   %Integer2 = OpTypeVector %int 2
+%_ptr_Function_Integer2 = OpTypePointer Function %Integer2
+    %Vector3 = OpTypeVector %float 3
+%_ptr_Function_Vector3 = OpTypePointer Function %Vector3
+   %Integer3 = OpTypeVector %int 3
+%_ptr_Function_Integer3 = OpTypePointer Function %Integer3
+    %Vector4 = OpTypeVector %float 4
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+   %Integer4 = OpTypeVector %int 4
+%_ptr_Function_Integer4 = OpTypePointer Function %Integer4
+         %25 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+      %int_0 = OpConstant %int 0
+%OpBitcastTest_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_OpBitcastTest
+         %32 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpBitcastTest_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_OpBitcastTest
+         %37 = OpLabel
+         %38 = OpFunctionCall %void %OpBitcastTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_OpBitcastTest
+         %43 = OpLabel
+   %floatVal = OpVariable %_ptr_Function_float Function
+     %intVal = OpVariable %_ptr_Function_int Function
+ %vector2Val = OpVariable %_ptr_Function_Vector2 Function
+%integer2Val = OpVariable %_ptr_Function_Integer2 Function
+ %vector3Val = OpVariable %_ptr_Function_Vector3 Function
+%integer3Val = OpVariable %_ptr_Function_Integer3 Function
+ %vector4Val = OpVariable %_ptr_Function_Vector4 Function
+%integer4Val = OpVariable %_ptr_Function_Integer4 Function
+               OpStore %floatVal %float_0
+               OpStore %intVal %int_0
+         %54 = OpCompositeConstruct %Vector2 %float_0 %float_0
+               OpStore %vector2Val %54
+         %56 = OpCompositeConstruct %Integer2 %int_0 %int_0
+               OpStore %integer2Val %56
+         %58 = OpCompositeConstruct %Vector3 %float_0 %float_0 %float_0
+               OpStore %vector3Val %58
+         %60 = OpCompositeConstruct %Integer3 %int_0 %int_0 %int_0
+               OpStore %integer3Val %60
+         %62 = OpCompositeConstruct %Vector4 %float_0 %float_0 %float_0 %float_0
+               OpStore %vector4Val %62
+         %64 = OpCompositeConstruct %Integer4 %int_0 %int_0 %int_0 %int_0
+               OpStore %integer4Val %64
+         %66 = OpLoad %int %intVal
+         %67 = OpBitcast %float %66
+               OpStore %floatVal %67
+         %69 = OpLoad %Integer2 %integer2Val
+         %70 = OpBitcast %Vector2 %69
+               OpStore %vector2Val %70
+         %72 = OpLoad %Integer3 %integer3Val
+         %73 = OpBitcast %Vector3 %72
+               OpStore %vector3Val %73
+         %75 = OpLoad %Integer4 %integer4Val
+         %76 = OpBitcast %Vector4 %75
+               OpStore %vector4Val %76
+               OpReturn
+               OpFunctionEnd
+%OpBitcastTest_InitGlobals = OpFunction %void None %25
+         %81 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpBitcastTest_CopyInputs = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_OpBitcastTest
+         %86 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpBitcastTest_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_OpBitcastTest
+         %91 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpBitcastTest_Main_EntryPoint = OpFunction %void None %25
+         %95 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpBitcastTest Function
+         %97 = OpFunctionCall %void %OpBitcastTest_InitGlobals
+         %98 = OpFunctionCall %void %OpBitcastTest_DefaultConstructor %self_4
+         %99 = OpFunctionCall %void %OpBitcastTest_CopyInputs %self_4
+        %100 = OpFunctionCall %void %Main %self_4
+        %101 = OpFunctionCall %void %OpBitcastTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct TanTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Tan(floatVal);
+    vector2Val = Shader.Intrinsics.Tan(vector2Val);
+    vector3Val = Shader.Intrinsics.Tan(vector3Val);
+    vector4Val = Shader.Intrinsics.Tan(vector4Val);
+  }
+}

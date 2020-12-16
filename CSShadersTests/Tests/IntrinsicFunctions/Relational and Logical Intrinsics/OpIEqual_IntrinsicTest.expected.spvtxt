@@ -1,0 +1,143 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 107
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %OpIEqualTest_Main_EntryPoint "OpIEqualTest_Main_EntryPoint"
+               OpExecutionMode %OpIEqualTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %OpIEqualTest "OpIEqualTest"
+               OpName %Bool2 "Bool2"
+               OpName %Integer2 "Integer2"
+               OpName %Bool3 "Bool3"
+               OpName %Integer3 "Integer3"
+               OpName %Bool4 "Bool4"
+               OpName %Integer4 "Integer4"
+               OpName %OpIEqualTest_PreConstructor "OpIEqualTest_PreConstructor"
+               OpName %self "self"
+               OpName %OpIEqualTest_DefaultConstructor "OpIEqualTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %boolVal "boolVal"
+               OpName %intVal "intVal"
+               OpName %bool2Val "bool2Val"
+               OpName %integer2Val "integer2Val"
+               OpName %bool3Val "bool3Val"
+               OpName %integer3Val "integer3Val"
+               OpName %bool4Val "bool4Val"
+               OpName %integer4Val "integer4Val"
+               OpName %OpIEqualTest_InitGlobals "OpIEqualTest_InitGlobals"
+               OpName %OpIEqualTest_CopyInputs "OpIEqualTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %OpIEqualTest_CopyOutputs "OpIEqualTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %OpIEqualTest_Main_EntryPoint "OpIEqualTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %OpIEqualTest_Main_EntryPoint "OpIEqualTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %bool = OpTypeBool
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%OpIEqualTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_OpIEqualTest = OpTypePointer Function %OpIEqualTest
+         %11 = OpTypeFunction %void %_ptr_Function_OpIEqualTest
+%_ptr_Function_bool = OpTypePointer Function %bool
+%_ptr_Function_int = OpTypePointer Function %int
+      %Bool2 = OpTypeVector %bool 2
+%_ptr_Function_Bool2 = OpTypePointer Function %Bool2
+   %Integer2 = OpTypeVector %int 2
+%_ptr_Function_Integer2 = OpTypePointer Function %Integer2
+      %Bool3 = OpTypeVector %bool 3
+%_ptr_Function_Bool3 = OpTypePointer Function %Bool3
+   %Integer3 = OpTypeVector %int 3
+%_ptr_Function_Integer3 = OpTypePointer Function %Integer3
+      %Bool4 = OpTypeVector %bool 4
+%_ptr_Function_Bool4 = OpTypePointer Function %Bool4
+   %Integer4 = OpTypeVector %int 4
+%_ptr_Function_Integer4 = OpTypePointer Function %Integer4
+         %25 = OpTypeFunction %void
+      %false = OpConstantFalse %bool
+      %int_0 = OpConstant %int 0
+%OpIEqualTest_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_OpIEqualTest
+         %32 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpIEqualTest_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_OpIEqualTest
+         %37 = OpLabel
+         %38 = OpFunctionCall %void %OpIEqualTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_OpIEqualTest
+         %43 = OpLabel
+    %boolVal = OpVariable %_ptr_Function_bool Function
+     %intVal = OpVariable %_ptr_Function_int Function
+   %bool2Val = OpVariable %_ptr_Function_Bool2 Function
+%integer2Val = OpVariable %_ptr_Function_Integer2 Function
+   %bool3Val = OpVariable %_ptr_Function_Bool3 Function
+%integer3Val = OpVariable %_ptr_Function_Integer3 Function
+   %bool4Val = OpVariable %_ptr_Function_Bool4 Function
+%integer4Val = OpVariable %_ptr_Function_Integer4 Function
+               OpStore %boolVal %false
+               OpStore %intVal %int_0
+         %54 = OpCompositeConstruct %Bool2 %false %false
+               OpStore %bool2Val %54
+         %56 = OpCompositeConstruct %Integer2 %int_0 %int_0
+               OpStore %integer2Val %56
+         %58 = OpCompositeConstruct %Bool3 %false %false %false
+               OpStore %bool3Val %58
+         %60 = OpCompositeConstruct %Integer3 %int_0 %int_0 %int_0
+               OpStore %integer3Val %60
+         %62 = OpCompositeConstruct %Bool4 %false %false %false %false
+               OpStore %bool4Val %62
+         %64 = OpCompositeConstruct %Integer4 %int_0 %int_0 %int_0 %int_0
+               OpStore %integer4Val %64
+         %66 = OpLoad %int %intVal
+         %67 = OpLoad %int %intVal
+         %68 = OpIEqual %bool %66 %67
+               OpStore %boolVal %68
+         %70 = OpLoad %Integer2 %integer2Val
+         %71 = OpLoad %Integer2 %integer2Val
+         %72 = OpIEqual %Bool2 %70 %71
+               OpStore %bool2Val %72
+         %74 = OpLoad %Integer3 %integer3Val
+         %75 = OpLoad %Integer3 %integer3Val
+         %76 = OpIEqual %Bool3 %74 %75
+               OpStore %bool3Val %76
+         %78 = OpLoad %Integer4 %integer4Val
+         %79 = OpLoad %Integer4 %integer4Val
+         %80 = OpIEqual %Bool4 %78 %79
+               OpStore %bool4Val %80
+               OpReturn
+               OpFunctionEnd
+%OpIEqualTest_InitGlobals = OpFunction %void None %25
+         %85 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpIEqualTest_CopyInputs = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_OpIEqualTest
+         %90 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpIEqualTest_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_OpIEqualTest
+         %95 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%OpIEqualTest_Main_EntryPoint = OpFunction %void None %25
+         %99 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpIEqualTest Function
+        %101 = OpFunctionCall %void %OpIEqualTest_InitGlobals
+        %102 = OpFunctionCall %void %OpIEqualTest_DefaultConstructor %self_4
+        %103 = OpFunctionCall %void %OpIEqualTest_CopyInputs %self_4
+        %104 = OpFunctionCall %void %Main %self_4
+        %105 = OpFunctionCall %void %OpIEqualTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

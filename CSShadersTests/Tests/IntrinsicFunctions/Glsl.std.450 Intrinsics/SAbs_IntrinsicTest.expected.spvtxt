@@ -1,0 +1,113 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 84
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %SAbsTest_Main_EntryPoint "SAbsTest_Main_EntryPoint"
+               OpExecutionMode %SAbsTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %SAbsTest "SAbsTest"
+               OpName %Integer2 "Integer2"
+               OpName %Integer3 "Integer3"
+               OpName %Integer4 "Integer4"
+               OpName %SAbsTest_PreConstructor "SAbsTest_PreConstructor"
+               OpName %self "self"
+               OpName %SAbsTest_DefaultConstructor "SAbsTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %intVal "intVal"
+               OpName %integer2Val "integer2Val"
+               OpName %integer3Val "integer3Val"
+               OpName %integer4Val "integer4Val"
+               OpName %SAbsTest_InitGlobals "SAbsTest_InitGlobals"
+               OpName %SAbsTest_CopyInputs "SAbsTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %SAbsTest_CopyOutputs "SAbsTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %SAbsTest_Main_EntryPoint "SAbsTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %SAbsTest_Main_EntryPoint "SAbsTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+   %SAbsTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_SAbsTest = OpTypePointer Function %SAbsTest
+         %10 = OpTypeFunction %void %_ptr_Function_SAbsTest
+%_ptr_Function_int = OpTypePointer Function %int
+   %Integer2 = OpTypeVector %int 2
+%_ptr_Function_Integer2 = OpTypePointer Function %Integer2
+   %Integer3 = OpTypeVector %int 3
+%_ptr_Function_Integer3 = OpTypePointer Function %Integer3
+   %Integer4 = OpTypeVector %int 4
+%_ptr_Function_Integer4 = OpTypePointer Function %Integer4
+         %18 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+%SAbsTest_PreConstructor = OpFunction %void None %10
+       %self = OpFunctionParameter %_ptr_Function_SAbsTest
+         %24 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SAbsTest_DefaultConstructor = OpFunction %void None %10
+     %self_0 = OpFunctionParameter %_ptr_Function_SAbsTest
+         %29 = OpLabel
+         %30 = OpFunctionCall %void %SAbsTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %10
+     %self_1 = OpFunctionParameter %_ptr_Function_SAbsTest
+         %35 = OpLabel
+     %intVal = OpVariable %_ptr_Function_int Function
+%integer2Val = OpVariable %_ptr_Function_Integer2 Function
+%integer3Val = OpVariable %_ptr_Function_Integer3 Function
+%integer4Val = OpVariable %_ptr_Function_Integer4 Function
+               OpStore %intVal %int_0
+         %41 = OpCompositeConstruct %Integer2 %int_0 %int_0
+               OpStore %integer2Val %41
+         %43 = OpCompositeConstruct %Integer3 %int_0 %int_0 %int_0
+               OpStore %integer3Val %43
+         %45 = OpCompositeConstruct %Integer4 %int_0 %int_0 %int_0 %int_0
+               OpStore %integer4Val %45
+         %47 = OpLoad %int %intVal
+         %48 = OpExtInst %int %1 SAbs %47
+               OpStore %intVal %48
+         %50 = OpLoad %Integer2 %integer2Val
+         %51 = OpExtInst %Integer2 %1 SAbs %50
+               OpStore %integer2Val %51
+         %53 = OpLoad %Integer3 %integer3Val
+         %54 = OpExtInst %Integer3 %1 SAbs %53
+               OpStore %integer3Val %54
+         %56 = OpLoad %Integer4 %integer4Val
+         %57 = OpExtInst %Integer4 %1 SAbs %56
+               OpStore %integer4Val %57
+               OpReturn
+               OpFunctionEnd
+%SAbsTest_InitGlobals = OpFunction %void None %18
+         %62 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SAbsTest_CopyInputs = OpFunction %void None %10
+     %self_2 = OpFunctionParameter %_ptr_Function_SAbsTest
+         %67 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SAbsTest_CopyOutputs = OpFunction %void None %10
+     %self_3 = OpFunctionParameter %_ptr_Function_SAbsTest
+         %72 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%SAbsTest_Main_EntryPoint = OpFunction %void None %18
+         %76 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_SAbsTest Function
+         %78 = OpFunctionCall %void %SAbsTest_InitGlobals
+         %79 = OpFunctionCall %void %SAbsTest_DefaultConstructor %self_4
+         %80 = OpFunctionCall %void %SAbsTest_CopyInputs %self_4
+         %81 = OpFunctionCall %void %Main %self_4
+         %82 = OpFunctionCall %void %SAbsTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

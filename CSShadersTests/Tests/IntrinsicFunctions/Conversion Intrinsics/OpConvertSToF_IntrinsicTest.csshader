@@ -1,0 +1,20 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpConvertSToFTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var intVal = 0;
+    var vector2Val = new Math.Vector2();
+    var integer2Val = new Math.Integer2();
+    var vector3Val = new Math.Vector3();
+    var integer3Val = new Math.Integer3();
+    var vector4Val = new Math.Vector4();
+    var integer4Val = new Math.Integer4();
+    floatVal = Shader.Intrinsics.ConvertToFloat(intVal);
+    vector2Val = Shader.Intrinsics.ConvertToFloat(integer2Val);
+    vector3Val = Shader.Intrinsics.ConvertToFloat(integer3Val);
+    vector4Val = Shader.Intrinsics.ConvertToFloat(integer4Val);
+  }
+}

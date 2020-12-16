@@ -1,0 +1,11 @@
+[Shader.UnitTest][Shader.Pixel]
+struct DeterminantTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var float2x2Val = new Math.Float2x2();
+    floatVal = Shader.Intrinsics.Determinant(float2x2Val);
+  }
+}

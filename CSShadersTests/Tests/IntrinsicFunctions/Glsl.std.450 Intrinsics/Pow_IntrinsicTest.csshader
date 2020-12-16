@@ -1,0 +1,16 @@
+[Shader.UnitTest][Shader.Pixel]
+struct PowTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    floatVal = Shader.Intrinsics.Pow(floatVal, floatVal);
+    vector2Val = Shader.Intrinsics.Pow(vector2Val, vector2Val);
+    vector3Val = Shader.Intrinsics.Pow(vector3Val, vector3Val);
+    vector4Val = Shader.Intrinsics.Pow(vector4Val, vector4Val);
+  }
+}

@@ -1,0 +1,15 @@
+[Shader.UnitTest][Shader.Pixel]
+struct RefractTest
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector2Val = new Math.Vector2();
+    var floatVal = 0.0f;
+    var vector3Val = new Math.Vector3();
+    var vector4Val = new Math.Vector4();
+    vector2Val = Shader.Intrinsics.Refract(vector2Val, vector2Val, floatVal);
+    vector3Val = Shader.Intrinsics.Refract(vector3Val, vector3Val, floatVal);
+    vector4Val = Shader.Intrinsics.Refract(vector4Val, vector4Val, floatVal);
+  }
+}

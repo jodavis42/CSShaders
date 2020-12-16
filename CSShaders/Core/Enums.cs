@@ -38,7 +38,7 @@ namespace CSShaders
     // Image
     OpSampledImage = 86, OpImageSampleImplicitLod, OpImageSampleExplicitLod,
     // Conversion
-    OpConvertFToU = 109,
+    OpConvertFToU = 109, OpConvertFToS, OpConvertSToF, OpBitcast,
     // Composite
     OpVectorExtractDynamic = 77, OpVectorInsertDynamic, OpVectorShuffle, OpCompositeConstruct, OpCompositeExtract, OpCompositeInsert, OpCopyObject, OpTranspose, 
 
@@ -46,7 +46,7 @@ namespace CSShaders
     OpSNegate = 126, OpFNegate, OpIAdd, OpFAdd, OpISub, OpFSub, OpIMul, OpFMul, OpUDiv, OpSDiv, OpFDiv, OpUMod, OpSRem, OpSMod, OpFRem, OpFMod,
     OpVectorTimesScalar, OpMatrixTimesScalar, OpVectorTimesMatrix, OpMatrixTimesVector, OpMatrixTimesMatrix, OpOuterProduct, OpDot, 
     // Bit
-    OpShiftRightLogical, OpShiftRightArithmetic, OpShiftLeftLogical, OpBitwiseOr, OpBitwiseXor, OBitwiseAnd, OpNot, OpBitReverse, OpBitCount,
+    OpShiftRightLogical, OpShiftRightArithmetic, OpShiftLeftLogical, OpBitwiseOr, OpBitwiseXor, OpBitwiseAnd, OpNot, OpBitReverse, OpBitCount, OpSignBitSet,
     // Relational
     OpAny, OpAll, OpIsNan, OpIsInf, OpOrdered, OpLessOrGreater, OpLogicalEqual, OpLogicalNotEqual, OpLogicalOr, OpLogicalAnd, OpLogicalNot, OpSelect,
     OpIEqual, OpINotEqual, OpUGreaterThan, OpSGreaterThan, OpUGreaterThanEqual, OpSGreaterThanEqual, OpULessThan, OpSLessThan, OpULessThanEqual, OpSLessThanEqual,
