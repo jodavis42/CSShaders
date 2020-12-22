@@ -20,20 +20,26 @@ namespace IntrinsicsGenerators
     /// </summary>
     public List<IntrinsicDescription> Intrinsics = new List<IntrinsicDescription>();
 
-    /// <summary>
-    /// Builds a new intrinsic in this group from the core function description.
-    /// </summary>
-    /// <returns></returns>
-    public IntrinsicDescription Build(IntrinsicsFunctionDescription fnCoreDesc)
+    public IntrinsicDescription Build(string intrinsicName, string functionName, IAttributesGenerator attributes)
     {
       var intrinsic = new IntrinsicDescription()
       {
-        IntrinsicName = fnCoreDesc.GetIntrinsicName(),
-        Attributes = fnCoreDesc.GetAttributes(),
-        FunctionName = fnCoreDesc.GetFunctionName()
+        IntrinsicName = intrinsicName,
+        FunctionName = functionName,
+        Attributes = attributes
       };
       Intrinsics.Add(intrinsic);
       return intrinsic;
+    }
+
+    public IntrinsicDescription Build(IntrinsicsFunctionDescription fnCoreDesc)
+    {
+      return Build(fnCoreDesc.GetIntrinsicName(), fnCoreDesc.GetFunctionName(), fnCoreDesc);
+    }
+
+    public IntrinsicDescription Build(string intrinsicName, string functionName)
+    {
+      return Build(intrinsicName, functionName, null);
     }
 
     public IntrinsicDescription Build(IntrinsicsFunctionDescription fnCoreDesc, List<TypeName> returnTypes, List<TypeName> param0Types)

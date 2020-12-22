@@ -21,8 +21,31 @@ namespace IntrinsicsGenerators
   /// </summary>
   public class IntrinsicSignature
   {
-    public TypeName ReturnTypeName;
+    public List<string> Comments = null;
+    public IAttributesGenerator Attributes = null;
+    public string Qualifiers = "public extern static";
+    public TypeName ReturnTypeName = null;
     public List<ParameterDescription> Parameters = new List<ParameterDescription>();
+
+    public IntrinsicSignature AddOverrideComment(string comment)
+    {
+      if (Comments == null)
+        Comments = new List<string>();
+      Comments.Add(comment);
+      return this;
+    }
+
+    public IntrinsicSignature SetAttributes(IAttributesGenerator attributes)
+    {
+      Attributes = attributes;
+      return this;
+    }
+
+    public IntrinsicSignature SetQualifiers(string qualifiers)
+    {
+      Qualifiers = qualifiers;
+      return this;
+    }
   }
 
   /// <summary>
@@ -31,19 +54,24 @@ namespace IntrinsicsGenerators
   /// </summary>
   public class IntrinsicDescription
   {
-    public List<string> Comments = new List<string>();
-    public string Attributes;
+    public bool Disabled = false;
     public string IntrinsicName;
+    public List<string> Comments = new List<string>();
+    public IAttributesGenerator Attributes;
     public string FunctionName;
     public List<IntrinsicSignature> Signatures = new List<IntrinsicSignature>();
-    public bool Disabled = false;
 
-    public IntrinsicDescription AddSignature(TypeName returnType, TypeName param0Type, string param0Name)
+    public IntrinsicSignature AddSignature(IAttributesGenerator attributes, TypeName returnType, TypeName param0Type, string param0Name)
     {
-      var signature = new IntrinsicSignature() { ReturnTypeName = returnType };
+      var signature = new IntrinsicSignature() { Attributes = attributes, ReturnTypeName = returnType };
       signature.Parameters.Add(new ParameterDescription { TypeName = param0Type, ParameterName = param0Name });
       Signatures.Add(signature);
-      return this;
+      return signature;
+    }
+
+    public IntrinsicSignature AddSignature(TypeName returnType, TypeName param0Type, string param0Name)
+    {
+      return AddSignature(null, returnType, param0Type, param0Name);
     }
 
     public IntrinsicDescription AddSignatures(List<TypeName> returnTypes, List<TypeName> param0Types, string param0Name)
@@ -53,13 +81,13 @@ namespace IntrinsicsGenerators
       return this;
     }
 
-    public IntrinsicDescription AddSignature(TypeName returnType, TypeName param0Type, string param0Name, TypeName param1Type, string param1Name)
+    public IntrinsicSignature AddSignature(TypeName returnType, TypeName param0Type, string param0Name, TypeName param1Type, string param1Name)
     {
       var signature = new IntrinsicSignature() { ReturnTypeName = returnType };
       signature.Parameters.Add(new ParameterDescription { TypeName = param0Type, ParameterName = param0Name });
       signature.Parameters.Add(new ParameterDescription { TypeName = param1Type, ParameterName = param1Name });
       Signatures.Add(signature);
-      return this;
+      return signature;
     }
 
     public IntrinsicDescription AddSignatures(List<TypeName> returnTypes, List<TypeName> param0Types, string param0Name, List<TypeName> param1Types, string param1Name)
@@ -69,12 +97,47 @@ namespace IntrinsicsGenerators
       return this;
     }
 
-    public IntrinsicDescription AddSignature(TypeName returnType, TypeName param0Type, string param0Name, TypeName param1Type, string param1Name, TypeName param2Type, string param2Name)
+    public IntrinsicSignature AddSignature(TypeName returnType, TypeName param0Type, string param0Name, TypeName param1Type, string param1Name, TypeName param2Type, string param2Name)
     {
       var signature = new IntrinsicSignature() { ReturnTypeName = returnType };
       signature.Parameters.Add(new ParameterDescription { TypeName = param0Type, ParameterName = param0Name });
       signature.Parameters.Add(new ParameterDescription { TypeName = param1Type, ParameterName = param1Name });
       signature.Parameters.Add(new ParameterDescription { TypeName = param2Type, ParameterName = param2Name });
+      Signatures.Add(signature);
+      return signature;
+    }
+
+    public IntrinsicSignature AddSignature(TypeName returnType, TypeName param0Type, string param0Name, TypeName param1Type, string param1Name, TypeName param2Type, string param2Name, TypeName param3Type, string param3Name)
+    {
+      var signature = new IntrinsicSignature() { ReturnTypeName = returnType };
+      signature.Parameters.Add(new ParameterDescription { TypeName = param0Type, ParameterName = param0Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param1Type, ParameterName = param1Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param2Type, ParameterName = param2Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param3Type, ParameterName = param3Name });
+      Signatures.Add(signature);
+      return signature;
+    }
+
+    public IntrinsicSignature AddSignature(TypeName returnType,
+      TypeName param0Type, string param0Name,
+      TypeName param1Type, string param1Name,
+      TypeName param2Type, string param2Name,
+      TypeName param3Type, string param3Name,
+      TypeName param4Type, string param4Name)
+    {
+      var signature = new IntrinsicSignature() { ReturnTypeName = returnType };
+      signature.Parameters.Add(new ParameterDescription { TypeName = param0Type, ParameterName = param0Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param1Type, ParameterName = param1Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param2Type, ParameterName = param2Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param3Type, ParameterName = param3Name });
+      signature.Parameters.Add(new ParameterDescription { TypeName = param4Type, ParameterName = param4Name });
+      Signatures.Add(signature);
+      return signature;
+    }
+
+    public IntrinsicDescription AddSignature(TypeName returnType, List<ParameterDescription> parameters)
+    {
+      var signature = new IntrinsicSignature() { ReturnTypeName = returnType, Parameters = parameters};
       Signatures.Add(signature);
       return this;
     }
@@ -86,7 +149,7 @@ namespace IntrinsicsGenerators
       return this;
     }
 
-    public IntrinsicDescription AddComment(string comment)
+    public IntrinsicDescription AddIntrinsicComment(string comment)
     {
       Comments.Add(comment);
       return this;

@@ -4,10 +4,14 @@ namespace Shader
   {
     // Image Intrinsics ------------------------------------------------------
     // Sample an image with an implicit level of detail.
-    [Shader.ImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 Sample(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
+    [Shader.SplitSampledImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 SampleImplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates);
+    // Sample an image with an implicit level of detail.
+    [Shader.ImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 SampleImplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
 
     // Sample an image with an explicit level of detail.
-    [Shader.ImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 Sample(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float lod);
+    [Shader.SplitSampledImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 3)] public extern static Math.Vector4 SampleExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates, float lod);
+    // Sample an image with an explicit level of detail.
+    [Shader.ImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 SampleExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float lod);
 
     // Conversion Intrinsics ------------------------------------------------------
     // Convert (value preserving) from floating point to signed integer, with round toward 0.0

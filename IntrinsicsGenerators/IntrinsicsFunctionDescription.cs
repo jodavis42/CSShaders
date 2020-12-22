@@ -8,10 +8,10 @@ namespace IntrinsicsGenerators
   /// that is the name of the intrinsic, the name of the function, and any attributes used to declare the intrinsic.
   /// This is mostly used to avoid a little code duplication between op names and attributes.
   /// </summary>
-  public class IntrinsicsFunctionDescription
+  public class IntrinsicsFunctionDescription : IAttributesGenerator
   {
     public virtual string GetIntrinsicName() { return ""; }
-    public virtual string GetAttributes() { return ""; }
+    public override string GetAttributes() { return ""; }
     public virtual string GetFunctionName() { return ""; }
   }
 
@@ -96,7 +96,7 @@ namespace IntrinsicsGenerators
     {
       var builder = new StringBuilder();
       // Build the attribute with the op name
-      builder.AppendFormat("[Shader.ImageIntrinsicFunction(\"{0}\"", OpName);
+      builder.AppendFormat("[{0}(\"{1}\"", GetAttributeName(), OpName);
       // Append any optional args if they exist. These are or'd together.
       if (OptionalArgs.Count != 0)
       {
@@ -122,5 +122,31 @@ namespace IntrinsicsGenerators
     {
       return FunctionName;
     }
+
+    public virtual string GetAttributeName()
+    {
+      return "Shader.ImageIntrinsicFunction";
+    }
   }
+
+  public class SplitImageIntrinsicFunctionDescription : ImageIntrinsicFunctionDescription
+  {
+    public SplitImageIntrinsicFunctionDescription(string opName, string functionName) : base(opName, functionName)
+    {
+    }
+
+    public SplitImageIntrinsicFunctionDescription(string opName, string optionalArg, int operandsLocation, string functionName) : base(opName, optionalArg, operandsLocation, functionName)
+    {
+    }
+
+    public SplitImageIntrinsicFunctionDescription(string opName, List<string> optionalArgs, int operandsLocation, string functionName) : base(opName, optionalArgs, operandsLocation, functionName)
+    {
+    }
+
+    public override string GetAttributeName()
+    {
+      return "Shader.SplitSampledImageIntrinsicFunction";
+    }
+  }
+
 }

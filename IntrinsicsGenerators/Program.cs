@@ -54,13 +54,20 @@ namespace IntrinsicsGenerators
     {
       var imageIntrinsicsGroup = new IntrinsicGroup() { GroupName = "Image" };
       imageIntrinsicsGroup.GroupComment = "// Image Intrinsics ------------------------------------------------------";
-      var opImageSampleImplicitLod = imageIntrinsicsGroup.Build(new ImageIntrinsicFunctionDescription("OpImageSampleImplicitLod", "Sample"));
-      opImageSampleImplicitLod.AddComment("Sample an image with an implicit level of detail.");
-      opImageSampleImplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatSampledImage2dType, "sampledImage", typeGroups.Float2Type, "coordinates");
+      var opImageSampleImplicitLod = imageIntrinsicsGroup.Build("OpImageSampleImplicitLod", "SampleImplicitLod");
+      opImageSampleImplicitLod.AddIntrinsicComment("Sample an image with an implicit level of detail.");
+      opImageSampleImplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatImage2dType, "image", typeGroups.SamplerType, "sampler", typeGroups.Float2Type, "coordinates")
+        .SetAttributes(new SplitImageIntrinsicFunctionDescription("OpImageSampleImplicitLod", "SampleImplicitLod"));
+      opImageSampleImplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatSampledImage2dType, "sampledImage", typeGroups.Float2Type, "coordinates")
+        .SetAttributes(new ImageIntrinsicFunctionDescription("OpImageSampleImplicitLod", "SampleImplicitLod"));
 
-      var opImageSampleExplicitLod = imageIntrinsicsGroup.Build(new ImageIntrinsicFunctionDescription("OpImageSampleExplicitLod", "ImageOperands.Lod", 2, "Sample"));
-      opImageSampleExplicitLod.AddComment("Sample an image with an explicit level of detail.");
-      opImageSampleExplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatSampledImage2dType, "sampledImage", typeGroups.Float2Type, "coordinates", typeGroups.FloatType, "lod");
+      var opImageSampleExplicitLod = imageIntrinsicsGroup.Build("OpImageSampleExplicitLod", "SampleExplicitLod");
+      opImageSampleExplicitLod.AddIntrinsicComment("Sample an image with an explicit level of detail.");
+      opImageSampleExplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatImage2dType, "image", typeGroups.SamplerType, "sampler", typeGroups.Float2Type, "coordinates", typeGroups.FloatType, "lod")
+        .SetAttributes(new SplitImageIntrinsicFunctionDescription("OpImageSampleExplicitLod", "ImageOperands.Lod", 3, "SampleExplicitLod"));
+      opImageSampleExplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatSampledImage2dType, "sampledImage", typeGroups.Float2Type, "coordinates", typeGroups.FloatType, "lod")
+        .SetAttributes(new ImageIntrinsicFunctionDescription("OpImageSampleExplicitLod", "ImageOperands.Lod", 2, "SampleExplicitLod"));
+
       return imageIntrinsicsGroup;
     }
 
@@ -69,13 +76,13 @@ namespace IntrinsicsGenerators
       var conversionIntrinsicsGroup = new IntrinsicGroup() { GroupName = "Conversion" };
       conversionIntrinsicsGroup.GroupComment = "// Conversion Intrinsics ------------------------------------------------------";
       conversionIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpConvertFToS", "ConvertToInt"), typeGroups.IntTypes, typeGroups.FloatTypes)
-        .AddComment("Convert (value preserving) from floating point to signed integer, with round toward 0.0");
+        .AddIntrinsicComment("Convert (value preserving) from floating point to signed integer, with round toward 0.0");
       conversionIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpConvertSToF", "ConvertToFloat"), typeGroups.FloatTypes, typeGroups.IntTypes)
-        .AddComment("Convert (value preserving) from signed integer to floating point.");
+        .AddIntrinsicComment("Convert (value preserving) from signed integer to floating point.");
       conversionIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpBitcast", "BitcastAsInt"), typeGroups.IntTypes, typeGroups.FloatTypes)
-        .AddComment("Bit pattern-preserving type conversion.");
+        .AddIntrinsicComment("Bit pattern-preserving type conversion.");
       conversionIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpBitcast", "BitcastAsFloat"), typeGroups.FloatTypes, typeGroups.IntTypes)
-        .AddComment("Bit pattern-preserving type conversion.");
+        .AddIntrinsicComment("Bit pattern-preserving type conversion.");
       return conversionIntrinsicsGroup;
     }
 
@@ -134,11 +141,11 @@ namespace IntrinsicsGenerators
       var bitIntrinsicsGroup = new IntrinsicGroup() { GroupName = "Bit" };
       bitIntrinsicsGroup.GroupComment = "// Bit Intrinsics ------------------------------------------------------";
       bitIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpShiftRightLogical", "ShiftRightLogical"), typeGroups.IntTypes, typeGroups.IntTypes, "baseValue", typeGroups.IntTypes, "shift")
-        .AddComment("Shift the bits in 'Base' right by the number of bits specified in 'Shift'. The most-significant bits will be zero filled.");
+        .AddIntrinsicComment("Shift the bits in 'Base' right by the number of bits specified in 'Shift'. The most-significant bits will be zero filled.");
       bitIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpShiftRightArithmetic", "ShiftRightArithmetic"), typeGroups.IntTypes, typeGroups.IntTypes, "baseValue", typeGroups.IntTypes, "shift")
-        .AddComment("Shift the bits in 'Base' right by the number of bits specified in 'Shift'. The most-significant bits will be filled with the sign bit from 'Base'");
+        .AddIntrinsicComment("Shift the bits in 'Base' right by the number of bits specified in 'Shift'. The most-significant bits will be filled with the sign bit from 'Base'");
       bitIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpShiftLeftLogical", "ShiftLeftLogical"), typeGroups.IntTypes, typeGroups.IntTypes, "baseValue", typeGroups.IntTypes, "shift")
-        .AddComment("Shift the bits in 'Base' left by the number of bits specified in 'Shift'. The least-significant bits will be zero filled.");
+        .AddIntrinsicComment("Shift the bits in 'Base' left by the number of bits specified in 'Shift'. The least-significant bits will be zero filled.");
       bitIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpBitwiseOr", "BitwiseOr"), typeGroups.IntTypes, typeGroups.IntTypes, typeGroups.IntTypes);
       bitIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpBitwiseXor", "BitwiseXor"), typeGroups.IntTypes, typeGroups.IntTypes, typeGroups.IntTypes);
       bitIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpBitwiseAnd", "BitwiseAnd"), typeGroups.IntTypes, typeGroups.IntTypes, typeGroups.IntTypes);
@@ -153,9 +160,9 @@ namespace IntrinsicsGenerators
       var relationalIntrinsicsGroup = new IntrinsicGroup() { GroupName = "Relational and Logical" };
       relationalIntrinsicsGroup.GroupComment = "// Relational and Logical Intrinsics ------------------------------------------------------";
       relationalIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpAny", "Any"), typeGroups.SingleBoolList, typeGroups.BoolVectorTypes)
-        .AddComment("Returns true if any values are true.");
+        .AddIntrinsicComment("Returns true if any values are true.");
       relationalIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpAll", "All"), typeGroups.SingleBoolList, typeGroups.BoolVectorTypes)
-        .AddComment("Returns true if all values are true.");
+        .AddIntrinsicComment("Returns true if all values are true.");
       // Requires kernel
       var opSignBitSet = relationalIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpSignBitSet", "SignBitSet"));
       opSignBitSet.AddSignatures(typeGroups.BoolTypes, typeGroups.FloatTypes, "value");
@@ -193,12 +200,12 @@ namespace IntrinsicsGenerators
     {
       var derivativeIntrinsicsGroup = new IntrinsicGroup() { GroupName = "Derivative" };
       derivativeIntrinsicsGroup.GroupComment = "// Derivative Intrinsics ------------------------------------------------------";
-      var ddxComment = "The partial derivative of 'value' with respect to the window x coordinate";
-      derivativeIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpDPdx", "Ddx"), typeGroups.FloatTypes, typeGroups.FloatTypes).AddComment(ddxComment);
-      var ddyComment = "The partial derivative of 'value' with respect to the window y coordinate";
-      derivativeIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpDPdy", "Ddy"), typeGroups.FloatTypes, typeGroups.FloatTypes).AddComment(ddyComment);
-      var fwidthComment = "The same as computing the sum of the absolute values of Ddx and Ddy";
-      derivativeIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpFwidth", "Fwidth"), typeGroups.FloatTypes, typeGroups.FloatTypes).AddComment(fwidthComment);
+      derivativeIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpDPdx", "Ddx"), typeGroups.FloatTypes, typeGroups.FloatTypes)
+        .AddIntrinsicComment("The partial derivative of 'value' with respect to the window x coordinate");
+      derivativeIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpDPdy", "Ddy"), typeGroups.FloatTypes, typeGroups.FloatTypes)
+        .AddIntrinsicComment("The partial derivative of 'value' with respect to the window y coordinate");
+      derivativeIntrinsicsGroup.Build(new SimpleIntrinsicsFunctionDescription("OpFwidth", "Fwidth"), typeGroups.FloatTypes, typeGroups.FloatTypes)
+        .AddIntrinsicComment("The same as computing the sum of the absolute values of Ddx and Ddy");
       return derivativeIntrinsicsGroup;
     }
 
@@ -208,10 +215,10 @@ namespace IntrinsicsGenerators
       glslExtensionIntrinsicsGroup.GroupComment = "// Extension Intrinsics: Glsl ------------------------------------------------------";
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Round", "Round"), typeGroups.FloatTypes, typeGroups.FloatTypes);
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("RoundEven", "RoundEven"), typeGroups.FloatTypes, typeGroups.FloatTypes)
-        .AddComment("Result is the value equal to the nearest whole number to x.")
-        .AddComment("A fractional part of 0.5 rounds toward the nearest even whole number. (Both 3.5 and 4.5 for x round to 4.0.)");
+        .AddIntrinsicComment("Result is the value equal to the nearest whole number to x.")
+        .AddIntrinsicComment("A fractional part of 0.5 rounds toward the nearest even whole number. (Both 3.5 and 4.5 for x round to 4.0.)");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Trunc", "Trunc"), typeGroups.FloatTypes, typeGroups.FloatTypes)
-        .AddComment("Result is the value equal to the nearest whole number to x whose absolute value is not larger than the absolute value of x.");
+        .AddIntrinsicComment("Result is the value equal to the nearest whole number to x whose absolute value is not larger than the absolute value of x.");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("FAbs", "Abs"), typeGroups.FloatTypes, typeGroups.FloatTypes);
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("SAbs", "Abs"), typeGroups.IntTypes, typeGroups.IntTypes);
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("FSign", "Sign"), typeGroups.FloatTypes, typeGroups.FloatTypes);
@@ -253,11 +260,11 @@ namespace IntrinsicsGenerators
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("FClamp", "Clamp"), typeGroups.FloatTypes, typeGroups.FloatTypes, "value", typeGroups.FloatTypes, "min", typeGroups.FloatTypes, "max");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("SClamp", "Clamp"), typeGroups.IntTypes, typeGroups.IntTypes, "value", typeGroups.IntTypes, "min", typeGroups.IntTypes, "max");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("FMix", "Lerp"), typeGroups.FloatTypes, typeGroups.FloatTypes, "x", typeGroups.FloatTypes, "y", typeGroups.FloatTypes, "t")
-        .AddComment("Result is the linear interpolation between x and y, i.e., 'x * (1 - t) + y * t'.");
+        .AddIntrinsicComment("Result is the linear interpolation between x and y, i.e., 'x * (1 - t) + y * t'.");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Step", "Step"), typeGroups.FloatTypes, typeGroups.FloatTypes, "y", typeGroups.FloatTypes, "x")
-        .AddComment("If y <= x then 1 is returned, otherwise 0 is returned.");
+        .AddIntrinsicComment("If y <= x then 1 is returned, otherwise 0 is returned.");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("SmoothStep", "SmoothStep"), typeGroups.FloatTypes, typeGroups.FloatTypes, "min", typeGroups.FloatTypes, "max", typeGroups.FloatTypes, "x")
-        .AddComment("Returns a smooth Hermite interpolation between 0 and 1 if x is in-between min and max.");
+        .AddIntrinsicComment("Returns a smooth Hermite interpolation between 0 and 1 if x is in-between min and max.");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Fma", "FusedMultiplyAdd"), typeGroups.FloatTypes, typeGroups.FloatTypes, "a", typeGroups.FloatTypes, "b", typeGroups.FloatTypes, "c");
 
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Length", "Length"), typeGroups.SingleFloatList, typeGroups.FloatVectorTypes);
@@ -268,16 +275,16 @@ namespace IntrinsicsGenerators
 
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Normalize", "Normalize"), typeGroups.FloatVectorTypes, typeGroups.FloatVectorTypes);
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("FaceForward", "FaceForward"), typeGroups.FloatVectorTypes, typeGroups.FloatVectorTypes, "N", typeGroups.FloatVectorTypes, "I", typeGroups.FloatVectorTypes, "Nref")
-        .AddComment("If the dot product of Nref and I is negative, the result is N, otherwise it is -N.");
+        .AddIntrinsicComment("If the dot product of Nref and I is negative, the result is N, otherwise it is -N.");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Reflect", "Reflect"), typeGroups.FloatVectorTypes, typeGroups.FloatVectorTypes, "I", typeGroups.FloatVectorTypes, "N")
-        .AddComment("For the incident vector I and surface orientation N, the result is the reflection direction: 'I- 2 * dot(N,I) * N'")
-        .AddComment("This computation assumes N is already normalized.");
+        .AddIntrinsicComment("For the incident vector I and surface orientation N, the result is the reflection direction: 'I- 2 * dot(N,I) * N'")
+        .AddIntrinsicComment("This computation assumes N is already normalized.");
       glslExtensionIntrinsicsGroup.Build(new GlslExtensionFunctionDescription("Refract", "Refract"), typeGroups.FloatVectorTypes, typeGroups.FloatVectorTypes, "I", typeGroups.FloatVectorTypes, "N", typeGroups.SingleFloatList, "eta")
-        .AddComment("For the incident vector I and surface normal N , and the ratio of indices of refraction eta, the result is the refraction vector.")
-        .AddComment("The result is computed by 'k = 1.0 -eta * eta * (1.0 - dot(N,I) * dot(N,I))'")
-        .AddComment("if k < 0.0 the result is 0.0")
-        .AddComment("otherwise, the result is 'eta * I - (eta * dot(N,I) + sqrt(k)) * N'.")
-        .AddComment("This computation assumes the input parameters for the incident vector I and the surface normal N are already normalized.");
+        .AddIntrinsicComment("For the incident vector I and surface normal N , and the ratio of indices of refraction eta, the result is the refraction vector.")
+        .AddIntrinsicComment("The result is computed by 'k = 1.0 -eta * eta * (1.0 - dot(N,I) * dot(N,I))'")
+        .AddIntrinsicComment("if k < 0.0 the result is 0.0")
+        .AddIntrinsicComment("otherwise, the result is 'eta * I - (eta * dot(N,I) + sqrt(k)) * N'.")
+        .AddIntrinsicComment("This computation assumes the input parameters for the incident vector I and the surface normal N are already normalized.");
 
       return glslExtensionIntrinsicsGroup;
     }

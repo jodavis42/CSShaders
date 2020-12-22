@@ -46,25 +46,17 @@ namespace IntrinsicsGenerators
 
     public void Generate(IntrinsicDescription intrinsic, IntrinsicSignature signature)
     {
-      foreach(var comment in intrinsic.Comments)
-      {
-        Writer.WriteIndentation();
-        Writer.Write("// ");
-        Writer.WriteLine(comment);
-      }
+      WriteComments(intrinsic, signature);
 
       Writer.WriteIndentation();
       // If this intrinsic is disabled, comment it out
       if (intrinsic.Disabled)
         Writer.Write("//");
 
-      if (!string.IsNullOrEmpty(intrinsic.Attributes))
-      {
-        Writer.Write(intrinsic.Attributes);
-        Writer.Write(" ");
-      }
+      WriteAttributes(intrinsic, signature);
 
-      Writer.Write("public extern static ");
+      Writer.Write(signature.Qualifiers);
+      Writer.Write(" ");
       Writer.Write(signature.ReturnTypeName.ToString());
       Writer.Write(" ");
       Writer.Write(intrinsic.FunctionName);
@@ -79,6 +71,40 @@ namespace IntrinsicsGenerators
           Writer.Write(", ");
       }
       Writer.Write(");\n");
+    }
+
+    void WriteComments(IntrinsicDescription intrinsic, IntrinsicSignature signature)
+    {
+      List<string> comments = null;
+      if (signature.Comments != null)
+        comments = signature.Comments;
+      else
+        comments = intrinsic.Comments;
+
+      if(comments != null)
+      {
+        foreach (var comment in comments)
+        {
+          Writer.WriteIndentation();
+          Writer.Write("// ");
+          Writer.WriteLine(comment);
+        }
+      }
+    }
+
+    void WriteAttributes(IntrinsicDescription intrinsic, IntrinsicSignature signature)
+    {
+      string attributes = null;
+      if (signature.Attributes != null)
+        attributes = signature.Attributes.GetAttributes();
+      else if (intrinsic.Attributes != null)
+        attributes = intrinsic.Attributes.GetAttributes();
+
+      if (!string.IsNullOrEmpty(attributes))
+      {
+        Writer.Write(attributes);
+        Writer.Write(" ");
+      }
     }
 
     public override string ToString()

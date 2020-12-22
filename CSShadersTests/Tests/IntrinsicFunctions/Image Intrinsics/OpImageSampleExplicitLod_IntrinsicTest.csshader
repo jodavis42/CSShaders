@@ -1,6 +1,8 @@
 [Shader.UnitTest][Shader.Pixel]
 struct OpImageSampleExplicitLodTest
 {
+  public static Shader.FloatImage2d FloatImage2dVal;
+  public static Shader.Sampler SamplerVal;
   public static Shader.FloatSampledImage2d FloatSampledImage2dVal;
   [Shader.EntryPoint]
   public void Main()
@@ -8,6 +10,7 @@ struct OpImageSampleExplicitLodTest
     var vector4Val = new Math.Vector4();
     var vector2Val = new Math.Vector2();
     var floatVal = 0.0f;
-    vector4Val = Shader.Intrinsics.Sample(FloatSampledImage2dVal, vector2Val, floatVal);
+    vector4Val = Shader.Intrinsics.SampleExplicitLod(FloatImage2dVal, SamplerVal, vector2Val, floatVal);
+    vector4Val = Shader.Intrinsics.SampleExplicitLod(FloatSampledImage2dVal, vector2Val, floatVal);
   }
 }

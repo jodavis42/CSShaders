@@ -20,6 +20,8 @@ namespace IntrinsicsGenerators
     public TypeName Float3Type = new TypeName("Math.Vector3");
     public TypeName Float4Type = new TypeName("Math.Vector4");
     public TypeName Float2x2Type = new TypeName("Math.Float2x2");
+    public TypeName SamplerType = new TypeName("Shader.Sampler", true);
+    public TypeName FloatImage2dType = new TypeName("Shader.FloatImage2d", true);
     public TypeName FloatSampledImage2dType = new TypeName("Shader.FloatSampledImage2d", true);
 
 
