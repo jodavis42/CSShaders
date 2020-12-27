@@ -1,0 +1,18 @@
+
+namespace Shaders
+{
+    [Shader.UnitTest][Shader.Pixel]
+    struct NoReturn
+    {
+      void VoidReturn()
+      {
+      }
+
+      [Shader.EntryPoint]
+      void Main()
+      {
+        this.VoidReturn();
+      }
+    }
+}
+

@@ -1,0 +1,19 @@
+
+namespace Shaders
+{
+    [Shader.UnitTest][Shader.Pixel]
+    struct ReturnPrimitive
+    {
+      int IntReturn()
+      {
+        return 1;
+      }
+
+      [Shader.EntryPoint]
+      void Main()
+      {
+        var i = this.IntReturn();
+      }
+    }
+}
+

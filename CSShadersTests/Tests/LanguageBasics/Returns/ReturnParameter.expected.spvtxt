@@ -1,0 +1,94 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 68
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ReturnParameter_Main_EntryPoint "ReturnParameter_Main_EntryPoint"
+               OpExecutionMode %ReturnParameter_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ReturnParameter "ReturnParameter"
+               OpName %ReturnParameter_PreConstructor "ReturnParameter_PreConstructor"
+               OpName %self "self"
+               OpName %ReturnParameter_DefaultConstructor "ReturnParameter_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %ReturnParam "ReturnParam"
+               OpName %self_1 "self"
+               OpName %value "value"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %param "param"
+               OpName %i "i"
+               OpName %ReturnParameter_InitGlobals "ReturnParameter_InitGlobals"
+               OpName %ReturnParameter_CopyInputs "ReturnParameter_CopyInputs"
+               OpName %self_3 "self"
+               OpName %ReturnParameter_CopyOutputs "ReturnParameter_CopyOutputs"
+               OpName %self_4 "self"
+               OpName %ReturnParameter_Main_EntryPoint "ReturnParameter_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %ReturnParameter_Main_EntryPoint "ReturnParameter_Main_EntryPoint"
+               OpName %self_5 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%ReturnParameter = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ReturnParameter = OpTypePointer Function %ReturnParameter
+          %9 = OpTypeFunction %void %_ptr_Function_ReturnParameter
+         %11 = OpTypeFunction %int %_ptr_Function_ReturnParameter %int
+%_ptr_Function_int = OpTypePointer Function %int
+         %13 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+%ReturnParameter_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_ReturnParameter
+         %19 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnParameter_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_ReturnParameter
+         %24 = OpLabel
+         %25 = OpFunctionCall %void %ReturnParameter_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%ReturnParam = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_ReturnParameter
+      %value = OpFunctionParameter %int
+         %31 = OpLabel
+               OpReturnValue %value
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_ReturnParameter
+         %36 = OpLabel
+      %param = OpVariable %_ptr_Function_int Function
+          %i = OpVariable %_ptr_Function_int Function
+               OpStore %param %int_1
+         %40 = OpLoad %int %param
+         %41 = OpFunctionCall %int %ReturnParam %self_2 %40
+               OpStore %i %41
+               OpReturn
+               OpFunctionEnd
+%ReturnParameter_InitGlobals = OpFunction %void None %13
+         %46 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnParameter_CopyInputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_ReturnParameter
+         %51 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnParameter_CopyOutputs = OpFunction %void None %9
+     %self_4 = OpFunctionParameter %_ptr_Function_ReturnParameter
+         %56 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnParameter_Main_EntryPoint = OpFunction %void None %13
+         %60 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_ReturnParameter Function
+         %62 = OpFunctionCall %void %ReturnParameter_InitGlobals
+         %63 = OpFunctionCall %void %ReturnParameter_DefaultConstructor %self_5
+         %64 = OpFunctionCall %void %ReturnParameter_CopyInputs %self_5
+         %65 = OpFunctionCall %void %Main %self_5
+         %66 = OpFunctionCall %void %ReturnParameter_CopyOutputs %self_5
+               OpReturn
+               OpFunctionEnd

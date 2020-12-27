@@ -1,0 +1,88 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 64
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ReturnPrimitive_Main_EntryPoint "ReturnPrimitive_Main_EntryPoint"
+               OpExecutionMode %ReturnPrimitive_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ReturnPrimitive "ReturnPrimitive"
+               OpName %ReturnPrimitive_PreConstructor "ReturnPrimitive_PreConstructor"
+               OpName %self "self"
+               OpName %ReturnPrimitive_DefaultConstructor "ReturnPrimitive_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %IntReturn "IntReturn"
+               OpName %self_1 "self"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %i "i"
+               OpName %ReturnPrimitive_InitGlobals "ReturnPrimitive_InitGlobals"
+               OpName %ReturnPrimitive_CopyInputs "ReturnPrimitive_CopyInputs"
+               OpName %self_3 "self"
+               OpName %ReturnPrimitive_CopyOutputs "ReturnPrimitive_CopyOutputs"
+               OpName %self_4 "self"
+               OpName %ReturnPrimitive_Main_EntryPoint "ReturnPrimitive_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %ReturnPrimitive_Main_EntryPoint "ReturnPrimitive_Main_EntryPoint"
+               OpName %self_5 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%ReturnPrimitive = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ReturnPrimitive = OpTypePointer Function %ReturnPrimitive
+          %9 = OpTypeFunction %void %_ptr_Function_ReturnPrimitive
+         %11 = OpTypeFunction %int %_ptr_Function_ReturnPrimitive
+%_ptr_Function_int = OpTypePointer Function %int
+         %13 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+%ReturnPrimitive_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_ReturnPrimitive
+         %19 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnPrimitive_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
+         %24 = OpLabel
+         %25 = OpFunctionCall %void %ReturnPrimitive_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+  %IntReturn = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
+         %30 = OpLabel
+               OpReturnValue %int_1
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
+         %35 = OpLabel
+          %i = OpVariable %_ptr_Function_int Function
+         %37 = OpFunctionCall %int %IntReturn %self_2
+               OpStore %i %37
+               OpReturn
+               OpFunctionEnd
+%ReturnPrimitive_InitGlobals = OpFunction %void None %13
+         %42 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnPrimitive_CopyInputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
+         %47 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnPrimitive_CopyOutputs = OpFunction %void None %9
+     %self_4 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
+         %52 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ReturnPrimitive_Main_EntryPoint = OpFunction %void None %13
+         %56 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_ReturnPrimitive Function
+         %58 = OpFunctionCall %void %ReturnPrimitive_InitGlobals
+         %59 = OpFunctionCall %void %ReturnPrimitive_DefaultConstructor %self_5
+         %60 = OpFunctionCall %void %ReturnPrimitive_CopyInputs %self_5
+         %61 = OpFunctionCall %void %Main %self_5
+         %62 = OpFunctionCall %void %ReturnPrimitive_CopyOutputs %self_5
+               OpReturn
+               OpFunctionEnd

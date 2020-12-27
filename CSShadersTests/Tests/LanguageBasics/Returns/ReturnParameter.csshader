@@ -1,0 +1,20 @@
+
+namespace Shaders
+{
+    [Shader.UnitTest][Shader.Pixel]
+    struct ReturnParameter
+    {
+      int ReturnParam(int value)
+      {
+        return value;
+      }
+
+      [Shader.EntryPoint]
+      void Main()
+      {
+        var param = 1;
+        var i = this.ReturnParam(param);
+      }
+    }
+}
+
