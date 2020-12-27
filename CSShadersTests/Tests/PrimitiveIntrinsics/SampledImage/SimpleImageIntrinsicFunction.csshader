@@ -5,7 +5,7 @@ public struct SimpleFloatImage2d{}
 [Shader.SampledImagePrimitive(typeof(SimpleFloatImage2d))]
 public struct SimpleSampledFloatImage2d
 {
-  [Shader.ImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 Sample(SimpleSampledFloatImage2d sampledImage, Math.Vector2 coordinates);
+  [Shader.SampledImageIntrinsicFunction("OpImageSampleImplicitLod", Shader.ImageOperands.None, 2)] public extern static Math.Vector4 Sample(SimpleSampledFloatImage2d sampledImage, Math.Vector2 coordinates);
 }
 
 [Shader.UnitTest][Shader.Pixel]

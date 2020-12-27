@@ -5,7 +5,7 @@ namespace IntrinsicsGenerators
   /// <summary>
   /// A collection of types. Some types are grouped into lists for common batch operations (like vector types).
   /// </summary>
-  class TypeGroups
+  public class TypeGroups
   {
     public TypeName BoolType = new TypeName("bool");
     public TypeName Bool2Type = new TypeName("Math.Bool2");
@@ -50,4 +50,12 @@ namespace IntrinsicsGenerators
       SingleFloatList = new List<TypeName>() { FloatType, FloatType, FloatType };
     }
   }
+
+  class ImageSamplerSet
+  {
+    public TypeName ImageType = null;
+    public TypeName SamplerType = null;
+    public TypeName SampledImageType = null;
+  }
+
 }

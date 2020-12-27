@@ -38,7 +38,7 @@ namespace IntrinsicsGenerators
     static List<IntrinsicGroup> GenerateIntrinsicDeclarations(TypeGroups typeGroups)
     {
       var intrinsicGroups = new List<IntrinsicGroup>();
-      intrinsicGroups.Add(GenerateImageIntrinsics(typeGroups));
+      intrinsicGroups.Add(ImageIntrinsics.Generate(typeGroups));
       intrinsicGroups.Add(GenerateConversionIntrinsics(typeGroups));
       intrinsicGroups.Add(GenerateCompositeIntrinsics(typeGroups));
       intrinsicGroups.Add(GenerateArithmeticIntrinsics(typeGroups));
@@ -48,27 +48,6 @@ namespace IntrinsicsGenerators
       intrinsicGroups.Add(GenerateGlslExtensionIntrinsics(typeGroups));
 
       return intrinsicGroups;
-    }
-
-    static IntrinsicGroup GenerateImageIntrinsics(TypeGroups typeGroups)
-    {
-      var imageIntrinsicsGroup = new IntrinsicGroup() { GroupName = "Image" };
-      imageIntrinsicsGroup.GroupComment = "// Image Intrinsics ------------------------------------------------------";
-      var opImageSampleImplicitLod = imageIntrinsicsGroup.Build("OpImageSampleImplicitLod", "SampleImplicitLod");
-      opImageSampleImplicitLod.AddIntrinsicComment("Sample an image with an implicit level of detail.");
-      opImageSampleImplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatImage2dType, "image", typeGroups.SamplerType, "sampler", typeGroups.Float2Type, "coordinates")
-        .SetAttributes(new SplitImageIntrinsicFunctionDescription("OpImageSampleImplicitLod", "SampleImplicitLod"));
-      opImageSampleImplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatSampledImage2dType, "sampledImage", typeGroups.Float2Type, "coordinates")
-        .SetAttributes(new ImageIntrinsicFunctionDescription("OpImageSampleImplicitLod", "SampleImplicitLod"));
-
-      var opImageSampleExplicitLod = imageIntrinsicsGroup.Build("OpImageSampleExplicitLod", "SampleExplicitLod");
-      opImageSampleExplicitLod.AddIntrinsicComment("Sample an image with an explicit level of detail.");
-      opImageSampleExplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatImage2dType, "image", typeGroups.SamplerType, "sampler", typeGroups.Float2Type, "coordinates", typeGroups.FloatType, "lod")
-        .SetAttributes(new SplitImageIntrinsicFunctionDescription("OpImageSampleExplicitLod", "ImageOperands.Lod", 3, "SampleExplicitLod"));
-      opImageSampleExplicitLod.AddSignature(typeGroups.Float4Type, typeGroups.FloatSampledImage2dType, "sampledImage", typeGroups.Float2Type, "coordinates", typeGroups.FloatType, "lod")
-        .SetAttributes(new ImageIntrinsicFunctionDescription("OpImageSampleExplicitLod", "ImageOperands.Lod", 2, "SampleExplicitLod"));
-
-      return imageIntrinsicsGroup;
     }
 
     static IntrinsicGroup GenerateConversionIntrinsics(TypeGroups typeGroups)

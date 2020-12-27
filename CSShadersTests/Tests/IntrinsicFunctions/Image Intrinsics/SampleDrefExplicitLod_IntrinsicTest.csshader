@@ -1,0 +1,15 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpImageSampleDrefExplicitLodTest
+{
+  public static Shader.FloatImage2d FloatImage2dVal;
+  public static Shader.Sampler SamplerVal;
+  public static Shader.FloatSampledImage2d FloatSampledImage2dVal;
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var floatVal = 0.0f;
+    var vector2Val = new Math.Vector2();
+    floatVal = Shader.Intrinsics.SampleDrefExplicitLod(FloatImage2dVal, SamplerVal, vector2Val, floatVal, floatVal);
+    floatVal = Shader.Intrinsics.SampleDrefExplicitLod(FloatSampledImage2dVal, vector2Val, floatVal, floatVal);
+  }
+}

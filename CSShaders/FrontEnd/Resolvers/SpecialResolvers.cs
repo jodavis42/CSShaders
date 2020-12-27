@@ -28,8 +28,8 @@ namespace CSShaders
       FieldProcessors.Add(typeof(Math.Swizzle).Name, VectorResolvers.ProcessVectorSwizzle);
       MethodProcessors.Add(typeof(Shader.SimpleIntrinsicFunction).Name, CreateSimpleIntrinsicType);
       MethodProcessors.Add(typeof(Math.CompositeConstruct).Name, CreateCompositeConstructIntrinsic);
-      MethodProcessors.Add(typeof(Shader.ImageIntrinsicFunction).Name, ImageIntrinsicResolvers.CreateSampledImageIntrinsicType);
-      MethodProcessors.Add(typeof(Shader.SplitSampledImageIntrinsicFunction).Name, ImageIntrinsicResolvers.CreateSplitSampledImageIntrinsicFunction);
+      MethodProcessors.Add(typeof(Shader.SampledImageIntrinsicFunction).Name, SampledImageIntrinsicResolvers.CreateSampledImageIntrinsicFunction);
+      MethodProcessors.Add(typeof(Shader.ImageIntrinsicFunction).Name, ImageIntrinsicResolvers.CreateImageIntrinsicFunction);
       MethodProcessors.Add(typeof(Shader.SimpleExtensionIntrinsic).Name, ExtensionIntrinsicResolvers.ProcessSimpleExtensionIntrinsic);
     }
 

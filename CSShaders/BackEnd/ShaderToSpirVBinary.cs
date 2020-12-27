@@ -98,6 +98,25 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpSampledImage, Spv.Op.OpSampledImage);
       SimpleInstructions.Add(OpInstructionType.OpImageSampleImplicitLod, Spv.Op.OpImageSampleImplicitLod);
       SimpleInstructions.Add(OpInstructionType.OpImageSampleExplicitLod, Spv.Op.OpImageSampleExplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleDrefImplicitLod, Spv.Op.OpImageSampleDrefImplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleDrefExplicitLod, Spv.Op.OpImageSampleDrefExplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleProjImplicitLod, Spv.Op.OpImageSampleProjImplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleProjExplicitLod, Spv.Op.OpImageSampleProjExplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleProjDrefImplicitLod, Spv.Op.OpImageSampleProjDrefImplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageSampleProjDrefExplicitLod, Spv.Op.OpImageSampleProjDrefExplicitLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageFetch, Spv.Op.OpImageFetch);
+      SimpleInstructions.Add(OpInstructionType.OpImageGather, Spv.Op.OpImageGather);
+      SimpleInstructions.Add(OpInstructionType.OpImageDrefGather, Spv.Op.OpImageDrefGather);
+      SimpleInstructions.Add(OpInstructionType.OpImageRead, Spv.Op.OpImageRead);
+      SimpleInstructions.Add(OpInstructionType.OpImageWrite, Spv.Op.OpImageWrite);
+      SimpleInstructions.Add(OpInstructionType.OpImage, Spv.Op.OpImage);
+      SimpleInstructions.Add(OpInstructionType.OpImageQueryFormat, Spv.Op.OpImageQueryFormat);
+      SimpleInstructions.Add(OpInstructionType.OpImageQueryOrder, Spv.Op.OpImageQueryOrder);
+      SimpleInstructions.Add(OpInstructionType.OpImageQuerySizeLod, Spv.Op.OpImageQuerySizeLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageQuerySize, Spv.Op.OpImageQuerySize);
+      SimpleInstructions.Add(OpInstructionType.OpImageQueryLod, Spv.Op.OpImageQueryLod);
+      SimpleInstructions.Add(OpInstructionType.OpImageQueryLevels, Spv.Op.OpImageQueryLevels);
+      SimpleInstructions.Add(OpInstructionType.OpImageQuerySamples, Spv.Op.OpImageQuerySamples);
     }
 
     public void Write(SpirVStreamWriter writer, ShaderLibrary library, FrontEndTranslator frontEnd)

@@ -82,10 +82,39 @@ namespace Shader
   }
 
   /// <summary>
-  /// Specifies an intrinsic function for an image. Image intrinsics are more complicated as they take a mask
+  /// Specifies an intrinsic function for a  sampled image. Image intrinsics are more complicated as they might take a mask
   /// that controls what extra parameters exist. This mask isn't always at a consistent location like the end of the function either,
   /// so the location was added for user control. The location specifies what function argument this should be placed before,
   /// so if location is 2 and there are 3 arguments then it's: [arg0, arg1, operandsMask, arg2].
+  /// If no mask and location are specified, then no mask is written (not all intrinsics specify a mask either).
+  /// A SampledImage intrinsic function expects the first parameter to either be a sampled image, or the first two to be an image and a sampler.
+  /// </summary>
+  public class SampledImageIntrinsicFunction : Attribute
+  {
+    public string OpName;
+    public ImageOperands Operands = ImageOperands.None;
+    public UInt32 OperandsLocation = 0;
+
+    public SampledImageIntrinsicFunction(string opName)
+    {
+      OpName = opName;
+    }
+
+    public SampledImageIntrinsicFunction(string opName, ImageOperands operands, UInt32 operandsLocation)
+    {
+      OpName = opName;
+      Operands = operands;
+      OperandsLocation = operandsLocation;
+    }
+  }
+
+  /// <summary>
+  /// Specifies an intrinsic function for an image. Image intrinsics are more complicated as they may take a mask
+  /// that controls what extra parameters exist. This mask isn't always at a consistent location like the end of the function either,
+  /// so the location was added for user control. The location specifies what function argument this should be placed before,
+  /// so if location is 2 and there are 3 arguments then it's: [arg0, arg1, operandsMask, arg2].
+  /// If no mask and location are specified, then no mask is written (not all intrinsics specify a mask either).
+  /// A Image intrinsic function expects the first parameter to either be an image or a sampled image.
   /// </summary>
   public class ImageIntrinsicFunction : Attribute
   {
@@ -99,29 +128,6 @@ namespace Shader
     }
 
     public ImageIntrinsicFunction(string opName, ImageOperands operands, UInt32 operandsLocation)
-    {
-      OpName = opName;
-      Operands = operands;
-      OperandsLocation = operandsLocation;
-    }
-  }
-
-  /// <summary>
-  /// This is the same as ImageIntrinsicFunction except for split image and samplers. SampledImages are not allowed to be 
-  /// stored into variables, so in order to combine them to use at run-time, new intrinsics were created.
-  /// </summary>
-  public class SplitSampledImageIntrinsicFunction : Attribute
-  {
-    string OpName;
-    ImageOperands Operands = ImageOperands.None;
-    UInt32 OperandsLocation = 0;
-
-    public SplitSampledImageIntrinsicFunction(string opName)
-    {
-      OpName = opName;
-    }
-
-    public SplitSampledImageIntrinsicFunction(string opName, ImageOperands operands, UInt32 operandsLocation)
     {
       OpName = opName;
       Operands = operands;

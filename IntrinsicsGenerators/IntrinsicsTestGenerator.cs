@@ -24,7 +24,9 @@ namespace IntrinsicsGenerators
           if (intrinsic.Disabled)
             continue;
 
-          var fileName = string.Format("{0}_IntrinsicTest.csshader", intrinsic.IntrinsicName);
+          // If the test has a name use that, otherwise use the intrinsic name
+          var testName = intrinsic.TestName != null ? intrinsic.TestName : intrinsic.IntrinsicName;
+          var fileName = string.Format("{0}_IntrinsicTest.csshader", testName);
           var filePathName = Path.Combine(dirName, fileName);
 
           var testWriter = new CodeWriter();

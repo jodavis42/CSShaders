@@ -129,24 +129,23 @@ namespace IntrinsicsGenerators
     }
   }
 
-  public class SplitImageIntrinsicFunctionDescription : ImageIntrinsicFunctionDescription
+  public class SampledImageIntrinsicFunctionDescription : ImageIntrinsicFunctionDescription
   {
-    public SplitImageIntrinsicFunctionDescription(string opName, string functionName) : base(opName, functionName)
+    public SampledImageIntrinsicFunctionDescription(string opName, string functionName) : base(opName, functionName)
     {
     }
 
-    public SplitImageIntrinsicFunctionDescription(string opName, string optionalArg, int operandsLocation, string functionName) : base(opName, optionalArg, operandsLocation, functionName)
+    public SampledImageIntrinsicFunctionDescription(string opName, string optionalArg, int operandsLocation, string functionName) : base(opName, optionalArg, operandsLocation, functionName)
     {
     }
 
-    public SplitImageIntrinsicFunctionDescription(string opName, List<string> optionalArgs, int operandsLocation, string functionName) : base(opName, optionalArgs, operandsLocation, functionName)
+    public SampledImageIntrinsicFunctionDescription(string opName, List<string> optionalArgs, int operandsLocation, string functionName) : base(opName, optionalArgs, operandsLocation, functionName)
     {
     }
 
     public override string GetAttributeName()
     {
-      return "Shader.SplitSampledImageIntrinsicFunction";
+      return "Shader.SampledImageIntrinsicFunction";
     }
   }
-
 }

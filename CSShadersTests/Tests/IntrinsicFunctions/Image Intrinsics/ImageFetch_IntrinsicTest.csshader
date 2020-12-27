@@ -1,0 +1,14 @@
+[Shader.UnitTest][Shader.Pixel]
+struct OpImageFetchTest
+{
+  public static Shader.FloatImage2d FloatImage2dVal;
+  public static Shader.FloatSampledImage2d FloatSampledImage2dVal;
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var vector4Val = new Math.Vector4();
+    var integer2Val = new Math.Integer2();
+    vector4Val = Shader.Intrinsics.ImageFetch(FloatImage2dVal, integer2Val);
+    vector4Val = Shader.Intrinsics.ImageFetch(FloatSampledImage2dVal, integer2Val);
+  }
+}

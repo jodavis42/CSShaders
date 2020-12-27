@@ -10,6 +10,17 @@ namespace IntrinsicsGenerators
     public TypeName TypeName;
     public string ParameterName;
 
+    public ParameterDescription()
+    {
+
+    }
+
+    public ParameterDescription(TypeName typeName, string parameterName)
+    {
+      TypeName = typeName;
+      ParameterName = parameterName;
+    }
+
     public string GetDeclaration()
     {
       return TypeName + " " + ParameterName;
@@ -60,6 +71,8 @@ namespace IntrinsicsGenerators
     public IAttributesGenerator Attributes;
     public string FunctionName;
     public List<IntrinsicSignature> Signatures = new List<IntrinsicSignature>();
+    /// The name of the test when emitting tests. If this is null, the intrinsic name is used.
+    public string TestName = null;
 
     public IntrinsicSignature AddSignature(IAttributesGenerator attributes, TypeName returnType, TypeName param0Type, string param0Name)
     {
@@ -135,11 +148,11 @@ namespace IntrinsicsGenerators
       return signature;
     }
 
-    public IntrinsicDescription AddSignature(TypeName returnType, List<ParameterDescription> parameters)
+    public IntrinsicSignature AddSignature(TypeName returnType, List<ParameterDescription> parameters)
     {
       var signature = new IntrinsicSignature() { ReturnTypeName = returnType, Parameters = parameters};
       Signatures.Add(signature);
-      return this;
+      return signature;
     }
 
     public IntrinsicDescription AddSignatures(List<TypeName> returnTypes, List<TypeName> param0Types, string param0Name, List<TypeName> param1Types, string param1Name, List<TypeName> param2Types, string param2Name)

@@ -4,14 +4,96 @@ namespace Shader
   {
     // Image Intrinsics ------------------------------------------------------
     // Sample an image with an implicit level of detail.
-    [Shader.SplitSampledImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 SampleImplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates);
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleImplicitLod", ImageOperands.None, 3)] public extern static Math.Vector4 SampleImplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates);
     // Sample an image with an implicit level of detail.
-    [Shader.ImageIntrinsicFunction("OpImageSampleImplicitLod")] public extern static Math.Vector4 SampleImplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleImplicitLod", ImageOperands.None, 2)] public extern static Math.Vector4 SampleImplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
 
     // Sample an image with an explicit level of detail.
-    [Shader.SplitSampledImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 3)] public extern static Math.Vector4 SampleExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates, float lod);
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 3)] public extern static Math.Vector4 SampleExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates, float lod);
     // Sample an image with an explicit level of detail.
-    [Shader.ImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 SampleExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float lod);
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 SampleExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float lod);
+
+    // Sample an image with an explicit level of detail. The explicit derivatvies of ddx and ddy are used to compute the lod.
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Grad, 3)] public extern static Math.Vector4 SampleGradExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates, Math.Vector2 ddx, Math.Vector2 ddy);
+    // Sample an image with an explicit level of detail. The explicit derivatvies of ddx and ddy are used to compute the lod.
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleExplicitLod", ImageOperands.Grad, 2)] public extern static Math.Vector4 SampleGradExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, Math.Vector2 ddx, Math.Vector2 ddy);
+
+    // Sample an image doing depth-comparison with an implicit level of detail.
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleDrefImplicitLod", ImageOperands.None, 4)] public extern static float SampleDrefImplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates, float depth);
+    // Sample an image doing depth-comparison with an implicit level of detail.
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleDrefImplicitLod", ImageOperands.None, 3)] public extern static float SampleDrefImplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float depth);
+
+    // Sample an image doing depth-comparison using an explicit level of detail.
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleDrefExplicitLod", ImageOperands.Lod, 4)] public extern static float SampleDrefExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates, float depth, float lod);
+    // Sample an image doing depth-comparison using an explicit level of detail.
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleDrefExplicitLod", ImageOperands.Lod, 3)] public extern static float SampleDrefExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates, float depth, float lod);
+
+    // Sample an image with with a project coordinate and an implicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjImplicitLod", ImageOperands.None, 3)] public extern static Math.Vector4 SampleProjImplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector3 coordinates);
+    // Sample an image with with a project coordinate and an implicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjImplicitLod", ImageOperands.None, 2)] public extern static Math.Vector4 SampleProjImplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector3 coordinates);
+
+    // Sample an image with a project coordinate using an explicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjExplicitLod", ImageOperands.Lod, 3)] public extern static Math.Vector4 SampleProjExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector3 coordinates, float lod);
+    // Sample an image with a project coordinate using an explicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjExplicitLod", ImageOperands.Lod, 2)] public extern static Math.Vector4 SampleProjExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector3 coordinates, float lod);
+
+    // Sample an image with a project coordinate, doing depth-comparison, with an implicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjDrefImplicitLod", ImageOperands.None, 4)] public extern static float SampleProjDrefImplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector3 coordinates, float depth);
+    // Sample an image with a project coordinate, doing depth-comparison, with an implicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjDrefImplicitLod", ImageOperands.None, 3)] public extern static float SampleProjDrefImplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector3 coordinates, float depth);
+
+    // Sample an image with a project coordinate, doing depth-comparison, using an explicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjDrefExplicitLod", ImageOperands.Lod, 4)] public extern static float SampleProjDrefExplicitLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector3 coordinates, float depth, float lod);
+    // Sample an image with a project coordinate, doing depth-comparison, using an explicit level of detail.
+    // Coordinates is a floating-point vector containing (u, v, q), with the q component consumed for the projective division.
+    // That is, the actual sample coordinate will be (u/q, v/q]).
+    [Shader.SampledImageIntrinsicFunction("OpImageSampleProjDrefExplicitLod", ImageOperands.Lod, 3)] public extern static float SampleProjDrefExplicitLod(Shader.FloatSampledImage2d sampledImage, Math.Vector3 coordinates, float depth, float lod);
+
+    // Fetch a single texel from an image.
+    [Shader.ImageIntrinsicFunction("OpImageFetch", ImageOperands.None, 2)] public extern static Math.Vector4 ImageFetch(Shader.FloatImage2d image, Math.Integer2 coordinates);
+    // Fetch a single texel from an image.
+    [Shader.ImageIntrinsicFunction("OpImageFetch", ImageOperands.None, 2)] public extern static Math.Vector4 ImageFetch(Shader.FloatSampledImage2d sampledImage, Math.Integer2 coordinates);
+
+    // Fetch a single texel from an image with an explicit lod level.
+    [Shader.ImageIntrinsicFunction("OpImageFetch", ImageOperands.Lod, 2)] public extern static Math.Vector4 ImageFetchLod(Shader.FloatImage2d image, Math.Integer2 coordinates, int lod);
+    // Fetch a single texel from an image with an explicit lod level.
+    [Shader.ImageIntrinsicFunction("OpImageFetch", ImageOperands.Lod, 2)] public extern static Math.Vector4 ImageFetchLod(Shader.FloatSampledImage2d sampledImage, Math.Integer2 coordinates, int lod);
+
+    // Requires Capabilities: ImageQuery.
+    // Query the dimensions of 'Image' for mipmap level for 'Level of Detail'.
+    //[Shader.ImageIntrinsicFunction("OpImageQuerySizeLod", ImageOperands.None, 1)] public extern static Math.Integer2 QuerySizeLod(Shader.FloatImage2d image);
+    // Requires Capabilities: ImageQuery.
+    // Query the dimensions of 'Image' for mipmap level for 'Level of Detail'.
+    //[Shader.ImageIntrinsicFunction("OpImageQuerySizeLod", ImageOperands.None, 1)] public extern static Math.Integer2 QuerySizeLod(Shader.FloatSampledImage2d sampledImage);
+
+    // Requires Capabilities: ImageQuery.
+    // Query the mipmap level and the level of detail for a hypothetical sampling of 'Image' at Coordinate using an implicit level of detail.
+    //[Shader.SampledImageIntrinsicFunction("OpImageQueryLod", ImageOperands.None, 2)] public extern static Math.Vector2 QueryLod(Shader.FloatImage2d image, Shader.Sampler sampler, Math.Vector2 coordinates);
+    // Requires Capabilities: ImageQuery.
+    // Query the mipmap level and the level of detail for a hypothetical sampling of 'Image' at Coordinate using an implicit level of detail.
+    //[Shader.SampledImageIntrinsicFunction("OpImageQueryLod", ImageOperands.None, 1)] public extern static Math.Vector2 QueryLod(Shader.FloatSampledImage2d sampledImage, Math.Vector2 coordinates);
+
+    // Requires Capabilities: ImageQuery.
+    // Query the number of mipmap levels accessible through Image.
+    //[Shader.ImageIntrinsicFunction("OpImageQueryLevels", ImageOperands.None, 1)] public extern static int QueryLevels(Shader.FloatImage2d image);
+    // Requires Capabilities: ImageQuery.
+    // Query the number of mipmap levels accessible through Image.
+    //[Shader.ImageIntrinsicFunction("OpImageQueryLevels", ImageOperands.None, 1)] public extern static int QueryLevels(Shader.FloatSampledImage2d sampledImage);
 
     // Conversion Intrinsics ------------------------------------------------------
     // Convert (value preserving) from floating point to signed integer, with round toward 0.0
