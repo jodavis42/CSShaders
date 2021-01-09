@@ -89,7 +89,7 @@ namespace CSShaders
       var trees = new List<SyntaxTree>();
       foreach(var entry in CodeEntries)
       {
-        SyntaxTree tree = CSharpSyntaxTree.ParseText(entry.Code);
+        SyntaxTree tree = CSharpSyntaxTree.ParseText(entry.Code, null, entry.Location);
         trees.Add(tree);
       }
       return trees;
