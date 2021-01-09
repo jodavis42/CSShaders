@@ -156,6 +156,12 @@ namespace CSShaders
     public void Visit(ShaderEntryPointInfo entryPointInfo)
     {
       mEntryPoints.Add(entryPointInfo);
+      foreach (var variable in entryPointInfo.mGlobalVariablesBlock.mLocalVariables)
+        mReferencedStatics.Add(variable as ShaderOp);
+      foreach (var variable in entryPointInfo.mInterfaceVariables.mLocalVariables)
+        mReferencedStatics.Add(variable as ShaderOp);
+      Visit(entryPointInfo.mGlobalVariablesBlock);
+      Visit(entryPointInfo.mInterfaceVariables);
       Visit(entryPointInfo.mEntryPointFunction);
     }
 

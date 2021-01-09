@@ -1,0 +1,16 @@
+namespace Shaders
+{
+
+[Shader.UnitTest][Shader.Vertex]
+struct Position
+{
+  [Shader.HardwareBuiltInOutput(Shader.HardwareBuiltinType.Position)] Math.Vector4 PerspectivePosition;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    this.PerspectivePosition = new Math.Vector4(1.0f, 2.0f, 3.0f, 4.0f);
+  }
+}
+
+}

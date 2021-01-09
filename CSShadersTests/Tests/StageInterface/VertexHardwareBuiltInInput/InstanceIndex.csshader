@@ -1,0 +1,16 @@
+namespace Shaders
+{
+
+[Shader.UnitTest][Shader.Vertex]
+struct InstanceIndexTest
+{
+  [Shader.HardwareBuiltInInput(Shader.HardwareBuiltinType.InstanceIndex)] int InstanceIndex;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var index = this.InstanceIndex;
+  }
+}
+
+}

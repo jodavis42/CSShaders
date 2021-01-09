@@ -1,0 +1,91 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 68
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Vertex %Position_Main_EntryPoint "Position_Main_EntryPoint" %gl_Position
+               OpSource Unknown 100
+               OpName %Vector4 "Vector4"
+               OpName %Position "Position"
+               OpMemberName %Position 0 "PerspectivePosition"
+               OpName %Position_PreConstructor "Position_PreConstructor"
+               OpName %self "self"
+               OpName %Position_DefaultConstructor "Position_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %Position_InitGlobals "Position_InitGlobals"
+               OpName %Position_CopyInputs "Position_CopyInputs"
+               OpName %self_2 "self"
+               OpName %Position_CopyOutputs "Position_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %Position_Main_EntryPoint "Position_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %Position_Main_EntryPoint "Position_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpDecorate %gl_Position BuiltIn Position
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+    %Vector4 = OpTypeVector %float 4
+   %Position = OpTypeStruct %Vector4
+       %void = OpTypeVoid
+%_ptr_Function_Position = OpTypePointer Function %Position
+         %11 = OpTypeFunction %void %_ptr_Function_Position
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+         %13 = OpTypeFunction %void
+%_ptr_Output_Vector4 = OpTypePointer Output %Vector4
+    %float_1 = OpConstant %float 1
+    %float_2 = OpConstant %float 2
+    %float_3 = OpConstant %float 3
+    %float_4 = OpConstant %float 4
+     %uint_0 = OpConstant %uint 0
+%gl_Position = OpVariable %_ptr_Output_Vector4 Output
+%Position_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_Position
+         %25 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Position_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_Position
+         %30 = OpLabel
+         %31 = OpFunctionCall %void %Position_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_Position
+         %36 = OpLabel
+         %37 = OpCompositeConstruct %Vector4 %float_1 %float_2 %float_3 %float_4
+         %38 = OpAccessChain %_ptr_Function_Vector4 %self_1 %uint_0
+               OpStore %38 %37
+               OpReturn
+               OpFunctionEnd
+%Position_InitGlobals = OpFunction %void None %13
+         %43 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Position_CopyInputs = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_Position
+         %48 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Position_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_Position
+         %53 = OpLabel
+         %54 = OpAccessChain %_ptr_Function_Vector4 %self_3 %uint_0
+         %55 = OpLoad %Vector4 %54
+               OpStore %gl_Position %55
+               OpReturn
+               OpFunctionEnd
+%Position_Main_EntryPoint = OpFunction %void None %13
+         %60 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_Position Function
+         %62 = OpFunctionCall %void %Position_InitGlobals
+         %63 = OpFunctionCall %void %Position_DefaultConstructor %self_4
+         %64 = OpFunctionCall %void %Position_CopyInputs %self_4
+         %65 = OpFunctionCall %void %Main %self_4
+         %66 = OpFunctionCall %void %Position_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

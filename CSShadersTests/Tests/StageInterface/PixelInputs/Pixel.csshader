@@ -1,0 +1,31 @@
+namespace Shaders
+{
+
+public struct TestStruct
+{
+  Math.Vector2 V2;
+  float Value;
+}
+
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct TestVectorPrimitive
+{
+    float X, Y;
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct Pixel
+{
+  [Shader.StageInput] float Value = 1.0f;
+  [Shader.StageInput] float Value2 = 1.0f;
+  
+  [Shader.StageInput] TestVectorPrimitive V2;
+  [Shader.StageInput] TestStruct TestStruct;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}
