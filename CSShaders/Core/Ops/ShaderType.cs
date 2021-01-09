@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace CSShaders
@@ -72,6 +73,101 @@ namespace CSShaders
     public bool IsPrimitiveType()
     {
       return !(mBaseType == OpType.Struct || mBaseType == OpType.Pointer || mBaseType == OpType.Function);
+    }
+
+    public UInt32 ComputeByteSize()
+    {
+      if (mBaseType == OpType.Bool || mBaseType == OpType.Int || mBaseType == OpType.Float)
+        return 4;
+      if (mBaseType == OpType.Vector)
+      {
+        var vectorType = VectorType.Load(this);
+        var componentType = vectorType.GetComponentType();
+        var componentCount = vectorType.GetComponentCount();
+        return componentCount * componentType.ComputeByteSize();
+      }
+      if (mBaseType == OpType.Matrix)
+      {
+        var matrixType = MatrixType.Load(this);
+        var componentType = matrixType.GetComponentType();
+        return matrixType.GetComponentCount() * componentType.ComputeByteAlignment();
+      }
+      if (mBaseType == OpType.Struct)
+      {
+        // Each element has to actually be properly aligned in order to get the
+        // correct size though otherwise this can drift very wildly.
+        // For example struct { float A; vec3 B; float C; vec3 D; }
+        // Is actually size 16 + 16 + 16 + 12 = 60 due to vec3 having 
+        // to be aligned on 16 byte boundaries.
+        UInt32 byteSize = 0;
+        foreach (var field in mFields)
+        {
+          var fieldType = field.mType;
+          var memberAlignment = fieldType.ComputeByteAlignment();
+          var memberByteSize = fieldType.ComputeByteSize();
+          byteSize = ComputeSizeAfterAlignment(byteSize, memberAlignment);
+          byteSize += memberByteSize;
+        }
+
+        // Vulkan Spec: A struct has a base alignment equal to the largest base alignment
+        // of any of its members rounded up to a multiple of 16.
+        return ComputeSizeAfterAlignment(byteSize, 16);
+      }
+      throw new Exception();
+    }
+
+    public UInt32 ComputeByteAlignment()
+    {
+      if (mBaseType == OpType.Bool || mBaseType == OpType.Int || mBaseType == OpType.Float)
+        return 4;
+      if (mBaseType == OpType.Vector)
+      {
+        var vectorType = VectorType.Load(this);
+        var componentType = vectorType.GetComponentType();
+        var componentCount = vectorType.GetComponentCount();
+        // Vec3 has to be padded out to a Vec4
+        if (componentCount == 3)
+          componentCount = 4;
+        return componentCount * componentType.ComputeByteAlignment();
+      }
+      if (mBaseType == OpType.Matrix)
+      {
+        // Via opengl/dx matrix types are treated as an array of the vector types where the vector
+        // types are padded up to vec4s. This happens for efficiency reason (at least with uniform buffers).
+        var matrixType = MatrixType.Load(this);
+        var componentType = matrixType.GetComponentType();
+        return 4 * componentType.ComputeByteAlignment();
+      }
+      if (mBaseType == OpType.Struct)
+      {
+        // The alignment of a struct is the max alignment of all of its members
+        UInt32 alignment = 0;
+        foreach (var field in mFields)
+        {
+          var fieldType = field.mType;
+          alignment = System.Math.Max(alignment, fieldType.ComputeByteAlignment());
+        }
+        // Vulkan Spec: A struct has a base alignment equal to the largest base alignment
+        // of any of its members rounded up to a multiple of 16.
+        return ComputeSizeAfterAlignment(alignment, 16);
+      }
+      throw new Exception();
+    }
+    public int GetStride(float baseAlignment)
+    {
+      var typeSize = this.ComputeByteSize();
+      int stride = (int)(baseAlignment * System.Math.Ceiling(typeSize / baseAlignment));
+      return stride;
+    }
+
+    public static UInt32 ComputeSizeAfterAlignment(UInt32 byteSize, UInt32 baseAlignment)
+    {
+      // Get the remainder to add
+      var remainder = baseAlignment - (byteSize % baseAlignment);
+      // Mod with the required alignment to get offset 0 when needed
+      var alignmentOffset = remainder % baseAlignment;
+      byteSize += alignmentOffset;
+      return byteSize;
     }
   }
 }
