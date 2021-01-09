@@ -162,9 +162,17 @@ namespace CSShaders
 
         if (!fieldSymbol.IsStatic)
         {
-          var left = WalkAndGetResult(node.Expression);
-          var memberVariableOp = mFrontEnd.GenerateAccessChain(left, fieldSymbol.Name, mContext);
-          mContext.Push(memberVariableOp);
+          var left = WalkAndGetResult(node.Expression) as ShaderOp;
+          if(left.mResultType.mBaseType == OpType.Pointer)
+          {
+            var memberVariableOp = mFrontEnd.GenerateAccessChain(left, fieldSymbol.Name, mContext);
+            mContext.Push(memberVariableOp);
+          }
+          else
+          {
+            var memberVariableOp = mFrontEnd.GenerateCompositeExtract(left, fieldSymbol.Name, mContext);
+            mContext.Push(memberVariableOp);
+          }
         }
         else
         {
@@ -296,6 +304,40 @@ namespace CSShaders
       op.mParameters.Add(rightOp);
       op.mResultType = leftOp.mResultType;
       mContext.Push(op);
+    }
+
+    public override void VisitCastExpression(CastExpressionSyntax node)
+    {
+      var expressionOp = WalkAndGetValueTypeResult(node.Expression) as ShaderOp;
+      var castedType = FindType(node.Type);
+      // If we're casting to the same type, make this a no-op
+      if (castedType == expressionOp.mResultType)
+      {
+        mContext.Push(expressionOp);
+        return;
+      }
+
+      var symbol = GetSymbol(node);
+      // Try to find a cast intrinsic for a primtive type
+      var castIntrinsic = mFrontEnd.mCurrentLibrary.FindCastIntrinsics(castedType, expressionOp.mResultType);
+      if (castIntrinsic != null)
+      {
+        var castOp = castIntrinsic(castedType, expressionOp, mContext);
+        if (castOp == null)
+          throw new Exception("invalid cast");
+        return;
+      }
+      // If this is a method symbold, try to find the function call for a cast function
+      else if (symbol != null && symbol is IMethodSymbol methodSymbol)
+      {
+        var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(methodSymbol));
+        if(shaderFunction == null)
+          throw new Exception("invalid cast");
+        var castOp = mFrontEnd.GenerateFunctionCall(shaderFunction, null, new List<IShaderIR> { expressionOp }, mContext);
+        mContext.Push(castOp);
+        return;
+      }
+      throw new Exception("invalid cast");
     }
   }
 }

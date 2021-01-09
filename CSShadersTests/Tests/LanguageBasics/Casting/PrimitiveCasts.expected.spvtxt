@@ -1,0 +1,138 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 111
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
+               OpExecutionMode %PrimitiveCasts_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %PrimitiveCasts "PrimitiveCasts"
+               OpName %PrimitiveCasts_PreConstructor "PrimitiveCasts_PreConstructor"
+               OpName %self "self"
+               OpName %PrimitiveCasts_DefaultConstructor "PrimitiveCasts_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %b "b"
+               OpName %i "i"
+               OpName %u "u"
+               OpName %f "f"
+               OpName %PrimitiveCasts_InitGlobals "PrimitiveCasts_InitGlobals"
+               OpName %PrimitiveCasts_CopyInputs "PrimitiveCasts_CopyInputs"
+               OpName %self_2 "self"
+               OpName %PrimitiveCasts_CopyOutputs "PrimitiveCasts_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
+               OpName %self_4 "self"
+       %bool = OpTypeBool
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+      %float = OpTypeFloat 32
+%PrimitiveCasts = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_PrimitiveCasts = OpTypePointer Function %PrimitiveCasts
+         %13 = OpTypeFunction %void %_ptr_Function_PrimitiveCasts
+%_ptr_Function_bool = OpTypePointer Function %bool
+%_ptr_Function_int = OpTypePointer Function %int
+%_ptr_Function_uint = OpTypePointer Function %uint
+%_ptr_Function_float = OpTypePointer Function %float
+         %15 = OpTypeFunction %void
+      %false = OpConstantFalse %bool
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+    %float_0 = OpConstant %float 0
+%PrimitiveCasts_PreConstructor = OpFunction %void None %13
+       %self = OpFunctionParameter %_ptr_Function_PrimitiveCasts
+         %24 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveCasts_DefaultConstructor = OpFunction %void None %13
+     %self_0 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
+         %29 = OpLabel
+         %30 = OpFunctionCall %void %PrimitiveCasts_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
+         %35 = OpLabel
+          %b = OpVariable %_ptr_Function_bool Function
+          %i = OpVariable %_ptr_Function_int Function
+          %u = OpVariable %_ptr_Function_uint Function
+          %f = OpVariable %_ptr_Function_float Function
+               OpStore %b %false
+               OpStore %i %int_0
+               OpStore %u %uint_0
+               OpStore %f %float_0
+               OpStore %b %false
+         %45 = OpLoad %bool %b
+               OpStore %b %45
+               OpStore %i %int_0
+         %48 = OpLoad %int %i
+               OpStore %i %48
+         %50 = OpBitcast %int %uint_0
+               OpStore %i %50
+         %52 = OpLoad %uint %u
+         %53 = OpBitcast %int %52
+               OpStore %i %53
+         %55 = OpConvertFToS %int %float_0
+               OpStore %i %55
+         %57 = OpLoad %float %f
+         %58 = OpConvertFToS %int %57
+               OpStore %i %58
+         %60 = OpBitcast %uint %int_0
+               OpStore %u %60
+         %62 = OpLoad %int %i
+         %63 = OpBitcast %uint %62
+               OpStore %u %63
+               OpStore %u %uint_0
+         %66 = OpLoad %uint %u
+               OpStore %u %66
+         %68 = OpConvertFToU %uint %float_0
+               OpStore %u %68
+         %70 = OpLoad %float %f
+         %71 = OpConvertFToU %uint %70
+               OpStore %u %71
+         %73 = OpConvertSToF %float %int_0
+               OpStore %f %73
+         %75 = OpLoad %int %i
+         %76 = OpConvertSToF %float %75
+               OpStore %f %76
+         %78 = OpConvertSToF %float %uint_0
+               OpStore %f %78
+         %80 = OpLoad %uint %u
+         %81 = OpConvertSToF %float %80
+               OpStore %f %81
+               OpStore %f %float_0
+         %84 = OpLoad %float %f
+               OpStore %f %84
+               OpReturn
+               OpFunctionEnd
+%PrimitiveCasts_InitGlobals = OpFunction %void None %15
+         %89 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveCasts_CopyInputs = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
+         %94 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveCasts_CopyOutputs = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
+         %99 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveCasts_Main_EntryPoint = OpFunction %void None %15
+        %103 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_PrimitiveCasts Function
+        %105 = OpFunctionCall %void %PrimitiveCasts_InitGlobals
+        %106 = OpFunctionCall %void %PrimitiveCasts_DefaultConstructor %self_4
+        %107 = OpFunctionCall %void %PrimitiveCasts_CopyInputs %self_4
+        %108 = OpFunctionCall %void %Main %self_4
+        %109 = OpFunctionCall %void %PrimitiveCasts_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

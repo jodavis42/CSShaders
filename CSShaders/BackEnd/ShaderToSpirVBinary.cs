@@ -19,6 +19,7 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpExtInst, Spv.Op.OpExtInst);
 
       SimpleInstructions.Add(OpInstructionType.OpConvertFToS, Spv.Op.OpConvertFToS);
+      SimpleInstructions.Add(OpInstructionType.OpConvertFToU, Spv.Op.OpConvertFToU);
       SimpleInstructions.Add(OpInstructionType.OpConvertSToF, Spv.Op.OpConvertSToF);
       SimpleInstructions.Add(OpInstructionType.OpBitcast, Spv.Op.OpBitcast);
       SimpleInstructions.Add(OpInstructionType.OpTranspose, Spv.Op.OpTranspose);

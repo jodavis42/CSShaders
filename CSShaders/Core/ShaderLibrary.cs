@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
+using System;
 using System.Collections.Generic;
 
 namespace CSShaders
@@ -10,6 +11,7 @@ namespace CSShaders
 
     public delegate void InstrinsicDelegate(FrontEndTranslator translator, List<IShaderIR> arguments, FrontEndContext context);
     public delegate void InstrinsicSetterDelegate(FrontEndTranslator translator, IShaderIR selfInstance, IShaderIR rhsIR, FrontEndContext context);
+    public delegate ShaderOp CastDelegate(ShaderType castedToType, IShaderIR expressionOp, FrontEndContext context);
 
     public Dictionary<ConstantOpKey, ShaderConstantLiteral> mConstantLiterals = new Dictionary<ConstantOpKey, ShaderConstantLiteral>();
     public Dictionary<ConstantOpKey, ShaderOp> mConstantOps = new Dictionary<ConstantOpKey, ShaderOp>();
@@ -19,6 +21,7 @@ namespace CSShaders
     public Dictionary<FunctionKey, InstrinsicDelegate> IntrinsicFunctions = new Dictionary<FunctionKey, InstrinsicDelegate>();
     public Dictionary<FunctionKey, InstrinsicSetterDelegate> IntrinsicSetterFunctions = new Dictionary<FunctionKey, InstrinsicSetterDelegate>();
     public Dictionary<string, ExtensionLibraryImportOp> ExtensionLibraryImports = new Dictionary<string, ExtensionLibraryImportOp>();
+    public Dictionary<Tuple<ShaderType, ShaderType>, CastDelegate> CastIntrinsics = new Dictionary<Tuple<ShaderType, ShaderType>, CastDelegate>();
 
     //---------------------------------------------------------------Types
     public bool AddType(TypeKey key, ShaderType shaderType)
@@ -189,6 +192,29 @@ namespace CSShaders
         result = new ExtensionLibraryImportOp();
         result.ExtensionLibraryName = extensionLibraryName;
         ExtensionLibraryImports.Add(extensionLibraryName, result);
+      }
+      return result;
+    }
+
+    //---------------------------------------------------------------Casting
+    public void AddCastIntrinsics(ShaderType castToType, ShaderType castFromType, CastDelegate castDelegate)
+    {
+      var tuple = new Tuple<ShaderType, ShaderType>(castToType, castFromType);
+      CastIntrinsics.Add(tuple, castDelegate);
+    }
+
+    public CastDelegate FindCastIntrinsics(ShaderType castToType, ShaderType castFromType, bool checkDependencies = true)
+    {
+      var tuple = new Tuple<ShaderType, ShaderType>(castToType, castFromType);
+      var result = CastIntrinsics.GetValueOrDefault(tuple, null);
+      if (result == null && checkDependencies == true && mDependencies != null)
+      {
+        foreach (var dependency in mDependencies)
+        {
+          result = dependency.FindCastIntrinsics(castToType, castFromType, checkDependencies);
+          if (result != null)
+            break;
+        }
       }
       return result;
     }

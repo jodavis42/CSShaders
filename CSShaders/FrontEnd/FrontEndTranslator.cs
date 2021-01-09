@@ -618,5 +618,139 @@ namespace CSShaders
       var functionCallOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpFunctionCall, fnShaderReturnType, argumentOps);
       return functionCallOp;
     }
+
+    public ShaderOp GenerateCompositeExtract(IShaderIR selfIR, string fieldName, FrontEndContext context)
+    {
+      var selfOp = selfIR as ShaderOp;
+      var selfType = selfOp.mResultType.GetDereferenceType();
+      ShaderField shaderField;
+      int fieldIndex;
+      FindField(selfType, fieldName, out shaderField, out fieldIndex);
+
+      var resultType = shaderField.mType.GetDereferenceType();
+      var constantLiteral = CreateConstantLiteral<uint>((uint)fieldIndex);
+      var memberVariableOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpCompositeExtract, resultType, new List<IShaderIR> { selfOp, constantLiteral });
+      return memberVariableOp;
+    }
+
+    public ShaderOp CompositeSplatConstruct(ShaderType resultType, IShaderIR value, FrontEndContext context)
+    {
+      var opArgs = new List<IShaderIR>();
+      if (resultType.mBaseType == OpType.Vector)
+      {
+        var vectorResultType = VectorType.Load(resultType);
+        for (var i = 0; i < vectorResultType.GetComponentCount(); ++i)
+          opArgs.Add(value);
+      }
+      else if (resultType.mBaseType == OpType.Matrix)
+      {
+        var matrixResultType = MatrixType.Load(resultType);
+        var vectorElement = CompositeSplatConstruct(matrixResultType.GetComponentType(), value, context);
+        for (var i = 0; i < matrixResultType.GetComponentCount(); ++i)
+          opArgs.Add(vectorElement);
+      }
+      else
+        throw new Exception("invalid type");
+
+      return CreateOp(context.mCurrentBlock, OpInstructionType.OpCompositeConstruct, resultType, opArgs);
+    }
+
+    ///////////////////////////////////////////////////////////////Conversions
+    public ShaderOp CastFromBool(ShaderType resultType, IShaderIR expressionOp, IShaderIR zeroScalar, IShaderIR oneScalar, FrontEndContext context)
+    {
+      var zeroExpression = zeroScalar;
+      var oneExpression = oneScalar;
+      if(resultType.mBaseType == OpType.Vector)
+      {
+        zeroExpression = CompositeSplatConstruct(resultType, zeroScalar, context);
+        oneExpression = CompositeSplatConstruct(resultType, oneScalar, context);
+      }
+      var castOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpSelect, resultType, new List<IShaderIR> { expressionOp, zeroScalar, oneScalar });
+      context.Push(castOp);
+      return castOp;
+    }
+
+    public ShaderOp SimpleCast(ShaderType resultType, OpInstructionType instructionType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var castOp = CreateOp(context.mCurrentBlock, instructionType, resultType, new List<IShaderIR> { expressionOp });
+      context.Push(castOp);
+      return castOp;
+    }
+
+    public ShaderOp SimpleCompareCast(ShaderType resultType, OpInstructionType instructionType, IShaderIR expressionOp, IShaderIR constantOp, FrontEndContext context)
+    {
+      var castOp = CreateOp(context.mCurrentBlock, instructionType, resultType, new List<IShaderIR> { expressionOp, constantOp });
+      context.Push(castOp);
+      return castOp;
+    }
+
+    public ShaderOp CastBoolToInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var constantOp0 = CreateConstantOp<int>(0);
+      var constantOp1 = CreateConstantOp<int>(1);
+      return CastFromBool(resultType, expressionOp, constantOp0, constantOp1, context);
+    }
+
+    public ShaderOp CastBoolToUInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var constantOp0 = CreateConstantOp<uint>(0u);
+      var constantOp1 = CreateConstantOp<uint>(1u);
+      return CastFromBool(resultType, expressionOp, constantOp0, constantOp1, context);
+    }
+
+    public ShaderOp CastBoolToFloat(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var constantOp0 = CreateConstantOp<float>(0.0f);
+      var constantOp1 = CreateConstantOp<float>(1.0f);
+      return CastFromBool(resultType, expressionOp, constantOp0, constantOp1, context);
+    }
+
+    public ShaderOp CastIntToBool(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var constantOp = CreateConstantOp<int>(0);
+      return SimpleCompareCast(resultType, OpInstructionType.OpINotEqual, expressionOp, constantOp, context);
+    }
+
+    public ShaderOp CastIntToUInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpBitcast, expressionOp, context);
+    }
+
+    public ShaderOp CastIntToFloat(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpConvertSToF, expressionOp, context);
+    }
+
+    public ShaderOp CastUIntToBool(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var constantOp = CreateConstantOp<uint>(0u);
+      return SimpleCompareCast(resultType, OpInstructionType.OpINotEqual, expressionOp, constantOp, context);
+    }
+
+    public ShaderOp CastUIntToInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpBitcast, expressionOp, context);
+    }
+
+    public ShaderOp CastUIntToFloat(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpConvertSToF, expressionOp, context);
+    }
+
+    public ShaderOp CastFloatToBool(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      var constantOp = CreateConstantOp<float>(0.0f);
+      return SimpleCompareCast(resultType, OpInstructionType.OpFOrdNotEqual,expressionOp, constantOp , context);
+    }
+
+    public ShaderOp CastFloatToInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpConvertFToS, expressionOp, context);
+    }
+
+    public ShaderOp CastFloatToUInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpConvertFToU, expressionOp, context);
+    }
   }
 }

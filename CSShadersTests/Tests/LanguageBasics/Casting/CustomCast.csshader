@@ -1,0 +1,30 @@
+
+namespace Shaders
+{
+
+struct Int2
+{
+  public int X, Y;
+}
+
+struct MyInt
+{
+  public int Value;
+  public static implicit operator int(MyInt value) { return value.Value; }
+  public static implicit operator Int2(MyInt value) { return new Int2(){X = value.Value, Y = value.Value}; }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct CustomCast
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    MyInt myInt = new MyInt();
+    var i = (int)myInt;
+    var i2 = (Int2)myInt;
+  }
+}
+
+}
+

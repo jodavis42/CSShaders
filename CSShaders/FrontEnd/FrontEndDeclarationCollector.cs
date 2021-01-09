@@ -84,6 +84,18 @@ namespace CSShaders
       CreateFunction(node, functionName, returnType);
     }
 
+    public override void VisitConversionOperatorDeclaration(ConversionOperatorDeclarationSyntax node)
+    {
+      // Don't process intrinsics
+      var attributes = mFrontEnd.ParseAttributes(GetDeclaredSymbol(node));
+      if (IsIntrinsic(attributes))
+        return;
+
+      var functionName = GetDeclaredSymbol(node).ToString();
+      var returnType = FindType(node.Type);
+      CreateFunction(node, functionName, returnType);
+    }
+
     public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
     {
       var owningType = mContext.mCurrentType;

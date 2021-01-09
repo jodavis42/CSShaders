@@ -87,6 +87,11 @@ namespace CSShaders
       return shaderFunction;
     }
 
+    public override void VisitConversionOperatorDeclaration(ConversionOperatorDeclarationSyntax node)
+    {
+      VisitMethod(node);
+    }
+
     public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
     {
       var propertySymbol = GetDeclaredSymbol(node) as IPropertySymbol;

@@ -23,6 +23,7 @@ namespace CSShaders
 
       // Add some custom intrinsics for built-int types that 
       AddPrimitiveIntrinsics(translator);
+      AddCastIntrinsics(translator);
 
       // Compile the custom data types and functions we're adding
       // @JoshD: Fix path lookup
@@ -54,6 +55,29 @@ namespace CSShaders
     {
       var floatType = translator.FindType(typeof(float));
       SpecialResolvers.CreateSimpleIntrinsicFunction(translator, new FunctionKey("float.operator +(float, float)"), OpInstructionType.OpFAdd, floatType);
+    }
+
+    void AddCastIntrinsics(FrontEndTranslator translator)
+    {
+      var boolType = FindType(new TypeKey(typeof(bool)));
+      var intType = FindType(new TypeKey(typeof(int)));
+      var uintType = FindType(new TypeKey(typeof(uint)));
+      var floatType = FindType(new TypeKey(typeof(float)));
+      AddCastIntrinsics(boolType, intType, translator.CastIntToBool);
+      AddCastIntrinsics(boolType, uintType, translator.CastUIntToBool);
+      AddCastIntrinsics(boolType, floatType, translator.CastFloatToBool);
+
+      AddCastIntrinsics(intType, boolType, translator.CastBoolToInt);
+      AddCastIntrinsics(intType, uintType, translator.CastUIntToInt);
+      AddCastIntrinsics(intType, floatType, translator.CastFloatToInt);
+
+      AddCastIntrinsics(uintType, boolType, translator.CastBoolToUInt);
+      AddCastIntrinsics(uintType, intType, translator.CastIntToUInt);
+      AddCastIntrinsics(uintType, floatType, translator.CastFloatToUInt);
+
+      AddCastIntrinsics(floatType, boolType, translator.CastBoolToFloat);
+      AddCastIntrinsics(floatType, intType, translator.CastIntToFloat);
+      AddCastIntrinsics(floatType, uintType, translator.CastUIntToFloat);
     }
   }
 }

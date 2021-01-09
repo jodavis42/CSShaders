@@ -1,0 +1,167 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 127
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %CustomCast_Main_EntryPoint "CustomCast_Main_EntryPoint"
+               OpExecutionMode %CustomCast_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Int2 "Int2"
+               OpMemberName %Int2 0 "X"
+               OpMemberName %Int2 1 "Y"
+               OpName %MyInt "MyInt"
+               OpMemberName %MyInt 0 "Value"
+               OpName %CustomCast "CustomCast"
+               OpName %Int2_PreConstructor "Int2_PreConstructor"
+               OpName %self "self"
+               OpName %Int2_DefaultConstructor "Int2_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %MyInt_PreConstructor "MyInt_PreConstructor"
+               OpName %self_1 "self"
+               OpName %MyInt_DefaultConstructor "MyInt_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %op_Implicit "op_Implicit"
+               OpName %value "value"
+               OpName %op_Implicit_0 "op_Implicit"
+               OpName %value_0 "value"
+               OpName %tempInt2 "tempInt2"
+               OpName %CustomCast_PreConstructor "CustomCast_PreConstructor"
+               OpName %self_3 "self"
+               OpName %CustomCast_DefaultConstructor "CustomCast_DefaultConstructor"
+               OpName %self_4 "self"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %myInt "myInt"
+               OpName %tempMyInt "tempMyInt"
+               OpName %i "i"
+               OpName %i2 "i2"
+               OpName %CustomCast_InitGlobals "CustomCast_InitGlobals"
+               OpName %CustomCast_CopyInputs "CustomCast_CopyInputs"
+               OpName %self_6 "self"
+               OpName %CustomCast_CopyOutputs "CustomCast_CopyOutputs"
+               OpName %self_7 "self"
+               OpName %CustomCast_Main_EntryPoint "CustomCast_Main_EntryPoint"
+               OpName %self_8 "self"
+               OpName %CustomCast_Main_EntryPoint "CustomCast_Main_EntryPoint"
+               OpName %self_8 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+       %Int2 = OpTypeStruct %int %int
+       %void = OpTypeVoid
+%_ptr_Function_Int2 = OpTypePointer Function %Int2
+          %9 = OpTypeFunction %void %_ptr_Function_Int2
+%_ptr_Function_int = OpTypePointer Function %int
+      %MyInt = OpTypeStruct %int
+%_ptr_Function_MyInt = OpTypePointer Function %MyInt
+         %13 = OpTypeFunction %void %_ptr_Function_MyInt
+         %15 = OpTypeFunction %int %MyInt
+         %17 = OpTypeFunction %Int2 %MyInt
+ %CustomCast = OpTypeStruct
+%_ptr_Function_CustomCast = OpTypePointer Function %CustomCast
+         %21 = OpTypeFunction %void %_ptr_Function_CustomCast
+         %23 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+%Int2_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_Int2
+         %31 = OpLabel
+         %32 = OpAccessChain %_ptr_Function_int %self %uint_0
+               OpStore %32 %int_0
+         %34 = OpAccessChain %_ptr_Function_int %self %uint_1
+               OpStore %34 %int_0
+               OpReturn
+               OpFunctionEnd
+%Int2_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_Int2
+         %40 = OpLabel
+         %41 = OpFunctionCall %void %Int2_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%MyInt_PreConstructor = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_MyInt
+         %46 = OpLabel
+         %47 = OpAccessChain %_ptr_Function_int %self_1 %uint_0
+               OpStore %47 %int_0
+               OpReturn
+               OpFunctionEnd
+%MyInt_DefaultConstructor = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_MyInt
+         %53 = OpLabel
+         %54 = OpFunctionCall %void %MyInt_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+%op_Implicit = OpFunction %int None %15
+      %value = OpFunctionParameter %MyInt
+         %59 = OpLabel
+         %60 = OpCompositeExtract %int %value 0
+               OpReturnValue %60
+               OpFunctionEnd
+%op_Implicit_0 = OpFunction %Int2 None %17
+    %value_0 = OpFunctionParameter %MyInt
+         %65 = OpLabel
+   %tempInt2 = OpVariable %_ptr_Function_Int2 Function
+         %67 = OpAccessChain %_ptr_Function_int %tempInt2 %uint_0
+         %68 = OpCompositeExtract %int %value_0 0
+               OpStore %67 %68
+         %70 = OpAccessChain %_ptr_Function_int %tempInt2 %uint_1
+         %71 = OpCompositeExtract %int %value_0 0
+               OpStore %70 %71
+         %73 = OpLoad %Int2 %tempInt2
+               OpReturnValue %73
+               OpFunctionEnd
+%CustomCast_PreConstructor = OpFunction %void None %21
+     %self_3 = OpFunctionParameter %_ptr_Function_CustomCast
+         %78 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CustomCast_DefaultConstructor = OpFunction %void None %21
+     %self_4 = OpFunctionParameter %_ptr_Function_CustomCast
+         %83 = OpLabel
+         %84 = OpFunctionCall %void %CustomCast_PreConstructor %self_4
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %21
+     %self_5 = OpFunctionParameter %_ptr_Function_CustomCast
+         %89 = OpLabel
+      %myInt = OpVariable %_ptr_Function_MyInt Function
+  %tempMyInt = OpVariable %_ptr_Function_MyInt Function
+          %i = OpVariable %_ptr_Function_int Function
+         %i2 = OpVariable %_ptr_Function_Int2 Function
+         %94 = OpLoad %MyInt %tempMyInt
+               OpStore %myInt %94
+         %96 = OpLoad %MyInt %myInt
+         %97 = OpFunctionCall %int %op_Implicit %96
+               OpStore %i %97
+         %99 = OpLoad %MyInt %myInt
+        %100 = OpFunctionCall %Int2 %op_Implicit_0 %99
+               OpStore %i2 %100
+               OpReturn
+               OpFunctionEnd
+%CustomCast_InitGlobals = OpFunction %void None %23
+        %105 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CustomCast_CopyInputs = OpFunction %void None %21
+     %self_6 = OpFunctionParameter %_ptr_Function_CustomCast
+        %110 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CustomCast_CopyOutputs = OpFunction %void None %21
+     %self_7 = OpFunctionParameter %_ptr_Function_CustomCast
+        %115 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%CustomCast_Main_EntryPoint = OpFunction %void None %23
+        %119 = OpLabel
+     %self_8 = OpVariable %_ptr_Function_CustomCast Function
+        %121 = OpFunctionCall %void %CustomCast_InitGlobals
+        %122 = OpFunctionCall %void %CustomCast_DefaultConstructor %self_8
+        %123 = OpFunctionCall %void %CustomCast_CopyInputs %self_8
+        %124 = OpFunctionCall %void %Main %self_8
+        %125 = OpFunctionCall %void %CustomCast_CopyOutputs %self_8
+               OpReturn
+               OpFunctionEnd

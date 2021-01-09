@@ -1,0 +1,55 @@
+
+namespace Shaders
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct PrimitiveCasts
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var b = false;
+    var i = 0;
+    var u = 0u;
+    var f = 0.0f;
+
+    b = (bool)false;
+    b = (bool)b;
+    //b = (bool)0;
+    //b = (bool)i;
+    //b = (bool)0u;
+    //b = (bool)u;
+    //b = (bool)0.0f;
+    //b = (bool)f;
+
+    //i = (int)false;
+    //i = (int)b;
+    i = (int)0;
+    i = (int)i;
+    i = (int)0u;
+    i = (int)u;
+    i = (int)0.0f;
+    i = (int)f;
+
+    //u = (int)false;
+    //u = (int)b;
+    u = (uint)0;
+    u = (uint)i;
+    u = (uint)0u;
+    u = (uint)u;
+    u = (uint)0.0f;
+    u = (uint)f;
+
+    //f = (float)false;
+    //f = (float)b;
+    f = (float)0;
+    f = (float)i;
+    f = (float)0u;
+    f = (float)u;
+    f = (float)0.0f;
+    f = (float)f;
+  }
+}
+
+}
+
