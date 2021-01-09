@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 
 namespace CSShaders
@@ -13,6 +14,7 @@ namespace CSShaders
   {
     public string Name = "";
     public List<ShaderAttributeParameter> Parameters = new List<ShaderAttributeParameter>();
+    public AttributeData Attribute;
   }
 
   public class ShaderAttributes
