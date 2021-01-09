@@ -1,0 +1,17 @@
+namespace Shaders
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct DescriptorSetBindingIds
+{
+  [Shader.UniformInput(DescriptorSet = 1)] float Value = 1.0f;
+  [Shader.UniformInput(BindingId = 1)] float Value2 = 1.0f;
+  [Shader.UniformInput(BindingId = 1, DescriptorSet = 1)] float Value3 = 1.0f;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}

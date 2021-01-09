@@ -1,0 +1,90 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 66
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Vertex %InstanceIndexTest_Main_EntryPoint "InstanceIndexTest_Main_EntryPoint" %gl_InstanceIndex
+               OpSource Unknown 100
+               OpName %InstanceIndexTest "InstanceIndexTest"
+               OpMemberName %InstanceIndexTest 0 "InstanceIndex"
+               OpName %InstanceIndexTest_PreConstructor "InstanceIndexTest_PreConstructor"
+               OpName %self "self"
+               OpName %InstanceIndexTest_DefaultConstructor "InstanceIndexTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %index "index"
+               OpName %InstanceIndexTest_InitGlobals "InstanceIndexTest_InitGlobals"
+               OpName %InstanceIndexTest_CopyInputs "InstanceIndexTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %InstanceIndexTest_CopyOutputs "InstanceIndexTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %InstanceIndexTest_Main_EntryPoint "InstanceIndexTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %InstanceIndexTest_Main_EntryPoint "InstanceIndexTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpDecorate %gl_InstanceIndex BuiltIn InstanceIndex
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%InstanceIndexTest = OpTypeStruct %int
+       %void = OpTypeVoid
+%_ptr_Function_InstanceIndexTest = OpTypePointer Function %InstanceIndexTest
+          %9 = OpTypeFunction %void %_ptr_Function_InstanceIndexTest
+%_ptr_Function_int = OpTypePointer Function %int
+         %11 = OpTypeFunction %void
+%_ptr_Input_int = OpTypePointer Input %int
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+%gl_InstanceIndex = OpVariable %_ptr_Input_int Input
+%InstanceIndexTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_InstanceIndexTest
+         %20 = OpLabel
+         %21 = OpAccessChain %_ptr_Function_int %self %uint_0
+               OpStore %21 %int_0
+               OpReturn
+               OpFunctionEnd
+%InstanceIndexTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %InstanceIndexTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
+         %33 = OpLabel
+      %index = OpVariable %_ptr_Function_int Function
+         %35 = OpAccessChain %_ptr_Function_int %self_1 %uint_0
+         %36 = OpLoad %int %35
+               OpStore %index %36
+               OpReturn
+               OpFunctionEnd
+%InstanceIndexTest_InitGlobals = OpFunction %void None %11
+         %41 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%InstanceIndexTest_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
+         %46 = OpLabel
+         %47 = OpAccessChain %_ptr_Function_int %self_2 %uint_0
+         %48 = OpLoad %int %gl_InstanceIndex
+               OpStore %47 %48
+               OpReturn
+               OpFunctionEnd
+%InstanceIndexTest_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
+         %54 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%InstanceIndexTest_Main_EntryPoint = OpFunction %void None %11
+         %58 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_InstanceIndexTest Function
+         %60 = OpFunctionCall %void %InstanceIndexTest_InitGlobals
+         %61 = OpFunctionCall %void %InstanceIndexTest_DefaultConstructor %self_4
+         %62 = OpFunctionCall %void %InstanceIndexTest_CopyInputs %self_4
+         %63 = OpFunctionCall %void %Main %self_4
+         %64 = OpFunctionCall %void %InstanceIndexTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

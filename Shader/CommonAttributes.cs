@@ -63,6 +63,8 @@ namespace Shader
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class UniformInput : Attribute
   {
+    public int DescriptorSet = 0;
+    public int BindingId = 0;
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
@@ -88,6 +90,12 @@ namespace Shader
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class HardwareBuiltInInput : Attribute
   {
+    public HardwareBuiltinType InputType;
+
+    public HardwareBuiltInInput(HardwareBuiltinType inputType)
+    {
+      InputType = inputType;
+    }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
@@ -98,6 +106,12 @@ namespace Shader
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class HardwareBuiltInOutput : Attribute
   {
+    public HardwareBuiltinType OutputType;
+
+    public HardwareBuiltInOutput(HardwareBuiltinType outputType)
+    {
+      OutputType = outputType;
+    }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]

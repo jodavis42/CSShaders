@@ -133,6 +133,7 @@ namespace CSShaders
       IdGenerator.GenerateIds(mLibrary, mTypeCollector);
       WriteHeader();
       WriteDebugInstructions();
+      WriteDecorations();
       WriteTypeDeclarations();
       WriteConstants();
       WriteGlobalStatics();
@@ -180,7 +181,7 @@ namespace CSShaders
         var entryPointName = entryPointFn.DebugInfo.Name;
         var byteCount = mWriter.GetPaddedByteCount(entryPointName);
         var wordCount = byteCount / 4;
-        var interfaceSize = entryPoint.mGlobalVariablesBlock.mLocalVariables.Count;
+        var interfaceSize = entryPoint.mGlobalVariablesBlock.mLocalVariables.Count + entryPoint.mInterfaceVariables.mLocalVariables.Count;
         UInt16 totalSize = (UInt16)(3 + wordCount + interfaceSize);
 
         Spv.ExecutionModel executionModel = Spv.ExecutionModel.ExecutionModelFragment;
@@ -192,6 +193,10 @@ namespace CSShaders
         mWriter.WriteInstruction(totalSize, Spv.Op.OpEntryPoint, (UInt32)executionModel, entryPointId);
         mWriter.Write(entryPointFn.DebugInfo.Name);
         foreach(var interfaceVar in entryPoint.mGlobalVariablesBlock.mLocalVariables)
+        {
+          mWriter.Write(GetId(interfaceVar));
+        }
+        foreach (var interfaceVar in entryPoint.mInterfaceVariables.mLocalVariables)
         {
           mWriter.Write(GetId(interfaceVar));
         }
@@ -283,11 +288,23 @@ namespace CSShaders
         return Spv.StorageClass.StorageClassPrivate;
       else if (storageClass == StorageClass.Generic)
         return Spv.StorageClass.StorageClassGeneric;
+      else if (storageClass == StorageClass.Input)
+        return Spv.StorageClass.StorageClassInput;
+      else if (storageClass == StorageClass.Output)
+        return Spv.StorageClass.StorageClassOutput;
       else if (storageClass == StorageClass.Uniform)
         return Spv.StorageClass.StorageClassUniform;
       else if (storageClass == StorageClass.UniformConstant)
         return Spv.StorageClass.StorageClassUniformConstant;
       return Spv.StorageClass.StorageClassFunction;
+    }
+
+    void WriteDecorations()
+    {
+      foreach(var entryPoint in mTypeCollector.mEntryPoints)
+      {
+        WriteBlockInstructions(entryPoint.mDecorations, entryPoint.mDecorations.mOps);
+      }
     }
 
     void WriteTypeDeclarations()
@@ -461,6 +478,12 @@ namespace CSShaders
           break;
         case OpInstructionType.OpExecutionMode:
           WriteBasicOpNoResultId(op, Spv.Op.OpExecutionMode);
+          break;
+        case OpInstructionType.OpDecorate:
+          WriteBasicOpNoResultId(op, Spv.Op.OpDecorate);
+          break;
+        case OpInstructionType.OpMemberDecorate:
+          WriteBasicOpNoResultId(op, Spv.Op.OpMemberDecorate);
           break;
         case OpInstructionType.OpConstant:
           mWriter.WriteInstruction(4, Spv.Op.OpConstant);
