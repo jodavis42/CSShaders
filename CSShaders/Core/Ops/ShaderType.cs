@@ -64,8 +64,7 @@ namespace CSShaders
       {
         var widthLiteral = mParameters[0] as ShaderConstantLiteral;
         var signedLiteral = mParameters[1] as ShaderConstantLiteral;
-        return string.Format("{0}Int{1}", IsSignedInt(this) ? "U" : "", (uint)widthLiteral.mValue);
-
+        return string.Format("{0}Int{1}", IsSignedInt(this) ? "" : "U", (uint)widthLiteral.mValue);
       }
       return mMeta.mName;
     }
