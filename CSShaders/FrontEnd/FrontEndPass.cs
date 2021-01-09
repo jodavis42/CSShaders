@@ -235,23 +235,7 @@ namespace CSShaders
 
     public IShaderIR GetFunctionParameter(ShaderFunction shaderFunction, int paramIndex, IShaderIR argumentOp)
     {
-      // Handle if the parameter types don't match (e.g. handle out params and whatnot)
-      var paramType = shaderFunction.GetExplicitParameterType(paramIndex);
-      // If the function expects a pointer
-      if (paramType.mBaseType == OpType.Pointer)
-      {
-        // If this isn't already a pointer then throw an exception. This might be valid, but has to be thought more about.
-        // With C# I think it'll always be a pointer when you pass something in to an out/ref param.
-        var op = argumentOp as ShaderOp;
-        if (op.mResultType != paramType)
-          throw new Exception();
-      }
-      // If this is a pointer but the function expects a value type then deref if necessary
-      else
-      {
-        argumentOp = mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, argumentOp);
-      }
-      return argumentOp;
+      return mFrontEnd.GetFunctionParameter(shaderFunction, paramIndex, argumentOp, mContext);
     }
 
     public IShaderIR GetFunctionParameter(ShaderFunction shaderFunction, int paramIndex, CSharpSyntaxNode argument)
@@ -263,23 +247,7 @@ namespace CSShaders
 
     public void GenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<IShaderIR> arguments)
     {
-      var argumentOps = new List<IShaderIR>();
-      argumentOps.Add(shaderFunction);
-      if (!shaderFunction.IsStatic)
-      {
-        argumentOps.Add(selfOp);
-      }
-
-      for (var i = 0; i < arguments.Count; ++i)
-      {
-        var argument = arguments[i];
-        var paramIR = GetFunctionParameter(shaderFunction, i, argument);
-        argumentOps.Add(paramIR);
-      }
-
-      var fnShaderReturnType = shaderFunction.GetReturnType();
-      var functionCallOp = mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionCall, fnShaderReturnType, argumentOps);
-      mContext.Push(functionCallOp);
+      mFrontEnd.GenerateFunctionCall(shaderFunction, selfOp, arguments, mContext);
     }
 
     public void GenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<CSharpSyntaxNode> arguments)
@@ -308,7 +276,6 @@ namespace CSShaders
       var setterShaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(functionKey);
       if (setterShaderFunction == null)
         return false;
-
 
       var selfInstanceIR = WalkAndGetResult(selfExpressionNode);
       var rhsIR = WalkAndGetResult(rhsNode);

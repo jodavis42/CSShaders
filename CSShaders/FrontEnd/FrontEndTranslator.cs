@@ -120,6 +120,27 @@ namespace CSShaders
       return pointerType;
     }
 
+    public ShaderType FindOrCreatePointerType(TypeKey key, string typeName, StorageClass storageClass)
+    {
+      string ptrTypeName = typeName + "_ptr";
+      var baseType = mCurrentLibrary.FindType(key);
+      return FindOrCreatePointerType(baseType, storageClass);
+    }
+
+    public ShaderType FindOrCreatePointerType(ShaderType baseType, StorageClass storageClass)
+    {
+      var pointerType = baseType.FindPointerType(storageClass);
+      if (pointerType != null)
+        return pointerType;
+
+      pointerType = new ShaderType();
+      pointerType.mBaseType = OpType.Pointer;
+      pointerType.DebugInfo.Name = "";
+      pointerType.mStorageClass = storageClass;
+      baseType.StorageClassCollection.AddPointerType(storageClass, pointerType);
+      return pointerType;
+    }
+
     public string GenerateDebugFunctionName(ShaderType owningType, string fnName)
     {
       return owningType.mMeta.mName + "_" + fnName;
@@ -312,6 +333,12 @@ namespace CSShaders
           InitializeOp(constantOp, OpInstructionType.OpConstantFalse, constantType, null);
       }
       return constantOp;
+    }
+
+    public ShaderOp CreateConstantOp<T>(T value)
+    {
+      var constantLiteral = CreateConstantLiteral<T>(value);
+      return CreateConstantOp(constantLiteral.mType, constantLiteral);
     }
 
     public ShaderOp CreateOpVariable(ShaderType resultType, FrontEndContext context)
@@ -540,9 +567,54 @@ namespace CSShaders
       var selfOp = selfIR as ShaderOp;
       var constantLiteral = CreateConstantLiteral(fieldIndex);
       var memberIndexConstant = CreateConstantOp(FindType(typeof(uint)), constantLiteral);
-      resultType = resultType.FindPointerType(selfOp.mResultType.mStorageClass);
+      resultType = FindOrCreatePointerType(resultType.GetDereferenceType(), selfOp.mResultType.mStorageClass);
       var memberVariableOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpAccessChain, resultType, new List<IShaderIR> { selfOp, memberIndexConstant });
       return memberVariableOp;
+    }
+
+    public IShaderIR GetFunctionParameter(ShaderFunction shaderFunction, int paramIndex, IShaderIR argumentOp, FrontEndContext context)
+    {
+      // Handle if the parameter types don't match (e.g. handle out params and whatnot)
+      var paramType = shaderFunction.GetExplicitParameterType(paramIndex);
+      // If the function expects a pointer
+      if (paramType.mBaseType == OpType.Pointer)
+      {
+        // If this isn't already a pointer then throw an exception. This might be valid, but has to be thought more about.
+        // With C# I think it'll always be a pointer when you pass something in to an out/ref param.
+        var op = argumentOp as ShaderOp;
+        if (op.mResultType != paramType)
+          throw new Exception();
+      }
+      // If this is a pointer but the function expects a value type then deref if necessary
+      else
+      {
+        argumentOp = GetOrGenerateValueTypeFromIR(context.mCurrentBlock, argumentOp);
+      }
+      return argumentOp;
+    }
+
+    public ShaderOp GenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<IShaderIR> arguments, FrontEndContext context)
+    {
+      var argumentOps = new List<IShaderIR>();
+      argumentOps.Add(shaderFunction);
+      if (!shaderFunction.IsStatic || selfOp != null)
+      {
+        argumentOps.Add(selfOp);
+      }
+
+      if(arguments != null)
+      {
+        for (var i = 0; i < arguments.Count; ++i)
+        {
+          var argument = arguments[i];
+          var paramIR = GetFunctionParameter(shaderFunction, i, argument, context);
+          argumentOps.Add(paramIR);
+        }
+      }
+
+      var fnShaderReturnType = shaderFunction.GetReturnType();
+      var functionCallOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpFunctionCall, fnShaderReturnType, argumentOps);
+      return functionCallOp;
     }
   }
 }
