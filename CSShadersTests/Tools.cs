@@ -113,7 +113,7 @@ namespace CSShadersTests
     public string Run(string inputFile)
     {
       inputFile = Path.GetFullPath(inputFile);
-      string arguments = String.Format("\"{0}\"", inputFile);
+      string arguments = String.Format("\"{0}\" --target-env {1}", inputFile, "spv1.4");
       string stdOut = "", stdErr = "";
       RunProcessSimple("spirv-val.exe", arguments, false, ref stdOut, ref stdErr);
       return stdErr + stdOut;
