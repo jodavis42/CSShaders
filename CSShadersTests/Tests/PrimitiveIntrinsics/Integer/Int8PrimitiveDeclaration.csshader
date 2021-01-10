@@ -1,0 +1,14 @@
+[Math.IntegerPrimitive(8, true)][Shader.RequiresCapability(Shader.Capabilities.Int8)]
+struct Int8
+{
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct Int8PrimitiveDeclarationTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        Int8 int8Val;
+    }
+}

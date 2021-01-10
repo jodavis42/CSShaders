@@ -2,6 +2,17 @@
 
 namespace Math
 {
+  public class IntegerPrimitive : Attribute
+  {
+    UInt32 Width = 32;
+    bool Signed = false;
+    public IntegerPrimitive(UInt32 width, bool signed)
+    {
+      Width = width;
+      Signed = signed;
+    }
+  }
+
   public class FloatPrimitive : Attribute
   {
     UInt32 Width = 32;

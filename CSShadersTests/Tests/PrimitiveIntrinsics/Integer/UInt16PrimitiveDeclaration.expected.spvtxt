@@ -1,0 +1,81 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 56
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpCapability Int16
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %UInt16PrimitiveDeclarationTest_Main_EntryPoint "UInt16PrimitiveDeclarationTest_Main_EntryPoint"
+               OpExecutionMode %UInt16PrimitiveDeclarationTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %UInt16 "UInt16"
+               OpName %UInt16PrimitiveDeclarationTest "UInt16PrimitiveDeclarationTest"
+               OpName %UInt16PrimitiveDeclarationTest_PreConstructor "UInt16PrimitiveDeclarationTest_PreConstructor"
+               OpName %self "self"
+               OpName %UInt16PrimitiveDeclarationTest_DefaultConstructor "UInt16PrimitiveDeclarationTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %uint16Val "uint16Val"
+               OpName %UInt16PrimitiveDeclarationTest_InitGlobals "UInt16PrimitiveDeclarationTest_InitGlobals"
+               OpName %UInt16PrimitiveDeclarationTest_CopyInputs "UInt16PrimitiveDeclarationTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %UInt16PrimitiveDeclarationTest_CopyOutputs "UInt16PrimitiveDeclarationTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %UInt16PrimitiveDeclarationTest_Main_EntryPoint "UInt16PrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %UInt16PrimitiveDeclarationTest_Main_EntryPoint "UInt16PrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+     %UInt16 = OpTypeInt 16 0
+%UInt16PrimitiveDeclarationTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_UInt16PrimitiveDeclarationTest = OpTypePointer Function %UInt16PrimitiveDeclarationTest
+          %9 = OpTypeFunction %void %_ptr_Function_UInt16PrimitiveDeclarationTest
+%_ptr_Function_UInt16 = OpTypePointer Function %UInt16
+         %11 = OpTypeFunction %void
+   %UInt16_0 = OpConstant %UInt16 0
+%UInt16PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_UInt16PrimitiveDeclarationTest
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UInt16PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_UInt16PrimitiveDeclarationTest
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %UInt16PrimitiveDeclarationTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_UInt16PrimitiveDeclarationTest
+         %28 = OpLabel
+  %uint16Val = OpVariable %_ptr_Function_UInt16 Function
+               OpStore %uint16Val %UInt16_0
+               OpReturn
+               OpFunctionEnd
+%UInt16PrimitiveDeclarationTest_InitGlobals = OpFunction %void None %11
+         %34 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UInt16PrimitiveDeclarationTest_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_UInt16PrimitiveDeclarationTest
+         %39 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UInt16PrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_UInt16PrimitiveDeclarationTest
+         %44 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UInt16PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
+         %48 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_UInt16PrimitiveDeclarationTest Function
+         %50 = OpFunctionCall %void %UInt16PrimitiveDeclarationTest_InitGlobals
+         %51 = OpFunctionCall %void %UInt16PrimitiveDeclarationTest_DefaultConstructor %self_4
+         %52 = OpFunctionCall %void %UInt16PrimitiveDeclarationTest_CopyInputs %self_4
+         %53 = OpFunctionCall %void %Main %self_4
+         %54 = OpFunctionCall %void %UInt16PrimitiveDeclarationTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

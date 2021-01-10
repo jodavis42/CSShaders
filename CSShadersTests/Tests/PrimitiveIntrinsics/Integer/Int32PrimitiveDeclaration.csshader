@@ -1,0 +1,14 @@
+[Math.IntegerPrimitive(32, true)]
+struct Int32
+{
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct Int32PrimitiveDeclarationTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        Int32 int32Val;
+    }
+}

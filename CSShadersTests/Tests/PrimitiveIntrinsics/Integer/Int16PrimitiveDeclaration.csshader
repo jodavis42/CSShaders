@@ -1,0 +1,14 @@
+[Math.IntegerPrimitive(16, true)][Shader.RequiresCapability(Shader.Capabilities.Int16)]
+struct Int16
+{
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct Int16PrimitiveDeclarationTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        Int16 int16Val;
+    }
+}

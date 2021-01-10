@@ -1,0 +1,80 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 56
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %Int32PrimitiveDeclarationTest_Main_EntryPoint "Int32PrimitiveDeclarationTest_Main_EntryPoint"
+               OpExecutionMode %Int32PrimitiveDeclarationTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Int32 "Int32"
+               OpName %Int32PrimitiveDeclarationTest "Int32PrimitiveDeclarationTest"
+               OpName %Int32PrimitiveDeclarationTest_PreConstructor "Int32PrimitiveDeclarationTest_PreConstructor"
+               OpName %self "self"
+               OpName %Int32PrimitiveDeclarationTest_DefaultConstructor "Int32PrimitiveDeclarationTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %int32Val "int32Val"
+               OpName %Int32PrimitiveDeclarationTest_InitGlobals "Int32PrimitiveDeclarationTest_InitGlobals"
+               OpName %Int32PrimitiveDeclarationTest_CopyInputs "Int32PrimitiveDeclarationTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %Int32PrimitiveDeclarationTest_CopyOutputs "Int32PrimitiveDeclarationTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %Int32PrimitiveDeclarationTest_Main_EntryPoint "Int32PrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %Int32PrimitiveDeclarationTest_Main_EntryPoint "Int32PrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %Int32 = OpTypeInt 32 1
+%Int32PrimitiveDeclarationTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_Int32PrimitiveDeclarationTest = OpTypePointer Function %Int32PrimitiveDeclarationTest
+          %9 = OpTypeFunction %void %_ptr_Function_Int32PrimitiveDeclarationTest
+%_ptr_Function_Int32 = OpTypePointer Function %Int32
+         %11 = OpTypeFunction %void
+    %Int32_0 = OpConstant %Int32 0
+%Int32PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Int32PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
+         %28 = OpLabel
+   %int32Val = OpVariable %_ptr_Function_Int32 Function
+               OpStore %int32Val %Int32_0
+               OpReturn
+               OpFunctionEnd
+%Int32PrimitiveDeclarationTest_InitGlobals = OpFunction %void None %11
+         %34 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Int32PrimitiveDeclarationTest_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
+         %39 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Int32PrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
+         %44 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Int32PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
+         %48 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_Int32PrimitiveDeclarationTest Function
+         %50 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_InitGlobals
+         %51 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_DefaultConstructor %self_4
+         %52 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_CopyInputs %self_4
+         %53 = OpFunctionCall %void %Main %self_4
+         %54 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

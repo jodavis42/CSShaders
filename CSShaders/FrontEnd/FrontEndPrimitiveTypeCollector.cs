@@ -15,6 +15,7 @@ namespace CSShaders
   {
     Dictionary<string, int> PrimitiveAttributePriorities = new Dictionary<string, int>()
     {
+      {typeof(Math.IntegerPrimitive).Name, 0 },
       {typeof(Math.FloatPrimitive).Name, 0 },
       {typeof(Math.VectorPrimitive).Name, 1 },
       // Matrices depend on vectors
