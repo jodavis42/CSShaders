@@ -1,0 +1,74 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 49
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpCapability Float16
+               OpCapability Int16
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %RequiresCapability2_Main_EntryPoint "RequiresCapability2_Main_EntryPoint"
+               OpExecutionMode %RequiresCapability2_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %RequiresCapability2 "RequiresCapability2"
+               OpName %RequiresCapability2_PreConstructor "RequiresCapability2_PreConstructor"
+               OpName %self "self"
+               OpName %RequiresCapability2_DefaultConstructor "RequiresCapability2_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %RequiresCapability2_InitGlobals "RequiresCapability2_InitGlobals"
+               OpName %RequiresCapability2_CopyInputs "RequiresCapability2_CopyInputs"
+               OpName %self_2 "self"
+               OpName %RequiresCapability2_CopyOutputs "RequiresCapability2_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %RequiresCapability2_Main_EntryPoint "RequiresCapability2_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %RequiresCapability2_Main_EntryPoint "RequiresCapability2_Main_EntryPoint"
+               OpName %self_4 "self"
+%RequiresCapability2 = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_RequiresCapability2 = OpTypePointer Function %RequiresCapability2
+          %5 = OpTypeFunction %void %_ptr_Function_RequiresCapability2
+          %7 = OpTypeFunction %void
+%RequiresCapability2_PreConstructor = OpFunction %void None %5
+       %self = OpFunctionParameter %_ptr_Function_RequiresCapability2
+         %12 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%RequiresCapability2_DefaultConstructor = OpFunction %void None %5
+     %self_0 = OpFunctionParameter %_ptr_Function_RequiresCapability2
+         %17 = OpLabel
+         %18 = OpFunctionCall %void %RequiresCapability2_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %5
+     %self_1 = OpFunctionParameter %_ptr_Function_RequiresCapability2
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%RequiresCapability2_InitGlobals = OpFunction %void None %7
+         %27 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%RequiresCapability2_CopyInputs = OpFunction %void None %5
+     %self_2 = OpFunctionParameter %_ptr_Function_RequiresCapability2
+         %32 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%RequiresCapability2_CopyOutputs = OpFunction %void None %5
+     %self_3 = OpFunctionParameter %_ptr_Function_RequiresCapability2
+         %37 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%RequiresCapability2_Main_EntryPoint = OpFunction %void None %7
+         %41 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_RequiresCapability2 Function
+         %43 = OpFunctionCall %void %RequiresCapability2_InitGlobals
+         %44 = OpFunctionCall %void %RequiresCapability2_DefaultConstructor %self_4
+         %45 = OpFunctionCall %void %RequiresCapability2_CopyInputs %self_4
+         %46 = OpFunctionCall %void %Main %self_4
+         %47 = OpFunctionCall %void %RequiresCapability2_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,13 @@
+
+namespace Test
+{
+    [Shader.UnitTest][Shader.Pixel][Shader.RequiresCapability(Shader.Capabilities.Float16)][Shader.RequiresCapability(Shader.Capabilities.Int16)]
+    struct RequiresCapability2
+    {
+      [Shader.EntryPoint]
+      void Main()
+      {
+      }
+    }
+}
+
