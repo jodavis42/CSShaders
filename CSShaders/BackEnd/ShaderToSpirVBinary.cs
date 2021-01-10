@@ -34,6 +34,7 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpSDiv, Spv.Op.OpSDiv);
       SimpleInstructions.Add(OpInstructionType.OpFDiv, Spv.Op.OpFDiv);
       SimpleInstructions.Add(OpInstructionType.OpSRem, Spv.Op.OpSRem);
+      SimpleInstructions.Add(OpInstructionType.OpUMod, Spv.Op.OpUMod);
       SimpleInstructions.Add(OpInstructionType.OpSMod, Spv.Op.OpSMod);
       SimpleInstructions.Add(OpInstructionType.OpFRem, Spv.Op.OpFRem);
       SimpleInstructions.Add(OpInstructionType.OpFMod, Spv.Op.OpFMod);
