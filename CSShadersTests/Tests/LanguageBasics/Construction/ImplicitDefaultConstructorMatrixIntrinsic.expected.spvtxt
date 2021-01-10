@@ -1,0 +1,85 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 62
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint "ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint"
+               OpExecutionMode %ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %V2 "V2"
+               OpName %M2x2 "M2x2"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic "ImplicitDefaultConstructorMatrixIntrinsic"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor "ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor"
+               OpName %self "self"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor "ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %myMatrix "myMatrix"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_InitGlobals "ImplicitDefaultConstructorMatrixIntrinsic_InitGlobals"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_CopyInputs "ImplicitDefaultConstructorMatrixIntrinsic_CopyInputs"
+               OpName %self_2 "self"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_CopyOutputs "ImplicitDefaultConstructorMatrixIntrinsic_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint "ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint "ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+         %V2 = OpTypeVector %float 2
+       %M2x2 = OpTypeMatrix %V2 2
+%ImplicitDefaultConstructorMatrixIntrinsic = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic = OpTypePointer Function %ImplicitDefaultConstructorMatrixIntrinsic
+         %13 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+%_ptr_Function_M2x2 = OpTypePointer Function %M2x2
+         %15 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor = OpFunction %void None %13
+       %self = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+         %21 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor = OpFunction %void None %13
+     %self_0 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+         %26 = OpLabel
+         %27 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+         %32 = OpLabel
+   %myMatrix = OpVariable %_ptr_Function_M2x2 Function
+         %34 = OpCompositeConstruct %V2 %float_0 %float_0
+         %35 = OpCompositeConstruct %M2x2 %34 %34
+               OpStore %myMatrix %35
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorMatrixIntrinsic_InitGlobals = OpFunction %void None %15
+         %40 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorMatrixIntrinsic_CopyInputs = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+         %45 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorMatrixIntrinsic_CopyOutputs = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+         %50 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint = OpFunction %void None %15
+         %54 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic Function
+         %56 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_InitGlobals
+         %57 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor %self_4
+         %58 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_CopyInputs %self_4
+         %59 = OpFunctionCall %void %Main %self_4
+         %60 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

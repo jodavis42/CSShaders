@@ -1,0 +1,28 @@
+
+namespace Test
+{
+
+struct MyClass
+{
+  public int IntVal;
+  public float FloatVal;
+
+  public MyClass(int intVal, float floatVal)
+  {
+    IntVal = intVal;
+    FloatVal = floatVal;
+  }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct DefaultConstructorIntrinsic
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var myClass = new MyClass(1, 2.0f);
+  }
+}
+
+}
+

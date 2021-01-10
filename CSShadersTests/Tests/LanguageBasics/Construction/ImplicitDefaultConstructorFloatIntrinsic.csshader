@@ -1,0 +1,16 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct ImplicitDefaultConstructorFloatIntrinsic
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    float myFloat;
+  }
+}
+
+}
+

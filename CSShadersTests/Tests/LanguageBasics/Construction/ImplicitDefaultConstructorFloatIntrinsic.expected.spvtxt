@@ -1,0 +1,79 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 56
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint "ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint"
+               OpExecutionMode %ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ImplicitDefaultConstructorFloatIntrinsic "ImplicitDefaultConstructorFloatIntrinsic"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_PreConstructor "ImplicitDefaultConstructorFloatIntrinsic_PreConstructor"
+               OpName %self "self"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor "ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %myFloat "myFloat"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_InitGlobals "ImplicitDefaultConstructorFloatIntrinsic_InitGlobals"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_CopyInputs "ImplicitDefaultConstructorFloatIntrinsic_CopyInputs"
+               OpName %self_2 "self"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_CopyOutputs "ImplicitDefaultConstructorFloatIntrinsic_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint "ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint "ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%ImplicitDefaultConstructorFloatIntrinsic = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic = OpTypePointer Function %ImplicitDefaultConstructorFloatIntrinsic
+          %9 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+%_ptr_Function_float = OpTypePointer Function %float
+         %11 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%ImplicitDefaultConstructorFloatIntrinsic_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+         %28 = OpLabel
+    %myFloat = OpVariable %_ptr_Function_float Function
+               OpStore %myFloat %float_0
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorFloatIntrinsic_InitGlobals = OpFunction %void None %11
+         %34 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorFloatIntrinsic_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+         %39 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorFloatIntrinsic_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+         %44 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint = OpFunction %void None %11
+         %48 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic Function
+         %50 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_InitGlobals
+         %51 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor %self_4
+         %52 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_CopyInputs %self_4
+         %53 = OpFunctionCall %void %Main %self_4
+         %54 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

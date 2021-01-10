@@ -212,6 +212,44 @@ namespace CSShaders
       return symbol.BaseType.Name == typeof(Attribute).Name;
     }
 
+    public IMethodSymbol FindDefaultConstructorSymbol(INamedTypeSymbol typeSymbol)
+    {
+      foreach (var constructor in typeSymbol.Constructors)
+      {
+        if (constructor.Parameters.Length == 0)
+          return constructor;
+      }
+      return null;
+    }
+
+    public void DefaultConstructType(INamedTypeSymbol typeSymbol, ShaderOp variableOp)
+    {
+      var defaultConstructorSymbol = FindDefaultConstructorSymbol(typeSymbol);
+      if (defaultConstructorSymbol == null)
+        return;
+
+      var constructorKey = new FunctionKey(defaultConstructorSymbol);
+      // If this is an intrinsic (defined by the compiler and not user defined) then invoke it.
+      var constructorIntrinsic = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(constructorKey);
+      if (constructorIntrinsic != null)
+      {
+        constructorIntrinsic(mFrontEnd, new List<IShaderIR>(), mContext);
+        mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, variableOp, mContext.Pop());
+        return;
+      }
+      // Otherwise see if this is user defined
+      var constructorFn = mFrontEnd.mCurrentLibrary.FindFunction(constructorKey);
+      if(constructorFn != null)
+      {
+        mFrontEnd.GenerateFunctionCall(constructorFn, variableOp, null, mContext);
+        return;
+      }
+
+      var derefType = variableOp.mResultType.GetDereferenceType();
+      var defaultValue = mFrontEnd.DefaultConstructPrimitive(derefType, mContext);
+      mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, variableOp, defaultValue);
+    }
+
     public ShaderFunction CreateFunction(BaseMethodDeclarationSyntax node, string fnName, ShaderType returnType)
     {
       var owningType = mContext.mCurrentType;

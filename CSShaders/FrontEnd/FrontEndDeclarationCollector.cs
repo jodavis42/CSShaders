@@ -52,16 +52,28 @@ namespace CSShaders
       return false;
     }
 
+    private IMethodSymbol FindDefaultConstructor(INamedTypeSymbol structSymbol)
+    {
+      foreach (var constructor in structSymbol.Constructors)
+      {
+        if (constructor.IsImplicitlyDeclared)
+          return constructor;
+      }
+      return null;
+    }
+
     public void GenerateDefaultConstructor(INamedTypeSymbol structSymbol, ShaderType owningType)
     {
       // Only generate a default constructor if needed
-      if (!HasDefaultConstructor(structSymbol))
+      var defaultConstructorSymbol = FindDefaultConstructor(structSymbol);
+      if (defaultConstructorSymbol == null)
         return;
 
       var constructorName = "DefaultConstructor";
       var returnType = FindType(typeof(void));
       var thisType = owningType.FindPointerType(StorageClass.Function);
-      owningType.mImplicitConstructor = mFrontEnd.CreateFunctionAndType(owningType, returnType, constructorName, thisType, null); 
+      owningType.mImplicitConstructor = mFrontEnd.CreateFunctionAndType(owningType, returnType, constructorName, thisType, null);
+      mFrontEnd.mCurrentLibrary.AddFunction(new FunctionKey(defaultConstructorSymbol), owningType.mImplicitConstructor);
     }
 
     public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)

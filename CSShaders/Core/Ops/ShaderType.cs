@@ -58,6 +58,15 @@ namespace CSShaders
       return true;
     }
 
+    public static ShaderType FindLeafType(ShaderType shaderType)
+    {
+      if (shaderType.mBaseType == OpType.Vector)
+        return shaderType.mParameters[0] as ShaderType;
+      if (shaderType.mBaseType == OpType.Matrix)
+        return FindLeafType(shaderType.mParameters[0] as ShaderType);
+      return shaderType;
+    }
+
     public string GetPrettyName()
     {
       // Determine if this is a signed or unsigned int

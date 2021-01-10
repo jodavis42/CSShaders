@@ -23,6 +23,11 @@ namespace CSShaders
           var initialValue = WalkAndGetResult(variable.Initializer);
           mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, variableOp, initialValue);
         }
+        else
+        {
+          var typeSymbol = GetSymbol(node.Declaration.Type) as INamedTypeSymbol;
+          DefaultConstructType(typeSymbol, variableOp);
+        }
       }
     }
     public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)

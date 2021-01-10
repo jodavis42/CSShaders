@@ -289,13 +289,19 @@ namespace CSShaders
       return constantOp;
     }
 
-    public ShaderConstantLiteral CreateConstantLiteral<T>(T value)
+    public ShaderConstantLiteral CreateConstantLiteral<T>(ShaderType literalType, T value)
     {
       var constantOp = new ShaderConstantLiteral();
-      constantOp.mType = mCurrentLibrary.FindType(new TypeKey(typeof(T)));
+      constantOp.mType = literalType;
       constantOp.mValue = value;
       constantOp = mCurrentLibrary.GetOrCreateConstantLiteral(constantOp);
       return constantOp;
+    }
+
+    public ShaderConstantLiteral CreateConstantLiteral<T>(T value)
+    {
+      var literalType = mCurrentLibrary.FindType(new TypeKey(typeof(T)));
+      return CreateConstantLiteral<T>(literalType, value);
     }
 
     public ShaderOp CreateConstantOp(ShaderType constantType, ShaderConstantLiteral constantLiteral)
@@ -338,6 +344,12 @@ namespace CSShaders
     public ShaderOp CreateConstantOp<T>(T value)
     {
       var constantLiteral = CreateConstantLiteral<T>(value);
+      return CreateConstantOp(constantLiteral.mType, constantLiteral);
+    }
+
+    public ShaderOp CreateConstantOp<T>(ShaderType constantType, T value)
+    {
+      var constantLiteral = CreateConstantLiteral<T>(constantType, value);
       return CreateConstantOp(constantLiteral.mType, constantLiteral);
     }
 
@@ -631,6 +643,27 @@ namespace CSShaders
       var constantLiteral = CreateConstantLiteral<uint>((uint)fieldIndex);
       var memberVariableOp = CreateOp(context.mCurrentBlock, OpInstructionType.OpCompositeExtract, resultType, new List<IShaderIR> { selfOp, constantLiteral });
       return memberVariableOp;
+    }
+
+    public ShaderOp DefaultConstructPrimitive(ShaderType resultType, FrontEndContext context)
+    {
+      if (resultType.mBaseType == OpType.Bool)
+        return CreateConstantOp(resultType, false);
+      else if (resultType.mBaseType == OpType.Int)
+      {
+        if (ShaderType.IsSignedInt(resultType))
+          return CreateConstantOp<int>(resultType, 0);
+        else
+          return CreateConstantOp<uint>(resultType, 0u);
+      }
+      else if (resultType.mBaseType == OpType.Float)
+        return CreateConstantOp<float>(resultType, 0.0f);
+      else
+      {
+        var leafType = ShaderType.FindLeafType(resultType);
+        var leafTypeValue = DefaultConstructPrimitive(leafType, context);
+        return CompositeSplatConstruct(leafType, leafTypeValue, context);
+      }
     }
 
     public ShaderOp CompositeSplatConstruct(ShaderType resultType, IShaderIR value, FrontEndContext context)

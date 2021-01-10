@@ -1,0 +1,26 @@
+
+namespace Test
+{
+
+[Math.VectorPrimitive(typeof(float), 2)]
+public struct V2
+{
+}
+
+[Math.MatrixPrimitive(typeof(V2), 2)]
+public struct M2x2
+{
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct ImplicitDefaultConstructorMatrixIntrinsic
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    M2x2 myMatrix;
+  }
+}
+
+}
+
