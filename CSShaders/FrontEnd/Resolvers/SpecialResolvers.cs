@@ -20,6 +20,7 @@ namespace CSShaders
     public SpecialResolvers()
     {
       // Setup a few special processing functors here
+      SpecialTypeCreationAttributeProcessors.Add(typeof(Math.FloatPrimitive).Name, FloatResolvers.ProcessFloatType);
       SpecialTypeCreationAttributeProcessors.Add(typeof(Math.VectorPrimitive).Name, VectorResolvers.ProcessVectorType);
       SpecialTypeCreationAttributeProcessors.Add(typeof(Math.MatrixPrimitive).Name, MatrixResolvers.ProcessMatrixType);
       SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.SamplerPrimitive).Name, SamplerResolvers.ProcessSamplerType);

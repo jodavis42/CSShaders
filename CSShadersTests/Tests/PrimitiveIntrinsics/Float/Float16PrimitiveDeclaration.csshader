@@ -1,0 +1,14 @@
+[Math.FloatPrimitive(16)][Shader.RequiresCapability(Shader.Capabilities.Float16)]
+struct Float16
+{
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct Float16PrimitiveDeclarationTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        Float16 float16Val;
+    }
+}

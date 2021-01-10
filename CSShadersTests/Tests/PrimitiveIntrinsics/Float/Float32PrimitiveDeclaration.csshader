@@ -1,0 +1,14 @@
+[Math.FloatPrimitive(32)]
+struct Float32
+{
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct Float32PrimitiveDeclarationTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        Float32 float32Val;
+    }
+}

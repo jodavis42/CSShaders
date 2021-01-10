@@ -2,6 +2,15 @@
 
 namespace Math
 {
+  public class FloatPrimitive : Attribute
+  {
+    UInt32 Width = 32;
+    public FloatPrimitive(UInt32 width)
+    {
+      Width = width;
+    }
+  }
+
   public class VectorPrimitive : Attribute
   {
     Type ComponentType;

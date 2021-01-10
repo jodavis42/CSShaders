@@ -1,0 +1,80 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 56
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %Float32PrimitiveDeclarationTest_Main_EntryPoint "Float32PrimitiveDeclarationTest_Main_EntryPoint"
+               OpExecutionMode %Float32PrimitiveDeclarationTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Float32 "Float32"
+               OpName %Float32PrimitiveDeclarationTest "Float32PrimitiveDeclarationTest"
+               OpName %Float32PrimitiveDeclarationTest_PreConstructor "Float32PrimitiveDeclarationTest_PreConstructor"
+               OpName %self "self"
+               OpName %Float32PrimitiveDeclarationTest_DefaultConstructor "Float32PrimitiveDeclarationTest_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %float32Val "float32Val"
+               OpName %Float32PrimitiveDeclarationTest_InitGlobals "Float32PrimitiveDeclarationTest_InitGlobals"
+               OpName %Float32PrimitiveDeclarationTest_CopyInputs "Float32PrimitiveDeclarationTest_CopyInputs"
+               OpName %self_2 "self"
+               OpName %Float32PrimitiveDeclarationTest_CopyOutputs "Float32PrimitiveDeclarationTest_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %Float32PrimitiveDeclarationTest_Main_EntryPoint "Float32PrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %Float32PrimitiveDeclarationTest_Main_EntryPoint "Float32PrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+    %Float32 = OpTypeFloat 32
+%Float32PrimitiveDeclarationTest = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_Float32PrimitiveDeclarationTest = OpTypePointer Function %Float32PrimitiveDeclarationTest
+          %9 = OpTypeFunction %void %_ptr_Function_Float32PrimitiveDeclarationTest
+%_ptr_Function_Float32 = OpTypePointer Function %Float32
+         %11 = OpTypeFunction %void
+  %Float32_0 = OpConstant %Float32 0
+%Float32PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Float32PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
+         %28 = OpLabel
+ %float32Val = OpVariable %_ptr_Function_Float32 Function
+               OpStore %float32Val %Float32_0
+               OpReturn
+               OpFunctionEnd
+%Float32PrimitiveDeclarationTest_InitGlobals = OpFunction %void None %11
+         %34 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Float32PrimitiveDeclarationTest_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
+         %39 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Float32PrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
+         %44 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Float32PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
+         %48 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_Float32PrimitiveDeclarationTest Function
+         %50 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_InitGlobals
+         %51 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_DefaultConstructor %self_4
+         %52 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_CopyInputs %self_4
+         %53 = OpFunctionCall %void %Main %self_4
+         %54 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd
