@@ -56,11 +56,23 @@ namespace CSShaders
       Visit(type.mFields);
       // Only add this as a reference type once we finish walking fields/parameters. This is so we have guaranteed visit any nested types (or dereference types).
       mReferencedTypes.Add(type);
+      VisitRequiredCapabilities(type);
 
       // Now visit the body of the functions and all of their ops
       Visit(type.mFunctions);
       foreach(var entryPoint in type.mEntryPoints)
         Visit(entryPoint);
+    }
+
+    public void VisitRequiredCapabilities(ShaderType type)
+    {
+      type.mMeta.mAttributes.ForeachAttribute(typeof(Shader.RequiresCapability), (ShaderAttribute attribute) =>
+      {
+        // Not the cleanest way to convert between enums, but it's fine for now. Doing this via name is more stable than by index.
+        var shaderCapability = (Shader.Capabilities)attribute.Attribute.ConstructorArguments[0].Value;
+        var capability = (Spv.Capability)Enum.Parse(typeof(Spv.Capability), "Capability" + shaderCapability);
+        RequiredCapabilities.Add(capability);
+      });
     }
 
     public void Visit(IEnumerable<ShaderField> fields)
@@ -165,5 +177,6 @@ namespace CSShaders
     public OrderedSet<ShaderOp> mReferencedConstants = new OrderedSet<ShaderOp>();
     public OrderedSet<ExtensionLibraryImportOp> mReferencedExtensionLibraryImports = new OrderedSet<ExtensionLibraryImportOp>();
     public OrderedSet<ShaderEntryPointInfo> mEntryPoints = new OrderedSet<ShaderEntryPointInfo>();
+    public OrderedSet<Spv.Capability> RequiredCapabilities = new OrderedSet<Spv.Capability>();
   }
 }

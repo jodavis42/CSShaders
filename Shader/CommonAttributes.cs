@@ -36,6 +36,21 @@ namespace Shader
     }
   }
 
+  /// <summary>
+  /// Marks a type as requiring a certain shader capability (e.g. 16-bit floats).
+  /// This is currently required by the user as opposed to being automatically added.
+  /// </summary>
+  [System.AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = true)]
+  public class RequiresCapability : Attribute
+  {
+    public Capabilities Capability;
+
+    public RequiresCapability(Capabilities capability)
+    {
+      Capability = capability;
+    }
+  }
+
   [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct)]
   public class Vertex : Attribute
   {

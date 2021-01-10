@@ -73,7 +73,9 @@ namespace CSShaders
       {
         var structSymbol = primitiveData.StructSymbol;
         var attributes = mFrontEnd.ParseAttributes(structSymbol);
-        CreatePrimitiveShaderType(structSymbol, attributes);
+        var shaderType = CreatePrimitiveShaderType(structSymbol, attributes);
+        shaderType.mMeta.mAttributes = attributes;
+        ExtractDebugInfo(shaderType, structSymbol, primitiveData.Node);
       }
     }
 

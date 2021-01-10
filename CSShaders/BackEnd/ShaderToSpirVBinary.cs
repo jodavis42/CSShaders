@@ -161,6 +161,9 @@ namespace CSShaders
       // Capabilities
       mWriter.WriteInstruction(2, Spv.Op.OpCapability, (UInt32)Spv.Capability.CapabilityShader);
       mWriter.WriteInstruction(2, Spv.Op.OpCapability, (UInt32)Spv.Capability.CapabilityLinkage);
+      foreach(var capability in mTypeCollector.RequiredCapabilities)
+        mWriter.WriteInstruction(2, Spv.Op.OpCapability, (UInt32)capability);
+
       // Extension Instance Imports
       foreach(var extLibraryImport in mTypeCollector.mReferencedExtensionLibraryImports)
       {
