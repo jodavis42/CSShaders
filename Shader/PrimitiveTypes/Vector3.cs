@@ -47,6 +47,6 @@
     [Swizzle(1, 2, 0)] public Vector3 ZZX { get { return new Vector3(Z, Z, X); } }
     [Swizzle(1, 2, 1)] public Vector3 ZZY { get { return new Vector3(Z, Z, Y); } }
     [Swizzle(1, 2, 2)] public Vector3 ZZZ { get { return new Vector3(Z, Z, Z); } }
-    public static Vector3 operator +(Vector3 lhs, Vector3 rhs) { return Shader.Intrinsics.Add(lhs, rhs); }
+    [Shader.SimpleIntrinsicFunction("OpFAdd")] public static Vector3 operator +(Vector3 lhs, Vector3 rhs) { return Shader.Intrinsics.Add(lhs, rhs); }
   }
 }

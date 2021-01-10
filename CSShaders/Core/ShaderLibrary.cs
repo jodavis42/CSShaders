@@ -12,6 +12,7 @@ namespace CSShaders
     public delegate void InstrinsicDelegate(FrontEndTranslator translator, List<IShaderIR> arguments, FrontEndContext context);
     public delegate void InstrinsicSetterDelegate(FrontEndTranslator translator, IShaderIR selfInstance, IShaderIR rhsIR, FrontEndContext context);
     public delegate ShaderOp CastDelegate(ShaderType castedToType, IShaderIR expressionOp, FrontEndContext context);
+    public delegate ShaderOp BinaryOpDelegate(IShaderIR lhsExpression, IShaderIR rhsExpression, FrontEndContext context);
 
     public Dictionary<ConstantOpKey, ShaderConstantLiteral> mConstantLiterals = new Dictionary<ConstantOpKey, ShaderConstantLiteral>();
     public Dictionary<ConstantOpKey, ShaderOp> mConstantOps = new Dictionary<ConstantOpKey, ShaderOp>();
@@ -20,6 +21,7 @@ namespace CSShaders
     public Dictionary<FunctionKey, ShaderFunction> mFunctionMap = new Dictionary<FunctionKey, ShaderFunction>();
     public Dictionary<FunctionKey, InstrinsicDelegate> IntrinsicFunctions = new Dictionary<FunctionKey, InstrinsicDelegate>();
     public Dictionary<FunctionKey, InstrinsicSetterDelegate> IntrinsicSetterFunctions = new Dictionary<FunctionKey, InstrinsicSetterDelegate>();
+    public Dictionary<BinaryOpKey, BinaryOpDelegate> BinaryOpIntrinsics = new Dictionary<BinaryOpKey, BinaryOpDelegate>();
     public Dictionary<string, ExtensionLibraryImportOp> ExtensionLibraryImports = new Dictionary<string, ExtensionLibraryImportOp>();
     public Dictionary<Tuple<ShaderType, ShaderType>, CastDelegate> CastIntrinsics = new Dictionary<Tuple<ShaderType, ShaderType>, CastDelegate>();
 
@@ -148,6 +150,27 @@ namespace CSShaders
         foreach (var dependency in mDependencies)
         {
           result = dependency.FindIntrinsicSetterFunction(key, checkDependencies);
+          if (result != null)
+            break;
+        }
+      }
+      return result;
+    }
+
+    //---------------------------------------------------------------BinaryOpIntrinsics
+    public void CreateBinaryOpIntrinsic(BinaryOpKey key, BinaryOpDelegate intrinsic)
+    {
+      BinaryOpIntrinsics.TryAdd(key, intrinsic);
+    }
+
+    public BinaryOpDelegate FindBinaryOpIntrinsic(BinaryOpKey key, bool checkDependencies = true)
+    {
+      var result = BinaryOpIntrinsics.GetValueOrDefault(key, null);
+      if (result == null && mDependencies != null)
+      {
+        foreach (var dependency in mDependencies)
+        {
+          result = dependency.FindBinaryOpIntrinsic(key, checkDependencies);
           if (result != null)
             break;
         }

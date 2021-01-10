@@ -1,0 +1,128 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 103
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %FloatBinaryOps_Main_EntryPoint "FloatBinaryOps_Main_EntryPoint"
+               OpExecutionMode %FloatBinaryOps_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FloatBinaryOps "FloatBinaryOps"
+               OpName %FloatBinaryOps_PreConstructor "FloatBinaryOps_PreConstructor"
+               OpName %self "self"
+               OpName %FloatBinaryOps_DefaultConstructor "FloatBinaryOps_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %f "f"
+               OpName %r "r"
+               OpName %b "b"
+               OpName %FloatBinaryOps_InitGlobals "FloatBinaryOps_InitGlobals"
+               OpName %FloatBinaryOps_CopyInputs "FloatBinaryOps_CopyInputs"
+               OpName %self_2 "self"
+               OpName %FloatBinaryOps_CopyOutputs "FloatBinaryOps_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %FloatBinaryOps_Main_EntryPoint "FloatBinaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %FloatBinaryOps_Main_EntryPoint "FloatBinaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+       %bool = OpTypeBool
+%FloatBinaryOps = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_FloatBinaryOps = OpTypePointer Function %FloatBinaryOps
+         %11 = OpTypeFunction %void %_ptr_Function_FloatBinaryOps
+%_ptr_Function_float = OpTypePointer Function %float
+%_ptr_Function_bool = OpTypePointer Function %bool
+         %13 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+      %false = OpConstantFalse %bool
+%FloatBinaryOps_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_FloatBinaryOps
+         %20 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatBinaryOps_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
+         %25 = OpLabel
+         %26 = OpFunctionCall %void %FloatBinaryOps_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
+         %31 = OpLabel
+          %f = OpVariable %_ptr_Function_float Function
+          %r = OpVariable %_ptr_Function_float Function
+          %b = OpVariable %_ptr_Function_bool Function
+               OpStore %f %float_0
+               OpStore %r %float_0
+         %37 = OpLoad %float %f
+         %38 = OpLoad %float %f
+         %39 = OpFAdd %float %37 %38
+               OpStore %r %39
+         %41 = OpLoad %float %f
+         %42 = OpLoad %float %f
+         %43 = OpFSub %float %41 %42
+               OpStore %r %43
+         %45 = OpLoad %float %f
+         %46 = OpLoad %float %f
+         %47 = OpFMul %float %45 %46
+               OpStore %r %47
+         %49 = OpLoad %float %f
+         %50 = OpLoad %float %f
+         %51 = OpFMod %float %49 %50
+               OpStore %r %51
+               OpStore %b %false
+         %54 = OpLoad %float %f
+         %55 = OpLoad %float %f
+         %56 = OpFOrdLessThan %bool %54 %55
+               OpStore %b %56
+         %58 = OpLoad %float %f
+         %59 = OpLoad %float %f
+         %60 = OpFOrdLessThanEqual %bool %58 %59
+               OpStore %b %60
+         %62 = OpLoad %float %f
+         %63 = OpLoad %float %f
+         %64 = OpFOrdGreaterThan %bool %62 %63
+               OpStore %b %64
+         %66 = OpLoad %float %f
+         %67 = OpLoad %float %f
+         %68 = OpFOrdGreaterThanEqual %bool %66 %67
+               OpStore %b %68
+         %70 = OpLoad %float %f
+         %71 = OpLoad %float %f
+         %72 = OpFOrdEqual %bool %70 %71
+               OpStore %b %72
+         %74 = OpLoad %float %f
+         %75 = OpLoad %float %f
+         %76 = OpFOrdNotEqual %bool %74 %75
+               OpStore %b %76
+               OpReturn
+               OpFunctionEnd
+%FloatBinaryOps_InitGlobals = OpFunction %void None %13
+         %81 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatBinaryOps_CopyInputs = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
+         %86 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatBinaryOps_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
+         %91 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatBinaryOps_Main_EntryPoint = OpFunction %void None %13
+         %95 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_FloatBinaryOps Function
+         %97 = OpFunctionCall %void %FloatBinaryOps_InitGlobals
+         %98 = OpFunctionCall %void %FloatBinaryOps_DefaultConstructor %self_4
+         %99 = OpFunctionCall %void %FloatBinaryOps_CopyInputs %self_4
+        %100 = OpFunctionCall %void %Main %self_4
+        %101 = OpFunctionCall %void %FloatBinaryOps_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

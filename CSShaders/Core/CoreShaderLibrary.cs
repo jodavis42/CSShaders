@@ -23,6 +23,7 @@ namespace CSShaders
 
       // Add some custom intrinsics for built-int types that 
       AddPrimitiveIntrinsics(translator);
+      AddPrimitiveOps(translator);
       AddCastIntrinsics(translator);
 
       // Compile the custom data types and functions we're adding
@@ -55,6 +56,70 @@ namespace CSShaders
     {
       var floatType = translator.FindType(typeof(float));
       SpecialResolvers.CreateSimpleIntrinsicFunction(translator, new FunctionKey("float.operator +(float, float)"), OpInstructionType.OpFAdd, floatType);
+    }
+
+    void AddPrimitiveOps(FrontEndTranslator translator)
+    {
+      var boolType = FindType(new TypeKey(typeof(bool)));
+      var intType = FindType(new TypeKey(typeof(int)));
+      var uintType = FindType(new TypeKey(typeof(uint)));
+      var floatType = FindType(new TypeKey(typeof(float)));
+
+      AddSimpleValueTypeBinaryOp(translator, boolType, boolType, "|", boolType, OpInstructionType.OpLogicalOr);
+      AddSimpleValueTypeBinaryOp(translator, boolType, boolType, "&", boolType, OpInstructionType.OpLogicalAnd);
+      AddSimpleValueTypeBinaryOp(translator, boolType, boolType, "^", boolType, OpInstructionType.OpLogicalNotEqual);
+
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "+", intType, OpInstructionType.OpIAdd);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "-", intType, OpInstructionType.OpISub);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "*", intType, OpInstructionType.OpIMul);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "/", intType, OpInstructionType.OpSDiv);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "%", intType, OpInstructionType.OpSMod);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "|", intType, OpInstructionType.OpBitwiseOr);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "&", intType, OpInstructionType.OpBitwiseAnd);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "^", intType, OpInstructionType.OpBitwiseXor);
+      AddSimpleValueTypeBinaryOp(translator, boolType, intType, "<", intType, OpInstructionType.OpSLessThan);
+      AddSimpleValueTypeBinaryOp(translator, boolType, intType, "<=", intType, OpInstructionType.OpSLessThanEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, intType, ">", intType, OpInstructionType.OpSGreaterThan);
+      AddSimpleValueTypeBinaryOp(translator, boolType, intType, ">=", intType, OpInstructionType.OpSGreaterThanEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, intType, "==", intType, OpInstructionType.OpIEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, intType, "!=", intType, OpInstructionType.OpINotEqual);
+
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "+", uintType, OpInstructionType.OpIAdd);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "-", uintType, OpInstructionType.OpISub);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "*", uintType, OpInstructionType.OpIMul);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "/", uintType, OpInstructionType.OpUDiv);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "%", uintType, OpInstructionType.OpUMod);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "|", uintType, OpInstructionType.OpBitwiseOr);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "&", uintType, OpInstructionType.OpBitwiseAnd);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "^", uintType, OpInstructionType.OpBitwiseXor);
+      AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "<", uintType, OpInstructionType.OpULessThan);
+      AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "<=", uintType, OpInstructionType.OpULessThanEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, uintType, ">", uintType, OpInstructionType.OpUGreaterThan);
+      AddSimpleValueTypeBinaryOp(translator, boolType, uintType, ">=", uintType, OpInstructionType.OpUGreaterThanEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "==", uintType, OpInstructionType.OpIEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "!=", uintType, OpInstructionType.OpINotEqual);
+
+      AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "+", floatType, OpInstructionType.OpFAdd);
+      AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "-", floatType, OpInstructionType.OpFSub);
+      AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "*", floatType, OpInstructionType.OpFMul);
+      AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "/", floatType, OpInstructionType.OpFDiv);
+      AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "%", floatType, OpInstructionType.OpFMod);
+      AddSimpleValueTypeBinaryOp(translator, boolType, floatType, "<", floatType, OpInstructionType.OpFOrdLessThan);
+      AddSimpleValueTypeBinaryOp(translator, boolType, floatType, "<=", floatType, OpInstructionType.OpFOrdLessThanEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, floatType, ">", floatType, OpInstructionType.OpFOrdGreaterThan);
+      AddSimpleValueTypeBinaryOp(translator, boolType, floatType, ">=", floatType, OpInstructionType.OpFOrdGreaterThanEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, floatType, "==", floatType, OpInstructionType.OpFOrdEqual);
+      AddSimpleValueTypeBinaryOp(translator, boolType, floatType, "!=", floatType, OpInstructionType.OpFOrdNotEqual);
+    }
+
+    void AddSimpleValueTypeBinaryOp(FrontEndTranslator translator, ShaderType resultType, ShaderType lhsType, string opToken, ShaderType rhsType, OpInstructionType instructionType)
+    {
+      CreateBinaryOpIntrinsic(new BinaryOpKey(lhsType, opToken, rhsType), (IShaderIR lhsExpression, IShaderIR rhsExpression, FrontEndContext context) =>
+      {
+        var lhsValueOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, lhsExpression);
+        var rhsValueOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, rhsExpression);
+        return translator.CreateOp(context.mCurrentBlock, instructionType, resultType, new List<IShaderIR> { lhsValueOp, rhsValueOp });
+      });
     }
 
     void AddCastIntrinsics(FrontEndTranslator translator)

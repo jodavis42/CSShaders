@@ -139,4 +139,30 @@ namespace CSShaders
       return false;
     }
   }
+
+  public class BinaryOpKey
+  {
+    ShaderType LeftType;
+    string OpToken;
+    ShaderType RightType;
+
+    public BinaryOpKey(ShaderType leftType, string opToken, ShaderType rightType)
+    {
+      LeftType = leftType;
+      OpToken = opToken;
+      RightType = rightType;
+    }
+
+    public override int GetHashCode()
+    {
+      return HashCode.Combine(LeftType, OpToken, RightType);
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (obj is BinaryOpKey binaryOpKey)
+        return LeftType == binaryOpKey.LeftType && RightType == binaryOpKey.RightType && OpToken == binaryOpKey.OpToken;
+      return false;
+    }
+  }
 }

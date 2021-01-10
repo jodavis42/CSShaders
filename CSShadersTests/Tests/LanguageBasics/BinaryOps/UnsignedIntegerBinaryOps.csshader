@@ -1,0 +1,32 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct UnsignedIntegerBinaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var u = 0u;
+    var r = 0u;
+    r = u + u;
+    r = u - u;
+    r = u * u;
+    r = u % u;
+    r = u | u;
+    r = u & u;
+    r = u ^ u;
+
+    var b = false;
+    b = u < u;
+    b = u <= u;
+    b = u > u;
+    b = u >= u;
+    b = u == u;
+    b = u != u;
+  }
+}
+
+}
+

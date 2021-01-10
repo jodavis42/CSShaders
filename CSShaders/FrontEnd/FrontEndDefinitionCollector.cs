@@ -116,5 +116,14 @@ namespace CSShaders
         }
       }
     }
+
+    public override void VisitOperatorDeclaration(OperatorDeclarationSyntax node)
+    {
+      // Don't process intrinsics
+      var attributes = mFrontEnd.ParseAttributes(GetDeclaredSymbol(node));
+      if (IsIntrinsic(attributes))
+        return;
+      VisitMethod(node);
+    }
   }
 }

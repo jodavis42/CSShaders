@@ -1,0 +1,30 @@
+
+namespace Test
+{
+
+struct TestV2
+{
+  float X, Y;
+
+  public static TestV2 operator +(TestV2 lhs, TestV2 rhs)
+  {
+    TestV2 result = new TestV2();
+    result.X = lhs.X + rhs.X;
+    result.Y = lhs.Y + rhs.Y;
+    return result;
+  }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct StructUnaryOp
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var value = new TestV2();
+    var result = value + value;
+  }
+}
+
+}
+

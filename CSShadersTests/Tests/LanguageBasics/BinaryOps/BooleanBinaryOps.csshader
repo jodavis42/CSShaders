@@ -1,0 +1,20 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct BooleanBinaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var b = false;
+    var r = false;
+    r = b | b;
+    r = b & b;
+    r = b ^ b;
+  }
+}
+
+}
+

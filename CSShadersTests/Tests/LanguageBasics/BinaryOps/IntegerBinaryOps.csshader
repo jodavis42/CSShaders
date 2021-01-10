@@ -1,0 +1,32 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct IntegerBinaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var i = 0;
+    var r = 0;
+    r = i + i;
+    r = i - i;
+    r = i * i;
+    r = i % i;
+    r = i | i;
+    r = i & i;
+    r = i ^ i;
+
+    var b = false;
+    b = i < i;
+    b = i <= i;
+    b = i > i;
+    b = i >= i;
+    b = i == i;
+    b = i != i;
+  }
+}
+
+}
+

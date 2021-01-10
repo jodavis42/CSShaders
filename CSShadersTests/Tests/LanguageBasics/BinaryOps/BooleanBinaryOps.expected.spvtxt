@@ -1,0 +1,93 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 68
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %BooleanBinaryOps_Main_EntryPoint "BooleanBinaryOps_Main_EntryPoint"
+               OpExecutionMode %BooleanBinaryOps_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %BooleanBinaryOps "BooleanBinaryOps"
+               OpName %BooleanBinaryOps_PreConstructor "BooleanBinaryOps_PreConstructor"
+               OpName %self "self"
+               OpName %BooleanBinaryOps_DefaultConstructor "BooleanBinaryOps_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %b "b"
+               OpName %r "r"
+               OpName %BooleanBinaryOps_InitGlobals "BooleanBinaryOps_InitGlobals"
+               OpName %BooleanBinaryOps_CopyInputs "BooleanBinaryOps_CopyInputs"
+               OpName %self_2 "self"
+               OpName %BooleanBinaryOps_CopyOutputs "BooleanBinaryOps_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %BooleanBinaryOps_Main_EntryPoint "BooleanBinaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %BooleanBinaryOps_Main_EntryPoint "BooleanBinaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+       %bool = OpTypeBool
+%BooleanBinaryOps = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_BooleanBinaryOps = OpTypePointer Function %BooleanBinaryOps
+          %7 = OpTypeFunction %void %_ptr_Function_BooleanBinaryOps
+%_ptr_Function_bool = OpTypePointer Function %bool
+          %9 = OpTypeFunction %void
+      %false = OpConstantFalse %bool
+%BooleanBinaryOps_PreConstructor = OpFunction %void None %7
+       %self = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
+         %15 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanBinaryOps_DefaultConstructor = OpFunction %void None %7
+     %self_0 = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
+         %20 = OpLabel
+         %21 = OpFunctionCall %void %BooleanBinaryOps_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %7
+     %self_1 = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
+         %26 = OpLabel
+          %b = OpVariable %_ptr_Function_bool Function
+          %r = OpVariable %_ptr_Function_bool Function
+               OpStore %b %false
+               OpStore %r %false
+         %31 = OpLoad %bool %b
+         %32 = OpLoad %bool %b
+         %33 = OpLogicalOr %bool %31 %32
+               OpStore %r %33
+         %35 = OpLoad %bool %b
+         %36 = OpLoad %bool %b
+         %37 = OpLogicalAnd %bool %35 %36
+               OpStore %r %37
+         %39 = OpLoad %bool %b
+         %40 = OpLoad %bool %b
+         %41 = OpLogicalNotEqual %bool %39 %40
+               OpStore %r %41
+               OpReturn
+               OpFunctionEnd
+%BooleanBinaryOps_InitGlobals = OpFunction %void None %9
+         %46 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanBinaryOps_CopyInputs = OpFunction %void None %7
+     %self_2 = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
+         %51 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanBinaryOps_CopyOutputs = OpFunction %void None %7
+     %self_3 = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
+         %56 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanBinaryOps_Main_EntryPoint = OpFunction %void None %9
+         %60 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_BooleanBinaryOps Function
+         %62 = OpFunctionCall %void %BooleanBinaryOps_InitGlobals
+         %63 = OpFunctionCall %void %BooleanBinaryOps_DefaultConstructor %self_4
+         %64 = OpFunctionCall %void %BooleanBinaryOps_CopyInputs %self_4
+         %65 = OpFunctionCall %void %Main %self_4
+         %66 = OpFunctionCall %void %BooleanBinaryOps_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

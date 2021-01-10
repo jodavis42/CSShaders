@@ -1,0 +1,29 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct FloatBinaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var f = 0.0f;
+    var r = 0.0f;
+    r = f + f;
+    r = f - f;
+    r = f * f;
+    r = f % f;
+
+    var b = false;
+    b = f < f;
+    b = f <= f;
+    b = f > f;
+    b = f >= f;
+    b = f == f;
+    b = f != f;
+  }
+}
+
+}
+

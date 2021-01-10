@@ -269,46 +269,44 @@ namespace CSShaders
     public override void VisitBinaryExpression(BinaryExpressionSyntax node)
     {
       var symbol = GetSymbol(node);
-      // If the symbol for this binary op is actually a method, then try to either call the intrinsic or function if they exist
-      if(symbol is IMethodSymbol methodSymbol)
-      {
-        var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
-        if(intrinsicCallback != null)
-        {
-          var l = WalkAndGetValueTypeResult(node.Left) as ShaderOp;
-          var r = WalkAndGetValueTypeResult(node.Right) as ShaderOp;
-          intrinsicCallback(mFrontEnd, new List<IShaderIR> { l, r }, mContext);
-          return;
-        }
 
-        var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
-        if (shaderFunction != null)
-        {
-          // @JoshD: Call function later?
-        }
+      var methodSymbol = symbol as IMethodSymbol;
+      if (methodSymbol == null)
+        // Can this happen?
+        throw new Exception("Invalid binary expression");
+
+      var lhsIR = WalkAndGetResult(node.Left);
+      var rhsIR = WalkAndGetResult(node.Right);
+      var lhsType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[0].Type));
+      var rhsType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[1].Type));
+
+      // Handle intrinsics (declared by the compiler but don't have symbols we can look up in advance)
+      var binaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindBinaryOpIntrinsic(new BinaryOpKey(lhsType, node.OperatorToken.Text, rhsType));
+      if (binaryOpIntrinsic != null)
+      {
+        var result = binaryOpIntrinsic(lhsIR, rhsIR, mContext);
+        mContext.Push(result);
         return;
       }
 
-      var leftOp = WalkAndGetValueTypeResult(node.Left) as ShaderOp;
-      var rightOp = WalkAndGetValueTypeResult(node.Right) as ShaderOp;
-
-      var op = new ShaderOp();
-      if (node.OperatorToken.Text == "+")
+      // Find if this is an intrinsic declared via attribute
+      var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
+      if(intrinsicCallback != null)
       {
-        switch (leftOp.mResultType.mBaseType)
-        {
-          case OpType.Int:
-            op.mOpType = OpInstructionType.OpIAdd;
-            break;
-          case OpType.Float:
-            op.mOpType = OpInstructionType.OpFAdd;
-            break;
-        }
+        intrinsicCallback(mFrontEnd, new List<IShaderIR> { lhsIR, rhsIR }, mContext);
+        return;
       }
-      op.mParameters.Add(leftOp);
-      op.mParameters.Add(rightOp);
-      op.mResultType = leftOp.mResultType;
-      mContext.Push(op);
+
+      // Find if this is a user defined function
+      var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
+      if (shaderFunction != null)
+      {
+        var fnCallResult = mFrontEnd.GenerateFunctionCall(shaderFunction, null, new List<IShaderIR> { lhsIR, rhsIR }, mContext);
+        mContext.Push(fnCallResult);
+        return;
+      }
+
+      throw new Exception("Unhandled");
     }
 
     public override void VisitCastExpression(CastExpressionSyntax node)

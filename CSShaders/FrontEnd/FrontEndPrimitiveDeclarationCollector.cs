@@ -55,5 +55,25 @@ namespace CSShaders
       var returnType = FindType(node.ReturnType);
       CreateFunction(node, node.Identifier.Text, returnType);
     }
+
+    public override void VisitOperatorDeclaration(OperatorDeclarationSyntax node)
+    {
+      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
+
+      // Visit any remaining methods (not intrinsics) on the primitive type. This is necessary for any helper functions to work
+      var attributes = mFrontEnd.ParseAttributes(GetDeclaredSymbol(node));
+
+      // Handle intrinsics. If we have a resolver for a special handler then call that and return.
+      if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
+        return;
+
+      // Don't process intrinsics
+      if (IsIntrinsic(attributes))
+        return;
+
+      var functionName = node.ToString();
+      var returnType = FindType(node.ReturnType);
+      CreateFunction(node, functionName, returnType);
+    }
   }
 }
