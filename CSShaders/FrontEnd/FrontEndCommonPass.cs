@@ -261,9 +261,51 @@ namespace CSShaders
       mContext.mCurrentBlock.mTerminatorOp = returnOp;
     }
 
-    public override void VisitUnaryPattern(UnaryPatternSyntax node)
+    public override void VisitPostfixUnaryExpression(PostfixUnaryExpressionSyntax node)
     {
-      base.VisitUnaryPattern(node);
+      // To Do
+      base.VisitPostfixUnaryExpression(node);
+    }
+
+    public override void VisitPrefixUnaryExpression(PrefixUnaryExpressionSyntax node)
+    {
+      var symbol = GetSymbol(node);
+      var methodSymbol = symbol as IMethodSymbol;
+      if (methodSymbol == null)
+        // Can this happen?
+        throw new Exception("Invalid unary expression");
+
+      var operandIR = WalkAndGetResult(node.Operand);
+      var operandType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[0].Type));
+
+      // Handle intrinsics (declared by the compiler but don't have symbols we can look up in advance)
+      var unaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindUnaryOpIntrinsic(new UnaryOpKey(node.OperatorToken.Text, operandType));
+      if (unaryOpIntrinsic != null)
+      {
+        var result = unaryOpIntrinsic(operandIR, mContext);
+        mContext.Push(result);
+        return;
+      }
+
+      // Find if this is an intrinsic declared via attribute
+      var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
+      if (intrinsicCallback != null)
+      {
+        var valueIR = WalkAndGetResult(node.Operand);
+        intrinsicCallback(mFrontEnd, new List<IShaderIR> { valueIR }, mContext);
+        return;
+      }
+
+      // Find if this is a user defined function
+      var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
+      if (shaderFunction != null)
+      {
+        var fnCallResult = mFrontEnd.GenerateFunctionCall(shaderFunction, null, new List<IShaderIR> { operandIR }, mContext);
+        mContext.Push(fnCallResult);
+        return;
+      }
+
+      throw new Exception("Unhandled");
     }
 
     public override void VisitBinaryExpression(BinaryExpressionSyntax node)

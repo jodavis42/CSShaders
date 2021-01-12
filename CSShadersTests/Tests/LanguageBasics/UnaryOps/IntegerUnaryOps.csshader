@@ -1,0 +1,20 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct IntegerUnaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var i = 0;
+    var r = 0;
+
+    r = ~i;
+    r = -i;
+  }
+}
+
+}
+

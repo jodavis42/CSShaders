@@ -1,0 +1,92 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 68
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %PrimitiveUnaryOp_Main_EntryPoint "PrimitiveUnaryOp_Main_EntryPoint"
+               OpExecutionMode %PrimitiveUnaryOp_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestV2 "TestV2"
+               OpName %PrimitiveUnaryOp "PrimitiveUnaryOp"
+               OpName %op_UnaryNegation "op_UnaryNegation"
+               OpName %value "value"
+               OpName %PrimitiveUnaryOp_PreConstructor "PrimitiveUnaryOp_PreConstructor"
+               OpName %self "self"
+               OpName %PrimitiveUnaryOp_DefaultConstructor "PrimitiveUnaryOp_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %result "result"
+               OpName %PrimitiveUnaryOp_InitGlobals "PrimitiveUnaryOp_InitGlobals"
+               OpName %PrimitiveUnaryOp_CopyInputs "PrimitiveUnaryOp_CopyInputs"
+               OpName %self_2 "self"
+               OpName %PrimitiveUnaryOp_CopyOutputs "PrimitiveUnaryOp_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %PrimitiveUnaryOp_Main_EntryPoint "PrimitiveUnaryOp_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %PrimitiveUnaryOp_Main_EntryPoint "PrimitiveUnaryOp_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+     %TestV2 = OpTypeVector %float 2
+          %7 = OpTypeFunction %TestV2 %TestV2
+%PrimitiveUnaryOp = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_PrimitiveUnaryOp = OpTypePointer Function %PrimitiveUnaryOp
+         %13 = OpTypeFunction %void %_ptr_Function_PrimitiveUnaryOp
+%_ptr_Function_TestV2 = OpTypePointer Function %TestV2
+         %15 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%op_UnaryNegation = OpFunction %TestV2 None %7
+      %value = OpFunctionParameter %TestV2
+         %21 = OpLabel
+         %22 = OpFNegate %TestV2 %value
+               OpReturnValue %22
+               OpFunctionEnd
+%PrimitiveUnaryOp_PreConstructor = OpFunction %void None %13
+       %self = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
+         %27 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveUnaryOp_DefaultConstructor = OpFunction %void None %13
+     %self_0 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
+         %32 = OpLabel
+         %33 = OpFunctionCall %void %PrimitiveUnaryOp_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
+         %38 = OpLabel
+     %result = OpVariable %_ptr_Function_TestV2 Function
+         %40 = OpCompositeConstruct %TestV2 %float_0 %float_0
+         %41 = OpFunctionCall %TestV2 %op_UnaryNegation %40
+               OpStore %result %41
+               OpReturn
+               OpFunctionEnd
+%PrimitiveUnaryOp_InitGlobals = OpFunction %void None %15
+         %46 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveUnaryOp_CopyInputs = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
+         %51 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveUnaryOp_CopyOutputs = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
+         %56 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%PrimitiveUnaryOp_Main_EntryPoint = OpFunction %void None %15
+         %60 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_PrimitiveUnaryOp Function
+         %62 = OpFunctionCall %void %PrimitiveUnaryOp_InitGlobals
+         %63 = OpFunctionCall %void %PrimitiveUnaryOp_DefaultConstructor %self_4
+         %64 = OpFunctionCall %void %PrimitiveUnaryOp_CopyInputs %self_4
+         %65 = OpFunctionCall %void %Main %self_4
+         %66 = OpFunctionCall %void %PrimitiveUnaryOp_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

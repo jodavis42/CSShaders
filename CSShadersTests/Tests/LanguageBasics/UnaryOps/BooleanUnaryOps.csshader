@@ -1,0 +1,17 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct BooleanUnaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var b = false;
+    var r = !b;
+  }
+}
+
+}
+

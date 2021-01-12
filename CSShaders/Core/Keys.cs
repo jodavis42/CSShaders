@@ -140,6 +140,30 @@ namespace CSShaders
     }
   }
 
+  public class UnaryOpKey
+  {
+    string OpToken;
+    ShaderType OperandType;
+
+    public UnaryOpKey(string opToken, ShaderType operandType)
+    {
+      OpToken = opToken;
+      OperandType = operandType;
+    }
+
+    public override int GetHashCode()
+    {
+      return HashCode.Combine(OpToken, OperandType);
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (obj is UnaryOpKey unaryOpKey)
+        return OperandType == unaryOpKey.OperandType && OpToken == unaryOpKey.OpToken;
+      return false;
+    }
+  }
+
   public class BinaryOpKey
   {
     ShaderType LeftType;

@@ -1,0 +1,88 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 64
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %IntegerUnaryOps_Main_EntryPoint "IntegerUnaryOps_Main_EntryPoint"
+               OpExecutionMode %IntegerUnaryOps_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %IntegerUnaryOps "IntegerUnaryOps"
+               OpName %IntegerUnaryOps_PreConstructor "IntegerUnaryOps_PreConstructor"
+               OpName %self "self"
+               OpName %IntegerUnaryOps_DefaultConstructor "IntegerUnaryOps_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %i "i"
+               OpName %r "r"
+               OpName %IntegerUnaryOps_InitGlobals "IntegerUnaryOps_InitGlobals"
+               OpName %IntegerUnaryOps_CopyInputs "IntegerUnaryOps_CopyInputs"
+               OpName %self_2 "self"
+               OpName %IntegerUnaryOps_CopyOutputs "IntegerUnaryOps_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %IntegerUnaryOps_Main_EntryPoint "IntegerUnaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %IntegerUnaryOps_Main_EntryPoint "IntegerUnaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%IntegerUnaryOps = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IntegerUnaryOps = OpTypePointer Function %IntegerUnaryOps
+          %9 = OpTypeFunction %void %_ptr_Function_IntegerUnaryOps
+%_ptr_Function_int = OpTypePointer Function %int
+         %11 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+%IntegerUnaryOps_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_IntegerUnaryOps
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerUnaryOps_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_IntegerUnaryOps
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %IntegerUnaryOps_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_IntegerUnaryOps
+         %28 = OpLabel
+          %i = OpVariable %_ptr_Function_int Function
+          %r = OpVariable %_ptr_Function_int Function
+               OpStore %i %int_0
+               OpStore %r %int_0
+         %33 = OpLoad %int %i
+         %34 = OpNot %int %33
+               OpStore %r %34
+         %36 = OpLoad %int %i
+         %37 = OpSNegate %int %36
+               OpStore %r %37
+               OpReturn
+               OpFunctionEnd
+%IntegerUnaryOps_InitGlobals = OpFunction %void None %11
+         %42 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerUnaryOps_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_IntegerUnaryOps
+         %47 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerUnaryOps_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_IntegerUnaryOps
+         %52 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerUnaryOps_Main_EntryPoint = OpFunction %void None %11
+         %56 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_IntegerUnaryOps Function
+         %58 = OpFunctionCall %void %IntegerUnaryOps_InitGlobals
+         %59 = OpFunctionCall %void %IntegerUnaryOps_DefaultConstructor %self_4
+         %60 = OpFunctionCall %void %IntegerUnaryOps_CopyInputs %self_4
+         %61 = OpFunctionCall %void %Main %self_4
+         %62 = OpFunctionCall %void %IntegerUnaryOps_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

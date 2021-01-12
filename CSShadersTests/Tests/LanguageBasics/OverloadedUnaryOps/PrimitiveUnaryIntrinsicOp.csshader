@@ -1,0 +1,22 @@
+
+namespace Test
+{
+
+[Math.VectorPrimitive(typeof(float), 2)]
+struct TestV2
+{
+  [Shader.SimpleIntrinsicFunction("OpFNegate")] public extern static TestV2 operator -(TestV2 value);
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct PrimitiveUnaryIntrinsicOp
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var result = -new TestV2();
+  }
+}
+
+}
+

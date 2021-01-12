@@ -1,0 +1,83 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 58
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
+               OpExecutionMode %BooleanUnaryOps_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %BooleanUnaryOps "BooleanUnaryOps"
+               OpName %BooleanUnaryOps_PreConstructor "BooleanUnaryOps_PreConstructor"
+               OpName %self "self"
+               OpName %BooleanUnaryOps_DefaultConstructor "BooleanUnaryOps_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %b "b"
+               OpName %r "r"
+               OpName %BooleanUnaryOps_InitGlobals "BooleanUnaryOps_InitGlobals"
+               OpName %BooleanUnaryOps_CopyInputs "BooleanUnaryOps_CopyInputs"
+               OpName %self_2 "self"
+               OpName %BooleanUnaryOps_CopyOutputs "BooleanUnaryOps_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+       %bool = OpTypeBool
+%BooleanUnaryOps = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_BooleanUnaryOps = OpTypePointer Function %BooleanUnaryOps
+          %7 = OpTypeFunction %void %_ptr_Function_BooleanUnaryOps
+%_ptr_Function_bool = OpTypePointer Function %bool
+          %9 = OpTypeFunction %void
+      %false = OpConstantFalse %bool
+%BooleanUnaryOps_PreConstructor = OpFunction %void None %7
+       %self = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
+         %15 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanUnaryOps_DefaultConstructor = OpFunction %void None %7
+     %self_0 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
+         %20 = OpLabel
+         %21 = OpFunctionCall %void %BooleanUnaryOps_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %7
+     %self_1 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
+         %26 = OpLabel
+          %b = OpVariable %_ptr_Function_bool Function
+          %r = OpVariable %_ptr_Function_bool Function
+               OpStore %b %false
+         %30 = OpLoad %bool %b
+         %31 = OpLogicalNot %bool %30
+               OpStore %r %31
+               OpReturn
+               OpFunctionEnd
+%BooleanUnaryOps_InitGlobals = OpFunction %void None %9
+         %36 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanUnaryOps_CopyInputs = OpFunction %void None %7
+     %self_2 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
+         %41 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanUnaryOps_CopyOutputs = OpFunction %void None %7
+     %self_3 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
+         %46 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%BooleanUnaryOps_Main_EntryPoint = OpFunction %void None %9
+         %50 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_BooleanUnaryOps Function
+         %52 = OpFunctionCall %void %BooleanUnaryOps_InitGlobals
+         %53 = OpFunctionCall %void %BooleanUnaryOps_DefaultConstructor %self_4
+         %54 = OpFunctionCall %void %BooleanUnaryOps_CopyInputs %self_4
+         %55 = OpFunctionCall %void %Main %self_4
+         %56 = OpFunctionCall %void %BooleanUnaryOps_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

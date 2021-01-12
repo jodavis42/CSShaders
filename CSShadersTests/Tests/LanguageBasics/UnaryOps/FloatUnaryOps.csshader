@@ -1,0 +1,17 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct FloatUnaryOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var f = 0.0f;
+    var r = -f;
+  }
+}
+
+}
+

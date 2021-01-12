@@ -1,0 +1,84 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 60
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %FloatUnaryOps_Main_EntryPoint "FloatUnaryOps_Main_EntryPoint"
+               OpExecutionMode %FloatUnaryOps_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FloatUnaryOps "FloatUnaryOps"
+               OpName %FloatUnaryOps_PreConstructor "FloatUnaryOps_PreConstructor"
+               OpName %self "self"
+               OpName %FloatUnaryOps_DefaultConstructor "FloatUnaryOps_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %f "f"
+               OpName %r "r"
+               OpName %FloatUnaryOps_InitGlobals "FloatUnaryOps_InitGlobals"
+               OpName %FloatUnaryOps_CopyInputs "FloatUnaryOps_CopyInputs"
+               OpName %self_2 "self"
+               OpName %FloatUnaryOps_CopyOutputs "FloatUnaryOps_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %FloatUnaryOps_Main_EntryPoint "FloatUnaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %FloatUnaryOps_Main_EntryPoint "FloatUnaryOps_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%FloatUnaryOps = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_FloatUnaryOps = OpTypePointer Function %FloatUnaryOps
+          %9 = OpTypeFunction %void %_ptr_Function_FloatUnaryOps
+%_ptr_Function_float = OpTypePointer Function %float
+         %11 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+%FloatUnaryOps_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_FloatUnaryOps
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatUnaryOps_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %FloatUnaryOps_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
+         %28 = OpLabel
+          %f = OpVariable %_ptr_Function_float Function
+          %r = OpVariable %_ptr_Function_float Function
+               OpStore %f %float_0
+         %32 = OpLoad %float %f
+         %33 = OpFNegate %float %32
+               OpStore %r %33
+               OpReturn
+               OpFunctionEnd
+%FloatUnaryOps_InitGlobals = OpFunction %void None %11
+         %38 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatUnaryOps_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
+         %43 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatUnaryOps_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
+         %48 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatUnaryOps_Main_EntryPoint = OpFunction %void None %11
+         %52 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_FloatUnaryOps Function
+         %54 = OpFunctionCall %void %FloatUnaryOps_InitGlobals
+         %55 = OpFunctionCall %void %FloatUnaryOps_DefaultConstructor %self_4
+         %56 = OpFunctionCall %void %FloatUnaryOps_CopyInputs %self_4
+         %57 = OpFunctionCall %void %Main %self_4
+         %58 = OpFunctionCall %void %FloatUnaryOps_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd
