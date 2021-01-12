@@ -1,0 +1,29 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct Unsigned
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var u = 0;
+    var r = 0;
+
+    // Pre/Post Increment
+    ++u;
+    r = ++u;
+    u++;
+    r = u++;
+
+    // Pre/Post Increment
+    --u;
+    r = --u;
+    u--;
+    r = u--;
+  }
+}
+
+}
+

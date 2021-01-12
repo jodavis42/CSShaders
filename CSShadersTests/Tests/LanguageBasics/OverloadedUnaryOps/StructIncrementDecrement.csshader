@@ -1,0 +1,50 @@
+
+namespace Test
+{
+
+struct TestV2
+{
+  float X, Y;
+
+  public static TestV2 operator ++(TestV2 value)
+  {
+    TestV2 result = new TestV2();
+    result.X = value.X + 1.0f;
+    result.Y = value.Y + 1.0f;
+    return result;
+  }
+
+  public static TestV2 operator --(TestV2 value)
+  {
+    TestV2 result = new TestV2();
+    result.X = value.X - 1.0f;
+    result.Y = value.Y - 1.0f;
+    return result;
+  }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct StructIncrementDecrement
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var v2 = new TestV2();
+    var r = new TestV2();
+
+    // Pre/Post Increment
+    ++v2;
+    r = ++v2;
+    v2++;
+    r = v2++;
+
+    // Pre/Post Increment
+    --v2;
+    r = --v2;
+    v2--;
+    r = v2--;
+  }
+}
+
+}
+

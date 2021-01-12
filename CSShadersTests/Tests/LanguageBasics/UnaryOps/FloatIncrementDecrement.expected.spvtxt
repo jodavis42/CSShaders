@@ -1,0 +1,113 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 89
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %FloatIncementDecrement_Main_EntryPoint "FloatIncementDecrement_Main_EntryPoint"
+               OpExecutionMode %FloatIncementDecrement_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FloatIncementDecrement "FloatIncementDecrement"
+               OpName %FloatIncementDecrement_PreConstructor "FloatIncementDecrement_PreConstructor"
+               OpName %self "self"
+               OpName %FloatIncementDecrement_DefaultConstructor "FloatIncementDecrement_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %f "f"
+               OpName %r "r"
+               OpName %FloatIncementDecrement_InitGlobals "FloatIncementDecrement_InitGlobals"
+               OpName %FloatIncementDecrement_CopyInputs "FloatIncementDecrement_CopyInputs"
+               OpName %self_2 "self"
+               OpName %FloatIncementDecrement_CopyOutputs "FloatIncementDecrement_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %FloatIncementDecrement_Main_EntryPoint "FloatIncementDecrement_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %FloatIncementDecrement_Main_EntryPoint "FloatIncementDecrement_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%FloatIncementDecrement = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_FloatIncementDecrement = OpTypePointer Function %FloatIncementDecrement
+          %9 = OpTypeFunction %void %_ptr_Function_FloatIncementDecrement
+%_ptr_Function_float = OpTypePointer Function %float
+         %11 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+    %float_1 = OpConstant %float 1
+%FloatIncementDecrement_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
+         %18 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatIncementDecrement_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
+         %23 = OpLabel
+         %24 = OpFunctionCall %void %FloatIncementDecrement_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
+         %29 = OpLabel
+          %f = OpVariable %_ptr_Function_float Function
+          %r = OpVariable %_ptr_Function_float Function
+               OpStore %f %float_0
+               OpStore %r %float_0
+         %34 = OpLoad %float %f
+         %35 = OpFAdd %float %34 %float_1
+               OpStore %f %35
+         %37 = OpLoad %float %f
+         %38 = OpFAdd %float %37 %float_1
+               OpStore %f %38
+         %40 = OpLoad %float %f
+               OpStore %r %40
+         %42 = OpLoad %float %f
+         %43 = OpFAdd %float %42 %float_1
+               OpStore %f %43
+         %45 = OpLoad %float %f
+         %46 = OpFAdd %float %45 %float_1
+               OpStore %f %46
+               OpStore %r %45
+         %49 = OpLoad %float %f
+         %50 = OpFSub %float %49 %float_1
+               OpStore %f %50
+         %52 = OpLoad %float %f
+         %53 = OpFSub %float %52 %float_1
+               OpStore %f %53
+         %55 = OpLoad %float %f
+               OpStore %r %55
+         %57 = OpLoad %float %f
+         %58 = OpFSub %float %57 %float_1
+               OpStore %f %58
+         %60 = OpLoad %float %f
+         %61 = OpFSub %float %60 %float_1
+               OpStore %f %61
+               OpStore %r %60
+               OpReturn
+               OpFunctionEnd
+%FloatIncementDecrement_InitGlobals = OpFunction %void None %11
+         %67 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatIncementDecrement_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
+         %72 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatIncementDecrement_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
+         %77 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FloatIncementDecrement_Main_EntryPoint = OpFunction %void None %11
+         %81 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_FloatIncementDecrement Function
+         %83 = OpFunctionCall %void %FloatIncementDecrement_InitGlobals
+         %84 = OpFunctionCall %void %FloatIncementDecrement_DefaultConstructor %self_4
+         %85 = OpFunctionCall %void %FloatIncementDecrement_CopyInputs %self_4
+         %86 = OpFunctionCall %void %Main %self_4
+         %87 = OpFunctionCall %void %FloatIncementDecrement_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

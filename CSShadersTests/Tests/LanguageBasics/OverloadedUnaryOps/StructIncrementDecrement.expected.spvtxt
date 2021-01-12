@@ -1,0 +1,195 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 156
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %StructIncrementDecrement_Main_EntryPoint "StructIncrementDecrement_Main_EntryPoint"
+               OpExecutionMode %StructIncrementDecrement_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestV2 "TestV2"
+               OpMemberName %TestV2 0 "X"
+               OpMemberName %TestV2 1 "Y"
+               OpName %StructIncrementDecrement "StructIncrementDecrement"
+               OpName %TestV2_PreConstructor "TestV2_PreConstructor"
+               OpName %self "self"
+               OpName %TestV2_DefaultConstructor "TestV2_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %op_Increment "op_Increment"
+               OpName %value "value"
+               OpName %result "result"
+               OpName %tempTestV2 "tempTestV2"
+               OpName %op_Decrement "op_Decrement"
+               OpName %value_0 "value"
+               OpName %result_0 "result"
+               OpName %tempTestV2_0 "tempTestV2"
+               OpName %StructIncrementDecrement_PreConstructor "StructIncrementDecrement_PreConstructor"
+               OpName %self_1 "self"
+               OpName %StructIncrementDecrement_DefaultConstructor "StructIncrementDecrement_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %Main "Main"
+               OpName %self_3 "self"
+               OpName %v2 "v2"
+               OpName %tempTestV2_1 "tempTestV2"
+               OpName %r "r"
+               OpName %tempTestV2_2 "tempTestV2"
+               OpName %StructIncrementDecrement_InitGlobals "StructIncrementDecrement_InitGlobals"
+               OpName %StructIncrementDecrement_CopyInputs "StructIncrementDecrement_CopyInputs"
+               OpName %self_4 "self"
+               OpName %StructIncrementDecrement_CopyOutputs "StructIncrementDecrement_CopyOutputs"
+               OpName %self_5 "self"
+               OpName %StructIncrementDecrement_Main_EntryPoint "StructIncrementDecrement_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %StructIncrementDecrement_Main_EntryPoint "StructIncrementDecrement_Main_EntryPoint"
+               OpName %self_6 "self"
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+     %TestV2 = OpTypeStruct %float %float
+       %void = OpTypeVoid
+%_ptr_Function_TestV2 = OpTypePointer Function %TestV2
+          %9 = OpTypeFunction %void %_ptr_Function_TestV2
+%_ptr_Function_float = OpTypePointer Function %float
+         %11 = OpTypeFunction %TestV2 %TestV2
+%StructIncrementDecrement = OpTypeStruct
+%_ptr_Function_StructIncrementDecrement = OpTypePointer Function %StructIncrementDecrement
+         %15 = OpTypeFunction %void %_ptr_Function_StructIncrementDecrement
+         %17 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+    %float_1 = OpConstant %float 1
+%TestV2_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_TestV2
+         %26 = OpLabel
+         %27 = OpAccessChain %_ptr_Function_float %self %uint_0
+               OpStore %27 %float_0
+         %29 = OpAccessChain %_ptr_Function_float %self %uint_1
+               OpStore %29 %float_0
+               OpReturn
+               OpFunctionEnd
+%TestV2_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_TestV2
+         %35 = OpLabel
+         %36 = OpFunctionCall %void %TestV2_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%op_Increment = OpFunction %TestV2 None %11
+      %value = OpFunctionParameter %TestV2
+         %41 = OpLabel
+     %result = OpVariable %_ptr_Function_TestV2 Function
+ %tempTestV2 = OpVariable %_ptr_Function_TestV2 Function
+         %44 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2
+         %45 = OpLoad %TestV2 %tempTestV2
+               OpStore %result %45
+         %47 = OpAccessChain %_ptr_Function_float %result %uint_0
+         %48 = OpCompositeExtract %float %value 0
+         %49 = OpFAdd %float %48 %float_1
+               OpStore %47 %49
+         %51 = OpAccessChain %_ptr_Function_float %result %uint_1
+         %52 = OpCompositeExtract %float %value 1
+         %53 = OpFAdd %float %52 %float_1
+               OpStore %51 %53
+         %55 = OpLoad %TestV2 %result
+               OpReturnValue %55
+               OpFunctionEnd
+%op_Decrement = OpFunction %TestV2 None %11
+    %value_0 = OpFunctionParameter %TestV2
+         %60 = OpLabel
+   %result_0 = OpVariable %_ptr_Function_TestV2 Function
+%tempTestV2_0 = OpVariable %_ptr_Function_TestV2 Function
+         %63 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2_0
+         %64 = OpLoad %TestV2 %tempTestV2_0
+               OpStore %result_0 %64
+         %66 = OpAccessChain %_ptr_Function_float %result_0 %uint_0
+         %67 = OpCompositeExtract %float %value_0 0
+         %68 = OpFSub %float %67 %float_1
+               OpStore %66 %68
+         %70 = OpAccessChain %_ptr_Function_float %result_0 %uint_1
+         %71 = OpCompositeExtract %float %value_0 1
+         %72 = OpFSub %float %71 %float_1
+               OpStore %70 %72
+         %74 = OpLoad %TestV2 %result_0
+               OpReturnValue %74
+               OpFunctionEnd
+%StructIncrementDecrement_PreConstructor = OpFunction %void None %15
+     %self_1 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
+         %79 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%StructIncrementDecrement_DefaultConstructor = OpFunction %void None %15
+     %self_2 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
+         %84 = OpLabel
+         %85 = OpFunctionCall %void %StructIncrementDecrement_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %15
+     %self_3 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
+         %90 = OpLabel
+         %v2 = OpVariable %_ptr_Function_TestV2 Function
+%tempTestV2_1 = OpVariable %_ptr_Function_TestV2 Function
+          %r = OpVariable %_ptr_Function_TestV2 Function
+%tempTestV2_2 = OpVariable %_ptr_Function_TestV2 Function
+         %95 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2_1
+         %96 = OpLoad %TestV2 %tempTestV2_1
+               OpStore %v2 %96
+         %98 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2_2
+         %99 = OpLoad %TestV2 %tempTestV2_2
+               OpStore %r %99
+        %101 = OpLoad %TestV2 %v2
+        %102 = OpFunctionCall %TestV2 %op_Increment %101
+               OpStore %v2 %102
+        %104 = OpLoad %TestV2 %v2
+        %105 = OpFunctionCall %TestV2 %op_Increment %104
+               OpStore %v2 %105
+        %107 = OpLoad %TestV2 %v2
+               OpStore %r %107
+        %109 = OpLoad %TestV2 %v2
+        %110 = OpFunctionCall %TestV2 %op_Increment %109
+               OpStore %v2 %110
+        %112 = OpLoad %TestV2 %v2
+        %113 = OpFunctionCall %TestV2 %op_Increment %112
+               OpStore %v2 %113
+               OpStore %r %112
+        %116 = OpLoad %TestV2 %v2
+        %117 = OpFunctionCall %TestV2 %op_Decrement %116
+               OpStore %v2 %117
+        %119 = OpLoad %TestV2 %v2
+        %120 = OpFunctionCall %TestV2 %op_Decrement %119
+               OpStore %v2 %120
+        %122 = OpLoad %TestV2 %v2
+               OpStore %r %122
+        %124 = OpLoad %TestV2 %v2
+        %125 = OpFunctionCall %TestV2 %op_Decrement %124
+               OpStore %v2 %125
+        %127 = OpLoad %TestV2 %v2
+        %128 = OpFunctionCall %TestV2 %op_Decrement %127
+               OpStore %v2 %128
+               OpStore %r %127
+               OpReturn
+               OpFunctionEnd
+%StructIncrementDecrement_InitGlobals = OpFunction %void None %17
+        %134 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%StructIncrementDecrement_CopyInputs = OpFunction %void None %15
+     %self_4 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
+        %139 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%StructIncrementDecrement_CopyOutputs = OpFunction %void None %15
+     %self_5 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
+        %144 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%StructIncrementDecrement_Main_EntryPoint = OpFunction %void None %17
+        %148 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_StructIncrementDecrement Function
+        %150 = OpFunctionCall %void %StructIncrementDecrement_InitGlobals
+        %151 = OpFunctionCall %void %StructIncrementDecrement_DefaultConstructor %self_6
+        %152 = OpFunctionCall %void %StructIncrementDecrement_CopyInputs %self_6
+        %153 = OpFunctionCall %void %Main %self_6
+        %154 = OpFunctionCall %void %StructIncrementDecrement_CopyOutputs %self_6
+               OpReturn
+               OpFunctionEnd

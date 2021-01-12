@@ -1,0 +1,29 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct FloatIncementDecrement
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var f = 0.0f;
+    var r = 0.0f;
+
+    // Pre/Post Increment
+    ++f;
+    r = ++f;
+    f++;
+    r = f++;
+
+    // Pre/Post Increment
+    --f;
+    r = --f;
+    f--;
+    r = f--;
+  }
+}
+
+}
+

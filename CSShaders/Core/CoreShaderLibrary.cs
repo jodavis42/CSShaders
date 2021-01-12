@@ -70,6 +70,8 @@ namespace CSShaders
       AddSimpleValueTypeBinaryOp(translator, boolType, boolType, "&", boolType, OpInstructionType.OpLogicalAnd);
       AddSimpleValueTypeBinaryOp(translator, boolType, boolType, "^", boolType, OpInstructionType.OpLogicalNotEqual);
 
+      IncDecOp(translator, intType, "++", intType, OpInstructionType.OpIAdd);
+      IncDecOp(translator, intType, "--", intType, OpInstructionType.OpISub);
       AddSimpleValueTypeUnaryOp(translator, intType, "~", intType, OpInstructionType.OpNot);
       AddSimpleValueTypeUnaryOp(translator, intType, "-", intType, OpInstructionType.OpSNegate);
       AddSimpleValueTypeBinaryOp(translator, intType, intType, "+", intType, OpInstructionType.OpIAdd);
@@ -87,6 +89,8 @@ namespace CSShaders
       AddSimpleValueTypeBinaryOp(translator, boolType, intType, "==", intType, OpInstructionType.OpIEqual);
       AddSimpleValueTypeBinaryOp(translator, boolType, intType, "!=", intType, OpInstructionType.OpINotEqual);
 
+      IncDecOp(translator, uintType, "++", uintType, OpInstructionType.OpIAdd);
+      IncDecOp(translator, uintType, "--", uintType, OpInstructionType.OpISub);
       AddSimpleValueTypeUnaryOp(translator, uintType, "~", uintType, OpInstructionType.OpNot);
       AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "+", uintType, OpInstructionType.OpIAdd);
       AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "-", uintType, OpInstructionType.OpISub);
@@ -103,6 +107,8 @@ namespace CSShaders
       AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "==", uintType, OpInstructionType.OpIEqual);
       AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "!=", uintType, OpInstructionType.OpINotEqual);
 
+      IncDecOp(translator, floatType, "++", floatType, OpInstructionType.OpFAdd);
+      IncDecOp(translator, floatType, "--", floatType, OpInstructionType.OpFSub);
       AddSimpleValueTypeUnaryOp(translator, floatType, "-", floatType, OpInstructionType.OpFNegate);
       AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "+", floatType, OpInstructionType.OpFAdd);
       AddSimpleValueTypeBinaryOp(translator, floatType, floatType, "-", floatType, OpInstructionType.OpFSub);
@@ -133,6 +139,20 @@ namespace CSShaders
         var lhsValueOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, lhsExpression);
         var rhsValueOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, rhsExpression);
         return translator.CreateOp(context.mCurrentBlock, instructionType, resultType, new List<IShaderIR> { lhsValueOp, rhsValueOp });
+      });
+    }
+
+    void IncDecOp(FrontEndTranslator translator, ShaderType resultType, string opToken, ShaderType operandType, OpInstructionType instructionType)
+    {
+      CreateUnaryOpIntrinsic(new UnaryOpKey(opToken, operandType), (IShaderIR operandIR, FrontEndContext context) =>
+      {
+        var operandValueOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, operandIR);
+        IShaderIR oneConstantOp = null;
+        if(resultType.mBaseType == OpType.Int)
+          oneConstantOp= translator.CreateConstantOp(operandType, 1);
+        else if(resultType.mBaseType == OpType.Float)
+          oneConstantOp = translator.CreateConstantOp(operandType, 1.0f);
+        return translator.CreateOp(context.mCurrentBlock, instructionType, resultType, new List<IShaderIR> { operandValueOp, oneConstantOp });
       });
     }
 

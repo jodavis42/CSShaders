@@ -261,13 +261,7 @@ namespace CSShaders
       mContext.mCurrentBlock.mTerminatorOp = returnOp;
     }
 
-    public override void VisitPostfixUnaryExpression(PostfixUnaryExpressionSyntax node)
-    {
-      // To Do
-      base.VisitPostfixUnaryExpression(node);
-    }
-
-    public override void VisitPrefixUnaryExpression(PrefixUnaryExpressionSyntax node)
+    public void VisitUnaryExpression(ExpressionSyntax node, SyntaxToken operatorToken, ExpressionSyntax operand, IShaderIR operandIR)
     {
       var symbol = GetSymbol(node);
       var methodSymbol = symbol as IMethodSymbol;
@@ -275,11 +269,10 @@ namespace CSShaders
         // Can this happen?
         throw new Exception("Invalid unary expression");
 
-      var operandIR = WalkAndGetResult(node.Operand);
       var operandType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[0].Type));
 
       // Handle intrinsics (declared by the compiler but don't have symbols we can look up in advance)
-      var unaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindUnaryOpIntrinsic(new UnaryOpKey(node.OperatorToken.Text, operandType));
+      var unaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindUnaryOpIntrinsic(new UnaryOpKey(operatorToken.Text, operandType));
       if (unaryOpIntrinsic != null)
       {
         var result = unaryOpIntrinsic(operandIR, mContext);
@@ -291,7 +284,7 @@ namespace CSShaders
       var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
       if (intrinsicCallback != null)
       {
-        var valueIR = WalkAndGetResult(node.Operand);
+        var valueIR = WalkAndGetResult(operand);
         intrinsicCallback(mFrontEnd, new List<IShaderIR> { valueIR }, mContext);
         return;
       }
@@ -306,6 +299,39 @@ namespace CSShaders
       }
 
       throw new Exception("Unhandled");
+    }
+
+    public override void VisitPostfixUnaryExpression(PostfixUnaryExpressionSyntax node)
+    {
+      var operandIR = WalkAndGetResult(node.Operand);
+      var operandValueIR = mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, operandIR);
+      VisitUnaryExpression(node, node.OperatorToken, node.Operand, operandValueIR);
+
+      // Handle pre/post fix modification operators
+      if (node.OperatorToken.Text == "++" || node.OperatorToken.Text == "--")
+      {
+        // Get the result of the operation and store it back into the variable.
+        var result = mContext.Pop();
+        mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, operandIR, result);
+        // Push the original value of the variable onto the stack so any later uses grab the old value.
+        mContext.Push(operandValueIR);
+      }
+    }
+
+    public override void VisitPrefixUnaryExpression(PrefixUnaryExpressionSyntax node)
+    {
+      var operandIR = WalkAndGetResult(node.Operand);
+      VisitUnaryExpression(node, node.OperatorToken, node.Operand, operandIR);
+
+      // Handle pre/post fix modification operators
+      if (node.OperatorToken.Text == "++" || node.OperatorToken.Text == "--")
+      {
+        // Get the result of the operation and store it back into the variable.
+        var result = mContext.Pop();
+        mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, operandIR, result);
+        // Push the newly assigned to variable onto the stack for any future operations.
+        mContext.Push(operandIR);
+      }
     }
 
     public override void VisitBinaryExpression(BinaryExpressionSyntax node)

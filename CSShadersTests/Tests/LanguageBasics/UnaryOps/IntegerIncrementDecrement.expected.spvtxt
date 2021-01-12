@@ -1,0 +1,113 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 89
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %IntegerIncementDecrement_Main_EntryPoint "IntegerIncementDecrement_Main_EntryPoint"
+               OpExecutionMode %IntegerIncementDecrement_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %IntegerIncementDecrement "IntegerIncementDecrement"
+               OpName %IntegerIncementDecrement_PreConstructor "IntegerIncementDecrement_PreConstructor"
+               OpName %self "self"
+               OpName %IntegerIncementDecrement_DefaultConstructor "IntegerIncementDecrement_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %i "i"
+               OpName %r "r"
+               OpName %IntegerIncementDecrement_InitGlobals "IntegerIncementDecrement_InitGlobals"
+               OpName %IntegerIncementDecrement_CopyInputs "IntegerIncementDecrement_CopyInputs"
+               OpName %self_2 "self"
+               OpName %IntegerIncementDecrement_CopyOutputs "IntegerIncementDecrement_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %IntegerIncementDecrement_Main_EntryPoint "IntegerIncementDecrement_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %IntegerIncementDecrement_Main_EntryPoint "IntegerIncementDecrement_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%IntegerIncementDecrement = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IntegerIncementDecrement = OpTypePointer Function %IntegerIncementDecrement
+          %9 = OpTypeFunction %void %_ptr_Function_IntegerIncementDecrement
+%_ptr_Function_int = OpTypePointer Function %int
+         %11 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+      %int_1 = OpConstant %int 1
+%IntegerIncementDecrement_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
+         %18 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerIncementDecrement_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
+         %23 = OpLabel
+         %24 = OpFunctionCall %void %IntegerIncementDecrement_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
+         %29 = OpLabel
+          %i = OpVariable %_ptr_Function_int Function
+          %r = OpVariable %_ptr_Function_int Function
+               OpStore %i %int_0
+               OpStore %r %int_0
+         %34 = OpLoad %int %i
+         %35 = OpIAdd %int %34 %int_1
+               OpStore %i %35
+         %37 = OpLoad %int %i
+         %38 = OpIAdd %int %37 %int_1
+               OpStore %i %38
+         %40 = OpLoad %int %i
+               OpStore %r %40
+         %42 = OpLoad %int %i
+         %43 = OpIAdd %int %42 %int_1
+               OpStore %i %43
+         %45 = OpLoad %int %i
+         %46 = OpIAdd %int %45 %int_1
+               OpStore %i %46
+               OpStore %r %45
+         %49 = OpLoad %int %i
+         %50 = OpISub %int %49 %int_1
+               OpStore %i %50
+         %52 = OpLoad %int %i
+         %53 = OpISub %int %52 %int_1
+               OpStore %i %53
+         %55 = OpLoad %int %i
+               OpStore %r %55
+         %57 = OpLoad %int %i
+         %58 = OpISub %int %57 %int_1
+               OpStore %i %58
+         %60 = OpLoad %int %i
+         %61 = OpISub %int %60 %int_1
+               OpStore %i %61
+               OpStore %r %60
+               OpReturn
+               OpFunctionEnd
+%IntegerIncementDecrement_InitGlobals = OpFunction %void None %11
+         %67 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerIncementDecrement_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
+         %72 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerIncementDecrement_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
+         %77 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerIncementDecrement_Main_EntryPoint = OpFunction %void None %11
+         %81 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_IntegerIncementDecrement Function
+         %83 = OpFunctionCall %void %IntegerIncementDecrement_InitGlobals
+         %84 = OpFunctionCall %void %IntegerIncementDecrement_DefaultConstructor %self_4
+         %85 = OpFunctionCall %void %IntegerIncementDecrement_CopyInputs %self_4
+         %86 = OpFunctionCall %void %Main %self_4
+         %87 = OpFunctionCall %void %IntegerIncementDecrement_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd
