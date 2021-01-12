@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 113
+; Bound: 122
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,110 +30,118 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
        %bool = OpTypeBool
+        %int = OpTypeInt 32 1
 %UnsignedIntegerBinaryOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_UnsignedIntegerBinaryOps = OpTypePointer Function %UnsignedIntegerBinaryOps
-          %9 = OpTypeFunction %void %_ptr_Function_UnsignedIntegerBinaryOps
+         %11 = OpTypeFunction %void %_ptr_Function_UnsignedIntegerBinaryOps
 %_ptr_Function_uint = OpTypePointer Function %uint
 %_ptr_Function_bool = OpTypePointer Function %bool
-         %11 = OpTypeFunction %void
+         %13 = OpTypeFunction %void
      %uint_0 = OpConstant %uint 0
       %false = OpConstantFalse %bool
-%UnsignedIntegerBinaryOps_PreConstructor = OpFunction %void None %9
+      %int_2 = OpConstant %int 2
+%UnsignedIntegerBinaryOps_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
-         %18 = OpLabel
+         %21 = OpLabel
                OpReturn
                OpFunctionEnd
-%UnsignedIntegerBinaryOps_DefaultConstructor = OpFunction %void None %9
+%UnsignedIntegerBinaryOps_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
-         %23 = OpLabel
-         %24 = OpFunctionCall %void %UnsignedIntegerBinaryOps_PreConstructor %self_0
+         %26 = OpLabel
+         %27 = OpFunctionCall %void %UnsignedIntegerBinaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
-         %29 = OpLabel
+         %32 = OpLabel
           %u = OpVariable %_ptr_Function_uint Function
           %r = OpVariable %_ptr_Function_uint Function
           %b = OpVariable %_ptr_Function_bool Function
                OpStore %u %uint_0
                OpStore %r %uint_0
-         %35 = OpLoad %uint %u
-         %36 = OpLoad %uint %u
-         %37 = OpIAdd %uint %35 %36
-               OpStore %r %37
+         %38 = OpLoad %uint %u
          %39 = OpLoad %uint %u
-         %40 = OpLoad %uint %u
-         %41 = OpISub %uint %39 %40
-               OpStore %r %41
+         %40 = OpIAdd %uint %38 %39
+               OpStore %r %40
+         %42 = OpLoad %uint %u
          %43 = OpLoad %uint %u
-         %44 = OpLoad %uint %u
-         %45 = OpIMul %uint %43 %44
-               OpStore %r %45
+         %44 = OpISub %uint %42 %43
+               OpStore %r %44
+         %46 = OpLoad %uint %u
          %47 = OpLoad %uint %u
-         %48 = OpLoad %uint %u
-         %49 = OpUMod %uint %47 %48
-               OpStore %r %49
+         %48 = OpIMul %uint %46 %47
+               OpStore %r %48
+         %50 = OpLoad %uint %u
          %51 = OpLoad %uint %u
-         %52 = OpLoad %uint %u
-         %53 = OpBitwiseOr %uint %51 %52
-               OpStore %r %53
+         %52 = OpUMod %uint %50 %51
+               OpStore %r %52
+         %54 = OpLoad %uint %u
          %55 = OpLoad %uint %u
-         %56 = OpLoad %uint %u
-         %57 = OpBitwiseAnd %uint %55 %56
-               OpStore %r %57
+         %56 = OpBitwiseOr %uint %54 %55
+               OpStore %r %56
+         %58 = OpLoad %uint %u
          %59 = OpLoad %uint %u
-         %60 = OpLoad %uint %u
-         %61 = OpBitwiseXor %uint %59 %60
-               OpStore %r %61
+         %60 = OpBitwiseAnd %uint %58 %59
+               OpStore %r %60
+         %62 = OpLoad %uint %u
+         %63 = OpLoad %uint %u
+         %64 = OpBitwiseXor %uint %62 %63
+               OpStore %r %64
                OpStore %b %false
-         %64 = OpLoad %uint %u
-         %65 = OpLoad %uint %u
-         %66 = OpULessThan %bool %64 %65
-               OpStore %b %66
+         %67 = OpLoad %uint %u
          %68 = OpLoad %uint %u
-         %69 = OpLoad %uint %u
-         %70 = OpULessThanEqual %bool %68 %69
-               OpStore %b %70
+         %69 = OpULessThan %bool %67 %68
+               OpStore %b %69
+         %71 = OpLoad %uint %u
          %72 = OpLoad %uint %u
-         %73 = OpLoad %uint %u
-         %74 = OpUGreaterThan %bool %72 %73
-               OpStore %b %74
+         %73 = OpULessThanEqual %bool %71 %72
+               OpStore %b %73
+         %75 = OpLoad %uint %u
          %76 = OpLoad %uint %u
-         %77 = OpLoad %uint %u
-         %78 = OpUGreaterThanEqual %bool %76 %77
-               OpStore %b %78
+         %77 = OpUGreaterThan %bool %75 %76
+               OpStore %b %77
+         %79 = OpLoad %uint %u
          %80 = OpLoad %uint %u
-         %81 = OpLoad %uint %u
-         %82 = OpIEqual %bool %80 %81
-               OpStore %b %82
+         %81 = OpUGreaterThanEqual %bool %79 %80
+               OpStore %b %81
+         %83 = OpLoad %uint %u
          %84 = OpLoad %uint %u
-         %85 = OpLoad %uint %u
-         %86 = OpINotEqual %bool %84 %85
-               OpStore %b %86
+         %85 = OpIEqual %bool %83 %84
+               OpStore %b %85
+         %87 = OpLoad %uint %u
+         %88 = OpLoad %uint %u
+         %89 = OpINotEqual %bool %87 %88
+               OpStore %b %89
+         %91 = OpLoad %uint %u
+         %92 = OpShiftLeftLogical %uint %91 %int_2
+               OpStore %u %92
+         %94 = OpLoad %uint %u
+         %95 = OpShiftRightArithmetic %uint %94 %int_2
+               OpStore %u %95
                OpReturn
                OpFunctionEnd
-%UnsignedIntegerBinaryOps_InitGlobals = OpFunction %void None %11
-         %91 = OpLabel
+%UnsignedIntegerBinaryOps_InitGlobals = OpFunction %void None %13
+        %100 = OpLabel
                OpReturn
                OpFunctionEnd
-%UnsignedIntegerBinaryOps_CopyInputs = OpFunction %void None %9
+%UnsignedIntegerBinaryOps_CopyInputs = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
-         %96 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%UnsignedIntegerBinaryOps_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
-        %101 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%UnsignedIntegerBinaryOps_Main_EntryPoint = OpFunction %void None %11
         %105 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UnsignedIntegerBinaryOps_CopyOutputs = OpFunction %void None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
+        %110 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UnsignedIntegerBinaryOps_Main_EntryPoint = OpFunction %void None %13
+        %114 = OpLabel
      %self_4 = OpVariable %_ptr_Function_UnsignedIntegerBinaryOps Function
-        %107 = OpFunctionCall %void %UnsignedIntegerBinaryOps_InitGlobals
-        %108 = OpFunctionCall %void %UnsignedIntegerBinaryOps_DefaultConstructor %self_4
-        %109 = OpFunctionCall %void %UnsignedIntegerBinaryOps_CopyInputs %self_4
-        %110 = OpFunctionCall %void %Main %self_4
-        %111 = OpFunctionCall %void %UnsignedIntegerBinaryOps_CopyOutputs %self_4
+        %116 = OpFunctionCall %void %UnsignedIntegerBinaryOps_InitGlobals
+        %117 = OpFunctionCall %void %UnsignedIntegerBinaryOps_DefaultConstructor %self_4
+        %118 = OpFunctionCall %void %UnsignedIntegerBinaryOps_CopyInputs %self_4
+        %119 = OpFunctionCall %void %Main %self_4
+        %120 = OpFunctionCall %void %UnsignedIntegerBinaryOps_CopyOutputs %self_4
                OpReturn
                OpFunctionEnd

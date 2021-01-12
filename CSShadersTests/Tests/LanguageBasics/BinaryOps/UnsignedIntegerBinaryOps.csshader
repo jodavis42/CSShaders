@@ -25,6 +25,9 @@ struct UnsignedIntegerBinaryOps
     b = u >= u;
     b = u == u;
     b = u != u;
+
+    u = u << 2;
+    u = u >> 2;
   }
 }
 

@@ -40,6 +40,8 @@ void Main(IntegerBinaryOps self)
     b = i >= i;
     b = i == i;
     b = i != i;
+    i = i << 2;
+    i = i >> 2;
 }
 
 void IntegerBinaryOps_CopyOutputs(IntegerBinaryOps self)

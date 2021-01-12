@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 115
+; Bound: 122
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -40,101 +40,108 @@
          %13 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
       %false = OpConstantFalse %bool
+      %int_2 = OpConstant %int 2
 %IntegerBinaryOps_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-         %20 = OpLabel
+         %21 = OpLabel
                OpReturn
                OpFunctionEnd
 %IntegerBinaryOps_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-         %25 = OpLabel
-         %26 = OpFunctionCall %void %IntegerBinaryOps_PreConstructor %self_0
+         %26 = OpLabel
+         %27 = OpFunctionCall %void %IntegerBinaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
        %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-         %31 = OpLabel
+         %32 = OpLabel
           %i = OpVariable %_ptr_Function_int Function
           %r = OpVariable %_ptr_Function_int Function
           %b = OpVariable %_ptr_Function_bool Function
                OpStore %i %int_0
                OpStore %r %int_0
-         %37 = OpLoad %int %i
          %38 = OpLoad %int %i
-         %39 = OpIAdd %int %37 %38
-               OpStore %r %39
-         %41 = OpLoad %int %i
+         %39 = OpLoad %int %i
+         %40 = OpIAdd %int %38 %39
+               OpStore %r %40
          %42 = OpLoad %int %i
-         %43 = OpISub %int %41 %42
-               OpStore %r %43
-         %45 = OpLoad %int %i
+         %43 = OpLoad %int %i
+         %44 = OpISub %int %42 %43
+               OpStore %r %44
          %46 = OpLoad %int %i
-         %47 = OpIMul %int %45 %46
-               OpStore %r %47
-         %49 = OpLoad %int %i
+         %47 = OpLoad %int %i
+         %48 = OpIMul %int %46 %47
+               OpStore %r %48
          %50 = OpLoad %int %i
-         %51 = OpSMod %int %49 %50
-               OpStore %r %51
-         %53 = OpLoad %int %i
+         %51 = OpLoad %int %i
+         %52 = OpSMod %int %50 %51
+               OpStore %r %52
          %54 = OpLoad %int %i
-         %55 = OpBitwiseOr %int %53 %54
-               OpStore %r %55
-         %57 = OpLoad %int %i
+         %55 = OpLoad %int %i
+         %56 = OpBitwiseOr %int %54 %55
+               OpStore %r %56
          %58 = OpLoad %int %i
-         %59 = OpBitwiseAnd %int %57 %58
-               OpStore %r %59
-         %61 = OpLoad %int %i
+         %59 = OpLoad %int %i
+         %60 = OpBitwiseAnd %int %58 %59
+               OpStore %r %60
          %62 = OpLoad %int %i
-         %63 = OpBitwiseXor %int %61 %62
-               OpStore %r %63
+         %63 = OpLoad %int %i
+         %64 = OpBitwiseXor %int %62 %63
+               OpStore %r %64
                OpStore %b %false
-         %66 = OpLoad %int %i
          %67 = OpLoad %int %i
-         %68 = OpSLessThan %bool %66 %67
-               OpStore %b %68
-         %70 = OpLoad %int %i
+         %68 = OpLoad %int %i
+         %69 = OpSLessThan %bool %67 %68
+               OpStore %b %69
          %71 = OpLoad %int %i
-         %72 = OpSLessThanEqual %bool %70 %71
-               OpStore %b %72
-         %74 = OpLoad %int %i
+         %72 = OpLoad %int %i
+         %73 = OpSLessThanEqual %bool %71 %72
+               OpStore %b %73
          %75 = OpLoad %int %i
-         %76 = OpSGreaterThan %bool %74 %75
-               OpStore %b %76
-         %78 = OpLoad %int %i
+         %76 = OpLoad %int %i
+         %77 = OpSGreaterThan %bool %75 %76
+               OpStore %b %77
          %79 = OpLoad %int %i
-         %80 = OpSGreaterThanEqual %bool %78 %79
-               OpStore %b %80
-         %82 = OpLoad %int %i
+         %80 = OpLoad %int %i
+         %81 = OpSGreaterThanEqual %bool %79 %80
+               OpStore %b %81
          %83 = OpLoad %int %i
-         %84 = OpIEqual %bool %82 %83
-               OpStore %b %84
-         %86 = OpLoad %int %i
+         %84 = OpLoad %int %i
+         %85 = OpIEqual %bool %83 %84
+               OpStore %b %85
          %87 = OpLoad %int %i
-         %88 = OpINotEqual %bool %86 %87
-               OpStore %b %88
+         %88 = OpLoad %int %i
+         %89 = OpINotEqual %bool %87 %88
+               OpStore %b %89
+         %91 = OpLoad %int %i
+         %92 = OpShiftLeftLogical %int %91 %int_2
+               OpStore %i %92
+         %94 = OpLoad %int %i
+         %95 = OpShiftRightArithmetic %int %94 %int_2
+               OpStore %i %95
                OpReturn
                OpFunctionEnd
 %IntegerBinaryOps_InitGlobals = OpFunction %void None %13
-         %93 = OpLabel
+        %100 = OpLabel
                OpReturn
                OpFunctionEnd
 %IntegerBinaryOps_CopyInputs = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-         %98 = OpLabel
+        %105 = OpLabel
                OpReturn
                OpFunctionEnd
 %IntegerBinaryOps_CopyOutputs = OpFunction %void None %11
      %self_3 = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-        %103 = OpLabel
+        %110 = OpLabel
                OpReturn
                OpFunctionEnd
 %IntegerBinaryOps_Main_EntryPoint = OpFunction %void None %13
-        %107 = OpLabel
+        %114 = OpLabel
      %self_4 = OpVariable %_ptr_Function_IntegerBinaryOps Function
-        %109 = OpFunctionCall %void %IntegerBinaryOps_InitGlobals
-        %110 = OpFunctionCall %void %IntegerBinaryOps_DefaultConstructor %self_4
-        %111 = OpFunctionCall %void %IntegerBinaryOps_CopyInputs %self_4
-        %112 = OpFunctionCall %void %Main %self_4
-        %113 = OpFunctionCall %void %IntegerBinaryOps_CopyOutputs %self_4
+        %116 = OpFunctionCall %void %IntegerBinaryOps_InitGlobals
+        %117 = OpFunctionCall %void %IntegerBinaryOps_DefaultConstructor %self_4
+        %118 = OpFunctionCall %void %IntegerBinaryOps_CopyInputs %self_4
+        %119 = OpFunctionCall %void %Main %self_4
+        %120 = OpFunctionCall %void %IntegerBinaryOps_CopyOutputs %self_4
                OpReturn
                OpFunctionEnd

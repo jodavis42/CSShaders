@@ -25,6 +25,9 @@ struct IntegerBinaryOps
     b = i >= i;
     b = i == i;
     b = i != i;
+
+    i = i << 2;
+    i = i >> 2;
   }
 }
 

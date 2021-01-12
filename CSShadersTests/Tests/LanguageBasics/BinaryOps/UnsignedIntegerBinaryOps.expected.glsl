@@ -40,6 +40,8 @@ void Main(UnsignedIntegerBinaryOps self)
     b = u >= u;
     b = u == u;
     b = u != u;
+    u = u << uint(2);
+    u = uint(int(u) >> 2);
 }
 
 void UnsignedIntegerBinaryOps_CopyOutputs(UnsignedIntegerBinaryOps self)

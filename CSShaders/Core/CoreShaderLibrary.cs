@@ -82,6 +82,8 @@ namespace CSShaders
       AddSimpleValueTypeBinaryOp(translator, intType, intType, "|", intType, OpInstructionType.OpBitwiseOr);
       AddSimpleValueTypeBinaryOp(translator, intType, intType, "&", intType, OpInstructionType.OpBitwiseAnd);
       AddSimpleValueTypeBinaryOp(translator, intType, intType, "^", intType, OpInstructionType.OpBitwiseXor);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, "<<", intType, OpInstructionType.OpShiftLeftLogical);
+      AddSimpleValueTypeBinaryOp(translator, intType, intType, ">>", intType, OpInstructionType.OpShiftRightArithmetic);
       AddSimpleValueTypeBinaryOp(translator, boolType, intType, "<", intType, OpInstructionType.OpSLessThan);
       AddSimpleValueTypeBinaryOp(translator, boolType, intType, "<=", intType, OpInstructionType.OpSLessThanEqual);
       AddSimpleValueTypeBinaryOp(translator, boolType, intType, ">", intType, OpInstructionType.OpSGreaterThan);
@@ -100,6 +102,8 @@ namespace CSShaders
       AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "|", uintType, OpInstructionType.OpBitwiseOr);
       AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "&", uintType, OpInstructionType.OpBitwiseAnd);
       AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "^", uintType, OpInstructionType.OpBitwiseXor);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, "<<", intType, OpInstructionType.OpShiftLeftLogical);
+      AddSimpleValueTypeBinaryOp(translator, uintType, uintType, ">>", intType, OpInstructionType.OpShiftRightArithmetic);
       AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "<", uintType, OpInstructionType.OpULessThan);
       AddSimpleValueTypeBinaryOp(translator, boolType, uintType, "<=", uintType, OpInstructionType.OpULessThanEqual);
       AddSimpleValueTypeBinaryOp(translator, boolType, uintType, ">", uintType, OpInstructionType.OpUGreaterThan);
