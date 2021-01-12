@@ -192,6 +192,7 @@ namespace CSShaders
           return;
         // @JoshD: Handle property getter/setter function calls
       }
+      throw new Exception();
     }
 
     public override void VisitLiteralExpression(LiteralExpressionSyntax node)
@@ -204,11 +205,29 @@ namespace CSShaders
 
     public override void VisitAssignmentExpression(AssignmentExpressionSyntax node)
     {
+      // Always get the right IR but not always the left. In some cases with setters we don't need the left. This avoids loading the left twice.
+      IShaderIR leftIR = null;
+      IShaderIR rightIR = WalkAndGetResult(node.Right);
+
+      // If the token isn't the assignment op, then this must be a compound assignment (e.g. '+=').
+      var token = node.OperatorToken.Text;
+      if (token != "=")
+      {
+        // To do the compound we have to load the left now.
+        leftIR = WalkAndGetResult(node.Left);
+
+        // Generate the token for the binary op in the compound (just strip the '=' off) and then visit the binary expression.
+        var binaryOp = token.Substring(0, token.Length - 1);
+        VisitBinaryExpression(node, leftIR, binaryOp, rightIR);
+        // Do whatever remaining logic for the assignment with the result of the binary expression.
+        rightIR = mContext.Pop();
+      }
+
       // If the left side is actually a setter, then we have to flip the assignment around to call the setter
       var leftSymbol = GetSymbol(node.Left);
       // One complicated case is if the left is actually a member access (e.g. Vec3.XY = rhs).
       // In this case, we need to call the setter on Vec3 (the expression of the member access)
-      if (node.Left is MemberAccessExpressionSyntax memberAccessNode)
+      if (node.Left is MemberAccessExpressionSyntax memberAccessNode && leftSymbol.IsStatic == false)
       {
         FunctionKey functionKey = null;
         // Try and get the function key for this symbol depending on if it's a field, property, etc...
@@ -220,16 +239,20 @@ namespace CSShaders
         // If we found a function key, then try and use it call the setter 
         if(functionKey != null)
         {
-          if (TryCallIntrinsicsSetterFunction(functionKey, memberAccessNode.Expression, node.Right))
+          var lhsInstanceIR = WalkAndGetResult(memberAccessNode.Expression);
+          if (TryCallIntrinsicsSetterFunction(functionKey, lhsInstanceIR, rightIR))
             return;
-          if (TryCallSetterFunction(functionKey, memberAccessNode.Expression, node.Right))
+          if (TryCallSetterFunction(functionKey, lhsInstanceIR, rightIR))
             return;
         }
       }
 
-      var leftOp = WalkAndGetResult(node.Left);
-      var rightValueOp = WalkAndGetValueTypeResult(node.Right);
-      var storeOp = mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, leftOp, rightValueOp);
+      // Load the left if we didn't already
+      if(leftIR == null)
+        leftIR = WalkAndGetResult(node.Left);
+
+      var rightValueOp = mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, rightIR);
+      var storeOp = mFrontEnd.CreateStoreOp(mContext.mCurrentBlock, leftIR, rightValueOp);
       mContext.Push(storeOp);
     }
 
@@ -334,7 +357,7 @@ namespace CSShaders
       }
     }
 
-    public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+    public void VisitBinaryExpression(ExpressionSyntax node, IShaderIR lhsIR, string operatorToken, IShaderIR rhsIR)
     {
       var symbol = GetSymbol(node);
 
@@ -343,13 +366,11 @@ namespace CSShaders
         // Can this happen?
         throw new Exception("Invalid binary expression");
 
-      var lhsIR = WalkAndGetResult(node.Left);
-      var rhsIR = WalkAndGetResult(node.Right);
       var lhsType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[0].Type));
       var rhsType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[1].Type));
 
       // Handle intrinsics (declared by the compiler but don't have symbols we can look up in advance)
-      var binaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindBinaryOpIntrinsic(new BinaryOpKey(lhsType, node.OperatorToken.Text, rhsType));
+      var binaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindBinaryOpIntrinsic(new BinaryOpKey(lhsType, operatorToken, rhsType));
       if (binaryOpIntrinsic != null)
       {
         var result = binaryOpIntrinsic(lhsIR, rhsIR, mContext);
@@ -359,7 +380,7 @@ namespace CSShaders
 
       // Find if this is an intrinsic declared via attribute
       var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
-      if(intrinsicCallback != null)
+      if (intrinsicCallback != null)
       {
         intrinsicCallback(mFrontEnd, new List<IShaderIR> { lhsIR, rhsIR }, mContext);
         return;
@@ -375,6 +396,13 @@ namespace CSShaders
       }
 
       throw new Exception("Unhandled");
+    }
+
+    public override void VisitBinaryExpression(BinaryExpressionSyntax node)
+    {
+      var lhsIR = WalkAndGetResult(node.Left);
+      var rhsIR = WalkAndGetResult(node.Right);
+      VisitBinaryExpression(node, lhsIR, node.OperatorToken.Text, rhsIR);
     }
 
     public override void VisitCastExpression(CastExpressionSyntax node)

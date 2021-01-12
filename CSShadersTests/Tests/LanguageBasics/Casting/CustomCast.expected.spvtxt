@@ -105,12 +105,12 @@
          %65 = OpLabel
    %tempInt2 = OpVariable %_ptr_Function_Int2 Function
          %67 = OpFunctionCall %void %Int2_DefaultConstructor %tempInt2
-         %68 = OpAccessChain %_ptr_Function_int %tempInt2 %uint_0
-         %69 = OpCompositeExtract %int %value_0 0
-               OpStore %68 %69
-         %71 = OpAccessChain %_ptr_Function_int %tempInt2 %uint_1
-         %72 = OpCompositeExtract %int %value_0 0
-               OpStore %71 %72
+         %68 = OpCompositeExtract %int %value_0 0
+         %69 = OpAccessChain %_ptr_Function_int %tempInt2 %uint_0
+               OpStore %69 %68
+         %71 = OpCompositeExtract %int %value_0 0
+         %72 = OpAccessChain %_ptr_Function_int %tempInt2 %uint_1
+               OpStore %72 %71
          %74 = OpLoad %Int2 %tempInt2
                OpReturnValue %74
                OpFunctionEnd

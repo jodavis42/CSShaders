@@ -1,0 +1,122 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 98
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %IntegerCompoundAssignmentOps_Main_EntryPoint "IntegerCompoundAssignmentOps_Main_EntryPoint"
+               OpExecutionMode %IntegerCompoundAssignmentOps_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %IntegerCompoundAssignmentOps "IntegerCompoundAssignmentOps"
+               OpName %IntegerCompoundAssignmentOps_PreConstructor "IntegerCompoundAssignmentOps_PreConstructor"
+               OpName %self "self"
+               OpName %IntegerCompoundAssignmentOps_DefaultConstructor "IntegerCompoundAssignmentOps_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Main "Main"
+               OpName %self_1 "self"
+               OpName %i "i"
+               OpName %r "r"
+               OpName %IntegerCompoundAssignmentOps_InitGlobals "IntegerCompoundAssignmentOps_InitGlobals"
+               OpName %IntegerCompoundAssignmentOps_CopyInputs "IntegerCompoundAssignmentOps_CopyInputs"
+               OpName %self_2 "self"
+               OpName %IntegerCompoundAssignmentOps_CopyOutputs "IntegerCompoundAssignmentOps_CopyOutputs"
+               OpName %self_3 "self"
+               OpName %IntegerCompoundAssignmentOps_Main_EntryPoint "IntegerCompoundAssignmentOps_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %IntegerCompoundAssignmentOps_Main_EntryPoint "IntegerCompoundAssignmentOps_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%IntegerCompoundAssignmentOps = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IntegerCompoundAssignmentOps = OpTypePointer Function %IntegerCompoundAssignmentOps
+          %9 = OpTypeFunction %void %_ptr_Function_IntegerCompoundAssignmentOps
+%_ptr_Function_int = OpTypePointer Function %int
+         %11 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+%IntegerCompoundAssignmentOps_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
+         %17 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerCompoundAssignmentOps_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
+         %22 = OpLabel
+         %23 = OpFunctionCall %void %IntegerCompoundAssignmentOps_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
+         %28 = OpLabel
+          %i = OpVariable %_ptr_Function_int Function
+          %r = OpVariable %_ptr_Function_int Function
+               OpStore %i %int_0
+               OpStore %r %int_0
+         %33 = OpLoad %int %r
+         %34 = OpLoad %int %i
+         %35 = OpIAdd %int %33 %34
+               OpStore %r %35
+         %37 = OpLoad %int %r
+         %38 = OpLoad %int %i
+         %39 = OpISub %int %37 %38
+               OpStore %r %39
+         %41 = OpLoad %int %r
+         %42 = OpLoad %int %i
+         %43 = OpIMul %int %41 %42
+               OpStore %r %43
+         %45 = OpLoad %int %r
+         %46 = OpLoad %int %i
+         %47 = OpSDiv %int %45 %46
+               OpStore %r %47
+         %49 = OpLoad %int %r
+         %50 = OpLoad %int %i
+         %51 = OpSMod %int %49 %50
+               OpStore %r %51
+         %53 = OpLoad %int %r
+         %54 = OpLoad %int %i
+         %55 = OpBitwiseOr %int %53 %54
+               OpStore %r %55
+         %57 = OpLoad %int %r
+         %58 = OpLoad %int %i
+         %59 = OpBitwiseAnd %int %57 %58
+               OpStore %r %59
+         %61 = OpLoad %int %r
+         %62 = OpLoad %int %i
+         %63 = OpBitwiseXor %int %61 %62
+               OpStore %r %63
+         %65 = OpLoad %int %r
+         %66 = OpLoad %int %i
+         %67 = OpShiftLeftLogical %int %65 %66
+               OpStore %r %67
+         %69 = OpLoad %int %r
+         %70 = OpLoad %int %i
+         %71 = OpShiftRightArithmetic %int %69 %70
+               OpStore %r %71
+               OpReturn
+               OpFunctionEnd
+%IntegerCompoundAssignmentOps_InitGlobals = OpFunction %void None %11
+         %76 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerCompoundAssignmentOps_CopyInputs = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
+         %81 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerCompoundAssignmentOps_CopyOutputs = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
+         %86 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IntegerCompoundAssignmentOps_Main_EntryPoint = OpFunction %void None %11
+         %90 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_IntegerCompoundAssignmentOps Function
+         %92 = OpFunctionCall %void %IntegerCompoundAssignmentOps_InitGlobals
+         %93 = OpFunctionCall %void %IntegerCompoundAssignmentOps_DefaultConstructor %self_4
+         %94 = OpFunctionCall %void %IntegerCompoundAssignmentOps_CopyInputs %self_4
+         %95 = OpFunctionCall %void %Main %self_4
+         %96 = OpFunctionCall %void %IntegerCompoundAssignmentOps_CopyOutputs %self_4
+               OpReturn
+               OpFunctionEnd

@@ -76,14 +76,14 @@
          %43 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2
          %44 = OpLoad %TestV2 %tempTestV2
                OpStore %result %44
-         %46 = OpAccessChain %_ptr_Function_float %result %uint_0
-         %47 = OpCompositeExtract %float %value 0
-         %48 = OpFNegate %float %47
-               OpStore %46 %48
-         %50 = OpAccessChain %_ptr_Function_float %result %uint_1
-         %51 = OpCompositeExtract %float %value 1
-         %52 = OpFNegate %float %51
-               OpStore %50 %52
+         %46 = OpCompositeExtract %float %value 0
+         %47 = OpFNegate %float %46
+         %48 = OpAccessChain %_ptr_Function_float %result %uint_0
+               OpStore %48 %47
+         %50 = OpCompositeExtract %float %value 1
+         %51 = OpFNegate %float %50
+         %52 = OpAccessChain %_ptr_Function_float %result %uint_1
+               OpStore %52 %51
          %54 = OpLoad %TestV2 %result
                OpReturnValue %54
                OpFunctionEnd

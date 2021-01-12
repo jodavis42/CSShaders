@@ -345,19 +345,17 @@ namespace CSShaders
       return true;
     }
 
-    public bool TryCallSetterFunction(FunctionKey functionKey, CSharpSyntaxNode selfExpressionNode, CSharpSyntaxNode rhsNode)
+    public bool TryCallSetterFunction(FunctionKey functionKey, IShaderIR selfInstanceIR, IShaderIR rhsIR)
     {
       var setterShaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(functionKey);
       if (setterShaderFunction == null)
         return false;
 
-      var selfInstanceIR = WalkAndGetResult(selfExpressionNode);
-      var rhsIR = WalkAndGetResult(rhsNode);
       GenerateFunctionCall(setterShaderFunction, selfInstanceIR, new List<IShaderIR>() { rhsIR });
       return true;
     }
 
-    public bool TryCallIntrinsicsSetterFunction(FunctionKey functionKey, CSharpSyntaxNode selfExpressionNode, CSharpSyntaxNode argument)
+    public bool TryCallIntrinsicsSetterFunction(FunctionKey functionKey, IShaderIR setter, IShaderIR argumentIR)
     {
       var instrinsicDelegate = mFrontEnd.mCurrentLibrary.FindIntrinsicSetterFunction(functionKey);
       if (instrinsicDelegate == null)
@@ -365,8 +363,6 @@ namespace CSShaders
 
       // Build the arguments up
       var argumentIRs = new List<IShaderIR>();
-      IShaderIR setter = WalkAndGetResult(selfExpressionNode);
-      IShaderIR argumentIR = WalkAndGetResult(argument);
       instrinsicDelegate(mFrontEnd, setter, argumentIR, mContext);
 
       return true;

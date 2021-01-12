@@ -1,0 +1,27 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct IntegerCompoundAssignmentOps
+{
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var i = 0;
+    var r = 0;
+    r += i;
+    r -= i;
+    r *= i;
+    r /= i;
+    r %= i;
+    r |= i;
+    r &= i;
+    r ^= i;
+    r <<= i;
+    r >>= i;
+  }
+}
+
+}
+

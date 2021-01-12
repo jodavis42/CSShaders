@@ -83,14 +83,14 @@
          %44 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2
          %45 = OpLoad %TestV2 %tempTestV2
                OpStore %result %45
-         %47 = OpAccessChain %_ptr_Function_float %result %uint_0
-         %48 = OpCompositeExtract %float %value 0
-         %49 = OpFAdd %float %48 %float_1
-               OpStore %47 %49
-         %51 = OpAccessChain %_ptr_Function_float %result %uint_1
-         %52 = OpCompositeExtract %float %value 1
-         %53 = OpFAdd %float %52 %float_1
-               OpStore %51 %53
+         %47 = OpCompositeExtract %float %value 0
+         %48 = OpFAdd %float %47 %float_1
+         %49 = OpAccessChain %_ptr_Function_float %result %uint_0
+               OpStore %49 %48
+         %51 = OpCompositeExtract %float %value 1
+         %52 = OpFAdd %float %51 %float_1
+         %53 = OpAccessChain %_ptr_Function_float %result %uint_1
+               OpStore %53 %52
          %55 = OpLoad %TestV2 %result
                OpReturnValue %55
                OpFunctionEnd
@@ -102,14 +102,14 @@
          %63 = OpFunctionCall %void %TestV2_DefaultConstructor %tempTestV2_0
          %64 = OpLoad %TestV2 %tempTestV2_0
                OpStore %result_0 %64
-         %66 = OpAccessChain %_ptr_Function_float %result_0 %uint_0
-         %67 = OpCompositeExtract %float %value_0 0
-         %68 = OpFSub %float %67 %float_1
-               OpStore %66 %68
-         %70 = OpAccessChain %_ptr_Function_float %result_0 %uint_1
-         %71 = OpCompositeExtract %float %value_0 1
-         %72 = OpFSub %float %71 %float_1
-               OpStore %70 %72
+         %66 = OpCompositeExtract %float %value_0 0
+         %67 = OpFSub %float %66 %float_1
+         %68 = OpAccessChain %_ptr_Function_float %result_0 %uint_0
+               OpStore %68 %67
+         %70 = OpCompositeExtract %float %value_0 1
+         %71 = OpFSub %float %70 %float_1
+         %72 = OpAccessChain %_ptr_Function_float %result_0 %uint_1
+               OpStore %72 %71
          %74 = OpLoad %TestV2 %result_0
                OpReturnValue %74
                OpFunctionEnd
