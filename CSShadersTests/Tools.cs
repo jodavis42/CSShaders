@@ -62,10 +62,11 @@ namespace CSShadersTests
     }
   }
 
-  public class TortoiseDiffTool : DiffTool
+  public class VisualDiffTool : DiffTool
   {
-    public bool mVisualDisplay = false;
-    static string mTortoiseDiffPath = "tortoisemerge.exe";
+    public bool VisualDisplay = false;
+    public string DiffToolLocation = "tortoisemerge.exe";
+    public string Arguments = "\"{0}\" \"{1}\"";
     public override bool Diff(string expected, string actual)
     {
       if (!File.Exists(expected))
@@ -77,10 +78,10 @@ namespace CSShadersTests
       if (base.Diff(expected, actual))
         return true;
 
-      if(mVisualDisplay)
+      if (VisualDisplay)
       {
-        var args = String.Format("\"{0}\" \"{1}\"", actual, expected);
-        RunProcessSimple(mTortoiseDiffPath, args, false);
+        var args = String.Format(Arguments, actual, expected);
+        RunProcessSimple(DiffToolLocation, args, false);
       }
       return false;
     }

@@ -82,8 +82,8 @@ namespace CSShadersTests
       var glslTool = new SpirVCrossTool();
       glslTool.Run(binaryOutPath, generatedGlslOutPath);
 
-      TortoiseDiffTool diffTool = new TortoiseDiffTool();
-      diffTool.mVisualDisplay = true;
+      VisualDiffTool diffTool = new VisualDiffTool();
+      diffTool.VisualDisplay = true;
       diffTool.Diff(expectedDisassemblerOutPath, generatedDisassemblerOutPath);
       diffTool.Diff(expectedGlslOutPath, generatedGlslOutPath);
     }
