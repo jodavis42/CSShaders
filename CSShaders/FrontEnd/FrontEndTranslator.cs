@@ -32,6 +32,7 @@ namespace CSShaders
   public class FrontEndTranslator
   {
     public ShaderLibrary mCurrentLibrary;
+    public ShaderProject CurrentProject;
     public SemanticModel mSemanticModel;
     public CSharpCompilation Compilation;
 

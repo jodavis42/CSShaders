@@ -11,12 +11,25 @@ namespace CSShaders
       Location = location;
     }
 
+    public override string ToString()
+    {
+      var lineSpan = Location.GetMappedLineSpan();
+      return string.Format("{0}({1},{2})", lineSpan.Path, lineSpan.StartLinePosition, lineSpan.EndLinePosition);
+    }
+
     Location Location;
   }
 
+  public class ShaderTranslationError
+  {
+    public ShaderCodeLocation Location;
+    public string Message = "";
+  }
+
+
   public class ShaderCompilationErrors
   {
-    public delegate void ErrorHandler(ShaderCodeLocation location, string message);
+    public delegate void ErrorHandler(ShaderTranslationError error);
     public List<ErrorHandler> ErrorHandlers = new List<ErrorHandler>();
 
     public void SendTranslationError(string message)
@@ -26,9 +39,15 @@ namespace CSShaders
 
     public void SendTranslationError(ShaderCodeLocation location, string message)
     {
-      foreach(var handler in ErrorHandlers)
+      var error = new ShaderTranslationError { Location = location, Message = message };
+      SendTranslationError(error);
+    }
+
+    public void SendTranslationError(ShaderTranslationError error)
+    {
+      foreach (var handler in ErrorHandlers)
       {
-        handler.Invoke(location, message);
+        handler.Invoke(error);
       }
     }
   }

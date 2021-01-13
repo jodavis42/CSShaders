@@ -69,6 +69,7 @@ namespace CSShaders
     public void Translate(CSharpCompilation compilation, List<SyntaxTree> trees, ShaderModule dependencies, FrontEndTranslator translator, ShaderLibrary library)
     {
       FrontEndTranslator frontEnd = new FrontEndTranslator();
+      translator.CurrentProject = this;
       translator.mCurrentLibrary = library;
       translator.mCurrentLibrary.SourceCompilation = compilation;
       translator.mCurrentLibrary.mDependencies = dependencies;

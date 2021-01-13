@@ -1,4 +1,5 @@
 ﻿using CSShaders;
+using System;
 using System.IO;
 
 namespace CSShadersTests
@@ -9,6 +10,8 @@ namespace CSShadersTests
 
     static void Main(string[] args)
     {
+      SimpleGenerator.ErrorHandlers.Add(OnTranslationErrorLog);
+      //SimpleGenerator.ErrorHandlers.Add(OnTranslationErrorThrowException);
       LoadCoreLibraries();
 
       var path = "Tests";
@@ -83,6 +86,16 @@ namespace CSShadersTests
       diffTool.mVisualDisplay = true;
       diffTool.Diff(expectedDisassemblerOutPath, generatedDisassemblerOutPath);
       diffTool.Diff(expectedGlslOutPath, generatedGlslOutPath);
+    }
+
+    static void OnTranslationErrorLog(ShaderTranslationError error)
+    {
+      Console.WriteLine(string.Format("{0}: {1}", error.Location.ToString(), error.Message));
+    }
+
+    static void OnTranslationErrorThrowException(ShaderTranslationError error)
+    {
+      throw new Exception(string.Format("{0}: {1}", error.Location.ToString(), error.Message));
     }
   }
 }

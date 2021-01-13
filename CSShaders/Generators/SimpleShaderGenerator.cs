@@ -14,6 +14,7 @@ namespace CSShaders
     
     public ShaderProject FragmentProject;
     public ShaderLibrary FragmentLibrary;
+    public List<ShaderProject.ErrorHandler> ErrorHandlers = new List<ShaderProject.ErrorHandler>();
 
     static void LoadProjectDirectory(string path, ShaderProject shaderProject, bool recursive = true)
     {
@@ -59,6 +60,7 @@ namespace CSShaders
     {
       this.FragmentProject = new ShaderProject();
       this.FragmentLibrary = new ShaderLibrary();
+      this.FragmentProject.ErrorHandlers.Add(this.OnTranslationError);
     }
 
     ShaderLibrary LoadAndCompileProject(string projectName, string directory, ShaderModule dependencies, out ShaderProject shaderProject)
@@ -70,9 +72,10 @@ namespace CSShaders
       return shaderLibrary;
     }
 
-    void OnTranslationError(ShaderCodeLocation location, string message)
+    void OnTranslationError(ShaderTranslationError error)
     {
-      throw new Exception(message);
+      foreach (var errorHandler in ErrorHandlers)
+        errorHandler(error);
     }
   }
 }
