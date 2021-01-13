@@ -739,6 +739,21 @@ namespace CSShaders
       return CastFromBool(resultType, expressionOp, constantOp0, constantOp1, context);
     }
 
+    public ShaderOp CastSignedConvert(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpSConvert, expressionOp, context);
+    }
+
+    public ShaderOp CastUnsignedConvert(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpUConvert, expressionOp, context);
+    }
+
+    public ShaderOp CastFloatConvert(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
+    {
+      return SimpleCast(resultType, OpInstructionType.OpFConvert, expressionOp, context);
+    }
+
     public ShaderOp CastIntToBool(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
     {
       var constantOp = CreateConstantOp<int>(0);
