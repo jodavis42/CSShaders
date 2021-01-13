@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 88
+; Bound: 89
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -72,47 +72,48 @@
      %self_1 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
          %43 = OpLabel
 %tempSubStruct = OpVariable %_ptr_Function_SubStruct Function
-         %45 = OpAccessChain %_ptr_Function_int %tempSubStruct %uint_0
-               OpStore %45 %int_3
-         %47 = OpAccessChain %_ptr_Function_float %tempSubStruct %uint_1
-               OpStore %47 %float_3_0999999
-         %49 = OpLoad %SubStruct %tempSubStruct
-         %50 = OpAccessChain %_ptr_Function_SubStruct %self_1 %uint_0
-               OpStore %50 %49
+         %45 = OpFunctionCall %void %SubStruct_DefaultConstructor %tempSubStruct
+         %46 = OpAccessChain %_ptr_Function_int %tempSubStruct %uint_0
+               OpStore %46 %int_3
+         %48 = OpAccessChain %_ptr_Function_float %tempSubStruct %uint_1
+               OpStore %48 %float_3_0999999
+         %50 = OpLoad %SubStruct %tempSubStruct
+         %51 = OpAccessChain %_ptr_Function_SubStruct %self_1 %uint_0
+               OpStore %51 %50
                OpReturn
                OpFunctionEnd
 %StructFieldConstructorInitializers_DefaultConstructor = OpFunction %void None %15
      %self_2 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
-         %56 = OpLabel
-         %57 = OpFunctionCall %void %StructFieldConstructorInitializers_PreConstructor %self_2
+         %57 = OpLabel
+         %58 = OpFunctionCall %void %StructFieldConstructorInitializers_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
        %Main = OpFunction %void None %15
      %self_3 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
-         %62 = OpLabel
+         %63 = OpLabel
                OpReturn
                OpFunctionEnd
 %StructFieldConstructorInitializers_InitGlobals = OpFunction %void None %17
-         %66 = OpLabel
+         %67 = OpLabel
                OpReturn
                OpFunctionEnd
 %StructFieldConstructorInitializers_CopyInputs = OpFunction %void None %15
      %self_4 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
-         %71 = OpLabel
+         %72 = OpLabel
                OpReturn
                OpFunctionEnd
 %StructFieldConstructorInitializers_CopyOutputs = OpFunction %void None %15
      %self_5 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
-         %76 = OpLabel
+         %77 = OpLabel
                OpReturn
                OpFunctionEnd
 %StructFieldConstructorInitializers_Main_EntryPoint = OpFunction %void None %17
-         %80 = OpLabel
+         %81 = OpLabel
      %self_6 = OpVariable %_ptr_Function_StructFieldConstructorInitializers Function
-         %82 = OpFunctionCall %void %StructFieldConstructorInitializers_InitGlobals
-         %83 = OpFunctionCall %void %StructFieldConstructorInitializers_DefaultConstructor %self_6
-         %84 = OpFunctionCall %void %StructFieldConstructorInitializers_CopyInputs %self_6
-         %85 = OpFunctionCall %void %Main %self_6
-         %86 = OpFunctionCall %void %StructFieldConstructorInitializers_CopyOutputs %self_6
+         %83 = OpFunctionCall %void %StructFieldConstructorInitializers_InitGlobals
+         %84 = OpFunctionCall %void %StructFieldConstructorInitializers_DefaultConstructor %self_6
+         %85 = OpFunctionCall %void %StructFieldConstructorInitializers_CopyInputs %self_6
+         %86 = OpFunctionCall %void %Main %self_6
+         %87 = OpFunctionCall %void %StructFieldConstructorInitializers_CopyOutputs %self_6
                OpReturn
                OpFunctionEnd

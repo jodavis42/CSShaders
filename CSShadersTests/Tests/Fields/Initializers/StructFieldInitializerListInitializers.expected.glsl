@@ -15,9 +15,21 @@ void StructFieldConstructorInitializers_InitGlobals()
 {
 }
 
+void SubStruct_PreConstructor(inout SubStruct self)
+{
+    self.IntValue = 0;
+    self.FloatVal = 1.0;
+}
+
+void SubStruct_DefaultConstructor(inout SubStruct self)
+{
+    SubStruct_PreConstructor(self);
+}
+
 void StructFieldConstructorInitializers_PreConstructor(inout StructFieldConstructorInitializers self)
 {
     SubStruct tempSubStruct;
+    SubStruct_DefaultConstructor(tempSubStruct);
     tempSubStruct.IntValue = 3;
     tempSubStruct.FloatVal = 3.099999904632568359375;
     self.SubStruct = tempSubStruct;
