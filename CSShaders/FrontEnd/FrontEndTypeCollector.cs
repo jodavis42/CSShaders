@@ -53,5 +53,31 @@ namespace CSShaders
       }
       return CreateType(typeSymbol, OpType.Struct);
     }
+
+    public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
+    {
+      var enumSymbol = GetDeclaredSymbol(node) as INamedTypeSymbol;
+      
+      var intType = FindType(typeof(int));
+      // Load the underlying type of the enum
+      var baseType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(enumSymbol.EnumUnderlyingType));
+      // Currently only integers are supported for enums. @JoshD: To do
+      if(intType != baseType)
+      {
+        var msg = string.Format("Enum {0} has a base type of {1}. Enums currently only support a base type of integer.", enumSymbol.Name, enumSymbol.EnumUnderlyingType.Name);
+        mFrontEnd.CurrentProject.SendTranslationError(new ShaderCodeLocation(node.GetLocation()), msg);
+        baseType = intType;
+      }
+
+      var attributes = mFrontEnd.ParseAttributes(enumSymbol);
+      // Clone the integer's type data (width and signedness)
+      var shaderType = CreateShaderType(enumSymbol, attributes);
+      shaderType.mBaseType = baseType.mBaseType;
+      shaderType.mParameters.Add(baseType.mParameters[0]);
+      shaderType.mParameters.Add(baseType.mParameters[1]);
+
+      shaderType.mMeta.mAttributes = attributes;
+      ExtractDebugInfo(shaderType, enumSymbol, node);
+    }
   }
 }

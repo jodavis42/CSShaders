@@ -181,8 +181,24 @@ namespace CSShaders
         }
         else
         {
-          var staticField = FindStaticField(fieldSymbol);
-          mContext.Push(staticField.InstanceOp);
+          // Create a constant from enum values (currently only supports ints)
+          if(fieldSymbol.Type.TypeKind == TypeKind.Enum && fieldSymbol.HasConstantValue)
+          {
+            int constantValue = 0;
+            if (fieldSymbol.ConstantValue is int intVal)
+              constantValue = intVal;
+            else
+              mFrontEnd.CurrentProject.SendTranslationError(new ShaderCodeLocation(node.GetLocation()), "Failed to get enum value. Defaulting to 0.");
+
+            var constantType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(fieldSymbol.Type));
+            var constantOp = mFrontEnd.CreateConstantOp(constantType, constantValue);
+            mContext.Push(constantOp);
+          }
+          else
+          {
+            var staticField = FindStaticField(fieldSymbol);
+            mContext.Push(staticField.InstanceOp);
+          }
         }
         return;
       }
