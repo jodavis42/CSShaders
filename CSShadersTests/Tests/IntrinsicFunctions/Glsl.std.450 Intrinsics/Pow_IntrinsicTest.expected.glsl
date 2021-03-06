@@ -5,10 +5,6 @@ struct PowTest
     int empty_struct_member;
 };
 
-void PowTest_InitGlobals()
-{
-}
-
 void PowTest_PreConstructor(PowTest self)
 {
 }
@@ -16,10 +12,6 @@ void PowTest_PreConstructor(PowTest self)
 void PowTest_DefaultConstructor(PowTest self)
 {
     PowTest_PreConstructor(self);
-}
-
-void PowTest_CopyInputs(PowTest self)
-{
 }
 
 void Main(PowTest self)
@@ -34,17 +26,10 @@ void Main(PowTest self)
     vector4Val = pow(vector4Val, vector4Val);
 }
 
-void PowTest_CopyOutputs(PowTest self)
-{
-}
-
 void main()
 {
-    PowTest_InitGlobals();
     PowTest self;
     PowTest_DefaultConstructor(self);
-    PowTest_CopyInputs(self);
     Main(self);
-    PowTest_CopyOutputs(self);
 }
 

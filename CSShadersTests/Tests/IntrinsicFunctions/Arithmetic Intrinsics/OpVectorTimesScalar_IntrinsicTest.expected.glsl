@@ -5,10 +5,6 @@ struct OpVectorTimesScalarTest
     int empty_struct_member;
 };
 
-void OpVectorTimesScalarTest_InitGlobals()
-{
-}
-
 void OpVectorTimesScalarTest_PreConstructor(OpVectorTimesScalarTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpVectorTimesScalarTest_PreConstructor(OpVectorTimesScalarTest self)
 void OpVectorTimesScalarTest_DefaultConstructor(OpVectorTimesScalarTest self)
 {
     OpVectorTimesScalarTest_PreConstructor(self);
-}
-
-void OpVectorTimesScalarTest_CopyInputs(OpVectorTimesScalarTest self)
-{
 }
 
 void Main(OpVectorTimesScalarTest self)
@@ -33,17 +25,10 @@ void Main(OpVectorTimesScalarTest self)
     vector4Val *= floatVal;
 }
 
-void OpVectorTimesScalarTest_CopyOutputs(OpVectorTimesScalarTest self)
-{
-}
-
 void main()
 {
-    OpVectorTimesScalarTest_InitGlobals();
     OpVectorTimesScalarTest self;
     OpVectorTimesScalarTest_DefaultConstructor(self);
-    OpVectorTimesScalarTest_CopyInputs(self);
     Main(self);
-    OpVectorTimesScalarTest_CopyOutputs(self);
 }
 

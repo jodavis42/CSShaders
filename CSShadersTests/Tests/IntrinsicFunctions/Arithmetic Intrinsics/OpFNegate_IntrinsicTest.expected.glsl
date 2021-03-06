@@ -5,10 +5,6 @@ struct OpFNegateTest
     int empty_struct_member;
 };
 
-void OpFNegateTest_InitGlobals()
-{
-}
-
 void OpFNegateTest_PreConstructor(OpFNegateTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFNegateTest_PreConstructor(OpFNegateTest self)
 void OpFNegateTest_DefaultConstructor(OpFNegateTest self)
 {
     OpFNegateTest_PreConstructor(self);
-}
-
-void OpFNegateTest_CopyInputs(OpFNegateTest self)
-{
 }
 
 void Main(OpFNegateTest self)
@@ -34,17 +26,10 @@ void Main(OpFNegateTest self)
     vector4Val = -vector4Val;
 }
 
-void OpFNegateTest_CopyOutputs(OpFNegateTest self)
-{
-}
-
 void main()
 {
-    OpFNegateTest_InitGlobals();
     OpFNegateTest self;
     OpFNegateTest_DefaultConstructor(self);
-    OpFNegateTest_CopyInputs(self);
     Main(self);
-    OpFNegateTest_CopyOutputs(self);
 }
 

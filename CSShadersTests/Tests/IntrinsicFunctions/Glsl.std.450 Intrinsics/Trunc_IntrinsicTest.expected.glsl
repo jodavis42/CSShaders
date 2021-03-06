@@ -5,10 +5,6 @@ struct TruncTest
     int empty_struct_member;
 };
 
-void TruncTest_InitGlobals()
-{
-}
-
 void TruncTest_PreConstructor(TruncTest self)
 {
 }
@@ -16,10 +12,6 @@ void TruncTest_PreConstructor(TruncTest self)
 void TruncTest_DefaultConstructor(TruncTest self)
 {
     TruncTest_PreConstructor(self);
-}
-
-void TruncTest_CopyInputs(TruncTest self)
-{
 }
 
 void Main(TruncTest self)
@@ -34,17 +26,10 @@ void Main(TruncTest self)
     vector4Val = trunc(vector4Val);
 }
 
-void TruncTest_CopyOutputs(TruncTest self)
-{
-}
-
 void main()
 {
-    TruncTest_InitGlobals();
     TruncTest self;
     TruncTest_DefaultConstructor(self);
-    TruncTest_CopyInputs(self);
     Main(self);
-    TruncTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 47
+; Bound: 30
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -17,11 +17,6 @@
                OpName %self_0 "self"
                OpName %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
-               OpName %SamplerPrimitiveDeclarationTest_InitGlobals "SamplerPrimitiveDeclarationTest_InitGlobals"
-               OpName %SamplerPrimitiveDeclarationTest_CopyInputs "SamplerPrimitiveDeclarationTest_CopyInputs"
-               OpName %self_2 "self"
-               OpName %SamplerPrimitiveDeclarationTest_CopyOutputs "SamplerPrimitiveDeclarationTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %Sampler "Sampler"
                OpName %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
@@ -47,23 +42,6 @@
 %SamplerPrimitiveDeclarationTest_EntryPoint = OpFunction %void None %10
          %26 = OpLabel
      %self_1 = OpVariable %_ptr_Function_SamplerPrimitiveDeclarationTest Function
-         %28 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_InitGlobals
-         %30 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_DefaultConstructor %self_1
-         %31 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_CopyInputs %self_1
-         %33 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_CopyOutputs %self_1
-               OpReturn
-               OpFunctionEnd
-%SamplerPrimitiveDeclarationTest_InitGlobals = OpFunction %void None %10
-         %37 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SamplerPrimitiveDeclarationTest_CopyInputs = OpFunction %void None %8
-     %self_2 = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
-         %41 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SamplerPrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %8
-     %self_3 = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
-         %45 = OpLabel
+         %28 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_DefaultConstructor %self_1
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 91
+; Bound: 74
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -28,16 +28,11 @@
                OpName %uvs "uvs"
                OpName %lod "lod"
                OpName %value "value"
-               OpName %ComplexImageIntrinsicFunction_InitGlobals "ComplexImageIntrinsicFunction_InitGlobals"
-               OpName %ComplexImageIntrinsicFunction_CopyInputs "ComplexImageIntrinsicFunction_CopyInputs"
-               OpName %self_4 "self"
-               OpName %ComplexImageIntrinsicFunction_CopyOutputs "ComplexImageIntrinsicFunction_CopyOutputs"
-               OpName %self_5 "self"
                OpName %ComplexImageIntrinsicFunction_Main_EntryPoint "ComplexImageIntrinsicFunction_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
                OpName %SimpleSampledFloatImage2d_0 "SimpleSampledFloatImage2d"
                OpName %ComplexImageIntrinsicFunction_Main_EntryPoint "ComplexImageIntrinsicFunction_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %SimpleFloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
@@ -97,27 +92,10 @@
                OpStore %value %64
                OpReturn
                OpFunctionEnd
-%ComplexImageIntrinsicFunction_InitGlobals = OpFunction %void None %24
-         %69 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%ComplexImageIntrinsicFunction_CopyInputs = OpFunction %void None %18
-     %self_4 = OpFunctionParameter %_ptr_Function_ComplexImageIntrinsicFunction
-         %74 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%ComplexImageIntrinsicFunction_CopyOutputs = OpFunction %void None %18
-     %self_5 = OpFunctionParameter %_ptr_Function_ComplexImageIntrinsicFunction
-         %79 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %ComplexImageIntrinsicFunction_Main_EntryPoint = OpFunction %void None %24
-         %83 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_ComplexImageIntrinsicFunction Function
-         %85 = OpFunctionCall %void %ComplexImageIntrinsicFunction_InitGlobals
-         %86 = OpFunctionCall %void %ComplexImageIntrinsicFunction_DefaultConstructor %self_6
-         %87 = OpFunctionCall %void %ComplexImageIntrinsicFunction_CopyInputs %self_6
-         %88 = OpFunctionCall %void %Main %self_6
-         %89 = OpFunctionCall %void %ComplexImageIntrinsicFunction_CopyOutputs %self_6
+         %69 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_ComplexImageIntrinsicFunction Function
+         %71 = OpFunctionCall %void %ComplexImageIntrinsicFunction_DefaultConstructor %self_4
+         %72 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

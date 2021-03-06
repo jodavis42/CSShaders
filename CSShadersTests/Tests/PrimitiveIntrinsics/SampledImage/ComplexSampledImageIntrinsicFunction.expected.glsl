@@ -12,10 +12,6 @@ struct ComplexImageIntrinsicFunction
 
 uniform sampler2D SimpleSampledFloatImage2d;
 
-void ComplexImageIntrinsicFunction_InitGlobals()
-{
-}
-
 void ComplexImageIntrinsicFunction_PreConstructor(ComplexImageIntrinsicFunction self)
 {
 }
@@ -25,10 +21,6 @@ void ComplexImageIntrinsicFunction_DefaultConstructor(ComplexImageIntrinsicFunct
     ComplexImageIntrinsicFunction_PreConstructor(self);
 }
 
-void ComplexImageIntrinsicFunction_CopyInputs(ComplexImageIntrinsicFunction self)
-{
-}
-
 void Main(ComplexImageIntrinsicFunction self)
 {
     vec2 uvs = vec2(0.0);
@@ -36,17 +28,10 @@ void Main(ComplexImageIntrinsicFunction self)
     vec4 value = textureLod(SimpleSampledFloatImage2d, uvs, lod);
 }
 
-void ComplexImageIntrinsicFunction_CopyOutputs(ComplexImageIntrinsicFunction self)
-{
-}
-
 void main()
 {
-    ComplexImageIntrinsicFunction_InitGlobals();
     ComplexImageIntrinsicFunction self;
     ComplexImageIntrinsicFunction_DefaultConstructor(self);
-    ComplexImageIntrinsicFunction_CopyInputs(self);
     Main(self);
-    ComplexImageIntrinsicFunction_CopyOutputs(self);
 }
 

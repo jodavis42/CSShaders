@@ -27,10 +27,6 @@ void GetSetStaticFields_DefaultConstructor(GetSetStaticFields self)
     GetSetStaticFields_PreConstructor(self);
 }
 
-void GetSetStaticFields_CopyInputs(GetSetStaticFields self)
-{
-}
-
 void Main(GetSetStaticFields self)
 {
     BoolValue = false;
@@ -47,17 +43,11 @@ void Main(GetSetStaticFields self)
     floatValue = FloatValue;
 }
 
-void GetSetStaticFields_CopyOutputs(GetSetStaticFields self)
-{
-}
-
 void main()
 {
     GetSetStaticFields_InitGlobals();
     GetSetStaticFields self;
     GetSetStaticFields_DefaultConstructor(self);
-    GetSetStaticFields_CopyInputs(self);
     Main(self);
-    GetSetStaticFields_CopyOutputs(self);
 }
 

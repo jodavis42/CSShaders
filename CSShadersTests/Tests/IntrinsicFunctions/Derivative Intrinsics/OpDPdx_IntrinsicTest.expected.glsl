@@ -5,10 +5,6 @@ struct OpDPdxTest
     int empty_struct_member;
 };
 
-void OpDPdxTest_InitGlobals()
-{
-}
-
 void OpDPdxTest_PreConstructor(OpDPdxTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpDPdxTest_PreConstructor(OpDPdxTest self)
 void OpDPdxTest_DefaultConstructor(OpDPdxTest self)
 {
     OpDPdxTest_PreConstructor(self);
-}
-
-void OpDPdxTest_CopyInputs(OpDPdxTest self)
-{
 }
 
 void Main(OpDPdxTest self)
@@ -34,17 +26,10 @@ void Main(OpDPdxTest self)
     vector4Val = dFdx(vector4Val);
 }
 
-void OpDPdxTest_CopyOutputs(OpDPdxTest self)
-{
-}
-
 void main()
 {
-    OpDPdxTest_InitGlobals();
     OpDPdxTest self;
     OpDPdxTest_DefaultConstructor(self);
-    OpDPdxTest_CopyInputs(self);
     Main(self);
-    OpDPdxTest_CopyOutputs(self);
 }
 

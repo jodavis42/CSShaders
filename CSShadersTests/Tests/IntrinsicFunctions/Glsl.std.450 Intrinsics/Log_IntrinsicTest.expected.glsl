@@ -5,10 +5,6 @@ struct LogTest
     int empty_struct_member;
 };
 
-void LogTest_InitGlobals()
-{
-}
-
 void LogTest_PreConstructor(LogTest self)
 {
 }
@@ -16,10 +12,6 @@ void LogTest_PreConstructor(LogTest self)
 void LogTest_DefaultConstructor(LogTest self)
 {
     LogTest_PreConstructor(self);
-}
-
-void LogTest_CopyInputs(LogTest self)
-{
 }
 
 void Main(LogTest self)
@@ -34,17 +26,10 @@ void Main(LogTest self)
     vector4Val = log(vector4Val);
 }
 
-void LogTest_CopyOutputs(LogTest self)
-{
-}
-
 void main()
 {
-    LogTest_InitGlobals();
     LogTest self;
     LogTest_DefaultConstructor(self);
-    LogTest_CopyInputs(self);
     Main(self);
-    LogTest_CopyOutputs(self);
 }
 

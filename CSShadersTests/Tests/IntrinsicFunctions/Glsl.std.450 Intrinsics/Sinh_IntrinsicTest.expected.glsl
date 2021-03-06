@@ -5,10 +5,6 @@ struct SinhTest
     int empty_struct_member;
 };
 
-void SinhTest_InitGlobals()
-{
-}
-
 void SinhTest_PreConstructor(SinhTest self)
 {
 }
@@ -16,10 +12,6 @@ void SinhTest_PreConstructor(SinhTest self)
 void SinhTest_DefaultConstructor(SinhTest self)
 {
     SinhTest_PreConstructor(self);
-}
-
-void SinhTest_CopyInputs(SinhTest self)
-{
 }
 
 void Main(SinhTest self)
@@ -34,17 +26,10 @@ void Main(SinhTest self)
     vector4Val = sinh(vector4Val);
 }
 
-void SinhTest_CopyOutputs(SinhTest self)
-{
-}
-
 void main()
 {
-    SinhTest_InitGlobals();
     SinhTest self;
     SinhTest_DefaultConstructor(self);
-    SinhTest_CopyInputs(self);
     Main(self);
-    SinhTest_CopyOutputs(self);
 }
 

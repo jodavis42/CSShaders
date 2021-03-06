@@ -5,10 +5,6 @@ struct SmoothStepTest
     int empty_struct_member;
 };
 
-void SmoothStepTest_InitGlobals()
-{
-}
-
 void SmoothStepTest_PreConstructor(SmoothStepTest self)
 {
 }
@@ -16,10 +12,6 @@ void SmoothStepTest_PreConstructor(SmoothStepTest self)
 void SmoothStepTest_DefaultConstructor(SmoothStepTest self)
 {
     SmoothStepTest_PreConstructor(self);
-}
-
-void SmoothStepTest_CopyInputs(SmoothStepTest self)
-{
 }
 
 void Main(SmoothStepTest self)
@@ -34,17 +26,10 @@ void Main(SmoothStepTest self)
     vector4Val = smoothstep(vector4Val, vector4Val, vector4Val);
 }
 
-void SmoothStepTest_CopyOutputs(SmoothStepTest self)
-{
-}
-
 void main()
 {
-    SmoothStepTest_InitGlobals();
     SmoothStepTest self;
     SmoothStepTest_DefaultConstructor(self);
-    SmoothStepTest_CopyInputs(self);
     Main(self);
-    SmoothStepTest_CopyOutputs(self);
 }
 

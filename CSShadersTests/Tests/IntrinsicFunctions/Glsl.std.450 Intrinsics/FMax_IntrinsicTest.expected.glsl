@@ -5,10 +5,6 @@ struct FMaxTest
     int empty_struct_member;
 };
 
-void FMaxTest_InitGlobals()
-{
-}
-
 void FMaxTest_PreConstructor(FMaxTest self)
 {
 }
@@ -16,10 +12,6 @@ void FMaxTest_PreConstructor(FMaxTest self)
 void FMaxTest_DefaultConstructor(FMaxTest self)
 {
     FMaxTest_PreConstructor(self);
-}
-
-void FMaxTest_CopyInputs(FMaxTest self)
-{
 }
 
 void Main(FMaxTest self)
@@ -34,17 +26,10 @@ void Main(FMaxTest self)
     vector4Val = max(vector4Val, vector4Val);
 }
 
-void FMaxTest_CopyOutputs(FMaxTest self)
-{
-}
-
 void main()
 {
-    FMaxTest_InitGlobals();
     FMaxTest self;
     FMaxTest_DefaultConstructor(self);
-    FMaxTest_CopyInputs(self);
     Main(self);
-    FMaxTest_CopyOutputs(self);
 }
 

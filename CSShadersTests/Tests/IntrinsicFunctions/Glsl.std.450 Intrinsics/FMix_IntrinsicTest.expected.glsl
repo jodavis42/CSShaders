@@ -5,10 +5,6 @@ struct FMixTest
     int empty_struct_member;
 };
 
-void FMixTest_InitGlobals()
-{
-}
-
 void FMixTest_PreConstructor(FMixTest self)
 {
 }
@@ -16,10 +12,6 @@ void FMixTest_PreConstructor(FMixTest self)
 void FMixTest_DefaultConstructor(FMixTest self)
 {
     FMixTest_PreConstructor(self);
-}
-
-void FMixTest_CopyInputs(FMixTest self)
-{
 }
 
 void Main(FMixTest self)
@@ -34,17 +26,10 @@ void Main(FMixTest self)
     vector4Val = mix(vector4Val, vector4Val, vector4Val);
 }
 
-void FMixTest_CopyOutputs(FMixTest self)
-{
-}
-
 void main()
 {
-    FMixTest_InitGlobals();
     FMixTest self;
     FMixTest_DefaultConstructor(self);
-    FMixTest_CopyInputs(self);
     Main(self);
-    FMixTest_CopyOutputs(self);
 }
 

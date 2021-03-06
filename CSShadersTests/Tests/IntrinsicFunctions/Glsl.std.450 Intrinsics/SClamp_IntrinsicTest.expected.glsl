@@ -5,10 +5,6 @@ struct SClampTest
     int empty_struct_member;
 };
 
-void SClampTest_InitGlobals()
-{
-}
-
 void SClampTest_PreConstructor(SClampTest self)
 {
 }
@@ -16,10 +12,6 @@ void SClampTest_PreConstructor(SClampTest self)
 void SClampTest_DefaultConstructor(SClampTest self)
 {
     SClampTest_PreConstructor(self);
-}
-
-void SClampTest_CopyInputs(SClampTest self)
-{
 }
 
 void Main(SClampTest self)
@@ -34,17 +26,10 @@ void Main(SClampTest self)
     integer4Val = clamp(integer4Val, integer4Val, integer4Val);
 }
 
-void SClampTest_CopyOutputs(SClampTest self)
-{
-}
-
 void main()
 {
-    SClampTest_InitGlobals();
     SClampTest self;
     SClampTest_DefaultConstructor(self);
-    SClampTest_CopyInputs(self);
     Main(self);
-    SClampTest_CopyOutputs(self);
 }
 

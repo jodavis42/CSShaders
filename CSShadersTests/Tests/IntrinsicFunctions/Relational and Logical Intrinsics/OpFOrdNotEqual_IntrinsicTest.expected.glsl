@@ -5,10 +5,6 @@ struct OpFOrdNotEqualTest
     int empty_struct_member;
 };
 
-void OpFOrdNotEqualTest_InitGlobals()
-{
-}
-
 void OpFOrdNotEqualTest_PreConstructor(OpFOrdNotEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFOrdNotEqualTest_PreConstructor(OpFOrdNotEqualTest self)
 void OpFOrdNotEqualTest_DefaultConstructor(OpFOrdNotEqualTest self)
 {
     OpFOrdNotEqualTest_PreConstructor(self);
-}
-
-void OpFOrdNotEqualTest_CopyInputs(OpFOrdNotEqualTest self)
-{
 }
 
 void Main(OpFOrdNotEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpFOrdNotEqualTest self)
     bool4Val = notEqual(vector4Val, vector4Val);
 }
 
-void OpFOrdNotEqualTest_CopyOutputs(OpFOrdNotEqualTest self)
-{
-}
-
 void main()
 {
-    OpFOrdNotEqualTest_InitGlobals();
     OpFOrdNotEqualTest self;
     OpFOrdNotEqualTest_DefaultConstructor(self);
-    OpFOrdNotEqualTest_CopyInputs(self);
     Main(self);
-    OpFOrdNotEqualTest_CopyOutputs(self);
 }
 

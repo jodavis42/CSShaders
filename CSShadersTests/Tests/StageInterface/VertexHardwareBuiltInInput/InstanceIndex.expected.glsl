@@ -7,10 +7,6 @@ struct InstanceIndexTest
 
 uniform int SPIRV_Cross_BaseInstance;
 
-void InstanceIndexTest_InitGlobals()
-{
-}
-
 void InstanceIndexTest_PreConstructor(inout InstanceIndexTest self)
 {
     self.InstanceIndex = 0;
@@ -31,17 +27,11 @@ void Main(InstanceIndexTest self)
     int index = self.InstanceIndex;
 }
 
-void InstanceIndexTest_CopyOutputs(InstanceIndexTest self)
-{
-}
-
 void main()
 {
-    InstanceIndexTest_InitGlobals();
     InstanceIndexTest self;
     InstanceIndexTest_DefaultConstructor(self);
     InstanceIndexTest_CopyInputs(self);
     Main(self);
-    InstanceIndexTest_CopyOutputs(self);
 }
 

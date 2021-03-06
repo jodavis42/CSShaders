@@ -5,10 +5,6 @@ struct DistanceTest
     int empty_struct_member;
 };
 
-void DistanceTest_InitGlobals()
-{
-}
-
 void DistanceTest_PreConstructor(DistanceTest self)
 {
 }
@@ -16,10 +12,6 @@ void DistanceTest_PreConstructor(DistanceTest self)
 void DistanceTest_DefaultConstructor(DistanceTest self)
 {
     DistanceTest_PreConstructor(self);
-}
-
-void DistanceTest_CopyInputs(DistanceTest self)
-{
 }
 
 void Main(DistanceTest self)
@@ -33,17 +25,10 @@ void Main(DistanceTest self)
     floatVal = distance(vector4Val, vector4Val);
 }
 
-void DistanceTest_CopyOutputs(DistanceTest self)
-{
-}
-
 void main()
 {
-    DistanceTest_InitGlobals();
     DistanceTest self;
     DistanceTest_DefaultConstructor(self);
-    DistanceTest_CopyInputs(self);
     Main(self);
-    DistanceTest_CopyOutputs(self);
 }
 

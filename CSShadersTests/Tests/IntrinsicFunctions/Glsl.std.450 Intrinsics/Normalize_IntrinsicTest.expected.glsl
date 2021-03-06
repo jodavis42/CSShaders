@@ -5,10 +5,6 @@ struct NormalizeTest
     int empty_struct_member;
 };
 
-void NormalizeTest_InitGlobals()
-{
-}
-
 void NormalizeTest_PreConstructor(NormalizeTest self)
 {
 }
@@ -16,10 +12,6 @@ void NormalizeTest_PreConstructor(NormalizeTest self)
 void NormalizeTest_DefaultConstructor(NormalizeTest self)
 {
     NormalizeTest_PreConstructor(self);
-}
-
-void NormalizeTest_CopyInputs(NormalizeTest self)
-{
 }
 
 void Main(NormalizeTest self)
@@ -32,17 +24,10 @@ void Main(NormalizeTest self)
     vector4Val = normalize(vector4Val);
 }
 
-void NormalizeTest_CopyOutputs(NormalizeTest self)
-{
-}
-
 void main()
 {
-    NormalizeTest_InitGlobals();
     NormalizeTest self;
     NormalizeTest_DefaultConstructor(self);
-    NormalizeTest_CopyInputs(self);
     Main(self);
-    NormalizeTest_CopyOutputs(self);
 }
 

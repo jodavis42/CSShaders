@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 65
+; Bound: 48
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -20,11 +20,6 @@
                OpName %self_0 "self"
                OpName %ImagePrimitiveDeclarationTest_EntryPoint "ImagePrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
-               OpName %ImagePrimitiveDeclarationTest_InitGlobals "ImagePrimitiveDeclarationTest_InitGlobals"
-               OpName %ImagePrimitiveDeclarationTest_CopyInputs "ImagePrimitiveDeclarationTest_CopyInputs"
-               OpName %self_2 "self"
-               OpName %ImagePrimitiveDeclarationTest_CopyOutputs "ImagePrimitiveDeclarationTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %SimpleFloatImage2d_0 "SimpleFloatImage2d"
                OpName %SimpleFloatImage3d_0 "SimpleFloatImage3d"
                OpName %SimpleIntImage2d_Rgba8_0 "SimpleIntImage2d_Rgba8"
@@ -65,23 +60,6 @@
 %ImagePrimitiveDeclarationTest_EntryPoint = OpFunction %void None %25
          %44 = OpLabel
      %self_1 = OpVariable %_ptr_Function_ImagePrimitiveDeclarationTest Function
-         %46 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_InitGlobals
-         %48 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_DefaultConstructor %self_1
-         %49 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_CopyInputs %self_1
-         %51 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_CopyOutputs %self_1
-               OpReturn
-               OpFunctionEnd
-%ImagePrimitiveDeclarationTest_InitGlobals = OpFunction %void None %25
-         %55 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%ImagePrimitiveDeclarationTest_CopyInputs = OpFunction %void None %23
-     %self_2 = OpFunctionParameter %_ptr_Function_ImagePrimitiveDeclarationTest
-         %59 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%ImagePrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %23
-     %self_3 = OpFunctionParameter %_ptr_Function_ImagePrimitiveDeclarationTest
-         %63 = OpLabel
+         %46 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_DefaultConstructor %self_1
                OpReturn
                OpFunctionEnd

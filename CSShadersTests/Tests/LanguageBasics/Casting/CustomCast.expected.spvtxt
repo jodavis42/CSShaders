@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 129
+; Bound: 112
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -38,15 +38,10 @@
                OpName %tempMyInt "tempMyInt"
                OpName %i "i"
                OpName %i2 "i2"
-               OpName %CustomCast_InitGlobals "CustomCast_InitGlobals"
-               OpName %CustomCast_CopyInputs "CustomCast_CopyInputs"
+               OpName %CustomCast_Main_EntryPoint "CustomCast_Main_EntryPoint"
                OpName %self_6 "self"
-               OpName %CustomCast_CopyOutputs "CustomCast_CopyOutputs"
-               OpName %self_7 "self"
                OpName %CustomCast_Main_EntryPoint "CustomCast_Main_EntryPoint"
-               OpName %self_8 "self"
-               OpName %CustomCast_Main_EntryPoint "CustomCast_Main_EntryPoint"
-               OpName %self_8 "self"
+               OpName %self_6 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
        %Int2 = OpTypeStruct %int %int
@@ -143,27 +138,10 @@
                OpStore %i2 %102
                OpReturn
                OpFunctionEnd
-%CustomCast_InitGlobals = OpFunction %void None %23
-        %107 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%CustomCast_CopyInputs = OpFunction %void None %21
-     %self_6 = OpFunctionParameter %_ptr_Function_CustomCast
-        %112 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%CustomCast_CopyOutputs = OpFunction %void None %21
-     %self_7 = OpFunctionParameter %_ptr_Function_CustomCast
-        %117 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %CustomCast_Main_EntryPoint = OpFunction %void None %23
-        %121 = OpLabel
-     %self_8 = OpVariable %_ptr_Function_CustomCast Function
-        %123 = OpFunctionCall %void %CustomCast_InitGlobals
-        %124 = OpFunctionCall %void %CustomCast_DefaultConstructor %self_8
-        %125 = OpFunctionCall %void %CustomCast_CopyInputs %self_8
-        %126 = OpFunctionCall %void %Main %self_8
-        %127 = OpFunctionCall %void %CustomCast_CopyOutputs %self_8
+        %107 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_CustomCast Function
+        %109 = OpFunctionCall %void %CustomCast_DefaultConstructor %self_6
+        %110 = OpFunctionCall %void %Main %self_6
                OpReturn
                OpFunctionEnd

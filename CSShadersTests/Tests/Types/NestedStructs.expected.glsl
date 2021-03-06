@@ -19,10 +19,6 @@ struct NestedStructs
     float FloatValue;
 };
 
-void NestedStructs_InitGlobals()
-{
-}
-
 void Struct1_PreConstructor(inout Struct1 self)
 {
     self.IntValue = 0;
@@ -63,20 +59,9 @@ void NestedStructs_DefaultConstructor(inout NestedStructs self)
     NestedStructs_PreConstructor(self);
 }
 
-void NestedStructs_CopyInputs(NestedStructs self)
-{
-}
-
-void NestedStructs_CopyOutputs(NestedStructs self)
-{
-}
-
 void main()
 {
-    NestedStructs_InitGlobals();
     NestedStructs self;
     NestedStructs_DefaultConstructor(self);
-    NestedStructs_CopyInputs(self);
-    NestedStructs_CopyOutputs(self);
 }
 

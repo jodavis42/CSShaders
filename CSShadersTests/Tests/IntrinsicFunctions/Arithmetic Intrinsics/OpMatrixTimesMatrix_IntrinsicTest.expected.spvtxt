@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 96
+; Bound: 79
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -29,15 +29,10 @@
                OpName %m01 "m01"
                OpName %m10 "m10"
                OpName %m11 "m11"
-               OpName %OpMatrixTimesMatrixTest_InitGlobals "OpMatrixTimesMatrixTest_InitGlobals"
-               OpName %OpMatrixTimesMatrixTest_CopyInputs "OpMatrixTimesMatrixTest_CopyInputs"
+               OpName %OpMatrixTimesMatrixTest_Main_EntryPoint "OpMatrixTimesMatrixTest_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %OpMatrixTimesMatrixTest_CopyOutputs "OpMatrixTimesMatrixTest_CopyOutputs"
-               OpName %self_5 "self"
                OpName %OpMatrixTimesMatrixTest_Main_EntryPoint "OpMatrixTimesMatrixTest_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %OpMatrixTimesMatrixTest_Main_EntryPoint "OpMatrixTimesMatrixTest_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %OpMatrixTimesMatrixTest = OpTypeStruct
@@ -102,27 +97,10 @@
                OpStore %self_3 %69
                OpReturn
                OpFunctionEnd
-%OpMatrixTimesMatrixTest_InitGlobals = OpFunction %void None %19
-         %74 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpMatrixTimesMatrixTest_CopyInputs = OpFunction %void None %9
-     %self_4 = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
-         %79 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpMatrixTimesMatrixTest_CopyOutputs = OpFunction %void None %9
-     %self_5 = OpFunctionParameter %_ptr_Function_OpMatrixTimesMatrixTest
-         %84 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpMatrixTimesMatrixTest_Main_EntryPoint = OpFunction %void None %19
-         %88 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_OpMatrixTimesMatrixTest Function
-         %90 = OpFunctionCall %void %OpMatrixTimesMatrixTest_InitGlobals
-         %91 = OpFunctionCall %void %OpMatrixTimesMatrixTest_DefaultConstructor %self_6
-         %92 = OpFunctionCall %void %OpMatrixTimesMatrixTest_CopyInputs %self_6
-         %93 = OpFunctionCall %void %Main %self_6
-         %94 = OpFunctionCall %void %OpMatrixTimesMatrixTest_CopyOutputs %self_6
+         %74 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpMatrixTimesMatrixTest Function
+         %76 = OpFunctionCall %void %OpMatrixTimesMatrixTest_DefaultConstructor %self_4
+         %77 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

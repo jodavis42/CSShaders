@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 156
+; Bound: 139
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -35,15 +35,10 @@
                OpName %tempTestV2_1 "tempTestV2"
                OpName %r "r"
                OpName %tempTestV2_2 "tempTestV2"
-               OpName %StructIncrementDecrement_InitGlobals "StructIncrementDecrement_InitGlobals"
-               OpName %StructIncrementDecrement_CopyInputs "StructIncrementDecrement_CopyInputs"
+               OpName %StructIncrementDecrement_Main_EntryPoint "StructIncrementDecrement_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %StructIncrementDecrement_CopyOutputs "StructIncrementDecrement_CopyOutputs"
-               OpName %self_5 "self"
                OpName %StructIncrementDecrement_Main_EntryPoint "StructIncrementDecrement_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %StructIncrementDecrement_Main_EntryPoint "StructIncrementDecrement_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
      %TestV2 = OpTypeStruct %float %float
@@ -169,27 +164,10 @@
                OpStore %r %127
                OpReturn
                OpFunctionEnd
-%StructIncrementDecrement_InitGlobals = OpFunction %void None %17
-        %134 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%StructIncrementDecrement_CopyInputs = OpFunction %void None %15
-     %self_4 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
-        %139 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%StructIncrementDecrement_CopyOutputs = OpFunction %void None %15
-     %self_5 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
-        %144 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %StructIncrementDecrement_Main_EntryPoint = OpFunction %void None %17
-        %148 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_StructIncrementDecrement Function
-        %150 = OpFunctionCall %void %StructIncrementDecrement_InitGlobals
-        %151 = OpFunctionCall %void %StructIncrementDecrement_DefaultConstructor %self_6
-        %152 = OpFunctionCall %void %StructIncrementDecrement_CopyInputs %self_6
-        %153 = OpFunctionCall %void %Main %self_6
-        %154 = OpFunctionCall %void %StructIncrementDecrement_CopyOutputs %self_6
+        %134 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_StructIncrementDecrement Function
+        %136 = OpFunctionCall %void %StructIncrementDecrement_DefaultConstructor %self_4
+        %137 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 107
+; Bound: 96
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -29,19 +29,16 @@
                OpName %self_2 "self"
                OpName %Main "Main"
                OpName %self_3 "self"
-               OpName %Vertex_InitGlobals "Vertex_InitGlobals"
                OpName %Vertex_CopyInputs "Vertex_CopyInputs"
                OpName %self_4 "self"
-               OpName %Vertex_CopyOutputs "Vertex_CopyOutputs"
-               OpName %self_5 "self"
                OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_5 "self"
                OpName %Value "Value"
                OpName %Value2 "Value2"
                OpName %V2 "V2"
                OpName %TestStruct_0 "TestStruct"
                OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_5 "self"
                OpDecorate %Value Location 0
                OpDecorate %Value2 Location 1
                OpDecorate %V2 Location 2
@@ -57,11 +54,11 @@
      %Vertex = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
 %_ptr_Function_Vertex = OpTypePointer Function %Vertex
          %15 = OpTypeFunction %void %_ptr_Function_Vertex
-         %17 = OpTypeFunction %void
 %_ptr_Input_float = OpTypePointer Input %float
 %_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
 %_ptr_Input_TestVectorPrimitive = OpTypePointer Input %TestVectorPrimitive
 %_ptr_Input_TestStruct = OpTypePointer Input %TestStruct
+         %20 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
     %float_1 = OpConstant %float 1
@@ -110,39 +107,28 @@
          %68 = OpLabel
                OpReturn
                OpFunctionEnd
-%Vertex_InitGlobals = OpFunction %void None %17
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %Vertex_CopyInputs = OpFunction %void None %15
      %self_4 = OpFunctionParameter %_ptr_Function_Vertex
-         %77 = OpLabel
-         %78 = OpAccessChain %_ptr_Function_float %self_4 %uint_0
-         %79 = OpLoad %float %Value
-               OpStore %78 %79
-         %81 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
-         %82 = OpLoad %float %Value2
-               OpStore %81 %82
-         %84 = OpAccessChain %_ptr_Function_TestVectorPrimitive %self_4 %uint_2
-         %85 = OpLoad %TestVectorPrimitive %V2
-               OpStore %84 %85
-         %87 = OpAccessChain %_ptr_Function_TestStruct %self_4 %uint_3
-         %88 = OpLoad %TestStruct %TestStruct_0
-               OpStore %87 %88
+         %73 = OpLabel
+         %74 = OpAccessChain %_ptr_Function_float %self_4 %uint_0
+         %75 = OpLoad %float %Value
+               OpStore %74 %75
+         %77 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
+         %78 = OpLoad %float %Value2
+               OpStore %77 %78
+         %80 = OpAccessChain %_ptr_Function_TestVectorPrimitive %self_4 %uint_2
+         %81 = OpLoad %TestVectorPrimitive %V2
+               OpStore %80 %81
+         %83 = OpAccessChain %_ptr_Function_TestStruct %self_4 %uint_3
+         %84 = OpLoad %TestStruct %TestStruct_0
+               OpStore %83 %84
                OpReturn
                OpFunctionEnd
-%Vertex_CopyOutputs = OpFunction %void None %15
-     %self_5 = OpFunctionParameter %_ptr_Function_Vertex
-         %94 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Vertex_Main_EntryPoint = OpFunction %void None %17
-         %98 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_Vertex Function
-        %100 = OpFunctionCall %void %Vertex_InitGlobals
-        %101 = OpFunctionCall %void %Vertex_DefaultConstructor %self_6
-        %102 = OpFunctionCall %void %Vertex_CopyInputs %self_6
-        %103 = OpFunctionCall %void %Main %self_6
-        %104 = OpFunctionCall %void %Vertex_CopyOutputs %self_6
+%Vertex_Main_EntryPoint = OpFunction %void None %20
+         %89 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_Vertex Function
+         %91 = OpFunctionCall %void %Vertex_DefaultConstructor %self_5
+         %92 = OpFunctionCall %void %Vertex_CopyInputs %self_5
+         %93 = OpFunctionCall %void %Main %self_5
                OpReturn
                OpFunctionEnd

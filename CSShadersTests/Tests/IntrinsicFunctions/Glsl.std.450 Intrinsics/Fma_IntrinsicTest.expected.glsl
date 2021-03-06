@@ -5,10 +5,6 @@ struct FmaTest
     int empty_struct_member;
 };
 
-void FmaTest_InitGlobals()
-{
-}
-
 void FmaTest_PreConstructor(FmaTest self)
 {
 }
@@ -16,10 +12,6 @@ void FmaTest_PreConstructor(FmaTest self)
 void FmaTest_DefaultConstructor(FmaTest self)
 {
     FmaTest_PreConstructor(self);
-}
-
-void FmaTest_CopyInputs(FmaTest self)
-{
 }
 
 void Main(FmaTest self)
@@ -34,17 +26,10 @@ void Main(FmaTest self)
     vector4Val = fma(vector4Val, vector4Val, vector4Val);
 }
 
-void FmaTest_CopyOutputs(FmaTest self)
-{
-}
-
 void main()
 {
-    FmaTest_InitGlobals();
     FmaTest self;
     FmaTest_DefaultConstructor(self);
-    FmaTest_CopyInputs(self);
     Main(self);
-    FmaTest_CopyOutputs(self);
 }
 

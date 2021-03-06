@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 103
+; Bound: 86
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %integer3Val "integer3Val"
                OpName %vector4Val "vector4Val"
                OpName %integer4Val "integer4Val"
-               OpName %OpConvertSToFTest_InitGlobals "OpConvertSToFTest_InitGlobals"
-               OpName %OpConvertSToFTest_CopyInputs "OpConvertSToFTest_CopyInputs"
+               OpName %OpConvertSToFTest_Main_EntryPoint "OpConvertSToFTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpConvertSToFTest_CopyOutputs "OpConvertSToFTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpConvertSToFTest_Main_EntryPoint "OpConvertSToFTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpConvertSToFTest_Main_EntryPoint "OpConvertSToFTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
         %int = OpTypeInt 32 1
@@ -113,27 +108,10 @@
                OpStore %vector4Val %76
                OpReturn
                OpFunctionEnd
-%OpConvertSToFTest_InitGlobals = OpFunction %void None %25
-         %81 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpConvertSToFTest_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_OpConvertSToFTest
-         %86 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpConvertSToFTest_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_OpConvertSToFTest
-         %91 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpConvertSToFTest_Main_EntryPoint = OpFunction %void None %25
-         %95 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpConvertSToFTest Function
-         %97 = OpFunctionCall %void %OpConvertSToFTest_InitGlobals
-         %98 = OpFunctionCall %void %OpConvertSToFTest_DefaultConstructor %self_4
-         %99 = OpFunctionCall %void %OpConvertSToFTest_CopyInputs %self_4
-        %100 = OpFunctionCall %void %Main %self_4
-        %101 = OpFunctionCall %void %OpConvertSToFTest_CopyOutputs %self_4
+         %81 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpConvertSToFTest Function
+         %83 = OpFunctionCall %void %OpConvertSToFTest_DefaultConstructor %self_2
+         %84 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

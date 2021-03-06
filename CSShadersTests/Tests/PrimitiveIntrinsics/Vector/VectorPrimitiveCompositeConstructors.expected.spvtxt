@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 63
+; Bound: 46
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %self_1 "self"
                OpName %vector0 "vector0"
                OpName %vector1 "vector1"
-               OpName %VectorPrimitiveCompositeConstructorsTest_InitGlobals "VectorPrimitiveCompositeConstructorsTest_InitGlobals"
-               OpName %VectorPrimitiveCompositeConstructorsTest_CopyInputs "VectorPrimitiveCompositeConstructorsTest_CopyInputs"
+               OpName %VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint "VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %VectorPrimitiveCompositeConstructorsTest_CopyOutputs "VectorPrimitiveCompositeConstructorsTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint "VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint "VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -61,27 +56,10 @@
                OpStore %vector1 %36
                OpReturn
                OpFunctionEnd
-%VectorPrimitiveCompositeConstructorsTest_InitGlobals = OpFunction %void None %13
-         %41 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%VectorPrimitiveCompositeConstructorsTest_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_VectorPrimitiveCompositeConstructorsTest
-         %46 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%VectorPrimitiveCompositeConstructorsTest_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_VectorPrimitiveCompositeConstructorsTest
-         %51 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %VectorPrimitiveCompositeConstructorsTest_Main_EntryPoint = OpFunction %void None %13
-         %55 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_VectorPrimitiveCompositeConstructorsTest Function
-         %57 = OpFunctionCall %void %VectorPrimitiveCompositeConstructorsTest_InitGlobals
-         %58 = OpFunctionCall %void %VectorPrimitiveCompositeConstructorsTest_DefaultConstructor %self_4
-         %59 = OpFunctionCall %void %VectorPrimitiveCompositeConstructorsTest_CopyInputs %self_4
-         %60 = OpFunctionCall %void %Main %self_4
-         %61 = OpFunctionCall %void %VectorPrimitiveCompositeConstructorsTest_CopyOutputs %self_4
+         %41 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_VectorPrimitiveCompositeConstructorsTest Function
+         %43 = OpFunctionCall %void %VectorPrimitiveCompositeConstructorsTest_DefaultConstructor %self_2
+         %44 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

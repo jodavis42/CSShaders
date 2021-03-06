@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 62
+; Bound: 45
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,19 +18,14 @@
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
-               OpName %DescriptorSetBindingIds_InitGlobals "DescriptorSetBindingIds_InitGlobals"
-               OpName %DescriptorSetBindingIds_CopyInputs "DescriptorSetBindingIds_CopyInputs"
-               OpName %self_2 "self"
-               OpName %DescriptorSetBindingIds_CopyOutputs "DescriptorSetBindingIds_CopyOutputs"
-               OpName %self_3 "self"
                OpName %DescriptorSetBindingIds_Main_EntryPoint "DescriptorSetBindingIds_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
                OpName %SampledImage0 "SampledImage0"
                OpName %SampledImage1 "SampledImage1"
                OpName %SampledImage2 "SampledImage2"
                OpName %SampledImage3 "SampledImage3"
                OpName %DescriptorSetBindingIds_Main_EntryPoint "DescriptorSetBindingIds_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
                OpDecorate %SampledImage0 DescriptorSet 0
                OpDecorate %SampledImage0 Binding 0
                OpDecorate %SampledImage1 DescriptorSet 1
@@ -69,27 +64,10 @@
          %36 = OpLabel
                OpReturn
                OpFunctionEnd
-%DescriptorSetBindingIds_InitGlobals = OpFunction %void None %16
-         %40 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DescriptorSetBindingIds_CopyInputs = OpFunction %void None %14
-     %self_2 = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
-         %45 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DescriptorSetBindingIds_CopyOutputs = OpFunction %void None %14
-     %self_3 = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
-         %50 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %DescriptorSetBindingIds_Main_EntryPoint = OpFunction %void None %16
-         %54 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_DescriptorSetBindingIds Function
-         %56 = OpFunctionCall %void %DescriptorSetBindingIds_InitGlobals
-         %57 = OpFunctionCall %void %DescriptorSetBindingIds_DefaultConstructor %self_4
-         %58 = OpFunctionCall %void %DescriptorSetBindingIds_CopyInputs %self_4
-         %59 = OpFunctionCall %void %Main %self_4
-         %60 = OpFunctionCall %void %DescriptorSetBindingIds_CopyOutputs %self_4
+         %40 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_DescriptorSetBindingIds Function
+         %42 = OpFunctionCall %void %DescriptorSetBindingIds_DefaultConstructor %self_2
+         %43 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -5,10 +5,6 @@ struct OpFDivTest
     int empty_struct_member;
 };
 
-void OpFDivTest_InitGlobals()
-{
-}
-
 void OpFDivTest_PreConstructor(OpFDivTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFDivTest_PreConstructor(OpFDivTest self)
 void OpFDivTest_DefaultConstructor(OpFDivTest self)
 {
     OpFDivTest_PreConstructor(self);
-}
-
-void OpFDivTest_CopyInputs(OpFDivTest self)
-{
 }
 
 void Main(OpFDivTest self)
@@ -34,17 +26,10 @@ void Main(OpFDivTest self)
     vector4Val /= vector4Val;
 }
 
-void OpFDivTest_CopyOutputs(OpFDivTest self)
-{
-}
-
 void main()
 {
-    OpFDivTest_InitGlobals();
     OpFDivTest self;
     OpFDivTest_DefaultConstructor(self);
-    OpFDivTest_CopyInputs(self);
     Main(self);
-    OpFDivTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 87
+; Bound: 70
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %integer2Val "integer2Val"
                OpName %integer3Val "integer3Val"
                OpName %integer4Val "integer4Val"
-               OpName %OpISubTest_InitGlobals "OpISubTest_InitGlobals"
-               OpName %OpISubTest_CopyInputs "OpISubTest_CopyInputs"
+               OpName %OpISubTest_Main_EntryPoint "OpISubTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpISubTest_CopyOutputs "OpISubTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpISubTest_Main_EntryPoint "OpISubTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpISubTest_Main_EntryPoint "OpISubTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
  %OpISubTest = OpTypeStruct
@@ -90,27 +85,10 @@
                OpStore %integer4Val %60
                OpReturn
                OpFunctionEnd
-%OpISubTest_InitGlobals = OpFunction %void None %17
-         %65 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpISubTest_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_OpISubTest
-         %70 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpISubTest_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_OpISubTest
-         %75 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpISubTest_Main_EntryPoint = OpFunction %void None %17
-         %79 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpISubTest Function
-         %81 = OpFunctionCall %void %OpISubTest_InitGlobals
-         %82 = OpFunctionCall %void %OpISubTest_DefaultConstructor %self_4
-         %83 = OpFunctionCall %void %OpISubTest_CopyInputs %self_4
-         %84 = OpFunctionCall %void %Main %self_4
-         %85 = OpFunctionCall %void %OpISubTest_CopyOutputs %self_4
+         %65 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpISubTest Function
+         %67 = OpFunctionCall %void %OpISubTest_DefaultConstructor %self_2
+         %68 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

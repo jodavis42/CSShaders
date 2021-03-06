@@ -5,10 +5,6 @@ struct OpDPdyTest
     int empty_struct_member;
 };
 
-void OpDPdyTest_InitGlobals()
-{
-}
-
 void OpDPdyTest_PreConstructor(OpDPdyTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpDPdyTest_PreConstructor(OpDPdyTest self)
 void OpDPdyTest_DefaultConstructor(OpDPdyTest self)
 {
     OpDPdyTest_PreConstructor(self);
-}
-
-void OpDPdyTest_CopyInputs(OpDPdyTest self)
-{
 }
 
 void Main(OpDPdyTest self)
@@ -34,17 +26,10 @@ void Main(OpDPdyTest self)
     vector4Val = dFdy(vector4Val);
 }
 
-void OpDPdyTest_CopyOutputs(OpDPdyTest self)
-{
-}
-
 void main()
 {
-    OpDPdyTest_InitGlobals();
     OpDPdyTest self;
     OpDPdyTest_DefaultConstructor(self);
-    OpDPdyTest_CopyInputs(self);
     Main(self);
-    OpDPdyTest_CopyOutputs(self);
 }
 

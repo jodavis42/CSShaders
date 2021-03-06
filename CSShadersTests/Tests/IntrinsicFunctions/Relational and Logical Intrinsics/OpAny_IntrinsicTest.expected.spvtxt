@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 80
+; Bound: 63
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %bool2Val "bool2Val"
                OpName %bool3Val "bool3Val"
                OpName %bool4Val "bool4Val"
-               OpName %OpAnyTest_InitGlobals "OpAnyTest_InitGlobals"
-               OpName %OpAnyTest_CopyInputs "OpAnyTest_CopyInputs"
+               OpName %OpAnyTest_Main_EntryPoint "OpAnyTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpAnyTest_CopyOutputs "OpAnyTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpAnyTest_Main_EntryPoint "OpAnyTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpAnyTest_Main_EntryPoint "OpAnyTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
   %OpAnyTest = OpTypeStruct
        %void = OpTypeVoid
@@ -83,27 +78,10 @@
                OpStore %boolVal %53
                OpReturn
                OpFunctionEnd
-%OpAnyTest_InitGlobals = OpFunction %void None %17
-         %58 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpAnyTest_CopyInputs = OpFunction %void None %7
-     %self_2 = OpFunctionParameter %_ptr_Function_OpAnyTest
-         %63 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpAnyTest_CopyOutputs = OpFunction %void None %7
-     %self_3 = OpFunctionParameter %_ptr_Function_OpAnyTest
-         %68 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpAnyTest_Main_EntryPoint = OpFunction %void None %17
-         %72 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpAnyTest Function
-         %74 = OpFunctionCall %void %OpAnyTest_InitGlobals
-         %75 = OpFunctionCall %void %OpAnyTest_DefaultConstructor %self_4
-         %76 = OpFunctionCall %void %OpAnyTest_CopyInputs %self_4
-         %77 = OpFunctionCall %void %Main %self_4
-         %78 = OpFunctionCall %void %OpAnyTest_CopyOutputs %self_4
+         %58 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpAnyTest Function
+         %60 = OpFunctionCall %void %OpAnyTest_DefaultConstructor %self_2
+         %61 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

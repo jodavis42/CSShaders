@@ -5,10 +5,6 @@ struct OpFModTest
     int empty_struct_member;
 };
 
-void OpFModTest_InitGlobals()
-{
-}
-
 void OpFModTest_PreConstructor(OpFModTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFModTest_PreConstructor(OpFModTest self)
 void OpFModTest_DefaultConstructor(OpFModTest self)
 {
     OpFModTest_PreConstructor(self);
-}
-
-void OpFModTest_CopyInputs(OpFModTest self)
-{
 }
 
 void Main(OpFModTest self)
@@ -34,17 +26,10 @@ void Main(OpFModTest self)
     vector4Val = mod(vector4Val, vector4Val);
 }
 
-void OpFModTest_CopyOutputs(OpFModTest self)
-{
-}
-
 void main()
 {
-    OpFModTest_InitGlobals();
     OpFModTest self;
     OpFModTest_DefaultConstructor(self);
-    OpFModTest_CopyInputs(self);
     Main(self);
-    OpFModTest_CopyOutputs(self);
 }
 

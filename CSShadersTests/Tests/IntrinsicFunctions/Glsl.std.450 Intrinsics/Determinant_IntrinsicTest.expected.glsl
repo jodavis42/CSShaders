@@ -5,10 +5,6 @@ struct DeterminantTest
     int empty_struct_member;
 };
 
-void DeterminantTest_InitGlobals()
-{
-}
-
 void DeterminantTest_PreConstructor(DeterminantTest self)
 {
 }
@@ -16,10 +12,6 @@ void DeterminantTest_PreConstructor(DeterminantTest self)
 void DeterminantTest_DefaultConstructor(DeterminantTest self)
 {
     DeterminantTest_PreConstructor(self);
-}
-
-void DeterminantTest_CopyInputs(DeterminantTest self)
-{
 }
 
 void Main(DeterminantTest self)
@@ -30,17 +22,10 @@ void Main(DeterminantTest self)
     floatVal = determinant(float2x2Val);
 }
 
-void DeterminantTest_CopyOutputs(DeterminantTest self)
-{
-}
-
 void main()
 {
-    DeterminantTest_InitGlobals();
     DeterminantTest self;
     DeterminantTest_DefaultConstructor(self);
-    DeterminantTest_CopyInputs(self);
     Main(self);
-    DeterminantTest_CopyOutputs(self);
 }
 

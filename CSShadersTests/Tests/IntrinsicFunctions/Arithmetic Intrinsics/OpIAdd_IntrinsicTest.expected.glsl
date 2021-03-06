@@ -5,10 +5,6 @@ struct OpIAddTest
     int empty_struct_member;
 };
 
-void OpIAddTest_InitGlobals()
-{
-}
-
 void OpIAddTest_PreConstructor(OpIAddTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpIAddTest_PreConstructor(OpIAddTest self)
 void OpIAddTest_DefaultConstructor(OpIAddTest self)
 {
     OpIAddTest_PreConstructor(self);
-}
-
-void OpIAddTest_CopyInputs(OpIAddTest self)
-{
 }
 
 void Main(OpIAddTest self)
@@ -34,17 +26,10 @@ void Main(OpIAddTest self)
     integer4Val += integer4Val;
 }
 
-void OpIAddTest_CopyOutputs(OpIAddTest self)
-{
-}
-
 void main()
 {
-    OpIAddTest_InitGlobals();
     OpIAddTest self;
     OpIAddTest_DefaultConstructor(self);
-    OpIAddTest_CopyInputs(self);
     Main(self);
-    OpIAddTest_CopyOutputs(self);
 }
 

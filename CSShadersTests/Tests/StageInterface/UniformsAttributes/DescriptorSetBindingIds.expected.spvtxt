@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 88
+; Bound: 77
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -25,18 +25,15 @@
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
-               OpName %DescriptorSetBindingIds_InitGlobals "DescriptorSetBindingIds_InitGlobals"
                OpName %DescriptorSetBindingIds_CopyInputs "DescriptorSetBindingIds_CopyInputs"
                OpName %self_2 "self"
-               OpName %DescriptorSetBindingIds_CopyOutputs "DescriptorSetBindingIds_CopyOutputs"
-               OpName %self_3 "self"
                OpName %DescriptorSetBindingIds_Main_EntryPoint "DescriptorSetBindingIds_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_3 "self"
                OpName %DescriptorSetBindingIds_MaterialBuffer_1_0_Instance "DescriptorSetBindingIds_MaterialBuffer_1_0_Instance"
                OpName %DescriptorSetBindingIds_MaterialBuffer_0_1_Instance "DescriptorSetBindingIds_MaterialBuffer_0_1_Instance"
                OpName %DescriptorSetBindingIds_MaterialBuffer_1_1_Instance "DescriptorSetBindingIds_MaterialBuffer_1_1_Instance"
                OpName %DescriptorSetBindingIds_Main_EntryPoint "DescriptorSetBindingIds_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_3 "self"
                OpDecorate %DescriptorSetBindingIds_MaterialBuffer_1_0 DescriptorSet 1
                OpDecorate %DescriptorSetBindingIds_MaterialBuffer_1_0 Binding 0
                OpDecorate %DescriptorSetBindingIds_MaterialBuffer_1_0 Block
@@ -56,7 +53,6 @@
 %_ptr_Function_DescriptorSetBindingIds = OpTypePointer Function %DescriptorSetBindingIds
           %9 = OpTypeFunction %void %_ptr_Function_DescriptorSetBindingIds
 %_ptr_Function_float = OpTypePointer Function %float
-         %11 = OpTypeFunction %void
 %_ptr_Uniform_float = OpTypePointer Uniform %float
 %DescriptorSetBindingIds_MaterialBuffer_1_0 = OpTypeStruct %float
 %_ptr_Uniform_DescriptorSetBindingIds_MaterialBuffer_1_0 = OpTypePointer Uniform %DescriptorSetBindingIds_MaterialBuffer_1_0
@@ -64,6 +60,7 @@
 %_ptr_Uniform_DescriptorSetBindingIds_MaterialBuffer_0_1 = OpTypePointer Uniform %DescriptorSetBindingIds_MaterialBuffer_0_1
 %DescriptorSetBindingIds_MaterialBuffer_1_1 = OpTypeStruct %float
 %_ptr_Uniform_DescriptorSetBindingIds_MaterialBuffer_1_1 = OpTypePointer Uniform %DescriptorSetBindingIds_MaterialBuffer_1_1
+         %21 = OpTypeFunction %void
     %float_1 = OpConstant %float 1
      %uint_0 = OpConstant %uint 0
      %uint_1 = OpConstant %uint 1
@@ -93,39 +90,28 @@
          %50 = OpLabel
                OpReturn
                OpFunctionEnd
-%DescriptorSetBindingIds_InitGlobals = OpFunction %void None %11
-         %54 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %DescriptorSetBindingIds_CopyInputs = OpFunction %void None %9
      %self_2 = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
-         %59 = OpLabel
-         %60 = OpAccessChain %_ptr_Uniform_float %DescriptorSetBindingIds_MaterialBuffer_1_0_Instance %uint_0
-         %61 = OpAccessChain %_ptr_Function_float %self_2 %uint_0
+         %55 = OpLabel
+         %56 = OpAccessChain %_ptr_Uniform_float %DescriptorSetBindingIds_MaterialBuffer_1_0_Instance %uint_0
+         %57 = OpAccessChain %_ptr_Function_float %self_2 %uint_0
+         %58 = OpLoad %float %56
+               OpStore %57 %58
+         %60 = OpAccessChain %_ptr_Uniform_float %DescriptorSetBindingIds_MaterialBuffer_0_1_Instance %uint_0
+         %61 = OpAccessChain %_ptr_Function_float %self_2 %uint_1
          %62 = OpLoad %float %60
                OpStore %61 %62
-         %64 = OpAccessChain %_ptr_Uniform_float %DescriptorSetBindingIds_MaterialBuffer_0_1_Instance %uint_0
-         %65 = OpAccessChain %_ptr_Function_float %self_2 %uint_1
+         %64 = OpAccessChain %_ptr_Uniform_float %DescriptorSetBindingIds_MaterialBuffer_1_1_Instance %uint_0
+         %65 = OpAccessChain %_ptr_Function_float %self_2 %uint_2
          %66 = OpLoad %float %64
                OpStore %65 %66
-         %68 = OpAccessChain %_ptr_Uniform_float %DescriptorSetBindingIds_MaterialBuffer_1_1_Instance %uint_0
-         %69 = OpAccessChain %_ptr_Function_float %self_2 %uint_2
-         %70 = OpLoad %float %68
-               OpStore %69 %70
                OpReturn
                OpFunctionEnd
-%DescriptorSetBindingIds_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
-         %76 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DescriptorSetBindingIds_Main_EntryPoint = OpFunction %void None %11
-         %80 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_DescriptorSetBindingIds Function
-         %82 = OpFunctionCall %void %DescriptorSetBindingIds_InitGlobals
-         %83 = OpFunctionCall %void %DescriptorSetBindingIds_DefaultConstructor %self_4
-         %84 = OpFunctionCall %void %DescriptorSetBindingIds_CopyInputs %self_4
-         %85 = OpFunctionCall %void %Main %self_4
-         %86 = OpFunctionCall %void %DescriptorSetBindingIds_CopyOutputs %self_4
+%DescriptorSetBindingIds_Main_EntryPoint = OpFunction %void None %21
+         %71 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_DescriptorSetBindingIds Function
+         %73 = OpFunctionCall %void %DescriptorSetBindingIds_DefaultConstructor %self_3
+         %74 = OpFunctionCall %void %DescriptorSetBindingIds_CopyInputs %self_3
+         %75 = OpFunctionCall %void %Main %self_3
                OpReturn
                OpFunctionEnd

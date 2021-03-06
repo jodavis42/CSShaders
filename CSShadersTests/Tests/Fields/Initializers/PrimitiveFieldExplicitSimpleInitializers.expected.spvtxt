@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 72
+; Bound: 55
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -20,15 +20,10 @@
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
-               OpName %PrimitiveFieldExplicitSimpleInitializers_InitGlobals "PrimitiveFieldExplicitSimpleInitializers_InitGlobals"
-               OpName %PrimitiveFieldExplicitSimpleInitializers_CopyInputs "PrimitiveFieldExplicitSimpleInitializers_CopyInputs"
+               OpName %PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint "PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %PrimitiveFieldExplicitSimpleInitializers_CopyOutputs "PrimitiveFieldExplicitSimpleInitializers_CopyOutputs"
-               OpName %self_3 "self"
                OpName %PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint "PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint "PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
@@ -73,27 +68,10 @@
          %46 = OpLabel
                OpReturn
                OpFunctionEnd
-%PrimitiveFieldExplicitSimpleInitializers_InitGlobals = OpFunction %void None %15
-         %50 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveFieldExplicitSimpleInitializers_CopyInputs = OpFunction %void None %13
-     %self_2 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitSimpleInitializers
-         %55 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveFieldExplicitSimpleInitializers_CopyOutputs = OpFunction %void None %13
-     %self_3 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitSimpleInitializers
-         %60 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %PrimitiveFieldExplicitSimpleInitializers_Main_EntryPoint = OpFunction %void None %15
-         %64 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_PrimitiveFieldExplicitSimpleInitializers Function
-         %66 = OpFunctionCall %void %PrimitiveFieldExplicitSimpleInitializers_InitGlobals
-         %67 = OpFunctionCall %void %PrimitiveFieldExplicitSimpleInitializers_DefaultConstructor %self_4
-         %68 = OpFunctionCall %void %PrimitiveFieldExplicitSimpleInitializers_CopyInputs %self_4
-         %69 = OpFunctionCall %void %Main %self_4
-         %70 = OpFunctionCall %void %PrimitiveFieldExplicitSimpleInitializers_CopyOutputs %self_4
+         %50 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_PrimitiveFieldExplicitSimpleInitializers Function
+         %52 = OpFunctionCall %void %PrimitiveFieldExplicitSimpleInitializers_DefaultConstructor %self_2
+         %53 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -5,10 +5,6 @@ struct AcosTest
     int empty_struct_member;
 };
 
-void AcosTest_InitGlobals()
-{
-}
-
 void AcosTest_PreConstructor(AcosTest self)
 {
 }
@@ -16,10 +12,6 @@ void AcosTest_PreConstructor(AcosTest self)
 void AcosTest_DefaultConstructor(AcosTest self)
 {
     AcosTest_PreConstructor(self);
-}
-
-void AcosTest_CopyInputs(AcosTest self)
-{
 }
 
 void Main(AcosTest self)
@@ -34,17 +26,10 @@ void Main(AcosTest self)
     vector4Val = acos(vector4Val);
 }
 
-void AcosTest_CopyOutputs(AcosTest self)
-{
-}
-
 void main()
 {
-    AcosTest_InitGlobals();
     AcosTest self;
     AcosTest_DefaultConstructor(self);
-    AcosTest_CopyInputs(self);
     Main(self);
-    AcosTest_CopyOutputs(self);
 }
 

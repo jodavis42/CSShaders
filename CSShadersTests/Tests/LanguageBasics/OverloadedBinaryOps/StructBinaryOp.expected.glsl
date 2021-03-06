@@ -11,10 +11,6 @@ struct StructUnaryOp
     int empty_struct_member;
 };
 
-void StructUnaryOp_InitGlobals()
-{
-}
-
 void StructUnaryOp_PreConstructor(StructUnaryOp self)
 {
 }
@@ -22,10 +18,6 @@ void StructUnaryOp_PreConstructor(StructUnaryOp self)
 void StructUnaryOp_DefaultConstructor(StructUnaryOp self)
 {
     StructUnaryOp_PreConstructor(self);
-}
-
-void StructUnaryOp_CopyInputs(StructUnaryOp self)
-{
 }
 
 void TestV2_PreConstructor(inout TestV2 self)
@@ -57,17 +49,10 @@ void Main(StructUnaryOp self)
     TestV2 result = op_Addition(value, value);
 }
 
-void StructUnaryOp_CopyOutputs(StructUnaryOp self)
-{
-}
-
 void main()
 {
-    StructUnaryOp_InitGlobals();
     StructUnaryOp self;
     StructUnaryOp_DefaultConstructor(self);
-    StructUnaryOp_CopyInputs(self);
     Main(self);
-    StructUnaryOp_CopyOutputs(self);
 }
 

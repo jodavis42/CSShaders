@@ -19,10 +19,6 @@ layout(location = 1) in float Value2;
 layout(location = 2) in vec2 V2;
 layout(location = 3) in TestStruct TestStruct_1;
 
-void Vertex_InitGlobals()
-{
-}
-
 void TestStruct_PreConstructor(inout TestStruct self)
 {
     self.Value = 0.0;
@@ -59,17 +55,11 @@ void Main(Vertex self)
 {
 }
 
-void Vertex_CopyOutputs(Vertex self)
-{
-}
-
 void main()
 {
-    Vertex_InitGlobals();
     Vertex self;
     Vertex_DefaultConstructor(self);
     Vertex_CopyInputs(self);
     Main(self);
-    Vertex_CopyOutputs(self);
 }
 

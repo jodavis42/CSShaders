@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 89
+; Bound: 72
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %u "u"
                OpName %r "r"
-               OpName %Unsigned_InitGlobals "Unsigned_InitGlobals"
-               OpName %Unsigned_CopyInputs "Unsigned_CopyInputs"
+               OpName %Unsigned_Main_EntryPoint "Unsigned_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %Unsigned_CopyOutputs "Unsigned_CopyOutputs"
-               OpName %self_3 "self"
                OpName %Unsigned_Main_EntryPoint "Unsigned_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %Unsigned_Main_EntryPoint "Unsigned_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
    %Unsigned = OpTypeStruct
@@ -87,27 +82,10 @@
                OpStore %r %60
                OpReturn
                OpFunctionEnd
-%Unsigned_InitGlobals = OpFunction %void None %11
-         %67 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Unsigned_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_Unsigned
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Unsigned_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_Unsigned
-         %77 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %Unsigned_Main_EntryPoint = OpFunction %void None %11
-         %81 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_Unsigned Function
-         %83 = OpFunctionCall %void %Unsigned_InitGlobals
-         %84 = OpFunctionCall %void %Unsigned_DefaultConstructor %self_4
-         %85 = OpFunctionCall %void %Unsigned_CopyInputs %self_4
-         %86 = OpFunctionCall %void %Main %self_4
-         %87 = OpFunctionCall %void %Unsigned_CopyOutputs %self_4
+         %67 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_Unsigned Function
+         %69 = OpFunctionCall %void %Unsigned_DefaultConstructor %self_2
+         %70 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

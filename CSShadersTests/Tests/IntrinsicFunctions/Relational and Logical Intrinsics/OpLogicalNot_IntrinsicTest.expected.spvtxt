@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 83
+; Bound: 66
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %bool2Val "bool2Val"
                OpName %bool3Val "bool3Val"
                OpName %bool4Val "bool4Val"
-               OpName %OpLogicalNotTest_InitGlobals "OpLogicalNotTest_InitGlobals"
-               OpName %OpLogicalNotTest_CopyInputs "OpLogicalNotTest_CopyInputs"
+               OpName %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpLogicalNotTest_CopyOutputs "OpLogicalNotTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
 %OpLogicalNotTest = OpTypeStruct
        %void = OpTypeVoid
@@ -86,27 +81,10 @@
                OpStore %bool4Val %56
                OpReturn
                OpFunctionEnd
-%OpLogicalNotTest_InitGlobals = OpFunction %void None %17
-         %61 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpLogicalNotTest_CopyInputs = OpFunction %void None %7
-     %self_2 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpLogicalNotTest_CopyOutputs = OpFunction %void None %7
-     %self_3 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpLogicalNotTest_Main_EntryPoint = OpFunction %void None %17
-         %75 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpLogicalNotTest Function
-         %77 = OpFunctionCall %void %OpLogicalNotTest_InitGlobals
-         %78 = OpFunctionCall %void %OpLogicalNotTest_DefaultConstructor %self_4
-         %79 = OpFunctionCall %void %OpLogicalNotTest_CopyInputs %self_4
-         %80 = OpFunctionCall %void %Main %self_4
-         %81 = OpFunctionCall %void %OpLogicalNotTest_CopyOutputs %self_4
+         %61 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpLogicalNotTest Function
+         %63 = OpFunctionCall %void %OpLogicalNotTest_DefaultConstructor %self_2
+         %64 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

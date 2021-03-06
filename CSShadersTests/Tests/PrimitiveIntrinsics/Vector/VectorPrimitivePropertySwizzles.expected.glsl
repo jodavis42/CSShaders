@@ -5,10 +5,6 @@ struct VectorPrimitivePropertySwizzlesTest
     int empty_struct_member;
 };
 
-void VectorPrimitivePropertySwizzlesTest_InitGlobals()
-{
-}
-
 void VectorPrimitivePropertySwizzlesTest_PreConstructor(VectorPrimitivePropertySwizzlesTest self)
 {
 }
@@ -16,10 +12,6 @@ void VectorPrimitivePropertySwizzlesTest_PreConstructor(VectorPrimitivePropertyS
 void VectorPrimitivePropertySwizzlesTest_DefaultConstructor(VectorPrimitivePropertySwizzlesTest self)
 {
     VectorPrimitivePropertySwizzlesTest_PreConstructor(self);
-}
-
-void VectorPrimitivePropertySwizzlesTest_CopyInputs(VectorPrimitivePropertySwizzlesTest self)
-{
 }
 
 void Main(VectorPrimitivePropertySwizzlesTest self)
@@ -31,17 +23,10 @@ void Main(VectorPrimitivePropertySwizzlesTest self)
     vector0 = vec2(vector0.xy.x, vector0.xy.y);
 }
 
-void VectorPrimitivePropertySwizzlesTest_CopyOutputs(VectorPrimitivePropertySwizzlesTest self)
-{
-}
-
 void main()
 {
-    VectorPrimitivePropertySwizzlesTest_InitGlobals();
     VectorPrimitivePropertySwizzlesTest self;
     VectorPrimitivePropertySwizzlesTest_DefaultConstructor(self);
-    VectorPrimitivePropertySwizzlesTest_CopyInputs(self);
     Main(self);
-    VectorPrimitivePropertySwizzlesTest_CopyOutputs(self);
 }
 

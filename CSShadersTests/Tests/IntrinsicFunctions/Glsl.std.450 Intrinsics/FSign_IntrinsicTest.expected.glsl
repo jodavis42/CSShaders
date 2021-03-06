@@ -5,10 +5,6 @@ struct FSignTest
     int empty_struct_member;
 };
 
-void FSignTest_InitGlobals()
-{
-}
-
 void FSignTest_PreConstructor(FSignTest self)
 {
 }
@@ -16,10 +12,6 @@ void FSignTest_PreConstructor(FSignTest self)
 void FSignTest_DefaultConstructor(FSignTest self)
 {
     FSignTest_PreConstructor(self);
-}
-
-void FSignTest_CopyInputs(FSignTest self)
-{
 }
 
 void Main(FSignTest self)
@@ -34,17 +26,10 @@ void Main(FSignTest self)
     vector4Val = sign(vector4Val);
 }
 
-void FSignTest_CopyOutputs(FSignTest self)
-{
-}
-
 void main()
 {
-    FSignTest_InitGlobals();
     FSignTest self;
     FSignTest_DefaultConstructor(self);
-    FSignTest_CopyInputs(self);
     Main(self);
-    FSignTest_CopyOutputs(self);
 }
 

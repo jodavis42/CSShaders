@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 64
+; Bound: 47
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %self_1 "self"
                OpName %value "value"
                OpName %result "result"
-               OpName %PrimitiveBinaryIntrinsicOp_InitGlobals "PrimitiveBinaryIntrinsicOp_InitGlobals"
-               OpName %PrimitiveBinaryIntrinsicOp_CopyInputs "PrimitiveBinaryIntrinsicOp_CopyInputs"
+               OpName %PrimitiveBinaryIntrinsicOp_Main_EntryPoint "PrimitiveBinaryIntrinsicOp_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %PrimitiveBinaryIntrinsicOp_CopyOutputs "PrimitiveBinaryIntrinsicOp_CopyOutputs"
-               OpName %self_3 "self"
                OpName %PrimitiveBinaryIntrinsicOp_Main_EntryPoint "PrimitiveBinaryIntrinsicOp_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %PrimitiveBinaryIntrinsicOp_Main_EntryPoint "PrimitiveBinaryIntrinsicOp_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
      %TestV2 = OpTypeVector %float 2
@@ -62,27 +57,10 @@
                OpStore %result %37
                OpReturn
                OpFunctionEnd
-%PrimitiveBinaryIntrinsicOp_InitGlobals = OpFunction %void None %13
-         %42 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveBinaryIntrinsicOp_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_PrimitiveBinaryIntrinsicOp
-         %47 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveBinaryIntrinsicOp_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_PrimitiveBinaryIntrinsicOp
-         %52 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %PrimitiveBinaryIntrinsicOp_Main_EntryPoint = OpFunction %void None %13
-         %56 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_PrimitiveBinaryIntrinsicOp Function
-         %58 = OpFunctionCall %void %PrimitiveBinaryIntrinsicOp_InitGlobals
-         %59 = OpFunctionCall %void %PrimitiveBinaryIntrinsicOp_DefaultConstructor %self_4
-         %60 = OpFunctionCall %void %PrimitiveBinaryIntrinsicOp_CopyInputs %self_4
-         %61 = OpFunctionCall %void %Main %self_4
-         %62 = OpFunctionCall %void %PrimitiveBinaryIntrinsicOp_CopyOutputs %self_4
+         %42 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_PrimitiveBinaryIntrinsicOp Function
+         %44 = OpFunctionCall %void %PrimitiveBinaryIntrinsicOp_DefaultConstructor %self_2
+         %45 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -11,10 +11,6 @@ struct ImplicitDefaultConstructor
     int empty_struct_member;
 };
 
-void ImplicitDefaultConstructor_InitGlobals()
-{
-}
-
 void ImplicitDefaultConstructor_PreConstructor(ImplicitDefaultConstructor self)
 {
 }
@@ -22,10 +18,6 @@ void ImplicitDefaultConstructor_PreConstructor(ImplicitDefaultConstructor self)
 void ImplicitDefaultConstructor_DefaultConstructor(ImplicitDefaultConstructor self)
 {
     ImplicitDefaultConstructor_PreConstructor(self);
-}
-
-void ImplicitDefaultConstructor_CopyInputs(ImplicitDefaultConstructor self)
-{
 }
 
 void MyClass_PreConstructor(inout MyClass self)
@@ -45,17 +37,10 @@ void Main(ImplicitDefaultConstructor self)
     MyClass_DefaultConstructor(myClass);
 }
 
-void ImplicitDefaultConstructor_CopyOutputs(ImplicitDefaultConstructor self)
-{
-}
-
 void main()
 {
-    ImplicitDefaultConstructor_InitGlobals();
     ImplicitDefaultConstructor self;
     ImplicitDefaultConstructor_DefaultConstructor(self);
-    ImplicitDefaultConstructor_CopyInputs(self);
     Main(self);
-    ImplicitDefaultConstructor_CopyOutputs(self);
 }
 

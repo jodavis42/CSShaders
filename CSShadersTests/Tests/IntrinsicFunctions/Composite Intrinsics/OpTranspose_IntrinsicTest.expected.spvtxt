@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 95
+; Bound: 78
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -29,15 +29,10 @@
                OpName %m01 "m01"
                OpName %m10 "m10"
                OpName %m11 "m11"
-               OpName %OpTransposeTest_InitGlobals "OpTransposeTest_InitGlobals"
-               OpName %OpTransposeTest_CopyInputs "OpTransposeTest_CopyInputs"
+               OpName %OpTransposeTest_Main_EntryPoint "OpTransposeTest_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %OpTransposeTest_CopyOutputs "OpTransposeTest_CopyOutputs"
-               OpName %self_5 "self"
                OpName %OpTransposeTest_Main_EntryPoint "OpTransposeTest_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %OpTransposeTest_Main_EntryPoint "OpTransposeTest_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %OpTransposeTest = OpTypeStruct
@@ -101,27 +96,10 @@
                OpStore %self_3 %68
                OpReturn
                OpFunctionEnd
-%OpTransposeTest_InitGlobals = OpFunction %void None %19
-         %73 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpTransposeTest_CopyInputs = OpFunction %void None %9
-     %self_4 = OpFunctionParameter %_ptr_Function_OpTransposeTest
-         %78 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpTransposeTest_CopyOutputs = OpFunction %void None %9
-     %self_5 = OpFunctionParameter %_ptr_Function_OpTransposeTest
-         %83 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpTransposeTest_Main_EntryPoint = OpFunction %void None %19
-         %87 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_OpTransposeTest Function
-         %89 = OpFunctionCall %void %OpTransposeTest_InitGlobals
-         %90 = OpFunctionCall %void %OpTransposeTest_DefaultConstructor %self_6
-         %91 = OpFunctionCall %void %OpTransposeTest_CopyInputs %self_6
-         %92 = OpFunctionCall %void %Main %self_6
-         %93 = OpFunctionCall %void %OpTransposeTest_CopyOutputs %self_6
+         %73 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpTransposeTest Function
+         %75 = OpFunctionCall %void %OpTransposeTest_DefaultConstructor %self_4
+         %76 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

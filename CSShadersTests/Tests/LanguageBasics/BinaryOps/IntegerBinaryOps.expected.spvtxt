@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 122
+; Bound: 105
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %i "i"
                OpName %r "r"
                OpName %b "b"
-               OpName %IntegerBinaryOps_InitGlobals "IntegerBinaryOps_InitGlobals"
-               OpName %IntegerBinaryOps_CopyInputs "IntegerBinaryOps_CopyInputs"
+               OpName %IntegerBinaryOps_Main_EntryPoint "IntegerBinaryOps_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %IntegerBinaryOps_CopyOutputs "IntegerBinaryOps_CopyOutputs"
-               OpName %self_3 "self"
                OpName %IntegerBinaryOps_Main_EntryPoint "IntegerBinaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %IntegerBinaryOps_Main_EntryPoint "IntegerBinaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
        %bool = OpTypeBool
@@ -121,27 +116,10 @@
                OpStore %i %95
                OpReturn
                OpFunctionEnd
-%IntegerBinaryOps_InitGlobals = OpFunction %void None %13
-        %100 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%IntegerBinaryOps_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-        %105 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%IntegerBinaryOps_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_IntegerBinaryOps
-        %110 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %IntegerBinaryOps_Main_EntryPoint = OpFunction %void None %13
-        %114 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_IntegerBinaryOps Function
-        %116 = OpFunctionCall %void %IntegerBinaryOps_InitGlobals
-        %117 = OpFunctionCall %void %IntegerBinaryOps_DefaultConstructor %self_4
-        %118 = OpFunctionCall %void %IntegerBinaryOps_CopyInputs %self_4
-        %119 = OpFunctionCall %void %Main %self_4
-        %120 = OpFunctionCall %void %IntegerBinaryOps_CopyOutputs %self_4
+        %100 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_IntegerBinaryOps Function
+        %102 = OpFunctionCall %void %IntegerBinaryOps_DefaultConstructor %self_2
+        %103 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

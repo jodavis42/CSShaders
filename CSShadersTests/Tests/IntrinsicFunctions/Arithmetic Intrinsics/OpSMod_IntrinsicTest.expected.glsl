@@ -5,10 +5,6 @@ struct OpSModTest
     int empty_struct_member;
 };
 
-void OpSModTest_InitGlobals()
-{
-}
-
 void OpSModTest_PreConstructor(OpSModTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSModTest_PreConstructor(OpSModTest self)
 void OpSModTest_DefaultConstructor(OpSModTest self)
 {
     OpSModTest_PreConstructor(self);
-}
-
-void OpSModTest_CopyInputs(OpSModTest self)
-{
 }
 
 void Main(OpSModTest self)
@@ -34,17 +26,10 @@ void Main(OpSModTest self)
     integer4Val %= integer4Val;
 }
 
-void OpSModTest_CopyOutputs(OpSModTest self)
-{
-}
-
 void main()
 {
-    OpSModTest_InitGlobals();
     OpSModTest self;
     OpSModTest_DefaultConstructor(self);
-    OpSModTest_CopyInputs(self);
     Main(self);
-    OpSModTest_CopyOutputs(self);
 }
 

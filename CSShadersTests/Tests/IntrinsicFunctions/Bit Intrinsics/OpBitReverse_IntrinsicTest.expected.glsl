@@ -5,10 +5,6 @@ struct OpBitReverseTest
     int empty_struct_member;
 };
 
-void OpBitReverseTest_InitGlobals()
-{
-}
-
 void OpBitReverseTest_PreConstructor(OpBitReverseTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpBitReverseTest_PreConstructor(OpBitReverseTest self)
 void OpBitReverseTest_DefaultConstructor(OpBitReverseTest self)
 {
     OpBitReverseTest_PreConstructor(self);
-}
-
-void OpBitReverseTest_CopyInputs(OpBitReverseTest self)
-{
 }
 
 void Main(OpBitReverseTest self)
@@ -34,17 +26,10 @@ void Main(OpBitReverseTest self)
     integer4Val = bitfieldReverse(integer4Val);
 }
 
-void OpBitReverseTest_CopyOutputs(OpBitReverseTest self)
-{
-}
-
 void main()
 {
-    OpBitReverseTest_InitGlobals();
     OpBitReverseTest self;
     OpBitReverseTest_DefaultConstructor(self);
-    OpBitReverseTest_CopyInputs(self);
     Main(self);
-    OpBitReverseTest_CopyOutputs(self);
 }
 

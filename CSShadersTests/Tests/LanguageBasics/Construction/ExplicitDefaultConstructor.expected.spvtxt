@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 83
+; Bound: 66
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -25,15 +25,10 @@
                OpName %self_3 "self"
                OpName %myClass "myClass"
                OpName %tempMyClass "tempMyClass"
-               OpName %DefaultConstructorIntrinsic_InitGlobals "DefaultConstructorIntrinsic_InitGlobals"
-               OpName %DefaultConstructorIntrinsic_CopyInputs "DefaultConstructorIntrinsic_CopyInputs"
+               OpName %DefaultConstructorIntrinsic_Main_EntryPoint "DefaultConstructorIntrinsic_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %DefaultConstructorIntrinsic_CopyOutputs "DefaultConstructorIntrinsic_CopyOutputs"
-               OpName %self_5 "self"
                OpName %DefaultConstructorIntrinsic_Main_EntryPoint "DefaultConstructorIntrinsic_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %DefaultConstructorIntrinsic_Main_EntryPoint "DefaultConstructorIntrinsic_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
       %float = OpTypeFloat 32
@@ -87,27 +82,10 @@
                OpStore %myClass %56
                OpReturn
                OpFunctionEnd
-%DefaultConstructorIntrinsic_InitGlobals = OpFunction %void None %17
-         %61 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DefaultConstructorIntrinsic_CopyInputs = OpFunction %void None %15
-     %self_4 = OpFunctionParameter %_ptr_Function_DefaultConstructorIntrinsic
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DefaultConstructorIntrinsic_CopyOutputs = OpFunction %void None %15
-     %self_5 = OpFunctionParameter %_ptr_Function_DefaultConstructorIntrinsic
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %DefaultConstructorIntrinsic_Main_EntryPoint = OpFunction %void None %17
-         %75 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_DefaultConstructorIntrinsic Function
-         %77 = OpFunctionCall %void %DefaultConstructorIntrinsic_InitGlobals
-         %78 = OpFunctionCall %void %DefaultConstructorIntrinsic_DefaultConstructor %self_6
-         %79 = OpFunctionCall %void %DefaultConstructorIntrinsic_CopyInputs %self_6
-         %80 = OpFunctionCall %void %Main %self_6
-         %81 = OpFunctionCall %void %DefaultConstructorIntrinsic_CopyOutputs %self_6
+         %61 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_DefaultConstructorIntrinsic Function
+         %63 = OpFunctionCall %void %DefaultConstructorIntrinsic_DefaultConstructor %self_4
+         %64 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

@@ -8,10 +8,6 @@ struct StructWithPrimitiveFields
     float FloatValue;
 };
 
-void StructWithPrimitiveFields_InitGlobals()
-{
-}
-
 void StructWithPrimitiveFields_PreConstructor(inout StructWithPrimitiveFields self)
 {
     self.BoolValue = false;
@@ -25,20 +21,9 @@ void StructWithPrimitiveFields_DefaultConstructor(inout StructWithPrimitiveField
     StructWithPrimitiveFields_PreConstructor(self);
 }
 
-void StructWithPrimitiveFields_CopyInputs(StructWithPrimitiveFields self)
-{
-}
-
-void StructWithPrimitiveFields_CopyOutputs(StructWithPrimitiveFields self)
-{
-}
-
 void main()
 {
-    StructWithPrimitiveFields_InitGlobals();
     StructWithPrimitiveFields self;
     StructWithPrimitiveFields_DefaultConstructor(self);
-    StructWithPrimitiveFields_CopyInputs(self);
-    StructWithPrimitiveFields_CopyOutputs(self);
 }
 

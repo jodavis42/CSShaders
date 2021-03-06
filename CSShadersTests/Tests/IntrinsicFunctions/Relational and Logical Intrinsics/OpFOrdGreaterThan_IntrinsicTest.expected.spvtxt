@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 107
+; Bound: 90
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %vector3Val "vector3Val"
                OpName %bool4Val "bool4Val"
                OpName %vector4Val "vector4Val"
-               OpName %OpFOrdGreaterThanTest_InitGlobals "OpFOrdGreaterThanTest_InitGlobals"
-               OpName %OpFOrdGreaterThanTest_CopyInputs "OpFOrdGreaterThanTest_CopyInputs"
+               OpName %OpFOrdGreaterThanTest_Main_EntryPoint "OpFOrdGreaterThanTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpFOrdGreaterThanTest_CopyOutputs "OpFOrdGreaterThanTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpFOrdGreaterThanTest_Main_EntryPoint "OpFOrdGreaterThanTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpFOrdGreaterThanTest_Main_EntryPoint "OpFOrdGreaterThanTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
@@ -117,27 +112,10 @@
                OpStore %bool4Val %80
                OpReturn
                OpFunctionEnd
-%OpFOrdGreaterThanTest_InitGlobals = OpFunction %void None %25
-         %85 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFOrdGreaterThanTest_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_OpFOrdGreaterThanTest
-         %90 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFOrdGreaterThanTest_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_OpFOrdGreaterThanTest
-         %95 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpFOrdGreaterThanTest_Main_EntryPoint = OpFunction %void None %25
-         %99 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpFOrdGreaterThanTest Function
-        %101 = OpFunctionCall %void %OpFOrdGreaterThanTest_InitGlobals
-        %102 = OpFunctionCall %void %OpFOrdGreaterThanTest_DefaultConstructor %self_4
-        %103 = OpFunctionCall %void %OpFOrdGreaterThanTest_CopyInputs %self_4
-        %104 = OpFunctionCall %void %Main %self_4
-        %105 = OpFunctionCall %void %OpFOrdGreaterThanTest_CopyOutputs %self_4
+         %85 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpFOrdGreaterThanTest Function
+         %87 = OpFunctionCall %void %OpFOrdGreaterThanTest_DefaultConstructor %self_2
+         %88 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

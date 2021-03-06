@@ -5,10 +5,6 @@ struct OpShiftLeftLogicalTest
     int empty_struct_member;
 };
 
-void OpShiftLeftLogicalTest_InitGlobals()
-{
-}
-
 void OpShiftLeftLogicalTest_PreConstructor(OpShiftLeftLogicalTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpShiftLeftLogicalTest_PreConstructor(OpShiftLeftLogicalTest self)
 void OpShiftLeftLogicalTest_DefaultConstructor(OpShiftLeftLogicalTest self)
 {
     OpShiftLeftLogicalTest_PreConstructor(self);
-}
-
-void OpShiftLeftLogicalTest_CopyInputs(OpShiftLeftLogicalTest self)
-{
 }
 
 void Main(OpShiftLeftLogicalTest self)
@@ -34,17 +26,10 @@ void Main(OpShiftLeftLogicalTest self)
     integer4Val = integer4Val << integer4Val;
 }
 
-void OpShiftLeftLogicalTest_CopyOutputs(OpShiftLeftLogicalTest self)
-{
-}
-
 void main()
 {
-    OpShiftLeftLogicalTest_InitGlobals();
     OpShiftLeftLogicalTest self;
     OpShiftLeftLogicalTest_DefaultConstructor(self);
-    OpShiftLeftLogicalTest_CopyInputs(self);
     Main(self);
-    OpShiftLeftLogicalTest_CopyOutputs(self);
 }
 

@@ -44,5 +44,7 @@ namespace CSShaders
         return null;
       return interfaceField.GetInstance(translator, interfaceField, context);
     }
+
+    public int Count { get { return Fields.Count; } }
   }
 }

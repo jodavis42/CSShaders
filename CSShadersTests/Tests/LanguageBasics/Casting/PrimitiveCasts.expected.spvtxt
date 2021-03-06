@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 111
+; Bound: 94
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -20,15 +20,10 @@
                OpName %i "i"
                OpName %u "u"
                OpName %f "f"
-               OpName %PrimitiveCasts_InitGlobals "PrimitiveCasts_InitGlobals"
-               OpName %PrimitiveCasts_CopyInputs "PrimitiveCasts_CopyInputs"
+               OpName %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %PrimitiveCasts_CopyOutputs "PrimitiveCasts_CopyOutputs"
-               OpName %self_3 "self"
                OpName %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
@@ -112,27 +107,10 @@
                OpStore %f %84
                OpReturn
                OpFunctionEnd
-%PrimitiveCasts_InitGlobals = OpFunction %void None %15
-         %89 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveCasts_CopyInputs = OpFunction %void None %13
-     %self_2 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
-         %94 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveCasts_CopyOutputs = OpFunction %void None %13
-     %self_3 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
-         %99 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %PrimitiveCasts_Main_EntryPoint = OpFunction %void None %15
-        %103 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_PrimitiveCasts Function
-        %105 = OpFunctionCall %void %PrimitiveCasts_InitGlobals
-        %106 = OpFunctionCall %void %PrimitiveCasts_DefaultConstructor %self_4
-        %107 = OpFunctionCall %void %PrimitiveCasts_CopyInputs %self_4
-        %108 = OpFunctionCall %void %Main %self_4
-        %109 = OpFunctionCall %void %PrimitiveCasts_CopyOutputs %self_4
+         %89 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_PrimitiveCasts Function
+         %91 = OpFunctionCall %void %PrimitiveCasts_DefaultConstructor %self_2
+         %92 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

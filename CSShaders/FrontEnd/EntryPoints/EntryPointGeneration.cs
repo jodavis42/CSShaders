@@ -43,14 +43,13 @@ namespace CSShaders
       var entryPointFunction = GenerateSpirVEntryPointFunction(translator, shaderType, entryPointName);
 
       // Generate the entry point function body
-      translator.GenerateFunctionCall(entryPoint.mGlobalsInitializationFunction, null, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(entryPoint.mGlobalsInitializationFunction, null, null, entryPointFunction.Context);
       EntryPointGenerationShared.ConstructShaderType(translator, shaderType, entryPointFunction.Context);
 
       var entryPointThisOp = entryPointFunction.Context.mThisOp;
-      translator.GenerateFunctionCall(interfaceInfo.CopyInputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
-      if (function != null)
-        translator.GenerateFunctionCall(function, entryPointThisOp, null, entryPointFunction.Context);
-      translator.GenerateFunctionCall(interfaceInfo.CopyOutputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(interfaceInfo.CopyInputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(function, entryPointThisOp, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(interfaceInfo.CopyOutputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
       translator.FixupBlockTerminators(entryPointFunction.ShaderFunction);
 
       // Make sure all global variables are added to the interface of the entry point
@@ -88,14 +87,13 @@ namespace CSShaders
       var entryPointFunction = GenerateSpirVEntryPointFunction(translator, shaderType, entryPointName);
 
       // Generate the entry point function body
-      translator.GenerateFunctionCall(entryPoint.mGlobalsInitializationFunction, null, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(entryPoint.mGlobalsInitializationFunction, null, null, entryPointFunction.Context);
       EntryPointGenerationShared.ConstructShaderType(translator, shaderType, entryPointFunction.Context);
 
       var entryPointThisOp = entryPointFunction.Context.mThisOp;
-      translator.GenerateFunctionCall(interfaceInfo.CopyInputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
-      if (function != null)
-        translator.GenerateFunctionCall(function, entryPointThisOp, null, entryPointFunction.Context);
-      translator.GenerateFunctionCall(interfaceInfo.CopyOutputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(interfaceInfo.CopyInputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(function, entryPointThisOp, null, entryPointFunction.Context);
+      translator.TryGenerateFunctionCall(interfaceInfo.CopyOutputsFunction.ShaderFunction, entryPointThisOp, null, entryPointFunction.Context);
       translator.FixupBlockTerminators(entryPointFunction.ShaderFunction);
 
       // Make sure all global variables are added to the interface of the entry point
@@ -127,6 +125,16 @@ namespace CSShaders
 
     public static void CreateGlobalVariableInitializeFunction(FrontEndTranslator translator, ShaderType shaderType, ShaderEntryPointInfo entryPoint, EntryPointInterfaceInfo interfaceInfo, FrontEndContext context)
     {
+      // First check if any global variables that need the variable initialization function exist. If not then don't emit anything.
+      bool globalVariablesExist = false;
+      foreach (var globalField in interfaceInfo.GlobalFields)
+      {
+        if (globalField.InitialValue != null)
+        globalVariablesExist = true;
+      }
+      if (!globalVariablesExist)
+        return;
+
       var library = translator.mCurrentLibrary;
       var voidType = library.FindType(new TypeKey(typeof(void)));
       var initGlobalFunction = translator.CreateFunctionAndType(shaderType, voidType, "InitGlobals", null, null);

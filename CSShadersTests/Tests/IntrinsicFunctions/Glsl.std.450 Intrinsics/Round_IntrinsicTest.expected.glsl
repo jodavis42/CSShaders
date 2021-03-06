@@ -5,10 +5,6 @@ struct RoundTest
     int empty_struct_member;
 };
 
-void RoundTest_InitGlobals()
-{
-}
-
 void RoundTest_PreConstructor(RoundTest self)
 {
 }
@@ -16,10 +12,6 @@ void RoundTest_PreConstructor(RoundTest self)
 void RoundTest_DefaultConstructor(RoundTest self)
 {
     RoundTest_PreConstructor(self);
-}
-
-void RoundTest_CopyInputs(RoundTest self)
-{
 }
 
 void Main(RoundTest self)
@@ -34,17 +26,10 @@ void Main(RoundTest self)
     vector4Val = round(vector4Val);
 }
 
-void RoundTest_CopyOutputs(RoundTest self)
-{
-}
-
 void main()
 {
-    RoundTest_InitGlobals();
     RoundTest self;
     RoundTest_DefaultConstructor(self);
-    RoundTest_CopyInputs(self);
     Main(self);
-    RoundTest_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct OpVectorTimesMatrixTest
     int empty_struct_member;
 };
 
-void OpVectorTimesMatrixTest_InitGlobals()
-{
-}
-
 void OpVectorTimesMatrixTest_PreConstructor(OpVectorTimesMatrixTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpVectorTimesMatrixTest_PreConstructor(OpVectorTimesMatrixTest self)
 void OpVectorTimesMatrixTest_DefaultConstructor(OpVectorTimesMatrixTest self)
 {
     OpVectorTimesMatrixTest_PreConstructor(self);
-}
-
-void OpVectorTimesMatrixTest_CopyInputs(OpVectorTimesMatrixTest self)
-{
 }
 
 void Main(OpVectorTimesMatrixTest self)
@@ -30,17 +22,10 @@ void Main(OpVectorTimesMatrixTest self)
     vector2Val *= float2x2Val;
 }
 
-void OpVectorTimesMatrixTest_CopyOutputs(OpVectorTimesMatrixTest self)
-{
-}
-
 void main()
 {
-    OpVectorTimesMatrixTest_InitGlobals();
     OpVectorTimesMatrixTest self;
     OpVectorTimesMatrixTest_DefaultConstructor(self);
-    OpVectorTimesMatrixTest_CopyInputs(self);
     Main(self);
-    OpVectorTimesMatrixTest_CopyOutputs(self);
 }
 

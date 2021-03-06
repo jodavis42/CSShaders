@@ -11,10 +11,6 @@ struct StructIncrementDecrement
     int empty_struct_member;
 };
 
-void StructIncrementDecrement_InitGlobals()
-{
-}
-
 void StructIncrementDecrement_PreConstructor(StructIncrementDecrement self)
 {
 }
@@ -22,10 +18,6 @@ void StructIncrementDecrement_PreConstructor(StructIncrementDecrement self)
 void StructIncrementDecrement_DefaultConstructor(StructIncrementDecrement self)
 {
     StructIncrementDecrement_PreConstructor(self);
-}
-
-void StructIncrementDecrement_CopyInputs(StructIncrementDecrement self)
-{
 }
 
 void TestV2_PreConstructor(inout TestV2 self)
@@ -83,17 +75,10 @@ void Main(StructIncrementDecrement self)
     r = _127;
 }
 
-void StructIncrementDecrement_CopyOutputs(StructIncrementDecrement self)
-{
-}
-
 void main()
 {
-    StructIncrementDecrement_InitGlobals();
     StructIncrementDecrement self;
     StructIncrementDecrement_DefaultConstructor(self);
-    StructIncrementDecrement_CopyInputs(self);
     Main(self);
-    StructIncrementDecrement_CopyOutputs(self);
 }
 

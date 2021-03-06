@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 58
+; Bound: 41
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %b "b"
                OpName %r "r"
-               OpName %BooleanUnaryOps_InitGlobals "BooleanUnaryOps_InitGlobals"
-               OpName %BooleanUnaryOps_CopyInputs "BooleanUnaryOps_CopyInputs"
+               OpName %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %BooleanUnaryOps_CopyOutputs "BooleanUnaryOps_CopyOutputs"
-               OpName %self_3 "self"
                OpName %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
 %BooleanUnaryOps = OpTypeStruct
        %void = OpTypeVoid
@@ -57,27 +52,10 @@
                OpStore %r %31
                OpReturn
                OpFunctionEnd
-%BooleanUnaryOps_InitGlobals = OpFunction %void None %9
-         %36 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%BooleanUnaryOps_CopyInputs = OpFunction %void None %7
-     %self_2 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
-         %41 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%BooleanUnaryOps_CopyOutputs = OpFunction %void None %7
-     %self_3 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
-         %46 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %BooleanUnaryOps_Main_EntryPoint = OpFunction %void None %9
-         %50 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_BooleanUnaryOps Function
-         %52 = OpFunctionCall %void %BooleanUnaryOps_InitGlobals
-         %53 = OpFunctionCall %void %BooleanUnaryOps_DefaultConstructor %self_4
-         %54 = OpFunctionCall %void %BooleanUnaryOps_CopyInputs %self_4
-         %55 = OpFunctionCall %void %Main %self_4
-         %56 = OpFunctionCall %void %BooleanUnaryOps_CopyOutputs %self_4
+         %36 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_BooleanUnaryOps Function
+         %38 = OpFunctionCall %void %BooleanUnaryOps_DefaultConstructor %self_2
+         %39 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -5,10 +5,6 @@ struct OpSelectTest
     int empty_struct_member;
 };
 
-void OpSelectTest_InitGlobals()
-{
-}
-
 void OpSelectTest_PreConstructor(OpSelectTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSelectTest_PreConstructor(OpSelectTest self)
 void OpSelectTest_DefaultConstructor(OpSelectTest self)
 {
     OpSelectTest_PreConstructor(self);
-}
-
-void OpSelectTest_CopyInputs(OpSelectTest self)
-{
 }
 
 void Main(OpSelectTest self)
@@ -50,17 +42,10 @@ void Main(OpSelectTest self)
     vector4Val = mix(vector4Val, vector4Val, bool4Val);
 }
 
-void OpSelectTest_CopyOutputs(OpSelectTest self)
-{
-}
-
 void main()
 {
-    OpSelectTest_InitGlobals();
     OpSelectTest self;
     OpSelectTest_DefaultConstructor(self);
-    OpSelectTest_CopyInputs(self);
     Main(self);
-    OpSelectTest_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct OpSDivTest
     int empty_struct_member;
 };
 
-void OpSDivTest_InitGlobals()
-{
-}
-
 void OpSDivTest_PreConstructor(OpSDivTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSDivTest_PreConstructor(OpSDivTest self)
 void OpSDivTest_DefaultConstructor(OpSDivTest self)
 {
     OpSDivTest_PreConstructor(self);
-}
-
-void OpSDivTest_CopyInputs(OpSDivTest self)
-{
 }
 
 void Main(OpSDivTest self)
@@ -34,17 +26,10 @@ void Main(OpSDivTest self)
     integer4Val /= integer4Val;
 }
 
-void OpSDivTest_CopyOutputs(OpSDivTest self)
-{
-}
-
 void main()
 {
-    OpSDivTest_InitGlobals();
     OpSDivTest self;
     OpSDivTest_DefaultConstructor(self);
-    OpSDivTest_CopyInputs(self);
     Main(self);
-    OpSDivTest_CopyOutputs(self);
 }
 

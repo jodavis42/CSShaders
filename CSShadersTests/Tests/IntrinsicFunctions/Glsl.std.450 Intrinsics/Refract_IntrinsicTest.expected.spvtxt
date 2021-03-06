@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 89
+; Bound: 72
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %floatVal "floatVal"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %RefractTest_InitGlobals "RefractTest_InitGlobals"
-               OpName %RefractTest_CopyInputs "RefractTest_CopyInputs"
+               OpName %RefractTest_Main_EntryPoint "RefractTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %RefractTest_CopyOutputs "RefractTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %RefractTest_Main_EntryPoint "RefractTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %RefractTest_Main_EntryPoint "RefractTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %RefractTest = OpTypeStruct
@@ -91,27 +86,10 @@
                OpStore %vector4Val %62
                OpReturn
                OpFunctionEnd
-%RefractTest_InitGlobals = OpFunction %void None %20
-         %67 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%RefractTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_RefractTest
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%RefractTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_RefractTest
-         %77 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %RefractTest_Main_EntryPoint = OpFunction %void None %20
-         %81 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_RefractTest Function
-         %83 = OpFunctionCall %void %RefractTest_InitGlobals
-         %84 = OpFunctionCall %void %RefractTest_DefaultConstructor %self_4
-         %85 = OpFunctionCall %void %RefractTest_CopyInputs %self_4
-         %86 = OpFunctionCall %void %Main %self_4
-         %87 = OpFunctionCall %void %RefractTest_CopyOutputs %self_4
+         %67 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_RefractTest Function
+         %69 = OpFunctionCall %void %RefractTest_DefaultConstructor %self_2
+         %70 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

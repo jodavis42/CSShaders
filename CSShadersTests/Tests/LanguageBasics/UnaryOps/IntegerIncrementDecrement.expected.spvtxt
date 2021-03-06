@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 89
+; Bound: 72
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %i "i"
                OpName %r "r"
-               OpName %IntegerIncementDecrement_InitGlobals "IntegerIncementDecrement_InitGlobals"
-               OpName %IntegerIncementDecrement_CopyInputs "IntegerIncementDecrement_CopyInputs"
+               OpName %IntegerIncementDecrement_Main_EntryPoint "IntegerIncementDecrement_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %IntegerIncementDecrement_CopyOutputs "IntegerIncementDecrement_CopyOutputs"
-               OpName %self_3 "self"
                OpName %IntegerIncementDecrement_Main_EntryPoint "IntegerIncementDecrement_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %IntegerIncementDecrement_Main_EntryPoint "IntegerIncementDecrement_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
 %IntegerIncementDecrement = OpTypeStruct
@@ -87,27 +82,10 @@
                OpStore %r %60
                OpReturn
                OpFunctionEnd
-%IntegerIncementDecrement_InitGlobals = OpFunction %void None %11
-         %67 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%IntegerIncementDecrement_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%IntegerIncementDecrement_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_IntegerIncementDecrement
-         %77 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %IntegerIncementDecrement_Main_EntryPoint = OpFunction %void None %11
-         %81 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_IntegerIncementDecrement Function
-         %83 = OpFunctionCall %void %IntegerIncementDecrement_InitGlobals
-         %84 = OpFunctionCall %void %IntegerIncementDecrement_DefaultConstructor %self_4
-         %85 = OpFunctionCall %void %IntegerIncementDecrement_CopyInputs %self_4
-         %86 = OpFunctionCall %void %Main %self_4
-         %87 = OpFunctionCall %void %IntegerIncementDecrement_CopyOutputs %self_4
+         %67 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_IntegerIncementDecrement Function
+         %69 = OpFunctionCall %void %IntegerIncementDecrement_DefaultConstructor %self_2
+         %70 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

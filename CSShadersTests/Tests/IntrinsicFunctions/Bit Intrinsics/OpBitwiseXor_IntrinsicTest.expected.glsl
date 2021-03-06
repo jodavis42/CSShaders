@@ -5,10 +5,6 @@ struct OpBitwiseXorTest
     int empty_struct_member;
 };
 
-void OpBitwiseXorTest_InitGlobals()
-{
-}
-
 void OpBitwiseXorTest_PreConstructor(OpBitwiseXorTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpBitwiseXorTest_PreConstructor(OpBitwiseXorTest self)
 void OpBitwiseXorTest_DefaultConstructor(OpBitwiseXorTest self)
 {
     OpBitwiseXorTest_PreConstructor(self);
-}
-
-void OpBitwiseXorTest_CopyInputs(OpBitwiseXorTest self)
-{
 }
 
 void Main(OpBitwiseXorTest self)
@@ -34,17 +26,10 @@ void Main(OpBitwiseXorTest self)
     integer4Val ^= integer4Val;
 }
 
-void OpBitwiseXorTest_CopyOutputs(OpBitwiseXorTest self)
-{
-}
-
 void main()
 {
-    OpBitwiseXorTest_InitGlobals();
     OpBitwiseXorTest self;
     OpBitwiseXorTest_DefaultConstructor(self);
-    OpBitwiseXorTest_CopyInputs(self);
     Main(self);
-    OpBitwiseXorTest_CopyOutputs(self);
 }
 

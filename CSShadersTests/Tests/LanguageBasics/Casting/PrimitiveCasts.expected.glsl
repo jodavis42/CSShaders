@@ -5,10 +5,6 @@ struct PrimitiveCasts
     int empty_struct_member;
 };
 
-void PrimitiveCasts_InitGlobals()
-{
-}
-
 void PrimitiveCasts_PreConstructor(PrimitiveCasts self)
 {
 }
@@ -16,10 +12,6 @@ void PrimitiveCasts_PreConstructor(PrimitiveCasts self)
 void PrimitiveCasts_DefaultConstructor(PrimitiveCasts self)
 {
     PrimitiveCasts_PreConstructor(self);
-}
-
-void PrimitiveCasts_CopyInputs(PrimitiveCasts self)
-{
 }
 
 void Main(PrimitiveCasts self)
@@ -50,17 +42,10 @@ void Main(PrimitiveCasts self)
     f = f;
 }
 
-void PrimitiveCasts_CopyOutputs(PrimitiveCasts self)
-{
-}
-
 void main()
 {
-    PrimitiveCasts_InitGlobals();
     PrimitiveCasts self;
     PrimitiveCasts_DefaultConstructor(self);
-    PrimitiveCasts_CopyInputs(self);
     Main(self);
-    PrimitiveCasts_CopyOutputs(self);
 }
 

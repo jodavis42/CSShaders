@@ -5,10 +5,6 @@ struct IntegerIncementDecrement
     int empty_struct_member;
 };
 
-void IntegerIncementDecrement_InitGlobals()
-{
-}
-
 void IntegerIncementDecrement_PreConstructor(IntegerIncementDecrement self)
 {
 }
@@ -16,10 +12,6 @@ void IntegerIncementDecrement_PreConstructor(IntegerIncementDecrement self)
 void IntegerIncementDecrement_DefaultConstructor(IntegerIncementDecrement self)
 {
     IntegerIncementDecrement_PreConstructor(self);
-}
-
-void IntegerIncementDecrement_CopyInputs(IntegerIncementDecrement self)
-{
 }
 
 void Main(IntegerIncementDecrement self)
@@ -42,17 +34,10 @@ void Main(IntegerIncementDecrement self)
     r = _60;
 }
 
-void IntegerIncementDecrement_CopyOutputs(IntegerIncementDecrement self)
-{
-}
-
 void main()
 {
-    IntegerIncementDecrement_InitGlobals();
     IntegerIncementDecrement self;
     IntegerIncementDecrement_DefaultConstructor(self);
-    IntegerIncementDecrement_CopyInputs(self);
     Main(self);
-    IntegerIncementDecrement_CopyOutputs(self);
 }
 

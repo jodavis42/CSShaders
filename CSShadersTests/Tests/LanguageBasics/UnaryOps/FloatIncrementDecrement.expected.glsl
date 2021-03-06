@@ -5,10 +5,6 @@ struct FloatIncementDecrement
     int empty_struct_member;
 };
 
-void FloatIncementDecrement_InitGlobals()
-{
-}
-
 void FloatIncementDecrement_PreConstructor(FloatIncementDecrement self)
 {
 }
@@ -16,10 +12,6 @@ void FloatIncementDecrement_PreConstructor(FloatIncementDecrement self)
 void FloatIncementDecrement_DefaultConstructor(FloatIncementDecrement self)
 {
     FloatIncementDecrement_PreConstructor(self);
-}
-
-void FloatIncementDecrement_CopyInputs(FloatIncementDecrement self)
-{
 }
 
 void Main(FloatIncementDecrement self)
@@ -42,17 +34,10 @@ void Main(FloatIncementDecrement self)
     r = _60;
 }
 
-void FloatIncementDecrement_CopyOutputs(FloatIncementDecrement self)
-{
-}
-
 void main()
 {
-    FloatIncementDecrement_InitGlobals();
     FloatIncementDecrement self;
     FloatIncementDecrement_DefaultConstructor(self);
-    FloatIncementDecrement_CopyInputs(self);
     Main(self);
-    FloatIncementDecrement_CopyOutputs(self);
 }
 

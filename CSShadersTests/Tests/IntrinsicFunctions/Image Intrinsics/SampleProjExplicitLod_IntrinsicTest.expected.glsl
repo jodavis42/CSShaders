@@ -8,10 +8,6 @@ struct OpImageSampleProjExplicitLodTest
 uniform sampler2D FloatSampledImage2dVal;
 uniform sampler2D SPIRV_Cross_CombinedFloatImage2dValSamplerVal;
 
-void OpImageSampleProjExplicitLodTest_InitGlobals()
-{
-}
-
 void OpImageSampleProjExplicitLodTest_PreConstructor(OpImageSampleProjExplicitLodTest self)
 {
 }
@@ -19,10 +15,6 @@ void OpImageSampleProjExplicitLodTest_PreConstructor(OpImageSampleProjExplicitLo
 void OpImageSampleProjExplicitLodTest_DefaultConstructor(OpImageSampleProjExplicitLodTest self)
 {
     OpImageSampleProjExplicitLodTest_PreConstructor(self);
-}
-
-void OpImageSampleProjExplicitLodTest_CopyInputs(OpImageSampleProjExplicitLodTest self)
-{
 }
 
 void Main(OpImageSampleProjExplicitLodTest self)
@@ -34,17 +26,10 @@ void Main(OpImageSampleProjExplicitLodTest self)
     vector4Val = textureProjLod(FloatSampledImage2dVal, vector3Val, floatVal);
 }
 
-void OpImageSampleProjExplicitLodTest_CopyOutputs(OpImageSampleProjExplicitLodTest self)
-{
-}
-
 void main()
 {
-    OpImageSampleProjExplicitLodTest_InitGlobals();
     OpImageSampleProjExplicitLodTest self;
     OpImageSampleProjExplicitLodTest_DefaultConstructor(self);
-    OpImageSampleProjExplicitLodTest_CopyInputs(self);
     Main(self);
-    OpImageSampleProjExplicitLodTest_CopyOutputs(self);
 }
 

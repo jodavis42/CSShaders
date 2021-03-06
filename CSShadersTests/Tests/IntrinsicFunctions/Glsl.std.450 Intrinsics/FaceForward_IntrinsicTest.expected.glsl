@@ -5,10 +5,6 @@ struct FaceForwardTest
     int empty_struct_member;
 };
 
-void FaceForwardTest_InitGlobals()
-{
-}
-
 void FaceForwardTest_PreConstructor(FaceForwardTest self)
 {
 }
@@ -16,10 +12,6 @@ void FaceForwardTest_PreConstructor(FaceForwardTest self)
 void FaceForwardTest_DefaultConstructor(FaceForwardTest self)
 {
     FaceForwardTest_PreConstructor(self);
-}
-
-void FaceForwardTest_CopyInputs(FaceForwardTest self)
-{
 }
 
 void Main(FaceForwardTest self)
@@ -32,17 +24,10 @@ void Main(FaceForwardTest self)
     vector4Val = faceforward(vector4Val, vector4Val, vector4Val);
 }
 
-void FaceForwardTest_CopyOutputs(FaceForwardTest self)
-{
-}
-
 void main()
 {
-    FaceForwardTest_InitGlobals();
     FaceForwardTest self;
     FaceForwardTest_DefaultConstructor(self);
-    FaceForwardTest_CopyInputs(self);
     Main(self);
-    FaceForwardTest_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct OpConvertSToFTest
     int empty_struct_member;
 };
 
-void OpConvertSToFTest_InitGlobals()
-{
-}
-
 void OpConvertSToFTest_PreConstructor(OpConvertSToFTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpConvertSToFTest_PreConstructor(OpConvertSToFTest self)
 void OpConvertSToFTest_DefaultConstructor(OpConvertSToFTest self)
 {
     OpConvertSToFTest_PreConstructor(self);
-}
-
-void OpConvertSToFTest_CopyInputs(OpConvertSToFTest self)
-{
 }
 
 void Main(OpConvertSToFTest self)
@@ -38,17 +30,10 @@ void Main(OpConvertSToFTest self)
     vector4Val = vec4(integer4Val);
 }
 
-void OpConvertSToFTest_CopyOutputs(OpConvertSToFTest self)
-{
-}
-
 void main()
 {
-    OpConvertSToFTest_InitGlobals();
     OpConvertSToFTest self;
     OpConvertSToFTest_DefaultConstructor(self);
-    OpConvertSToFTest_CopyInputs(self);
     Main(self);
-    OpConvertSToFTest_CopyOutputs(self);
 }
 

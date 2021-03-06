@@ -5,10 +5,6 @@ struct VectorPrimitiveImplicitExplicitThisTests
     int empty_struct_member;
 };
 
-void VectorPrimitiveImplicitExplicitThisTests_InitGlobals()
-{
-}
-
 void VectorPrimitiveImplicitExplicitThisTests_PreConstructor(VectorPrimitiveImplicitExplicitThisTests self)
 {
 }
@@ -16,10 +12,6 @@ void VectorPrimitiveImplicitExplicitThisTests_PreConstructor(VectorPrimitiveImpl
 void VectorPrimitiveImplicitExplicitThisTests_DefaultConstructor(VectorPrimitiveImplicitExplicitThisTests self)
 {
     VectorPrimitiveImplicitExplicitThisTests_PreConstructor(self);
-}
-
-void VectorPrimitiveImplicitExplicitThisTests_CopyInputs(VectorPrimitiveImplicitExplicitThisTests self)
-{
 }
 
 float FieldThisExplicit(vec2 self)
@@ -51,17 +43,10 @@ void Main(VectorPrimitiveImplicitExplicitThisTests self)
     vec2 propertyThisImplicit = PropertyThisImplicit(vector0);
 }
 
-void VectorPrimitiveImplicitExplicitThisTests_CopyOutputs(VectorPrimitiveImplicitExplicitThisTests self)
-{
-}
-
 void main()
 {
-    VectorPrimitiveImplicitExplicitThisTests_InitGlobals();
     VectorPrimitiveImplicitExplicitThisTests self;
     VectorPrimitiveImplicitExplicitThisTests_DefaultConstructor(self);
-    VectorPrimitiveImplicitExplicitThisTests_CopyInputs(self);
     Main(self);
-    VectorPrimitiveImplicitExplicitThisTests_CopyOutputs(self);
 }
 

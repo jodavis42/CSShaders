@@ -5,10 +5,6 @@ struct FloorTest
     int empty_struct_member;
 };
 
-void FloorTest_InitGlobals()
-{
-}
-
 void FloorTest_PreConstructor(FloorTest self)
 {
 }
@@ -16,10 +12,6 @@ void FloorTest_PreConstructor(FloorTest self)
 void FloorTest_DefaultConstructor(FloorTest self)
 {
     FloorTest_PreConstructor(self);
-}
-
-void FloorTest_CopyInputs(FloorTest self)
-{
 }
 
 void Main(FloorTest self)
@@ -34,17 +26,10 @@ void Main(FloorTest self)
     vector4Val = floor(vector4Val);
 }
 
-void FloorTest_CopyOutputs(FloorTest self)
-{
-}
-
 void main()
 {
-    FloorTest_InitGlobals();
     FloorTest self;
     FloorTest_DefaultConstructor(self);
-    FloorTest_CopyInputs(self);
     Main(self);
-    FloorTest_CopyOutputs(self);
 }
 

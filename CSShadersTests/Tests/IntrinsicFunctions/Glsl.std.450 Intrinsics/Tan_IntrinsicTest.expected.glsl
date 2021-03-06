@@ -5,10 +5,6 @@ struct TanTest
     int empty_struct_member;
 };
 
-void TanTest_InitGlobals()
-{
-}
-
 void TanTest_PreConstructor(TanTest self)
 {
 }
@@ -16,10 +12,6 @@ void TanTest_PreConstructor(TanTest self)
 void TanTest_DefaultConstructor(TanTest self)
 {
     TanTest_PreConstructor(self);
-}
-
-void TanTest_CopyInputs(TanTest self)
-{
 }
 
 void Main(TanTest self)
@@ -34,17 +26,10 @@ void Main(TanTest self)
     vector4Val = tan(vector4Val);
 }
 
-void TanTest_CopyOutputs(TanTest self)
-{
-}
-
 void main()
 {
-    TanTest_InitGlobals();
     TanTest self;
     TanTest_DefaultConstructor(self);
-    TanTest_CopyInputs(self);
     Main(self);
-    TanTest_CopyOutputs(self);
 }
 

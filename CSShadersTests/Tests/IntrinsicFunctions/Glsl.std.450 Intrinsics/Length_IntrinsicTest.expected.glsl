@@ -5,10 +5,6 @@ struct LengthTest
     int empty_struct_member;
 };
 
-void LengthTest_InitGlobals()
-{
-}
-
 void LengthTest_PreConstructor(LengthTest self)
 {
 }
@@ -16,10 +12,6 @@ void LengthTest_PreConstructor(LengthTest self)
 void LengthTest_DefaultConstructor(LengthTest self)
 {
     LengthTest_PreConstructor(self);
-}
-
-void LengthTest_CopyInputs(LengthTest self)
-{
 }
 
 void Main(LengthTest self)
@@ -33,17 +25,10 @@ void Main(LengthTest self)
     floatVal = length(vector4Val);
 }
 
-void LengthTest_CopyOutputs(LengthTest self)
-{
-}
-
 void main()
 {
-    LengthTest_InitGlobals();
     LengthTest self;
     LengthTest_DefaultConstructor(self);
-    LengthTest_CopyInputs(self);
     Main(self);
-    LengthTest_CopyOutputs(self);
 }
 

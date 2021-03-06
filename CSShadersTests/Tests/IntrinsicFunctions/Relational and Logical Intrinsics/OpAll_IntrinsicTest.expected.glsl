@@ -5,10 +5,6 @@ struct OpAllTest
     int empty_struct_member;
 };
 
-void OpAllTest_InitGlobals()
-{
-}
-
 void OpAllTest_PreConstructor(OpAllTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpAllTest_PreConstructor(OpAllTest self)
 void OpAllTest_DefaultConstructor(OpAllTest self)
 {
     OpAllTest_PreConstructor(self);
-}
-
-void OpAllTest_CopyInputs(OpAllTest self)
-{
 }
 
 void Main(OpAllTest self)
@@ -33,17 +25,10 @@ void Main(OpAllTest self)
     boolVal = all(bool4Val);
 }
 
-void OpAllTest_CopyOutputs(OpAllTest self)
-{
-}
-
 void main()
 {
-    OpAllTest_InitGlobals();
     OpAllTest self;
     OpAllTest_DefaultConstructor(self);
-    OpAllTest_CopyInputs(self);
     Main(self);
-    OpAllTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 88
+; Bound: 71
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,17 +23,12 @@
                OpName %vector4Val "vector4Val"
                OpName %integer2Val "integer2Val"
                OpName %intVal "intVal"
-               OpName %OpImageFetchTest_InitGlobals "OpImageFetchTest_InitGlobals"
-               OpName %OpImageFetchTest_CopyInputs "OpImageFetchTest_CopyInputs"
-               OpName %self_2 "self"
-               OpName %OpImageFetchTest_CopyOutputs "OpImageFetchTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpImageFetchTest_Main_EntryPoint "OpImageFetchTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
                OpName %FloatImage2dVal "FloatImage2dVal"
                OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
                OpName %OpImageFetchTest_Main_EntryPoint "OpImageFetchTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
         %int = OpTypeInt 32 1
@@ -90,27 +85,10 @@
                OpStore %vector4Val %61
                OpReturn
                OpFunctionEnd
-%OpImageFetchTest_InitGlobals = OpFunction %void None %23
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpImageFetchTest_CopyInputs = OpFunction %void None %17
-     %self_2 = OpFunctionParameter %_ptr_Function_OpImageFetchTest
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpImageFetchTest_CopyOutputs = OpFunction %void None %17
-     %self_3 = OpFunctionParameter %_ptr_Function_OpImageFetchTest
-         %76 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpImageFetchTest_Main_EntryPoint = OpFunction %void None %23
-         %80 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpImageFetchTest Function
-         %82 = OpFunctionCall %void %OpImageFetchTest_InitGlobals
-         %83 = OpFunctionCall %void %OpImageFetchTest_DefaultConstructor %self_4
-         %84 = OpFunctionCall %void %OpImageFetchTest_CopyInputs %self_4
-         %85 = OpFunctionCall %void %Main %self_4
-         %86 = OpFunctionCall %void %OpImageFetchTest_CopyOutputs %self_4
+         %66 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpImageFetchTest Function
+         %68 = OpFunctionCall %void %OpImageFetchTest_DefaultConstructor %self_2
+         %69 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

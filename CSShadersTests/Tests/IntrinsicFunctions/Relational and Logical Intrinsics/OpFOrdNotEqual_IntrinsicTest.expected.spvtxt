@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 107
+; Bound: 90
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %vector3Val "vector3Val"
                OpName %bool4Val "bool4Val"
                OpName %vector4Val "vector4Val"
-               OpName %OpFOrdNotEqualTest_InitGlobals "OpFOrdNotEqualTest_InitGlobals"
-               OpName %OpFOrdNotEqualTest_CopyInputs "OpFOrdNotEqualTest_CopyInputs"
+               OpName %OpFOrdNotEqualTest_Main_EntryPoint "OpFOrdNotEqualTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpFOrdNotEqualTest_CopyOutputs "OpFOrdNotEqualTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpFOrdNotEqualTest_Main_EntryPoint "OpFOrdNotEqualTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpFOrdNotEqualTest_Main_EntryPoint "OpFOrdNotEqualTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
@@ -117,27 +112,10 @@
                OpStore %bool4Val %80
                OpReturn
                OpFunctionEnd
-%OpFOrdNotEqualTest_InitGlobals = OpFunction %void None %25
-         %85 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFOrdNotEqualTest_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_OpFOrdNotEqualTest
-         %90 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFOrdNotEqualTest_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_OpFOrdNotEqualTest
-         %95 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpFOrdNotEqualTest_Main_EntryPoint = OpFunction %void None %25
-         %99 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpFOrdNotEqualTest Function
-        %101 = OpFunctionCall %void %OpFOrdNotEqualTest_InitGlobals
-        %102 = OpFunctionCall %void %OpFOrdNotEqualTest_DefaultConstructor %self_4
-        %103 = OpFunctionCall %void %OpFOrdNotEqualTest_CopyInputs %self_4
-        %104 = OpFunctionCall %void %Main %self_4
-        %105 = OpFunctionCall %void %OpFOrdNotEqualTest_CopyOutputs %self_4
+         %85 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpFOrdNotEqualTest Function
+         %87 = OpFunctionCall %void %OpFOrdNotEqualTest_DefaultConstructor %self_2
+         %88 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

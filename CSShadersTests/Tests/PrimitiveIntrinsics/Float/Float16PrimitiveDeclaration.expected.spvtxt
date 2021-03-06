@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 56
+; Bound: 39
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %Main "Main"
                OpName %self_1 "self"
                OpName %float16Val "float16Val"
-               OpName %Float16PrimitiveDeclarationTest_InitGlobals "Float16PrimitiveDeclarationTest_InitGlobals"
-               OpName %Float16PrimitiveDeclarationTest_CopyInputs "Float16PrimitiveDeclarationTest_CopyInputs"
+               OpName %Float16PrimitiveDeclarationTest_Main_EntryPoint "Float16PrimitiveDeclarationTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %Float16PrimitiveDeclarationTest_CopyOutputs "Float16PrimitiveDeclarationTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %Float16PrimitiveDeclarationTest_Main_EntryPoint "Float16PrimitiveDeclarationTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %Float16PrimitiveDeclarationTest_Main_EntryPoint "Float16PrimitiveDeclarationTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
     %Float16 = OpTypeFloat 16
 %Float16PrimitiveDeclarationTest = OpTypeStruct
@@ -55,27 +50,10 @@
                OpStore %float16Val %Float16_0x0p_0
                OpReturn
                OpFunctionEnd
-%Float16PrimitiveDeclarationTest_InitGlobals = OpFunction %void None %11
-         %34 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Float16PrimitiveDeclarationTest_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_Float16PrimitiveDeclarationTest
-         %39 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Float16PrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_Float16PrimitiveDeclarationTest
-         %44 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %Float16PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
-         %48 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_Float16PrimitiveDeclarationTest Function
-         %50 = OpFunctionCall %void %Float16PrimitiveDeclarationTest_InitGlobals
-         %51 = OpFunctionCall %void %Float16PrimitiveDeclarationTest_DefaultConstructor %self_4
-         %52 = OpFunctionCall %void %Float16PrimitiveDeclarationTest_CopyInputs %self_4
-         %53 = OpFunctionCall %void %Main %self_4
-         %54 = OpFunctionCall %void %Float16PrimitiveDeclarationTest_CopyOutputs %self_4
+         %34 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_Float16PrimitiveDeclarationTest Function
+         %36 = OpFunctionCall %void %Float16PrimitiveDeclarationTest_DefaultConstructor %self_2
+         %37 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

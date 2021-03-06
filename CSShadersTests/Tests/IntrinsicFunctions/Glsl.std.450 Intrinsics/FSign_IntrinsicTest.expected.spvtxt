@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 86
+; Bound: 69
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %FSignTest_InitGlobals "FSignTest_InitGlobals"
-               OpName %FSignTest_CopyInputs "FSignTest_CopyInputs"
+               OpName %FSignTest_Main_EntryPoint "FSignTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %FSignTest_CopyOutputs "FSignTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %FSignTest_Main_EntryPoint "FSignTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %FSignTest_Main_EntryPoint "FSignTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
   %FSignTest = OpTypeStruct
@@ -88,27 +83,10 @@
                OpStore %vector4Val %59
                OpReturn
                OpFunctionEnd
-%FSignTest_InitGlobals = OpFunction %void None %20
-         %64 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FSignTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_FSignTest
-         %69 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FSignTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_FSignTest
-         %74 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %FSignTest_Main_EntryPoint = OpFunction %void None %20
-         %78 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_FSignTest Function
-         %80 = OpFunctionCall %void %FSignTest_InitGlobals
-         %81 = OpFunctionCall %void %FSignTest_DefaultConstructor %self_4
-         %82 = OpFunctionCall %void %FSignTest_CopyInputs %self_4
-         %83 = OpFunctionCall %void %Main %self_4
-         %84 = OpFunctionCall %void %FSignTest_CopyOutputs %self_4
+         %64 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_FSignTest Function
+         %66 = OpFunctionCall %void %FSignTest_DefaultConstructor %self_2
+         %67 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 111
+; Bound: 94
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -36,11 +36,6 @@
                OpName %self_4 "self"
                OpName %NestedStructs_EntryPoint "NestedStructs_EntryPoint"
                OpName %self_5 "self"
-               OpName %NestedStructs_InitGlobals "NestedStructs_InitGlobals"
-               OpName %NestedStructs_CopyInputs "NestedStructs_CopyInputs"
-               OpName %self_6 "self"
-               OpName %NestedStructs_CopyOutputs "NestedStructs_CopyOutputs"
-               OpName %self_7 "self"
                OpName %NestedStructs_EntryPoint "NestedStructs_EntryPoint"
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
@@ -127,23 +122,6 @@
 %NestedStructs_EntryPoint = OpFunction %void None %23
          %90 = OpLabel
      %self_5 = OpVariable %_ptr_Function_NestedStructs Function
-         %92 = OpFunctionCall %void %NestedStructs_InitGlobals
-         %94 = OpFunctionCall %void %NestedStructs_DefaultConstructor %self_5
-         %95 = OpFunctionCall %void %NestedStructs_CopyInputs %self_5
-         %97 = OpFunctionCall %void %NestedStructs_CopyOutputs %self_5
-               OpReturn
-               OpFunctionEnd
-%NestedStructs_InitGlobals = OpFunction %void None %23
-        %101 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%NestedStructs_CopyInputs = OpFunction %void None %21
-     %self_6 = OpFunctionParameter %_ptr_Function_NestedStructs
-        %105 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%NestedStructs_CopyOutputs = OpFunction %void None %21
-     %self_7 = OpFunctionParameter %_ptr_Function_NestedStructs
-        %109 = OpLabel
+         %92 = OpFunctionCall %void %NestedStructs_DefaultConstructor %self_5
                OpReturn
                OpFunctionEnd

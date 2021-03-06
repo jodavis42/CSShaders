@@ -5,10 +5,6 @@ struct OpBitwiseOrTest
     int empty_struct_member;
 };
 
-void OpBitwiseOrTest_InitGlobals()
-{
-}
-
 void OpBitwiseOrTest_PreConstructor(OpBitwiseOrTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpBitwiseOrTest_PreConstructor(OpBitwiseOrTest self)
 void OpBitwiseOrTest_DefaultConstructor(OpBitwiseOrTest self)
 {
     OpBitwiseOrTest_PreConstructor(self);
-}
-
-void OpBitwiseOrTest_CopyInputs(OpBitwiseOrTest self)
-{
 }
 
 void Main(OpBitwiseOrTest self)
@@ -34,17 +26,10 @@ void Main(OpBitwiseOrTest self)
     integer4Val |= integer4Val;
 }
 
-void OpBitwiseOrTest_CopyOutputs(OpBitwiseOrTest self)
-{
-}
-
 void main()
 {
-    OpBitwiseOrTest_InitGlobals();
     OpBitwiseOrTest self;
     OpBitwiseOrTest_DefaultConstructor(self);
-    OpBitwiseOrTest_CopyInputs(self);
     Main(self);
-    OpBitwiseOrTest_CopyOutputs(self);
 }
 

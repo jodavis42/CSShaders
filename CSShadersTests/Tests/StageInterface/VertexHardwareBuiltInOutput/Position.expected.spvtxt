@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 68
+; Bound: 57
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -17,15 +17,12 @@
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
-               OpName %Position_InitGlobals "Position_InitGlobals"
-               OpName %Position_CopyInputs "Position_CopyInputs"
-               OpName %self_2 "self"
                OpName %Position_CopyOutputs "Position_CopyOutputs"
+               OpName %self_2 "self"
+               OpName %Position_Main_EntryPoint "Position_Main_EntryPoint"
                OpName %self_3 "self"
                OpName %Position_Main_EntryPoint "Position_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %Position_Main_EntryPoint "Position_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_3 "self"
                OpDecorate %gl_Position BuiltIn Position
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
@@ -35,8 +32,8 @@
 %_ptr_Function_Position = OpTypePointer Function %Position
          %11 = OpTypeFunction %void %_ptr_Function_Position
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-         %13 = OpTypeFunction %void
 %_ptr_Output_Vector4 = OpTypePointer Output %Vector4
+         %14 = OpTypeFunction %void
     %float_1 = OpConstant %float 1
     %float_2 = OpConstant %float 2
     %float_3 = OpConstant %float 3
@@ -62,30 +59,19 @@
                OpStore %38 %37
                OpReturn
                OpFunctionEnd
-%Position_InitGlobals = OpFunction %void None %13
-         %43 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Position_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_Position
-         %48 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %Position_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_Position
-         %53 = OpLabel
-         %54 = OpAccessChain %_ptr_Function_Vector4 %self_3 %uint_0
-         %55 = OpLoad %Vector4 %54
-               OpStore %gl_Position %55
+     %self_2 = OpFunctionParameter %_ptr_Function_Position
+         %44 = OpLabel
+         %45 = OpAccessChain %_ptr_Function_Vector4 %self_2 %uint_0
+         %46 = OpLoad %Vector4 %45
+               OpStore %gl_Position %46
                OpReturn
                OpFunctionEnd
-%Position_Main_EntryPoint = OpFunction %void None %13
-         %60 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_Position Function
-         %62 = OpFunctionCall %void %Position_InitGlobals
-         %63 = OpFunctionCall %void %Position_DefaultConstructor %self_4
-         %64 = OpFunctionCall %void %Position_CopyInputs %self_4
-         %65 = OpFunctionCall %void %Main %self_4
-         %66 = OpFunctionCall %void %Position_CopyOutputs %self_4
+%Position_Main_EntryPoint = OpFunction %void None %14
+         %51 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_Position Function
+         %53 = OpFunctionCall %void %Position_DefaultConstructor %self_3
+         %54 = OpFunctionCall %void %Main %self_3
+         %55 = OpFunctionCall %void %Position_CopyOutputs %self_3
                OpReturn
                OpFunctionEnd

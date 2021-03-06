@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 59
+; Bound: 42
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %Main "Main"
                OpName %self_1 "self"
                OpName %vector0 "vector0"
-               OpName %VectorPrimitiveDeclarationTest_InitGlobals "VectorPrimitiveDeclarationTest_InitGlobals"
-               OpName %VectorPrimitiveDeclarationTest_CopyInputs "VectorPrimitiveDeclarationTest_CopyInputs"
+               OpName %VectorPrimitiveDeclarationTest_Main_EntryPoint "VectorPrimitiveDeclarationTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %VectorPrimitiveDeclarationTest_CopyOutputs "VectorPrimitiveDeclarationTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %VectorPrimitiveDeclarationTest_Main_EntryPoint "VectorPrimitiveDeclarationTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %VectorPrimitiveDeclarationTest_Main_EntryPoint "VectorPrimitiveDeclarationTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -56,27 +51,10 @@
                OpStore %vector0 %32
                OpReturn
                OpFunctionEnd
-%VectorPrimitiveDeclarationTest_InitGlobals = OpFunction %void None %13
-         %37 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%VectorPrimitiveDeclarationTest_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_VectorPrimitiveDeclarationTest
-         %42 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%VectorPrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_VectorPrimitiveDeclarationTest
-         %47 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %VectorPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %13
-         %51 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_VectorPrimitiveDeclarationTest Function
-         %53 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_InitGlobals
-         %54 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_DefaultConstructor %self_4
-         %55 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_CopyInputs %self_4
-         %56 = OpFunctionCall %void %Main %self_4
-         %57 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_CopyOutputs %self_4
+         %37 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_VectorPrimitiveDeclarationTest Function
+         %39 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_DefaultConstructor %self_2
+         %40 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 86
+; Bound: 69
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %AsinhTest_InitGlobals "AsinhTest_InitGlobals"
-               OpName %AsinhTest_CopyInputs "AsinhTest_CopyInputs"
+               OpName %AsinhTest_Main_EntryPoint "AsinhTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %AsinhTest_CopyOutputs "AsinhTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %AsinhTest_Main_EntryPoint "AsinhTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %AsinhTest_Main_EntryPoint "AsinhTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
   %AsinhTest = OpTypeStruct
@@ -88,27 +83,10 @@
                OpStore %vector4Val %59
                OpReturn
                OpFunctionEnd
-%AsinhTest_InitGlobals = OpFunction %void None %20
-         %64 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%AsinhTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_AsinhTest
-         %69 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%AsinhTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_AsinhTest
-         %74 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %AsinhTest_Main_EntryPoint = OpFunction %void None %20
-         %78 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_AsinhTest Function
-         %80 = OpFunctionCall %void %AsinhTest_InitGlobals
-         %81 = OpFunctionCall %void %AsinhTest_DefaultConstructor %self_4
-         %82 = OpFunctionCall %void %AsinhTest_CopyInputs %self_4
-         %83 = OpFunctionCall %void %Main %self_4
-         %84 = OpFunctionCall %void %AsinhTest_CopyOutputs %self_4
+         %64 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_AsinhTest Function
+         %66 = OpFunctionCall %void %AsinhTest_DefaultConstructor %self_2
+         %67 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

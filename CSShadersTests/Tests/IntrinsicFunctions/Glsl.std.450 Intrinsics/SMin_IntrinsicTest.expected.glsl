@@ -5,10 +5,6 @@ struct SMinTest
     int empty_struct_member;
 };
 
-void SMinTest_InitGlobals()
-{
-}
-
 void SMinTest_PreConstructor(SMinTest self)
 {
 }
@@ -16,10 +12,6 @@ void SMinTest_PreConstructor(SMinTest self)
 void SMinTest_DefaultConstructor(SMinTest self)
 {
     SMinTest_PreConstructor(self);
-}
-
-void SMinTest_CopyInputs(SMinTest self)
-{
 }
 
 void Main(SMinTest self)
@@ -34,17 +26,10 @@ void Main(SMinTest self)
     integer4Val = min(integer4Val, integer4Val);
 }
 
-void SMinTest_CopyOutputs(SMinTest self)
-{
-}
-
 void main()
 {
-    SMinTest_InitGlobals();
     SMinTest self;
     SMinTest_DefaultConstructor(self);
-    SMinTest_CopyInputs(self);
     Main(self);
-    SMinTest_CopyOutputs(self);
 }
 

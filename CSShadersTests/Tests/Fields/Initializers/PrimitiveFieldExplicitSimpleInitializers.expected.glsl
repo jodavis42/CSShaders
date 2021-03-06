@@ -8,10 +8,6 @@ struct PrimitiveFieldExplicitSimpleInitializers
     float FloatValue;
 };
 
-void PrimitiveFieldExplicitSimpleInitializers_InitGlobals()
-{
-}
-
 void PrimitiveFieldExplicitSimpleInitializers_PreConstructor(inout PrimitiveFieldExplicitSimpleInitializers self)
 {
     self.BoolValue = true;
@@ -25,25 +21,14 @@ void PrimitiveFieldExplicitSimpleInitializers_DefaultConstructor(inout Primitive
     PrimitiveFieldExplicitSimpleInitializers_PreConstructor(self);
 }
 
-void PrimitiveFieldExplicitSimpleInitializers_CopyInputs(PrimitiveFieldExplicitSimpleInitializers self)
-{
-}
-
 void Main(PrimitiveFieldExplicitSimpleInitializers self)
-{
-}
-
-void PrimitiveFieldExplicitSimpleInitializers_CopyOutputs(PrimitiveFieldExplicitSimpleInitializers self)
 {
 }
 
 void main()
 {
-    PrimitiveFieldExplicitSimpleInitializers_InitGlobals();
     PrimitiveFieldExplicitSimpleInitializers self;
     PrimitiveFieldExplicitSimpleInitializers_DefaultConstructor(self);
-    PrimitiveFieldExplicitSimpleInitializers_CopyInputs(self);
     Main(self);
-    PrimitiveFieldExplicitSimpleInitializers_CopyOutputs(self);
 }
 

@@ -8,10 +8,6 @@ struct OpImageFetchTest
 uniform sampler2D FloatSampledImage2dVal;
 uniform sampler2D SPIRV_Cross_CombinedFloatImage2dValSPIRV_Cross_DummySampler;
 
-void OpImageFetchTest_InitGlobals()
-{
-}
-
 void OpImageFetchTest_PreConstructor(OpImageFetchTest self)
 {
 }
@@ -19,10 +15,6 @@ void OpImageFetchTest_PreConstructor(OpImageFetchTest self)
 void OpImageFetchTest_DefaultConstructor(OpImageFetchTest self)
 {
     OpImageFetchTest_PreConstructor(self);
-}
-
-void OpImageFetchTest_CopyInputs(OpImageFetchTest self)
-{
 }
 
 void Main(OpImageFetchTest self)
@@ -34,17 +26,10 @@ void Main(OpImageFetchTest self)
     vector4Val = texelFetch(FloatSampledImage2dVal, integer2Val, intVal);
 }
 
-void OpImageFetchTest_CopyOutputs(OpImageFetchTest self)
-{
-}
-
 void main()
 {
-    OpImageFetchTest_InitGlobals();
     OpImageFetchTest self;
     OpImageFetchTest_DefaultConstructor(self);
-    OpImageFetchTest_CopyInputs(self);
     Main(self);
-    OpImageFetchTest_CopyOutputs(self);
 }
 

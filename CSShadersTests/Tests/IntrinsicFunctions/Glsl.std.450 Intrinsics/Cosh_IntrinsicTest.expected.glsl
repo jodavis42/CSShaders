@@ -5,10 +5,6 @@ struct CoshTest
     int empty_struct_member;
 };
 
-void CoshTest_InitGlobals()
-{
-}
-
 void CoshTest_PreConstructor(CoshTest self)
 {
 }
@@ -16,10 +12,6 @@ void CoshTest_PreConstructor(CoshTest self)
 void CoshTest_DefaultConstructor(CoshTest self)
 {
     CoshTest_PreConstructor(self);
-}
-
-void CoshTest_CopyInputs(CoshTest self)
-{
 }
 
 void Main(CoshTest self)
@@ -34,17 +26,10 @@ void Main(CoshTest self)
     vector4Val = cosh(vector4Val);
 }
 
-void CoshTest_CopyOutputs(CoshTest self)
-{
-}
-
 void main()
 {
-    CoshTest_InitGlobals();
     CoshTest self;
     CoshTest_DefaultConstructor(self);
-    CoshTest_CopyInputs(self);
     Main(self);
-    CoshTest_CopyOutputs(self);
 }
 

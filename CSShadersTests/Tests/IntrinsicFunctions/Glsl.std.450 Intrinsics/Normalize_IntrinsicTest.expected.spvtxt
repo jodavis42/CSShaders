@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 81
+; Bound: 64
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %NormalizeTest_InitGlobals "NormalizeTest_InitGlobals"
-               OpName %NormalizeTest_CopyInputs "NormalizeTest_CopyInputs"
+               OpName %NormalizeTest_Main_EntryPoint "NormalizeTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %NormalizeTest_CopyOutputs "NormalizeTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %NormalizeTest_Main_EntryPoint "NormalizeTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %NormalizeTest_Main_EntryPoint "NormalizeTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %NormalizeTest = OpTypeStruct
@@ -81,27 +76,10 @@
                OpStore %vector4Val %54
                OpReturn
                OpFunctionEnd
-%NormalizeTest_InitGlobals = OpFunction %void None %20
-         %59 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%NormalizeTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_NormalizeTest
-         %64 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%NormalizeTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_NormalizeTest
-         %69 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %NormalizeTest_Main_EntryPoint = OpFunction %void None %20
-         %73 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_NormalizeTest Function
-         %75 = OpFunctionCall %void %NormalizeTest_InitGlobals
-         %76 = OpFunctionCall %void %NormalizeTest_DefaultConstructor %self_4
-         %77 = OpFunctionCall %void %NormalizeTest_CopyInputs %self_4
-         %78 = OpFunctionCall %void %Main %self_4
-         %79 = OpFunctionCall %void %NormalizeTest_CopyOutputs %self_4
+         %59 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_NormalizeTest Function
+         %61 = OpFunctionCall %void %NormalizeTest_DefaultConstructor %self_2
+         %62 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

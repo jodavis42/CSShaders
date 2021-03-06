@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 99
+; Bound: 82
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %m01 "m01"
                OpName %m10 "m10"
                OpName %m11 "m11"
-               OpName %OpOuterProductTest_InitGlobals "OpOuterProductTest_InitGlobals"
-               OpName %OpOuterProductTest_CopyInputs "OpOuterProductTest_CopyInputs"
+               OpName %OpOuterProductTest_Main_EntryPoint "OpOuterProductTest_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %OpOuterProductTest_CopyOutputs "OpOuterProductTest_CopyOutputs"
-               OpName %self_5 "self"
                OpName %OpOuterProductTest_Main_EntryPoint "OpOuterProductTest_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %OpOuterProductTest_Main_EntryPoint "OpOuterProductTest_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %OpOuterProductTest = OpTypeStruct
@@ -106,27 +101,10 @@
                OpStore %self_3 %72
                OpReturn
                OpFunctionEnd
-%OpOuterProductTest_InitGlobals = OpFunction %void None %19
-         %77 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpOuterProductTest_CopyInputs = OpFunction %void None %9
-     %self_4 = OpFunctionParameter %_ptr_Function_OpOuterProductTest
-         %82 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpOuterProductTest_CopyOutputs = OpFunction %void None %9
-     %self_5 = OpFunctionParameter %_ptr_Function_OpOuterProductTest
-         %87 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpOuterProductTest_Main_EntryPoint = OpFunction %void None %19
-         %91 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_OpOuterProductTest Function
-         %93 = OpFunctionCall %void %OpOuterProductTest_InitGlobals
-         %94 = OpFunctionCall %void %OpOuterProductTest_DefaultConstructor %self_6
-         %95 = OpFunctionCall %void %OpOuterProductTest_CopyInputs %self_6
-         %96 = OpFunctionCall %void %Main %self_6
-         %97 = OpFunctionCall %void %OpOuterProductTest_CopyOutputs %self_6
+         %77 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_OpOuterProductTest Function
+         %79 = OpFunctionCall %void %OpOuterProductTest_DefaultConstructor %self_4
+         %80 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 62
+; Bound: 45
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %Main "Main"
                OpName %self_1 "self"
                OpName %matrix0 "matrix0"
-               OpName %MatrixPrimitiveDeclarationTest_InitGlobals "MatrixPrimitiveDeclarationTest_InitGlobals"
-               OpName %MatrixPrimitiveDeclarationTest_CopyInputs "MatrixPrimitiveDeclarationTest_CopyInputs"
+               OpName %MatrixPrimitiveDeclarationTest_Main_EntryPoint "MatrixPrimitiveDeclarationTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %MatrixPrimitiveDeclarationTest_CopyOutputs "MatrixPrimitiveDeclarationTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %MatrixPrimitiveDeclarationTest_Main_EntryPoint "MatrixPrimitiveDeclarationTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %MatrixPrimitiveDeclarationTest_Main_EntryPoint "MatrixPrimitiveDeclarationTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -59,27 +54,10 @@
                OpStore %matrix0 %35
                OpReturn
                OpFunctionEnd
-%MatrixPrimitiveDeclarationTest_InitGlobals = OpFunction %void None %15
-         %40 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%MatrixPrimitiveDeclarationTest_CopyInputs = OpFunction %void None %13
-     %self_2 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveDeclarationTest
-         %45 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%MatrixPrimitiveDeclarationTest_CopyOutputs = OpFunction %void None %13
-     %self_3 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveDeclarationTest
-         %50 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %MatrixPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %15
-         %54 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_MatrixPrimitiveDeclarationTest Function
-         %56 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_InitGlobals
-         %57 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_DefaultConstructor %self_4
-         %58 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_CopyInputs %self_4
-         %59 = OpFunctionCall %void %Main %self_4
-         %60 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_CopyOutputs %self_4
+         %40 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_MatrixPrimitiveDeclarationTest Function
+         %42 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_DefaultConstructor %self_2
+         %43 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

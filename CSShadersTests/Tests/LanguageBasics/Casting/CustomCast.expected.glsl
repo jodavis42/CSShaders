@@ -16,10 +16,6 @@ struct CustomCast
     int empty_struct_member;
 };
 
-void CustomCast_InitGlobals()
-{
-}
-
 void CustomCast_PreConstructor(CustomCast self)
 {
 }
@@ -27,10 +23,6 @@ void CustomCast_PreConstructor(CustomCast self)
 void CustomCast_DefaultConstructor(CustomCast self)
 {
     CustomCast_PreConstructor(self);
-}
-
-void CustomCast_CopyInputs(CustomCast self)
-{
 }
 
 void MyInt_PreConstructor(inout MyInt self)
@@ -77,17 +69,10 @@ void Main(CustomCast self)
     Int2 i2 = op_Implicit_1(myInt);
 }
 
-void CustomCast_CopyOutputs(CustomCast self)
-{
-}
-
 void main()
 {
-    CustomCast_InitGlobals();
     CustomCast self;
     CustomCast_DefaultConstructor(self);
-    CustomCast_CopyInputs(self);
     Main(self);
-    CustomCast_CopyOutputs(self);
 }
 

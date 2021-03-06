@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 98
+; Bound: 81
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %i "i"
                OpName %r "r"
-               OpName %IntegerCompoundAssignmentOps_InitGlobals "IntegerCompoundAssignmentOps_InitGlobals"
-               OpName %IntegerCompoundAssignmentOps_CopyInputs "IntegerCompoundAssignmentOps_CopyInputs"
+               OpName %IntegerCompoundAssignmentOps_Main_EntryPoint "IntegerCompoundAssignmentOps_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %IntegerCompoundAssignmentOps_CopyOutputs "IntegerCompoundAssignmentOps_CopyOutputs"
-               OpName %self_3 "self"
                OpName %IntegerCompoundAssignmentOps_Main_EntryPoint "IntegerCompoundAssignmentOps_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %IntegerCompoundAssignmentOps_Main_EntryPoint "IntegerCompoundAssignmentOps_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
 %IntegerCompoundAssignmentOps = OpTypeStruct
@@ -96,27 +91,10 @@
                OpStore %r %71
                OpReturn
                OpFunctionEnd
-%IntegerCompoundAssignmentOps_InitGlobals = OpFunction %void None %11
-         %76 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%IntegerCompoundAssignmentOps_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
-         %81 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%IntegerCompoundAssignmentOps_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
-         %86 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %IntegerCompoundAssignmentOps_Main_EntryPoint = OpFunction %void None %11
-         %90 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_IntegerCompoundAssignmentOps Function
-         %92 = OpFunctionCall %void %IntegerCompoundAssignmentOps_InitGlobals
-         %93 = OpFunctionCall %void %IntegerCompoundAssignmentOps_DefaultConstructor %self_4
-         %94 = OpFunctionCall %void %IntegerCompoundAssignmentOps_CopyInputs %self_4
-         %95 = OpFunctionCall %void %Main %self_4
-         %96 = OpFunctionCall %void %IntegerCompoundAssignmentOps_CopyOutputs %self_4
+         %76 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_IntegerCompoundAssignmentOps Function
+         %78 = OpFunctionCall %void %IntegerCompoundAssignmentOps_DefaultConstructor %self_2
+         %79 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

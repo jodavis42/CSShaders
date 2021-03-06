@@ -5,10 +5,6 @@ struct OpAnyTest
     int empty_struct_member;
 };
 
-void OpAnyTest_InitGlobals()
-{
-}
-
 void OpAnyTest_PreConstructor(OpAnyTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpAnyTest_PreConstructor(OpAnyTest self)
 void OpAnyTest_DefaultConstructor(OpAnyTest self)
 {
     OpAnyTest_PreConstructor(self);
-}
-
-void OpAnyTest_CopyInputs(OpAnyTest self)
-{
 }
 
 void Main(OpAnyTest self)
@@ -33,17 +25,10 @@ void Main(OpAnyTest self)
     boolVal = any(bool4Val);
 }
 
-void OpAnyTest_CopyOutputs(OpAnyTest self)
-{
-}
-
 void main()
 {
-    OpAnyTest_InitGlobals();
     OpAnyTest self;
     OpAnyTest_DefaultConstructor(self);
-    OpAnyTest_CopyInputs(self);
     Main(self);
-    OpAnyTest_CopyOutputs(self);
 }
 

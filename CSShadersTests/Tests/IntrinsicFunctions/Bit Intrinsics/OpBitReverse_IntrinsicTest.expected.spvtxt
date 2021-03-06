@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 83
+; Bound: 66
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %integer2Val "integer2Val"
                OpName %integer3Val "integer3Val"
                OpName %integer4Val "integer4Val"
-               OpName %OpBitReverseTest_InitGlobals "OpBitReverseTest_InitGlobals"
-               OpName %OpBitReverseTest_CopyInputs "OpBitReverseTest_CopyInputs"
+               OpName %OpBitReverseTest_Main_EntryPoint "OpBitReverseTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpBitReverseTest_CopyOutputs "OpBitReverseTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpBitReverseTest_Main_EntryPoint "OpBitReverseTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpBitReverseTest_Main_EntryPoint "OpBitReverseTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
 %OpBitReverseTest = OpTypeStruct
@@ -86,27 +81,10 @@
                OpStore %integer4Val %56
                OpReturn
                OpFunctionEnd
-%OpBitReverseTest_InitGlobals = OpFunction %void None %17
-         %61 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpBitReverseTest_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_OpBitReverseTest
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpBitReverseTest_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_OpBitReverseTest
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpBitReverseTest_Main_EntryPoint = OpFunction %void None %17
-         %75 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpBitReverseTest Function
-         %77 = OpFunctionCall %void %OpBitReverseTest_InitGlobals
-         %78 = OpFunctionCall %void %OpBitReverseTest_DefaultConstructor %self_4
-         %79 = OpFunctionCall %void %OpBitReverseTest_CopyInputs %self_4
-         %80 = OpFunctionCall %void %Main %self_4
-         %81 = OpFunctionCall %void %OpBitReverseTest_CopyOutputs %self_4
+         %61 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpBitReverseTest Function
+         %63 = OpFunctionCall %void %OpBitReverseTest_DefaultConstructor %self_2
+         %64 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

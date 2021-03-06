@@ -5,10 +5,6 @@ struct OpSGreaterThanEqualTest
     int empty_struct_member;
 };
 
-void OpSGreaterThanEqualTest_InitGlobals()
-{
-}
-
 void OpSGreaterThanEqualTest_PreConstructor(OpSGreaterThanEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSGreaterThanEqualTest_PreConstructor(OpSGreaterThanEqualTest self)
 void OpSGreaterThanEqualTest_DefaultConstructor(OpSGreaterThanEqualTest self)
 {
     OpSGreaterThanEqualTest_PreConstructor(self);
-}
-
-void OpSGreaterThanEqualTest_CopyInputs(OpSGreaterThanEqualTest self)
-{
 }
 
 void Main(OpSGreaterThanEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpSGreaterThanEqualTest self)
     bool4Val = greaterThanEqual(integer4Val, integer4Val);
 }
 
-void OpSGreaterThanEqualTest_CopyOutputs(OpSGreaterThanEqualTest self)
-{
-}
-
 void main()
 {
-    OpSGreaterThanEqualTest_InitGlobals();
     OpSGreaterThanEqualTest self;
     OpSGreaterThanEqualTest_DefaultConstructor(self);
-    OpSGreaterThanEqualTest_CopyInputs(self);
     Main(self);
-    OpSGreaterThanEqualTest_CopyOutputs(self);
 }
 

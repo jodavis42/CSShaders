@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 88
+; Bound: 71
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %integer2Val "integer2Val"
                OpName %integer3Val "integer3Val"
                OpName %integer4Val "integer4Val"
-               OpName %SMaxTest_InitGlobals "SMaxTest_InitGlobals"
-               OpName %SMaxTest_CopyInputs "SMaxTest_CopyInputs"
+               OpName %SMaxTest_Main_EntryPoint "SMaxTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %SMaxTest_CopyOutputs "SMaxTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %SMaxTest_Main_EntryPoint "SMaxTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %SMaxTest_Main_EntryPoint "SMaxTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
    %SMaxTest = OpTypeStruct
@@ -91,27 +86,10 @@
                OpStore %integer4Val %61
                OpReturn
                OpFunctionEnd
-%SMaxTest_InitGlobals = OpFunction %void None %18
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SMaxTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_SMaxTest
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SMaxTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_SMaxTest
-         %76 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %SMaxTest_Main_EntryPoint = OpFunction %void None %18
-         %80 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_SMaxTest Function
-         %82 = OpFunctionCall %void %SMaxTest_InitGlobals
-         %83 = OpFunctionCall %void %SMaxTest_DefaultConstructor %self_4
-         %84 = OpFunctionCall %void %SMaxTest_CopyInputs %self_4
-         %85 = OpFunctionCall %void %Main %self_4
-         %86 = OpFunctionCall %void %SMaxTest_CopyOutputs %self_4
+         %66 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_SMaxTest Function
+         %68 = OpFunctionCall %void %SMaxTest_DefaultConstructor %self_2
+         %69 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

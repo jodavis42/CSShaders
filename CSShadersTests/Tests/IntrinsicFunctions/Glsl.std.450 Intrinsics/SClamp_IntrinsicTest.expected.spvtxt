@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 92
+; Bound: 75
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %integer2Val "integer2Val"
                OpName %integer3Val "integer3Val"
                OpName %integer4Val "integer4Val"
-               OpName %SClampTest_InitGlobals "SClampTest_InitGlobals"
-               OpName %SClampTest_CopyInputs "SClampTest_CopyInputs"
+               OpName %SClampTest_Main_EntryPoint "SClampTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %SClampTest_CopyOutputs "SClampTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %SClampTest_Main_EntryPoint "SClampTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %SClampTest_Main_EntryPoint "SClampTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
  %SClampTest = OpTypeStruct
@@ -95,27 +90,10 @@
                OpStore %integer4Val %65
                OpReturn
                OpFunctionEnd
-%SClampTest_InitGlobals = OpFunction %void None %18
-         %70 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SClampTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_SClampTest
-         %75 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SClampTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_SClampTest
-         %80 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %SClampTest_Main_EntryPoint = OpFunction %void None %18
-         %84 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_SClampTest Function
-         %86 = OpFunctionCall %void %SClampTest_InitGlobals
-         %87 = OpFunctionCall %void %SClampTest_DefaultConstructor %self_4
-         %88 = OpFunctionCall %void %SClampTest_CopyInputs %self_4
-         %89 = OpFunctionCall %void %Main %self_4
-         %90 = OpFunctionCall %void %SClampTest_CopyOutputs %self_4
+         %70 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_SClampTest Function
+         %72 = OpFunctionCall %void %SClampTest_DefaultConstructor %self_2
+         %73 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

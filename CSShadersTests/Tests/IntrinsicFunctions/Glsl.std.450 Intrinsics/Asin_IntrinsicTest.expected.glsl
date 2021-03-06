@@ -5,10 +5,6 @@ struct AsinTest
     int empty_struct_member;
 };
 
-void AsinTest_InitGlobals()
-{
-}
-
 void AsinTest_PreConstructor(AsinTest self)
 {
 }
@@ -16,10 +12,6 @@ void AsinTest_PreConstructor(AsinTest self)
 void AsinTest_DefaultConstructor(AsinTest self)
 {
     AsinTest_PreConstructor(self);
-}
-
-void AsinTest_CopyInputs(AsinTest self)
-{
 }
 
 void Main(AsinTest self)
@@ -34,17 +26,10 @@ void Main(AsinTest self)
     vector4Val = asin(vector4Val);
 }
 
-void AsinTest_CopyOutputs(AsinTest self)
-{
-}
-
 void main()
 {
-    AsinTest_InitGlobals();
     AsinTest self;
     AsinTest_DefaultConstructor(self);
-    AsinTest_CopyInputs(self);
     Main(self);
-    AsinTest_CopyOutputs(self);
 }
 

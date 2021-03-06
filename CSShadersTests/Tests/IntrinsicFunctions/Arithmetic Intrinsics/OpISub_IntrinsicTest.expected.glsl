@@ -5,10 +5,6 @@ struct OpISubTest
     int empty_struct_member;
 };
 
-void OpISubTest_InitGlobals()
-{
-}
-
 void OpISubTest_PreConstructor(OpISubTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpISubTest_PreConstructor(OpISubTest self)
 void OpISubTest_DefaultConstructor(OpISubTest self)
 {
     OpISubTest_PreConstructor(self);
-}
-
-void OpISubTest_CopyInputs(OpISubTest self)
-{
 }
 
 void Main(OpISubTest self)
@@ -34,17 +26,10 @@ void Main(OpISubTest self)
     integer4Val -= integer4Val;
 }
 
-void OpISubTest_CopyOutputs(OpISubTest self)
-{
-}
-
 void main()
 {
-    OpISubTest_InitGlobals();
     OpISubTest self;
     OpISubTest_DefaultConstructor(self);
-    OpISubTest_CopyInputs(self);
     Main(self);
-    OpISubTest_CopyOutputs(self);
 }
 

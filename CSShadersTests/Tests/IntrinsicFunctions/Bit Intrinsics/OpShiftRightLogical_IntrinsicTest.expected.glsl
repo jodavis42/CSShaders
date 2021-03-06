@@ -5,10 +5,6 @@ struct OpShiftRightLogicalTest
     int empty_struct_member;
 };
 
-void OpShiftRightLogicalTest_InitGlobals()
-{
-}
-
 void OpShiftRightLogicalTest_PreConstructor(OpShiftRightLogicalTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpShiftRightLogicalTest_PreConstructor(OpShiftRightLogicalTest self)
 void OpShiftRightLogicalTest_DefaultConstructor(OpShiftRightLogicalTest self)
 {
     OpShiftRightLogicalTest_PreConstructor(self);
-}
-
-void OpShiftRightLogicalTest_CopyInputs(OpShiftRightLogicalTest self)
-{
 }
 
 void Main(OpShiftRightLogicalTest self)
@@ -34,17 +26,10 @@ void Main(OpShiftRightLogicalTest self)
     integer4Val = ivec4(uvec4(integer4Val) >> uvec4(integer4Val));
 }
 
-void OpShiftRightLogicalTest_CopyOutputs(OpShiftRightLogicalTest self)
-{
-}
-
 void main()
 {
-    OpShiftRightLogicalTest_InitGlobals();
     OpShiftRightLogicalTest self;
     OpShiftRightLogicalTest_DefaultConstructor(self);
-    OpShiftRightLogicalTest_CopyInputs(self);
     Main(self);
-    OpShiftRightLogicalTest_CopyOutputs(self);
 }
 

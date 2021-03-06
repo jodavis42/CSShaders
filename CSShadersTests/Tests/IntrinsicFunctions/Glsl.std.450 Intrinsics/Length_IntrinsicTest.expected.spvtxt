@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 83
+; Bound: 66
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %LengthTest_InitGlobals "LengthTest_InitGlobals"
-               OpName %LengthTest_CopyInputs "LengthTest_CopyInputs"
+               OpName %LengthTest_Main_EntryPoint "LengthTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %LengthTest_CopyOutputs "LengthTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %LengthTest_Main_EntryPoint "LengthTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %LengthTest_Main_EntryPoint "LengthTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
  %LengthTest = OpTypeStruct
@@ -85,27 +80,10 @@
                OpStore %floatVal %56
                OpReturn
                OpFunctionEnd
-%LengthTest_InitGlobals = OpFunction %void None %20
-         %61 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%LengthTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_LengthTest
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%LengthTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_LengthTest
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %LengthTest_Main_EntryPoint = OpFunction %void None %20
-         %75 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_LengthTest Function
-         %77 = OpFunctionCall %void %LengthTest_InitGlobals
-         %78 = OpFunctionCall %void %LengthTest_DefaultConstructor %self_4
-         %79 = OpFunctionCall %void %LengthTest_CopyInputs %self_4
-         %80 = OpFunctionCall %void %Main %self_4
-         %81 = OpFunctionCall %void %LengthTest_CopyOutputs %self_4
+         %61 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_LengthTest Function
+         %63 = OpFunctionCall %void %LengthTest_DefaultConstructor %self_2
+         %64 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

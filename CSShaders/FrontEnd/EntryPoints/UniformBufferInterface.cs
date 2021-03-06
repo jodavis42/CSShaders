@@ -40,5 +40,7 @@ namespace CSShaders
       Buffers.Add(tuple, buffer);
       return buffer;
     }
+
+    public int Count { get { return Buffers.Count; } }
   }
 }

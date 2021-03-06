@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 103
+; Bound: 86
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %fieldThisImplicit "fieldThisImplicit"
                OpName %propertyThisExplicit "propertyThisExplicit"
                OpName %propertyThisImplicit "propertyThisImplicit"
-               OpName %VectorPrimitiveImplicitExplicitThisTests_InitGlobals "VectorPrimitiveImplicitExplicitThisTests_InitGlobals"
-               OpName %VectorPrimitiveImplicitExplicitThisTests_CopyInputs "VectorPrimitiveImplicitExplicitThisTests_CopyInputs"
+               OpName %VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint "VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint"
                OpName %self_6 "self"
-               OpName %VectorPrimitiveImplicitExplicitThisTests_CopyOutputs "VectorPrimitiveImplicitExplicitThisTests_CopyOutputs"
-               OpName %self_7 "self"
                OpName %VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint "VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint"
-               OpName %self_8 "self"
-               OpName %VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint "VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint"
-               OpName %self_8 "self"
+               OpName %self_6 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -111,27 +106,10 @@
                OpStore %propertyThisImplicit %76
                OpReturn
                OpFunctionEnd
-%VectorPrimitiveImplicitExplicitThisTests_InitGlobals = OpFunction %void None %17
-         %81 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%VectorPrimitiveImplicitExplicitThisTests_CopyInputs = OpFunction %void None %15
-     %self_6 = OpFunctionParameter %_ptr_Function_VectorPrimitiveImplicitExplicitThisTests
-         %86 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%VectorPrimitiveImplicitExplicitThisTests_CopyOutputs = OpFunction %void None %15
-     %self_7 = OpFunctionParameter %_ptr_Function_VectorPrimitiveImplicitExplicitThisTests
-         %91 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %VectorPrimitiveImplicitExplicitThisTests_Main_EntryPoint = OpFunction %void None %17
-         %95 = OpLabel
-     %self_8 = OpVariable %_ptr_Function_VectorPrimitiveImplicitExplicitThisTests Function
-         %97 = OpFunctionCall %void %VectorPrimitiveImplicitExplicitThisTests_InitGlobals
-         %98 = OpFunctionCall %void %VectorPrimitiveImplicitExplicitThisTests_DefaultConstructor %self_8
-         %99 = OpFunctionCall %void %VectorPrimitiveImplicitExplicitThisTests_CopyInputs %self_8
-        %100 = OpFunctionCall %void %Main %self_8
-        %101 = OpFunctionCall %void %VectorPrimitiveImplicitExplicitThisTests_CopyOutputs %self_8
+         %81 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_VectorPrimitiveImplicitExplicitThisTests Function
+         %83 = OpFunctionCall %void %VectorPrimitiveImplicitExplicitThisTests_DefaultConstructor %self_6
+         %84 = OpFunctionCall %void %Main %self_6
                OpReturn
                OpFunctionEnd

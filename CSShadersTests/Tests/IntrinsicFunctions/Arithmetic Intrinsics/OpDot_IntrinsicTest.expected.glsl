@@ -5,10 +5,6 @@ struct OpDotTest
     int empty_struct_member;
 };
 
-void OpDotTest_InitGlobals()
-{
-}
-
 void OpDotTest_PreConstructor(OpDotTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpDotTest_PreConstructor(OpDotTest self)
 void OpDotTest_DefaultConstructor(OpDotTest self)
 {
     OpDotTest_PreConstructor(self);
-}
-
-void OpDotTest_CopyInputs(OpDotTest self)
-{
 }
 
 void Main(OpDotTest self)
@@ -33,17 +25,10 @@ void Main(OpDotTest self)
     floatVal = dot(vector4Val, vector4Val);
 }
 
-void OpDotTest_CopyOutputs(OpDotTest self)
-{
-}
-
 void main()
 {
-    OpDotTest_InitGlobals();
     OpDotTest self;
     OpDotTest_DefaultConstructor(self);
-    OpDotTest_CopyInputs(self);
     Main(self);
-    OpDotTest_CopyOutputs(self);
 }
 

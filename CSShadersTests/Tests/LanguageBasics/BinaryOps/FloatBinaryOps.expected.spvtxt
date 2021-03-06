@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 103
+; Bound: 86
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %f "f"
                OpName %r "r"
                OpName %b "b"
-               OpName %FloatBinaryOps_InitGlobals "FloatBinaryOps_InitGlobals"
-               OpName %FloatBinaryOps_CopyInputs "FloatBinaryOps_CopyInputs"
+               OpName %FloatBinaryOps_Main_EntryPoint "FloatBinaryOps_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %FloatBinaryOps_CopyOutputs "FloatBinaryOps_CopyOutputs"
-               OpName %self_3 "self"
                OpName %FloatBinaryOps_Main_EntryPoint "FloatBinaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %FloatBinaryOps_Main_EntryPoint "FloatBinaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
        %bool = OpTypeBool
@@ -102,27 +97,10 @@
                OpStore %b %76
                OpReturn
                OpFunctionEnd
-%FloatBinaryOps_InitGlobals = OpFunction %void None %13
-         %81 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FloatBinaryOps_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
-         %86 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FloatBinaryOps_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
-         %91 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %FloatBinaryOps_Main_EntryPoint = OpFunction %void None %13
-         %95 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_FloatBinaryOps Function
-         %97 = OpFunctionCall %void %FloatBinaryOps_InitGlobals
-         %98 = OpFunctionCall %void %FloatBinaryOps_DefaultConstructor %self_4
-         %99 = OpFunctionCall %void %FloatBinaryOps_CopyInputs %self_4
-        %100 = OpFunctionCall %void %Main %self_4
-        %101 = OpFunctionCall %void %FloatBinaryOps_CopyOutputs %self_4
+         %81 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_FloatBinaryOps Function
+         %83 = OpFunctionCall %void %FloatBinaryOps_DefaultConstructor %self_2
+         %84 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

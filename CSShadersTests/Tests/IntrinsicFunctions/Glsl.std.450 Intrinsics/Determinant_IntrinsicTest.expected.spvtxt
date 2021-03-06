@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 100
+; Bound: 83
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -31,15 +31,10 @@
                OpName %m01 "m01"
                OpName %m10 "m10"
                OpName %m11 "m11"
-               OpName %DeterminantTest_InitGlobals "DeterminantTest_InitGlobals"
-               OpName %DeterminantTest_CopyInputs "DeterminantTest_CopyInputs"
+               OpName %DeterminantTest_Main_EntryPoint "DeterminantTest_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %DeterminantTest_CopyOutputs "DeterminantTest_CopyOutputs"
-               OpName %self_5 "self"
                OpName %DeterminantTest_Main_EntryPoint "DeterminantTest_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %DeterminantTest_Main_EntryPoint "DeterminantTest_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %DeterminantTest = OpTypeStruct
@@ -107,27 +102,10 @@
                OpStore %self_3 %73
                OpReturn
                OpFunctionEnd
-%DeterminantTest_InitGlobals = OpFunction %void None %22
-         %78 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DeterminantTest_CopyInputs = OpFunction %void None %10
-     %self_4 = OpFunctionParameter %_ptr_Function_DeterminantTest
-         %83 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%DeterminantTest_CopyOutputs = OpFunction %void None %10
-     %self_5 = OpFunctionParameter %_ptr_Function_DeterminantTest
-         %88 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %DeterminantTest_Main_EntryPoint = OpFunction %void None %22
-         %92 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_DeterminantTest Function
-         %94 = OpFunctionCall %void %DeterminantTest_InitGlobals
-         %95 = OpFunctionCall %void %DeterminantTest_DefaultConstructor %self_6
-         %96 = OpFunctionCall %void %DeterminantTest_CopyInputs %self_6
-         %97 = OpFunctionCall %void %Main %self_6
-         %98 = OpFunctionCall %void %DeterminantTest_CopyOutputs %self_6
+         %78 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_DeterminantTest Function
+         %80 = OpFunctionCall %void %DeterminantTest_DefaultConstructor %self_4
+         %81 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

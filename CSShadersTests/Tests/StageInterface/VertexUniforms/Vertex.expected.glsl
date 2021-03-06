@@ -22,10 +22,6 @@ layout(std140) uniform Vertex_MaterialBuffer_0_0
     TestStruct TestStruct;
 } Vertex_MaterialBuffer_0_0_Instance;
 
-void Vertex_InitGlobals()
-{
-}
-
 void TestStruct_PreConstructor(inout TestStruct self)
 {
     self.Value = 0.0;
@@ -62,17 +58,11 @@ void Main(Vertex self)
 {
 }
 
-void Vertex_CopyOutputs(Vertex self)
-{
-}
-
 void main()
 {
-    Vertex_InitGlobals();
     Vertex self;
     Vertex_DefaultConstructor(self);
     Vertex_CopyInputs(self);
     Main(self);
-    Vertex_CopyOutputs(self);
 }
 

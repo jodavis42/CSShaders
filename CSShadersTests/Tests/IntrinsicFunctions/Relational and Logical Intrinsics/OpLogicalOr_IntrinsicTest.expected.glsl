@@ -5,10 +5,6 @@ struct OpLogicalOrTest
     int empty_struct_member;
 };
 
-void OpLogicalOrTest_InitGlobals()
-{
-}
-
 void OpLogicalOrTest_PreConstructor(OpLogicalOrTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpLogicalOrTest_PreConstructor(OpLogicalOrTest self)
 void OpLogicalOrTest_DefaultConstructor(OpLogicalOrTest self)
 {
     OpLogicalOrTest_PreConstructor(self);
-}
-
-void OpLogicalOrTest_CopyInputs(OpLogicalOrTest self)
-{
 }
 
 void Main(OpLogicalOrTest self)
@@ -34,17 +26,10 @@ void Main(OpLogicalOrTest self)
     bool4Val = bvec4(bool4Val.x || bool4Val.x, bool4Val.y || bool4Val.y, bool4Val.z || bool4Val.z, bool4Val.w || bool4Val.w);
 }
 
-void OpLogicalOrTest_CopyOutputs(OpLogicalOrTest self)
-{
-}
-
 void main()
 {
-    OpLogicalOrTest_InitGlobals();
     OpLogicalOrTest self;
     OpLogicalOrTest_DefaultConstructor(self);
-    OpLogicalOrTest_CopyInputs(self);
     Main(self);
-    OpLogicalOrTest_CopyOutputs(self);
 }
 

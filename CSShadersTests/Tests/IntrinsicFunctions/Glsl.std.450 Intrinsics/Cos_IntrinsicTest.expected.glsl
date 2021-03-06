@@ -5,10 +5,6 @@ struct CosTest
     int empty_struct_member;
 };
 
-void CosTest_InitGlobals()
-{
-}
-
 void CosTest_PreConstructor(CosTest self)
 {
 }
@@ -16,10 +12,6 @@ void CosTest_PreConstructor(CosTest self)
 void CosTest_DefaultConstructor(CosTest self)
 {
     CosTest_PreConstructor(self);
-}
-
-void CosTest_CopyInputs(CosTest self)
-{
 }
 
 void Main(CosTest self)
@@ -34,17 +26,10 @@ void Main(CosTest self)
     vector4Val = cos(vector4Val);
 }
 
-void CosTest_CopyOutputs(CosTest self)
-{
-}
-
 void main()
 {
-    CosTest_InitGlobals();
     CosTest self;
     CosTest_DefaultConstructor(self);
-    CosTest_CopyInputs(self);
     Main(self);
-    CosTest_CopyOutputs(self);
 }
 

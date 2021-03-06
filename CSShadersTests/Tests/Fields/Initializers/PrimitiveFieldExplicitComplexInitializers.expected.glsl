@@ -13,10 +13,6 @@ struct PrimitiveFieldExplicitComplexInitializers
     float FloatValue;
 };
 
-void PrimitiveFieldExplicitComplexInitializers_InitGlobals()
-{
-}
-
 bool GetBool()
 {
     return false;
@@ -50,25 +46,14 @@ void PrimitiveFieldExplicitComplexInitializers_DefaultConstructor(inout Primitiv
     PrimitiveFieldExplicitComplexInitializers_PreConstructor(self);
 }
 
-void PrimitiveFieldExplicitComplexInitializers_CopyInputs(PrimitiveFieldExplicitComplexInitializers self)
-{
-}
-
 void Main(PrimitiveFieldExplicitComplexInitializers self)
-{
-}
-
-void PrimitiveFieldExplicitComplexInitializers_CopyOutputs(PrimitiveFieldExplicitComplexInitializers self)
 {
 }
 
 void main()
 {
-    PrimitiveFieldExplicitComplexInitializers_InitGlobals();
     PrimitiveFieldExplicitComplexInitializers self;
     PrimitiveFieldExplicitComplexInitializers_DefaultConstructor(self);
-    PrimitiveFieldExplicitComplexInitializers_CopyInputs(self);
     Main(self);
-    PrimitiveFieldExplicitComplexInitializers_CopyOutputs(self);
 }
 

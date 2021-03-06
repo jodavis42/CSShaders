@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 64
+; Bound: 47
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %Main "Main"
                OpName %self_2 "self"
                OpName %i "i"
-               OpName %ReturnPrimitive_InitGlobals "ReturnPrimitive_InitGlobals"
-               OpName %ReturnPrimitive_CopyInputs "ReturnPrimitive_CopyInputs"
+               OpName %ReturnPrimitive_Main_EntryPoint "ReturnPrimitive_Main_EntryPoint"
                OpName %self_3 "self"
-               OpName %ReturnPrimitive_CopyOutputs "ReturnPrimitive_CopyOutputs"
-               OpName %self_4 "self"
                OpName %ReturnPrimitive_Main_EntryPoint "ReturnPrimitive_Main_EntryPoint"
-               OpName %self_5 "self"
-               OpName %ReturnPrimitive_Main_EntryPoint "ReturnPrimitive_Main_EntryPoint"
-               OpName %self_5 "self"
+               OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
 %ReturnPrimitive = OpTypeStruct
@@ -62,27 +57,10 @@
                OpStore %i %37
                OpReturn
                OpFunctionEnd
-%ReturnPrimitive_InitGlobals = OpFunction %void None %13
-         %42 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%ReturnPrimitive_CopyInputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
-         %47 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%ReturnPrimitive_CopyOutputs = OpFunction %void None %9
-     %self_4 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
-         %52 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %ReturnPrimitive_Main_EntryPoint = OpFunction %void None %13
-         %56 = OpLabel
-     %self_5 = OpVariable %_ptr_Function_ReturnPrimitive Function
-         %58 = OpFunctionCall %void %ReturnPrimitive_InitGlobals
-         %59 = OpFunctionCall %void %ReturnPrimitive_DefaultConstructor %self_5
-         %60 = OpFunctionCall %void %ReturnPrimitive_CopyInputs %self_5
-         %61 = OpFunctionCall %void %Main %self_5
-         %62 = OpFunctionCall %void %ReturnPrimitive_CopyOutputs %self_5
+         %42 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_ReturnPrimitive Function
+         %44 = OpFunctionCall %void %ReturnPrimitive_DefaultConstructor %self_3
+         %45 = OpFunctionCall %void %Main %self_3
                OpReturn
                OpFunctionEnd

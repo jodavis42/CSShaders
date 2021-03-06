@@ -5,10 +5,6 @@ struct OpFOrdEqualTest
     int empty_struct_member;
 };
 
-void OpFOrdEqualTest_InitGlobals()
-{
-}
-
 void OpFOrdEqualTest_PreConstructor(OpFOrdEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFOrdEqualTest_PreConstructor(OpFOrdEqualTest self)
 void OpFOrdEqualTest_DefaultConstructor(OpFOrdEqualTest self)
 {
     OpFOrdEqualTest_PreConstructor(self);
-}
-
-void OpFOrdEqualTest_CopyInputs(OpFOrdEqualTest self)
-{
 }
 
 void Main(OpFOrdEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpFOrdEqualTest self)
     bool4Val = equal(vector4Val, vector4Val);
 }
 
-void OpFOrdEqualTest_CopyOutputs(OpFOrdEqualTest self)
-{
-}
-
 void main()
 {
-    OpFOrdEqualTest_InitGlobals();
     OpFOrdEqualTest self;
     OpFOrdEqualTest_DefaultConstructor(self);
-    OpFOrdEqualTest_CopyInputs(self);
     Main(self);
-    OpFOrdEqualTest_CopyOutputs(self);
 }
 

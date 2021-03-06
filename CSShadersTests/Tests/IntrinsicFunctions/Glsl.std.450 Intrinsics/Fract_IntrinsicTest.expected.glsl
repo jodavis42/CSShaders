@@ -5,10 +5,6 @@ struct FractTest
     int empty_struct_member;
 };
 
-void FractTest_InitGlobals()
-{
-}
-
 void FractTest_PreConstructor(FractTest self)
 {
 }
@@ -16,10 +12,6 @@ void FractTest_PreConstructor(FractTest self)
 void FractTest_DefaultConstructor(FractTest self)
 {
     FractTest_PreConstructor(self);
-}
-
-void FractTest_CopyInputs(FractTest self)
-{
 }
 
 void Main(FractTest self)
@@ -34,17 +26,10 @@ void Main(FractTest self)
     vector4Val = fract(vector4Val);
 }
 
-void FractTest_CopyOutputs(FractTest self)
-{
-}
-
 void main()
 {
-    FractTest_InitGlobals();
     FractTest self;
     FractTest_DefaultConstructor(self);
-    FractTest_CopyInputs(self);
     Main(self);
-    FractTest_CopyOutputs(self);
 }
 

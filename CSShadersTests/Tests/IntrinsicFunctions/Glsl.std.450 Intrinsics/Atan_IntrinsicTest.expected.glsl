@@ -5,10 +5,6 @@ struct AtanTest
     int empty_struct_member;
 };
 
-void AtanTest_InitGlobals()
-{
-}
-
 void AtanTest_PreConstructor(AtanTest self)
 {
 }
@@ -16,10 +12,6 @@ void AtanTest_PreConstructor(AtanTest self)
 void AtanTest_DefaultConstructor(AtanTest self)
 {
     AtanTest_PreConstructor(self);
-}
-
-void AtanTest_CopyInputs(AtanTest self)
-{
 }
 
 void Main(AtanTest self)
@@ -34,17 +26,10 @@ void Main(AtanTest self)
     vector4Val = atan(vector4Val);
 }
 
-void AtanTest_CopyOutputs(AtanTest self)
-{
-}
-
 void main()
 {
-    AtanTest_InitGlobals();
     AtanTest self;
     AtanTest_DefaultConstructor(self);
-    AtanTest_CopyInputs(self);
     Main(self);
-    AtanTest_CopyOutputs(self);
 }
 

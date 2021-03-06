@@ -5,10 +5,6 @@ struct StepTest
     int empty_struct_member;
 };
 
-void StepTest_InitGlobals()
-{
-}
-
 void StepTest_PreConstructor(StepTest self)
 {
 }
@@ -16,10 +12,6 @@ void StepTest_PreConstructor(StepTest self)
 void StepTest_DefaultConstructor(StepTest self)
 {
     StepTest_PreConstructor(self);
-}
-
-void StepTest_CopyInputs(StepTest self)
-{
 }
 
 void Main(StepTest self)
@@ -34,17 +26,10 @@ void Main(StepTest self)
     vector4Val = step(vector4Val, vector4Val);
 }
 
-void StepTest_CopyOutputs(StepTest self)
-{
-}
-
 void main()
 {
-    StepTest_InitGlobals();
     StepTest self;
     StepTest_DefaultConstructor(self);
-    StepTest_CopyInputs(self);
     Main(self);
-    StepTest_CopyOutputs(self);
 }
 

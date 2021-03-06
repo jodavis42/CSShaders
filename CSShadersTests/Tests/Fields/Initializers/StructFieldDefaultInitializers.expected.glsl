@@ -10,10 +10,6 @@ struct StructFieldDefaultInitializers
     SubStruct SubStruct;
 };
 
-void StructFieldDefaultInitializers_InitGlobals()
-{
-}
-
 void SubStruct_PreConstructor(inout SubStruct self)
 {
     self.Value = 0;
@@ -36,25 +32,14 @@ void StructFieldDefaultInitializers_DefaultConstructor(inout StructFieldDefaultI
     StructFieldDefaultInitializers_PreConstructor(self);
 }
 
-void StructFieldDefaultInitializers_CopyInputs(StructFieldDefaultInitializers self)
-{
-}
-
 void Main(StructFieldDefaultInitializers self)
-{
-}
-
-void StructFieldDefaultInitializers_CopyOutputs(StructFieldDefaultInitializers self)
 {
 }
 
 void main()
 {
-    StructFieldDefaultInitializers_InitGlobals();
     StructFieldDefaultInitializers self;
     StructFieldDefaultInitializers_DefaultConstructor(self);
-    StructFieldDefaultInitializers_CopyInputs(self);
     Main(self);
-    StructFieldDefaultInitializers_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct OpFwidthTest
     int empty_struct_member;
 };
 
-void OpFwidthTest_InitGlobals()
-{
-}
-
 void OpFwidthTest_PreConstructor(OpFwidthTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFwidthTest_PreConstructor(OpFwidthTest self)
 void OpFwidthTest_DefaultConstructor(OpFwidthTest self)
 {
     OpFwidthTest_PreConstructor(self);
-}
-
-void OpFwidthTest_CopyInputs(OpFwidthTest self)
-{
 }
 
 void Main(OpFwidthTest self)
@@ -34,17 +26,10 @@ void Main(OpFwidthTest self)
     vector4Val = fwidth(vector4Val);
 }
 
-void OpFwidthTest_CopyOutputs(OpFwidthTest self)
-{
-}
-
 void main()
 {
-    OpFwidthTest_InitGlobals();
     OpFwidthTest self;
     OpFwidthTest_DefaultConstructor(self);
-    OpFwidthTest_CopyInputs(self);
     Main(self);
-    OpFwidthTest_CopyOutputs(self);
 }
 

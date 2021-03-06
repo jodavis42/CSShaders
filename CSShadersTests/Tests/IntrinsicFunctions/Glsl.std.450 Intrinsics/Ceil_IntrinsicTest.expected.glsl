@@ -5,10 +5,6 @@ struct CeilTest
     int empty_struct_member;
 };
 
-void CeilTest_InitGlobals()
-{
-}
-
 void CeilTest_PreConstructor(CeilTest self)
 {
 }
@@ -16,10 +12,6 @@ void CeilTest_PreConstructor(CeilTest self)
 void CeilTest_DefaultConstructor(CeilTest self)
 {
     CeilTest_PreConstructor(self);
-}
-
-void CeilTest_CopyInputs(CeilTest self)
-{
 }
 
 void Main(CeilTest self)
@@ -34,17 +26,10 @@ void Main(CeilTest self)
     vector4Val = ceil(vector4Val);
 }
 
-void CeilTest_CopyOutputs(CeilTest self)
-{
-}
-
 void main()
 {
-    CeilTest_InitGlobals();
     CeilTest self;
     CeilTest_DefaultConstructor(self);
-    CeilTest_CopyInputs(self);
     Main(self);
-    CeilTest_CopyOutputs(self);
 }
 

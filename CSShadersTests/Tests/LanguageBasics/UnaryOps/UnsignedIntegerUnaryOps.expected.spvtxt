@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 58
+; Bound: 41
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %u "u"
                OpName %r "r"
-               OpName %UnsignedIntegerUnaryOps_InitGlobals "UnsignedIntegerUnaryOps_InitGlobals"
-               OpName %UnsignedIntegerUnaryOps_CopyInputs "UnsignedIntegerUnaryOps_CopyInputs"
+               OpName %UnsignedIntegerUnaryOps_Main_EntryPoint "UnsignedIntegerUnaryOps_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %UnsignedIntegerUnaryOps_CopyOutputs "UnsignedIntegerUnaryOps_CopyOutputs"
-               OpName %self_3 "self"
                OpName %UnsignedIntegerUnaryOps_Main_EntryPoint "UnsignedIntegerUnaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %UnsignedIntegerUnaryOps_Main_EntryPoint "UnsignedIntegerUnaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
 %UnsignedIntegerUnaryOps = OpTypeStruct
        %void = OpTypeVoid
@@ -57,27 +52,10 @@
                OpStore %r %31
                OpReturn
                OpFunctionEnd
-%UnsignedIntegerUnaryOps_InitGlobals = OpFunction %void None %9
-         %36 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%UnsignedIntegerUnaryOps_CopyInputs = OpFunction %void None %7
-     %self_2 = OpFunctionParameter %_ptr_Function_UnsignedIntegerUnaryOps
-         %41 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%UnsignedIntegerUnaryOps_CopyOutputs = OpFunction %void None %7
-     %self_3 = OpFunctionParameter %_ptr_Function_UnsignedIntegerUnaryOps
-         %46 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %UnsignedIntegerUnaryOps_Main_EntryPoint = OpFunction %void None %9
-         %50 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_UnsignedIntegerUnaryOps Function
-         %52 = OpFunctionCall %void %UnsignedIntegerUnaryOps_InitGlobals
-         %53 = OpFunctionCall %void %UnsignedIntegerUnaryOps_DefaultConstructor %self_4
-         %54 = OpFunctionCall %void %UnsignedIntegerUnaryOps_CopyInputs %self_4
-         %55 = OpFunctionCall %void %Main %self_4
-         %56 = OpFunctionCall %void %UnsignedIntegerUnaryOps_CopyOutputs %self_4
+         %36 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_UnsignedIntegerUnaryOps Function
+         %38 = OpFunctionCall %void %UnsignedIntegerUnaryOps_DefaultConstructor %self_2
+         %39 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

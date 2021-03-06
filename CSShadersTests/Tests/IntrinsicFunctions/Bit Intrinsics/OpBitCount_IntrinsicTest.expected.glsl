@@ -5,10 +5,6 @@ struct OpBitCountTest
     int empty_struct_member;
 };
 
-void OpBitCountTest_InitGlobals()
-{
-}
-
 void OpBitCountTest_PreConstructor(OpBitCountTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpBitCountTest_PreConstructor(OpBitCountTest self)
 void OpBitCountTest_DefaultConstructor(OpBitCountTest self)
 {
     OpBitCountTest_PreConstructor(self);
-}
-
-void OpBitCountTest_CopyInputs(OpBitCountTest self)
-{
 }
 
 void Main(OpBitCountTest self)
@@ -34,17 +26,10 @@ void Main(OpBitCountTest self)
     integer4Val = bitCount(integer4Val);
 }
 
-void OpBitCountTest_CopyOutputs(OpBitCountTest self)
-{
-}
-
 void main()
 {
-    OpBitCountTest_InitGlobals();
     OpBitCountTest self;
     OpBitCountTest_DefaultConstructor(self);
-    OpBitCountTest_CopyInputs(self);
     Main(self);
-    OpBitCountTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 115
+; Bound: 98
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -29,15 +29,10 @@
                OpName %self_2 "self"
                OpName %Main "Main"
                OpName %self_3 "self"
-               OpName %PrimitiveFieldExplicitComplexInitializers_InitGlobals "PrimitiveFieldExplicitComplexInitializers_InitGlobals"
-               OpName %PrimitiveFieldExplicitComplexInitializers_CopyInputs "PrimitiveFieldExplicitComplexInitializers_CopyInputs"
+               OpName %PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint "PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %PrimitiveFieldExplicitComplexInitializers_CopyOutputs "PrimitiveFieldExplicitComplexInitializers_CopyOutputs"
-               OpName %self_5 "self"
                OpName %PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint "PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint "PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
        %bool = OpTypeBool
         %int = OpTypeInt 32 1
@@ -120,27 +115,10 @@
          %89 = OpLabel
                OpReturn
                OpFunctionEnd
-%PrimitiveFieldExplicitComplexInitializers_InitGlobals = OpFunction %void None %27
-         %93 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveFieldExplicitComplexInitializers_CopyInputs = OpFunction %void None %25
-     %self_4 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
-         %98 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%PrimitiveFieldExplicitComplexInitializers_CopyOutputs = OpFunction %void None %25
-     %self_5 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
-        %103 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint = OpFunction %void None %27
-        %107 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_PrimitiveFieldExplicitComplexInitializers Function
-        %109 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_InitGlobals
-        %110 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_DefaultConstructor %self_6
-        %111 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_CopyInputs %self_6
-        %112 = OpFunctionCall %void %Main %self_6
-        %113 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_CopyOutputs %self_6
+         %93 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_PrimitiveFieldExplicitComplexInitializers Function
+         %95 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_DefaultConstructor %self_4
+         %96 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

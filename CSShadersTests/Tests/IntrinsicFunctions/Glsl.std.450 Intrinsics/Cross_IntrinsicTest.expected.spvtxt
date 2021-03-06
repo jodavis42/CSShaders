@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 66
+; Bound: 49
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -19,15 +19,10 @@
                OpName %Main "Main"
                OpName %self_1 "self"
                OpName %vector3Val "vector3Val"
-               OpName %CrossTest_InitGlobals "CrossTest_InitGlobals"
-               OpName %CrossTest_CopyInputs "CrossTest_CopyInputs"
+               OpName %CrossTest_Main_EntryPoint "CrossTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %CrossTest_CopyOutputs "CrossTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %CrossTest_Main_EntryPoint "CrossTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %CrossTest_Main_EntryPoint "CrossTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
   %CrossTest = OpTypeStruct
@@ -62,27 +57,10 @@
                OpStore %vector3Val %39
                OpReturn
                OpFunctionEnd
-%CrossTest_InitGlobals = OpFunction %void None %16
-         %44 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%CrossTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_CrossTest
-         %49 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%CrossTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_CrossTest
-         %54 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %CrossTest_Main_EntryPoint = OpFunction %void None %16
-         %58 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_CrossTest Function
-         %60 = OpFunctionCall %void %CrossTest_InitGlobals
-         %61 = OpFunctionCall %void %CrossTest_DefaultConstructor %self_4
-         %62 = OpFunctionCall %void %CrossTest_CopyInputs %self_4
-         %63 = OpFunctionCall %void %Main %self_4
-         %64 = OpFunctionCall %void %CrossTest_CopyOutputs %self_4
+         %44 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_CrossTest Function
+         %46 = OpFunctionCall %void %CrossTest_DefaultConstructor %self_2
+         %47 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

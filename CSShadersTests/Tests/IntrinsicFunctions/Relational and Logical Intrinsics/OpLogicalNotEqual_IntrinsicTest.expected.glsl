@@ -5,10 +5,6 @@ struct OpLogicalNotEqualTest
     int empty_struct_member;
 };
 
-void OpLogicalNotEqualTest_InitGlobals()
-{
-}
-
 void OpLogicalNotEqualTest_PreConstructor(OpLogicalNotEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpLogicalNotEqualTest_PreConstructor(OpLogicalNotEqualTest self)
 void OpLogicalNotEqualTest_DefaultConstructor(OpLogicalNotEqualTest self)
 {
     OpLogicalNotEqualTest_PreConstructor(self);
-}
-
-void OpLogicalNotEqualTest_CopyInputs(OpLogicalNotEqualTest self)
-{
 }
 
 void Main(OpLogicalNotEqualTest self)
@@ -34,17 +26,10 @@ void Main(OpLogicalNotEqualTest self)
     bool4Val = notEqual(bool4Val, bool4Val);
 }
 
-void OpLogicalNotEqualTest_CopyOutputs(OpLogicalNotEqualTest self)
-{
-}
-
 void main()
 {
-    OpLogicalNotEqualTest_InitGlobals();
     OpLogicalNotEqualTest self;
     OpLogicalNotEqualTest_DefaultConstructor(self);
-    OpLogicalNotEqualTest_CopyInputs(self);
     Main(self);
-    OpLogicalNotEqualTest_CopyOutputs(self);
 }
 

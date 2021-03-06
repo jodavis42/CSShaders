@@ -5,10 +5,6 @@ struct OpINotEqualTest
     int empty_struct_member;
 };
 
-void OpINotEqualTest_InitGlobals()
-{
-}
-
 void OpINotEqualTest_PreConstructor(OpINotEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpINotEqualTest_PreConstructor(OpINotEqualTest self)
 void OpINotEqualTest_DefaultConstructor(OpINotEqualTest self)
 {
     OpINotEqualTest_PreConstructor(self);
-}
-
-void OpINotEqualTest_CopyInputs(OpINotEqualTest self)
-{
 }
 
 void Main(OpINotEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpINotEqualTest self)
     bool4Val = notEqual(integer4Val, integer4Val);
 }
 
-void OpINotEqualTest_CopyOutputs(OpINotEqualTest self)
-{
-}
-
 void main()
 {
-    OpINotEqualTest_InitGlobals();
     OpINotEqualTest self;
     OpINotEqualTest_DefaultConstructor(self);
-    OpINotEqualTest_CopyInputs(self);
     Main(self);
-    OpINotEqualTest_CopyOutputs(self);
 }
 

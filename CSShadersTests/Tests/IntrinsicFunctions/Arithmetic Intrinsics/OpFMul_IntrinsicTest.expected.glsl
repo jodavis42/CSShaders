@@ -5,10 +5,6 @@ struct OpFMulTest
     int empty_struct_member;
 };
 
-void OpFMulTest_InitGlobals()
-{
-}
-
 void OpFMulTest_PreConstructor(OpFMulTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFMulTest_PreConstructor(OpFMulTest self)
 void OpFMulTest_DefaultConstructor(OpFMulTest self)
 {
     OpFMulTest_PreConstructor(self);
-}
-
-void OpFMulTest_CopyInputs(OpFMulTest self)
-{
 }
 
 void Main(OpFMulTest self)
@@ -34,17 +26,10 @@ void Main(OpFMulTest self)
     vector4Val *= vector4Val;
 }
 
-void OpFMulTest_CopyOutputs(OpFMulTest self)
-{
-}
-
 void main()
 {
-    OpFMulTest_InitGlobals();
     OpFMulTest self;
     OpFMulTest_DefaultConstructor(self);
-    OpFMulTest_CopyInputs(self);
     Main(self);
-    OpFMulTest_CopyOutputs(self);
 }
 

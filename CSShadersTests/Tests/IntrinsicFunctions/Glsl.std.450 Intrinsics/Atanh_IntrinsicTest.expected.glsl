@@ -5,10 +5,6 @@ struct AtanhTest
     int empty_struct_member;
 };
 
-void AtanhTest_InitGlobals()
-{
-}
-
 void AtanhTest_PreConstructor(AtanhTest self)
 {
 }
@@ -16,10 +12,6 @@ void AtanhTest_PreConstructor(AtanhTest self)
 void AtanhTest_DefaultConstructor(AtanhTest self)
 {
     AtanhTest_PreConstructor(self);
-}
-
-void AtanhTest_CopyInputs(AtanhTest self)
-{
 }
 
 void Main(AtanhTest self)
@@ -34,17 +26,10 @@ void Main(AtanhTest self)
     vector4Val = atanh(vector4Val);
 }
 
-void AtanhTest_CopyOutputs(AtanhTest self)
-{
-}
-
 void main()
 {
-    AtanhTest_InitGlobals();
     AtanhTest self;
     AtanhTest_DefaultConstructor(self);
-    AtanhTest_CopyInputs(self);
     Main(self);
-    AtanhTest_CopyOutputs(self);
 }
 

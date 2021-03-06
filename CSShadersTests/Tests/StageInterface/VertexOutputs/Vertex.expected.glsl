@@ -23,10 +23,6 @@ layout(location = 0) out Vertex_Outputs
 } Out;
 
 
-void Vertex_InitGlobals()
-{
-}
-
 void TestStruct_PreConstructor(inout TestStruct self)
 {
     self.Value = 0.0;
@@ -51,10 +47,6 @@ void Vertex_DefaultConstructor(inout Vertex self)
     Vertex_PreConstructor(self);
 }
 
-void Vertex_CopyInputs(Vertex self)
-{
-}
-
 void Main(Vertex self)
 {
 }
@@ -69,10 +61,8 @@ void Vertex_CopyOutputs(Vertex self)
 
 void main()
 {
-    Vertex_InitGlobals();
     Vertex self;
     Vertex_DefaultConstructor(self);
-    Vertex_CopyInputs(self);
     Main(self);
     Vertex_CopyOutputs(self);
 }

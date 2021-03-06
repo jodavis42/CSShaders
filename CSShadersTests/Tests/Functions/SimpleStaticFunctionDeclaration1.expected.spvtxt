@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 53
+; Bound: 36
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -17,15 +17,10 @@
                OpName %StaticFn "StaticFn"
                OpName %Main "Main"
                OpName %self_1 "self"
-               OpName %SimpleStaticFunctionDeclaration1_InitGlobals "SimpleStaticFunctionDeclaration1_InitGlobals"
-               OpName %SimpleStaticFunctionDeclaration1_CopyInputs "SimpleStaticFunctionDeclaration1_CopyInputs"
+               OpName %SimpleStaticFunctionDeclaration1_Main_EntryPoint "SimpleStaticFunctionDeclaration1_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %SimpleStaticFunctionDeclaration1_CopyOutputs "SimpleStaticFunctionDeclaration1_CopyOutputs"
-               OpName %self_3 "self"
                OpName %SimpleStaticFunctionDeclaration1_Main_EntryPoint "SimpleStaticFunctionDeclaration1_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %SimpleStaticFunctionDeclaration1_Main_EntryPoint "SimpleStaticFunctionDeclaration1_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
 %SimpleStaticFunctionDeclaration1 = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_SimpleStaticFunctionDeclaration1 = OpTypePointer Function %SimpleStaticFunctionDeclaration1
@@ -51,27 +46,10 @@
          %27 = OpLabel
                OpReturn
                OpFunctionEnd
-%SimpleStaticFunctionDeclaration1_InitGlobals = OpFunction %void None %7
-         %31 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SimpleStaticFunctionDeclaration1_CopyInputs = OpFunction %void None %5
-     %self_2 = OpFunctionParameter %_ptr_Function_SimpleStaticFunctionDeclaration1
-         %36 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SimpleStaticFunctionDeclaration1_CopyOutputs = OpFunction %void None %5
-     %self_3 = OpFunctionParameter %_ptr_Function_SimpleStaticFunctionDeclaration1
-         %41 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %SimpleStaticFunctionDeclaration1_Main_EntryPoint = OpFunction %void None %7
-         %45 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_SimpleStaticFunctionDeclaration1 Function
-         %47 = OpFunctionCall %void %SimpleStaticFunctionDeclaration1_InitGlobals
-         %48 = OpFunctionCall %void %SimpleStaticFunctionDeclaration1_DefaultConstructor %self_4
-         %49 = OpFunctionCall %void %SimpleStaticFunctionDeclaration1_CopyInputs %self_4
-         %50 = OpFunctionCall %void %Main %self_4
-         %51 = OpFunctionCall %void %SimpleStaticFunctionDeclaration1_CopyOutputs %self_4
+         %31 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_SimpleStaticFunctionDeclaration1 Function
+         %33 = OpFunctionCall %void %SimpleStaticFunctionDeclaration1_DefaultConstructor %self_2
+         %34 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

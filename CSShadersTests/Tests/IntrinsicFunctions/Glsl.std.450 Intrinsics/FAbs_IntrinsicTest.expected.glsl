@@ -5,10 +5,6 @@ struct FAbsTest
     int empty_struct_member;
 };
 
-void FAbsTest_InitGlobals()
-{
-}
-
 void FAbsTest_PreConstructor(FAbsTest self)
 {
 }
@@ -16,10 +12,6 @@ void FAbsTest_PreConstructor(FAbsTest self)
 void FAbsTest_DefaultConstructor(FAbsTest self)
 {
     FAbsTest_PreConstructor(self);
-}
-
-void FAbsTest_CopyInputs(FAbsTest self)
-{
 }
 
 void Main(FAbsTest self)
@@ -34,17 +26,10 @@ void Main(FAbsTest self)
     vector4Val = abs(vector4Val);
 }
 
-void FAbsTest_CopyOutputs(FAbsTest self)
-{
-}
-
 void main()
 {
-    FAbsTest_InitGlobals();
     FAbsTest self;
     FAbsTest_DefaultConstructor(self);
-    FAbsTest_CopyInputs(self);
     Main(self);
-    FAbsTest_CopyOutputs(self);
 }
 

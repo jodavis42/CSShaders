@@ -5,10 +5,6 @@ struct DegreesTest
     int empty_struct_member;
 };
 
-void DegreesTest_InitGlobals()
-{
-}
-
 void DegreesTest_PreConstructor(DegreesTest self)
 {
 }
@@ -16,10 +12,6 @@ void DegreesTest_PreConstructor(DegreesTest self)
 void DegreesTest_DefaultConstructor(DegreesTest self)
 {
     DegreesTest_PreConstructor(self);
-}
-
-void DegreesTest_CopyInputs(DegreesTest self)
-{
 }
 
 void Main(DegreesTest self)
@@ -34,17 +26,10 @@ void Main(DegreesTest self)
     vector4Val = degrees(vector4Val);
 }
 
-void DegreesTest_CopyOutputs(DegreesTest self)
-{
-}
-
 void main()
 {
-    DegreesTest_InitGlobals();
     DegreesTest self;
     DegreesTest_DefaultConstructor(self);
-    DegreesTest_CopyInputs(self);
     Main(self);
-    DegreesTest_CopyOutputs(self);
 }
 

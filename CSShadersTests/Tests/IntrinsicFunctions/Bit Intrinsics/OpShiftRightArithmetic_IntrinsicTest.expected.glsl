@@ -5,10 +5,6 @@ struct OpShiftRightArithmeticTest
     int empty_struct_member;
 };
 
-void OpShiftRightArithmeticTest_InitGlobals()
-{
-}
-
 void OpShiftRightArithmeticTest_PreConstructor(OpShiftRightArithmeticTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpShiftRightArithmeticTest_PreConstructor(OpShiftRightArithmeticTest self)
 void OpShiftRightArithmeticTest_DefaultConstructor(OpShiftRightArithmeticTest self)
 {
     OpShiftRightArithmeticTest_PreConstructor(self);
-}
-
-void OpShiftRightArithmeticTest_CopyInputs(OpShiftRightArithmeticTest self)
-{
 }
 
 void Main(OpShiftRightArithmeticTest self)
@@ -34,17 +26,10 @@ void Main(OpShiftRightArithmeticTest self)
     integer4Val = integer4Val >> integer4Val;
 }
 
-void OpShiftRightArithmeticTest_CopyOutputs(OpShiftRightArithmeticTest self)
-{
-}
-
 void main()
 {
-    OpShiftRightArithmeticTest_InitGlobals();
     OpShiftRightArithmeticTest self;
     OpShiftRightArithmeticTest_DefaultConstructor(self);
-    OpShiftRightArithmeticTest_CopyInputs(self);
     Main(self);
-    OpShiftRightArithmeticTest_CopyOutputs(self);
 }
 

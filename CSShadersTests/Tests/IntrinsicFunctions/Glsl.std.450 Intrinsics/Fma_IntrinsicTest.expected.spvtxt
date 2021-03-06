@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 94
+; Bound: 77
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %FmaTest_InitGlobals "FmaTest_InitGlobals"
-               OpName %FmaTest_CopyInputs "FmaTest_CopyInputs"
+               OpName %FmaTest_Main_EntryPoint "FmaTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %FmaTest_CopyOutputs "FmaTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %FmaTest_Main_EntryPoint "FmaTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %FmaTest_Main_EntryPoint "FmaTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
     %FmaTest = OpTypeStruct
@@ -96,27 +91,10 @@
                OpStore %vector4Val %67
                OpReturn
                OpFunctionEnd
-%FmaTest_InitGlobals = OpFunction %void None %20
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FmaTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_FmaTest
-         %77 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FmaTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_FmaTest
-         %82 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %FmaTest_Main_EntryPoint = OpFunction %void None %20
-         %86 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_FmaTest Function
-         %88 = OpFunctionCall %void %FmaTest_InitGlobals
-         %89 = OpFunctionCall %void %FmaTest_DefaultConstructor %self_4
-         %90 = OpFunctionCall %void %FmaTest_CopyInputs %self_4
-         %91 = OpFunctionCall %void %Main %self_4
-         %92 = OpFunctionCall %void %FmaTest_CopyOutputs %self_4
+         %72 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_FmaTest Function
+         %74 = OpFunctionCall %void %FmaTest_DefaultConstructor %self_2
+         %75 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

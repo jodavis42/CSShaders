@@ -632,6 +632,13 @@ namespace CSShaders
       return functionCallOp;
     }
 
+    public ShaderOp TryGenerateFunctionCall(ShaderFunction shaderFunction, IShaderIR selfOp, List<IShaderIR> arguments, FrontEndContext context)
+    {
+      if (shaderFunction == null)
+        return null;
+      return GenerateFunctionCall(shaderFunction, selfOp, arguments, context);
+    }
+
     public ShaderOp GenerateCompositeExtract(IShaderIR selfIR, string fieldName, FrontEndContext context)
     {
       var selfOp = selfIR as ShaderOp;

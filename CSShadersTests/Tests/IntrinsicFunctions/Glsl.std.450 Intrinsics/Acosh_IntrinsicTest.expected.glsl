@@ -5,10 +5,6 @@ struct AcoshTest
     int empty_struct_member;
 };
 
-void AcoshTest_InitGlobals()
-{
-}
-
 void AcoshTest_PreConstructor(AcoshTest self)
 {
 }
@@ -16,10 +12,6 @@ void AcoshTest_PreConstructor(AcoshTest self)
 void AcoshTest_DefaultConstructor(AcoshTest self)
 {
     AcoshTest_PreConstructor(self);
-}
-
-void AcoshTest_CopyInputs(AcoshTest self)
-{
 }
 
 void Main(AcoshTest self)
@@ -34,17 +26,10 @@ void Main(AcoshTest self)
     vector4Val = acosh(vector4Val);
 }
 
-void AcoshTest_CopyOutputs(AcoshTest self)
-{
-}
-
 void main()
 {
-    AcoshTest_InitGlobals();
     AcoshTest self;
     AcoshTest_DefaultConstructor(self);
-    AcoshTest_CopyInputs(self);
     Main(self);
-    AcoshTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 55
+; Bound: 38
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %Main "Main"
                OpName %self_2 "self"
-               OpName %NoReturn_InitGlobals "NoReturn_InitGlobals"
-               OpName %NoReturn_CopyInputs "NoReturn_CopyInputs"
+               OpName %NoReturn_Main_EntryPoint "NoReturn_Main_EntryPoint"
                OpName %self_3 "self"
-               OpName %NoReturn_CopyOutputs "NoReturn_CopyOutputs"
-               OpName %self_4 "self"
                OpName %NoReturn_Main_EntryPoint "NoReturn_Main_EntryPoint"
-               OpName %self_5 "self"
-               OpName %NoReturn_Main_EntryPoint "NoReturn_Main_EntryPoint"
-               OpName %self_5 "self"
+               OpName %self_3 "self"
    %NoReturn = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_NoReturn = OpTypePointer Function %NoReturn
@@ -54,27 +49,10 @@
          %29 = OpFunctionCall %void %VoidReturn %self_2
                OpReturn
                OpFunctionEnd
-%NoReturn_InitGlobals = OpFunction %void None %7
-         %33 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%NoReturn_CopyInputs = OpFunction %void None %5
-     %self_3 = OpFunctionParameter %_ptr_Function_NoReturn
-         %38 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%NoReturn_CopyOutputs = OpFunction %void None %5
-     %self_4 = OpFunctionParameter %_ptr_Function_NoReturn
-         %43 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %NoReturn_Main_EntryPoint = OpFunction %void None %7
-         %47 = OpLabel
-     %self_5 = OpVariable %_ptr_Function_NoReturn Function
-         %49 = OpFunctionCall %void %NoReturn_InitGlobals
-         %50 = OpFunctionCall %void %NoReturn_DefaultConstructor %self_5
-         %51 = OpFunctionCall %void %NoReturn_CopyInputs %self_5
-         %52 = OpFunctionCall %void %Main %self_5
-         %53 = OpFunctionCall %void %NoReturn_CopyOutputs %self_5
+         %33 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_NoReturn Function
+         %35 = OpFunctionCall %void %NoReturn_DefaultConstructor %self_3
+         %36 = OpFunctionCall %void %Main %self_3
                OpReturn
                OpFunctionEnd

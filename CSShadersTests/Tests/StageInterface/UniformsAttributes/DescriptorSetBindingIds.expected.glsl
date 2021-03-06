@@ -22,10 +22,6 @@ layout(std140) uniform DescriptorSetBindingIds_MaterialBuffer_1_1
     float Value3;
 } DescriptorSetBindingIds_MaterialBuffer_1_1_Instance;
 
-void DescriptorSetBindingIds_InitGlobals()
-{
-}
-
 void DescriptorSetBindingIds_PreConstructor(inout DescriptorSetBindingIds self)
 {
     self.Value = 1.0;
@@ -49,17 +45,11 @@ void Main(DescriptorSetBindingIds self)
 {
 }
 
-void DescriptorSetBindingIds_CopyOutputs(DescriptorSetBindingIds self)
-{
-}
-
 void main()
 {
-    DescriptorSetBindingIds_InitGlobals();
     DescriptorSetBindingIds self;
     DescriptorSetBindingIds_DefaultConstructor(self);
     DescriptorSetBindingIds_CopyInputs(self);
     Main(self);
-    DescriptorSetBindingIds_CopyOutputs(self);
 }
 

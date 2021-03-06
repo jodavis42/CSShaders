@@ -12,10 +12,6 @@ struct Float16PrimitiveDeclarationTest
     int empty_struct_member;
 };
 
-void Float16PrimitiveDeclarationTest_InitGlobals()
-{
-}
-
 void Float16PrimitiveDeclarationTest_PreConstructor(Float16PrimitiveDeclarationTest self)
 {
 }
@@ -25,26 +21,15 @@ void Float16PrimitiveDeclarationTest_DefaultConstructor(Float16PrimitiveDeclarat
     Float16PrimitiveDeclarationTest_PreConstructor(self);
 }
 
-void Float16PrimitiveDeclarationTest_CopyInputs(Float16PrimitiveDeclarationTest self)
-{
-}
-
 void Main(Float16PrimitiveDeclarationTest self)
 {
     float16_t float16Val = float16_t(0.0);
 }
 
-void Float16PrimitiveDeclarationTest_CopyOutputs(Float16PrimitiveDeclarationTest self)
-{
-}
-
 void main()
 {
-    Float16PrimitiveDeclarationTest_InitGlobals();
     Float16PrimitiveDeclarationTest self;
     Float16PrimitiveDeclarationTest_DefaultConstructor(self);
-    Float16PrimitiveDeclarationTest_CopyInputs(self);
     Main(self);
-    Float16PrimitiveDeclarationTest_CopyOutputs(self);
 }
 

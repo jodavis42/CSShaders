@@ -5,10 +5,6 @@ struct TanhTest
     int empty_struct_member;
 };
 
-void TanhTest_InitGlobals()
-{
-}
-
 void TanhTest_PreConstructor(TanhTest self)
 {
 }
@@ -16,10 +12,6 @@ void TanhTest_PreConstructor(TanhTest self)
 void TanhTest_DefaultConstructor(TanhTest self)
 {
     TanhTest_PreConstructor(self);
-}
-
-void TanhTest_CopyInputs(TanhTest self)
-{
 }
 
 void Main(TanhTest self)
@@ -34,17 +26,10 @@ void Main(TanhTest self)
     vector4Val = tanh(vector4Val);
 }
 
-void TanhTest_CopyOutputs(TanhTest self)
-{
-}
-
 void main()
 {
-    TanhTest_InitGlobals();
     TanhTest self;
     TanhTest_DefaultConstructor(self);
-    TanhTest_CopyInputs(self);
     Main(self);
-    TanhTest_CopyOutputs(self);
 }
 

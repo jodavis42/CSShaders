@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 171
+; Bound: 154
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -37,15 +37,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %OpSelectTest_InitGlobals "OpSelectTest_InitGlobals"
-               OpName %OpSelectTest_CopyInputs "OpSelectTest_CopyInputs"
+               OpName %OpSelectTest_Main_EntryPoint "OpSelectTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpSelectTest_CopyOutputs "OpSelectTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpSelectTest_Main_EntryPoint "OpSelectTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpSelectTest_Main_EntryPoint "OpSelectTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
@@ -188,27 +183,10 @@
                OpStore %vector4Val %144
                OpReturn
                OpFunctionEnd
-%OpSelectTest_InitGlobals = OpFunction %void None %33
-        %149 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpSelectTest_CopyInputs = OpFunction %void None %13
-     %self_2 = OpFunctionParameter %_ptr_Function_OpSelectTest
-        %154 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpSelectTest_CopyOutputs = OpFunction %void None %13
-     %self_3 = OpFunctionParameter %_ptr_Function_OpSelectTest
-        %159 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpSelectTest_Main_EntryPoint = OpFunction %void None %33
-        %163 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpSelectTest Function
-        %165 = OpFunctionCall %void %OpSelectTest_InitGlobals
-        %166 = OpFunctionCall %void %OpSelectTest_DefaultConstructor %self_4
-        %167 = OpFunctionCall %void %OpSelectTest_CopyInputs %self_4
-        %168 = OpFunctionCall %void %Main %self_4
-        %169 = OpFunctionCall %void %OpSelectTest_CopyOutputs %self_4
+        %149 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpSelectTest Function
+        %151 = OpFunctionCall %void %OpSelectTest_DefaultConstructor %self_2
+        %152 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

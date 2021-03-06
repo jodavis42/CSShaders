@@ -5,10 +5,6 @@ struct OpFOrdLessThanEqualTest
     int empty_struct_member;
 };
 
-void OpFOrdLessThanEqualTest_InitGlobals()
-{
-}
-
 void OpFOrdLessThanEqualTest_PreConstructor(OpFOrdLessThanEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFOrdLessThanEqualTest_PreConstructor(OpFOrdLessThanEqualTest self)
 void OpFOrdLessThanEqualTest_DefaultConstructor(OpFOrdLessThanEqualTest self)
 {
     OpFOrdLessThanEqualTest_PreConstructor(self);
-}
-
-void OpFOrdLessThanEqualTest_CopyInputs(OpFOrdLessThanEqualTest self)
-{
 }
 
 void Main(OpFOrdLessThanEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpFOrdLessThanEqualTest self)
     bool4Val = lessThanEqual(vector4Val, vector4Val);
 }
 
-void OpFOrdLessThanEqualTest_CopyOutputs(OpFOrdLessThanEqualTest self)
-{
-}
-
 void main()
 {
-    OpFOrdLessThanEqualTest_InitGlobals();
     OpFOrdLessThanEqualTest self;
     OpFOrdLessThanEqualTest_DefaultConstructor(self);
-    OpFOrdLessThanEqualTest_CopyInputs(self);
     Main(self);
-    OpFOrdLessThanEqualTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 60
+; Bound: 43
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_1 "self"
                OpName %f "f"
                OpName %r "r"
-               OpName %FloatUnaryOps_InitGlobals "FloatUnaryOps_InitGlobals"
-               OpName %FloatUnaryOps_CopyInputs "FloatUnaryOps_CopyInputs"
+               OpName %FloatUnaryOps_Main_EntryPoint "FloatUnaryOps_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %FloatUnaryOps_CopyOutputs "FloatUnaryOps_CopyOutputs"
-               OpName %self_3 "self"
                OpName %FloatUnaryOps_Main_EntryPoint "FloatUnaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %FloatUnaryOps_Main_EntryPoint "FloatUnaryOps_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %FloatUnaryOps = OpTypeStruct
@@ -58,27 +53,10 @@
                OpStore %r %33
                OpReturn
                OpFunctionEnd
-%FloatUnaryOps_InitGlobals = OpFunction %void None %11
-         %38 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FloatUnaryOps_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
-         %43 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%FloatUnaryOps_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
-         %48 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %FloatUnaryOps_Main_EntryPoint = OpFunction %void None %11
-         %52 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_FloatUnaryOps Function
-         %54 = OpFunctionCall %void %FloatUnaryOps_InitGlobals
-         %55 = OpFunctionCall %void %FloatUnaryOps_DefaultConstructor %self_4
-         %56 = OpFunctionCall %void %FloatUnaryOps_CopyInputs %self_4
-         %57 = OpFunctionCall %void %Main %self_4
-         %58 = OpFunctionCall %void %FloatUnaryOps_CopyOutputs %self_4
+         %38 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_FloatUnaryOps Function
+         %40 = OpFunctionCall %void %FloatUnaryOps_DefaultConstructor %self_2
+         %41 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

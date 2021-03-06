@@ -23,10 +23,6 @@ layout(location = 0) in Pixel_Inputs
 } In;
 
 
-void Pixel_InitGlobals()
-{
-}
-
 void TestStruct_PreConstructor(inout TestStruct self)
 {
     self.Value = 0.0;
@@ -63,17 +59,11 @@ void Main(Pixel self)
 {
 }
 
-void Pixel_CopyOutputs(Pixel self)
-{
-}
-
 void main()
 {
-    Pixel_InitGlobals();
     Pixel self;
     Pixel_DefaultConstructor(self);
     Pixel_CopyInputs(self);
     Main(self);
-    Pixel_CopyOutputs(self);
 }
 

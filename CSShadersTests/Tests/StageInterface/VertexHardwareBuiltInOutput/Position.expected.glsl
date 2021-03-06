@@ -5,10 +5,6 @@ struct Position
     vec4 PerspectivePosition;
 };
 
-void Position_InitGlobals()
-{
-}
-
 void Position_PreConstructor(Position self)
 {
 }
@@ -16,10 +12,6 @@ void Position_PreConstructor(Position self)
 void Position_DefaultConstructor(Position self)
 {
     Position_PreConstructor(self);
-}
-
-void Position_CopyInputs(Position self)
-{
 }
 
 void Main(inout Position self)
@@ -34,10 +26,8 @@ void Position_CopyOutputs(Position self)
 
 void main()
 {
-    Position_InitGlobals();
     Position self;
     Position_DefaultConstructor(self);
-    Position_CopyInputs(self);
     Main(self);
     Position_CopyOutputs(self);
 }

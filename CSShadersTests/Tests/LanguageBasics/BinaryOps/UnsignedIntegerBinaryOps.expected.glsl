@@ -5,10 +5,6 @@ struct UnsignedIntegerBinaryOps
     int empty_struct_member;
 };
 
-void UnsignedIntegerBinaryOps_InitGlobals()
-{
-}
-
 void UnsignedIntegerBinaryOps_PreConstructor(UnsignedIntegerBinaryOps self)
 {
 }
@@ -16,10 +12,6 @@ void UnsignedIntegerBinaryOps_PreConstructor(UnsignedIntegerBinaryOps self)
 void UnsignedIntegerBinaryOps_DefaultConstructor(UnsignedIntegerBinaryOps self)
 {
     UnsignedIntegerBinaryOps_PreConstructor(self);
-}
-
-void UnsignedIntegerBinaryOps_CopyInputs(UnsignedIntegerBinaryOps self)
-{
 }
 
 void Main(UnsignedIntegerBinaryOps self)
@@ -44,17 +36,10 @@ void Main(UnsignedIntegerBinaryOps self)
     u = uint(int(u) >> 2);
 }
 
-void UnsignedIntegerBinaryOps_CopyOutputs(UnsignedIntegerBinaryOps self)
-{
-}
-
 void main()
 {
-    UnsignedIntegerBinaryOps_InitGlobals();
     UnsignedIntegerBinaryOps self;
     UnsignedIntegerBinaryOps_DefaultConstructor(self);
-    UnsignedIntegerBinaryOps_CopyInputs(self);
     Main(self);
-    UnsignedIntegerBinaryOps_CopyOutputs(self);
 }
 

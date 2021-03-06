@@ -11,10 +11,6 @@ struct DefaultConstructorIntrinsic
     int empty_struct_member;
 };
 
-void DefaultConstructorIntrinsic_InitGlobals()
-{
-}
-
 void DefaultConstructorIntrinsic_PreConstructor(DefaultConstructorIntrinsic self)
 {
 }
@@ -22,10 +18,6 @@ void DefaultConstructorIntrinsic_PreConstructor(DefaultConstructorIntrinsic self
 void DefaultConstructorIntrinsic_DefaultConstructor(DefaultConstructorIntrinsic self)
 {
     DefaultConstructorIntrinsic_PreConstructor(self);
-}
-
-void DefaultConstructorIntrinsic_CopyInputs(DefaultConstructorIntrinsic self)
-{
 }
 
 void MyClass_Constructor(inout MyClass self, int intVal, float floatVal)
@@ -41,17 +33,10 @@ void Main(DefaultConstructorIntrinsic self)
     MyClass myClass = tempMyClass;
 }
 
-void DefaultConstructorIntrinsic_CopyOutputs(DefaultConstructorIntrinsic self)
-{
-}
-
 void main()
 {
-    DefaultConstructorIntrinsic_InitGlobals();
     DefaultConstructorIntrinsic self;
     DefaultConstructorIntrinsic_DefaultConstructor(self);
-    DefaultConstructorIntrinsic_CopyInputs(self);
     Main(self);
-    DefaultConstructorIntrinsic_CopyOutputs(self);
 }
 

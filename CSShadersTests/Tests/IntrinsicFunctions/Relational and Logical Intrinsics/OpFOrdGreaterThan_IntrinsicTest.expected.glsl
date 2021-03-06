@@ -5,10 +5,6 @@ struct OpFOrdGreaterThanTest
     int empty_struct_member;
 };
 
-void OpFOrdGreaterThanTest_InitGlobals()
-{
-}
-
 void OpFOrdGreaterThanTest_PreConstructor(OpFOrdGreaterThanTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFOrdGreaterThanTest_PreConstructor(OpFOrdGreaterThanTest self)
 void OpFOrdGreaterThanTest_DefaultConstructor(OpFOrdGreaterThanTest self)
 {
     OpFOrdGreaterThanTest_PreConstructor(self);
-}
-
-void OpFOrdGreaterThanTest_CopyInputs(OpFOrdGreaterThanTest self)
-{
 }
 
 void Main(OpFOrdGreaterThanTest self)
@@ -38,17 +30,10 @@ void Main(OpFOrdGreaterThanTest self)
     bool4Val = greaterThan(vector4Val, vector4Val);
 }
 
-void OpFOrdGreaterThanTest_CopyOutputs(OpFOrdGreaterThanTest self)
-{
-}
-
 void main()
 {
-    OpFOrdGreaterThanTest_InitGlobals();
     OpFOrdGreaterThanTest self;
     OpFOrdGreaterThanTest_DefaultConstructor(self);
-    OpFOrdGreaterThanTest_CopyInputs(self);
     Main(self);
-    OpFOrdGreaterThanTest_CopyOutputs(self);
 }
 

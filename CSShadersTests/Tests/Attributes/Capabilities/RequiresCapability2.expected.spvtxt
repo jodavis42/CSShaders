@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 49
+; Bound: 32
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -18,15 +18,10 @@
                OpName %self_0 "self"
                OpName %Main "Main"
                OpName %self_1 "self"
-               OpName %RequiresCapability2_InitGlobals "RequiresCapability2_InitGlobals"
-               OpName %RequiresCapability2_CopyInputs "RequiresCapability2_CopyInputs"
+               OpName %RequiresCapability2_Main_EntryPoint "RequiresCapability2_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %RequiresCapability2_CopyOutputs "RequiresCapability2_CopyOutputs"
-               OpName %self_3 "self"
                OpName %RequiresCapability2_Main_EntryPoint "RequiresCapability2_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %RequiresCapability2_Main_EntryPoint "RequiresCapability2_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
 %RequiresCapability2 = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_RequiresCapability2 = OpTypePointer Function %RequiresCapability2
@@ -48,27 +43,10 @@
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%RequiresCapability2_InitGlobals = OpFunction %void None %7
-         %27 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%RequiresCapability2_CopyInputs = OpFunction %void None %5
-     %self_2 = OpFunctionParameter %_ptr_Function_RequiresCapability2
-         %32 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%RequiresCapability2_CopyOutputs = OpFunction %void None %5
-     %self_3 = OpFunctionParameter %_ptr_Function_RequiresCapability2
-         %37 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %RequiresCapability2_Main_EntryPoint = OpFunction %void None %7
-         %41 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_RequiresCapability2 Function
-         %43 = OpFunctionCall %void %RequiresCapability2_InitGlobals
-         %44 = OpFunctionCall %void %RequiresCapability2_DefaultConstructor %self_4
-         %45 = OpFunctionCall %void %RequiresCapability2_CopyInputs %self_4
-         %46 = OpFunctionCall %void %Main %self_4
-         %47 = OpFunctionCall %void %RequiresCapability2_CopyOutputs %self_4
+         %27 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_RequiresCapability2 Function
+         %29 = OpFunctionCall %void %RequiresCapability2_DefaultConstructor %self_2
+         %30 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

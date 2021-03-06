@@ -5,10 +5,6 @@ struct RadiansTest
     int empty_struct_member;
 };
 
-void RadiansTest_InitGlobals()
-{
-}
-
 void RadiansTest_PreConstructor(RadiansTest self)
 {
 }
@@ -16,10 +12,6 @@ void RadiansTest_PreConstructor(RadiansTest self)
 void RadiansTest_DefaultConstructor(RadiansTest self)
 {
     RadiansTest_PreConstructor(self);
-}
-
-void RadiansTest_CopyInputs(RadiansTest self)
-{
 }
 
 void Main(RadiansTest self)
@@ -34,17 +26,10 @@ void Main(RadiansTest self)
     vector4Val = radians(vector4Val);
 }
 
-void RadiansTest_CopyOutputs(RadiansTest self)
-{
-}
-
 void main()
 {
-    RadiansTest_InitGlobals();
     RadiansTest self;
     RadiansTest_DefaultConstructor(self);
-    RadiansTest_CopyInputs(self);
     Main(self);
-    RadiansTest_CopyOutputs(self);
 }
 

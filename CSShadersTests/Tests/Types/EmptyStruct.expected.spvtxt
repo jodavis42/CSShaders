@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 43
+; Bound: 26
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -16,11 +16,6 @@
                OpName %self_0 "self"
                OpName %EmptyStruct_EntryPoint "EmptyStruct_EntryPoint"
                OpName %self_1 "self"
-               OpName %EmptyStruct_InitGlobals "EmptyStruct_InitGlobals"
-               OpName %EmptyStruct_CopyInputs "EmptyStruct_CopyInputs"
-               OpName %self_2 "self"
-               OpName %EmptyStruct_CopyOutputs "EmptyStruct_CopyOutputs"
-               OpName %self_3 "self"
                OpName %EmptyStruct_EntryPoint "EmptyStruct_EntryPoint"
                OpName %self_1 "self"
 %EmptyStruct = OpTypeStruct
@@ -42,23 +37,6 @@
 %EmptyStruct_EntryPoint = OpFunction %void None %7
          %22 = OpLabel
      %self_1 = OpVariable %_ptr_Function_EmptyStruct Function
-         %24 = OpFunctionCall %void %EmptyStruct_InitGlobals
-         %26 = OpFunctionCall %void %EmptyStruct_DefaultConstructor %self_1
-         %27 = OpFunctionCall %void %EmptyStruct_CopyInputs %self_1
-         %29 = OpFunctionCall %void %EmptyStruct_CopyOutputs %self_1
-               OpReturn
-               OpFunctionEnd
-%EmptyStruct_InitGlobals = OpFunction %void None %7
-         %33 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%EmptyStruct_CopyInputs = OpFunction %void None %5
-     %self_2 = OpFunctionParameter %_ptr_Function_EmptyStruct
-         %37 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%EmptyStruct_CopyOutputs = OpFunction %void None %5
-     %self_3 = OpFunctionParameter %_ptr_Function_EmptyStruct
-         %41 = OpLabel
+         %24 = OpFunctionCall %void %EmptyStruct_DefaultConstructor %self_1
                OpReturn
                OpFunctionEnd

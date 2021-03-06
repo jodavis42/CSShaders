@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 107
+; Bound: 90
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %integer3Val "integer3Val"
                OpName %bool4Val "bool4Val"
                OpName %integer4Val "integer4Val"
-               OpName %OpIEqualTest_InitGlobals "OpIEqualTest_InitGlobals"
-               OpName %OpIEqualTest_CopyInputs "OpIEqualTest_CopyInputs"
+               OpName %OpIEqualTest_Main_EntryPoint "OpIEqualTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpIEqualTest_CopyOutputs "OpIEqualTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpIEqualTest_Main_EntryPoint "OpIEqualTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpIEqualTest_Main_EntryPoint "OpIEqualTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %bool = OpTypeBool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
@@ -117,27 +112,10 @@
                OpStore %bool4Val %80
                OpReturn
                OpFunctionEnd
-%OpIEqualTest_InitGlobals = OpFunction %void None %25
-         %85 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpIEqualTest_CopyInputs = OpFunction %void None %11
-     %self_2 = OpFunctionParameter %_ptr_Function_OpIEqualTest
-         %90 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpIEqualTest_CopyOutputs = OpFunction %void None %11
-     %self_3 = OpFunctionParameter %_ptr_Function_OpIEqualTest
-         %95 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpIEqualTest_Main_EntryPoint = OpFunction %void None %25
-         %99 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpIEqualTest Function
-        %101 = OpFunctionCall %void %OpIEqualTest_InitGlobals
-        %102 = OpFunctionCall %void %OpIEqualTest_DefaultConstructor %self_4
-        %103 = OpFunctionCall %void %OpIEqualTest_CopyInputs %self_4
-        %104 = OpFunctionCall %void %Main %self_4
-        %105 = OpFunctionCall %void %OpIEqualTest_CopyOutputs %self_4
+         %85 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpIEqualTest Function
+         %87 = OpFunctionCall %void %OpIEqualTest_DefaultConstructor %self_2
+         %88 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

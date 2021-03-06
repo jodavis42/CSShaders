@@ -5,10 +5,6 @@ struct OpLogicalAndTest
     int empty_struct_member;
 };
 
-void OpLogicalAndTest_InitGlobals()
-{
-}
-
 void OpLogicalAndTest_PreConstructor(OpLogicalAndTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpLogicalAndTest_PreConstructor(OpLogicalAndTest self)
 void OpLogicalAndTest_DefaultConstructor(OpLogicalAndTest self)
 {
     OpLogicalAndTest_PreConstructor(self);
-}
-
-void OpLogicalAndTest_CopyInputs(OpLogicalAndTest self)
-{
 }
 
 void Main(OpLogicalAndTest self)
@@ -34,17 +26,10 @@ void Main(OpLogicalAndTest self)
     bool4Val = bvec4(bool4Val.x && bool4Val.x, bool4Val.y && bool4Val.y, bool4Val.z && bool4Val.z, bool4Val.w && bool4Val.w);
 }
 
-void OpLogicalAndTest_CopyOutputs(OpLogicalAndTest self)
-{
-}
-
 void main()
 {
-    OpLogicalAndTest_InitGlobals();
     OpLogicalAndTest self;
     OpLogicalAndTest_DefaultConstructor(self);
-    OpLogicalAndTest_CopyInputs(self);
     Main(self);
-    OpLogicalAndTest_CopyOutputs(self);
 }
 

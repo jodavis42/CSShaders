@@ -5,10 +5,6 @@ struct OpLogicalEqualTest
     int empty_struct_member;
 };
 
-void OpLogicalEqualTest_InitGlobals()
-{
-}
-
 void OpLogicalEqualTest_PreConstructor(OpLogicalEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpLogicalEqualTest_PreConstructor(OpLogicalEqualTest self)
 void OpLogicalEqualTest_DefaultConstructor(OpLogicalEqualTest self)
 {
     OpLogicalEqualTest_PreConstructor(self);
-}
-
-void OpLogicalEqualTest_CopyInputs(OpLogicalEqualTest self)
-{
 }
 
 void Main(OpLogicalEqualTest self)
@@ -34,17 +26,10 @@ void Main(OpLogicalEqualTest self)
     bool4Val = equal(bool4Val, bool4Val);
 }
 
-void OpLogicalEqualTest_CopyOutputs(OpLogicalEqualTest self)
-{
-}
-
 void main()
 {
-    OpLogicalEqualTest_InitGlobals();
     OpLogicalEqualTest self;
     OpLogicalEqualTest_DefaultConstructor(self);
-    OpLogicalEqualTest_CopyInputs(self);
     Main(self);
-    OpLogicalEqualTest_CopyOutputs(self);
 }
 

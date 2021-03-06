@@ -5,10 +5,6 @@ struct OpConvertFToSTest
     int empty_struct_member;
 };
 
-void OpConvertFToSTest_InitGlobals()
-{
-}
-
 void OpConvertFToSTest_PreConstructor(OpConvertFToSTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpConvertFToSTest_PreConstructor(OpConvertFToSTest self)
 void OpConvertFToSTest_DefaultConstructor(OpConvertFToSTest self)
 {
     OpConvertFToSTest_PreConstructor(self);
-}
-
-void OpConvertFToSTest_CopyInputs(OpConvertFToSTest self)
-{
 }
 
 void Main(OpConvertFToSTest self)
@@ -38,17 +30,10 @@ void Main(OpConvertFToSTest self)
     integer4Val = ivec4(vector4Val);
 }
 
-void OpConvertFToSTest_CopyOutputs(OpConvertFToSTest self)
-{
-}
-
 void main()
 {
-    OpConvertFToSTest_InitGlobals();
     OpConvertFToSTest self;
     OpConvertFToSTest_DefaultConstructor(self);
-    OpConvertFToSTest_CopyInputs(self);
     Main(self);
-    OpConvertFToSTest_CopyOutputs(self);
 }
 

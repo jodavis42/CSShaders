@@ -5,10 +5,6 @@ struct OpSGreaterThanTest
     int empty_struct_member;
 };
 
-void OpSGreaterThanTest_InitGlobals()
-{
-}
-
 void OpSGreaterThanTest_PreConstructor(OpSGreaterThanTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSGreaterThanTest_PreConstructor(OpSGreaterThanTest self)
 void OpSGreaterThanTest_DefaultConstructor(OpSGreaterThanTest self)
 {
     OpSGreaterThanTest_PreConstructor(self);
-}
-
-void OpSGreaterThanTest_CopyInputs(OpSGreaterThanTest self)
-{
 }
 
 void Main(OpSGreaterThanTest self)
@@ -38,17 +30,10 @@ void Main(OpSGreaterThanTest self)
     bool4Val = greaterThan(integer4Val, integer4Val);
 }
 
-void OpSGreaterThanTest_CopyOutputs(OpSGreaterThanTest self)
-{
-}
-
 void main()
 {
-    OpSGreaterThanTest_InitGlobals();
     OpSGreaterThanTest self;
     OpSGreaterThanTest_DefaultConstructor(self);
-    OpSGreaterThanTest_CopyInputs(self);
     Main(self);
-    OpSGreaterThanTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 87
+; Bound: 70
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %OpFRemTest_InitGlobals "OpFRemTest_InitGlobals"
-               OpName %OpFRemTest_CopyInputs "OpFRemTest_CopyInputs"
+               OpName %OpFRemTest_Main_EntryPoint "OpFRemTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpFRemTest_CopyOutputs "OpFRemTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpFRemTest_Main_EntryPoint "OpFRemTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpFRemTest_Main_EntryPoint "OpFRemTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
  %OpFRemTest = OpTypeStruct
@@ -90,27 +85,10 @@
                OpStore %vector4Val %60
                OpReturn
                OpFunctionEnd
-%OpFRemTest_InitGlobals = OpFunction %void None %17
-         %65 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFRemTest_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_OpFRemTest
-         %70 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFRemTest_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_OpFRemTest
-         %75 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpFRemTest_Main_EntryPoint = OpFunction %void None %17
-         %79 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpFRemTest Function
-         %81 = OpFunctionCall %void %OpFRemTest_InitGlobals
-         %82 = OpFunctionCall %void %OpFRemTest_DefaultConstructor %self_4
-         %83 = OpFunctionCall %void %OpFRemTest_CopyInputs %self_4
-         %84 = OpFunctionCall %void %Main %self_4
-         %85 = OpFunctionCall %void %OpFRemTest_CopyOutputs %self_4
+         %65 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpFRemTest Function
+         %67 = OpFunctionCall %void %OpFRemTest_DefaultConstructor %self_2
+         %68 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 86
+; Bound: 69
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,18 +23,13 @@
                OpName %self_1 "self"
                OpName %floatVal "floatVal"
                OpName %vector3Val "vector3Val"
-               OpName %OpImageSampleProjDrefImplicitLodTest_InitGlobals "OpImageSampleProjDrefImplicitLodTest_InitGlobals"
-               OpName %OpImageSampleProjDrefImplicitLodTest_CopyInputs "OpImageSampleProjDrefImplicitLodTest_CopyInputs"
-               OpName %self_2 "self"
-               OpName %OpImageSampleProjDrefImplicitLodTest_CopyOutputs "OpImageSampleProjDrefImplicitLodTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpImageSampleProjDrefImplicitLodTest_Main_EntryPoint "OpImageSampleProjDrefImplicitLodTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
                OpName %FloatImage2dVal "FloatImage2dVal"
                OpName %SamplerVal "SamplerVal"
                OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
                OpName %OpImageSampleProjDrefImplicitLodTest_Main_EntryPoint "OpImageSampleProjDrefImplicitLodTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %FloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
@@ -88,27 +83,10 @@
                OpStore %floatVal %58
                OpReturn
                OpFunctionEnd
-%OpImageSampleProjDrefImplicitLodTest_InitGlobals = OpFunction %void None %22
-         %63 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpImageSampleProjDrefImplicitLodTest_CopyInputs = OpFunction %void None %18
-     %self_2 = OpFunctionParameter %_ptr_Function_OpImageSampleProjDrefImplicitLodTest
-         %68 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpImageSampleProjDrefImplicitLodTest_CopyOutputs = OpFunction %void None %18
-     %self_3 = OpFunctionParameter %_ptr_Function_OpImageSampleProjDrefImplicitLodTest
-         %73 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpImageSampleProjDrefImplicitLodTest_Main_EntryPoint = OpFunction %void None %22
-         %77 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpImageSampleProjDrefImplicitLodTest Function
-         %79 = OpFunctionCall %void %OpImageSampleProjDrefImplicitLodTest_InitGlobals
-         %80 = OpFunctionCall %void %OpImageSampleProjDrefImplicitLodTest_DefaultConstructor %self_4
-         %81 = OpFunctionCall %void %OpImageSampleProjDrefImplicitLodTest_CopyInputs %self_4
-         %82 = OpFunctionCall %void %Main %self_4
-         %83 = OpFunctionCall %void %OpImageSampleProjDrefImplicitLodTest_CopyOutputs %self_4
+         %63 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpImageSampleProjDrefImplicitLodTest Function
+         %65 = OpFunctionCall %void %OpImageSampleProjDrefImplicitLodTest_DefaultConstructor %self_2
+         %66 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

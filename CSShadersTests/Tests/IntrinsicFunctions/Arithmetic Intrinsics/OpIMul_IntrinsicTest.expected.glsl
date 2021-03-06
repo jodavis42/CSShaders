@@ -5,10 +5,6 @@ struct OpIMulTest
     int empty_struct_member;
 };
 
-void OpIMulTest_InitGlobals()
-{
-}
-
 void OpIMulTest_PreConstructor(OpIMulTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpIMulTest_PreConstructor(OpIMulTest self)
 void OpIMulTest_DefaultConstructor(OpIMulTest self)
 {
     OpIMulTest_PreConstructor(self);
-}
-
-void OpIMulTest_CopyInputs(OpIMulTest self)
-{
 }
 
 void Main(OpIMulTest self)
@@ -34,17 +26,10 @@ void Main(OpIMulTest self)
     integer4Val *= integer4Val;
 }
 
-void OpIMulTest_CopyOutputs(OpIMulTest self)
-{
-}
-
 void main()
 {
-    OpIMulTest_InitGlobals();
     OpIMulTest self;
     OpIMulTest_DefaultConstructor(self);
-    OpIMulTest_CopyInputs(self);
     Main(self);
-    OpIMulTest_CopyOutputs(self);
 }
 

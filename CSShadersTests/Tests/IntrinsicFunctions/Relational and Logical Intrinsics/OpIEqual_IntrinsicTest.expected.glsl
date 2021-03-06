@@ -5,10 +5,6 @@ struct OpIEqualTest
     int empty_struct_member;
 };
 
-void OpIEqualTest_InitGlobals()
-{
-}
-
 void OpIEqualTest_PreConstructor(OpIEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpIEqualTest_PreConstructor(OpIEqualTest self)
 void OpIEqualTest_DefaultConstructor(OpIEqualTest self)
 {
     OpIEqualTest_PreConstructor(self);
-}
-
-void OpIEqualTest_CopyInputs(OpIEqualTest self)
-{
 }
 
 void Main(OpIEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpIEqualTest self)
     bool4Val = equal(integer4Val, integer4Val);
 }
 
-void OpIEqualTest_CopyOutputs(OpIEqualTest self)
-{
-}
-
 void main()
 {
-    OpIEqualTest_InitGlobals();
     OpIEqualTest self;
     OpIEqualTest_DefaultConstructor(self);
-    OpIEqualTest_CopyInputs(self);
     Main(self);
-    OpIEqualTest_CopyOutputs(self);
 }
 

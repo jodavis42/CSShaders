@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 83
+; Bound: 66
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %OpFwidthTest_InitGlobals "OpFwidthTest_InitGlobals"
-               OpName %OpFwidthTest_CopyInputs "OpFwidthTest_CopyInputs"
+               OpName %OpFwidthTest_Main_EntryPoint "OpFwidthTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpFwidthTest_CopyOutputs "OpFwidthTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpFwidthTest_Main_EntryPoint "OpFwidthTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpFwidthTest_Main_EntryPoint "OpFwidthTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %OpFwidthTest = OpTypeStruct
@@ -86,27 +81,10 @@
                OpStore %vector4Val %56
                OpReturn
                OpFunctionEnd
-%OpFwidthTest_InitGlobals = OpFunction %void None %17
-         %61 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFwidthTest_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_OpFwidthTest
-         %66 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFwidthTest_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_OpFwidthTest
-         %71 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpFwidthTest_Main_EntryPoint = OpFunction %void None %17
-         %75 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpFwidthTest Function
-         %77 = OpFunctionCall %void %OpFwidthTest_InitGlobals
-         %78 = OpFunctionCall %void %OpFwidthTest_DefaultConstructor %self_4
-         %79 = OpFunctionCall %void %OpFwidthTest_CopyInputs %self_4
-         %80 = OpFunctionCall %void %Main %self_4
-         %81 = OpFunctionCall %void %OpFwidthTest_CopyOutputs %self_4
+         %61 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpFwidthTest Function
+         %63 = OpFunctionCall %void %OpFwidthTest_DefaultConstructor %self_2
+         %64 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

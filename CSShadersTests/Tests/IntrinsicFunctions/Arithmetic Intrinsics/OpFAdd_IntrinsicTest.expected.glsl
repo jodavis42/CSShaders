@@ -5,10 +5,6 @@ struct OpFAddTest
     int empty_struct_member;
 };
 
-void OpFAddTest_InitGlobals()
-{
-}
-
 void OpFAddTest_PreConstructor(OpFAddTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFAddTest_PreConstructor(OpFAddTest self)
 void OpFAddTest_DefaultConstructor(OpFAddTest self)
 {
     OpFAddTest_PreConstructor(self);
-}
-
-void OpFAddTest_CopyInputs(OpFAddTest self)
-{
 }
 
 void Main(OpFAddTest self)
@@ -34,17 +26,10 @@ void Main(OpFAddTest self)
     vector4Val += vector4Val;
 }
 
-void OpFAddTest_CopyOutputs(OpFAddTest self)
-{
-}
-
 void main()
 {
-    OpFAddTest_InitGlobals();
     OpFAddTest self;
     OpFAddTest_DefaultConstructor(self);
-    OpFAddTest_CopyInputs(self);
     Main(self);
-    OpFAddTest_CopyOutputs(self);
 }
 

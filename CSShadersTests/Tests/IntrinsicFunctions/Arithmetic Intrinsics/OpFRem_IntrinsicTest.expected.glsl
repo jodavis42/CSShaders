@@ -5,10 +5,6 @@ struct OpFRemTest
     int empty_struct_member;
 };
 
-void OpFRemTest_InitGlobals()
-{
-}
-
 void OpFRemTest_PreConstructor(OpFRemTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpFRemTest_PreConstructor(OpFRemTest self)
 void OpFRemTest_DefaultConstructor(OpFRemTest self)
 {
     OpFRemTest_PreConstructor(self);
-}
-
-void OpFRemTest_CopyInputs(OpFRemTest self)
-{
 }
 
 void Main(OpFRemTest self)
@@ -34,17 +26,10 @@ void Main(OpFRemTest self)
     vector4Val -= vector4Val * trunc(vector4Val / vector4Val);
 }
 
-void OpFRemTest_CopyOutputs(OpFRemTest self)
-{
-}
-
 void main()
 {
-    OpFRemTest_InitGlobals();
     OpFRemTest self;
     OpFRemTest_DefaultConstructor(self);
-    OpFRemTest_CopyInputs(self);
     Main(self);
-    OpFRemTest_CopyOutputs(self);
 }
 

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 111
+; Bound: 100
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -34,16 +34,13 @@
                OpName %self_2 "self"
                OpName %Main "Main"
                OpName %self_3 "self"
-               OpName %Vertex_InitGlobals "Vertex_InitGlobals"
                OpName %Vertex_CopyInputs "Vertex_CopyInputs"
                OpName %self_4 "self"
-               OpName %Vertex_CopyOutputs "Vertex_CopyOutputs"
-               OpName %self_5 "self"
                OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_5 "self"
                OpName %Vertex_MaterialBuffer_0_0_Instance "Vertex_MaterialBuffer_0_0_Instance"
                OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_5 "self"
                OpDecorate %Vertex_MaterialBuffer_0_0 DescriptorSet 0
                OpDecorate %Vertex_MaterialBuffer_0_0 Binding 0
                OpDecorate %Vertex_MaterialBuffer_0_0 Block
@@ -64,13 +61,13 @@
      %Vertex = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
 %_ptr_Function_Vertex = OpTypePointer Function %Vertex
          %15 = OpTypeFunction %void %_ptr_Function_Vertex
-         %17 = OpTypeFunction %void
 %_ptr_Uniform_float = OpTypePointer Uniform %float
 %Vertex_MaterialBuffer_0_0 = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
 %_ptr_Uniform_Vertex_MaterialBuffer_0_0 = OpTypePointer Uniform %Vertex_MaterialBuffer_0_0
 %_ptr_Uniform_TestVectorPrimitive = OpTypePointer Uniform %TestVectorPrimitive
 %_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
 %_ptr_Uniform_TestStruct = OpTypePointer Uniform %TestStruct
+         %23 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
     %float_1 = OpConstant %float 1
@@ -116,43 +113,32 @@
          %68 = OpLabel
                OpReturn
                OpFunctionEnd
-%Vertex_InitGlobals = OpFunction %void None %17
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %Vertex_CopyInputs = OpFunction %void None %15
      %self_4 = OpFunctionParameter %_ptr_Function_Vertex
-         %77 = OpLabel
-         %78 = OpAccessChain %_ptr_Uniform_float %Vertex_MaterialBuffer_0_0_Instance %uint_0
-         %79 = OpAccessChain %_ptr_Function_float %self_4 %uint_0
+         %73 = OpLabel
+         %74 = OpAccessChain %_ptr_Uniform_float %Vertex_MaterialBuffer_0_0_Instance %uint_0
+         %75 = OpAccessChain %_ptr_Function_float %self_4 %uint_0
+         %76 = OpLoad %float %74
+               OpStore %75 %76
+         %78 = OpAccessChain %_ptr_Uniform_float %Vertex_MaterialBuffer_0_0_Instance %uint_1
+         %79 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
          %80 = OpLoad %float %78
                OpStore %79 %80
-         %82 = OpAccessChain %_ptr_Uniform_float %Vertex_MaterialBuffer_0_0_Instance %uint_1
-         %83 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
-         %84 = OpLoad %float %82
+         %82 = OpAccessChain %_ptr_Uniform_TestVectorPrimitive %Vertex_MaterialBuffer_0_0_Instance %uint_2
+         %83 = OpAccessChain %_ptr_Function_TestVectorPrimitive %self_4 %uint_2
+         %84 = OpLoad %TestVectorPrimitive %82
                OpStore %83 %84
-         %86 = OpAccessChain %_ptr_Uniform_TestVectorPrimitive %Vertex_MaterialBuffer_0_0_Instance %uint_2
-         %87 = OpAccessChain %_ptr_Function_TestVectorPrimitive %self_4 %uint_2
-         %88 = OpLoad %TestVectorPrimitive %86
+         %86 = OpAccessChain %_ptr_Uniform_TestStruct %Vertex_MaterialBuffer_0_0_Instance %uint_3
+         %87 = OpAccessChain %_ptr_Function_TestStruct %self_4 %uint_3
+         %88 = OpLoad %TestStruct %86
                OpStore %87 %88
-         %90 = OpAccessChain %_ptr_Uniform_TestStruct %Vertex_MaterialBuffer_0_0_Instance %uint_3
-         %91 = OpAccessChain %_ptr_Function_TestStruct %self_4 %uint_3
-         %92 = OpLoad %TestStruct %90
-               OpStore %91 %92
                OpReturn
                OpFunctionEnd
-%Vertex_CopyOutputs = OpFunction %void None %15
-     %self_5 = OpFunctionParameter %_ptr_Function_Vertex
-         %98 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%Vertex_Main_EntryPoint = OpFunction %void None %17
-        %102 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_Vertex Function
-        %104 = OpFunctionCall %void %Vertex_InitGlobals
-        %105 = OpFunctionCall %void %Vertex_DefaultConstructor %self_6
-        %106 = OpFunctionCall %void %Vertex_CopyInputs %self_6
-        %107 = OpFunctionCall %void %Main %self_6
-        %108 = OpFunctionCall %void %Vertex_CopyOutputs %self_6
+%Vertex_Main_EntryPoint = OpFunction %void None %23
+         %93 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_Vertex Function
+         %95 = OpFunctionCall %void %Vertex_DefaultConstructor %self_5
+         %96 = OpFunctionCall %void %Vertex_CopyInputs %self_5
+         %97 = OpFunctionCall %void %Main %self_5
                OpReturn
                OpFunctionEnd

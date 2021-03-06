@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 66
+; Bound: 49
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -20,11 +20,6 @@
                OpName %self_0 "self"
                OpName %StructWithPrimitiveFields_EntryPoint "StructWithPrimitiveFields_EntryPoint"
                OpName %self_1 "self"
-               OpName %StructWithPrimitiveFields_InitGlobals "StructWithPrimitiveFields_InitGlobals"
-               OpName %StructWithPrimitiveFields_CopyInputs "StructWithPrimitiveFields_CopyInputs"
-               OpName %self_2 "self"
-               OpName %StructWithPrimitiveFields_CopyOutputs "StructWithPrimitiveFields_CopyOutputs"
-               OpName %self_3 "self"
                OpName %StructWithPrimitiveFields_EntryPoint "StructWithPrimitiveFields_EntryPoint"
                OpName %self_1 "self"
        %bool = OpTypeBool
@@ -69,23 +64,6 @@
 %StructWithPrimitiveFields_EntryPoint = OpFunction %void None %15
          %45 = OpLabel
      %self_1 = OpVariable %_ptr_Function_StructWithPrimitiveFields Function
-         %47 = OpFunctionCall %void %StructWithPrimitiveFields_InitGlobals
-         %49 = OpFunctionCall %void %StructWithPrimitiveFields_DefaultConstructor %self_1
-         %50 = OpFunctionCall %void %StructWithPrimitiveFields_CopyInputs %self_1
-         %52 = OpFunctionCall %void %StructWithPrimitiveFields_CopyOutputs %self_1
-               OpReturn
-               OpFunctionEnd
-%StructWithPrimitiveFields_InitGlobals = OpFunction %void None %15
-         %56 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%StructWithPrimitiveFields_CopyInputs = OpFunction %void None %13
-     %self_2 = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
-         %60 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%StructWithPrimitiveFields_CopyOutputs = OpFunction %void None %13
-     %self_3 = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
-         %64 = OpLabel
+         %47 = OpFunctionCall %void %StructWithPrimitiveFields_DefaultConstructor %self_1
                OpReturn
                OpFunctionEnd

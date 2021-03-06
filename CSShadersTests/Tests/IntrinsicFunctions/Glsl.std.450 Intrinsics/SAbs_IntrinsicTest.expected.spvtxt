@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 84
+; Bound: 67
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -24,15 +24,10 @@
                OpName %integer2Val "integer2Val"
                OpName %integer3Val "integer3Val"
                OpName %integer4Val "integer4Val"
-               OpName %SAbsTest_InitGlobals "SAbsTest_InitGlobals"
-               OpName %SAbsTest_CopyInputs "SAbsTest_CopyInputs"
+               OpName %SAbsTest_Main_EntryPoint "SAbsTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %SAbsTest_CopyOutputs "SAbsTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %SAbsTest_Main_EntryPoint "SAbsTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %SAbsTest_Main_EntryPoint "SAbsTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
    %SAbsTest = OpTypeStruct
@@ -87,27 +82,10 @@
                OpStore %integer4Val %57
                OpReturn
                OpFunctionEnd
-%SAbsTest_InitGlobals = OpFunction %void None %18
-         %62 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SAbsTest_CopyInputs = OpFunction %void None %10
-     %self_2 = OpFunctionParameter %_ptr_Function_SAbsTest
-         %67 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%SAbsTest_CopyOutputs = OpFunction %void None %10
-     %self_3 = OpFunctionParameter %_ptr_Function_SAbsTest
-         %72 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %SAbsTest_Main_EntryPoint = OpFunction %void None %18
-         %76 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_SAbsTest Function
-         %78 = OpFunctionCall %void %SAbsTest_InitGlobals
-         %79 = OpFunctionCall %void %SAbsTest_DefaultConstructor %self_4
-         %80 = OpFunctionCall %void %SAbsTest_CopyInputs %self_4
-         %81 = OpFunctionCall %void %Main %self_4
-         %82 = OpFunctionCall %void %SAbsTest_CopyOutputs %self_4
+         %62 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_SAbsTest Function
+         %64 = OpFunctionCall %void %SAbsTest_DefaultConstructor %self_2
+         %65 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

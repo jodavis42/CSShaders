@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 67
+; Bound: 50
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -20,15 +20,10 @@
                OpName %Main "Main"
                OpName %self_2 "self"
                OpName %value_0 "value"
-               OpName %InstanceFunctionRef_InitGlobals "InstanceFunctionRef_InitGlobals"
-               OpName %InstanceFunctionRef_CopyInputs "InstanceFunctionRef_CopyInputs"
+               OpName %InstanceFunctionRef_Main_EntryPoint "InstanceFunctionRef_Main_EntryPoint"
                OpName %self_3 "self"
-               OpName %InstanceFunctionRef_CopyOutputs "InstanceFunctionRef_CopyOutputs"
-               OpName %self_4 "self"
                OpName %InstanceFunctionRef_Main_EntryPoint "InstanceFunctionRef_Main_EntryPoint"
-               OpName %self_5 "self"
-               OpName %InstanceFunctionRef_Main_EntryPoint "InstanceFunctionRef_Main_EntryPoint"
-               OpName %self_5 "self"
+               OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
 %InstanceFunctionRef = OpTypeStruct
@@ -66,27 +61,10 @@
          %41 = OpFunctionCall %void %TestFn1 %self_2 %value_0
                OpReturn
                OpFunctionEnd
-%InstanceFunctionRef_InitGlobals = OpFunction %void None %13
-         %45 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%InstanceFunctionRef_CopyInputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_InstanceFunctionRef
-         %50 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%InstanceFunctionRef_CopyOutputs = OpFunction %void None %9
-     %self_4 = OpFunctionParameter %_ptr_Function_InstanceFunctionRef
-         %55 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %InstanceFunctionRef_Main_EntryPoint = OpFunction %void None %13
-         %59 = OpLabel
-     %self_5 = OpVariable %_ptr_Function_InstanceFunctionRef Function
-         %61 = OpFunctionCall %void %InstanceFunctionRef_InitGlobals
-         %62 = OpFunctionCall %void %InstanceFunctionRef_DefaultConstructor %self_5
-         %63 = OpFunctionCall %void %InstanceFunctionRef_CopyInputs %self_5
-         %64 = OpFunctionCall %void %Main %self_5
-         %65 = OpFunctionCall %void %InstanceFunctionRef_CopyOutputs %self_5
+         %45 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_InstanceFunctionRef Function
+         %47 = OpFunctionCall %void %InstanceFunctionRef_DefaultConstructor %self_3
+         %48 = OpFunctionCall %void %Main %self_3
                OpReturn
                OpFunctionEnd

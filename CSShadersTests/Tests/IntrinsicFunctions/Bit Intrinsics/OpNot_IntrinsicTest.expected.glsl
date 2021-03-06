@@ -5,10 +5,6 @@ struct OpNotTest
     int empty_struct_member;
 };
 
-void OpNotTest_InitGlobals()
-{
-}
-
 void OpNotTest_PreConstructor(OpNotTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpNotTest_PreConstructor(OpNotTest self)
 void OpNotTest_DefaultConstructor(OpNotTest self)
 {
     OpNotTest_PreConstructor(self);
-}
-
-void OpNotTest_CopyInputs(OpNotTest self)
-{
 }
 
 void Main(OpNotTest self)
@@ -34,17 +26,10 @@ void Main(OpNotTest self)
     integer4Val = ~integer4Val;
 }
 
-void OpNotTest_CopyOutputs(OpNotTest self)
-{
-}
-
 void main()
 {
-    OpNotTest_InitGlobals();
     OpNotTest self;
     OpNotTest_DefaultConstructor(self);
-    OpNotTest_CopyInputs(self);
     Main(self);
-    OpNotTest_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct SqrtTest
     int empty_struct_member;
 };
 
-void SqrtTest_InitGlobals()
-{
-}
-
 void SqrtTest_PreConstructor(SqrtTest self)
 {
 }
@@ -16,10 +12,6 @@ void SqrtTest_PreConstructor(SqrtTest self)
 void SqrtTest_DefaultConstructor(SqrtTest self)
 {
     SqrtTest_PreConstructor(self);
-}
-
-void SqrtTest_CopyInputs(SqrtTest self)
-{
 }
 
 void Main(SqrtTest self)
@@ -34,17 +26,10 @@ void Main(SqrtTest self)
     vector4Val = sqrt(vector4Val);
 }
 
-void SqrtTest_CopyOutputs(SqrtTest self)
-{
-}
-
 void main()
 {
-    SqrtTest_InitGlobals();
     SqrtTest self;
     SqrtTest_DefaultConstructor(self);
-    SqrtTest_CopyInputs(self);
     Main(self);
-    SqrtTest_CopyOutputs(self);
 }
 

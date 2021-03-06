@@ -5,10 +5,6 @@ struct FloatBinaryOps
     int empty_struct_member;
 };
 
-void FloatBinaryOps_InitGlobals()
-{
-}
-
 void FloatBinaryOps_PreConstructor(FloatBinaryOps self)
 {
 }
@@ -16,10 +12,6 @@ void FloatBinaryOps_PreConstructor(FloatBinaryOps self)
 void FloatBinaryOps_DefaultConstructor(FloatBinaryOps self)
 {
     FloatBinaryOps_PreConstructor(self);
-}
-
-void FloatBinaryOps_CopyInputs(FloatBinaryOps self)
-{
 }
 
 void Main(FloatBinaryOps self)
@@ -39,17 +31,10 @@ void Main(FloatBinaryOps self)
     b = f != f;
 }
 
-void FloatBinaryOps_CopyOutputs(FloatBinaryOps self)
-{
-}
-
 void main()
 {
-    FloatBinaryOps_InitGlobals();
     FloatBinaryOps self;
     FloatBinaryOps_DefaultConstructor(self);
-    FloatBinaryOps_CopyInputs(self);
     Main(self);
-    FloatBinaryOps_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct OpSNegateTest
     int empty_struct_member;
 };
 
-void OpSNegateTest_InitGlobals()
-{
-}
-
 void OpSNegateTest_PreConstructor(OpSNegateTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSNegateTest_PreConstructor(OpSNegateTest self)
 void OpSNegateTest_DefaultConstructor(OpSNegateTest self)
 {
     OpSNegateTest_PreConstructor(self);
-}
-
-void OpSNegateTest_CopyInputs(OpSNegateTest self)
-{
 }
 
 void Main(OpSNegateTest self)
@@ -34,17 +26,10 @@ void Main(OpSNegateTest self)
     integer4Val = -integer4Val;
 }
 
-void OpSNegateTest_CopyOutputs(OpSNegateTest self)
-{
-}
-
 void main()
 {
-    OpSNegateTest_InitGlobals();
     OpSNegateTest self;
     OpSNegateTest_DefaultConstructor(self);
-    OpSNegateTest_CopyInputs(self);
     Main(self);
-    OpSNegateTest_CopyOutputs(self);
 }
 

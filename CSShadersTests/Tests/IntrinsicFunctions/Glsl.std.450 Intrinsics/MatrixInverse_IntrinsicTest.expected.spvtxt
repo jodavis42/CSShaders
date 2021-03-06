@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 98
+; Bound: 81
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -30,15 +30,10 @@
                OpName %m01 "m01"
                OpName %m10 "m10"
                OpName %m11 "m11"
-               OpName %MatrixInverseTest_InitGlobals "MatrixInverseTest_InitGlobals"
-               OpName %MatrixInverseTest_CopyInputs "MatrixInverseTest_CopyInputs"
+               OpName %MatrixInverseTest_Main_EntryPoint "MatrixInverseTest_Main_EntryPoint"
                OpName %self_4 "self"
-               OpName %MatrixInverseTest_CopyOutputs "MatrixInverseTest_CopyOutputs"
-               OpName %self_5 "self"
                OpName %MatrixInverseTest_Main_EntryPoint "MatrixInverseTest_Main_EntryPoint"
-               OpName %self_6 "self"
-               OpName %MatrixInverseTest_Main_EntryPoint "MatrixInverseTest_Main_EntryPoint"
-               OpName %self_6 "self"
+               OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %MatrixInverseTest = OpTypeStruct
@@ -103,27 +98,10 @@
                OpStore %self_3 %71
                OpReturn
                OpFunctionEnd
-%MatrixInverseTest_InitGlobals = OpFunction %void None %22
-         %76 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%MatrixInverseTest_CopyInputs = OpFunction %void None %10
-     %self_4 = OpFunctionParameter %_ptr_Function_MatrixInverseTest
-         %81 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%MatrixInverseTest_CopyOutputs = OpFunction %void None %10
-     %self_5 = OpFunctionParameter %_ptr_Function_MatrixInverseTest
-         %86 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %MatrixInverseTest_Main_EntryPoint = OpFunction %void None %22
-         %90 = OpLabel
-     %self_6 = OpVariable %_ptr_Function_MatrixInverseTest Function
-         %92 = OpFunctionCall %void %MatrixInverseTest_InitGlobals
-         %93 = OpFunctionCall %void %MatrixInverseTest_DefaultConstructor %self_6
-         %94 = OpFunctionCall %void %MatrixInverseTest_CopyInputs %self_6
-         %95 = OpFunctionCall %void %Main %self_6
-         %96 = OpFunctionCall %void %MatrixInverseTest_CopyOutputs %self_6
+         %76 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_MatrixInverseTest Function
+         %78 = OpFunctionCall %void %MatrixInverseTest_DefaultConstructor %self_4
+         %79 = OpFunctionCall %void %Main %self_4
                OpReturn
                OpFunctionEnd

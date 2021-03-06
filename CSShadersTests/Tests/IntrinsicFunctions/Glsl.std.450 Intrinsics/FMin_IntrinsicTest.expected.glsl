@@ -5,10 +5,6 @@ struct FMinTest
     int empty_struct_member;
 };
 
-void FMinTest_InitGlobals()
-{
-}
-
 void FMinTest_PreConstructor(FMinTest self)
 {
 }
@@ -16,10 +12,6 @@ void FMinTest_PreConstructor(FMinTest self)
 void FMinTest_DefaultConstructor(FMinTest self)
 {
     FMinTest_PreConstructor(self);
-}
-
-void FMinTest_CopyInputs(FMinTest self)
-{
 }
 
 void Main(FMinTest self)
@@ -34,17 +26,10 @@ void Main(FMinTest self)
     vector4Val = min(vector4Val, vector4Val);
 }
 
-void FMinTest_CopyOutputs(FMinTest self)
-{
-}
-
 void main()
 {
-    FMinTest_InitGlobals();
     FMinTest self;
     FMinTest_DefaultConstructor(self);
-    FMinTest_CopyInputs(self);
     Main(self);
-    FMinTest_CopyOutputs(self);
 }
 

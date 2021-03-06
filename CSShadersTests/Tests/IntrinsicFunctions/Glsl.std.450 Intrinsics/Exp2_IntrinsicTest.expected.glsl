@@ -5,10 +5,6 @@ struct Exp2Test
     int empty_struct_member;
 };
 
-void Exp2Test_InitGlobals()
-{
-}
-
 void Exp2Test_PreConstructor(Exp2Test self)
 {
 }
@@ -16,10 +12,6 @@ void Exp2Test_PreConstructor(Exp2Test self)
 void Exp2Test_DefaultConstructor(Exp2Test self)
 {
     Exp2Test_PreConstructor(self);
-}
-
-void Exp2Test_CopyInputs(Exp2Test self)
-{
 }
 
 void Main(Exp2Test self)
@@ -34,17 +26,10 @@ void Main(Exp2Test self)
     vector4Val = exp2(vector4Val);
 }
 
-void Exp2Test_CopyOutputs(Exp2Test self)
-{
-}
-
 void main()
 {
-    Exp2Test_InitGlobals();
     Exp2Test self;
     Exp2Test_DefaultConstructor(self);
-    Exp2Test_CopyInputs(self);
     Main(self);
-    Exp2Test_CopyOutputs(self);
 }
 

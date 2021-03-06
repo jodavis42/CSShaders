@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.4
 ; Generator: Khronos; 0
-; Bound: 87
+; Bound: 70
 ; Schema: 0
                OpCapability Shader
                OpCapability Linkage
@@ -23,15 +23,10 @@
                OpName %vector2Val "vector2Val"
                OpName %vector3Val "vector3Val"
                OpName %vector4Val "vector4Val"
-               OpName %OpFSubTest_InitGlobals "OpFSubTest_InitGlobals"
-               OpName %OpFSubTest_CopyInputs "OpFSubTest_CopyInputs"
+               OpName %OpFSubTest_Main_EntryPoint "OpFSubTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %OpFSubTest_CopyOutputs "OpFSubTest_CopyOutputs"
-               OpName %self_3 "self"
                OpName %OpFSubTest_Main_EntryPoint "OpFSubTest_Main_EntryPoint"
-               OpName %self_4 "self"
-               OpName %OpFSubTest_Main_EntryPoint "OpFSubTest_Main_EntryPoint"
-               OpName %self_4 "self"
+               OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
  %OpFSubTest = OpTypeStruct
@@ -90,27 +85,10 @@
                OpStore %vector4Val %60
                OpReturn
                OpFunctionEnd
-%OpFSubTest_InitGlobals = OpFunction %void None %17
-         %65 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFSubTest_CopyInputs = OpFunction %void None %9
-     %self_2 = OpFunctionParameter %_ptr_Function_OpFSubTest
-         %70 = OpLabel
-               OpReturn
-               OpFunctionEnd
-%OpFSubTest_CopyOutputs = OpFunction %void None %9
-     %self_3 = OpFunctionParameter %_ptr_Function_OpFSubTest
-         %75 = OpLabel
-               OpReturn
-               OpFunctionEnd
 %OpFSubTest_Main_EntryPoint = OpFunction %void None %17
-         %79 = OpLabel
-     %self_4 = OpVariable %_ptr_Function_OpFSubTest Function
-         %81 = OpFunctionCall %void %OpFSubTest_InitGlobals
-         %82 = OpFunctionCall %void %OpFSubTest_DefaultConstructor %self_4
-         %83 = OpFunctionCall %void %OpFSubTest_CopyInputs %self_4
-         %84 = OpFunctionCall %void %Main %self_4
-         %85 = OpFunctionCall %void %OpFSubTest_CopyOutputs %self_4
+         %65 = OpLabel
+     %self_2 = OpVariable %_ptr_Function_OpFSubTest Function
+         %67 = OpFunctionCall %void %OpFSubTest_DefaultConstructor %self_2
+         %68 = OpFunctionCall %void %Main %self_2
                OpReturn
                OpFunctionEnd

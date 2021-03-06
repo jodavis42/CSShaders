@@ -5,10 +5,6 @@ struct RefractTest
     int empty_struct_member;
 };
 
-void RefractTest_InitGlobals()
-{
-}
-
 void RefractTest_PreConstructor(RefractTest self)
 {
 }
@@ -16,10 +12,6 @@ void RefractTest_PreConstructor(RefractTest self)
 void RefractTest_DefaultConstructor(RefractTest self)
 {
     RefractTest_PreConstructor(self);
-}
-
-void RefractTest_CopyInputs(RefractTest self)
-{
 }
 
 void Main(RefractTest self)
@@ -33,17 +25,10 @@ void Main(RefractTest self)
     vector4Val = refract(vector4Val, vector4Val, floatVal);
 }
 
-void RefractTest_CopyOutputs(RefractTest self)
-{
-}
-
 void main()
 {
-    RefractTest_InitGlobals();
     RefractTest self;
     RefractTest_DefaultConstructor(self);
-    RefractTest_CopyInputs(self);
     Main(self);
-    RefractTest_CopyOutputs(self);
 }
 

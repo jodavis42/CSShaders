@@ -5,10 +5,6 @@ struct OpSLessThanEqualTest
     int empty_struct_member;
 };
 
-void OpSLessThanEqualTest_InitGlobals()
-{
-}
-
 void OpSLessThanEqualTest_PreConstructor(OpSLessThanEqualTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpSLessThanEqualTest_PreConstructor(OpSLessThanEqualTest self)
 void OpSLessThanEqualTest_DefaultConstructor(OpSLessThanEqualTest self)
 {
     OpSLessThanEqualTest_PreConstructor(self);
-}
-
-void OpSLessThanEqualTest_CopyInputs(OpSLessThanEqualTest self)
-{
 }
 
 void Main(OpSLessThanEqualTest self)
@@ -38,17 +30,10 @@ void Main(OpSLessThanEqualTest self)
     bool4Val = lessThanEqual(integer4Val, integer4Val);
 }
 
-void OpSLessThanEqualTest_CopyOutputs(OpSLessThanEqualTest self)
-{
-}
-
 void main()
 {
-    OpSLessThanEqualTest_InitGlobals();
     OpSLessThanEqualTest self;
     OpSLessThanEqualTest_DefaultConstructor(self);
-    OpSLessThanEqualTest_CopyInputs(self);
     Main(self);
-    OpSLessThanEqualTest_CopyOutputs(self);
 }
 

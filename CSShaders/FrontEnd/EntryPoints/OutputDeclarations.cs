@@ -31,6 +31,10 @@
 
     public static void GenerateCopyOutputsFunction(FrontEndTranslator translator, ShaderType shaderType, ShaderEntryPointInfo entryPoint, EntryPointInterfaceInfo interfaceInfo)
     {
+      // No outputs to copy, don't generate anything
+      if (interfaceInfo.HardwareBuiltInOutputs.Count == 0 && interfaceInfo.StageOutputs.Count == 0)
+        return;
+
       interfaceInfo.CopyOutputsFunction = EntryPointGenerationShared.GenerateEntryPointCopyFunction(translator, shaderType, "CopyOutputs");
 
       var thisOp = interfaceInfo.CopyOutputsFunction.ShaderTypeInstanceOp;

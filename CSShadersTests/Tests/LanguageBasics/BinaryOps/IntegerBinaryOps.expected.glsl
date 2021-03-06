@@ -5,10 +5,6 @@ struct IntegerBinaryOps
     int empty_struct_member;
 };
 
-void IntegerBinaryOps_InitGlobals()
-{
-}
-
 void IntegerBinaryOps_PreConstructor(IntegerBinaryOps self)
 {
 }
@@ -16,10 +12,6 @@ void IntegerBinaryOps_PreConstructor(IntegerBinaryOps self)
 void IntegerBinaryOps_DefaultConstructor(IntegerBinaryOps self)
 {
     IntegerBinaryOps_PreConstructor(self);
-}
-
-void IntegerBinaryOps_CopyInputs(IntegerBinaryOps self)
-{
 }
 
 void Main(IntegerBinaryOps self)
@@ -44,17 +36,10 @@ void Main(IntegerBinaryOps self)
     i = i >> 2;
 }
 
-void IntegerBinaryOps_CopyOutputs(IntegerBinaryOps self)
-{
-}
-
 void main()
 {
-    IntegerBinaryOps_InitGlobals();
     IntegerBinaryOps self;
     IntegerBinaryOps_DefaultConstructor(self);
-    IntegerBinaryOps_CopyInputs(self);
     Main(self);
-    IntegerBinaryOps_CopyOutputs(self);
 }
 

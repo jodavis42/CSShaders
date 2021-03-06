@@ -5,10 +5,6 @@ struct RoundEvenTest
     int empty_struct_member;
 };
 
-void RoundEvenTest_InitGlobals()
-{
-}
-
 void RoundEvenTest_PreConstructor(RoundEvenTest self)
 {
 }
@@ -16,10 +12,6 @@ void RoundEvenTest_PreConstructor(RoundEvenTest self)
 void RoundEvenTest_DefaultConstructor(RoundEvenTest self)
 {
     RoundEvenTest_PreConstructor(self);
-}
-
-void RoundEvenTest_CopyInputs(RoundEvenTest self)
-{
 }
 
 void Main(RoundEvenTest self)
@@ -34,17 +26,10 @@ void Main(RoundEvenTest self)
     vector4Val = roundEven(vector4Val);
 }
 
-void RoundEvenTest_CopyOutputs(RoundEvenTest self)
-{
-}
-
 void main()
 {
-    RoundEvenTest_InitGlobals();
     RoundEvenTest self;
     RoundEvenTest_DefaultConstructor(self);
-    RoundEvenTest_CopyInputs(self);
     Main(self);
-    RoundEvenTest_CopyOutputs(self);
 }
 

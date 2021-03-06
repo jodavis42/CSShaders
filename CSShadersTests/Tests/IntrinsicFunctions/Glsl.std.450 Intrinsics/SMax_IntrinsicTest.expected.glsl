@@ -5,10 +5,6 @@ struct SMaxTest
     int empty_struct_member;
 };
 
-void SMaxTest_InitGlobals()
-{
-}
-
 void SMaxTest_PreConstructor(SMaxTest self)
 {
 }
@@ -16,10 +12,6 @@ void SMaxTest_PreConstructor(SMaxTest self)
 void SMaxTest_DefaultConstructor(SMaxTest self)
 {
     SMaxTest_PreConstructor(self);
-}
-
-void SMaxTest_CopyInputs(SMaxTest self)
-{
 }
 
 void Main(SMaxTest self)
@@ -34,17 +26,10 @@ void Main(SMaxTest self)
     integer4Val = max(integer4Val, integer4Val);
 }
 
-void SMaxTest_CopyOutputs(SMaxTest self)
-{
-}
-
 void main()
 {
-    SMaxTest_InitGlobals();
     SMaxTest self;
     SMaxTest_DefaultConstructor(self);
-    SMaxTest_CopyInputs(self);
     Main(self);
-    SMaxTest_CopyOutputs(self);
 }
 

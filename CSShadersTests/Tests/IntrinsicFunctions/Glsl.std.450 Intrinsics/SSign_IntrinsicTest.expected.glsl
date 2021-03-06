@@ -5,10 +5,6 @@ struct SSignTest
     int empty_struct_member;
 };
 
-void SSignTest_InitGlobals()
-{
-}
-
 void SSignTest_PreConstructor(SSignTest self)
 {
 }
@@ -16,10 +12,6 @@ void SSignTest_PreConstructor(SSignTest self)
 void SSignTest_DefaultConstructor(SSignTest self)
 {
     SSignTest_PreConstructor(self);
-}
-
-void SSignTest_CopyInputs(SSignTest self)
-{
 }
 
 void Main(SSignTest self)
@@ -34,17 +26,10 @@ void Main(SSignTest self)
     integer4Val = sign(integer4Val);
 }
 
-void SSignTest_CopyOutputs(SSignTest self)
-{
-}
-
 void main()
 {
-    SSignTest_InitGlobals();
     SSignTest self;
     SSignTest_DefaultConstructor(self);
-    SSignTest_CopyInputs(self);
     Main(self);
-    SSignTest_CopyOutputs(self);
 }
 

@@ -5,10 +5,6 @@ struct OpBitcastTest
     int empty_struct_member;
 };
 
-void OpBitcastTest_InitGlobals()
-{
-}
-
 void OpBitcastTest_PreConstructor(OpBitcastTest self)
 {
 }
@@ -16,10 +12,6 @@ void OpBitcastTest_PreConstructor(OpBitcastTest self)
 void OpBitcastTest_DefaultConstructor(OpBitcastTest self)
 {
     OpBitcastTest_PreConstructor(self);
-}
-
-void OpBitcastTest_CopyInputs(OpBitcastTest self)
-{
 }
 
 void Main(OpBitcastTest self)
@@ -38,17 +30,10 @@ void Main(OpBitcastTest self)
     vector4Val = intBitsToFloat(integer4Val);
 }
 
-void OpBitcastTest_CopyOutputs(OpBitcastTest self)
-{
-}
-
 void main()
 {
-    OpBitcastTest_InitGlobals();
     OpBitcastTest self;
     OpBitcastTest_DefaultConstructor(self);
-    OpBitcastTest_CopyInputs(self);
     Main(self);
-    OpBitcastTest_CopyOutputs(self);
 }
 
