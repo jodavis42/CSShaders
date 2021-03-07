@@ -13,34 +13,6 @@ namespace CSShaders
     public SemanticModel mSemanticModel;
     public CSharpCompilation Compilation;
 
-    public List<FrontEndPass> mPasses = new List<FrontEndPass>()
-    {
-      // Collect all types
-      new FrontEndPrimitiveTypeCollector(),
-      new FrontEndTypeCollector(),
-      // Visit Intrinsics separately (e.g. Vector2)
-      
-      new FrontEndPrimitiveDeclarationCollector(),
-      // Collect all functions/vars definitions
-      new FrontEndDeclarationCollector(),
-      new FrontEndPreconstructorPass(),
-      // Collect all function contents, var definitions
-      new FrontEndDefinitionCollector()
-    };
-
-    public void Translate(CSharpCompilation compilation, List<SyntaxTree> trees)
-    {
-      Compilation = compilation;
-
-      FrontEndContext context = new FrontEndContext();
-      foreach (var pass in mPasses)
-      {
-        pass.Visit(this, Compilation, trees, context);
-      }
-
-      // Validation passes
-    }
-
     public ShaderType CreatePrimitive(Type type, OpType opType)
     {
       var shaderType = CreateType(new TypeKey(type), type.Name, opType, null);

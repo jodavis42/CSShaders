@@ -73,7 +73,9 @@ namespace CSShaders
       translator.mCurrentLibrary = library;
       translator.mCurrentLibrary.SourceCompilation = compilation;
       translator.mCurrentLibrary.mDependencies = dependencies;
-      translator.Translate(compilation, trees);
+
+      FrontEndPipeline pipeline = new FrontEndPipeline();
+      pipeline.Translate(translator, compilation, trees);
     }
 
     public ShaderLibrary CompileAndTranslate(string compilationName, ShaderModule dependencies, FrontEndTranslator translator)
