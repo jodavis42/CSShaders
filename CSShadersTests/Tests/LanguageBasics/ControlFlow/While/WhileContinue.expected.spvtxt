@@ -1,0 +1,90 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 66
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %WhileContinue_Main_EntryPoint "WhileContinue_Main_EntryPoint"
+               OpExecutionMode %WhileContinue_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %WhileContinue "WhileContinue"
+               OpName %WhileContinue_PreConstructor "WhileContinue_PreConstructor"
+               OpName %self "self"
+               OpName %WhileContinue_DefaultConstructor "WhileContinue_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %WhileContinue0 "WhileContinue0"
+               OpName %self_1 "self"
+               OpName %a "a"
+               OpName %headerBlock "headerBlock"
+               OpName %conditionBlock "conditionBlock"
+               OpName %loop_body "loop-body"
+               OpName %continueBlock "continueBlock"
+               OpName %after_loop "after-loop"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %ret "ret"
+               OpName %WhileContinue_Main_EntryPoint "WhileContinue_Main_EntryPoint"
+               OpName %self_3 "self"
+               OpName %WhileContinue_Main_EntryPoint "WhileContinue_Main_EntryPoint"
+               OpName %self_3 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%WhileContinue = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_WhileContinue = OpTypePointer Function %WhileContinue
+          %9 = OpTypeFunction %void %_ptr_Function_WhileContinue
+         %11 = OpTypeFunction %int %_ptr_Function_WhileContinue
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %15 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
+%WhileContinue_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_WhileContinue
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%WhileContinue_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_WhileContinue
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %WhileContinue_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%WhileContinue0 = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_WhileContinue
+         %33 = OpLabel
+          %a = OpVariable %_ptr_Function_int Function
+               OpStore %a %int_1
+               OpBranch %headerBlock
+%headerBlock = OpLabel
+               OpLoopMerge %after_loop %continueBlock None
+               OpBranch %conditionBlock
+%conditionBlock = OpLabel
+         %41 = OpLoad %int %a
+         %42 = OpSLessThan %bool %41 %int_0
+               OpBranchConditional %42 %loop_body %after_loop
+  %loop_body = OpLabel
+               OpBranch %continueBlock
+%continueBlock = OpLabel
+               OpBranch %headerBlock
+ %after_loop = OpLabel
+         %49 = OpLoad %int %a
+               OpReturnValue %49
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_WhileContinue
+         %54 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+         %56 = OpFunctionCall %int %WhileContinue0 %self_2
+               OpStore %ret %56
+               OpReturn
+               OpFunctionEnd
+%WhileContinue_Main_EntryPoint = OpFunction %void None %15
+         %61 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_WhileContinue Function
+         %63 = OpFunctionCall %void %WhileContinue_DefaultConstructor %self_3
+         %64 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,78 @@
+
+namespace Test
+{
+  [Shader.UnitTest][Shader.Pixel]
+  struct ForNested
+  {
+    int ForNested0()
+    {
+      var result = 1;
+      for(var i = 1; i > 0; --i)
+      {
+        for(var j = 1; j > 0; --j)
+        {
+          result += 2;
+        }
+        ++result;
+      }
+      return result;
+    }
+  
+    int ForNested1()
+    {
+      var result = 1;
+      for(var i = 1; i > 0; --i)
+      {
+        for(var j = 1; j > 0; --j)
+        {
+          result += 2;
+          continue;
+        }
+        ++result;
+      }
+      return result;
+    }
+
+    int ForNested2()
+    {
+      var result = 1;
+      for(var i = 1; i > 0; --i)
+      {
+        for(var j = 1; j > 0; --j)
+        {
+          result += 2;
+          break;
+        }
+        ++result;
+      }
+      return result;
+    }
+
+    int ForNested3()
+    {
+      var result = 1;
+      for(var i = 1; i > 0; --i)
+      {
+        for(var j = 1; j > 0; --j)
+        {
+          result += 2;
+          break;
+        }
+        ++result;
+        break;
+      }
+      return result;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      int ret = 0;
+      ret = this.ForNested0();
+      ret = this.ForNested1();
+      ret = this.ForNested2();
+      ret = this.ForNested3();
+    }
+  }
+}
+

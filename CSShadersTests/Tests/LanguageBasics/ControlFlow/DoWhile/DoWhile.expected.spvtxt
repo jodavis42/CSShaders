@@ -1,0 +1,90 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 67
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %DoWhile_Main_EntryPoint "DoWhile_Main_EntryPoint"
+               OpExecutionMode %DoWhile_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %DoWhile "DoWhile"
+               OpName %DoWhile_PreConstructor "DoWhile_PreConstructor"
+               OpName %self "self"
+               OpName %DoWhile_DefaultConstructor "DoWhile_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %DoWhile0 "DoWhile0"
+               OpName %self_1 "self"
+               OpName %a "a"
+               OpName %headerBlock "headerBlock"
+               OpName %loop_body "loop-body"
+               OpName %conditionBlock "conditionBlock"
+               OpName %after_loop "after-loop"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %ret "ret"
+               OpName %DoWhile_Main_EntryPoint "DoWhile_Main_EntryPoint"
+               OpName %self_3 "self"
+               OpName %DoWhile_Main_EntryPoint "DoWhile_Main_EntryPoint"
+               OpName %self_3 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+    %DoWhile = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_DoWhile = OpTypePointer Function %DoWhile
+          %9 = OpTypeFunction %void %_ptr_Function_DoWhile
+         %11 = OpTypeFunction %int %_ptr_Function_DoWhile
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %15 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
+%DoWhile_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_DoWhile
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DoWhile_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_DoWhile
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %DoWhile_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+   %DoWhile0 = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_DoWhile
+         %33 = OpLabel
+          %a = OpVariable %_ptr_Function_int Function
+               OpStore %a %int_1
+               OpBranch %headerBlock
+%headerBlock = OpLabel
+               OpLoopMerge %after_loop %conditionBlock None
+               OpBranch %loop_body
+  %loop_body = OpLabel
+         %41 = OpLoad %int %a
+         %42 = OpISub %int %41 %int_1
+               OpStore %a %42
+               OpBranch %conditionBlock
+%conditionBlock = OpLabel
+         %46 = OpLoad %int %a
+         %47 = OpSLessThan %bool %46 %int_0
+               OpBranchConditional %47 %headerBlock %after_loop
+ %after_loop = OpLabel
+         %50 = OpLoad %int %a
+               OpReturnValue %50
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_DoWhile
+         %55 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+         %57 = OpFunctionCall %int %DoWhile0 %self_2
+               OpStore %ret %57
+               OpReturn
+               OpFunctionEnd
+%DoWhile_Main_EntryPoint = OpFunction %void None %15
+         %62 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_DoWhile Function
+         %64 = OpFunctionCall %void %DoWhile_DefaultConstructor %self_3
+         %65 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd

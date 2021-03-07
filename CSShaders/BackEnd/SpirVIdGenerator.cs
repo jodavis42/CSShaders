@@ -134,6 +134,10 @@ namespace CSShaders
       {
         // No op
       }
+      else if (ir is ShaderBlock shaderBlock)
+      {
+        // Id is already assigned from the owning function
+      }
       else
         throw new Exception();
     }

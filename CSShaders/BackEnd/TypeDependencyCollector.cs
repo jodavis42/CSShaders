@@ -130,6 +130,10 @@ namespace CSShaders
         Visit(shaderOp);
       else if (ir is ExtensionLibraryImportOp extLibraryImportOp)
         Visit(extLibraryImportOp);
+      else if (ir is ShaderBlock shaderBlock)
+      {
+        // Skip blocks as an ir. This is a target of some other op (like a branch) and it's body will be visited elsewhere (typically on the function)
+      }
       else
         throw new Exception();
     }

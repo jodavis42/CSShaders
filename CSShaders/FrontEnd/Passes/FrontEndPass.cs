@@ -374,5 +374,116 @@ namespace CSShaders
         || attributes.Contains(typeof(Math.CompositeConstruct)) || attributes.Contains(typeof(Math.Swizzle))
         || attributes.Contains(typeof(Shader.ImageIntrinsicFunction)) || attributes.Contains(typeof(Shader.SampledImageIntrinsicFunction));
     }
+
+    /////////////////////////////////////////////////////////////// Loops
+    public void GenerateGenericLoop(IEnumerable<SyntaxNode> initializerNodes, IEnumerable<SyntaxNode> iteratorNodes, SyntaxNode conditionalNode, StatementSyntax loopScopeNode, FrontEndContext context)
+    {
+      // Always walk the initializer node statements first if they exists. The contents of this go before any loop block.
+      if (initializerNodes != null)
+      {
+        foreach(var initializerNode in initializerNodes)
+          WalkAndGetResult(initializerNode);
+      }
+
+      // A basic while looks like a header block that always jumps to a condition block.
+      // The condition block will choose to jump either to the loop block or to the merge point.
+      // The loop block will always branch to the continue target unless a break happens which
+      // will branch to the merge block (after the loop).
+      // The continue block will always jump back to the header block.
+      var headerBlock = mFrontEnd.CreateBlock("headerBlock");
+      var conditionBlock = mFrontEnd.CreateBlock("conditionBlock");
+      var loopTrueBlock = mFrontEnd.CreateBlock("loop-body");
+      var continueBlock = mFrontEnd.CreateBlock("continueBlock");
+      var mergeBlock = mFrontEnd.CreateBlock("after-loop");
+
+      // Always jump to the header block
+      mFrontEnd.CreateOp(context.mCurrentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { headerBlock });
+
+      // The header always jumps to the conditional
+      context.mCurrentFunction.mBlocks.Add(headerBlock);
+      GenerateLoopHeaderBlock(headerBlock, conditionBlock, mergeBlock, continueBlock, context);
+
+      // The conditional will jump to either the loop body or the merge point (after the loop)
+      context.mCurrentFunction.mBlocks.Add(conditionBlock);
+      GenerateLoopConditionBlock(conditionalNode, conditionBlock, loopTrueBlock, mergeBlock, context);
+
+      // Walk all of the statements in the loop body and jump to either the merge or continue block
+      context.mCurrentFunction.mBlocks.Add(loopTrueBlock);
+      GenerateLoopStatements(loopScopeNode, loopTrueBlock, mergeBlock, continueBlock, context);
+
+      // The continue block always just jumps to the header block
+      context.mCurrentFunction.mBlocks.Add(continueBlock);
+      GenerateLoopContinueBlock(iteratorNodes, continueBlock, headerBlock, context);
+
+      // Afterwards the active block is always the merge point
+      context.mCurrentFunction.mBlocks.Add(mergeBlock);
+      context.mCurrentBlock = mergeBlock;
+    }
+
+    public void GenerateLoopHeaderBlock(ShaderBlock headerBlock, ShaderBlock branchTarget, ShaderBlock mergeBlock, ShaderBlock continueBlock, FrontEndContext context)
+    {
+      // Mark the header block as a loop block (so we emit the LoopMerge instruction)
+      headerBlock.mBlockType = BlockType.Loop;
+      // Being a LoopMerge requires setting the merge and continue points
+      headerBlock.mMergePoint = mergeBlock;
+      headerBlock.mContinuePoint = continueBlock;
+
+      var loopControlMask = mFrontEnd.CreateConstantLiteral<uint>((uint)Spv.LoopControlMask.LoopControlMaskNone);
+      mFrontEnd.CreateOp(headerBlock, OpInstructionType.OpLoopMerge, null, new List<IShaderIR> { mergeBlock, continueBlock, loopControlMask } );
+      // The header always jumps to the branch target (typically a continue)
+      mFrontEnd.CreateOp(headerBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { branchTarget });
+    }
+
+    public void GenerateLoopConditionBlock(SyntaxNode conditionalNode, ShaderBlock conditionBlock, ShaderBlock branchTrueBlock, ShaderBlock branchFalseBlock, FrontEndContext context)
+    {
+      // The condition builds the conditional and then jumps either to the body of the loop or to the end
+      context.mCurrentBlock = conditionBlock;
+      // If the conditional node exists
+      if (conditionalNode != null)
+      {
+        //ExtractDebugInfo(conditionalNode->Condition, context->mDebugInfo);
+        // Get the conditional value (must be a bool via how zilch works)
+        IShaderIR conditional = WalkAndGetValueTypeResult(context.mCurrentBlock, conditionalNode);
+        // Branch to either the true or false branch
+        mFrontEnd.CreateOp(context.mCurrentBlock, OpInstructionType.OpBranchConditional, null, new List<IShaderIR> { conditional, branchTrueBlock, branchFalseBlock });
+      }
+      // Otherwise there is no conditional (e.g. loop) so unconditionally branch to the true block
+      else
+        mFrontEnd.CreateOp(context.mCurrentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { branchTrueBlock });
+    }
+
+    public void GenerateLoopStatements(StatementSyntax loopScopeNode, ShaderBlock loopBlock, ShaderBlock mergeBlock, ShaderBlock continueBlock, FrontEndContext context)
+    {
+      context.mCurrentBlock = loopBlock;
+      // Set the continue and merge points for this block (mainly needed for nested loops)
+      loopBlock.mContinuePoint = continueBlock;
+      loopBlock.mMergePoint = mergeBlock;
+      context.PushMergePoint(continueBlock, mergeBlock);
+
+      // Iterate over all of the statements in the loop body
+      Visit(loopScopeNode);
+
+      // Write out a jump back to the continue block of the loop. Only write this to the active block
+      // which will either be the end of the loop block or something like an after if
+      if (context.mCurrentBlock.mTerminatorOp == null)
+      {
+        var currentBlockContinue = mFrontEnd.CreateOp(context.mCurrentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { continueBlock });
+      }
+      context.PopMergePoint();
+    }
+
+    public void GenerateLoopContinueBlock(IEnumerable<SyntaxNode> iteratorNodes, ShaderBlock continueBlock, ShaderBlock headerBlock, FrontEndContext context)
+    {
+      // Mark the continue block as the active block
+      context.mCurrentBlock = continueBlock;
+      // If it exists, walk the iterator statement
+      if (iteratorNodes != null)
+      {
+        foreach(var iteratorNode in iteratorNodes)
+          Visit(iteratorNode);
+      }
+      // Always jump back to the header block
+      mFrontEnd.CreateOp(continueBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { headerBlock });
+    }
   }
 }

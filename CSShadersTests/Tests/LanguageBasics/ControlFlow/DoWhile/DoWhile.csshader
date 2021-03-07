@@ -1,0 +1,24 @@
+
+namespace Test
+{
+  [Shader.UnitTest][Shader.Pixel]
+  struct DoWhile
+  {
+    int DoWhile0()
+    {
+      var a = 1;
+      do
+      {
+        --a;
+      } while(a < 0);
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      int ret = this.DoWhile0();
+    }
+  }
+}
+

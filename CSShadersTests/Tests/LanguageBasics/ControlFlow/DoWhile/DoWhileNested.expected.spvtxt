@@ -1,0 +1,256 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 192
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %DoWhileNested_Main_EntryPoint "DoWhileNested_Main_EntryPoint"
+               OpExecutionMode %DoWhileNested_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %DoWhileNested "DoWhileNested"
+               OpName %DoWhileNested_PreConstructor "DoWhileNested_PreConstructor"
+               OpName %self "self"
+               OpName %DoWhileNested_DefaultConstructor "DoWhileNested_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %DoWhileNested0 "DoWhileNested0"
+               OpName %self_1 "self"
+               OpName %a "a"
+               OpName %b "b"
+               OpName %headerBlock "headerBlock"
+               OpName %loop_body "loop-body"
+               OpName %headerBlock_0 "headerBlock"
+               OpName %loop_body_0 "loop-body"
+               OpName %conditionBlock "conditionBlock"
+               OpName %after_loop "after-loop"
+               OpName %conditionBlock_0 "conditionBlock"
+               OpName %after_loop_0 "after-loop"
+               OpName %DoWhileNested1 "DoWhileNested1"
+               OpName %self_2 "self"
+               OpName %a_0 "a"
+               OpName %b_0 "b"
+               OpName %headerBlock_1 "headerBlock"
+               OpName %loop_body_1 "loop-body"
+               OpName %headerBlock_2 "headerBlock"
+               OpName %loop_body_2 "loop-body"
+               OpName %conditionBlock_1 "conditionBlock"
+               OpName %after_loop_1 "after-loop"
+               OpName %conditionBlock_2 "conditionBlock"
+               OpName %after_loop_2 "after-loop"
+               OpName %DoWhileNested2 "DoWhileNested2"
+               OpName %self_3 "self"
+               OpName %a_1 "a"
+               OpName %b_1 "b"
+               OpName %headerBlock_3 "headerBlock"
+               OpName %loop_body_3 "loop-body"
+               OpName %headerBlock_4 "headerBlock"
+               OpName %loop_body_4 "loop-body"
+               OpName %conditionBlock_3 "conditionBlock"
+               OpName %after_loop_3 "after-loop"
+               OpName %conditionBlock_4 "conditionBlock"
+               OpName %after_loop_4 "after-loop"
+               OpName %DoWhileNested3 "DoWhileNested3"
+               OpName %self_4 "self"
+               OpName %a_2 "a"
+               OpName %b_2 "b"
+               OpName %headerBlock_5 "headerBlock"
+               OpName %loop_body_5 "loop-body"
+               OpName %headerBlock_6 "headerBlock"
+               OpName %loop_body_6 "loop-body"
+               OpName %conditionBlock_5 "conditionBlock"
+               OpName %after_loop_5 "after-loop"
+               OpName %conditionBlock_6 "conditionBlock"
+               OpName %after_loop_6 "after-loop"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %ret "ret"
+               OpName %DoWhileNested_Main_EntryPoint "DoWhileNested_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %DoWhileNested_Main_EntryPoint "DoWhileNested_Main_EntryPoint"
+               OpName %self_6 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%DoWhileNested = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_DoWhileNested = OpTypePointer Function %DoWhileNested
+          %9 = OpTypeFunction %void %_ptr_Function_DoWhileNested
+         %11 = OpTypeFunction %int %_ptr_Function_DoWhileNested
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %15 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
+%DoWhileNested_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_DoWhileNested
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%DoWhileNested_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_DoWhileNested
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %DoWhileNested_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%DoWhileNested0 = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_DoWhileNested
+         %33 = OpLabel
+          %a = OpVariable %_ptr_Function_int Function
+          %b = OpVariable %_ptr_Function_int Function
+               OpStore %a %int_1
+               OpBranch %headerBlock
+%headerBlock = OpLabel
+               OpLoopMerge %after_loop_0 %conditionBlock_0 None
+               OpBranch %loop_body
+  %loop_body = OpLabel
+               OpStore %b %int_1
+               OpBranch %headerBlock_0
+%headerBlock_0 = OpLabel
+               OpLoopMerge %after_loop %conditionBlock None
+               OpBranch %loop_body_0
+%loop_body_0 = OpLabel
+         %48 = OpLoad %int %b
+         %49 = OpISub %int %48 %int_1
+               OpStore %b %49
+               OpBranch %conditionBlock
+%conditionBlock = OpLabel
+         %53 = OpLoad %int %b
+         %54 = OpSGreaterThan %bool %53 %int_0
+               OpBranchConditional %54 %headerBlock_0 %after_loop
+ %after_loop = OpLabel
+         %57 = OpLoad %int %a
+         %58 = OpISub %int %57 %int_1
+               OpStore %a %58
+               OpBranch %conditionBlock_0
+%conditionBlock_0 = OpLabel
+         %62 = OpLoad %int %a
+         %63 = OpSGreaterThan %bool %62 %int_0
+               OpBranchConditional %63 %headerBlock %after_loop_0
+%after_loop_0 = OpLabel
+         %66 = OpLoad %int %a
+               OpReturnValue %66
+               OpFunctionEnd
+%DoWhileNested1 = OpFunction %int None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_DoWhileNested
+         %71 = OpLabel
+        %a_0 = OpVariable %_ptr_Function_int Function
+        %b_0 = OpVariable %_ptr_Function_int Function
+               OpStore %a_0 %int_1
+               OpBranch %headerBlock_1
+%headerBlock_1 = OpLabel
+               OpLoopMerge %after_loop_2 %conditionBlock_2 None
+               OpBranch %loop_body_1
+%loop_body_1 = OpLabel
+               OpStore %b_0 %int_1
+               OpBranch %headerBlock_2
+%headerBlock_2 = OpLabel
+               OpLoopMerge %after_loop_1 %conditionBlock_1 None
+               OpBranch %loop_body_2
+%loop_body_2 = OpLabel
+               OpBranch %conditionBlock_1
+%conditionBlock_1 = OpLabel
+         %88 = OpLoad %int %b_0
+         %89 = OpSGreaterThan %bool %88 %int_0
+               OpBranchConditional %89 %headerBlock_2 %after_loop_1
+%after_loop_1 = OpLabel
+         %92 = OpLoad %int %a_0
+         %93 = OpISub %int %92 %int_1
+               OpStore %a_0 %93
+               OpBranch %conditionBlock_2
+%conditionBlock_2 = OpLabel
+         %97 = OpLoad %int %a_0
+         %98 = OpSGreaterThan %bool %97 %int_0
+               OpBranchConditional %98 %headerBlock_1 %after_loop_2
+%after_loop_2 = OpLabel
+        %101 = OpLoad %int %a_0
+               OpReturnValue %101
+               OpFunctionEnd
+%DoWhileNested2 = OpFunction %int None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_DoWhileNested
+        %106 = OpLabel
+        %a_1 = OpVariable %_ptr_Function_int Function
+        %b_1 = OpVariable %_ptr_Function_int Function
+               OpStore %a_1 %int_1
+               OpBranch %headerBlock_3
+%headerBlock_3 = OpLabel
+               OpLoopMerge %after_loop_4 %conditionBlock_4 None
+               OpBranch %loop_body_3
+%loop_body_3 = OpLabel
+               OpStore %b_1 %int_1
+               OpBranch %headerBlock_4
+%headerBlock_4 = OpLabel
+               OpLoopMerge %after_loop_3 %conditionBlock_3 None
+               OpBranch %loop_body_4
+%loop_body_4 = OpLabel
+               OpBranch %after_loop_3
+%conditionBlock_3 = OpLabel
+        %123 = OpLoad %int %b_1
+        %124 = OpSGreaterThan %bool %123 %int_0
+               OpBranchConditional %124 %headerBlock_4 %after_loop_3
+%after_loop_3 = OpLabel
+        %127 = OpLoad %int %a_1
+        %128 = OpISub %int %127 %int_1
+               OpStore %a_1 %128
+               OpBranch %conditionBlock_4
+%conditionBlock_4 = OpLabel
+        %132 = OpLoad %int %a_1
+        %133 = OpSGreaterThan %bool %132 %int_0
+               OpBranchConditional %133 %headerBlock_3 %after_loop_4
+%after_loop_4 = OpLabel
+        %136 = OpLoad %int %a_1
+               OpReturnValue %136
+               OpFunctionEnd
+%DoWhileNested3 = OpFunction %int None %11
+     %self_4 = OpFunctionParameter %_ptr_Function_DoWhileNested
+        %141 = OpLabel
+        %a_2 = OpVariable %_ptr_Function_int Function
+        %b_2 = OpVariable %_ptr_Function_int Function
+               OpStore %a_2 %int_1
+               OpBranch %headerBlock_5
+%headerBlock_5 = OpLabel
+               OpLoopMerge %after_loop_6 %conditionBlock_6 None
+               OpBranch %loop_body_5
+%loop_body_5 = OpLabel
+               OpStore %b_2 %int_1
+               OpBranch %headerBlock_6
+%headerBlock_6 = OpLabel
+               OpLoopMerge %after_loop_5 %conditionBlock_5 None
+               OpBranch %loop_body_6
+%loop_body_6 = OpLabel
+               OpBranch %after_loop_5
+%conditionBlock_5 = OpLabel
+        %158 = OpLoad %int %b_2
+        %159 = OpSGreaterThan %bool %158 %int_0
+               OpBranchConditional %159 %headerBlock_6 %after_loop_5
+%after_loop_5 = OpLabel
+               OpBranch %after_loop_6
+%conditionBlock_6 = OpLabel
+        %164 = OpLoad %int %a_2
+        %165 = OpSGreaterThan %bool %164 %int_0
+               OpBranchConditional %165 %headerBlock_5 %after_loop_6
+%after_loop_6 = OpLabel
+        %168 = OpLoad %int %a_2
+               OpReturnValue %168
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_5 = OpFunctionParameter %_ptr_Function_DoWhileNested
+        %173 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+               OpStore %ret %int_0
+        %176 = OpFunctionCall %int %DoWhileNested0 %self_5
+               OpStore %ret %176
+        %178 = OpFunctionCall %int %DoWhileNested1 %self_5
+               OpStore %ret %178
+        %180 = OpFunctionCall %int %DoWhileNested2 %self_5
+               OpStore %ret %180
+        %182 = OpFunctionCall %int %DoWhileNested3 %self_5
+               OpStore %ret %182
+               OpReturn
+               OpFunctionEnd
+%DoWhileNested_Main_EntryPoint = OpFunction %void None %15
+        %187 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_DoWhileNested Function
+        %189 = OpFunctionCall %void %DoWhileNested_DefaultConstructor %self_6
+        %190 = OpFunctionCall %void %Main %self_6
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,37 @@
+
+namespace Test
+{
+  [Shader.UnitTest][Shader.Pixel]
+  struct ForContinue
+  {
+    int ForContinue0(int count)
+    {
+      var result = 0;
+      for(var i = 1; i < count; ++i)
+      {
+        continue;
+      }
+      return result;
+    }
+  
+    int ForContinue1(int count)
+    {
+      var result = 0;
+      for(var i = 1; i < count; ++i)
+      {
+        ++result;
+        continue;
+      }
+      return result;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      int ret = 0;
+      ret = this.ForContinue0(10);
+      ret = this.ForContinue1(10);
+    }
+  }
+}
+

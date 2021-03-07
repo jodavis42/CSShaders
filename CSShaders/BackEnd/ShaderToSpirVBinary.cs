@@ -255,6 +255,7 @@ namespace CSShaders
 
     void WriteDebugInstructions(ShaderBlock block)
     {
+      WriteDebugName(block, block.DebugInfo.Name);
       foreach (var op in block.mLocalVariables)
         WriteDebugName(op, op.DebugInfo.Name);
       foreach (var op in block.mOps)
@@ -514,12 +515,32 @@ namespace CSShaders
             
           break;
         case OpInstructionType.OpFunctionCall:
-          UInt16 instructionCount = (UInt16)(3 + op.mParameters.Count);
-          mWriter.WriteInstruction(instructionCount, Spv.Op.OpFunctionCall);
-          mWriter.Write(GetId(op.mResultType));
-          mWriter.Write(GetId(op));
+          {
+            UInt16 instructionCount = (UInt16)(3 + op.mParameters.Count);
+            mWriter.WriteInstruction(instructionCount, Spv.Op.OpFunctionCall);
+            mWriter.Write(GetId(op.mResultType));
+            mWriter.Write(GetId(op));
+            WriteArgs(op.mParameters);
+            break;
+          }
+        case OpInstructionType.OpBranch:
+          mWriter.WriteInstruction((UInt16)2, Spv.Op.OpBranch);
           WriteArgs(op.mParameters);
           break;
+        case OpInstructionType.OpBranchConditional:
+          {
+            UInt16 instructionCount = (UInt16)(1 + op.mParameters.Count);
+            mWriter.WriteInstruction(instructionCount, Spv.Op.OpBranchConditional);
+            WriteArgs(op.mParameters);
+            break;
+          }
+        case OpInstructionType.OpLoopMerge:
+          {
+            UInt16 instructionCount = (UInt16)(1 + op.mParameters.Count);
+            mWriter.WriteInstruction(instructionCount, Spv.Op.OpLoopMerge);
+            WriteArgs(op.mParameters);
+            break;
+          }
         default:
           Spv.Op spvOp;
           if(!SimpleInstructions.TryGetValue(op.mOpType, out spvOp))

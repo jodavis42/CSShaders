@@ -1,0 +1,90 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 66
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %WhileBreak_Main_EntryPoint "WhileBreak_Main_EntryPoint"
+               OpExecutionMode %WhileBreak_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %WhileBreak "WhileBreak"
+               OpName %WhileBreak_PreConstructor "WhileBreak_PreConstructor"
+               OpName %self "self"
+               OpName %WhileBreak_DefaultConstructor "WhileBreak_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %WhileBreak0 "WhileBreak0"
+               OpName %self_1 "self"
+               OpName %a "a"
+               OpName %headerBlock "headerBlock"
+               OpName %conditionBlock "conditionBlock"
+               OpName %loop_body "loop-body"
+               OpName %continueBlock "continueBlock"
+               OpName %after_loop "after-loop"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %ret "ret"
+               OpName %WhileBreak_Main_EntryPoint "WhileBreak_Main_EntryPoint"
+               OpName %self_3 "self"
+               OpName %WhileBreak_Main_EntryPoint "WhileBreak_Main_EntryPoint"
+               OpName %self_3 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+ %WhileBreak = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_WhileBreak = OpTypePointer Function %WhileBreak
+          %9 = OpTypeFunction %void %_ptr_Function_WhileBreak
+         %11 = OpTypeFunction %int %_ptr_Function_WhileBreak
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %15 = OpTypeFunction %void
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
+%WhileBreak_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_WhileBreak
+         %22 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%WhileBreak_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_WhileBreak
+         %27 = OpLabel
+         %28 = OpFunctionCall %void %WhileBreak_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%WhileBreak0 = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_WhileBreak
+         %33 = OpLabel
+          %a = OpVariable %_ptr_Function_int Function
+               OpStore %a %int_1
+               OpBranch %headerBlock
+%headerBlock = OpLabel
+               OpLoopMerge %after_loop %continueBlock None
+               OpBranch %conditionBlock
+%conditionBlock = OpLabel
+         %41 = OpLoad %int %a
+         %42 = OpSLessThan %bool %41 %int_0
+               OpBranchConditional %42 %loop_body %after_loop
+  %loop_body = OpLabel
+               OpBranch %after_loop
+%continueBlock = OpLabel
+               OpBranch %headerBlock
+ %after_loop = OpLabel
+         %49 = OpLoad %int %a
+               OpReturnValue %49
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_WhileBreak
+         %54 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+         %56 = OpFunctionCall %int %WhileBreak0 %self_2
+               OpStore %ret %56
+               OpReturn
+               OpFunctionEnd
+%WhileBreak_Main_EntryPoint = OpFunction %void None %15
+         %61 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_WhileBreak Function
+         %63 = OpFunctionCall %void %WhileBreak_DefaultConstructor %self_3
+         %64 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd

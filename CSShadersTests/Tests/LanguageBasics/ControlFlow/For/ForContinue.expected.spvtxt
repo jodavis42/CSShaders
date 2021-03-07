@@ -1,0 +1,142 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 106
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ForContinue_Main_EntryPoint "ForContinue_Main_EntryPoint"
+               OpExecutionMode %ForContinue_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ForContinue "ForContinue"
+               OpName %ForContinue_PreConstructor "ForContinue_PreConstructor"
+               OpName %self "self"
+               OpName %ForContinue_DefaultConstructor "ForContinue_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %ForContinue0 "ForContinue0"
+               OpName %self_1 "self"
+               OpName %count "count"
+               OpName %result "result"
+               OpName %i "i"
+               OpName %headerBlock "headerBlock"
+               OpName %conditionBlock "conditionBlock"
+               OpName %loop_body "loop-body"
+               OpName %continueBlock "continueBlock"
+               OpName %after_loop "after-loop"
+               OpName %ForContinue1 "ForContinue1"
+               OpName %self_2 "self"
+               OpName %count_0 "count"
+               OpName %result_0 "result"
+               OpName %i_0 "i"
+               OpName %headerBlock_0 "headerBlock"
+               OpName %conditionBlock_0 "conditionBlock"
+               OpName %loop_body_0 "loop-body"
+               OpName %continueBlock_0 "continueBlock"
+               OpName %after_loop_0 "after-loop"
+               OpName %Main "Main"
+               OpName %self_3 "self"
+               OpName %ret "ret"
+               OpName %ForContinue_Main_EntryPoint "ForContinue_Main_EntryPoint"
+               OpName %self_4 "self"
+               OpName %ForContinue_Main_EntryPoint "ForContinue_Main_EntryPoint"
+               OpName %self_4 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%ForContinue = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ForContinue = OpTypePointer Function %ForContinue
+          %9 = OpTypeFunction %void %_ptr_Function_ForContinue
+         %11 = OpTypeFunction %int %_ptr_Function_ForContinue %int
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %15 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+      %int_1 = OpConstant %int 1
+     %int_10 = OpConstant %int 10
+%ForContinue_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_ForContinue
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ForContinue_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_ForContinue
+         %28 = OpLabel
+         %29 = OpFunctionCall %void %ForContinue_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%ForContinue0 = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_ForContinue
+      %count = OpFunctionParameter %int
+         %35 = OpLabel
+     %result = OpVariable %_ptr_Function_int Function
+          %i = OpVariable %_ptr_Function_int Function
+               OpStore %result %int_0
+               OpStore %i %int_1
+               OpBranch %headerBlock
+%headerBlock = OpLabel
+               OpLoopMerge %after_loop %continueBlock None
+               OpBranch %conditionBlock
+%conditionBlock = OpLabel
+         %45 = OpLoad %int %i
+         %46 = OpSLessThan %bool %45 %count
+               OpBranchConditional %46 %loop_body %after_loop
+  %loop_body = OpLabel
+               OpBranch %continueBlock
+%continueBlock = OpLabel
+         %51 = OpLoad %int %i
+         %52 = OpIAdd %int %51 %int_1
+               OpStore %i %52
+               OpBranch %headerBlock
+ %after_loop = OpLabel
+         %56 = OpLoad %int %result
+               OpReturnValue %56
+               OpFunctionEnd
+%ForContinue1 = OpFunction %int None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_ForContinue
+    %count_0 = OpFunctionParameter %int
+         %62 = OpLabel
+   %result_0 = OpVariable %_ptr_Function_int Function
+        %i_0 = OpVariable %_ptr_Function_int Function
+               OpStore %result_0 %int_0
+               OpStore %i_0 %int_1
+               OpBranch %headerBlock_0
+%headerBlock_0 = OpLabel
+               OpLoopMerge %after_loop_0 %continueBlock_0 None
+               OpBranch %conditionBlock_0
+%conditionBlock_0 = OpLabel
+         %72 = OpLoad %int %i_0
+         %73 = OpSLessThan %bool %72 %count_0
+               OpBranchConditional %73 %loop_body_0 %after_loop_0
+%loop_body_0 = OpLabel
+         %76 = OpLoad %int %result_0
+         %77 = OpIAdd %int %76 %int_1
+               OpStore %result_0 %77
+               OpBranch %continueBlock_0
+%continueBlock_0 = OpLabel
+         %81 = OpLoad %int %i_0
+         %82 = OpIAdd %int %81 %int_1
+               OpStore %i_0 %82
+               OpBranch %headerBlock_0
+%after_loop_0 = OpLabel
+         %86 = OpLoad %int %result_0
+               OpReturnValue %86
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_ForContinue
+         %91 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+               OpStore %ret %int_0
+         %94 = OpFunctionCall %int %ForContinue0 %self_3 %int_10
+               OpStore %ret %94
+         %96 = OpFunctionCall %int %ForContinue1 %self_3 %int_10
+               OpStore %ret %96
+               OpReturn
+               OpFunctionEnd
+%ForContinue_Main_EntryPoint = OpFunction %void None %15
+        %101 = OpLabel
+     %self_4 = OpVariable %_ptr_Function_ForContinue Function
+        %103 = OpFunctionCall %void %ForContinue_DefaultConstructor %self_4
+        %104 = OpFunctionCall %void %Main %self_4
+               OpReturn
+               OpFunctionEnd

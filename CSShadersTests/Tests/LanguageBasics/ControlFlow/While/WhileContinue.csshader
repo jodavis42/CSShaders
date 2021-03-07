@@ -1,0 +1,26 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct WhileContinue
+{
+  public int WhileContinue0()
+  {
+    var a = 1;
+    while(a < 0)
+    {
+      continue;
+    }
+    return a;
+  }
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    int ret = this.WhileContinue0();
+  }
+}
+
+}
+

@@ -1,0 +1,78 @@
+
+namespace Test
+{
+  [Shader.UnitTest][Shader.Pixel]
+  struct DoWhileNested
+  {
+    int DoWhileNested0()
+    {
+      var a = 1;
+      do
+      {
+        var b = 1;
+        do
+        {
+          --b;
+        } while(b > 0);
+        --a;
+      } while(a > 0);
+      return a;
+    }
+
+    int DoWhileNested1()
+    {
+      var a = 1;
+      do
+      {
+        var b = 1;
+        do
+        {
+          continue;
+        } while(b > 0);
+        --a;
+      } while(a > 0);
+      return a;
+    }
+
+    int DoWhileNested2()
+    {
+      var a = 1;
+      do
+      {
+        var b = 1;
+        do
+        {
+          break;
+        } while(b > 0);
+        --a;
+      } while(a > 0);
+      return a;
+    }
+
+    int DoWhileNested3()
+    {
+      var a = 1;
+      do
+      {
+        var b = 1;
+        do
+        {
+          break;
+        } while(b > 0);
+        break;
+      } while(a > 0);
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      int ret = 0;
+      ret = this.DoWhileNested0();
+      ret = this.DoWhileNested1();
+      ret = this.DoWhileNested2();
+      ret = this.DoWhileNested3();
+    }
+  }
+}
+

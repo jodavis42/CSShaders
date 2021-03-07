@@ -1,0 +1,237 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 181
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ForBasic1_Main_EntryPoint "ForBasic1_Main_EntryPoint"
+               OpExecutionMode %ForBasic1_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ForBasic1 "ForBasic1"
+               OpName %ForBasic1_PreConstructor "ForBasic1_PreConstructor"
+               OpName %self "self"
+               OpName %ForBasic1_DefaultConstructor "ForBasic1_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %For0 "For0"
+               OpName %self_1 "self"
+               OpName %count "count"
+               OpName %result "result"
+               OpName %i "i"
+               OpName %headerBlock "headerBlock"
+               OpName %conditionBlock "conditionBlock"
+               OpName %loop_body "loop-body"
+               OpName %continueBlock "continueBlock"
+               OpName %after_loop "after-loop"
+               OpName %For1 "For1"
+               OpName %self_2 "self"
+               OpName %count_0 "count"
+               OpName %result_0 "result"
+               OpName %i_0 "i"
+               OpName %headerBlock_0 "headerBlock"
+               OpName %conditionBlock_0 "conditionBlock"
+               OpName %loop_body_0 "loop-body"
+               OpName %continueBlock_0 "continueBlock"
+               OpName %after_loop_0 "after-loop"
+               OpName %For2 "For2"
+               OpName %self_3 "self"
+               OpName %count_1 "count"
+               OpName %result_1 "result"
+               OpName %i_1 "i"
+               OpName %headerBlock_1 "headerBlock"
+               OpName %conditionBlock_1 "conditionBlock"
+               OpName %loop_body_1 "loop-body"
+               OpName %continueBlock_1 "continueBlock"
+               OpName %after_loop_1 "after-loop"
+               OpName %For3 "For3"
+               OpName %self_4 "self"
+               OpName %count_2 "count"
+               OpName %result_2 "result"
+               OpName %i_2 "i"
+               OpName %headerBlock_2 "headerBlock"
+               OpName %conditionBlock_2 "conditionBlock"
+               OpName %loop_body_2 "loop-body"
+               OpName %continueBlock_2 "continueBlock"
+               OpName %after_loop_2 "after-loop"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %ret "ret"
+               OpName %ForBasic1_Main_EntryPoint "ForBasic1_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %ForBasic1_Main_EntryPoint "ForBasic1_Main_EntryPoint"
+               OpName %self_6 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+  %ForBasic1 = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ForBasic1 = OpTypePointer Function %ForBasic1
+          %9 = OpTypeFunction %void %_ptr_Function_ForBasic1
+         %11 = OpTypeFunction %int %_ptr_Function_ForBasic1
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %15 = OpTypeFunction %void
+     %int_10 = OpConstant %int 10
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
+%ForBasic1_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_ForBasic1
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ForBasic1_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_ForBasic1
+         %28 = OpLabel
+         %29 = OpFunctionCall %void %ForBasic1_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+       %For0 = OpFunction %int None %11
+     %self_1 = OpFunctionParameter %_ptr_Function_ForBasic1
+         %34 = OpLabel
+      %count = OpVariable %_ptr_Function_int Function
+     %result = OpVariable %_ptr_Function_int Function
+          %i = OpVariable %_ptr_Function_int Function
+               OpStore %count %int_10
+               OpStore %result %int_1
+               OpStore %i %int_0
+               OpBranch %headerBlock
+%headerBlock = OpLabel
+               OpLoopMerge %after_loop %continueBlock None
+               OpBranch %conditionBlock
+%conditionBlock = OpLabel
+         %46 = OpLoad %int %i
+         %47 = OpLoad %int %count
+         %48 = OpSLessThan %bool %46 %47
+               OpBranchConditional %48 %loop_body %after_loop
+  %loop_body = OpLabel
+         %51 = OpLoad %int %result
+         %52 = OpLoad %int %i
+         %53 = OpIAdd %int %51 %52
+               OpStore %result %53
+               OpBranch %continueBlock
+%continueBlock = OpLabel
+         %57 = OpLoad %int %i
+         %58 = OpIAdd %int %57 %int_1
+               OpStore %i %58
+               OpBranch %headerBlock
+ %after_loop = OpLabel
+         %62 = OpLoad %int %result
+               OpReturnValue %62
+               OpFunctionEnd
+       %For1 = OpFunction %int None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_ForBasic1
+         %67 = OpLabel
+    %count_0 = OpVariable %_ptr_Function_int Function
+   %result_0 = OpVariable %_ptr_Function_int Function
+        %i_0 = OpVariable %_ptr_Function_int Function
+               OpStore %count_0 %int_10
+               OpStore %result_0 %int_1
+               OpStore %i_0 %int_0
+               OpStore %i_0 %int_1
+               OpBranch %headerBlock_0
+%headerBlock_0 = OpLabel
+               OpLoopMerge %after_loop_0 %continueBlock_0 None
+               OpBranch %conditionBlock_0
+%conditionBlock_0 = OpLabel
+               OpBranch %loop_body_0
+%loop_body_0 = OpLabel
+         %82 = OpLoad %int %result_0
+         %83 = OpLoad %int %i_0
+         %84 = OpIAdd %int %82 %83
+               OpStore %result_0 %84
+               OpBranch %continueBlock_0
+%continueBlock_0 = OpLabel
+         %88 = OpLoad %int %i_0
+         %89 = OpIAdd %int %88 %int_1
+               OpStore %i_0 %89
+               OpBranch %headerBlock_0
+%after_loop_0 = OpLabel
+         %93 = OpLoad %int %result_0
+               OpReturnValue %93
+               OpFunctionEnd
+       %For2 = OpFunction %int None %11
+     %self_3 = OpFunctionParameter %_ptr_Function_ForBasic1
+         %98 = OpLabel
+    %count_1 = OpVariable %_ptr_Function_int Function
+   %result_1 = OpVariable %_ptr_Function_int Function
+        %i_1 = OpVariable %_ptr_Function_int Function
+               OpStore %count_1 %int_10
+               OpStore %result_1 %int_1
+               OpStore %i_1 %int_0
+               OpStore %i_1 %int_1
+               OpBranch %headerBlock_1
+%headerBlock_1 = OpLabel
+               OpLoopMerge %after_loop_1 %continueBlock_1 None
+               OpBranch %conditionBlock_1
+%conditionBlock_1 = OpLabel
+        %111 = OpLoad %int %i_1
+        %112 = OpLoad %int %count_1
+        %113 = OpSLessThan %bool %111 %112
+               OpBranchConditional %113 %loop_body_1 %after_loop_1
+%loop_body_1 = OpLabel
+        %116 = OpLoad %int %result_1
+        %117 = OpLoad %int %i_1
+        %118 = OpIAdd %int %116 %117
+               OpStore %result_1 %118
+        %120 = OpLoad %int %i_1
+        %121 = OpIAdd %int %120 %int_1
+               OpStore %i_1 %121
+               OpBranch %continueBlock_1
+%continueBlock_1 = OpLabel
+               OpBranch %headerBlock_1
+%after_loop_1 = OpLabel
+        %127 = OpLoad %int %result_1
+               OpReturnValue %127
+               OpFunctionEnd
+       %For3 = OpFunction %int None %11
+     %self_4 = OpFunctionParameter %_ptr_Function_ForBasic1
+        %132 = OpLabel
+    %count_2 = OpVariable %_ptr_Function_int Function
+   %result_2 = OpVariable %_ptr_Function_int Function
+        %i_2 = OpVariable %_ptr_Function_int Function
+               OpStore %count_2 %int_10
+               OpStore %result_2 %int_1
+               OpStore %i_2 %int_0
+               OpBranch %headerBlock_2
+%headerBlock_2 = OpLabel
+               OpLoopMerge %after_loop_2 %continueBlock_2 None
+               OpBranch %conditionBlock_2
+%conditionBlock_2 = OpLabel
+               OpBranch %loop_body_2
+%loop_body_2 = OpLabel
+        %146 = OpLoad %int %result_2
+        %147 = OpLoad %int %i_2
+        %148 = OpIAdd %int %146 %147
+               OpStore %result_2 %148
+        %150 = OpLoad %int %i_2
+        %151 = OpIAdd %int %150 %int_1
+               OpStore %i_2 %151
+               OpBranch %continueBlock_2
+%continueBlock_2 = OpLabel
+               OpBranch %headerBlock_2
+%after_loop_2 = OpLabel
+        %157 = OpLoad %int %result_2
+               OpReturnValue %157
+               OpFunctionEnd
+       %Main = OpFunction %void None %9
+     %self_5 = OpFunctionParameter %_ptr_Function_ForBasic1
+        %162 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+               OpStore %ret %int_0
+        %165 = OpFunctionCall %int %For0 %self_5
+               OpStore %ret %165
+        %167 = OpFunctionCall %int %For1 %self_5
+               OpStore %ret %167
+        %169 = OpFunctionCall %int %For2 %self_5
+               OpStore %ret %169
+        %171 = OpFunctionCall %int %For3 %self_5
+               OpStore %ret %171
+               OpReturn
+               OpFunctionEnd
+%ForBasic1_Main_EntryPoint = OpFunction %void None %15
+        %176 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_ForBasic1 Function
+        %178 = OpFunctionCall %void %ForBasic1_DefaultConstructor %self_6
+        %179 = OpFunctionCall %void %Main %self_6
+               OpReturn
+               OpFunctionEnd

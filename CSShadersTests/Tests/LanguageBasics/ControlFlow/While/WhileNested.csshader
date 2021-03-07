@@ -1,0 +1,81 @@
+
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct WhileNested
+{
+  int WhileNested0()
+  {
+    var a = 1;
+    while(a > 0)
+    {
+      var b = 1;
+      while(b > 0)
+        --b;
+      --a;
+    }
+    return a;
+  }
+  
+  int WhileNested1()
+  {
+    var a = 1;
+    while(a > 0)
+    {
+      var b = 1;
+      while(b > 0)
+       {
+        --b;
+        continue;
+      }
+      --a;
+    }
+    return a;
+  }
+  
+  int WhileNested2()
+  {
+    var a = 1;
+    while(a > 0)
+    {
+      var b = 1;
+      while(b > 0)
+      {
+        --b;
+        break;
+      }
+      --a;
+    }
+    return a;
+  }
+  
+  int WhileNested3()
+  {
+    var a = 1;
+    while(a > 0)
+    {
+      var b = 1;
+      while(b > 0)
+      {
+        --b;
+        break;
+      }
+      break;
+    }
+    return a;
+  }
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+    var ret = 0;
+    ret = this.WhileNested0();
+    ret = this.WhileNested1();
+    ret = this.WhileNested2();
+    ret = this.WhileNested3();
+  }
+}
+
+}
+

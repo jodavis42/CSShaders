@@ -411,7 +411,10 @@ namespace CSShaders
         for (var i = 0; i < block.mOps.Count; ++i)
         {
           var op = block.mOps[i] as ShaderOp;
-          if (op != null && (op.mOpType == OpInstructionType.OpReturn || op.mOpType == OpInstructionType.OpReturnValue))
+          if (op != null &&
+            (op.mOpType == OpInstructionType.OpReturn || op.mOpType == OpInstructionType.OpReturnValue ||
+             op.mOpType == OpInstructionType.OpBranch || op.mOpType == OpInstructionType.OpBranchConditional ||
+             op.mOpType == OpInstructionType.OpKill || op.mOpType == OpInstructionType.OpSwitch))
           {
             var nextOpIndex = i + 1;
             block.mOps.RemoveRange(nextOpIndex, block.mOps.Count - nextOpIndex);
@@ -756,6 +759,13 @@ namespace CSShaders
     public ShaderOp CastFloatToUInt(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
     {
       return SimpleCast(resultType, OpInstructionType.OpConvertFToU, expressionOp, context);
+    }
+
+    public ShaderBlock CreateBlock(string debugBlockName)
+    {
+      var block = new ShaderBlock();
+      block.DebugInfo.Name = debugBlockName;
+      return block;
     }
   }
 }

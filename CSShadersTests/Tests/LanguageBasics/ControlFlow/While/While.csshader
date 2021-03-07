@@ -1,0 +1,23 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct WhileTest
+  {
+    int While0()
+    {
+      var a = 1;
+        while(a < 0)
+         --a;
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      int ret = this.While0();
+    }
+  }
+}
+

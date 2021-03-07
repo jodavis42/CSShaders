@@ -8,13 +8,13 @@ namespace CSShaders
 {
   class FrontEndCommonPass : FrontEndPass
   {
-    public override void VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)
+    public override void VisitVariableDeclaration(VariableDeclarationSyntax node)
     {
-      var localVariableType = FindType(node.Declaration.Type);
-      foreach (var variable in node.Declaration.Variables)
+      var variableType = FindType(node.Type);
+      foreach (var variable in node.Variables)
       {
         var symbol = GetDeclaredSymbol(variable);
-        var variableOp = mFrontEnd.CreateOpVariable(localVariableType, mContext);
+        var variableOp = mFrontEnd.CreateOpVariable(variableType, mContext);
         variableOp.DebugInfo.Name = variable.Identifier.ToString();
         AddIRForSymbol(symbol, variableOp);
 
@@ -25,11 +25,12 @@ namespace CSShaders
         }
         else
         {
-          var typeSymbol = GetSymbol(node.Declaration.Type) as INamedTypeSymbol;
+          var typeSymbol = GetSymbol(node.Type) as INamedTypeSymbol;
           DefaultConstructType(typeSymbol, variableOp);
         }
       }
     }
+
     public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
     {
       var symbol = GetSymbol(node);
@@ -453,6 +454,80 @@ namespace CSShaders
         return;
       }
       throw new Exception("invalid cast");
+    }
+
+    public override void VisitWhileStatement(WhileStatementSyntax node)
+    {
+      GenerateGenericLoop(null, null, node.Condition, node.Statement, mContext);
+    }
+
+    public override void VisitForStatement(ForStatementSyntax node)
+    {
+      Visit(node.Declaration);
+      GenerateGenericLoop(node.Initializers, node.Incrementors, node.Condition, node.Statement, mContext);
+    }
+
+    public override void VisitDoStatement(DoStatementSyntax node)
+    {
+      // A do while looks like a header block that always jumps to a loop block.
+      // This loop block will always branch to the continue target (the condition block) 
+      // unless a break happens which will branch to the merge block (after the loop).
+      // The condition block will choose to jump either back to the header block or to the merge point.
+      ShaderBlock headerBlock = mFrontEnd.CreateBlock("headerBlock");
+      ShaderBlock loopTrueBlock = mFrontEnd.CreateBlock("loop-body");
+      ShaderBlock conditionBlock = mFrontEnd.CreateBlock("conditionBlock");
+      ShaderBlock mergeBlock = mFrontEnd.CreateBlock("after-loop");
+
+      // Always jump to the header block
+      mFrontEnd.CreateOp(mContext.mCurrentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { headerBlock });
+
+      // Mark the header as the next block and visit it
+      mContext.mCurrentFunction.mBlocks.Add(headerBlock);
+      GenerateLoopHeaderBlock(headerBlock, loopTrueBlock, mergeBlock, conditionBlock, mContext);
+
+      // Now create the loop body which has the conditional block as its continue target
+      mContext.mCurrentFunction.mBlocks.Add(loopTrueBlock);
+      GenerateLoopStatements(node.Statement, loopTrueBlock, mergeBlock, conditionBlock, mContext);
+
+      // Finally create the conditional block (which is the continue target)
+      // which will either jump back to the header block or exit the loop
+      mContext.mCurrentFunction.mBlocks.Add(conditionBlock);
+      GenerateLoopConditionBlock(node.Condition, conditionBlock, headerBlock, mergeBlock, mContext);
+
+      // Afterwards the active block is always the merge point
+      mContext.mCurrentFunction.mBlocks.Add(mergeBlock);
+      mContext.mCurrentBlock = mergeBlock;
+    }
+
+    public override void VisitForEachStatement(ForEachStatementSyntax node)
+    {
+      throw new Exception("For each nodes currently unsupported");
+    }
+
+    public override void VisitBreakStatement(BreakStatementSyntax node)
+    {
+      ShaderBlock currentBlock = mContext.mCurrentBlock;
+      var mergePoint = mContext.MergePointStack.Peek();
+      ShaderBlock breakTarget = mergePoint.MergeBlock;
+      if(breakTarget == null)
+        throw new Exception("Break statement doesn't have a valid merge point to jump to");
+
+      // Generate a branch to the break target of the current block. Also mark this
+      // as a terminator op so we know that no terminator must be generated.
+      currentBlock.mTerminatorOp = mFrontEnd.CreateOp(currentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { breakTarget });
+    }
+
+    public override void VisitContinueStatement(ContinueStatementSyntax node)
+    {
+      ShaderBlock currentBlock = mContext.mCurrentBlock;
+      var mergePoint = mContext.MergePointStack.Peek();
+      ShaderBlock continueTarget = mergePoint.ContinueBlock;
+      if (continueTarget == null)
+        throw new Exception("Continue statement doesn't have a valid continue point to jump to");
+
+      // Generate a branch to the continue target of the current block. Also mark this
+      // as a terminator op so we know that no terminator must be generated.
+      currentBlock.mTerminatorOp = mFrontEnd.CreateOp(currentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { continueTarget });
     }
   }
 }
