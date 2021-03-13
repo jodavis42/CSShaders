@@ -515,8 +515,7 @@ namespace CSShaders
     public override void VisitBreakStatement(BreakStatementSyntax node)
     {
       ShaderBlock currentBlock = mContext.mCurrentBlock;
-      var mergePoint = mContext.MergePointStack.Peek();
-      ShaderBlock breakTarget = mergePoint.MergeBlock;
+      ShaderBlock breakTarget = mContext.GetActiveMergeBlock();
       if(breakTarget == null)
         throw new Exception("Break statement doesn't have a valid merge point to jump to");
 
@@ -528,8 +527,7 @@ namespace CSShaders
     public override void VisitContinueStatement(ContinueStatementSyntax node)
     {
       ShaderBlock currentBlock = mContext.mCurrentBlock;
-      var mergePoint = mContext.MergePointStack.Peek();
-      ShaderBlock continueTarget = mergePoint.ContinueBlock;
+      ShaderBlock continueTarget = mContext.GetActiveContinueBlock();
       if (continueTarget == null)
         throw new Exception("Continue statement doesn't have a valid continue point to jump to");
 

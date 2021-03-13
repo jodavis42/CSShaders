@@ -18,7 +18,7 @@ namespace CSShaders
     public ShaderBlock mCurrentBlock;
 
     public Stack<IShaderIR> mOpStack = new Stack<IShaderIR>();
-    public Stack<MergePointScope> MergePointStack = new Stack<MergePointScope>();
+    List<MergePointScope> MergePointStack = new List<MergePointScope>();
     public Dictionary<ISymbol, IShaderIR> mSymbolToIRMap = new Dictionary<ISymbol, IShaderIR>();
     public IShaderIR mThisOp = null;
 
@@ -33,12 +33,34 @@ namespace CSShaders
 
     public void PushMergePoint(ShaderBlock continueBlock, ShaderBlock mergeBlock)
     {
-      MergePointStack.Push(new MergePointScope { ContinueBlock = continueBlock, MergeBlock = mergeBlock });
+      MergePointStack.Add(new MergePointScope { ContinueBlock = continueBlock, MergeBlock = mergeBlock });
+    }
+
+    public ShaderBlock GetActiveMergeBlock()
+    {
+      for(var i = 0; i < MergePointStack.Count; ++i)
+      {
+        var index = MergePointStack.Count - 1 - i;
+        if (MergePointStack[index].MergeBlock != null)
+          return MergePointStack[index].MergeBlock;
+      }
+      return null;
+    }
+
+    public ShaderBlock GetActiveContinueBlock()
+    {
+      for (var i = 0; i < MergePointStack.Count; ++i)
+      {
+        var index = MergePointStack.Count - 1 - i;
+        if (MergePointStack[index].ContinueBlock != null)
+          return MergePointStack[index].ContinueBlock;
+      }
+      return null;
     }
 
     public void PopMergePoint()
     {
-      MergePointStack.Pop();
+      MergePointStack.RemoveAt(MergePointStack.Count - 1);
     }
   }
 }
