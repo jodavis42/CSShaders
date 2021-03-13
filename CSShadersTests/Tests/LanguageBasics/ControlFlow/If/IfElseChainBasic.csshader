@@ -1,0 +1,57 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct IfElseChainBasic
+  {
+    int IfElseChain0()
+    {
+      var a = 0;
+      if(true)
+        a = 1;
+      else if(false)
+        a = 2;
+      ++a;
+      return a;
+    }
+
+    int IfElseChain1()
+    {
+      var a = 0;
+      if(true)
+        a = 1;
+      else if(false)
+        a = 2;
+      else
+        a = 3;
+      ++a;
+      return a;
+    }
+
+    int IfElseChain2()
+    {
+      var a = 0;
+      if(true)
+        a = 1;
+      else if(false)
+        a = 2;
+      else if(a < 3)
+        a = 3;
+      else
+        a = 4;
+      ++a;
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = 0;
+      ret = this.IfElseChain0();
+      ret = this.IfElseChain1();
+      ret = this.IfElseChain2();
+    }
+  }
+}
+

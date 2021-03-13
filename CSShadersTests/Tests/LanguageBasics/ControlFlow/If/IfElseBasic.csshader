@@ -1,0 +1,27 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct IfElseBasic
+  {
+    int IfElse0()
+    {
+      var a = 0;
+      if(true)
+        a = 1;
+      else
+        a = 2;
+      ++a;
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = 0;
+      ret = this.IfElse0();
+    }
+  }
+}
+

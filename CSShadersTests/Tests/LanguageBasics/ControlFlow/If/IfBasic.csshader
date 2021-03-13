@@ -1,0 +1,34 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct IfBasic
+  {
+    int If0()
+    {
+      var a = 0;
+      if(true)
+        a = 1;
+      return a;
+    }
+
+    int If1()
+    {
+       var a = 0;
+      if(true)
+        a = 1;
+      ++a;
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = 0;
+      ret = this.If0();
+      ret = this.If1();
+    }
+  }
+}
+

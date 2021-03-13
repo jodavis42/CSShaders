@@ -1,0 +1,90 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 68
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %IfElseBasic_Main_EntryPoint "IfElseBasic_Main_EntryPoint"
+               OpExecutionMode %IfElseBasic_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %IfElseBasic "IfElseBasic"
+               OpName %IfElseBasic_PreConstructor "IfElseBasic_PreConstructor"
+               OpName %self "self"
+               OpName %IfElseBasic_DefaultConstructor "IfElseBasic_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %IfElse0 "IfElse0"
+               OpName %self_1 "self"
+               OpName %a "a"
+               OpName %ifTrue0 "ifTrue0"
+               OpName %ifFalse0 "ifFalse0"
+               OpName %ifMerge0 "ifMerge0"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %ret "ret"
+               OpName %IfElseBasic_Main_EntryPoint "IfElseBasic_Main_EntryPoint"
+               OpName %self_3 "self"
+               OpName %IfElseBasic_Main_EntryPoint "IfElseBasic_Main_EntryPoint"
+               OpName %self_3 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+       %bool = OpTypeBool
+%IfElseBasic = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IfElseBasic = OpTypePointer Function %IfElseBasic
+         %11 = OpTypeFunction %void %_ptr_Function_IfElseBasic
+         %13 = OpTypeFunction %int %_ptr_Function_IfElseBasic
+%_ptr_Function_int = OpTypePointer Function %int
+         %15 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+       %true = OpConstantTrue %bool
+      %int_1 = OpConstant %int 1
+      %int_2 = OpConstant %int 2
+%IfElseBasic_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_IfElseBasic
+         %24 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IfElseBasic_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_IfElseBasic
+         %29 = OpLabel
+         %30 = OpFunctionCall %void %IfElseBasic_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+    %IfElse0 = OpFunction %int None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_IfElseBasic
+         %35 = OpLabel
+          %a = OpVariable %_ptr_Function_int Function
+               OpStore %a %int_0
+               OpSelectionMerge %ifMerge0 None
+               OpBranchConditional %true %ifTrue0 %ifFalse0
+    %ifTrue0 = OpLabel
+               OpStore %a %int_1
+               OpBranch %ifMerge0
+   %ifFalse0 = OpLabel
+               OpStore %a %int_2
+               OpBranch %ifMerge0
+   %ifMerge0 = OpLabel
+         %47 = OpLoad %int %a
+         %48 = OpIAdd %int %47 %int_1
+               OpStore %a %48
+         %50 = OpLoad %int %a
+               OpReturnValue %50
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_2 = OpFunctionParameter %_ptr_Function_IfElseBasic
+         %55 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+               OpStore %ret %int_0
+         %58 = OpFunctionCall %int %IfElse0 %self_2
+               OpStore %ret %58
+               OpReturn
+               OpFunctionEnd
+%IfElseBasic_Main_EntryPoint = OpFunction %void None %15
+         %63 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_IfElseBasic Function
+         %65 = OpFunctionCall %void %IfElseBasic_DefaultConstructor %self_3
+         %66 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd

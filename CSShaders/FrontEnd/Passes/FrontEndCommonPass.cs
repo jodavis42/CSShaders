@@ -547,5 +547,181 @@ namespace CSShaders
       // as a terminator op so we know that no terminator must be generated.
       currentBlock.mTerminatorOp = mFrontEnd.CreateOp(currentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { continueTarget });
     }
+
+    class IfNodeData
+    {
+      public SyntaxNode Condition;
+      public SyntaxNode Statement;
+    }
+
+    List<IfNodeData> FlattenIfChain(IfStatementSyntax node)
+    {
+      List<IfNodeData> ifNodes = new List<IfNodeData>();
+      Stack<IfStatementSyntax> ifStack = new Stack<IfStatementSyntax>();
+      ifStack.Push(node);
+      // Walk the if-else chain, flattening it into a list of data
+      while (ifStack.Count != 0)
+      {
+        var ifNode = ifStack.Pop();
+        // Add the if data
+        ifNodes.Add(new IfNodeData { Condition = ifNode.Condition, Statement = ifNode.Statement });
+        
+        if (ifNode.Else != null)
+        {
+          // If there's an if that's an else-if, push it on the stack to visit
+          if(ifNode.Else.Statement is IfStatementSyntax elseIfNode)
+            ifStack.Push(elseIfNode);
+          // Otherwise this is an else, build the node with the statement data
+          else
+            ifNodes.Add(new IfNodeData { Condition = null, Statement = ifNode.Else.Statement });
+        }
+      }
+      return ifNodes;
+    }
+
+    class ConditionBlockData
+    {
+      public ShaderBlock IfTrue;
+      public ShaderBlock IfFalse;
+      public ShaderBlock MergePoint;
+    };
+
+    List<ConditionBlockData> BuildIfChain(List<IfNodeData> ifs)
+    {
+      List<ConditionBlockData> blockPairs = new List<ConditionBlockData>();
+      for (var i = 0; i < ifs.Count; ++i)
+      {
+        // Skip any else with no condition. This is covered by the previous block's ifFalse block
+        if (ifs[i].Condition == null)
+          continue;
+
+        var indexStr = i.ToString();
+        var data = new ConditionBlockData();
+
+        // Don't add any block to the function so we can properly resolve dominance order.
+        // This is particularly important for expressions that change the block inside of the conditional (e.g. Logical Or)
+
+        // Always make the if and merge blocks
+        data.IfTrue = mFrontEnd.CreateBlock("ifTrue" + indexStr);
+        data.MergePoint = mFrontEnd.CreateBlock("ifMerge" + indexStr);
+
+        // The ifFalse block is not always needed though. If this is the last part in the chain
+        // then this must be an if with no else (since we skipped else's with no ifs earlier).
+        // In this case do a small optimization of making the ifFalse and mergePoint be the same block.
+        // This makes code generation a little easier and makes the resultant code look cleaner.
+        var lastIndex = ifs.Count - 1;
+        if (i != lastIndex)
+          data.IfFalse = mFrontEnd.CreateBlock("ifFalse" + indexStr);
+        else
+          data.IfFalse = data.MergePoint;
+
+        blockPairs.Add(data);
+      }
+      return blockPairs;
+    }
+
+    void EmitIfChain(List<IfNodeData>  ifs, List<ConditionBlockData> blockPairs)
+    {
+      ShaderBlock prevBlock = mContext.mCurrentBlock;
+      // Now emit all of the actual if statements and their bodies
+      for (var i = 0; i < ifs.Count; ++i)
+      {
+        var ifNode = ifs[i];
+
+        // If this part has a condition then we have to emit the appropriate conditional block and branch conditions
+        if (ifNode.Condition != null)
+        {
+          var blockPair = blockPairs[i];
+          ShaderBlock ifTrueBlock = blockPair.IfTrue;
+          ShaderBlock ifFalseBlock = blockPair.IfFalse;
+          ShaderBlock ifMerge = blockPair.MergePoint;
+
+          // Walk the conditional and then branch on this value to either the true or false block
+          var conditionalIR = WalkAndGetValueTypeResult(ifNode.Condition);
+
+          // Mark the current block we're in (the header block where we write the conditionals) as a selection block and mark it's merge point.
+          // Note: This needs to be after we walk the conditional as the block can change (logical and/or expressions)
+          ShaderBlock headerBlock = mContext.mCurrentBlock;
+          headerBlock.mBlockType = BlockType.Selection;
+          headerBlock.mMergePoint = ifMerge;
+
+          var selectControlMask = mFrontEnd.CreateConstantLiteral<uint>((uint)Spv.SelectionControlMask.SelectionControlMaskNone);
+          mFrontEnd.CreateOp(headerBlock, OpInstructionType.OpSelectionMerge, null, new List<IShaderIR> { ifMerge, selectControlMask });
+          headerBlock.mTerminatorOp = mFrontEnd.CreateOp(headerBlock, OpInstructionType.OpBranchConditional, null, new List<IShaderIR> { conditionalIR, ifTrueBlock, ifFalseBlock });
+
+          // Start emitting the true block. First mark this as the current active block
+          mContext.mCurrentBlock = ifTrueBlock;
+          // Mark the if true block as the next block in dominance order
+          mContext.mCurrentFunction.mBlocks.Add(ifTrueBlock);
+
+          // Now walk all of the statements int he block
+          Visit(ifNode.Statement);
+          // Always emit a branch back to the merge point. If this is dead code because of another termination
+          // condition we'll clean this up after generating the entire function.
+          ifTrueBlock.mTerminatorOp = mFrontEnd.CreateOp(ifTrueBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { ifMerge });
+
+          // Nested if pushed another merge point. Add to a termination condition on the nested if merge point back to our merge point.
+          if (mContext.mCurrentBlock != ifTrueBlock)
+          {
+            ShaderBlock nestedBlock = mContext.mCurrentBlock;
+            nestedBlock.mTerminatorOp = mFrontEnd.CreateOp(nestedBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { ifMerge });
+          }
+
+          // Now mark that we're inside the false block
+          mContext.mCurrentBlock = ifFalseBlock;
+          // Mark the if false block as the next block in dominance order
+          // (if it's not the merge block which is handled at the end)
+          if (ifFalseBlock != ifMerge)
+            mContext.mCurrentFunction.mBlocks.Add(ifFalseBlock);
+          // Keep track of the previous header block so if statements know where to merge back to
+          prevBlock = headerBlock;
+        }
+        // Otherwise this is an else with no if
+        else
+        {
+          ShaderBlock currentBlock = mContext.mCurrentBlock;
+          // Walk all of the statements in the else
+          Visit(ifNode.Statement);
+
+          // Always emit a branch back to the previous block's merge point
+          currentBlock.mTerminatorOp = mFrontEnd.CreateOp(currentBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { prevBlock.mMergePoint });
+          // Nested if pushed another merge point. Add to a termination condition on the nested if merge point back to our merge point.
+          if (mContext.mCurrentBlock != currentBlock)
+          {
+            ShaderBlock nestedBlock = mContext.mCurrentBlock;
+            currentBlock.mTerminatorOp = mFrontEnd.CreateOp(nestedBlock, OpInstructionType.OpBranch, null, new List<IShaderIR> { prevBlock.mMergePoint });
+          }
+        }
+      }
+    }
+
+    void EmitIfMergePoints(List<ConditionBlockData> blockPairs)
+    {
+      // Now write out all merge point blocks in reverse order (requirement of spir-v is
+      // that a block must appear before all blocks they dominate). Additionally, add branches 
+      // for all merge points of all blocks to the previous block's merge point.
+      for (var i = 0; i < blockPairs.Count; ++i)
+      {
+        var blockIndex = blockPairs.Count - i - 1;
+        ShaderBlock block = blockPairs[blockIndex].MergePoint;
+        // If this is not the first block then add a branch on the merge point to the previous block's merge point
+        if (blockIndex != 0)
+          block.mTerminatorOp = mFrontEnd.CreateOp(block, OpInstructionType.OpBranch, null, new List<IShaderIR> { blockPairs[blockIndex - 1].MergePoint });
+        mContext.mCurrentFunction.mBlocks.Add(block);
+      }
+    }
+
+    public override void VisitIfStatement(IfStatementSyntax node)
+    {
+      // If statements are very complicated to get correctly. This could potentially be simplified, but this 
+      // correctly catches all cases now and recent attempts to improve this have found edge cases.
+      var ifs = FlattenIfChain(node);
+      var blockPairs = BuildIfChain(ifs);
+      EmitIfChain(ifs, blockPairs);
+      EmitIfMergePoints(blockPairs);
+
+      // Mark the first merge point as the new current block (everything after the if goes here).
+      mContext.mCurrentBlock = blockPairs[0].MergePoint;
+    }
   }
 }

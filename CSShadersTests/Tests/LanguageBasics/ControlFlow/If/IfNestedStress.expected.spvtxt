@@ -1,0 +1,895 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 746
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %IfNestedStress_Main_EntryPoint "IfNestedStress_Main_EntryPoint"
+               OpExecutionMode %IfNestedStress_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %IfNestedStress "IfNestedStress"
+               OpName %IfNestedStress_PreConstructor "IfNestedStress_PreConstructor"
+               OpName %self "self"
+               OpName %IfNestedStress_DefaultConstructor "IfNestedStress_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %IfNestedStress0 "IfNestedStress0"
+               OpName %self_1 "self"
+               OpName %a "a"
+               OpName %ifTrue0 "ifTrue0"
+               OpName %ifTrue0_0 "ifTrue0"
+               OpName %ifTrue0_1 "ifTrue0"
+               OpName %ifMerge0 "ifMerge0"
+               OpName %ifMerge0_0 "ifMerge0"
+               OpName %ifMerge0_1 "ifMerge0"
+               OpName %IfNestedStress1 "IfNestedStress1"
+               OpName %self_2 "self"
+               OpName %one "one"
+               OpName %nOne "nOne"
+               OpName %zero "zero"
+               OpName %i0 "i0"
+               OpName %i1 "i1"
+               OpName %r0 "r0"
+               OpName %r1 "r1"
+               OpName %result "result"
+               OpName %ifTrue0_2 "ifTrue0"
+               OpName %ifTrue0_3 "ifTrue0"
+               OpName %ifFalse0 "ifFalse0"
+               OpName %ifTrue1 "ifTrue1"
+               OpName %ifFalse1 "ifFalse1"
+               OpName %ifMerge1 "ifMerge1"
+               OpName %ifMerge0_2 "ifMerge0"
+               OpName %ifFalse0_0 "ifFalse0"
+               OpName %ifTrue1_0 "ifTrue1"
+               OpName %ifTrue0_4 "ifTrue0"
+               OpName %ifFalse0_1 "ifFalse0"
+               OpName %ifTrue1_1 "ifTrue1"
+               OpName %ifFalse1_0 "ifFalse1"
+               OpName %ifMerge1_0 "ifMerge1"
+               OpName %ifMerge0_3 "ifMerge0"
+               OpName %ifFalse1_1 "ifFalse1"
+               OpName %ifTrue0_5 "ifTrue0"
+               OpName %ifFalse0_2 "ifFalse0"
+               OpName %ifTrue1_2 "ifTrue1"
+               OpName %ifFalse1_2 "ifFalse1"
+               OpName %ifMerge1_1 "ifMerge1"
+               OpName %ifMerge0_4 "ifMerge0"
+               OpName %ifMerge1_2 "ifMerge1"
+               OpName %ifMerge0_5 "ifMerge0"
+               OpName %IfNestedStress2 "IfNestedStress2"
+               OpName %self_3 "self"
+               OpName %one_0 "one"
+               OpName %nOne_0 "nOne"
+               OpName %zero_0 "zero"
+               OpName %i0_0 "i0"
+               OpName %i1_0 "i1"
+               OpName %i2 "i2"
+               OpName %r0_0 "r0"
+               OpName %r1_0 "r1"
+               OpName %r2 "r2"
+               OpName %result_0 "result"
+               OpName %ifTrue0_6 "ifTrue0"
+               OpName %ifTrue0_7 "ifTrue0"
+               OpName %ifTrue0_8 "ifTrue0"
+               OpName %ifFalse0_3 "ifFalse0"
+               OpName %ifTrue1_3 "ifTrue1"
+               OpName %ifFalse1_3 "ifFalse1"
+               OpName %ifMerge1_3 "ifMerge1"
+               OpName %ifMerge0_6 "ifMerge0"
+               OpName %ifFalse0_4 "ifFalse0"
+               OpName %ifTrue1_4 "ifTrue1"
+               OpName %ifTrue0_9 "ifTrue0"
+               OpName %ifFalse0_5 "ifFalse0"
+               OpName %ifTrue1_5 "ifTrue1"
+               OpName %ifFalse1_4 "ifFalse1"
+               OpName %ifMerge1_4 "ifMerge1"
+               OpName %ifMerge0_7 "ifMerge0"
+               OpName %ifFalse1_5 "ifFalse1"
+               OpName %ifTrue0_10 "ifTrue0"
+               OpName %ifFalse0_6 "ifFalse0"
+               OpName %ifTrue1_6 "ifTrue1"
+               OpName %ifFalse1_6 "ifFalse1"
+               OpName %ifMerge1_5 "ifMerge1"
+               OpName %ifMerge0_8 "ifMerge0"
+               OpName %ifMerge1_6 "ifMerge1"
+               OpName %ifMerge0_9 "ifMerge0"
+               OpName %ifFalse0_7 "ifFalse0"
+               OpName %ifTrue1_7 "ifTrue1"
+               OpName %ifTrue0_11 "ifTrue0"
+               OpName %ifTrue0_12 "ifTrue0"
+               OpName %ifFalse0_8 "ifFalse0"
+               OpName %ifTrue1_8 "ifTrue1"
+               OpName %ifFalse1_7 "ifFalse1"
+               OpName %ifMerge1_7 "ifMerge1"
+               OpName %ifMerge0_10 "ifMerge0"
+               OpName %ifFalse0_9 "ifFalse0"
+               OpName %ifTrue1_9 "ifTrue1"
+               OpName %ifTrue0_13 "ifTrue0"
+               OpName %ifFalse0_10 "ifFalse0"
+               OpName %ifTrue1_10 "ifTrue1"
+               OpName %ifFalse1_8 "ifFalse1"
+               OpName %ifMerge1_8 "ifMerge1"
+               OpName %ifMerge0_11 "ifMerge0"
+               OpName %ifFalse1_9 "ifFalse1"
+               OpName %ifTrue0_14 "ifTrue0"
+               OpName %ifFalse0_11 "ifFalse0"
+               OpName %ifTrue1_11 "ifTrue1"
+               OpName %ifFalse1_10 "ifFalse1"
+               OpName %ifMerge1_9 "ifMerge1"
+               OpName %ifMerge0_12 "ifMerge0"
+               OpName %ifMerge1_10 "ifMerge1"
+               OpName %ifMerge0_13 "ifMerge0"
+               OpName %ifFalse1_11 "ifFalse1"
+               OpName %ifTrue0_15 "ifTrue0"
+               OpName %ifTrue0_16 "ifTrue0"
+               OpName %ifFalse0_12 "ifFalse0"
+               OpName %ifTrue1_12 "ifTrue1"
+               OpName %ifFalse1_12 "ifFalse1"
+               OpName %ifMerge1_11 "ifMerge1"
+               OpName %ifMerge0_14 "ifMerge0"
+               OpName %ifFalse0_13 "ifFalse0"
+               OpName %ifTrue1_13 "ifTrue1"
+               OpName %ifTrue0_17 "ifTrue0"
+               OpName %ifFalse0_14 "ifFalse0"
+               OpName %ifTrue1_14 "ifTrue1"
+               OpName %ifFalse1_13 "ifFalse1"
+               OpName %ifMerge1_12 "ifMerge1"
+               OpName %ifMerge0_15 "ifMerge0"
+               OpName %ifFalse1_14 "ifFalse1"
+               OpName %ifTrue0_18 "ifTrue0"
+               OpName %ifFalse0_15 "ifFalse0"
+               OpName %ifTrue1_15 "ifTrue1"
+               OpName %ifFalse1_15 "ifFalse1"
+               OpName %ifMerge1_13 "ifMerge1"
+               OpName %ifMerge0_16 "ifMerge0"
+               OpName %ifMerge1_14 "ifMerge1"
+               OpName %ifMerge0_17 "ifMerge0"
+               OpName %ifMerge1_15 "ifMerge1"
+               OpName %ifMerge0_18 "ifMerge0"
+               OpName %Main "Main"
+               OpName %self_4 "self"
+               OpName %ret "ret"
+               OpName %IfNestedStress_Main_EntryPoint "IfNestedStress_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %IfNestedStress_Main_EntryPoint "IfNestedStress_Main_EntryPoint"
+               OpName %self_5 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+       %bool = OpTypeBool
+%IfNestedStress = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IfNestedStress = OpTypePointer Function %IfNestedStress
+         %11 = OpTypeFunction %void %_ptr_Function_IfNestedStress
+         %13 = OpTypeFunction %int %_ptr_Function_IfNestedStress
+%_ptr_Function_int = OpTypePointer Function %int
+         %15 = OpTypeFunction %void
+      %int_0 = OpConstant %int 0
+       %true = OpConstantTrue %bool
+      %int_1 = OpConstant %int 1
+      %false = OpConstantFalse %bool
+      %int_2 = OpConstant %int 2
+      %int_3 = OpConstant %int 3
+      %int_4 = OpConstant %int 4
+%IfNestedStress_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_IfNestedStress
+         %27 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%IfNestedStress_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_IfNestedStress
+         %32 = OpLabel
+         %33 = OpFunctionCall %void %IfNestedStress_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%IfNestedStress0 = OpFunction %int None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_IfNestedStress
+         %38 = OpLabel
+          %a = OpVariable %_ptr_Function_int Function
+               OpStore %a %int_0
+               OpSelectionMerge %ifMerge0_1 None
+               OpBranchConditional %true %ifTrue0 %ifMerge0_1
+    %ifTrue0 = OpLabel
+               OpStore %a %int_1
+               OpSelectionMerge %ifMerge0_0 None
+               OpBranchConditional %false %ifTrue0_0 %ifMerge0_0
+  %ifTrue0_0 = OpLabel
+               OpStore %a %int_2
+         %49 = OpLoad %int %a
+         %50 = OpSGreaterThan %bool %49 %int_3
+               OpSelectionMerge %ifMerge0 None
+               OpBranchConditional %50 %ifTrue0_1 %ifMerge0
+  %ifTrue0_1 = OpLabel
+               OpStore %a %int_3
+               OpBranch %ifMerge0
+   %ifMerge0 = OpLabel
+               OpStore %a %int_4
+               OpBranch %ifMerge0_0
+ %ifMerge0_0 = OpLabel
+               OpStore %a %int_3
+               OpBranch %ifMerge0_1
+ %ifMerge0_1 = OpLabel
+         %63 = OpLoad %int %a
+         %64 = OpIAdd %int %63 %int_1
+               OpStore %a %64
+         %66 = OpLoad %int %a
+               OpReturnValue %66
+               OpFunctionEnd
+%IfNestedStress1 = OpFunction %int None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_IfNestedStress
+         %71 = OpLabel
+        %one = OpVariable %_ptr_Function_int Function
+       %nOne = OpVariable %_ptr_Function_int Function
+       %zero = OpVariable %_ptr_Function_int Function
+         %i0 = OpVariable %_ptr_Function_int Function
+         %i1 = OpVariable %_ptr_Function_int Function
+         %r0 = OpVariable %_ptr_Function_int Function
+         %r1 = OpVariable %_ptr_Function_int Function
+     %result = OpVariable %_ptr_Function_int Function
+               OpStore %one %int_1
+         %81 = OpSNegate %int %int_1
+               OpStore %nOne %81
+               OpStore %zero %int_0
+               OpStore %i0 %int_0
+               OpStore %i1 %int_0
+               OpStore %r0 %int_0
+               OpStore %r1 %int_0
+         %88 = OpLoad %int %i0
+         %89 = OpSLessThan %bool %88 %int_0
+               OpSelectionMerge %ifMerge0_5 None
+               OpBranchConditional %89 %ifTrue0_2 %ifFalse0_0
+  %ifTrue0_2 = OpLabel
+         %93 = OpLoad %int %nOne
+               OpStore %r0 %93
+         %95 = OpLoad %int %i1
+         %96 = OpSLessThan %bool %95 %int_0
+               OpSelectionMerge %ifMerge0_2 None
+               OpBranchConditional %96 %ifTrue0_3 %ifFalse0
+  %ifTrue0_3 = OpLabel
+        %100 = OpLoad %int %nOne
+        %101 = OpLoad %int %nOne
+        %102 = OpIAdd %int %100 %101
+               OpStore %r1 %102
+               OpBranch %ifMerge0_2
+   %ifFalse0 = OpLabel
+        %106 = OpLoad %int %i1
+        %107 = OpSGreaterThan %bool %106 %int_0
+               OpSelectionMerge %ifMerge1 None
+               OpBranchConditional %107 %ifTrue1 %ifFalse1
+    %ifTrue1 = OpLabel
+        %111 = OpLoad %int %one
+        %112 = OpLoad %int %nOne
+        %113 = OpIAdd %int %111 %112
+               OpStore %r1 %113
+               OpBranch %ifMerge1
+   %ifFalse1 = OpLabel
+        %117 = OpLoad %int %zero
+        %118 = OpLoad %int %nOne
+        %119 = OpIAdd %int %117 %118
+               OpStore %r1 %119
+               OpBranch %ifMerge1
+   %ifMerge1 = OpLabel
+               OpBranch %ifMerge0_2
+ %ifMerge0_2 = OpLabel
+        %125 = OpLoad %int %nOne
+               OpStore %r0 %125
+               OpBranch %ifMerge0_5
+ %ifFalse0_0 = OpLabel
+        %129 = OpLoad %int %i0
+        %130 = OpSGreaterThan %bool %129 %int_0
+               OpSelectionMerge %ifMerge1_2 None
+               OpBranchConditional %130 %ifTrue1_0 %ifFalse1_1
+  %ifTrue1_0 = OpLabel
+        %134 = OpLoad %int %one
+               OpStore %r0 %134
+        %136 = OpLoad %int %i1
+        %137 = OpSLessThan %bool %136 %int_0
+               OpSelectionMerge %ifMerge0_3 None
+               OpBranchConditional %137 %ifTrue0_4 %ifFalse0_1
+  %ifTrue0_4 = OpLabel
+        %141 = OpLoad %int %nOne
+        %142 = OpLoad %int %one
+        %143 = OpIAdd %int %141 %142
+               OpStore %r1 %143
+               OpBranch %ifMerge0_3
+ %ifFalse0_1 = OpLabel
+        %147 = OpLoad %int %i1
+        %148 = OpSGreaterThan %bool %147 %int_0
+               OpSelectionMerge %ifMerge1_0 None
+               OpBranchConditional %148 %ifTrue1_1 %ifFalse1_0
+  %ifTrue1_1 = OpLabel
+        %152 = OpLoad %int %one
+        %153 = OpLoad %int %one
+        %154 = OpIAdd %int %152 %153
+               OpStore %r1 %154
+               OpBranch %ifMerge1_0
+ %ifFalse1_0 = OpLabel
+        %158 = OpLoad %int %zero
+        %159 = OpLoad %int %one
+        %160 = OpIAdd %int %158 %159
+               OpStore %r1 %160
+               OpBranch %ifMerge1_0
+ %ifMerge1_0 = OpLabel
+               OpBranch %ifMerge0_3
+ %ifMerge0_3 = OpLabel
+        %166 = OpLoad %int %one
+               OpStore %r0 %166
+               OpBranch %ifMerge1_2
+ %ifFalse1_1 = OpLabel
+        %170 = OpLoad %int %zero
+               OpStore %r0 %170
+        %172 = OpLoad %int %i1
+        %173 = OpSLessThan %bool %172 %int_0
+               OpSelectionMerge %ifMerge0_4 None
+               OpBranchConditional %173 %ifTrue0_5 %ifFalse0_2
+  %ifTrue0_5 = OpLabel
+        %177 = OpLoad %int %nOne
+        %178 = OpLoad %int %zero
+        %179 = OpIAdd %int %177 %178
+               OpStore %r1 %179
+               OpBranch %ifMerge0_4
+ %ifFalse0_2 = OpLabel
+        %183 = OpLoad %int %i1
+        %184 = OpSGreaterThan %bool %183 %int_0
+               OpSelectionMerge %ifMerge1_1 None
+               OpBranchConditional %184 %ifTrue1_2 %ifFalse1_2
+  %ifTrue1_2 = OpLabel
+        %188 = OpLoad %int %one
+        %189 = OpLoad %int %zero
+        %190 = OpIAdd %int %188 %189
+               OpStore %r1 %190
+               OpBranch %ifMerge1_1
+ %ifFalse1_2 = OpLabel
+        %194 = OpLoad %int %zero
+        %195 = OpLoad %int %zero
+        %196 = OpIAdd %int %194 %195
+               OpStore %r1 %196
+               OpBranch %ifMerge1_1
+ %ifMerge1_1 = OpLabel
+               OpBranch %ifMerge0_4
+ %ifMerge0_4 = OpLabel
+        %202 = OpLoad %int %zero
+               OpStore %r0 %202
+               OpBranch %ifMerge1_2
+ %ifMerge1_2 = OpLabel
+               OpBranch %ifMerge0_5
+ %ifMerge0_5 = OpLabel
+        %208 = OpLoad %int %r0
+        %209 = OpLoad %int %r1
+        %210 = OpIAdd %int %208 %209
+               OpStore %result %210
+        %212 = OpLoad %int %result
+               OpReturnValue %212
+               OpFunctionEnd
+%IfNestedStress2 = OpFunction %int None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_IfNestedStress
+        %217 = OpLabel
+      %one_0 = OpVariable %_ptr_Function_int Function
+     %nOne_0 = OpVariable %_ptr_Function_int Function
+     %zero_0 = OpVariable %_ptr_Function_int Function
+       %i0_0 = OpVariable %_ptr_Function_int Function
+       %i1_0 = OpVariable %_ptr_Function_int Function
+         %i2 = OpVariable %_ptr_Function_int Function
+       %r0_0 = OpVariable %_ptr_Function_int Function
+       %r1_0 = OpVariable %_ptr_Function_int Function
+         %r2 = OpVariable %_ptr_Function_int Function
+   %result_0 = OpVariable %_ptr_Function_int Function
+               OpStore %one_0 %int_1
+        %229 = OpSNegate %int %int_1
+               OpStore %nOne_0 %229
+               OpStore %zero_0 %int_0
+               OpStore %i0_0 %int_0
+               OpStore %i1_0 %int_0
+               OpStore %i2 %int_0
+               OpStore %r0_0 %int_0
+               OpStore %r1_0 %int_0
+               OpStore %r2 %int_0
+        %238 = OpLoad %int %i0_0
+        %239 = OpSLessThan %bool %238 %int_0
+               OpSelectionMerge %ifMerge0_18 None
+               OpBranchConditional %239 %ifTrue0_6 %ifFalse0_7
+  %ifTrue0_6 = OpLabel
+        %243 = OpLoad %int %nOne_0
+               OpStore %r0_0 %243
+        %245 = OpLoad %int %i1_0
+        %246 = OpSLessThan %bool %245 %int_0
+               OpSelectionMerge %ifMerge0_9 None
+               OpBranchConditional %246 %ifTrue0_7 %ifFalse0_4
+  %ifTrue0_7 = OpLabel
+        %250 = OpLoad %int %nOne_0
+        %251 = OpLoad %int %nOne_0
+        %252 = OpIAdd %int %250 %251
+               OpStore %r1_0 %252
+        %254 = OpLoad %int %i2
+        %255 = OpSLessThan %bool %254 %int_0
+               OpSelectionMerge %ifMerge0_6 None
+               OpBranchConditional %255 %ifTrue0_8 %ifFalse0_3
+  %ifTrue0_8 = OpLabel
+        %259 = OpLoad %int %nOne_0
+        %260 = OpLoad %int %nOne_0
+        %261 = OpIAdd %int %259 %260
+        %262 = OpLoad %int %nOne_0
+        %263 = OpIAdd %int %261 %262
+               OpStore %r2 %263
+               OpBranch %ifMerge0_6
+ %ifFalse0_3 = OpLabel
+        %267 = OpLoad %int %i2
+        %268 = OpSGreaterThan %bool %267 %int_0
+               OpSelectionMerge %ifMerge1_3 None
+               OpBranchConditional %268 %ifTrue1_3 %ifFalse1_3
+  %ifTrue1_3 = OpLabel
+        %272 = OpLoad %int %one_0
+        %273 = OpLoad %int %nOne_0
+        %274 = OpIAdd %int %272 %273
+        %275 = OpLoad %int %nOne_0
+        %276 = OpIAdd %int %274 %275
+               OpStore %r2 %276
+               OpBranch %ifMerge1_3
+ %ifFalse1_3 = OpLabel
+        %280 = OpLoad %int %zero_0
+        %281 = OpLoad %int %nOne_0
+        %282 = OpIAdd %int %280 %281
+        %283 = OpLoad %int %nOne_0
+        %284 = OpIAdd %int %282 %283
+               OpStore %r2 %284
+               OpBranch %ifMerge1_3
+ %ifMerge1_3 = OpLabel
+               OpBranch %ifMerge0_6
+ %ifMerge0_6 = OpLabel
+        %290 = OpLoad %int %nOne_0
+        %291 = OpLoad %int %nOne_0
+        %292 = OpIAdd %int %290 %291
+               OpStore %r1_0 %292
+               OpBranch %ifMerge0_9
+ %ifFalse0_4 = OpLabel
+        %296 = OpLoad %int %i1_0
+        %297 = OpSGreaterThan %bool %296 %int_0
+               OpSelectionMerge %ifMerge1_6 None
+               OpBranchConditional %297 %ifTrue1_4 %ifFalse1_5
+  %ifTrue1_4 = OpLabel
+        %301 = OpLoad %int %one_0
+        %302 = OpLoad %int %nOne_0
+        %303 = OpIAdd %int %301 %302
+               OpStore %r1_0 %303
+        %305 = OpLoad %int %i2
+        %306 = OpSLessThan %bool %305 %int_0
+               OpSelectionMerge %ifMerge0_7 None
+               OpBranchConditional %306 %ifTrue0_9 %ifFalse0_5
+  %ifTrue0_9 = OpLabel
+        %310 = OpLoad %int %nOne_0
+        %311 = OpLoad %int %one_0
+        %312 = OpIAdd %int %310 %311
+        %313 = OpLoad %int %nOne_0
+        %314 = OpIAdd %int %312 %313
+               OpStore %r2 %314
+               OpBranch %ifMerge0_7
+ %ifFalse0_5 = OpLabel
+        %318 = OpLoad %int %i2
+        %319 = OpSGreaterThan %bool %318 %int_0
+               OpSelectionMerge %ifMerge1_4 None
+               OpBranchConditional %319 %ifTrue1_5 %ifFalse1_4
+  %ifTrue1_5 = OpLabel
+        %323 = OpLoad %int %one_0
+        %324 = OpLoad %int %one_0
+        %325 = OpIAdd %int %323 %324
+        %326 = OpLoad %int %nOne_0
+        %327 = OpIAdd %int %325 %326
+               OpStore %r2 %327
+               OpBranch %ifMerge1_4
+ %ifFalse1_4 = OpLabel
+        %331 = OpLoad %int %zero_0
+        %332 = OpLoad %int %one_0
+        %333 = OpIAdd %int %331 %332
+        %334 = OpLoad %int %nOne_0
+        %335 = OpIAdd %int %333 %334
+               OpStore %r2 %335
+               OpBranch %ifMerge1_4
+ %ifMerge1_4 = OpLabel
+               OpBranch %ifMerge0_7
+ %ifMerge0_7 = OpLabel
+        %341 = OpLoad %int %one_0
+        %342 = OpLoad %int %nOne_0
+        %343 = OpIAdd %int %341 %342
+               OpStore %r1_0 %343
+               OpBranch %ifMerge1_6
+ %ifFalse1_5 = OpLabel
+        %347 = OpLoad %int %zero_0
+        %348 = OpLoad %int %nOne_0
+        %349 = OpIAdd %int %347 %348
+               OpStore %r1_0 %349
+        %351 = OpLoad %int %i2
+        %352 = OpSLessThan %bool %351 %int_0
+               OpSelectionMerge %ifMerge0_8 None
+               OpBranchConditional %352 %ifTrue0_10 %ifFalse0_6
+ %ifTrue0_10 = OpLabel
+        %356 = OpLoad %int %nOne_0
+        %357 = OpLoad %int %zero_0
+        %358 = OpIAdd %int %356 %357
+        %359 = OpLoad %int %nOne_0
+        %360 = OpIAdd %int %358 %359
+               OpStore %r2 %360
+               OpBranch %ifMerge0_8
+ %ifFalse0_6 = OpLabel
+        %364 = OpLoad %int %i2
+        %365 = OpSGreaterThan %bool %364 %int_0
+               OpSelectionMerge %ifMerge1_5 None
+               OpBranchConditional %365 %ifTrue1_6 %ifFalse1_6
+  %ifTrue1_6 = OpLabel
+        %369 = OpLoad %int %one_0
+        %370 = OpLoad %int %zero_0
+        %371 = OpIAdd %int %369 %370
+        %372 = OpLoad %int %nOne_0
+        %373 = OpIAdd %int %371 %372
+               OpStore %r2 %373
+               OpBranch %ifMerge1_5
+ %ifFalse1_6 = OpLabel
+        %377 = OpLoad %int %zero_0
+        %378 = OpLoad %int %zero_0
+        %379 = OpIAdd %int %377 %378
+        %380 = OpLoad %int %nOne_0
+        %381 = OpIAdd %int %379 %380
+               OpStore %r2 %381
+               OpBranch %ifMerge1_5
+ %ifMerge1_5 = OpLabel
+               OpBranch %ifMerge0_8
+ %ifMerge0_8 = OpLabel
+        %387 = OpLoad %int %zero_0
+        %388 = OpLoad %int %nOne_0
+        %389 = OpIAdd %int %387 %388
+               OpStore %r1_0 %389
+               OpBranch %ifMerge1_6
+ %ifMerge1_6 = OpLabel
+               OpBranch %ifMerge0_9
+ %ifMerge0_9 = OpLabel
+        %395 = OpLoad %int %nOne_0
+               OpStore %r0_0 %395
+               OpBranch %ifMerge0_18
+ %ifFalse0_7 = OpLabel
+        %399 = OpLoad %int %i0_0
+        %400 = OpSGreaterThan %bool %399 %int_0
+               OpSelectionMerge %ifMerge1_15 None
+               OpBranchConditional %400 %ifTrue1_7 %ifFalse1_11
+  %ifTrue1_7 = OpLabel
+        %404 = OpLoad %int %one_0
+               OpStore %r0_0 %404
+        %406 = OpLoad %int %i1_0
+        %407 = OpSLessThan %bool %406 %int_0
+               OpSelectionMerge %ifMerge0_13 None
+               OpBranchConditional %407 %ifTrue0_11 %ifFalse0_9
+ %ifTrue0_11 = OpLabel
+        %411 = OpLoad %int %nOne_0
+        %412 = OpLoad %int %one_0
+        %413 = OpIAdd %int %411 %412
+               OpStore %r1_0 %413
+        %415 = OpLoad %int %i2
+        %416 = OpSLessThan %bool %415 %int_0
+               OpSelectionMerge %ifMerge0_10 None
+               OpBranchConditional %416 %ifTrue0_12 %ifFalse0_8
+ %ifTrue0_12 = OpLabel
+        %420 = OpLoad %int %nOne_0
+        %421 = OpLoad %int %nOne_0
+        %422 = OpIAdd %int %420 %421
+        %423 = OpLoad %int %one_0
+        %424 = OpIAdd %int %422 %423
+               OpStore %r2 %424
+               OpBranch %ifMerge0_10
+ %ifFalse0_8 = OpLabel
+        %428 = OpLoad %int %i2
+        %429 = OpSGreaterThan %bool %428 %int_0
+               OpSelectionMerge %ifMerge1_7 None
+               OpBranchConditional %429 %ifTrue1_8 %ifFalse1_7
+  %ifTrue1_8 = OpLabel
+        %433 = OpLoad %int %one_0
+        %434 = OpLoad %int %nOne_0
+        %435 = OpIAdd %int %433 %434
+        %436 = OpLoad %int %one_0
+        %437 = OpIAdd %int %435 %436
+               OpStore %r2 %437
+               OpBranch %ifMerge1_7
+ %ifFalse1_7 = OpLabel
+        %441 = OpLoad %int %zero_0
+        %442 = OpLoad %int %nOne_0
+        %443 = OpIAdd %int %441 %442
+        %444 = OpLoad %int %one_0
+        %445 = OpIAdd %int %443 %444
+               OpStore %r2 %445
+               OpBranch %ifMerge1_7
+ %ifMerge1_7 = OpLabel
+               OpBranch %ifMerge0_10
+%ifMerge0_10 = OpLabel
+        %451 = OpLoad %int %nOne_0
+        %452 = OpLoad %int %one_0
+        %453 = OpIAdd %int %451 %452
+               OpStore %r1_0 %453
+               OpBranch %ifMerge0_13
+ %ifFalse0_9 = OpLabel
+        %457 = OpLoad %int %i1_0
+        %458 = OpSGreaterThan %bool %457 %int_0
+               OpSelectionMerge %ifMerge1_10 None
+               OpBranchConditional %458 %ifTrue1_9 %ifFalse1_9
+  %ifTrue1_9 = OpLabel
+        %462 = OpLoad %int %one_0
+        %463 = OpLoad %int %one_0
+        %464 = OpIAdd %int %462 %463
+               OpStore %r1_0 %464
+        %466 = OpLoad %int %i2
+        %467 = OpSLessThan %bool %466 %int_0
+               OpSelectionMerge %ifMerge0_11 None
+               OpBranchConditional %467 %ifTrue0_13 %ifFalse0_10
+ %ifTrue0_13 = OpLabel
+        %471 = OpLoad %int %nOne_0
+        %472 = OpLoad %int %one_0
+        %473 = OpIAdd %int %471 %472
+        %474 = OpLoad %int %one_0
+        %475 = OpIAdd %int %473 %474
+               OpStore %r2 %475
+               OpBranch %ifMerge0_11
+%ifFalse0_10 = OpLabel
+        %479 = OpLoad %int %i2
+        %480 = OpSGreaterThan %bool %479 %int_0
+               OpSelectionMerge %ifMerge1_8 None
+               OpBranchConditional %480 %ifTrue1_10 %ifFalse1_8
+ %ifTrue1_10 = OpLabel
+        %484 = OpLoad %int %one_0
+        %485 = OpLoad %int %one_0
+        %486 = OpIAdd %int %484 %485
+        %487 = OpLoad %int %one_0
+        %488 = OpIAdd %int %486 %487
+               OpStore %r2 %488
+               OpBranch %ifMerge1_8
+ %ifFalse1_8 = OpLabel
+        %492 = OpLoad %int %zero_0
+        %493 = OpLoad %int %one_0
+        %494 = OpIAdd %int %492 %493
+        %495 = OpLoad %int %one_0
+        %496 = OpIAdd %int %494 %495
+               OpStore %r2 %496
+               OpBranch %ifMerge1_8
+ %ifMerge1_8 = OpLabel
+               OpBranch %ifMerge0_11
+%ifMerge0_11 = OpLabel
+        %502 = OpLoad %int %one_0
+        %503 = OpLoad %int %one_0
+        %504 = OpIAdd %int %502 %503
+               OpStore %r1_0 %504
+               OpBranch %ifMerge1_10
+ %ifFalse1_9 = OpLabel
+        %508 = OpLoad %int %zero_0
+        %509 = OpLoad %int %one_0
+        %510 = OpIAdd %int %508 %509
+               OpStore %r1_0 %510
+        %512 = OpLoad %int %i2
+        %513 = OpSLessThan %bool %512 %int_0
+               OpSelectionMerge %ifMerge0_12 None
+               OpBranchConditional %513 %ifTrue0_14 %ifFalse0_11
+ %ifTrue0_14 = OpLabel
+        %517 = OpLoad %int %nOne_0
+        %518 = OpLoad %int %zero_0
+        %519 = OpIAdd %int %517 %518
+        %520 = OpLoad %int %one_0
+        %521 = OpIAdd %int %519 %520
+               OpStore %r2 %521
+               OpBranch %ifMerge0_12
+%ifFalse0_11 = OpLabel
+        %525 = OpLoad %int %i2
+        %526 = OpSGreaterThan %bool %525 %int_0
+               OpSelectionMerge %ifMerge1_9 None
+               OpBranchConditional %526 %ifTrue1_11 %ifFalse1_10
+ %ifTrue1_11 = OpLabel
+        %530 = OpLoad %int %one_0
+        %531 = OpLoad %int %zero_0
+        %532 = OpIAdd %int %530 %531
+        %533 = OpLoad %int %one_0
+        %534 = OpIAdd %int %532 %533
+               OpStore %r2 %534
+               OpBranch %ifMerge1_9
+%ifFalse1_10 = OpLabel
+        %538 = OpLoad %int %zero_0
+        %539 = OpLoad %int %zero_0
+        %540 = OpIAdd %int %538 %539
+        %541 = OpLoad %int %one_0
+        %542 = OpIAdd %int %540 %541
+               OpStore %r2 %542
+               OpBranch %ifMerge1_9
+ %ifMerge1_9 = OpLabel
+               OpBranch %ifMerge0_12
+%ifMerge0_12 = OpLabel
+        %548 = OpLoad %int %zero_0
+        %549 = OpLoad %int %one_0
+        %550 = OpIAdd %int %548 %549
+               OpStore %r1_0 %550
+               OpBranch %ifMerge1_10
+%ifMerge1_10 = OpLabel
+               OpBranch %ifMerge0_13
+%ifMerge0_13 = OpLabel
+        %556 = OpLoad %int %one_0
+               OpStore %r0_0 %556
+               OpBranch %ifMerge1_15
+%ifFalse1_11 = OpLabel
+        %560 = OpLoad %int %zero_0
+               OpStore %r0_0 %560
+        %562 = OpLoad %int %i1_0
+        %563 = OpSLessThan %bool %562 %int_0
+               OpSelectionMerge %ifMerge0_17 None
+               OpBranchConditional %563 %ifTrue0_15 %ifFalse0_13
+ %ifTrue0_15 = OpLabel
+        %567 = OpLoad %int %nOne_0
+        %568 = OpLoad %int %zero_0
+        %569 = OpIAdd %int %567 %568
+               OpStore %r1_0 %569
+        %571 = OpLoad %int %i2
+        %572 = OpSLessThan %bool %571 %int_0
+               OpSelectionMerge %ifMerge0_14 None
+               OpBranchConditional %572 %ifTrue0_16 %ifFalse0_12
+ %ifTrue0_16 = OpLabel
+        %576 = OpLoad %int %nOne_0
+        %577 = OpLoad %int %nOne_0
+        %578 = OpIAdd %int %576 %577
+        %579 = OpLoad %int %zero_0
+        %580 = OpIAdd %int %578 %579
+               OpStore %r2 %580
+               OpBranch %ifMerge0_14
+%ifFalse0_12 = OpLabel
+        %584 = OpLoad %int %i2
+        %585 = OpSGreaterThan %bool %584 %int_0
+               OpSelectionMerge %ifMerge1_11 None
+               OpBranchConditional %585 %ifTrue1_12 %ifFalse1_12
+ %ifTrue1_12 = OpLabel
+        %589 = OpLoad %int %one_0
+        %590 = OpLoad %int %nOne_0
+        %591 = OpIAdd %int %589 %590
+        %592 = OpLoad %int %zero_0
+        %593 = OpIAdd %int %591 %592
+               OpStore %r2 %593
+               OpBranch %ifMerge1_11
+%ifFalse1_12 = OpLabel
+        %597 = OpLoad %int %zero_0
+        %598 = OpLoad %int %nOne_0
+        %599 = OpIAdd %int %597 %598
+        %600 = OpLoad %int %zero_0
+        %601 = OpIAdd %int %599 %600
+               OpStore %r2 %601
+               OpBranch %ifMerge1_11
+%ifMerge1_11 = OpLabel
+               OpBranch %ifMerge0_14
+%ifMerge0_14 = OpLabel
+        %607 = OpLoad %int %nOne_0
+        %608 = OpLoad %int %zero_0
+        %609 = OpIAdd %int %607 %608
+               OpStore %r1_0 %609
+               OpBranch %ifMerge0_17
+%ifFalse0_13 = OpLabel
+        %613 = OpLoad %int %i1_0
+        %614 = OpSGreaterThan %bool %613 %int_0
+               OpSelectionMerge %ifMerge1_14 None
+               OpBranchConditional %614 %ifTrue1_13 %ifFalse1_14
+ %ifTrue1_13 = OpLabel
+        %618 = OpLoad %int %one_0
+        %619 = OpLoad %int %zero_0
+        %620 = OpIAdd %int %618 %619
+               OpStore %r1_0 %620
+        %622 = OpLoad %int %i2
+        %623 = OpSLessThan %bool %622 %int_0
+               OpSelectionMerge %ifMerge0_15 None
+               OpBranchConditional %623 %ifTrue0_17 %ifFalse0_14
+ %ifTrue0_17 = OpLabel
+        %627 = OpLoad %int %nOne_0
+        %628 = OpLoad %int %one_0
+        %629 = OpIAdd %int %627 %628
+        %630 = OpLoad %int %zero_0
+        %631 = OpIAdd %int %629 %630
+               OpStore %r2 %631
+               OpBranch %ifMerge0_15
+%ifFalse0_14 = OpLabel
+        %635 = OpLoad %int %i2
+        %636 = OpSGreaterThan %bool %635 %int_0
+               OpSelectionMerge %ifMerge1_12 None
+               OpBranchConditional %636 %ifTrue1_14 %ifFalse1_13
+ %ifTrue1_14 = OpLabel
+        %640 = OpLoad %int %one_0
+        %641 = OpLoad %int %one_0
+        %642 = OpIAdd %int %640 %641
+        %643 = OpLoad %int %zero_0
+        %644 = OpIAdd %int %642 %643
+               OpStore %r2 %644
+               OpBranch %ifMerge1_12
+%ifFalse1_13 = OpLabel
+        %648 = OpLoad %int %zero_0
+        %649 = OpLoad %int %one_0
+        %650 = OpIAdd %int %648 %649
+        %651 = OpLoad %int %zero_0
+        %652 = OpIAdd %int %650 %651
+               OpStore %r2 %652
+               OpBranch %ifMerge1_12
+%ifMerge1_12 = OpLabel
+               OpBranch %ifMerge0_15
+%ifMerge0_15 = OpLabel
+        %658 = OpLoad %int %one_0
+        %659 = OpLoad %int %zero_0
+        %660 = OpIAdd %int %658 %659
+               OpStore %r1_0 %660
+               OpBranch %ifMerge1_14
+%ifFalse1_14 = OpLabel
+        %664 = OpLoad %int %zero_0
+        %665 = OpLoad %int %zero_0
+        %666 = OpIAdd %int %664 %665
+               OpStore %r1_0 %666
+        %668 = OpLoad %int %i2
+        %669 = OpSLessThan %bool %668 %int_0
+               OpSelectionMerge %ifMerge0_16 None
+               OpBranchConditional %669 %ifTrue0_18 %ifFalse0_15
+ %ifTrue0_18 = OpLabel
+        %673 = OpLoad %int %nOne_0
+        %674 = OpLoad %int %zero_0
+        %675 = OpIAdd %int %673 %674
+        %676 = OpLoad %int %zero_0
+        %677 = OpIAdd %int %675 %676
+               OpStore %r2 %677
+               OpBranch %ifMerge0_16
+%ifFalse0_15 = OpLabel
+        %681 = OpLoad %int %i2
+        %682 = OpSGreaterThan %bool %681 %int_0
+               OpSelectionMerge %ifMerge1_13 None
+               OpBranchConditional %682 %ifTrue1_15 %ifFalse1_15
+ %ifTrue1_15 = OpLabel
+        %686 = OpLoad %int %one_0
+        %687 = OpLoad %int %zero_0
+        %688 = OpIAdd %int %686 %687
+        %689 = OpLoad %int %zero_0
+        %690 = OpIAdd %int %688 %689
+               OpStore %r2 %690
+               OpBranch %ifMerge1_13
+%ifFalse1_15 = OpLabel
+        %694 = OpLoad %int %zero_0
+        %695 = OpLoad %int %zero_0
+        %696 = OpIAdd %int %694 %695
+        %697 = OpLoad %int %zero_0
+        %698 = OpIAdd %int %696 %697
+               OpStore %r2 %698
+               OpBranch %ifMerge1_13
+%ifMerge1_13 = OpLabel
+               OpBranch %ifMerge0_16
+%ifMerge0_16 = OpLabel
+        %704 = OpLoad %int %zero_0
+        %705 = OpLoad %int %zero_0
+        %706 = OpIAdd %int %704 %705
+               OpStore %r1_0 %706
+               OpBranch %ifMerge1_14
+%ifMerge1_14 = OpLabel
+               OpBranch %ifMerge0_17
+%ifMerge0_17 = OpLabel
+        %712 = OpLoad %int %zero_0
+               OpStore %r0_0 %712
+               OpBranch %ifMerge1_15
+%ifMerge1_15 = OpLabel
+               OpBranch %ifMerge0_18
+%ifMerge0_18 = OpLabel
+        %718 = OpLoad %int %r0_0
+        %719 = OpLoad %int %r1_0
+        %720 = OpIAdd %int %718 %719
+        %721 = OpLoad %int %r2
+        %722 = OpIAdd %int %720 %721
+               OpStore %result_0 %722
+        %724 = OpLoad %int %result_0
+               OpReturnValue %724
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_4 = OpFunctionParameter %_ptr_Function_IfNestedStress
+        %729 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+               OpStore %ret %int_0
+        %732 = OpFunctionCall %int %IfNestedStress0 %self_4
+               OpStore %ret %732
+        %734 = OpFunctionCall %int %IfNestedStress1 %self_4
+               OpStore %ret %734
+        %736 = OpFunctionCall %int %IfNestedStress2 %self_4
+               OpStore %ret %736
+               OpReturn
+               OpFunctionEnd
+%IfNestedStress_Main_EntryPoint = OpFunction %void None %15
+        %741 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_IfNestedStress Function
+        %743 = OpFunctionCall %void %IfNestedStress_DefaultConstructor %self_5
+        %744 = OpFunctionCall %void %Main %self_5
+               OpReturn
+               OpFunctionEnd

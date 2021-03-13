@@ -544,6 +544,13 @@ namespace CSShaders
             WriteArgs(op.mParameters);
             break;
           }
+        case OpInstructionType.OpSelectionMerge:
+          {
+            UInt16 instructionCount = (UInt16)(1 + op.mParameters.Count);
+            mWriter.WriteInstruction(instructionCount, Spv.Op.OpSelectionMerge);
+            WriteArgs(op.mParameters);
+            break;
+          }
         default:
           Spv.Op spvOp;
           if(!SimpleInstructions.TryGetValue(op.mOpType, out spvOp))
