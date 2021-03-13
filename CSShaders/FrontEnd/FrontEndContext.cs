@@ -12,6 +12,7 @@ namespace CSShaders
     }
 
     public FrontEndTranslator mFrontEnd;
+    public FrontEndPass mCurrentPass;
     public ShaderType mCurrentType;
     public ShaderFunction mCurrentFunction;
     public ShaderBlock mCurrentBlock;

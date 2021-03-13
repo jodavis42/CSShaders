@@ -8,6 +8,14 @@ namespace CSShaders
 {
   class FrontEndCommonPass : FrontEndPass
   {
+    public override void Visit(SyntaxNode? node)
+    {
+      var oldPass = mContext.mCurrentPass;
+      mContext.mCurrentPass = this;
+      base.Visit(node);
+      mContext.mCurrentPass = oldPass;
+    }
+
     public override void VisitVariableDeclaration(VariableDeclarationSyntax node)
     {
       var variableType = FindType(node.Type);

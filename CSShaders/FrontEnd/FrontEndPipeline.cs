@@ -24,6 +24,7 @@ namespace CSShaders
     public void Translate(FrontEndTranslator translator, CSharpCompilation compilation, List<SyntaxTree> trees)
     {
       FrontEndContext context = new FrontEndContext();
+      context.mFrontEnd = translator;
       foreach (var pass in mPasses)
       {
         pass.Visit(translator, compilation, trees, context);

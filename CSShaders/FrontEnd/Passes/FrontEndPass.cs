@@ -17,6 +17,7 @@ namespace CSShaders
     {
       mFrontEnd = translator;
       mContext = context;
+      mContext.mCurrentPass = this;
       VisitTrees(compilation, trees);
     }
 
