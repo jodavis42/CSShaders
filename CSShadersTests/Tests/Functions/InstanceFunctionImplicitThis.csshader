@@ -1,0 +1,18 @@
+
+namespace Shaders
+{
+    [Shader.UnitTest][Shader.Pixel]
+    struct InstanceFunctionImplicitThis
+    {
+      void TestFn1()
+      {
+      }
+
+      [Shader.EntryPoint]
+      void Main()
+      {
+        TestFn1();
+      }
+    }
+}
+

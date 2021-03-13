@@ -28,6 +28,8 @@ namespace CSShaders
     }
     public IShaderIR Pop()
     {
+      if (mOpStack.Count == 0)
+        return null;
       return mOpStack.Pop();
     }
 

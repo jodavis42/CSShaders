@@ -1,0 +1,58 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 38
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %InstanceFunctionImplicitThis_Main_EntryPoint "InstanceFunctionImplicitThis_Main_EntryPoint"
+               OpExecutionMode %InstanceFunctionImplicitThis_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %InstanceFunctionImplicitThis "InstanceFunctionImplicitThis"
+               OpName %InstanceFunctionImplicitThis_PreConstructor "InstanceFunctionImplicitThis_PreConstructor"
+               OpName %self "self"
+               OpName %InstanceFunctionImplicitThis_DefaultConstructor "InstanceFunctionImplicitThis_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %TestFn1 "TestFn1"
+               OpName %self_1 "self"
+               OpName %Main "Main"
+               OpName %self_2 "self"
+               OpName %InstanceFunctionImplicitThis_Main_EntryPoint "InstanceFunctionImplicitThis_Main_EntryPoint"
+               OpName %self_3 "self"
+               OpName %InstanceFunctionImplicitThis_Main_EntryPoint "InstanceFunctionImplicitThis_Main_EntryPoint"
+               OpName %self_3 "self"
+%InstanceFunctionImplicitThis = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_InstanceFunctionImplicitThis = OpTypePointer Function %InstanceFunctionImplicitThis
+          %5 = OpTypeFunction %void %_ptr_Function_InstanceFunctionImplicitThis
+          %7 = OpTypeFunction %void
+%InstanceFunctionImplicitThis_PreConstructor = OpFunction %void None %5
+       %self = OpFunctionParameter %_ptr_Function_InstanceFunctionImplicitThis
+         %12 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%InstanceFunctionImplicitThis_DefaultConstructor = OpFunction %void None %5
+     %self_0 = OpFunctionParameter %_ptr_Function_InstanceFunctionImplicitThis
+         %17 = OpLabel
+         %18 = OpFunctionCall %void %InstanceFunctionImplicitThis_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+    %TestFn1 = OpFunction %void None %5
+     %self_1 = OpFunctionParameter %_ptr_Function_InstanceFunctionImplicitThis
+         %23 = OpLabel
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %5
+     %self_2 = OpFunctionParameter %_ptr_Function_InstanceFunctionImplicitThis
+         %28 = OpLabel
+         %29 = OpFunctionCall %void %TestFn1 %self_2
+               OpReturn
+               OpFunctionEnd
+%InstanceFunctionImplicitThis_Main_EntryPoint = OpFunction %void None %7
+         %33 = OpLabel
+     %self_3 = OpVariable %_ptr_Function_InstanceFunctionImplicitThis Function
+         %35 = OpFunctionCall %void %InstanceFunctionImplicitThis_DefaultConstructor %self_3
+         %36 = OpFunctionCall %void %Main %self_3
+               OpReturn
+               OpFunctionEnd

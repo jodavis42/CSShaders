@@ -142,6 +142,9 @@ namespace CSShaders
       if(!shaderFunction.IsStatic)
       {
         var selfOp = WalkAndGetResult(node.Expression);
+        // Handle implict this calls
+        if (selfOp == null)
+          selfOp = mContext.mThisOp;
         argumentOps.Add(selfOp);
       }
 
