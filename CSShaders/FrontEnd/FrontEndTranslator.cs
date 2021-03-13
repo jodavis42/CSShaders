@@ -401,7 +401,12 @@ namespace CSShaders
 
       var lastBlock = shaderFunction.mBlocks[shaderFunction.mBlocks.Count - 1];
       if (lastBlock.mTerminatorOp == null)
-        lastBlock.mTerminatorOp = CreateOp(lastBlock, OpInstructionType.OpReturn, null, null);
+      {
+        if(shaderFunction.GetReturnType() != FindType(typeof(void)))
+          lastBlock.mTerminatorOp = CreateOp(lastBlock, OpInstructionType.OpUnreachable, null, null);
+        else
+          lastBlock.mTerminatorOp = CreateOp(lastBlock, OpInstructionType.OpReturn, null, null);
+      }
 
       foreach (var block in shaderFunction.mBlocks)
       {

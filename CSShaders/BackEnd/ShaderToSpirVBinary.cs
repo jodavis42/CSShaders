@@ -484,6 +484,9 @@ namespace CSShaders
         case OpInstructionType.OpReturnValue:
           mWriter.WriteInstruction(2, Spv.Op.OpReturnValue, GetId(op.mParameters[0]));
           break;
+        case OpInstructionType.OpUnreachable:
+          mWriter.WriteInstruction(1, Spv.Op.OpUnreachable);
+          break;
         case OpInstructionType.OpExecutionMode:
           WriteBasicOpNoResultId(op, Spv.Op.OpExecutionMode);
           break;
