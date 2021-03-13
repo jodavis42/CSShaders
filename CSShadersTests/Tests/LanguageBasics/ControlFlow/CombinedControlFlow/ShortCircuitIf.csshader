@@ -1,0 +1,53 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct ShortCircuitIf
+  {
+    int ShortCircuitIf0()
+    {
+      var lhs = true;
+      var rhs = false;
+    
+      if(lhs && rhs)
+        return 0;
+      return 3;
+    }
+
+    int ShortCircuitIf1()
+    {
+      var lhs = true;
+      var rhs = false;
+    
+      if(lhs && rhs)
+        return 0;
+      else if(lhs || rhs)
+        return 1;
+      return 3;
+    }
+
+    int ShortCircuitIf2()
+    {
+      var lhs = true;
+      var rhs = false;
+    
+      if(lhs && rhs)
+        return 0;
+      else if(lhs || rhs)
+        return 1;
+      else
+        return 2;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = 0;
+      ret = this.ShortCircuitIf0();
+      ret = this.ShortCircuitIf1();
+      ret = this.ShortCircuitIf2();
+    }
+  }
+}
+

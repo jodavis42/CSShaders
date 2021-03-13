@@ -1,0 +1,58 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct WhileIf
+  {
+    int WhileIf0()
+    {
+      var a = 1;
+      while(a < 0)
+      {
+        if(a > 0)
+          continue;
+        --a;
+      }
+      return a;
+    }
+
+    int WhileIf1()
+    {
+      var a = 1;
+      while(a < 0)
+      {
+        if(a > 0)
+          break;
+        --a;
+      }
+      return a;
+    }
+
+    int WhileIf2()
+    {
+      var a = 1;
+      while(a < 0)
+      {
+        if(a > 0)
+          continue;
+        else if(a < 0)
+          break;
+        else
+          a = 0;
+        --a;
+      }
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = 0;
+      ret = this.WhileIf0();
+      ret = this.WhileIf1();
+      ret = this.WhileIf2();
+    }
+  }
+}
+

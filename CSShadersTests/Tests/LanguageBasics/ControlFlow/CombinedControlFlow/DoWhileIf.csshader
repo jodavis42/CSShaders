@@ -1,0 +1,58 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct DoWhileIf
+  {
+    int DoWhileIf0()
+    {
+      var a = 1;
+      do
+      {
+        if(a > 0)
+          continue;
+        --a;
+      } while(a < 0);
+      return a;
+    }
+
+    int DoWhileIf1()
+    {
+      var a = 1;
+      do
+      {
+        if(a > 0)
+          break;
+        --a;
+      } while(a < 0);
+      return a;
+    }
+
+    int DoWhileIf2()
+    {
+      var a = 1;
+      do
+      {
+        if(a > 0)
+          continue;
+        else if(a < 0)
+          break;
+        else
+          a = 0;
+        --a;
+      } while(a < 0);
+      return a;
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = 0;
+      ret = this.DoWhileIf0();
+      ret = this.DoWhileIf1();
+      ret = this.DoWhileIf2();
+    }
+  }
+}
+

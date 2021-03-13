@@ -1,0 +1,239 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 177
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ShortCircuitIf_Main_EntryPoint "ShortCircuitIf_Main_EntryPoint"
+               OpExecutionMode %ShortCircuitIf_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ShortCircuitIf "ShortCircuitIf"
+               OpName %ShortCircuitIf_PreConstructor "ShortCircuitIf_PreConstructor"
+               OpName %self "self"
+               OpName %ShortCircuitIf_DefaultConstructor "ShortCircuitIf_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %ShortCircuitIf0 "ShortCircuitIf0"
+               OpName %self_1 "self"
+               OpName %lhs "lhs"
+               OpName %rhs "rhs"
+               OpName %tempAnd "tempAnd"
+               OpName %ifTrue "ifTrue"
+               OpName %ifFalse "ifFalse"
+               OpName %mergePoint "mergePoint"
+               OpName %ifTrue0 "ifTrue0"
+               OpName %ifMerge0 "ifMerge0"
+               OpName %ShortCircuitIf1 "ShortCircuitIf1"
+               OpName %self_2 "self"
+               OpName %lhs_0 "lhs"
+               OpName %rhs_0 "rhs"
+               OpName %tempAnd_0 "tempAnd"
+               OpName %tempOr "tempOr"
+               OpName %ifTrue_0 "ifTrue"
+               OpName %ifFalse_0 "ifFalse"
+               OpName %mergePoint_0 "mergePoint"
+               OpName %ifTrue0_0 "ifTrue0"
+               OpName %ifFalse0 "ifFalse0"
+               OpName %ifTrue_1 "ifTrue"
+               OpName %ifFalse_1 "ifFalse"
+               OpName %mergePoint_1 "mergePoint"
+               OpName %ifTrue1 "ifTrue1"
+               OpName %ifMerge1 "ifMerge1"
+               OpName %ifMerge0_0 "ifMerge0"
+               OpName %ShortCircuitIf2 "ShortCircuitIf2"
+               OpName %self_3 "self"
+               OpName %lhs_1 "lhs"
+               OpName %rhs_1 "rhs"
+               OpName %tempAnd_1 "tempAnd"
+               OpName %tempOr_0 "tempOr"
+               OpName %ifTrue_2 "ifTrue"
+               OpName %ifFalse_2 "ifFalse"
+               OpName %mergePoint_2 "mergePoint"
+               OpName %ifTrue0_1 "ifTrue0"
+               OpName %ifFalse0_0 "ifFalse0"
+               OpName %ifTrue_3 "ifTrue"
+               OpName %ifFalse_3 "ifFalse"
+               OpName %mergePoint_3 "mergePoint"
+               OpName %ifTrue1_0 "ifTrue1"
+               OpName %ifFalse1 "ifFalse1"
+               OpName %ifMerge1_0 "ifMerge1"
+               OpName %ifMerge0_1 "ifMerge0"
+               OpName %Main "Main"
+               OpName %self_4 "self"
+               OpName %ret "ret"
+               OpName %ShortCircuitIf_Main_EntryPoint "ShortCircuitIf_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %ShortCircuitIf_Main_EntryPoint "ShortCircuitIf_Main_EntryPoint"
+               OpName %self_5 "self"
+       %bool = OpTypeBool
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+%ShortCircuitIf = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ShortCircuitIf = OpTypePointer Function %ShortCircuitIf
+         %11 = OpTypeFunction %void %_ptr_Function_ShortCircuitIf
+         %13 = OpTypeFunction %int %_ptr_Function_ShortCircuitIf
+%_ptr_Function_bool = OpTypePointer Function %bool
+%_ptr_Function_int = OpTypePointer Function %int
+         %15 = OpTypeFunction %void
+       %true = OpConstantTrue %bool
+      %false = OpConstantFalse %bool
+      %int_0 = OpConstant %int 0
+      %int_3 = OpConstant %int 3
+      %int_1 = OpConstant %int 1
+      %int_2 = OpConstant %int 2
+%ShortCircuitIf_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_ShortCircuitIf
+         %26 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ShortCircuitIf_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
+         %31 = OpLabel
+         %32 = OpFunctionCall %void %ShortCircuitIf_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%ShortCircuitIf0 = OpFunction %int None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
+         %37 = OpLabel
+        %lhs = OpVariable %_ptr_Function_bool Function
+        %rhs = OpVariable %_ptr_Function_bool Function
+    %tempAnd = OpVariable %_ptr_Function_bool Function
+               OpStore %lhs %true
+               OpStore %rhs %false
+         %43 = OpLoad %bool %lhs
+               OpSelectionMerge %mergePoint None
+               OpBranchConditional %43 %ifFalse %ifTrue
+     %ifTrue = OpLabel
+               OpStore %tempAnd %43
+               OpBranch %mergePoint
+    %ifFalse = OpLabel
+         %50 = OpLoad %bool %rhs
+               OpStore %tempAnd %50
+               OpBranch %mergePoint
+ %mergePoint = OpLabel
+         %54 = OpLoad %bool %tempAnd
+               OpSelectionMerge %ifMerge0 None
+               OpBranchConditional %54 %ifTrue0 %ifMerge0
+    %ifTrue0 = OpLabel
+               OpReturnValue %int_0
+   %ifMerge0 = OpLabel
+               OpReturnValue %int_3
+               OpFunctionEnd
+%ShortCircuitIf1 = OpFunction %int None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
+         %64 = OpLabel
+      %lhs_0 = OpVariable %_ptr_Function_bool Function
+      %rhs_0 = OpVariable %_ptr_Function_bool Function
+  %tempAnd_0 = OpVariable %_ptr_Function_bool Function
+     %tempOr = OpVariable %_ptr_Function_bool Function
+               OpStore %lhs_0 %true
+               OpStore %rhs_0 %false
+         %71 = OpLoad %bool %lhs_0
+               OpSelectionMerge %mergePoint_0 None
+               OpBranchConditional %71 %ifFalse_0 %ifTrue_0
+   %ifTrue_0 = OpLabel
+               OpStore %tempAnd_0 %71
+               OpBranch %mergePoint_0
+  %ifFalse_0 = OpLabel
+         %78 = OpLoad %bool %rhs_0
+               OpStore %tempAnd_0 %78
+               OpBranch %mergePoint_0
+%mergePoint_0 = OpLabel
+         %82 = OpLoad %bool %tempAnd_0
+               OpSelectionMerge %ifMerge0_0 None
+               OpBranchConditional %82 %ifTrue0_0 %ifFalse0
+  %ifTrue0_0 = OpLabel
+               OpReturnValue %int_0
+   %ifFalse0 = OpLabel
+         %88 = OpLoad %bool %lhs_0
+               OpSelectionMerge %mergePoint_1 None
+               OpBranchConditional %88 %ifTrue_1 %ifFalse_1
+   %ifTrue_1 = OpLabel
+               OpStore %tempOr %88
+               OpBranch %mergePoint_1
+  %ifFalse_1 = OpLabel
+         %95 = OpLoad %bool %rhs_0
+               OpStore %tempOr %95
+               OpBranch %mergePoint_1
+%mergePoint_1 = OpLabel
+         %99 = OpLoad %bool %tempOr
+               OpSelectionMerge %ifMerge1 None
+               OpBranchConditional %99 %ifTrue1 %ifMerge1
+    %ifTrue1 = OpLabel
+               OpReturnValue %int_1
+   %ifMerge1 = OpLabel
+               OpBranch %ifMerge0_0
+ %ifMerge0_0 = OpLabel
+               OpReturnValue %int_3
+               OpFunctionEnd
+%ShortCircuitIf2 = OpFunction %int None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
+        %111 = OpLabel
+      %lhs_1 = OpVariable %_ptr_Function_bool Function
+      %rhs_1 = OpVariable %_ptr_Function_bool Function
+  %tempAnd_1 = OpVariable %_ptr_Function_bool Function
+   %tempOr_0 = OpVariable %_ptr_Function_bool Function
+               OpStore %lhs_1 %true
+               OpStore %rhs_1 %false
+        %118 = OpLoad %bool %lhs_1
+               OpSelectionMerge %mergePoint_2 None
+               OpBranchConditional %118 %ifFalse_2 %ifTrue_2
+   %ifTrue_2 = OpLabel
+               OpStore %tempAnd_1 %118
+               OpBranch %mergePoint_2
+  %ifFalse_2 = OpLabel
+        %125 = OpLoad %bool %rhs_1
+               OpStore %tempAnd_1 %125
+               OpBranch %mergePoint_2
+%mergePoint_2 = OpLabel
+        %129 = OpLoad %bool %tempAnd_1
+               OpSelectionMerge %ifMerge0_1 None
+               OpBranchConditional %129 %ifTrue0_1 %ifFalse0_0
+  %ifTrue0_1 = OpLabel
+               OpReturnValue %int_0
+ %ifFalse0_0 = OpLabel
+        %135 = OpLoad %bool %lhs_1
+               OpSelectionMerge %mergePoint_3 None
+               OpBranchConditional %135 %ifTrue_3 %ifFalse_3
+   %ifTrue_3 = OpLabel
+               OpStore %tempOr_0 %135
+               OpBranch %mergePoint_3
+  %ifFalse_3 = OpLabel
+        %142 = OpLoad %bool %rhs_1
+               OpStore %tempOr_0 %142
+               OpBranch %mergePoint_3
+%mergePoint_3 = OpLabel
+        %146 = OpLoad %bool %tempOr_0
+               OpSelectionMerge %ifMerge1_0 None
+               OpBranchConditional %146 %ifTrue1_0 %ifFalse1
+  %ifTrue1_0 = OpLabel
+               OpReturnValue %int_1
+   %ifFalse1 = OpLabel
+               OpReturnValue %int_2
+ %ifMerge1_0 = OpLabel
+               OpBranch %ifMerge0_1
+ %ifMerge0_1 = OpLabel
+               OpUnreachable
+               OpFunctionEnd
+       %Main = OpFunction %void None %11
+     %self_4 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
+        %160 = OpLabel
+        %ret = OpVariable %_ptr_Function_int Function
+               OpStore %ret %int_0
+        %163 = OpFunctionCall %int %ShortCircuitIf0 %self_4
+               OpStore %ret %163
+        %165 = OpFunctionCall %int %ShortCircuitIf1 %self_4
+               OpStore %ret %165
+        %167 = OpFunctionCall %int %ShortCircuitIf2 %self_4
+               OpStore %ret %167
+               OpReturn
+               OpFunctionEnd
+%ShortCircuitIf_Main_EntryPoint = OpFunction %void None %15
+        %172 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_ShortCircuitIf Function
+        %174 = OpFunctionCall %void %ShortCircuitIf_DefaultConstructor %self_5
+        %175 = OpFunctionCall %void %Main %self_5
+               OpReturn
+               OpFunctionEnd
