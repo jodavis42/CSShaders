@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ namespace CSShaders
     public delegate void InstrinsicSetterDelegate(FrontEndTranslator translator, IShaderIR selfInstance, IShaderIR rhsIR, FrontEndContext context);
     public delegate ShaderOp CastDelegate(ShaderType castedToType, IShaderIR expressionOp, FrontEndContext context);
     public delegate ShaderOp UnaryOpDelegate(IShaderIR operandIR, FrontEndContext context);
+    public delegate ShaderOp ComplexBinaryOpDelegate(SyntaxNode lhsExpression, SyntaxNode rhsExpression, FrontEndContext context);
     public delegate ShaderOp BinaryOpDelegate(IShaderIR lhsExpression, IShaderIR rhsExpression, FrontEndContext context);
 
     public Dictionary<ConstantOpKey, ShaderConstantLiteral> mConstantLiterals = new Dictionary<ConstantOpKey, ShaderConstantLiteral>();
@@ -24,6 +26,7 @@ namespace CSShaders
     public Dictionary<FunctionKey, InstrinsicSetterDelegate> IntrinsicSetterFunctions = new Dictionary<FunctionKey, InstrinsicSetterDelegate>();
     public Dictionary<UnaryOpKey, UnaryOpDelegate> UnaryOpIntrinsics = new Dictionary<UnaryOpKey, UnaryOpDelegate>();
     public Dictionary<BinaryOpKey, BinaryOpDelegate> BinaryOpIntrinsics = new Dictionary<BinaryOpKey, BinaryOpDelegate>();
+    public Dictionary<BinaryOpKey, ComplexBinaryOpDelegate> ComplexBinaryOpIntrinsics = new Dictionary<BinaryOpKey, ComplexBinaryOpDelegate>();
     public Dictionary<string, ExtensionLibraryImportOp> ExtensionLibraryImports = new Dictionary<string, ExtensionLibraryImportOp>();
     public Dictionary<Tuple<ShaderType, ShaderType>, CastDelegate> CastIntrinsics = new Dictionary<Tuple<ShaderType, ShaderType>, CastDelegate>();
 
@@ -173,6 +176,30 @@ namespace CSShaders
         foreach (var dependency in mDependencies)
         {
           result = dependency.FindUnaryOpIntrinsic(key, checkDependencies);
+          if (result != null)
+            break;
+        }
+      }
+      return result;
+    }
+
+    //---------------------------------------------------------------ComplexBinaryOpIntrinsics
+    // Very rarely a binary intrinsic needs to operate on on the underlying CSharp SyntaxNode.
+    // This can't be the norm due to how assignment binary ops need to work (e.g. '+='). The only cases that
+    // need to do this are binary ops that become more than a binary op, in particular this is any operator requiring short circuit evaluation.
+    public void CreateComplexBinaryOpIntrinsic(BinaryOpKey key, ComplexBinaryOpDelegate intrinsic)
+    {
+      ComplexBinaryOpIntrinsics.TryAdd(key, intrinsic);
+    }
+
+    public ComplexBinaryOpDelegate FindComplexBinaryOpIntrinsic(BinaryOpKey key, bool checkDependencies = true)
+    {
+      var result = ComplexBinaryOpIntrinsics.GetValueOrDefault(key, null);
+      if (result == null && mDependencies != null)
+      {
+        foreach (var dependency in mDependencies)
+        {
+          result = dependency.FindComplexBinaryOpIntrinsic(key, checkDependencies);
           if (result != null)
             break;
         }

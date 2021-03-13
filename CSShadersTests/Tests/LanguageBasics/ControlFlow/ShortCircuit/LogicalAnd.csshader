@@ -1,0 +1,40 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct LogicalAnd
+  {
+    bool GetBool()
+    {
+      return false;
+    }
+
+    bool LogicalAnd0()
+    {
+      return true && false;
+    }
+
+    bool LogicalAnd1()
+    {
+      var a = true;
+      var b = false;
+      return a && b;
+    }
+
+    bool LogicalAnd2()
+    {
+      return this.GetBool() && this.GetBool();
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = false;
+      ret = this.LogicalAnd0();
+      ret = this.LogicalAnd1();
+      ret = this.LogicalAnd2();
+    }
+  }
+}
+

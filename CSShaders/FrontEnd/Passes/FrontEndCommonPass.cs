@@ -240,10 +240,12 @@ namespace CSShaders
       {
         // To do the compound we have to load the left now.
         leftIR = WalkAndGetResult(node.Left);
+        var lhsType = GetSymbolType(node.Left);
+        var rhsType = GetSymbolType(node.Right);
 
         // Generate the token for the binary op in the compound (just strip the '=' off) and then visit the binary expression.
         var binaryOp = token.Substring(0, token.Length - 1);
-        VisitBinaryExpression(node, leftIR, binaryOp, rightIR);
+        VisitBinaryExpression(node, lhsType, leftIR, rhsType, rightIR, binaryOp);
         // Do whatever remaining logic for the assignment with the result of the binary expression.
         rightIR = mContext.Pop();
       }
@@ -382,20 +384,11 @@ namespace CSShaders
       }
     }
 
-    public void VisitBinaryExpression(ExpressionSyntax node, IShaderIR lhsIR, string operatorToken, IShaderIR rhsIR)
+    public void VisitBinaryExpression(ExpressionSyntax node, ShaderType lhsType, IShaderIR lhsIR, ShaderType rhsType, IShaderIR rhsIR, string operatorToken)
     {
-      var symbol = GetSymbol(node);
-
-      var methodSymbol = symbol as IMethodSymbol;
-      if (methodSymbol == null)
-        // Can this happen?
-        throw new Exception("Invalid binary expression");
-
-      var lhsType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[0].Type));
-      var rhsType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.Parameters[1].Type));
-
       // Handle intrinsics (declared by the compiler but don't have symbols we can look up in advance)
-      var binaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindBinaryOpIntrinsic(new BinaryOpKey(lhsType, operatorToken, rhsType));
+      var binaryOpKey = new BinaryOpKey(lhsType, operatorToken, rhsType);
+      var binaryOpIntrinsic = mFrontEnd.mCurrentLibrary.FindBinaryOpIntrinsic(binaryOpKey);
       if (binaryOpIntrinsic != null)
       {
         var result = binaryOpIntrinsic(lhsIR, rhsIR, mContext);
@@ -403,8 +396,13 @@ namespace CSShaders
         return;
       }
 
+      var symbol = GetSymbol(node);
+      // Can this happen?
+      if (symbol == null)
+        throw new Exception("Invalid binary expression");
+
       // Find if this is an intrinsic declared via attribute
-      var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(methodSymbol));
+      var intrinsicCallback = mFrontEnd.mCurrentLibrary.FindIntrinsicFunction(new FunctionKey(symbol));
       if (intrinsicCallback != null)
       {
         intrinsicCallback(mFrontEnd, new List<IShaderIR> { lhsIR, rhsIR }, mContext);
@@ -425,9 +423,23 @@ namespace CSShaders
 
     public override void VisitBinaryExpression(BinaryExpressionSyntax node)
     {
+      ShaderType lhsType = GetSymbolType(node.Left);
+      ShaderType rhsType = GetSymbolType(node.Right);
+      string operatorToken = node.OperatorToken.Text;
+
+      // Handle any complex ops (e.g. || or && for short circuit eval).
+      var binaryOpKey = new BinaryOpKey(lhsType, operatorToken, rhsType);
+      var rawIntrinsic = mFrontEnd.mCurrentLibrary.FindComplexBinaryOpIntrinsic(binaryOpKey);
+      if (rawIntrinsic != null)
+      {
+        var binaryOp = rawIntrinsic(node.Left, node.Right, mContext);
+        mContext.Push(binaryOp);
+        return;
+      }
+
       var lhsIR = WalkAndGetResult(node.Left);
       var rhsIR = WalkAndGetResult(node.Right);
-      VisitBinaryExpression(node, lhsIR, node.OperatorToken.Text, rhsIR);
+      VisitBinaryExpression(node, lhsType, lhsIR, rhsType, rhsIR, operatorToken);
     }
 
     public override void VisitCastExpression(CastExpressionSyntax node)

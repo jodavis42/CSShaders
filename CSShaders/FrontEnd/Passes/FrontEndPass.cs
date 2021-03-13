@@ -51,6 +51,12 @@ namespace CSShaders
       return mFrontEnd.mSemanticModel.GetSymbolInfo(node).Symbol;
     }
 
+    public ShaderType GetSymbolType(SyntaxNode node)
+    {
+      var typeInfo = mFrontEnd.mSemanticModel.GetTypeInfo(node);
+      return mFrontEnd.mCurrentLibrary.FindType(new TypeKey(typeInfo.Type));
+    }
+
     public IShaderIR GetIR(SyntaxNode node)
     {
       var symbol = GetSymbol(node);

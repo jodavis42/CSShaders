@@ -1,0 +1,200 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 147
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ComplexLogicalAndOr_Main_EntryPoint "ComplexLogicalAndOr_Main_EntryPoint"
+               OpExecutionMode %ComplexLogicalAndOr_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %ComplexLogicalAndOr "ComplexLogicalAndOr"
+               OpName %ComplexLogicalAndOr_PreConstructor "ComplexLogicalAndOr_PreConstructor"
+               OpName %self "self"
+               OpName %ComplexLogicalAndOr_DefaultConstructor "ComplexLogicalAndOr_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %GetBool "GetBool"
+               OpName %self_1 "self"
+               OpName %LogicalOrAnd0 "LogicalOrAnd0"
+               OpName %self_2 "self"
+               OpName %tempOr "tempOr"
+               OpName %tempAnd "tempAnd"
+               OpName %ifTrue "ifTrue"
+               OpName %ifFalse "ifFalse"
+               OpName %ifTrue_0 "ifTrue"
+               OpName %ifFalse_0 "ifFalse"
+               OpName %mergePoint "mergePoint"
+               OpName %mergePoint_0 "mergePoint"
+               OpName %LogicalOrAnd1 "LogicalOrAnd1"
+               OpName %self_3 "self"
+               OpName %tempOr_0 "tempOr"
+               OpName %tempAnd_0 "tempAnd"
+               OpName %ifTrue_1 "ifTrue"
+               OpName %ifFalse_1 "ifFalse"
+               OpName %mergePoint_1 "mergePoint"
+               OpName %ifTrue_2 "ifTrue"
+               OpName %ifFalse_2 "ifFalse"
+               OpName %mergePoint_2 "mergePoint"
+               OpName %LogicalOrAnd2 "LogicalOrAnd2"
+               OpName %self_4 "self"
+               OpName %tempOr_1 "tempOr"
+               OpName %tempAnd_1 "tempAnd"
+               OpName %tempOr_2 "tempOr"
+               OpName %ifTrue_3 "ifTrue"
+               OpName %ifFalse_3 "ifFalse"
+               OpName %mergePoint_3 "mergePoint"
+               OpName %ifTrue_4 "ifTrue"
+               OpName %ifFalse_4 "ifFalse"
+               OpName %ifTrue_5 "ifTrue"
+               OpName %ifFalse_5 "ifFalse"
+               OpName %mergePoint_4 "mergePoint"
+               OpName %mergePoint_5 "mergePoint"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %ret "ret"
+               OpName %ComplexLogicalAndOr_Main_EntryPoint "ComplexLogicalAndOr_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %ComplexLogicalAndOr_Main_EntryPoint "ComplexLogicalAndOr_Main_EntryPoint"
+               OpName %self_6 "self"
+       %bool = OpTypeBool
+%ComplexLogicalAndOr = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ComplexLogicalAndOr = OpTypePointer Function %ComplexLogicalAndOr
+          %7 = OpTypeFunction %void %_ptr_Function_ComplexLogicalAndOr
+          %9 = OpTypeFunction %bool %_ptr_Function_ComplexLogicalAndOr
+%_ptr_Function_bool = OpTypePointer Function %bool
+       %uint = OpTypeInt 32 0
+         %13 = OpTypeFunction %void
+      %false = OpConstantFalse %bool
+       %true = OpConstantTrue %bool
+%ComplexLogicalAndOr_PreConstructor = OpFunction %void None %7
+       %self = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+         %20 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ComplexLogicalAndOr_DefaultConstructor = OpFunction %void None %7
+     %self_0 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+         %25 = OpLabel
+         %26 = OpFunctionCall %void %ComplexLogicalAndOr_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+    %GetBool = OpFunction %bool None %9
+     %self_1 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+         %31 = OpLabel
+               OpReturnValue %false
+               OpFunctionEnd
+%LogicalOrAnd0 = OpFunction %bool None %9
+     %self_2 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+         %36 = OpLabel
+     %tempOr = OpVariable %_ptr_Function_bool Function
+    %tempAnd = OpVariable %_ptr_Function_bool Function
+               OpSelectionMerge %mergePoint_0 None
+               OpBranchConditional %true %ifTrue %ifFalse
+     %ifTrue = OpLabel
+               OpStore %tempOr %true
+               OpBranch %mergePoint_0
+    %ifFalse = OpLabel
+               OpSelectionMerge %mergePoint None
+               OpBranchConditional %true %ifFalse_0 %ifTrue_0
+   %ifTrue_0 = OpLabel
+               OpStore %tempAnd %true
+               OpBranch %mergePoint
+  %ifFalse_0 = OpLabel
+               OpStore %tempAnd %false
+               OpBranch %mergePoint
+ %mergePoint = OpLabel
+         %54 = OpLoad %bool %tempAnd
+               OpStore %tempOr %54
+               OpBranch %mergePoint_0
+%mergePoint_0 = OpLabel
+         %58 = OpLoad %bool %tempOr
+               OpReturnValue %58
+               OpFunctionEnd
+%LogicalOrAnd1 = OpFunction %bool None %9
+     %self_3 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+         %63 = OpLabel
+   %tempOr_0 = OpVariable %_ptr_Function_bool Function
+  %tempAnd_0 = OpVariable %_ptr_Function_bool Function
+               OpSelectionMerge %mergePoint_1 None
+               OpBranchConditional %true %ifTrue_1 %ifFalse_1
+   %ifTrue_1 = OpLabel
+               OpStore %tempOr_0 %true
+               OpBranch %mergePoint_1
+  %ifFalse_1 = OpLabel
+               OpStore %tempOr_0 %true
+               OpBranch %mergePoint_1
+%mergePoint_1 = OpLabel
+         %75 = OpLoad %bool %tempOr_0
+               OpSelectionMerge %mergePoint_2 None
+               OpBranchConditional %75 %ifFalse_2 %ifTrue_2
+   %ifTrue_2 = OpLabel
+               OpStore %tempAnd_0 %75
+               OpBranch %mergePoint_2
+  %ifFalse_2 = OpLabel
+               OpStore %tempAnd_0 %false
+               OpBranch %mergePoint_2
+%mergePoint_2 = OpLabel
+         %85 = OpLoad %bool %tempAnd_0
+               OpReturnValue %85
+               OpFunctionEnd
+%LogicalOrAnd2 = OpFunction %bool None %9
+     %self_4 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+         %90 = OpLabel
+   %tempOr_1 = OpVariable %_ptr_Function_bool Function
+  %tempAnd_1 = OpVariable %_ptr_Function_bool Function
+   %tempOr_2 = OpVariable %_ptr_Function_bool Function
+               OpSelectionMerge %mergePoint_3 None
+               OpBranchConditional %false %ifTrue_3 %ifFalse_3
+   %ifTrue_3 = OpLabel
+               OpStore %tempOr_1 %false
+               OpBranch %mergePoint_3
+  %ifFalse_3 = OpLabel
+        %100 = OpFunctionCall %bool %GetBool %self_4
+               OpStore %tempOr_1 %100
+               OpBranch %mergePoint_3
+%mergePoint_3 = OpLabel
+        %104 = OpLoad %bool %tempOr_1
+               OpSelectionMerge %mergePoint_5 None
+               OpBranchConditional %104 %ifFalse_4 %ifTrue_4
+   %ifTrue_4 = OpLabel
+               OpStore %tempAnd_1 %104
+               OpBranch %mergePoint_5
+  %ifFalse_4 = OpLabel
+        %111 = OpFunctionCall %bool %GetBool %self_4
+               OpSelectionMerge %mergePoint_4 None
+               OpBranchConditional %111 %ifTrue_5 %ifFalse_5
+   %ifTrue_5 = OpLabel
+               OpStore %tempOr_2 %111
+               OpBranch %mergePoint_4
+  %ifFalse_5 = OpLabel
+               OpStore %tempOr_2 %true
+               OpBranch %mergePoint_4
+%mergePoint_4 = OpLabel
+        %121 = OpLoad %bool %tempOr_2
+               OpStore %tempAnd_1 %121
+               OpBranch %mergePoint_5
+%mergePoint_5 = OpLabel
+        %125 = OpLoad %bool %tempAnd_1
+               OpReturnValue %125
+               OpFunctionEnd
+       %Main = OpFunction %void None %7
+     %self_5 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
+        %130 = OpLabel
+        %ret = OpVariable %_ptr_Function_bool Function
+               OpStore %ret %false
+        %133 = OpFunctionCall %bool %LogicalOrAnd0 %self_5
+               OpStore %ret %133
+        %135 = OpFunctionCall %bool %LogicalOrAnd1 %self_5
+               OpStore %ret %135
+        %137 = OpFunctionCall %bool %LogicalOrAnd2 %self_5
+               OpStore %ret %137
+               OpReturn
+               OpFunctionEnd
+%ComplexLogicalAndOr_Main_EntryPoint = OpFunction %void None %13
+        %142 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_ComplexLogicalAndOr Function
+        %144 = OpFunctionCall %void %ComplexLogicalAndOr_DefaultConstructor %self_6
+        %145 = OpFunctionCall %void %Main %self_6
+               OpReturn
+               OpFunctionEnd

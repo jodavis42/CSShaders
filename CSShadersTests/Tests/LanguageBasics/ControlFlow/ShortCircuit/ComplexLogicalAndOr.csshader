@@ -1,0 +1,38 @@
+
+namespace Test
+{
+
+  [Shader.UnitTest][Shader.Pixel]
+  struct ComplexLogicalAndOr
+  {
+    bool GetBool()
+    {
+      return false;
+    }
+
+    bool LogicalOrAnd0()
+    {
+      return true || (true && false);
+    }
+
+    bool LogicalOrAnd1()
+    {
+      return (true || true) && false;
+    }
+
+    bool LogicalOrAnd2()
+    {
+      return (false || this.GetBool()) && (this.GetBool() || true);
+    }
+
+    [Shader.EntryPoint]
+    public void Main()
+    {
+      var ret = false;
+      ret = this.LogicalOrAnd0();
+      ret = this.LogicalOrAnd1();
+      ret = this.LogicalOrAnd2();
+    }
+  }
+}
+
