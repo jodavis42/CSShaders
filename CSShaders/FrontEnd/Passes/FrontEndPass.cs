@@ -159,7 +159,9 @@ namespace CSShaders
 
     public IShaderIR WalkAndGetValueTypeResult(SyntaxNode node)
     {
-      return WalkAndGetValueTypeResult(mContext.mCurrentBlock, node);
+      var ir = WalkAndGetResult(node);
+      // Walking the result could change the block. The load op (if required) must be emitted in the actual current block.
+      return mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, ir);
     }
 
     public IShaderIR WalkAndGetValueTypeResult(ShaderBlock block, SyntaxNode node)
