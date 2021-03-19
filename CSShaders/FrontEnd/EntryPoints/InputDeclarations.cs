@@ -52,7 +52,7 @@
       EntryPointGenerationShared.CopyInterfaceFields(translator, thisOp, interfaceInfo.StageInputs, InterfaceFieldCopyMode.Input, context);
 
       foreach (var uniformBuffer in interfaceInfo.UniformBuffers.Buffers.Values)
-        EntryPointGenerationShared.CopyInterfaceFields(translator, thisOp, uniformBuffer.Fields, InterfaceFieldCopyMode.Input, context);
+        UniformDeclarations.CopyUniformBufferFields(translator, thisOp, uniformBuffer, InterfaceFieldCopyMode.Input, context);
 
       translator.FixupBlockTerminators(interfaceInfo.CopyInputsFunction.ShaderFunction);
     }

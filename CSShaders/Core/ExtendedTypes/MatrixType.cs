@@ -12,7 +12,7 @@ namespace CSShaders
     /// </summary>
     public static MatrixType Load(ShaderType type)
     {
-      if (type == null || type.mBaseType != OpType.Vector)
+      if (type == null || type.mBaseType != OpType.Matrix)
         return null;
 
       return new MatrixType() { Type = type };

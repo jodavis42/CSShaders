@@ -1,0 +1,300 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 207
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %UniformBufferVec4Layouts_Main_EntryPoint "UniformBufferVec4Layouts_Main_EntryPoint" %Vec4Buffer0_Instance %Vec4Buffer1_Instance %Vec4Buffer2_Instance %Vec4Buffer3_Instance
+               OpExecutionMode %UniformBufferVec4Layouts_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVector4 "TestVector4"
+               OpName %Vec4Buffer0 "Vec4Buffer0"
+               OpMemberName %Vec4Buffer0 0 "TestVector4_0"
+               OpMemberName %Vec4Buffer0 1 "TestVector4_1"
+               OpName %Vec4Buffer1 "Vec4Buffer1"
+               OpMemberName %Vec4Buffer1 0 "Value0"
+               OpMemberName %Vec4Buffer1 1 "TestVector4"
+               OpName %Vec4Buffer2 "Vec4Buffer2"
+               OpMemberName %Vec4Buffer2 0 "Value0"
+               OpMemberName %Vec4Buffer2 1 "Value1"
+               OpMemberName %Vec4Buffer2 2 "TestVector4"
+               OpName %Vec4Buffer3 "Vec4Buffer3"
+               OpMemberName %Vec4Buffer3 0 "Value0"
+               OpMemberName %Vec4Buffer3 1 "Value1"
+               OpMemberName %Vec4Buffer3 2 "Value2"
+               OpMemberName %Vec4Buffer3 3 "TestVector4"
+               OpName %UniformBufferVec4Layouts "UniformBufferVec4Layouts"
+               OpMemberName %UniformBufferVec4Layouts 0 "Vec4Buffer0"
+               OpMemberName %UniformBufferVec4Layouts 1 "Vec4Buffer1"
+               OpMemberName %UniformBufferVec4Layouts 2 "Vec4Buffer2"
+               OpMemberName %UniformBufferVec4Layouts 3 "Vec4Buffer3"
+               OpName %Vec4Buffer0_0 "Vec4Buffer0_0"
+               OpMemberName %Vec4Buffer0_0 0 "TestVector4_0"
+               OpMemberName %Vec4Buffer0_0 1 "TestVector4_1"
+               OpName %Vec4Buffer1_0 "Vec4Buffer1_0"
+               OpMemberName %Vec4Buffer1_0 0 "Value0"
+               OpMemberName %Vec4Buffer1_0 1 "TestVector4"
+               OpName %Vec4Buffer2_0 "Vec4Buffer2_0"
+               OpMemberName %Vec4Buffer2_0 0 "Value0"
+               OpMemberName %Vec4Buffer2_0 1 "Value1"
+               OpMemberName %Vec4Buffer2_0 2 "TestVector4"
+               OpName %Vec4Buffer3_0 "Vec4Buffer3_0"
+               OpMemberName %Vec4Buffer3_0 0 "Value0"
+               OpMemberName %Vec4Buffer3_0 1 "Value1"
+               OpMemberName %Vec4Buffer3_0 2 "Value2"
+               OpMemberName %Vec4Buffer3_0 3 "TestVector4"
+               OpName %Vec4Buffer0_PreConstructor "Vec4Buffer0_PreConstructor"
+               OpName %self "self"
+               OpName %Vec4Buffer0_DefaultConstructor "Vec4Buffer0_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Vec4Buffer1_PreConstructor "Vec4Buffer1_PreConstructor"
+               OpName %self_1 "self"
+               OpName %Vec4Buffer1_DefaultConstructor "Vec4Buffer1_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %Vec4Buffer2_PreConstructor "Vec4Buffer2_PreConstructor"
+               OpName %self_3 "self"
+               OpName %Vec4Buffer2_DefaultConstructor "Vec4Buffer2_DefaultConstructor"
+               OpName %self_4 "self"
+               OpName %Vec4Buffer3_PreConstructor "Vec4Buffer3_PreConstructor"
+               OpName %self_5 "self"
+               OpName %Vec4Buffer3_DefaultConstructor "Vec4Buffer3_DefaultConstructor"
+               OpName %self_6 "self"
+               OpName %UniformBufferVec4Layouts_PreConstructor "UniformBufferVec4Layouts_PreConstructor"
+               OpName %self_7 "self"
+               OpName %tempVec4Buffer0 "tempVec4Buffer0"
+               OpName %tempVec4Buffer1 "tempVec4Buffer1"
+               OpName %tempVec4Buffer2 "tempVec4Buffer2"
+               OpName %tempVec4Buffer3 "tempVec4Buffer3"
+               OpName %UniformBufferVec4Layouts_DefaultConstructor "UniformBufferVec4Layouts_DefaultConstructor"
+               OpName %self_8 "self"
+               OpName %Main "Main"
+               OpName %self_9 "self"
+               OpName %UniformBufferVec4Layouts_CopyInputs "UniformBufferVec4Layouts_CopyInputs"
+               OpName %self_10 "self"
+               OpName %UniformBufferVec4Layouts_Main_EntryPoint "UniformBufferVec4Layouts_Main_EntryPoint"
+               OpName %self_11 "self"
+               OpName %Vec4Buffer0_Instance "Vec4Buffer0_Instance"
+               OpName %Vec4Buffer1_Instance "Vec4Buffer1_Instance"
+               OpName %Vec4Buffer2_Instance "Vec4Buffer2_Instance"
+               OpName %Vec4Buffer3_Instance "Vec4Buffer3_Instance"
+               OpName %UniformBufferVec4Layouts_Main_EntryPoint "UniformBufferVec4Layouts_Main_EntryPoint"
+               OpName %self_11 "self"
+               OpDecorate %Vec4Buffer0_0 DescriptorSet 0
+               OpDecorate %Vec4Buffer0_0 Binding 0
+               OpDecorate %Vec4Buffer0_0 Block
+               OpMemberDecorate %Vec4Buffer0_0 0 Offset 0
+               OpMemberDecorate %Vec4Buffer0_0 1 Offset 16
+               OpDecorate %Vec4Buffer1_0 DescriptorSet 0
+               OpDecorate %Vec4Buffer1_0 Binding 1
+               OpDecorate %Vec4Buffer1_0 Block
+               OpMemberDecorate %Vec4Buffer1_0 0 Offset 0
+               OpMemberDecorate %Vec4Buffer1_0 1 Offset 16
+               OpDecorate %Vec4Buffer2_0 DescriptorSet 0
+               OpDecorate %Vec4Buffer2_0 Binding 2
+               OpDecorate %Vec4Buffer2_0 Block
+               OpMemberDecorate %Vec4Buffer2_0 0 Offset 0
+               OpMemberDecorate %Vec4Buffer2_0 1 Offset 4
+               OpMemberDecorate %Vec4Buffer2_0 2 Offset 16
+               OpDecorate %Vec4Buffer3_0 DescriptorSet 0
+               OpDecorate %Vec4Buffer3_0 Binding 3
+               OpDecorate %Vec4Buffer3_0 Block
+               OpMemberDecorate %Vec4Buffer3_0 0 Offset 0
+               OpMemberDecorate %Vec4Buffer3_0 1 Offset 4
+               OpMemberDecorate %Vec4Buffer3_0 2 Offset 8
+               OpMemberDecorate %Vec4Buffer3_0 3 Offset 16
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVector4 = OpTypeVector %float 4
+%Vec4Buffer0 = OpTypeStruct %TestVector4 %TestVector4
+       %void = OpTypeVoid
+%_ptr_Function_Vec4Buffer0 = OpTypePointer Function %Vec4Buffer0
+         %11 = OpTypeFunction %void %_ptr_Function_Vec4Buffer0
+%Vec4Buffer1 = OpTypeStruct %float %TestVector4
+%_ptr_Function_Vec4Buffer1 = OpTypePointer Function %Vec4Buffer1
+         %15 = OpTypeFunction %void %_ptr_Function_Vec4Buffer1
+%_ptr_Function_float = OpTypePointer Function %float
+%Vec4Buffer2 = OpTypeStruct %float %float %TestVector4
+%_ptr_Function_Vec4Buffer2 = OpTypePointer Function %Vec4Buffer2
+         %19 = OpTypeFunction %void %_ptr_Function_Vec4Buffer2
+%Vec4Buffer3 = OpTypeStruct %float %float %float %TestVector4
+%_ptr_Function_Vec4Buffer3 = OpTypePointer Function %Vec4Buffer3
+         %23 = OpTypeFunction %void %_ptr_Function_Vec4Buffer3
+%UniformBufferVec4Layouts = OpTypeStruct %Vec4Buffer0 %Vec4Buffer1 %Vec4Buffer2 %Vec4Buffer3
+%_ptr_Function_UniformBufferVec4Layouts = OpTypePointer Function %UniformBufferVec4Layouts
+         %27 = OpTypeFunction %void %_ptr_Function_UniformBufferVec4Layouts
+%_ptr_Uniform_TestVector4 = OpTypePointer Uniform %TestVector4
+%Vec4Buffer0_0 = OpTypeStruct %TestVector4 %TestVector4
+%_ptr_Uniform_Vec4Buffer0_0 = OpTypePointer Uniform %Vec4Buffer0_0
+%_ptr_Function_TestVector4 = OpTypePointer Function %TestVector4
+%_ptr_Uniform_float = OpTypePointer Uniform %float
+%Vec4Buffer1_0 = OpTypeStruct %float %TestVector4
+%_ptr_Uniform_Vec4Buffer1_0 = OpTypePointer Uniform %Vec4Buffer1_0
+%Vec4Buffer2_0 = OpTypeStruct %float %float %TestVector4
+%_ptr_Uniform_Vec4Buffer2_0 = OpTypePointer Uniform %Vec4Buffer2_0
+%Vec4Buffer3_0 = OpTypeStruct %float %float %float %TestVector4
+%_ptr_Uniform_Vec4Buffer3_0 = OpTypePointer Uniform %Vec4Buffer3_0
+         %43 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
+     %uint_3 = OpConstant %uint 3
+%Vec4Buffer0_Instance = OpVariable %_ptr_Uniform_Vec4Buffer0_0 Uniform
+%Vec4Buffer1_Instance = OpVariable %_ptr_Uniform_Vec4Buffer1_0 Uniform
+%Vec4Buffer2_Instance = OpVariable %_ptr_Uniform_Vec4Buffer2_0 Uniform
+%Vec4Buffer3_Instance = OpVariable %_ptr_Uniform_Vec4Buffer3_0 Uniform
+%Vec4Buffer0_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_Vec4Buffer0
+         %57 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer0_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_Vec4Buffer0
+         %62 = OpLabel
+         %63 = OpFunctionCall %void %Vec4Buffer0_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer1_PreConstructor = OpFunction %void None %15
+     %self_1 = OpFunctionParameter %_ptr_Function_Vec4Buffer1
+         %68 = OpLabel
+         %69 = OpAccessChain %_ptr_Function_float %self_1 %uint_0
+               OpStore %69 %float_0
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer1_DefaultConstructor = OpFunction %void None %15
+     %self_2 = OpFunctionParameter %_ptr_Function_Vec4Buffer1
+         %75 = OpLabel
+         %76 = OpFunctionCall %void %Vec4Buffer1_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer2_PreConstructor = OpFunction %void None %19
+     %self_3 = OpFunctionParameter %_ptr_Function_Vec4Buffer2
+         %81 = OpLabel
+         %82 = OpAccessChain %_ptr_Function_float %self_3 %uint_0
+               OpStore %82 %float_0
+         %84 = OpAccessChain %_ptr_Function_float %self_3 %uint_1
+               OpStore %84 %float_0
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer2_DefaultConstructor = OpFunction %void None %19
+     %self_4 = OpFunctionParameter %_ptr_Function_Vec4Buffer2
+         %90 = OpLabel
+         %91 = OpFunctionCall %void %Vec4Buffer2_PreConstructor %self_4
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer3_PreConstructor = OpFunction %void None %23
+     %self_5 = OpFunctionParameter %_ptr_Function_Vec4Buffer3
+         %96 = OpLabel
+         %97 = OpAccessChain %_ptr_Function_float %self_5 %uint_0
+               OpStore %97 %float_0
+         %99 = OpAccessChain %_ptr_Function_float %self_5 %uint_1
+               OpStore %99 %float_0
+        %101 = OpAccessChain %_ptr_Function_float %self_5 %uint_2
+               OpStore %101 %float_0
+               OpReturn
+               OpFunctionEnd
+%Vec4Buffer3_DefaultConstructor = OpFunction %void None %23
+     %self_6 = OpFunctionParameter %_ptr_Function_Vec4Buffer3
+        %107 = OpLabel
+        %108 = OpFunctionCall %void %Vec4Buffer3_PreConstructor %self_6
+               OpReturn
+               OpFunctionEnd
+%UniformBufferVec4Layouts_PreConstructor = OpFunction %void None %27
+     %self_7 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
+        %113 = OpLabel
+%tempVec4Buffer0 = OpVariable %_ptr_Function_Vec4Buffer0 Function
+%tempVec4Buffer1 = OpVariable %_ptr_Function_Vec4Buffer1 Function
+%tempVec4Buffer2 = OpVariable %_ptr_Function_Vec4Buffer2 Function
+%tempVec4Buffer3 = OpVariable %_ptr_Function_Vec4Buffer3 Function
+        %118 = OpFunctionCall %void %Vec4Buffer0_DefaultConstructor %tempVec4Buffer0
+        %119 = OpLoad %Vec4Buffer0 %tempVec4Buffer0
+        %120 = OpAccessChain %_ptr_Function_Vec4Buffer0 %self_7 %uint_0
+               OpStore %120 %119
+        %122 = OpFunctionCall %void %Vec4Buffer1_DefaultConstructor %tempVec4Buffer1
+        %123 = OpLoad %Vec4Buffer1 %tempVec4Buffer1
+        %124 = OpAccessChain %_ptr_Function_Vec4Buffer1 %self_7 %uint_1
+               OpStore %124 %123
+        %126 = OpFunctionCall %void %Vec4Buffer2_DefaultConstructor %tempVec4Buffer2
+        %127 = OpLoad %Vec4Buffer2 %tempVec4Buffer2
+        %128 = OpAccessChain %_ptr_Function_Vec4Buffer2 %self_7 %uint_2
+               OpStore %128 %127
+        %130 = OpFunctionCall %void %Vec4Buffer3_DefaultConstructor %tempVec4Buffer3
+        %131 = OpLoad %Vec4Buffer3 %tempVec4Buffer3
+        %132 = OpAccessChain %_ptr_Function_Vec4Buffer3 %self_7 %uint_3
+               OpStore %132 %131
+               OpReturn
+               OpFunctionEnd
+%UniformBufferVec4Layouts_DefaultConstructor = OpFunction %void None %27
+     %self_8 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
+        %138 = OpLabel
+        %139 = OpFunctionCall %void %UniformBufferVec4Layouts_PreConstructor %self_8
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %27
+     %self_9 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
+        %144 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UniformBufferVec4Layouts_CopyInputs = OpFunction %void None %27
+    %self_10 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
+        %149 = OpLabel
+        %150 = OpAccessChain %_ptr_Function_Vec4Buffer0 %self_10 %uint_0
+        %151 = OpAccessChain %_ptr_Uniform_TestVector4 %Vec4Buffer0_Instance %uint_0
+        %152 = OpAccessChain %_ptr_Function_TestVector4 %150 %uint_0
+        %153 = OpLoad %TestVector4 %151
+               OpStore %152 %153
+        %155 = OpAccessChain %_ptr_Uniform_TestVector4 %Vec4Buffer0_Instance %uint_1
+        %156 = OpAccessChain %_ptr_Function_TestVector4 %150 %uint_1
+        %157 = OpLoad %TestVector4 %155
+               OpStore %156 %157
+        %159 = OpAccessChain %_ptr_Function_Vec4Buffer1 %self_10 %uint_1
+        %160 = OpAccessChain %_ptr_Uniform_float %Vec4Buffer1_Instance %uint_0
+        %161 = OpAccessChain %_ptr_Function_float %159 %uint_0
+        %162 = OpLoad %float %160
+               OpStore %161 %162
+        %164 = OpAccessChain %_ptr_Uniform_TestVector4 %Vec4Buffer1_Instance %uint_1
+        %165 = OpAccessChain %_ptr_Function_TestVector4 %159 %uint_1
+        %166 = OpLoad %TestVector4 %164
+               OpStore %165 %166
+        %168 = OpAccessChain %_ptr_Function_Vec4Buffer2 %self_10 %uint_2
+        %169 = OpAccessChain %_ptr_Uniform_float %Vec4Buffer2_Instance %uint_0
+        %170 = OpAccessChain %_ptr_Function_float %168 %uint_0
+        %171 = OpLoad %float %169
+               OpStore %170 %171
+        %173 = OpAccessChain %_ptr_Uniform_float %Vec4Buffer2_Instance %uint_1
+        %174 = OpAccessChain %_ptr_Function_float %168 %uint_1
+        %175 = OpLoad %float %173
+               OpStore %174 %175
+        %177 = OpAccessChain %_ptr_Uniform_TestVector4 %Vec4Buffer2_Instance %uint_2
+        %178 = OpAccessChain %_ptr_Function_TestVector4 %168 %uint_2
+        %179 = OpLoad %TestVector4 %177
+               OpStore %178 %179
+        %181 = OpAccessChain %_ptr_Function_Vec4Buffer3 %self_10 %uint_3
+        %182 = OpAccessChain %_ptr_Uniform_float %Vec4Buffer3_Instance %uint_0
+        %183 = OpAccessChain %_ptr_Function_float %181 %uint_0
+        %184 = OpLoad %float %182
+               OpStore %183 %184
+        %186 = OpAccessChain %_ptr_Uniform_float %Vec4Buffer3_Instance %uint_1
+        %187 = OpAccessChain %_ptr_Function_float %181 %uint_1
+        %188 = OpLoad %float %186
+               OpStore %187 %188
+        %190 = OpAccessChain %_ptr_Uniform_float %Vec4Buffer3_Instance %uint_2
+        %191 = OpAccessChain %_ptr_Function_float %181 %uint_2
+        %192 = OpLoad %float %190
+               OpStore %191 %192
+        %194 = OpAccessChain %_ptr_Uniform_TestVector4 %Vec4Buffer3_Instance %uint_3
+        %195 = OpAccessChain %_ptr_Function_TestVector4 %181 %uint_3
+        %196 = OpLoad %TestVector4 %194
+               OpStore %195 %196
+               OpReturn
+               OpFunctionEnd
+%UniformBufferVec4Layouts_Main_EntryPoint = OpFunction %void None %43
+        %201 = OpLabel
+    %self_11 = OpVariable %_ptr_Function_UniformBufferVec4Layouts Function
+        %203 = OpFunctionCall %void %UniformBufferVec4Layouts_DefaultConstructor %self_11
+        %204 = OpFunctionCall %void %UniformBufferVec4Layouts_CopyInputs %self_11
+        %205 = OpFunctionCall %void %Main %self_11
+               OpReturn
+               OpFunctionEnd

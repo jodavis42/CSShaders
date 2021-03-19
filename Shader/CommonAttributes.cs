@@ -75,8 +75,20 @@ namespace Shader
     Output(string name) { }
   }
 
-  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
-  public class UniformInput : Attribute
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+  public class UniformBuffer : Attribute
+  {
+    public int DescriptorSet = 0;
+    public int BindingId = 0;
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+  public class UniformBufferField : Attribute
+  {
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+  public class UniformConstant : Attribute
   {
     public int DescriptorSet = 0;
     public int BindingId = 0;

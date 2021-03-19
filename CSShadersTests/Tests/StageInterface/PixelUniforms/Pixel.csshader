@@ -16,11 +16,11 @@ public struct TestVectorPrimitive
 [Shader.UnitTest][Shader.Pixel]
 struct Pixel
 {
-  [Shader.UniformInput] float Value = 1.0f;
-  [Shader.UniformInput] float Value2 = 1.0f;
+  [Shader.UniformBufferField] float Value = 1.0f;
+  [Shader.UniformBufferField] float Value2 = 1.0f;
   
-  [Shader.UniformInput] TestVectorPrimitive V2;
-  [Shader.UniformInput] TestStruct TestStruct;
+  [Shader.UniformBufferField] TestVectorPrimitive V2;
+  [Shader.UniformBufferField] TestStruct TestStruct;
 
   [Shader.EntryPoint]
   public void Main()

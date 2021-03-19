@@ -1,0 +1,231 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 157
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %UniformBuffers4_Main_EntryPoint "UniformBuffers4_Main_EntryPoint" %Buffer_Instance %Buffer_Instance_0 %Buffer_Instance_1 %Buffer_Instance_2
+               OpExecutionMode %UniformBuffers4_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Buffer "Buffer"
+               OpMemberName %Buffer 0 "Value"
+               OpMemberName %Buffer 1 "Value2"
+               OpMemberName %Buffer 2 "Value3"
+               OpName %UniformBuffers4 "UniformBuffers4"
+               OpMemberName %UniformBuffers4 0 "Buffer01"
+               OpMemberName %UniformBuffers4 1 "Buffer10"
+               OpMemberName %UniformBuffers4 2 "Buffer00"
+               OpMemberName %UniformBuffers4 3 "Buffer02"
+               OpName %Buffer_0 "Buffer_0"
+               OpMemberName %Buffer_0 0 "Value"
+               OpMemberName %Buffer_0 1 "Value2"
+               OpMemberName %Buffer_0 2 "Value3"
+               OpName %Buffer_1 "Buffer_1"
+               OpMemberName %Buffer_1 0 "Value"
+               OpMemberName %Buffer_1 1 "Value2"
+               OpMemberName %Buffer_1 2 "Value3"
+               OpName %Buffer_2 "Buffer_2"
+               OpMemberName %Buffer_2 0 "Value"
+               OpMemberName %Buffer_2 1 "Value2"
+               OpMemberName %Buffer_2 2 "Value3"
+               OpName %Buffer_3 "Buffer_3"
+               OpMemberName %Buffer_3 0 "Value"
+               OpMemberName %Buffer_3 1 "Value2"
+               OpMemberName %Buffer_3 2 "Value3"
+               OpName %Buffer_PreConstructor "Buffer_PreConstructor"
+               OpName %self "self"
+               OpName %Buffer_DefaultConstructor "Buffer_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %UniformBuffers4_PreConstructor "UniformBuffers4_PreConstructor"
+               OpName %self_1 "self"
+               OpName %tempBuffer "tempBuffer"
+               OpName %tempBuffer_0 "tempBuffer"
+               OpName %tempBuffer_1 "tempBuffer"
+               OpName %tempBuffer_2 "tempBuffer"
+               OpName %UniformBuffers4_DefaultConstructor "UniformBuffers4_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %Main "Main"
+               OpName %self_3 "self"
+               OpName %UniformBuffers4_CopyInputs "UniformBuffers4_CopyInputs"
+               OpName %self_4 "self"
+               OpName %UniformBuffers4_Main_EntryPoint "UniformBuffers4_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %Buffer_Instance "Buffer_Instance"
+               OpName %Buffer_Instance_0 "Buffer_Instance"
+               OpName %Buffer_Instance_1 "Buffer_Instance"
+               OpName %Buffer_Instance_2 "Buffer_Instance"
+               OpName %UniformBuffers4_Main_EntryPoint "UniformBuffers4_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpDecorate %Buffer_0 DescriptorSet 0
+               OpDecorate %Buffer_0 Binding 1
+               OpDecorate %Buffer_0 Block
+               OpMemberDecorate %Buffer_0 0 Offset 0
+               OpMemberDecorate %Buffer_0 1 Offset 4
+               OpMemberDecorate %Buffer_0 2 Offset 8
+               OpDecorate %Buffer_1 DescriptorSet 1
+               OpDecorate %Buffer_1 Binding 0
+               OpDecorate %Buffer_1 Block
+               OpMemberDecorate %Buffer_1 0 Offset 0
+               OpMemberDecorate %Buffer_1 1 Offset 4
+               OpMemberDecorate %Buffer_1 2 Offset 8
+               OpDecorate %Buffer_2 DescriptorSet 0
+               OpDecorate %Buffer_2 Binding 0
+               OpDecorate %Buffer_2 Block
+               OpMemberDecorate %Buffer_2 0 Offset 0
+               OpMemberDecorate %Buffer_2 1 Offset 4
+               OpMemberDecorate %Buffer_2 2 Offset 8
+               OpDecorate %Buffer_3 DescriptorSet 0
+               OpDecorate %Buffer_3 Binding 2
+               OpDecorate %Buffer_3 Block
+               OpMemberDecorate %Buffer_3 0 Offset 0
+               OpMemberDecorate %Buffer_3 1 Offset 4
+               OpMemberDecorate %Buffer_3 2 Offset 8
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+     %Buffer = OpTypeStruct %float %float %float
+       %void = OpTypeVoid
+%_ptr_Function_Buffer = OpTypePointer Function %Buffer
+          %9 = OpTypeFunction %void %_ptr_Function_Buffer
+%_ptr_Function_float = OpTypePointer Function %float
+%UniformBuffers4 = OpTypeStruct %Buffer %Buffer %Buffer %Buffer
+%_ptr_Function_UniformBuffers4 = OpTypePointer Function %UniformBuffers4
+         %13 = OpTypeFunction %void %_ptr_Function_UniformBuffers4
+%_ptr_Uniform_float = OpTypePointer Uniform %float
+   %Buffer_0 = OpTypeStruct %float %float %float
+%_ptr_Uniform_Buffer_0 = OpTypePointer Uniform %Buffer_0
+   %Buffer_1 = OpTypeStruct %float %float %float
+%_ptr_Uniform_Buffer_1 = OpTypePointer Uniform %Buffer_1
+   %Buffer_2 = OpTypeStruct %float %float %float
+%_ptr_Uniform_Buffer_2 = OpTypePointer Uniform %Buffer_2
+   %Buffer_3 = OpTypeStruct %float %float %float
+%_ptr_Uniform_Buffer_3 = OpTypePointer Uniform %Buffer_3
+         %28 = OpTypeFunction %void
+    %float_1 = OpConstant %float 1
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
+     %uint_3 = OpConstant %uint 3
+%Buffer_Instance = OpVariable %_ptr_Uniform_Buffer_0 Uniform
+%Buffer_Instance_0 = OpVariable %_ptr_Uniform_Buffer_1 Uniform
+%Buffer_Instance_1 = OpVariable %_ptr_Uniform_Buffer_2 Uniform
+%Buffer_Instance_2 = OpVariable %_ptr_Uniform_Buffer_3 Uniform
+%Buffer_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_Buffer
+         %42 = OpLabel
+         %43 = OpAccessChain %_ptr_Function_float %self %uint_0
+               OpStore %43 %float_1
+         %45 = OpAccessChain %_ptr_Function_float %self %uint_1
+               OpStore %45 %float_1
+         %47 = OpAccessChain %_ptr_Function_float %self %uint_2
+               OpStore %47 %float_1
+               OpReturn
+               OpFunctionEnd
+%Buffer_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_Buffer
+         %53 = OpLabel
+         %54 = OpFunctionCall %void %Buffer_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers4_PreConstructor = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_UniformBuffers4
+         %59 = OpLabel
+ %tempBuffer = OpVariable %_ptr_Function_Buffer Function
+%tempBuffer_0 = OpVariable %_ptr_Function_Buffer Function
+%tempBuffer_1 = OpVariable %_ptr_Function_Buffer Function
+%tempBuffer_2 = OpVariable %_ptr_Function_Buffer Function
+         %64 = OpFunctionCall %void %Buffer_DefaultConstructor %tempBuffer
+         %65 = OpLoad %Buffer %tempBuffer
+         %66 = OpAccessChain %_ptr_Function_Buffer %self_1 %uint_0
+               OpStore %66 %65
+         %68 = OpFunctionCall %void %Buffer_DefaultConstructor %tempBuffer_0
+         %69 = OpLoad %Buffer %tempBuffer_0
+         %70 = OpAccessChain %_ptr_Function_Buffer %self_1 %uint_1
+               OpStore %70 %69
+         %72 = OpFunctionCall %void %Buffer_DefaultConstructor %tempBuffer_1
+         %73 = OpLoad %Buffer %tempBuffer_1
+         %74 = OpAccessChain %_ptr_Function_Buffer %self_1 %uint_2
+               OpStore %74 %73
+         %76 = OpFunctionCall %void %Buffer_DefaultConstructor %tempBuffer_2
+         %77 = OpLoad %Buffer %tempBuffer_2
+         %78 = OpAccessChain %_ptr_Function_Buffer %self_1 %uint_3
+               OpStore %78 %77
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers4_DefaultConstructor = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_UniformBuffers4
+         %84 = OpLabel
+         %85 = OpFunctionCall %void %UniformBuffers4_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_UniformBuffers4
+         %90 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers4_CopyInputs = OpFunction %void None %13
+     %self_4 = OpFunctionParameter %_ptr_Function_UniformBuffers4
+         %95 = OpLabel
+         %96 = OpAccessChain %_ptr_Function_Buffer %self_4 %uint_0
+         %97 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance %uint_0
+         %98 = OpAccessChain %_ptr_Function_float %96 %uint_0
+         %99 = OpLoad %float %97
+               OpStore %98 %99
+        %101 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance %uint_1
+        %102 = OpAccessChain %_ptr_Function_float %96 %uint_1
+        %103 = OpLoad %float %101
+               OpStore %102 %103
+        %105 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance %uint_2
+        %106 = OpAccessChain %_ptr_Function_float %96 %uint_2
+        %107 = OpLoad %float %105
+               OpStore %106 %107
+        %109 = OpAccessChain %_ptr_Function_Buffer %self_4 %uint_1
+        %110 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_0 %uint_0
+        %111 = OpAccessChain %_ptr_Function_float %109 %uint_0
+        %112 = OpLoad %float %110
+               OpStore %111 %112
+        %114 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_0 %uint_1
+        %115 = OpAccessChain %_ptr_Function_float %109 %uint_1
+        %116 = OpLoad %float %114
+               OpStore %115 %116
+        %118 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_0 %uint_2
+        %119 = OpAccessChain %_ptr_Function_float %109 %uint_2
+        %120 = OpLoad %float %118
+               OpStore %119 %120
+        %122 = OpAccessChain %_ptr_Function_Buffer %self_4 %uint_2
+        %123 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_1 %uint_0
+        %124 = OpAccessChain %_ptr_Function_float %122 %uint_0
+        %125 = OpLoad %float %123
+               OpStore %124 %125
+        %127 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_1 %uint_1
+        %128 = OpAccessChain %_ptr_Function_float %122 %uint_1
+        %129 = OpLoad %float %127
+               OpStore %128 %129
+        %131 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_1 %uint_2
+        %132 = OpAccessChain %_ptr_Function_float %122 %uint_2
+        %133 = OpLoad %float %131
+               OpStore %132 %133
+        %135 = OpAccessChain %_ptr_Function_Buffer %self_4 %uint_3
+        %136 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_2 %uint_0
+        %137 = OpAccessChain %_ptr_Function_float %135 %uint_0
+        %138 = OpLoad %float %136
+               OpStore %137 %138
+        %140 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_2 %uint_1
+        %141 = OpAccessChain %_ptr_Function_float %135 %uint_1
+        %142 = OpLoad %float %140
+               OpStore %141 %142
+        %144 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance_2 %uint_2
+        %145 = OpAccessChain %_ptr_Function_float %135 %uint_2
+        %146 = OpLoad %float %144
+               OpStore %145 %146
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers4_Main_EntryPoint = OpFunction %void None %28
+        %151 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_UniformBuffers4 Function
+        %153 = OpFunctionCall %void %UniformBuffers4_DefaultConstructor %self_5
+        %154 = OpFunctionCall %void %UniformBuffers4_CopyInputs %self_5
+        %155 = OpFunctionCall %void %Main %self_5
+               OpReturn
+               OpFunctionEnd

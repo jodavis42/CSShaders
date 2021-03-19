@@ -47,6 +47,31 @@ namespace CSShaders
       translator.CreateOp(decorationsBlock, OpInstructionType.OpMemberDecorate, null, new List<IShaderIR>() { shaderType, fieldIndexLiteral, decorationOffsetLiteral, byteOffsetLiteral });
     }
 
+    public static void AddDecorationMemberMatrixStride(FrontEndTranslator translator, ShaderType shaderType, int fieldIndex, int stride, ShaderBlock decorationsBlock)
+    {
+      var decorationOffsetLiteral = translator.CreateConstantLiteral((int)Spv.Decoration.DecorationMatrixStride);
+      var fieldIndexLiteral = translator.CreateConstantLiteral(fieldIndex);
+      var strideLiteral = translator.CreateConstantLiteral(stride);
+      translator.CreateOp(decorationsBlock, OpInstructionType.OpMemberDecorate, null, new List<IShaderIR>() { shaderType, fieldIndexLiteral, decorationOffsetLiteral, strideLiteral });
+    }
+
+    public static void AddDecorationMemberMatrixMajor(FrontEndTranslator translator, ShaderType shaderType, int fieldIndex, Spv.Decoration decoration, ShaderBlock decorationsBlock)
+    {
+      var decorationOffsetLiteral = translator.CreateConstantLiteral((int)decoration);
+      var fieldIndexLiteral = translator.CreateConstantLiteral(fieldIndex);
+      translator.CreateOp(decorationsBlock, OpInstructionType.OpMemberDecorate, null, new List<IShaderIR>() { shaderType, fieldIndexLiteral, decorationOffsetLiteral });
+    }
+
+    public static void AddDecorationMemberRowMajor(FrontEndTranslator translator, ShaderType shaderType, int fieldIndex, ShaderBlock decorationsBlock)
+    {
+      AddDecorationMemberMatrixMajor(translator, shaderType, fieldIndex, Spv.Decoration.DecorationRowMajor, decorationsBlock);
+    }
+
+    public static void AddDecorationMemberColMajor(FrontEndTranslator translator, ShaderType shaderType, int fieldIndex, ShaderBlock decorationsBlock)
+    {
+      AddDecorationMemberMatrixMajor(translator, shaderType, fieldIndex, Spv.Decoration.DecorationColMajor, decorationsBlock);
+    }
+
     public static void DecorateUniforms(FrontEndTranslator translator, ShaderOp instanceOp, ShaderBlock decorationsBlock)
     {
       var instanceType = instanceOp.mResultType.GetDereferenceType();
@@ -73,6 +98,39 @@ namespace CSShaders
         AddDecorationMemberOffset(translator, shaderType, fieldIndex, currentByteOffset, decorationsBlock);
 
         currentByteOffset += byteSize;
+      }
+    }
+
+    public static void DecorateStrides(FrontEndTranslator translator, ShaderType shaderType, ShaderBlock decorationsBlock)
+    {
+      for (var fieldIndex = 0; fieldIndex < shaderType.mFields.Count; ++fieldIndex)
+      {
+        var field = shaderType.mFields[fieldIndex];
+        var fieldType = field.mType;
+        // Recursively decorate structs
+        if (fieldType.mBaseType == OpType.Struct)
+          DecorateStrides(translator, fieldType, decorationsBlock);
+        else if(fieldType.mBaseType == OpType.Matrix)
+        {
+          // Hardcode stride to size of a vec4 for performance reasons.
+          // @JoshD: Maybe make a packing option for this later?
+          int matrixStride = 16;
+          AddDecorationMemberMatrixStride(translator, shaderType, fieldIndex, matrixStride, decorationsBlock);
+        }
+      }
+    }
+
+    public static void DecorateMatrixMajor(FrontEndTranslator translator, ShaderType shaderType, ShaderBlock decorationsBlock)
+    {
+      for (var fieldIndex = 0; fieldIndex < shaderType.mFields.Count; ++fieldIndex)
+      {
+        var field = shaderType.mFields[fieldIndex];
+        var fieldType = field.mType;
+        // Recursively decorate structs
+        if (fieldType.mBaseType == OpType.Struct)
+          DecorateMatrixMajor(translator, fieldType, decorationsBlock);
+        else if (fieldType.mBaseType == OpType.Matrix)
+          AddDecorationMemberColMajor(translator, shaderType, fieldIndex, decorationsBlock);
       }
     }
   }

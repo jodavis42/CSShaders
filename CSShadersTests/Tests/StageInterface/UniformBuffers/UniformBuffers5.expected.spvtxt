@@ -1,0 +1,164 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 113
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %UniformBuffers5_Main_EntryPoint "UniformBuffers5_Main_EntryPoint" %Buffer_Instance %UniformBuffers5_SharedMaterialBuffer_Instance
+               OpExecutionMode %UniformBuffers5_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %Buffer "Buffer"
+               OpMemberName %Buffer 0 "Value"
+               OpMemberName %Buffer 1 "Value2"
+               OpMemberName %Buffer 2 "Value3"
+               OpName %UniformBuffers5 "UniformBuffers5"
+               OpMemberName %UniformBuffers5 0 "Buffer"
+               OpMemberName %UniformBuffers5 1 "Value"
+               OpMemberName %UniformBuffers5 2 "Value2"
+               OpMemberName %UniformBuffers5 3 "Value3"
+               OpName %Buffer_0 "Buffer_0"
+               OpMemberName %Buffer_0 0 "Value"
+               OpMemberName %Buffer_0 1 "Value2"
+               OpMemberName %Buffer_0 2 "Value3"
+               OpName %UniformBuffers5_SharedMaterialBuffer "UniformBuffers5_SharedMaterialBuffer"
+               OpMemberName %UniformBuffers5_SharedMaterialBuffer 0 "Value"
+               OpMemberName %UniformBuffers5_SharedMaterialBuffer 1 "Value2"
+               OpMemberName %UniformBuffers5_SharedMaterialBuffer 2 "Value3"
+               OpName %Buffer_PreConstructor "Buffer_PreConstructor"
+               OpName %self "self"
+               OpName %Buffer_DefaultConstructor "Buffer_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %UniformBuffers5_PreConstructor "UniformBuffers5_PreConstructor"
+               OpName %self_1 "self"
+               OpName %tempBuffer "tempBuffer"
+               OpName %UniformBuffers5_DefaultConstructor "UniformBuffers5_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %Main "Main"
+               OpName %self_3 "self"
+               OpName %UniformBuffers5_CopyInputs "UniformBuffers5_CopyInputs"
+               OpName %self_4 "self"
+               OpName %UniformBuffers5_Main_EntryPoint "UniformBuffers5_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %Buffer_Instance "Buffer_Instance"
+               OpName %UniformBuffers5_SharedMaterialBuffer_Instance "UniformBuffers5_SharedMaterialBuffer_Instance"
+               OpName %UniformBuffers5_Main_EntryPoint "UniformBuffers5_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpDecorate %Buffer_0 DescriptorSet 0
+               OpDecorate %Buffer_0 Binding 0
+               OpDecorate %Buffer_0 Block
+               OpMemberDecorate %Buffer_0 0 Offset 0
+               OpMemberDecorate %Buffer_0 1 Offset 4
+               OpMemberDecorate %Buffer_0 2 Offset 8
+               OpDecorate %UniformBuffers5_SharedMaterialBuffer DescriptorSet 0
+               OpDecorate %UniformBuffers5_SharedMaterialBuffer Binding 1
+               OpDecorate %UniformBuffers5_SharedMaterialBuffer Block
+               OpMemberDecorate %UniformBuffers5_SharedMaterialBuffer 0 Offset 0
+               OpMemberDecorate %UniformBuffers5_SharedMaterialBuffer 1 Offset 4
+               OpMemberDecorate %UniformBuffers5_SharedMaterialBuffer 2 Offset 8
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+     %Buffer = OpTypeStruct %float %float %float
+       %void = OpTypeVoid
+%_ptr_Function_Buffer = OpTypePointer Function %Buffer
+          %9 = OpTypeFunction %void %_ptr_Function_Buffer
+%_ptr_Function_float = OpTypePointer Function %float
+%UniformBuffers5 = OpTypeStruct %Buffer %float %float %float
+%_ptr_Function_UniformBuffers5 = OpTypePointer Function %UniformBuffers5
+         %13 = OpTypeFunction %void %_ptr_Function_UniformBuffers5
+%_ptr_Uniform_float = OpTypePointer Uniform %float
+   %Buffer_0 = OpTypeStruct %float %float %float
+%_ptr_Uniform_Buffer_0 = OpTypePointer Uniform %Buffer_0
+%UniformBuffers5_SharedMaterialBuffer = OpTypeStruct %float %float %float
+%_ptr_Uniform_UniformBuffers5_SharedMaterialBuffer = OpTypePointer Uniform %UniformBuffers5_SharedMaterialBuffer
+         %22 = OpTypeFunction %void
+    %float_1 = OpConstant %float 1
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
+     %uint_3 = OpConstant %uint 3
+%Buffer_Instance = OpVariable %_ptr_Uniform_Buffer_0 Uniform
+%UniformBuffers5_SharedMaterialBuffer_Instance = OpVariable %_ptr_Uniform_UniformBuffers5_SharedMaterialBuffer Uniform
+%Buffer_PreConstructor = OpFunction %void None %9
+       %self = OpFunctionParameter %_ptr_Function_Buffer
+         %34 = OpLabel
+         %35 = OpAccessChain %_ptr_Function_float %self %uint_0
+               OpStore %35 %float_1
+         %37 = OpAccessChain %_ptr_Function_float %self %uint_1
+               OpStore %37 %float_1
+         %39 = OpAccessChain %_ptr_Function_float %self %uint_2
+               OpStore %39 %float_1
+               OpReturn
+               OpFunctionEnd
+%Buffer_DefaultConstructor = OpFunction %void None %9
+     %self_0 = OpFunctionParameter %_ptr_Function_Buffer
+         %45 = OpLabel
+         %46 = OpFunctionCall %void %Buffer_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers5_PreConstructor = OpFunction %void None %13
+     %self_1 = OpFunctionParameter %_ptr_Function_UniformBuffers5
+         %51 = OpLabel
+ %tempBuffer = OpVariable %_ptr_Function_Buffer Function
+         %53 = OpFunctionCall %void %Buffer_DefaultConstructor %tempBuffer
+         %54 = OpLoad %Buffer %tempBuffer
+         %55 = OpAccessChain %_ptr_Function_Buffer %self_1 %uint_0
+               OpStore %55 %54
+         %57 = OpAccessChain %_ptr_Function_float %self_1 %uint_1
+               OpStore %57 %float_1
+         %59 = OpAccessChain %_ptr_Function_float %self_1 %uint_2
+               OpStore %59 %float_1
+         %61 = OpAccessChain %_ptr_Function_float %self_1 %uint_3
+               OpStore %61 %float_1
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers5_DefaultConstructor = OpFunction %void None %13
+     %self_2 = OpFunctionParameter %_ptr_Function_UniformBuffers5
+         %67 = OpLabel
+         %68 = OpFunctionCall %void %UniformBuffers5_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %13
+     %self_3 = OpFunctionParameter %_ptr_Function_UniformBuffers5
+         %73 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers5_CopyInputs = OpFunction %void None %13
+     %self_4 = OpFunctionParameter %_ptr_Function_UniformBuffers5
+         %78 = OpLabel
+         %79 = OpAccessChain %_ptr_Function_Buffer %self_4 %uint_0
+         %80 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance %uint_0
+         %81 = OpAccessChain %_ptr_Function_float %79 %uint_0
+         %82 = OpLoad %float %80
+               OpStore %81 %82
+         %84 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance %uint_1
+         %85 = OpAccessChain %_ptr_Function_float %79 %uint_1
+         %86 = OpLoad %float %84
+               OpStore %85 %86
+         %88 = OpAccessChain %_ptr_Uniform_float %Buffer_Instance %uint_2
+         %89 = OpAccessChain %_ptr_Function_float %79 %uint_2
+         %90 = OpLoad %float %88
+               OpStore %89 %90
+         %92 = OpAccessChain %_ptr_Uniform_float %UniformBuffers5_SharedMaterialBuffer_Instance %uint_0
+         %93 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
+         %94 = OpLoad %float %92
+               OpStore %93 %94
+         %96 = OpAccessChain %_ptr_Uniform_float %UniformBuffers5_SharedMaterialBuffer_Instance %uint_1
+         %97 = OpAccessChain %_ptr_Function_float %self_4 %uint_2
+         %98 = OpLoad %float %96
+               OpStore %97 %98
+        %100 = OpAccessChain %_ptr_Uniform_float %UniformBuffers5_SharedMaterialBuffer_Instance %uint_2
+        %101 = OpAccessChain %_ptr_Function_float %self_4 %uint_3
+        %102 = OpLoad %float %100
+               OpStore %101 %102
+               OpReturn
+               OpFunctionEnd
+%UniformBuffers5_Main_EntryPoint = OpFunction %void None %22
+        %107 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_UniformBuffers5 Function
+        %109 = OpFunctionCall %void %UniformBuffers5_DefaultConstructor %self_5
+        %110 = OpFunctionCall %void %UniformBuffers5_CopyInputs %self_5
+        %111 = OpFunctionCall %void %Main %self_5
+               OpReturn
+               OpFunctionEnd

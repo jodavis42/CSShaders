@@ -6,7 +6,7 @@
                OpCapability Shader
                OpCapability Linkage
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Vertex %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint" %Vertex_MaterialBuffer_0_0_Instance
+               OpEntryPoint Vertex %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint" %Vertex_SharedMaterialBuffer_Instance
                OpSource Unknown 100
                OpName %TestVectorPrimitive "TestVectorPrimitive"
                OpName %TestVectorPrimitive "Vector2"
@@ -18,11 +18,11 @@
                OpMemberName %Vertex 1 "Value2"
                OpMemberName %Vertex 2 "V2"
                OpMemberName %Vertex 3 "TestStruct"
-               OpName %Vertex_MaterialBuffer_0_0 "Vertex_MaterialBuffer_0_0"
-               OpMemberName %Vertex_MaterialBuffer_0_0 0 "Value"
-               OpMemberName %Vertex_MaterialBuffer_0_0 1 "Value2"
-               OpMemberName %Vertex_MaterialBuffer_0_0 2 "V2"
-               OpMemberName %Vertex_MaterialBuffer_0_0 3 "TestStruct"
+               OpName %Vertex_SharedMaterialBuffer "Vertex_SharedMaterialBuffer"
+               OpMemberName %Vertex_SharedMaterialBuffer 0 "Value"
+               OpMemberName %Vertex_SharedMaterialBuffer 1 "Value2"
+               OpMemberName %Vertex_SharedMaterialBuffer 2 "V2"
+               OpMemberName %Vertex_SharedMaterialBuffer 3 "TestStruct"
                OpName %TestStruct_PreConstructor "TestStruct_PreConstructor"
                OpName %self "self"
                OpName %TestStruct_DefaultConstructor "TestStruct_DefaultConstructor"
@@ -38,18 +38,18 @@
                OpName %self_4 "self"
                OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
                OpName %self_5 "self"
-               OpName %Vertex_MaterialBuffer_0_0_Instance "Vertex_MaterialBuffer_0_0_Instance"
+               OpName %Vertex_SharedMaterialBuffer_Instance "Vertex_SharedMaterialBuffer_Instance"
                OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
                OpName %self_5 "self"
-               OpDecorate %Vertex_MaterialBuffer_0_0 DescriptorSet 0
-               OpDecorate %Vertex_MaterialBuffer_0_0 Binding 0
-               OpDecorate %Vertex_MaterialBuffer_0_0 Block
-               OpMemberDecorate %Vertex_MaterialBuffer_0_0 0 Offset 0
-               OpMemberDecorate %Vertex_MaterialBuffer_0_0 1 Offset 4
-               OpMemberDecorate %Vertex_MaterialBuffer_0_0 2 Offset 8
+               OpDecorate %Vertex_SharedMaterialBuffer DescriptorSet 0
+               OpDecorate %Vertex_SharedMaterialBuffer Binding 0
+               OpDecorate %Vertex_SharedMaterialBuffer Block
+               OpMemberDecorate %Vertex_SharedMaterialBuffer 0 Offset 0
+               OpMemberDecorate %Vertex_SharedMaterialBuffer 1 Offset 4
+               OpMemberDecorate %Vertex_SharedMaterialBuffer 2 Offset 8
                OpMemberDecorate %TestStruct 0 Offset 0
                OpMemberDecorate %TestStruct 1 Offset 8
-               OpMemberDecorate %Vertex_MaterialBuffer_0_0 3 Offset 16
+               OpMemberDecorate %Vertex_SharedMaterialBuffer 3 Offset 16
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %TestVectorPrimitive = OpTypeVector %float 2
@@ -62,8 +62,8 @@
 %_ptr_Function_Vertex = OpTypePointer Function %Vertex
          %15 = OpTypeFunction %void %_ptr_Function_Vertex
 %_ptr_Uniform_float = OpTypePointer Uniform %float
-%Vertex_MaterialBuffer_0_0 = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
-%_ptr_Uniform_Vertex_MaterialBuffer_0_0 = OpTypePointer Uniform %Vertex_MaterialBuffer_0_0
+%Vertex_SharedMaterialBuffer = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
+%_ptr_Uniform_Vertex_SharedMaterialBuffer = OpTypePointer Uniform %Vertex_SharedMaterialBuffer
 %_ptr_Uniform_TestVectorPrimitive = OpTypePointer Uniform %TestVectorPrimitive
 %_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
 %_ptr_Uniform_TestStruct = OpTypePointer Uniform %TestStruct
@@ -74,7 +74,7 @@
      %uint_0 = OpConstant %uint 0
      %uint_3 = OpConstant %uint 3
      %uint_2 = OpConstant %uint 2
-%Vertex_MaterialBuffer_0_0_Instance = OpVariable %_ptr_Uniform_Vertex_MaterialBuffer_0_0 Uniform
+%Vertex_SharedMaterialBuffer_Instance = OpVariable %_ptr_Uniform_Vertex_SharedMaterialBuffer Uniform
 %TestStruct_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_TestStruct
          %35 = OpLabel
@@ -116,19 +116,19 @@
 %Vertex_CopyInputs = OpFunction %void None %15
      %self_4 = OpFunctionParameter %_ptr_Function_Vertex
          %73 = OpLabel
-         %74 = OpAccessChain %_ptr_Uniform_float %Vertex_MaterialBuffer_0_0_Instance %uint_0
+         %74 = OpAccessChain %_ptr_Uniform_float %Vertex_SharedMaterialBuffer_Instance %uint_0
          %75 = OpAccessChain %_ptr_Function_float %self_4 %uint_0
          %76 = OpLoad %float %74
                OpStore %75 %76
-         %78 = OpAccessChain %_ptr_Uniform_float %Vertex_MaterialBuffer_0_0_Instance %uint_1
+         %78 = OpAccessChain %_ptr_Uniform_float %Vertex_SharedMaterialBuffer_Instance %uint_1
          %79 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
          %80 = OpLoad %float %78
                OpStore %79 %80
-         %82 = OpAccessChain %_ptr_Uniform_TestVectorPrimitive %Vertex_MaterialBuffer_0_0_Instance %uint_2
+         %82 = OpAccessChain %_ptr_Uniform_TestVectorPrimitive %Vertex_SharedMaterialBuffer_Instance %uint_2
          %83 = OpAccessChain %_ptr_Function_TestVectorPrimitive %self_4 %uint_2
          %84 = OpLoad %TestVectorPrimitive %82
                OpStore %83 %84
-         %86 = OpAccessChain %_ptr_Uniform_TestStruct %Vertex_MaterialBuffer_0_0_Instance %uint_3
+         %86 = OpAccessChain %_ptr_Uniform_TestStruct %Vertex_SharedMaterialBuffer_Instance %uint_3
          %87 = OpAccessChain %_ptr_Function_TestStruct %self_4 %uint_3
          %88 = OpLoad %TestStruct %86
                OpStore %87 %88

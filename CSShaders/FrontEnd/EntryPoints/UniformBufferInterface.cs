@@ -16,6 +16,16 @@ namespace CSShaders
 
     public int DescriptorSet = 0;
     public int BindingId = 0;
+
+    public delegate ShaderOp OwnerAccessDelegate(FrontEndTranslator translator, UniformBufferInterface bufferInterface, ShaderOp ownerOp, FrontEndContext context);
+    public OwnerAccessDelegate GetOwnerDelegate = null;
+
+    public ShaderOp GetOwnerInstance(FrontEndTranslator translator, ShaderOp ownerOp, FrontEndContext context)
+    {
+      if (GetOwnerDelegate == null)
+        return ownerOp;
+      return GetOwnerDelegate(translator, this, ownerOp, context);
+    }
   }
 
   /// <summary>
@@ -24,6 +34,18 @@ namespace CSShaders
   public class UniformBufferSet
   {
     public Dictionary<Tuple<int, int>, UniformBufferInterface> Buffers = new Dictionary<Tuple<int, int>, UniformBufferInterface>();
+
+    public UniformBufferInterface GetOrDefault(int descriptorSet, int bindingId, UniformBufferInterface defaultValue = null)
+    {
+      var tuple = new Tuple<int, int>(descriptorSet, bindingId);
+      var buffer = Buffers.GetValueOrDefault(tuple, defaultValue);
+      return buffer;
+    }
+
+    public UniformBufferInterface GetOrDefault(UniformBindings bindings, UniformBufferInterface defaultValue = null)
+    {
+      return GetOrDefault(bindings.DescriptorSet, bindings.BindingId, defaultValue);
+    }
 
     public UniformBufferInterface GetOrCreate(int descriptorSet, int bindingId)
     {
@@ -39,6 +61,11 @@ namespace CSShaders
       buffer.BindingId = bindingId;
       Buffers.Add(tuple, buffer);
       return buffer;
+    }
+
+    public UniformBufferInterface GetOrCreate(UniformBindings bindings)
+    {
+      return GetOrCreate(bindings.DescriptorSet, bindings.BindingId);
     }
 
     public int Count { get { return Buffers.Count; } }

@@ -1,0 +1,240 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 161
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %UniformBufferFloat2x2Layouts_Main_EntryPoint "UniformBufferFloat2x2Layouts_Main_EntryPoint" %Float2x2Buffer0_Instance %Float2x2Buffer1_Instance %Float2x2Buffer2_Instance
+               OpExecutionMode %UniformBufferFloat2x2Layouts_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVector2 "TestVector2"
+               OpName %TestFloat2x2 "TestFloat2x2"
+               OpName %Float2x2Buffer0 "Float2x2Buffer0"
+               OpMemberName %Float2x2Buffer0 0 "Float2x22_0"
+               OpMemberName %Float2x2Buffer0 1 "Float2x22_1"
+               OpName %Float2x2Buffer1 "Float2x2Buffer1"
+               OpMemberName %Float2x2Buffer1 0 "Value0"
+               OpMemberName %Float2x2Buffer1 1 "Float2x2"
+               OpName %Float2x2Buffer2 "Float2x2Buffer2"
+               OpMemberName %Float2x2Buffer2 0 "Value0"
+               OpMemberName %Float2x2Buffer2 1 "Value1"
+               OpMemberName %Float2x2Buffer2 2 "Float2x2"
+               OpName %UniformBufferFloat2x2Layouts "UniformBufferFloat2x2Layouts"
+               OpMemberName %UniformBufferFloat2x2Layouts 0 "Float2x2Buffer0"
+               OpMemberName %UniformBufferFloat2x2Layouts 1 "Float2x2Buffer1"
+               OpMemberName %UniformBufferFloat2x2Layouts 2 "Float2x2Buffer2"
+               OpName %Float2x2Buffer0_0 "Float2x2Buffer0_0"
+               OpMemberName %Float2x2Buffer0_0 0 "Float2x22_0"
+               OpMemberName %Float2x2Buffer0_0 1 "Float2x22_1"
+               OpName %Float2x2Buffer1_0 "Float2x2Buffer1_0"
+               OpMemberName %Float2x2Buffer1_0 0 "Value0"
+               OpMemberName %Float2x2Buffer1_0 1 "Float2x2"
+               OpName %Float2x2Buffer2_0 "Float2x2Buffer2_0"
+               OpMemberName %Float2x2Buffer2_0 0 "Value0"
+               OpMemberName %Float2x2Buffer2_0 1 "Value1"
+               OpMemberName %Float2x2Buffer2_0 2 "Float2x2"
+               OpName %Float2x2Buffer0_PreConstructor "Float2x2Buffer0_PreConstructor"
+               OpName %self "self"
+               OpName %Float2x2Buffer0_DefaultConstructor "Float2x2Buffer0_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Float2x2Buffer1_PreConstructor "Float2x2Buffer1_PreConstructor"
+               OpName %self_1 "self"
+               OpName %Float2x2Buffer1_DefaultConstructor "Float2x2Buffer1_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %Float2x2Buffer2_PreConstructor "Float2x2Buffer2_PreConstructor"
+               OpName %self_3 "self"
+               OpName %Float2x2Buffer2_DefaultConstructor "Float2x2Buffer2_DefaultConstructor"
+               OpName %self_4 "self"
+               OpName %UniformBufferFloat2x2Layouts_PreConstructor "UniformBufferFloat2x2Layouts_PreConstructor"
+               OpName %self_5 "self"
+               OpName %tempFloat2x2Buffer0 "tempFloat2x2Buffer0"
+               OpName %tempFloat2x2Buffer1 "tempFloat2x2Buffer1"
+               OpName %tempFloat2x2Buffer2 "tempFloat2x2Buffer2"
+               OpName %UniformBufferFloat2x2Layouts_DefaultConstructor "UniformBufferFloat2x2Layouts_DefaultConstructor"
+               OpName %self_6 "self"
+               OpName %Main "Main"
+               OpName %self_7 "self"
+               OpName %UniformBufferFloat2x2Layouts_CopyInputs "UniformBufferFloat2x2Layouts_CopyInputs"
+               OpName %self_8 "self"
+               OpName %UniformBufferFloat2x2Layouts_Main_EntryPoint "UniformBufferFloat2x2Layouts_Main_EntryPoint"
+               OpName %self_9 "self"
+               OpName %Float2x2Buffer0_Instance "Float2x2Buffer0_Instance"
+               OpName %Float2x2Buffer1_Instance "Float2x2Buffer1_Instance"
+               OpName %Float2x2Buffer2_Instance "Float2x2Buffer2_Instance"
+               OpName %UniformBufferFloat2x2Layouts_Main_EntryPoint "UniformBufferFloat2x2Layouts_Main_EntryPoint"
+               OpName %self_9 "self"
+               OpDecorate %Float2x2Buffer0_0 DescriptorSet 0
+               OpDecorate %Float2x2Buffer0_0 Binding 0
+               OpDecorate %Float2x2Buffer0_0 Block
+               OpMemberDecorate %Float2x2Buffer0_0 0 Offset 0
+               OpMemberDecorate %Float2x2Buffer0_0 1 Offset 32
+               OpMemberDecorate %Float2x2Buffer0_0 0 MatrixStride 16
+               OpMemberDecorate %Float2x2Buffer0_0 1 MatrixStride 16
+               OpMemberDecorate %Float2x2Buffer0_0 0 ColMajor
+               OpMemberDecorate %Float2x2Buffer0_0 1 ColMajor
+               OpDecorate %Float2x2Buffer1_0 DescriptorSet 0
+               OpDecorate %Float2x2Buffer1_0 Binding 1
+               OpDecorate %Float2x2Buffer1_0 Block
+               OpMemberDecorate %Float2x2Buffer1_0 0 Offset 0
+               OpMemberDecorate %Float2x2Buffer1_0 1 Offset 32
+               OpMemberDecorate %Float2x2Buffer1_0 1 MatrixStride 16
+               OpMemberDecorate %Float2x2Buffer1_0 1 ColMajor
+               OpDecorate %Float2x2Buffer2_0 DescriptorSet 0
+               OpDecorate %Float2x2Buffer2_0 Binding 2
+               OpDecorate %Float2x2Buffer2_0 Block
+               OpMemberDecorate %Float2x2Buffer2_0 0 Offset 0
+               OpMemberDecorate %Float2x2Buffer2_0 1 Offset 4
+               OpMemberDecorate %Float2x2Buffer2_0 2 Offset 32
+               OpMemberDecorate %Float2x2Buffer2_0 2 MatrixStride 16
+               OpMemberDecorate %Float2x2Buffer2_0 2 ColMajor
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVector2 = OpTypeVector %float 2
+%TestFloat2x2 = OpTypeMatrix %TestVector2 2
+%Float2x2Buffer0 = OpTypeStruct %TestFloat2x2 %TestFloat2x2
+       %void = OpTypeVoid
+%_ptr_Function_Float2x2Buffer0 = OpTypePointer Function %Float2x2Buffer0
+         %13 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer0
+%Float2x2Buffer1 = OpTypeStruct %float %TestFloat2x2
+%_ptr_Function_Float2x2Buffer1 = OpTypePointer Function %Float2x2Buffer1
+         %17 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer1
+%_ptr_Function_float = OpTypePointer Function %float
+%Float2x2Buffer2 = OpTypeStruct %float %float %TestFloat2x2
+%_ptr_Function_Float2x2Buffer2 = OpTypePointer Function %Float2x2Buffer2
+         %21 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer2
+%UniformBufferFloat2x2Layouts = OpTypeStruct %Float2x2Buffer0 %Float2x2Buffer1 %Float2x2Buffer2
+%_ptr_Function_UniformBufferFloat2x2Layouts = OpTypePointer Function %UniformBufferFloat2x2Layouts
+         %25 = OpTypeFunction %void %_ptr_Function_UniformBufferFloat2x2Layouts
+%_ptr_Uniform_TestFloat2x2 = OpTypePointer Uniform %TestFloat2x2
+%Float2x2Buffer0_0 = OpTypeStruct %TestFloat2x2 %TestFloat2x2
+%_ptr_Uniform_Float2x2Buffer0_0 = OpTypePointer Uniform %Float2x2Buffer0_0
+%_ptr_Function_TestFloat2x2 = OpTypePointer Function %TestFloat2x2
+%_ptr_Uniform_float = OpTypePointer Uniform %float
+%Float2x2Buffer1_0 = OpTypeStruct %float %TestFloat2x2
+%_ptr_Uniform_Float2x2Buffer1_0 = OpTypePointer Uniform %Float2x2Buffer1_0
+%Float2x2Buffer2_0 = OpTypeStruct %float %float %TestFloat2x2
+%_ptr_Uniform_Float2x2Buffer2_0 = OpTypePointer Uniform %Float2x2Buffer2_0
+         %38 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
+%Float2x2Buffer0_Instance = OpVariable %_ptr_Uniform_Float2x2Buffer0_0 Uniform
+%Float2x2Buffer1_Instance = OpVariable %_ptr_Uniform_Float2x2Buffer1_0 Uniform
+%Float2x2Buffer2_Instance = OpVariable %_ptr_Uniform_Float2x2Buffer2_0 Uniform
+%Float2x2Buffer0_PreConstructor = OpFunction %void None %13
+       %self = OpFunctionParameter %_ptr_Function_Float2x2Buffer0
+         %50 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Float2x2Buffer0_DefaultConstructor = OpFunction %void None %13
+     %self_0 = OpFunctionParameter %_ptr_Function_Float2x2Buffer0
+         %55 = OpLabel
+         %56 = OpFunctionCall %void %Float2x2Buffer0_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%Float2x2Buffer1_PreConstructor = OpFunction %void None %17
+     %self_1 = OpFunctionParameter %_ptr_Function_Float2x2Buffer1
+         %61 = OpLabel
+         %62 = OpAccessChain %_ptr_Function_float %self_1 %uint_0
+               OpStore %62 %float_0
+               OpReturn
+               OpFunctionEnd
+%Float2x2Buffer1_DefaultConstructor = OpFunction %void None %17
+     %self_2 = OpFunctionParameter %_ptr_Function_Float2x2Buffer1
+         %68 = OpLabel
+         %69 = OpFunctionCall %void %Float2x2Buffer1_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+%Float2x2Buffer2_PreConstructor = OpFunction %void None %21
+     %self_3 = OpFunctionParameter %_ptr_Function_Float2x2Buffer2
+         %74 = OpLabel
+         %75 = OpAccessChain %_ptr_Function_float %self_3 %uint_0
+               OpStore %75 %float_0
+         %77 = OpAccessChain %_ptr_Function_float %self_3 %uint_1
+               OpStore %77 %float_0
+               OpReturn
+               OpFunctionEnd
+%Float2x2Buffer2_DefaultConstructor = OpFunction %void None %21
+     %self_4 = OpFunctionParameter %_ptr_Function_Float2x2Buffer2
+         %83 = OpLabel
+         %84 = OpFunctionCall %void %Float2x2Buffer2_PreConstructor %self_4
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat2x2Layouts_PreConstructor = OpFunction %void None %25
+     %self_5 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
+         %89 = OpLabel
+%tempFloat2x2Buffer0 = OpVariable %_ptr_Function_Float2x2Buffer0 Function
+%tempFloat2x2Buffer1 = OpVariable %_ptr_Function_Float2x2Buffer1 Function
+%tempFloat2x2Buffer2 = OpVariable %_ptr_Function_Float2x2Buffer2 Function
+         %93 = OpFunctionCall %void %Float2x2Buffer0_DefaultConstructor %tempFloat2x2Buffer0
+         %94 = OpLoad %Float2x2Buffer0 %tempFloat2x2Buffer0
+         %95 = OpAccessChain %_ptr_Function_Float2x2Buffer0 %self_5 %uint_0
+               OpStore %95 %94
+         %97 = OpFunctionCall %void %Float2x2Buffer1_DefaultConstructor %tempFloat2x2Buffer1
+         %98 = OpLoad %Float2x2Buffer1 %tempFloat2x2Buffer1
+         %99 = OpAccessChain %_ptr_Function_Float2x2Buffer1 %self_5 %uint_1
+               OpStore %99 %98
+        %101 = OpFunctionCall %void %Float2x2Buffer2_DefaultConstructor %tempFloat2x2Buffer2
+        %102 = OpLoad %Float2x2Buffer2 %tempFloat2x2Buffer2
+        %103 = OpAccessChain %_ptr_Function_Float2x2Buffer2 %self_5 %uint_2
+               OpStore %103 %102
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat2x2Layouts_DefaultConstructor = OpFunction %void None %25
+     %self_6 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
+        %109 = OpLabel
+        %110 = OpFunctionCall %void %UniformBufferFloat2x2Layouts_PreConstructor %self_6
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %25
+     %self_7 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
+        %115 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat2x2Layouts_CopyInputs = OpFunction %void None %25
+     %self_8 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
+        %120 = OpLabel
+        %121 = OpAccessChain %_ptr_Function_Float2x2Buffer0 %self_8 %uint_0
+        %122 = OpAccessChain %_ptr_Uniform_TestFloat2x2 %Float2x2Buffer0_Instance %uint_0
+        %123 = OpAccessChain %_ptr_Function_TestFloat2x2 %121 %uint_0
+        %124 = OpLoad %TestFloat2x2 %122
+               OpStore %123 %124
+        %126 = OpAccessChain %_ptr_Uniform_TestFloat2x2 %Float2x2Buffer0_Instance %uint_1
+        %127 = OpAccessChain %_ptr_Function_TestFloat2x2 %121 %uint_1
+        %128 = OpLoad %TestFloat2x2 %126
+               OpStore %127 %128
+        %130 = OpAccessChain %_ptr_Function_Float2x2Buffer1 %self_8 %uint_1
+        %131 = OpAccessChain %_ptr_Uniform_float %Float2x2Buffer1_Instance %uint_0
+        %132 = OpAccessChain %_ptr_Function_float %130 %uint_0
+        %133 = OpLoad %float %131
+               OpStore %132 %133
+        %135 = OpAccessChain %_ptr_Uniform_TestFloat2x2 %Float2x2Buffer1_Instance %uint_1
+        %136 = OpAccessChain %_ptr_Function_TestFloat2x2 %130 %uint_1
+        %137 = OpLoad %TestFloat2x2 %135
+               OpStore %136 %137
+        %139 = OpAccessChain %_ptr_Function_Float2x2Buffer2 %self_8 %uint_2
+        %140 = OpAccessChain %_ptr_Uniform_float %Float2x2Buffer2_Instance %uint_0
+        %141 = OpAccessChain %_ptr_Function_float %139 %uint_0
+        %142 = OpLoad %float %140
+               OpStore %141 %142
+        %144 = OpAccessChain %_ptr_Uniform_float %Float2x2Buffer2_Instance %uint_1
+        %145 = OpAccessChain %_ptr_Function_float %139 %uint_1
+        %146 = OpLoad %float %144
+               OpStore %145 %146
+        %148 = OpAccessChain %_ptr_Uniform_TestFloat2x2 %Float2x2Buffer2_Instance %uint_2
+        %149 = OpAccessChain %_ptr_Function_TestFloat2x2 %139 %uint_2
+        %150 = OpLoad %TestFloat2x2 %148
+               OpStore %149 %150
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat2x2Layouts_Main_EntryPoint = OpFunction %void None %38
+        %155 = OpLabel
+     %self_9 = OpVariable %_ptr_Function_UniformBufferFloat2x2Layouts Function
+        %157 = OpFunctionCall %void %UniformBufferFloat2x2Layouts_DefaultConstructor %self_9
+        %158 = OpFunctionCall %void %UniformBufferFloat2x2Layouts_CopyInputs %self_9
+        %159 = OpFunctionCall %void %Main %self_9
+               OpReturn
+               OpFunctionEnd

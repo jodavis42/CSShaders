@@ -32,8 +32,8 @@ namespace CSShaders
       InputDeclarations.GenerateInputFields(translator, shaderType, interfaceInfo.StageInputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       EntryPointGenerationShared.GenerateHardwareBuiltIns(translator, interfaceInfo.HardwareBuiltInOutputs, StorageClass.Output, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       OutputDeclarations.GenerateOutputBlockStruct(translator, shaderType, interfaceInfo.StageOutputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
-      UniformInputs.DeclareUniformBuffers(translator, interfaceInfo.UniformBuffers, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
-      UniformInputs.DeclareUniformConstants(translator, interfaceInfo.ConstantUniforms, entryPoint.mDecorations);
+      UniformDeclarations.DeclareUniformBuffers(translator, interfaceInfo.UniformBuffers, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
+      UniformDeclarations.DeclareUniformConstants(translator, interfaceInfo.ConstantUniforms, entryPoint.mDecorations);
 
       // Create the functions required to run an entry point
       string entryPointName = EntryPointGenerationShared.GenerateEntryPointFunctionName(translator, shaderType, function);
@@ -76,8 +76,8 @@ namespace CSShaders
       InputDeclarations.GenerateInputStruct(translator, shaderType, interfaceInfo.StageInputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       EntryPointGenerationShared.GenerateHardwareBuiltIns(translator, interfaceInfo.HardwareBuiltInOutputs, StorageClass.Output, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       OutputDeclarations.GenerateOutputStruct(translator, shaderType, interfaceInfo.StageOutputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
-      UniformInputs.DeclareUniformBuffers(translator, interfaceInfo.UniformBuffers, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
-      UniformInputs.DeclareUniformConstants(translator, interfaceInfo.ConstantUniforms, entryPoint.mDecorations);
+      UniformDeclarations.DeclareUniformBuffers(translator, interfaceInfo.UniformBuffers, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
+      UniformDeclarations.DeclareUniformConstants(translator, interfaceInfo.ConstantUniforms, entryPoint.mDecorations);
 
       // Create the functions required to run an entry point
       string entryPointName = EntryPointGenerationShared.GenerateEntryPointFunctionName(translator, shaderType, function);

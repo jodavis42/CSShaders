@@ -1,0 +1,177 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 119
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %UniformBufferFloat3x3Layouts_Main_EntryPoint "UniformBufferFloat3x3Layouts_Main_EntryPoint" %Float3x3Buffer0_Instance %Float3x3Buffer1_Instance
+               OpExecutionMode %UniformBufferFloat3x3Layouts_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %TestVector3 "TestVector3"
+               OpName %TestFloat3x3 "TestFloat3x3"
+               OpName %Float3x3Buffer0 "Float3x3Buffer0"
+               OpMemberName %Float3x3Buffer0 0 "Float3x3_0"
+               OpMemberName %Float3x3Buffer0 1 "Float3x3_1"
+               OpName %Float3x3Buffer1 "Float3x3Buffer1"
+               OpMemberName %Float3x3Buffer1 0 "Value0"
+               OpMemberName %Float3x3Buffer1 1 "Float3x3"
+               OpName %UniformBufferFloat3x3Layouts "UniformBufferFloat3x3Layouts"
+               OpMemberName %UniformBufferFloat3x3Layouts 0 "Float3x3Buffer0"
+               OpMemberName %UniformBufferFloat3x3Layouts 1 "Float3x3Buffer1"
+               OpName %Float3x3Buffer0_0 "Float3x3Buffer0_0"
+               OpMemberName %Float3x3Buffer0_0 0 "Float3x3_0"
+               OpMemberName %Float3x3Buffer0_0 1 "Float3x3_1"
+               OpName %Float3x3Buffer1_0 "Float3x3Buffer1_0"
+               OpMemberName %Float3x3Buffer1_0 0 "Value0"
+               OpMemberName %Float3x3Buffer1_0 1 "Float3x3"
+               OpName %Float3x3Buffer0_PreConstructor "Float3x3Buffer0_PreConstructor"
+               OpName %self "self"
+               OpName %Float3x3Buffer0_DefaultConstructor "Float3x3Buffer0_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Float3x3Buffer1_PreConstructor "Float3x3Buffer1_PreConstructor"
+               OpName %self_1 "self"
+               OpName %Float3x3Buffer1_DefaultConstructor "Float3x3Buffer1_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %UniformBufferFloat3x3Layouts_PreConstructor "UniformBufferFloat3x3Layouts_PreConstructor"
+               OpName %self_3 "self"
+               OpName %tempFloat3x3Buffer0 "tempFloat3x3Buffer0"
+               OpName %tempFloat3x3Buffer1 "tempFloat3x3Buffer1"
+               OpName %UniformBufferFloat3x3Layouts_DefaultConstructor "UniformBufferFloat3x3Layouts_DefaultConstructor"
+               OpName %self_4 "self"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %UniformBufferFloat3x3Layouts_CopyInputs "UniformBufferFloat3x3Layouts_CopyInputs"
+               OpName %self_6 "self"
+               OpName %UniformBufferFloat3x3Layouts_Main_EntryPoint "UniformBufferFloat3x3Layouts_Main_EntryPoint"
+               OpName %self_7 "self"
+               OpName %Float3x3Buffer0_Instance "Float3x3Buffer0_Instance"
+               OpName %Float3x3Buffer1_Instance "Float3x3Buffer1_Instance"
+               OpName %UniformBufferFloat3x3Layouts_Main_EntryPoint "UniformBufferFloat3x3Layouts_Main_EntryPoint"
+               OpName %self_7 "self"
+               OpDecorate %Float3x3Buffer0_0 DescriptorSet 0
+               OpDecorate %Float3x3Buffer0_0 Binding 0
+               OpDecorate %Float3x3Buffer0_0 Block
+               OpMemberDecorate %Float3x3Buffer0_0 0 Offset 0
+               OpMemberDecorate %Float3x3Buffer0_0 1 Offset 64
+               OpMemberDecorate %Float3x3Buffer0_0 0 MatrixStride 16
+               OpMemberDecorate %Float3x3Buffer0_0 1 MatrixStride 16
+               OpMemberDecorate %Float3x3Buffer0_0 0 ColMajor
+               OpMemberDecorate %Float3x3Buffer0_0 1 ColMajor
+               OpDecorate %Float3x3Buffer1_0 DescriptorSet 0
+               OpDecorate %Float3x3Buffer1_0 Binding 1
+               OpDecorate %Float3x3Buffer1_0 Block
+               OpMemberDecorate %Float3x3Buffer1_0 0 Offset 0
+               OpMemberDecorate %Float3x3Buffer1_0 1 Offset 64
+               OpMemberDecorate %Float3x3Buffer1_0 1 MatrixStride 16
+               OpMemberDecorate %Float3x3Buffer1_0 1 ColMajor
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVector3 = OpTypeVector %float 3
+%TestFloat3x3 = OpTypeMatrix %TestVector3 3
+%Float3x3Buffer0 = OpTypeStruct %TestFloat3x3 %TestFloat3x3
+       %void = OpTypeVoid
+%_ptr_Function_Float3x3Buffer0 = OpTypePointer Function %Float3x3Buffer0
+         %13 = OpTypeFunction %void %_ptr_Function_Float3x3Buffer0
+%Float3x3Buffer1 = OpTypeStruct %float %TestFloat3x3
+%_ptr_Function_Float3x3Buffer1 = OpTypePointer Function %Float3x3Buffer1
+         %17 = OpTypeFunction %void %_ptr_Function_Float3x3Buffer1
+%_ptr_Function_float = OpTypePointer Function %float
+%UniformBufferFloat3x3Layouts = OpTypeStruct %Float3x3Buffer0 %Float3x3Buffer1
+%_ptr_Function_UniformBufferFloat3x3Layouts = OpTypePointer Function %UniformBufferFloat3x3Layouts
+         %21 = OpTypeFunction %void %_ptr_Function_UniformBufferFloat3x3Layouts
+%_ptr_Uniform_TestFloat3x3 = OpTypePointer Uniform %TestFloat3x3
+%Float3x3Buffer0_0 = OpTypeStruct %TestFloat3x3 %TestFloat3x3
+%_ptr_Uniform_Float3x3Buffer0_0 = OpTypePointer Uniform %Float3x3Buffer0_0
+%_ptr_Function_TestFloat3x3 = OpTypePointer Function %TestFloat3x3
+%_ptr_Uniform_float = OpTypePointer Uniform %float
+%Float3x3Buffer1_0 = OpTypeStruct %float %TestFloat3x3
+%_ptr_Uniform_Float3x3Buffer1_0 = OpTypePointer Uniform %Float3x3Buffer1_0
+         %31 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+%Float3x3Buffer0_Instance = OpVariable %_ptr_Uniform_Float3x3Buffer0_0 Uniform
+%Float3x3Buffer1_Instance = OpVariable %_ptr_Uniform_Float3x3Buffer1_0 Uniform
+%Float3x3Buffer0_PreConstructor = OpFunction %void None %13
+       %self = OpFunctionParameter %_ptr_Function_Float3x3Buffer0
+         %41 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Float3x3Buffer0_DefaultConstructor = OpFunction %void None %13
+     %self_0 = OpFunctionParameter %_ptr_Function_Float3x3Buffer0
+         %46 = OpLabel
+         %47 = OpFunctionCall %void %Float3x3Buffer0_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%Float3x3Buffer1_PreConstructor = OpFunction %void None %17
+     %self_1 = OpFunctionParameter %_ptr_Function_Float3x3Buffer1
+         %52 = OpLabel
+         %53 = OpAccessChain %_ptr_Function_float %self_1 %uint_0
+               OpStore %53 %float_0
+               OpReturn
+               OpFunctionEnd
+%Float3x3Buffer1_DefaultConstructor = OpFunction %void None %17
+     %self_2 = OpFunctionParameter %_ptr_Function_Float3x3Buffer1
+         %59 = OpLabel
+         %60 = OpFunctionCall %void %Float3x3Buffer1_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat3x3Layouts_PreConstructor = OpFunction %void None %21
+     %self_3 = OpFunctionParameter %_ptr_Function_UniformBufferFloat3x3Layouts
+         %65 = OpLabel
+%tempFloat3x3Buffer0 = OpVariable %_ptr_Function_Float3x3Buffer0 Function
+%tempFloat3x3Buffer1 = OpVariable %_ptr_Function_Float3x3Buffer1 Function
+         %68 = OpFunctionCall %void %Float3x3Buffer0_DefaultConstructor %tempFloat3x3Buffer0
+         %69 = OpLoad %Float3x3Buffer0 %tempFloat3x3Buffer0
+         %70 = OpAccessChain %_ptr_Function_Float3x3Buffer0 %self_3 %uint_0
+               OpStore %70 %69
+         %72 = OpFunctionCall %void %Float3x3Buffer1_DefaultConstructor %tempFloat3x3Buffer1
+         %73 = OpLoad %Float3x3Buffer1 %tempFloat3x3Buffer1
+         %74 = OpAccessChain %_ptr_Function_Float3x3Buffer1 %self_3 %uint_1
+               OpStore %74 %73
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat3x3Layouts_DefaultConstructor = OpFunction %void None %21
+     %self_4 = OpFunctionParameter %_ptr_Function_UniformBufferFloat3x3Layouts
+         %80 = OpLabel
+         %81 = OpFunctionCall %void %UniformBufferFloat3x3Layouts_PreConstructor %self_4
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %21
+     %self_5 = OpFunctionParameter %_ptr_Function_UniformBufferFloat3x3Layouts
+         %86 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat3x3Layouts_CopyInputs = OpFunction %void None %21
+     %self_6 = OpFunctionParameter %_ptr_Function_UniformBufferFloat3x3Layouts
+         %91 = OpLabel
+         %92 = OpAccessChain %_ptr_Function_Float3x3Buffer0 %self_6 %uint_0
+         %93 = OpAccessChain %_ptr_Uniform_TestFloat3x3 %Float3x3Buffer0_Instance %uint_0
+         %94 = OpAccessChain %_ptr_Function_TestFloat3x3 %92 %uint_0
+         %95 = OpLoad %TestFloat3x3 %93
+               OpStore %94 %95
+         %97 = OpAccessChain %_ptr_Uniform_TestFloat3x3 %Float3x3Buffer0_Instance %uint_1
+         %98 = OpAccessChain %_ptr_Function_TestFloat3x3 %92 %uint_1
+         %99 = OpLoad %TestFloat3x3 %97
+               OpStore %98 %99
+        %101 = OpAccessChain %_ptr_Function_Float3x3Buffer1 %self_6 %uint_1
+        %102 = OpAccessChain %_ptr_Uniform_float %Float3x3Buffer1_Instance %uint_0
+        %103 = OpAccessChain %_ptr_Function_float %101 %uint_0
+        %104 = OpLoad %float %102
+               OpStore %103 %104
+        %106 = OpAccessChain %_ptr_Uniform_TestFloat3x3 %Float3x3Buffer1_Instance %uint_1
+        %107 = OpAccessChain %_ptr_Function_TestFloat3x3 %101 %uint_1
+        %108 = OpLoad %TestFloat3x3 %106
+               OpStore %107 %108
+               OpReturn
+               OpFunctionEnd
+%UniformBufferFloat3x3Layouts_Main_EntryPoint = OpFunction %void None %31
+        %113 = OpLabel
+     %self_7 = OpVariable %_ptr_Function_UniformBufferFloat3x3Layouts Function
+        %115 = OpFunctionCall %void %UniformBufferFloat3x3Layouts_DefaultConstructor %self_7
+        %116 = OpFunctionCall %void %UniformBufferFloat3x3Layouts_CopyInputs %self_7
+        %117 = OpFunctionCall %void %Main %self_7
+               OpReturn
+               OpFunctionEnd

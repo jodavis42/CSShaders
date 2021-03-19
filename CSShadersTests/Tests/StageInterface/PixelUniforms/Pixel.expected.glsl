@@ -14,13 +14,13 @@ struct Pixel
     TestStruct TestStruct;
 };
 
-layout(std140) uniform Pixel_MaterialBuffer_0_0
+layout(std140) uniform Pixel_SharedMaterialBuffer
 {
     float Value;
     float Value2;
     vec2 V2;
     TestStruct TestStruct;
-} Pixel_MaterialBuffer_0_0_Instance;
+} Pixel_SharedMaterialBuffer_Instance;
 
 void TestStruct_PreConstructor(inout TestStruct self)
 {
@@ -48,10 +48,10 @@ void Pixel_DefaultConstructor(inout Pixel self)
 
 void Pixel_CopyInputs(inout Pixel self)
 {
-    self.Value = Pixel_MaterialBuffer_0_0_Instance.Value;
-    self.Value2 = Pixel_MaterialBuffer_0_0_Instance.Value2;
-    self.V2 = Pixel_MaterialBuffer_0_0_Instance.V2;
-    self.TestStruct = Pixel_MaterialBuffer_0_0_Instance.TestStruct;
+    self.Value = Pixel_SharedMaterialBuffer_Instance.Value;
+    self.Value2 = Pixel_SharedMaterialBuffer_Instance.Value2;
+    self.V2 = Pixel_SharedMaterialBuffer_Instance.V2;
+    self.TestStruct = Pixel_SharedMaterialBuffer_Instance.TestStruct;
 }
 
 void Main(Pixel self)

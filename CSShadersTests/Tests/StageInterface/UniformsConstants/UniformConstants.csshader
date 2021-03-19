@@ -1,0 +1,18 @@
+namespace Test
+{
+
+[Shader.UnitTest][Shader.Pixel]
+struct DescriptorSetBindingIds
+{
+  [Shader.UniformConstant] static Shader.FloatSampledImage2d SampledImage0;
+  [Shader.UniformConstant(DescriptorSet = 1)] static Shader.FloatSampledImage2d SampledImage1;
+  [Shader.UniformConstant(BindingId = 1)] static Shader.FloatSampledImage2d SampledImage2;
+  [Shader.UniformConstant(DescriptorSet = 1, BindingId = 1)] static Shader.FloatSampledImage2d SampledImage3;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}

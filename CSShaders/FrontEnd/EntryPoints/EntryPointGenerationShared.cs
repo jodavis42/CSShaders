@@ -29,6 +29,8 @@ namespace CSShaders
     public static void CollectInterface(FrontEndTranslator translator, ShaderType shaderType, EntryPointInterfaceInfo interfaceInfo)
     {
       CollectStageInputsOuputs(translator, shaderType, interfaceInfo);
+      UniformDeclarations.GenerateUniforms(translator, shaderType, interfaceInfo);
+      UniformDeclarations.GenerateConstantUniforms(translator, shaderType, interfaceInfo);
 
       // @JoshD: Hack for now, this should really check what's reachable. This also needs to walk all dependent libraries
       foreach (var globalStatic in translator.mCurrentLibrary.mStaticGlobals.Values)
@@ -48,15 +50,6 @@ namespace CSShaders
         {
           interfaceInfo.StageOutputs.Add(new ShaderInterfaceField() { ShaderField = field });
         };
-        ShaderAttributes.AttributeCallback uniformCallback = (ShaderAttribute attribute) =>
-        {
-          var interfaceField = new ShaderInterfaceField() { ShaderField = field };
-          var uniformInput = UniformInputs.ParseAttribute(attribute);
-          var uniformBuffer = interfaceInfo.UniformBuffers.GetOrCreate(uniformInput.DescriptorSet, uniformInput.BindingId);
-          uniformBuffer.TypeName = string.Format("{0}_MaterialBuffer_{1}_{2}", shaderType.mMeta.mName, uniformInput.DescriptorSet, uniformInput.BindingId);
-          uniformBuffer.InstanceName = string.Format("{0}_MaterialBuffer_{1}_{2}_Instance", shaderType.mMeta.mName, uniformInput.DescriptorSet, uniformInput.BindingId);
-          uniformBuffer.Fields.Add(interfaceField);
-        };
         ShaderAttributes.AttributeCallback hardwareBuiltInInputCallback = (ShaderAttribute attribute) =>
         {
           var arg0 = attribute.Attribute.ConstructorArguments[0];
@@ -74,25 +67,8 @@ namespace CSShaders
 
         attributes.ForeachAttribute(typeof(Shader.StageInput), stageInputCallback);
         attributes.ForeachAttribute(typeof(Shader.StageOutput), stageOutputCallback);
-        attributes.ForeachAttribute(typeof(Shader.UniformInput), uniformCallback);
         attributes.ForeachAttribute(typeof(Shader.HardwareBuiltInInput), hardwareBuiltInInputCallback);
         attributes.ForeachAttribute(typeof(Shader.HardwareBuiltInOutput), hardwareBuiltInOutputCallback);
-      }
-
-      foreach (var field in shaderType.mStaticFields)
-      {
-        var attributes = field.mMeta.mAttributes;
-        ShaderAttributes.AttributeCallback uniformCallback = (ShaderAttribute attribute) =>
-        {
-          var staticGlobalInstance = translator.mCurrentLibrary.mStaticGlobals.GetValueOrDefault(field);
-          if (staticGlobalInstance == null)
-            return;
-
-          var uniformAttribute = UniformInputs.ParseAttribute(attribute);
-          var uniformConstant = interfaceInfo.ConstantUniforms.GetOrCreate(uniformAttribute.DescriptorSet, uniformAttribute.BindingId);
-          uniformConstant.InterfaceInstance = staticGlobalInstance.InstanceOp;
-        };
-        attributes.ForeachAttribute(typeof(Shader.UniformInput), uniformCallback);
       }
     }
 
@@ -113,12 +89,15 @@ namespace CSShaders
 
     public static ShaderOp GenerateInterfaceStructAndOp(FrontEndTranslator translator, List<ShaderInterfaceField> interfaceFields, string structName, string instanceName, StorageClass storageClass)
     {
-      var interfaceStruct = translator.CreateType(new TypeKey(structName), structName, OpType.Struct, null);
-      foreach (var interfaceField in interfaceFields)
+      var interfaceStruct = translator.FindType(new TypeKey(structName));
+      // Generate the interface struct if it doesn't already exist (uniform buffers already exist)
+      if (interfaceStruct == null)
       {
-        interfaceStruct.mFields.Add(interfaceField.ShaderField);
+        interfaceStruct = translator.CreateType(new TypeKey(structName), structName, OpType.Struct, null);
+        foreach (var interfaceField in interfaceFields)
+          interfaceStruct.mFields.Add(interfaceField.ShaderField);
       }
-      interfaceStruct.mStorageClass = storageClass;
+
       var opPointerType = translator.FindOrCreatePointerType(new TypeKey(structName), structName, storageClass);
       var op = translator.CreateOp(OpInstructionType.OpVariable, opPointerType, null);
 

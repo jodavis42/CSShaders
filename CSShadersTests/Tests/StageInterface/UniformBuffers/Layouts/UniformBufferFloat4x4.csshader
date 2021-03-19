@@ -1,0 +1,31 @@
+namespace Shaders
+{
+
+[Math.VectorPrimitive(typeof(float), 4)] public struct TestVector4 { }
+[Math.MatrixPrimitive(typeof(TestVector4), 4)] public struct TestFloat4x4 { }
+
+struct Float4x4Buffer0
+{
+  TestFloat4x4 Float4x4_0;
+  TestFloat4x4 Float4x4_1;
+}
+
+struct Float4x4Buffer1
+{
+  float Value0;
+  TestFloat4x4 Float4x4;
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct UniformBufferFloat4x4Layouts
+{
+  [Shader.UniformBuffer] Float4x4Buffer0 Float4x4Buffer0;
+  [Shader.UniformBuffer] Float4x4Buffer1 Float4x4Buffer1;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}

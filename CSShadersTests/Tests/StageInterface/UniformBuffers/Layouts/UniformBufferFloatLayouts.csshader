@@ -1,0 +1,24 @@
+namespace Shaders
+{
+
+struct FloatBuffer
+{
+  float Value = 1.0f;
+  float Value2 = 1.0f;
+  float Value3 = 1.0f;
+  float Value4 = 1.0f;
+  float Value5 = 1.0f;
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct UniformBufferLayouts1
+{
+  [Shader.UniformBuffer] FloatBuffer FloatBuffer;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}

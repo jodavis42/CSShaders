@@ -1,0 +1,39 @@
+namespace Shaders
+{
+
+[Math.VectorPrimitive(typeof(float), 2)] public struct TestVector2 { }
+[Math.MatrixPrimitive(typeof(TestVector2), 2)] public struct TestFloat2x2 { }
+
+struct Float2x2Buffer0
+{
+  TestFloat2x2 Float2x22_0;
+  TestFloat2x2 Float2x22_1;
+}
+
+struct Float2x2Buffer1
+{
+  float Value0;
+  TestFloat2x2 Float2x2;
+}
+
+struct Float2x2Buffer2
+{
+  float Value0;
+  float Value1;
+  TestFloat2x2 Float2x2;
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct UniformBufferFloat2x2Layouts
+{
+  [Shader.UniformBuffer] Float2x2Buffer0 Float2x2Buffer0;
+  [Shader.UniformBuffer] Float2x2Buffer1 Float2x2Buffer1;
+  [Shader.UniformBuffer] Float2x2Buffer2 Float2x2Buffer2;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}

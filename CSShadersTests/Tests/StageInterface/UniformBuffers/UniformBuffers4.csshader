@@ -1,0 +1,25 @@
+namespace Shaders
+{
+
+struct Buffer
+{
+  float Value = 1.0f;
+  float Value2 = 1.0f;
+  float Value3 = 1.0f;
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct UniformBuffers4
+{
+  [Shader.UniformBuffer(BindingId = 1)] Buffer Buffer01;
+  [Shader.UniformBuffer(DescriptorSet = 1)] Buffer Buffer10;
+  [Shader.UniformBuffer] Buffer Buffer00;
+  [Shader.UniformBuffer] Buffer Buffer02;
+
+  [Shader.EntryPoint]
+  public void Main()
+  {
+  }
+}
+
+}
