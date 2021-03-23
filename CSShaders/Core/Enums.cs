@@ -59,7 +59,7 @@ namespace CSShaders
     OpImageQueryLevels = 106,
     OpImageQuerySamples = 107,
     // Conversion
-    OpConvertFToU = 109, OpConvertFToS, OpConvertSToF, OpSConvert, OpUConvert, OpFConvert, OpBitcast,
+    OpConvertFToU = 109, OpConvertFToS, OpConvertSToF, OpConvertUToF, OpSConvert, OpUConvert, OpFConvert, OpBitcast,
     // Composite
     OpVectorExtractDynamic = 77, OpVectorInsertDynamic, OpVectorShuffle, OpCompositeConstruct, OpCompositeExtract, OpCompositeInsert, OpCopyObject, OpTranspose, 
 

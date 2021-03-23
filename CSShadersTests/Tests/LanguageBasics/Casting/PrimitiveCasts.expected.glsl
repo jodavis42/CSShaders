@@ -36,8 +36,8 @@ void Main(PrimitiveCasts self)
     u = uint(f);
     f = float(0);
     f = float(i);
-    f = float(int(0u));
-    f = float(int(u));
+    f = float(0u);
+    f = float(u);
     f = 0.0;
     f = f;
 }

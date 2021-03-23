@@ -747,7 +747,7 @@ namespace CSShaders
 
     public ShaderOp CastUIntToFloat(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)
     {
-      return SimpleCast(resultType, OpInstructionType.OpConvertSToF, expressionOp, context);
+      return SimpleCast(resultType, OpInstructionType.OpConvertUToF, expressionOp, context);
     }
 
     public ShaderOp CastFloatToBool(ShaderType resultType, IShaderIR expressionOp, FrontEndContext context)

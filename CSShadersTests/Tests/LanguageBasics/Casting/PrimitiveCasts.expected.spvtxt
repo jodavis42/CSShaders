@@ -97,10 +97,10 @@
          %75 = OpLoad %int %i
          %76 = OpConvertSToF %float %75
                OpStore %f %76
-         %78 = OpConvertSToF %float %uint_0
+         %78 = OpConvertUToF %float %uint_0
                OpStore %f %78
          %80 = OpLoad %uint %u
-         %81 = OpConvertSToF %float %80
+         %81 = OpConvertUToF %float %80
                OpStore %f %81
                OpStore %f %float_0
          %84 = OpLoad %float %f
