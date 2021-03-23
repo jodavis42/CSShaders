@@ -1,101 +1,67 @@
-﻿using CSShaders;
-using System;
+﻿using CommandLine;
+using CSShaders;
+using System.Collections.Generic;
 using System.IO;
 
 namespace CSShadersTests
 {
+  public class Options
+  {
+    [Option("workingDir", Required = false)]
+    public string WorkingDir { get; set; } = null;
+    [Option("artifactsDir", Required = false)]
+    public string ArtifactsDir { get; set; } = null;
+    [Option("testPath", Required = false)]
+    public string TestPath { get; set; } = null;
+    [Option('v', "verbose", Required = false, HelpText = "Verbose logging.")]
+    public bool Verbose { get; set; } = false;
+    [Option("visualDiff", Required = false, HelpText = "Should a visual differ be used")]
+    public bool VisualDiff { get; set; } = false;
+  }
+
+  public class Context
+  {
+    public bool Success = true;
+    public ILogger Logger = new ConsoleLogger();
+    public SimpleShaderGenerator SimpleGenerator = new SimpleShaderGenerator();
+    public Pipeline BasicPipeline;
+  }
+
   class Program
   {
-    static SimpleShaderGenerator SimpleGenerator = new SimpleShaderGenerator();
-
-    static void Main(string[] args)
+    static int Main(string[] args)
     {
-      SimpleGenerator.ErrorHandlers.Add(OnTranslationErrorLog);
-      //SimpleGenerator.ErrorHandlers.Add(OnTranslationErrorThrowException);
-      LoadCoreLibraries();
+      var context = new Context();
+      Parser.Default.ParseArguments<Options>(args)
+        .WithParsed<Options>(o => { ParseSucceeded(o, context); })
+        .WithNotParsed<Options>(o => { ParseFailed(o, context); });
+      return context.Success ? 0 : 1;
+    }
+
+    static void ParseFailed(IEnumerable<Error> errors, Context context)
+    {
+      context.Success = false;
+      context.Logger.Log("Command Line Error:", ILogger.Verbosity.Error);
+      foreach (var error in errors)
+      {
+        context.Logger.Log(error.ToString(), ILogger.Verbosity.Error);
+      }
+    }
+
+    static void ParseSucceeded(Options options, Context context)
+    {
+      if (!string.IsNullOrWhiteSpace(options.ArtifactsDir))
+        Directory.CreateDirectory(options.ArtifactsDir);
 
       var path = "Tests";
-      if (args.Length != 0)
-        path = args[0];
+      if (!string.IsNullOrWhiteSpace(options.TestPath))
+        path = options.TestPath;
 
-      if (Directory.Exists(path))
-        RunTests(path);
-      else
-        RunTest(path);
-    }
+      var testRunner = new TestRunner() { ArtifactsDir = options.ArtifactsDir, VisualDiff = options.VisualDiff, Logger = context.Logger };
+      if(options.Verbose)
+        testRunner.Logger.MessageVerbosity = ILogger.Verbosity.Verbose;
 
-    static void LoadCoreLibraries()
-    {
-      var path = Path.Combine("..", "CSShaders", "Libraries");
-      SimpleGenerator.LoadDependencies(path);
-    }
-    
-    static void RunTests(string path)
-    {
-      foreach(var file in Directory.EnumerateFiles(path))
-      {
-        RunTest(file);
-      }
-
-      foreach (var subDir in Directory.EnumerateDirectories(path))
-      {
-        RunTests(subDir);
-      }
-    }
-
-    static void RunTest(string filePath)
-    {
-      if (!File.Exists(filePath))
-        return;
-
-      if (Path.GetExtension(filePath) != ".csshader")
-        return;
-
-      SimpleGenerator.ClearFragmentProject();
-      SimpleGenerator.LoadFragmentFile(filePath);
-      SimpleGenerator.CompileFragmentProject();
-
-
-      var binaryOutPath = Path.ChangeExtension(filePath, ".generated.spv");
-      var validatorOutPath = Path.ChangeExtension(filePath, ".generated.spvval");
-      var generatedDisassemblerOutPath = Path.ChangeExtension(filePath, ".generated.spvtxt");
-      var generatedGlslOutPath = Path.ChangeExtension(filePath, ".generated.glsl");
-      var expectedDisassemblerOutPath = Path.ChangeExtension(filePath, ".expected.spvtxt");
-      var expectedGlslOutPath = Path.ChangeExtension(filePath, ".expected.glsl");
-
-      var writer = new BinaryWriter(new FileStream(binaryOutPath, FileMode.Create));
-      var spirvWriter = new SpirVStreamWriter(writer);
-      var spirVBinaryBackend = new ShaderToSpirVBinary();
-      spirVBinaryBackend.Write(spirvWriter, SimpleGenerator.FragmentLibrary, SimpleGenerator.FrontEnd);
-      writer.Close();
-
-      var validatorTool = new SpirVValidatorTool();
-      var validatorResults = validatorTool.Run(binaryOutPath);
-      File.WriteAllText(validatorOutPath, validatorResults);
-      
-      var disassemblerTool = new SpirVDisassemblerTool();
-      var disassembly = disassemblerTool.Run(binaryOutPath);
-      if (validatorResults.Length != 0)
-        disassembly = validatorResults + disassembly;
-      File.WriteAllText(generatedDisassemblerOutPath, disassembly);
-
-      var glslTool = new SpirVCrossTool();
-      glslTool.Run(binaryOutPath, generatedGlslOutPath);
-
-      VisualDiffTool diffTool = new VisualDiffTool();
-      diffTool.VisualDisplay = true;
-      diffTool.Diff(expectedDisassemblerOutPath, generatedDisassemblerOutPath);
-      diffTool.Diff(expectedGlslOutPath, generatedGlslOutPath);
-    }
-
-    static void OnTranslationErrorLog(ShaderTranslationError error)
-    {
-      Console.WriteLine(string.Format("{0}: {1}", error.Location.ToString(), error.Message));
-    }
-
-    static void OnTranslationErrorThrowException(ShaderTranslationError error)
-    {
-      throw new Exception(string.Format("{0}: {1}", error.Location.ToString(), error.Message));
+      context.Success = testRunner.Run(path);
     }
   }
 }
