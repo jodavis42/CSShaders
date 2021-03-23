@@ -93,30 +93,33 @@ namespace CSShadersTests
 
   public class SpirVDisassemblerTool : CommandLineTool
   {
+    static string mExePath = Path.Combine("Tools", "spirv-dis.exe");
+
     public string Run(string inputFile)
     {
       inputFile = Path.GetFullPath(inputFile);
       string arguments = String.Format("\"{0}\"", inputFile);
       string stdOut = "", stdErr = "";
-      RunProcessSimple("spirv-dis.exe", arguments, false, ref stdOut, ref stdErr);
+      RunProcessSimple(mExePath, arguments, false, ref stdOut, ref stdErr);
       return stdErr + stdOut;
     }
     public void Run(string inputFile, string outFile)
     {
       inputFile = Path.GetFullPath(inputFile);
       string arguments = String.Format("{2} -o \"{0}\" \"{1}\"", outFile, inputFile, "");
-      RunProcessSimple("spirv-dis.exe", arguments, false);
+      RunProcessSimple(mExePath, arguments, false);
     }
   }
 
   public class SpirVValidatorTool : CommandLineTool
   {
+    static string mExePath = Path.Combine("Tools", "spirv-val.exe");
     public string Run(string inputFile)
     {
       inputFile = Path.GetFullPath(inputFile);
       string arguments = String.Format("\"{0}\" --target-env {1}", inputFile, "spv1.4");
       string stdOut = "", stdErr = "";
-      RunProcessSimple("spirv-val.exe", arguments, false, ref stdOut, ref stdErr);
+      RunProcessSimple(mExePath, arguments, false, ref stdOut, ref stdErr);
       return stdErr + stdOut;
     }
 
@@ -130,12 +133,13 @@ namespace CSShadersTests
 
   public class SpirVCrossTool : CommandLineTool
   {
+    static string mExePath = Path.Combine("Tools", "SPIRV-Cross.exe");
     public string Run(string inputFile)
     {
       inputFile = Path.GetFullPath(inputFile);
       string arguments = String.Format("\"{0}\"", inputFile);
       string stdOut = "", stdErr = "";
-      RunProcessSimple("SPIRV-Cross.exe", arguments, false, ref stdOut, ref stdErr);
+      RunProcessSimple(mExePath, arguments, false, ref stdOut, ref stdErr);
       return stdErr + stdOut;
     }
 
@@ -143,7 +147,7 @@ namespace CSShadersTests
     {
       inputFile = Path.GetFullPath(inputFile);
       string arguments = String.Format("\"{0}\" --output \"{1}\"", inputFile, outFile);
-      RunProcessSimple("SPIRV-Cross.exe", arguments, false);
+      RunProcessSimple(mExePath, arguments, false);
     }
   }
 }
