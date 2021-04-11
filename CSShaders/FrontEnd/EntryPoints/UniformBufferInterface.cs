@@ -8,7 +8,7 @@ namespace CSShaders
   /// </summary>
   public class UniformBufferInterface
   {
-    public string TypeName;
+    public TypeName TypeName;
     public string InstanceName;
     public ShaderInterfaceSet Fields = new ShaderInterfaceSet();
     // The instance for the uniform buffer.

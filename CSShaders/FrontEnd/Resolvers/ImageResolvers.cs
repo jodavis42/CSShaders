@@ -22,19 +22,20 @@ namespace CSShaders
       // Load all constructor args by type.
       foreach(var argument in attribute.ConstructorArguments)
       {
-        if (argument.Type.Name == typeof(Type).Name)
+        var argName = TypeAliases.GetTypeName(argument.Type);
+        if (argName == TypeAliases.GetTypeName<Type>())
           sampledType = translator.FindType(new TypeKey(argument.Value as ITypeSymbol));
-        else if (argument.Type.Name == typeof(Shader.ImageDimension).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageDimension>())
           dimension = (Shader.ImageDimension)argument.Value;
-        else if (argument.Type.Name == typeof(Shader.ImageDepthMode).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageDepthMode>())
           depthMode = (Shader.ImageDepthMode)argument.Value;
-        else if (argument.Type.Name == typeof(Shader.ImageArrayedMode).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageArrayedMode>())
           arrayedMode = (Shader.ImageArrayedMode)argument.Value;
-        else if (argument.Type.Name == typeof(Shader.ImageMultiSampledMode).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageMultiSampledMode>())
           multiSampledMode = (Shader.ImageMultiSampledMode)argument.Value;
-        else if (argument.Type.Name == typeof(Shader.ImageSampledMode).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageSampledMode>())
           sampledMode = (Shader.ImageSampledMode)argument.Value;
-        else if (argument.Type.Name == typeof(Shader.ImageFormat).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageFormat>())
           imageFormat = (Shader.ImageFormat)argument.Value;
       }
       // Handle named arguments
@@ -56,7 +57,7 @@ namespace CSShaders
           imageFormat = (Shader.ImageFormat)pair.Value.Value;
       }
 
-      // Validate input type. SpirV spec says: "Sampled Typeis the type of the components that result
+      // Validate input type. SpirV spec says: "Sampled Type is the type of the components that result
       // from sampling or reading from this image type. Must be ascalar numerical type or OpTypeVoid"
       if (sampledType == null || (sampledType.mBaseType != OpType.Bool && sampledType.mBaseType != OpType.Int && sampledType.mBaseType != OpType.Float && sampledType.mBaseType != OpType.Void))
         throw new Exception();

@@ -98,7 +98,8 @@ namespace CSShaders
       var attributes = mFrontEnd.ParseAttributes(propertySymbol);
       foreach (var fieldAttribute in propertySymbol.GetAttributes())
       {
-        var processor = SpecialResolvers.FieldProcessors.GetValueOrDefault(fieldAttribute.AttributeClass.Name);
+        var attributeName = TypeAliases.GetFullTypeName(fieldAttribute.AttributeClass);
+        var processor = SpecialResolvers.FieldProcessors.GetValueOrDefault(attributeName);
         processor?.Invoke(mFrontEnd, propertySymbol.ContainingType, propertySymbol, fieldAttribute);
       }
     }
@@ -111,7 +112,8 @@ namespace CSShaders
         var attributes = mFrontEnd.ParseAttributes(fieldSymbol);
         foreach (var fieldAttribute in fieldSymbol.GetAttributes())
         {
-          var processor = SpecialResolvers.FieldProcessors.GetValueOrDefault(fieldAttribute.AttributeClass.Name);
+          var attributeName = TypeAliases.GetFullTypeName(fieldAttribute.AttributeClass);
+          var processor = SpecialResolvers.FieldProcessors.GetValueOrDefault(attributeName);
           processor?.Invoke(mFrontEnd, fieldSymbol.ContainingType, fieldSymbol, fieldAttribute);
         }
       }

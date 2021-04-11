@@ -9,7 +9,7 @@ namespace CSShaders
   /// </summary>
   public enum FragmentType
   {
-    None, Vertex, Pixel
+    None = -1, Start = 0, Vertex = 0, Pixel, Count
   }
 
   /// <summary>

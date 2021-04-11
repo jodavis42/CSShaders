@@ -87,7 +87,7 @@ namespace CSShaders
       }
     }
 
-    public static ShaderOp GenerateInterfaceStructAndOp(FrontEndTranslator translator, List<ShaderInterfaceField> interfaceFields, string structName, string instanceName, StorageClass storageClass)
+    public static ShaderOp GenerateInterfaceStructAndOp(FrontEndTranslator translator, List<ShaderInterfaceField> interfaceFields, TypeName structName, string instanceName, StorageClass storageClass)
     {
       var interfaceStruct = translator.FindType(new TypeKey(structName));
       // Generate the interface struct if it doesn't already exist (uniform buffers already exist)
