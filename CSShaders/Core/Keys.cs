@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using System;
+using System.Diagnostics;
 
 namespace CSShaders
 {
@@ -12,6 +13,10 @@ namespace CSShaders
     {
       mKey = typeName;
     }
+    public TypeKey(TypeName typeName)
+    {
+      mKey = typeName.FullName;
+    }
 
     public TypeKey(ShaderType shaderType)
     {
@@ -20,12 +25,12 @@ namespace CSShaders
 
     public TypeKey(Type type)
     {
-      mKey = type.Name;
+      mKey = TypeAliases.GetFullTypeName(type);
     }
 
     public TypeKey(ISymbol symbol)
     {
-      mKey = symbol.Name;
+      mKey = TypeAliases.GetFullTypeName(symbol);
     }
 
     public override int GetHashCode()
@@ -41,6 +46,7 @@ namespace CSShaders
     }
   }
 
+  [DebuggerDisplay("{mKey}")]
   public class FunctionKey
   {
     string mKey = "";
@@ -65,6 +71,38 @@ namespace CSShaders
     {
       if (obj is FunctionKey functionKey)
         return mKey.Equals(functionKey.mKey);
+      return false;
+    }
+  }
+
+  public class FieldKey
+  {
+    string mKey = "";
+
+    public FieldKey(string key)
+    {
+      mKey = key;
+    }
+
+    public FieldKey(string fieldType, string fieldName)
+    {
+      mKey = $"{fieldType}_{fieldName}";
+    }
+
+    public FieldKey(ShaderField field)
+    {
+      mKey = $"{field.mType.mMeta.mName}_{field.mMeta.mName}";
+    }
+
+    public override int GetHashCode()
+    {
+      return mKey.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (obj is FieldKey fieldKey)
+        return mKey.Equals(fieldKey.mKey);
       return false;
     }
   }

@@ -2,8 +2,6 @@
 
 namespace Shader
 {
-
-
   [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct)]
   public class UnitTest : Attribute
   {

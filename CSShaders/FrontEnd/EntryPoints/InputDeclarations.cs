@@ -10,7 +10,7 @@
       if (interfaceSet.Fields.Count == 0)
         return null;
 
-      var typeName = shaderType.mMeta.mName + "_Inputs";
+      var typeName = shaderType.mMeta.TypeName.CloneAsAppended("_Inputs");
       var instanceName = "In";
       var instanceOp = EntryPointGenerationShared.GenerateInterfaceStructAndOp(translator, interfaceSet.Fields, typeName, instanceName, StorageClass.Input);
       var instanceType = instanceOp.mResultType.GetDereferenceType();

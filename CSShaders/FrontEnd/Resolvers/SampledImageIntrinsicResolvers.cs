@@ -59,7 +59,7 @@ namespace CSShaders
       var samplerParam = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, arguments[1]);
 
       // Try and generate a sampled image type for this image. If we do create a new type that wasn't necessary that's fine because it'll be de-duped in the binary backend.
-      var sampledImageTypeStr = "GeneratedSampledImage_" + imageParam.mResultType.ToString();
+      var sampledImageTypeStr = new TypeName { Name = "GeneratedSampledImage_" + imageParam.mResultType.ToString() };
       var sampledImageType = translator.FindType(new TypeKey(sampledImageTypeStr));
       if (sampledImageType == null)
       {

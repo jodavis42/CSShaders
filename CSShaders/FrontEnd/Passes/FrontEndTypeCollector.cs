@@ -46,7 +46,8 @@ namespace CSShaders
       // If there's a special resolver for this type then use that to get the shader type
       foreach (var attribute in typeSymbol.GetAttributes())
       {
-        var processor = SpecialResolvers.SpecialTypeCreationAttributeProcessors.GetValueOrDefault(attribute.AttributeClass.Name);
+        var attributeName = TypeAliases.GetFullTypeName(attribute.AttributeClass);
+        var processor = SpecialResolvers.SpecialTypeCreationAttributeProcessors.GetValueOrDefault(attributeName);
         shaderType = processor?.Invoke(mFrontEnd, typeSymbol, attribute);
         if (shaderType != null)
           return shaderType;

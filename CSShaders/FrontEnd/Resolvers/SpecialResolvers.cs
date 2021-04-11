@@ -20,26 +20,27 @@ namespace CSShaders
     public SpecialResolvers()
     {
       // Setup a few special processing functors here
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Math.IntegerPrimitive).Name, IntegerResolvers.ProcessIntegerType);
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Math.FloatPrimitive).Name, FloatResolvers.ProcessFloatType);
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Math.VectorPrimitive).Name, VectorResolvers.ProcessVectorType);
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Math.MatrixPrimitive).Name, MatrixResolvers.ProcessMatrixType);
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.SamplerPrimitive).Name, SamplerResolvers.ProcessSamplerType);
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.ImagePrimitive).Name, ImageResolvers.ProcessImageType);
-      SpecialTypeCreationAttributeProcessors.Add(typeof(Shader.SampledImagePrimitive).Name, SampledSamplerResolvers.ProcessSampledImageType);
-      FieldProcessors.Add(typeof(Math.Swizzle).Name, VectorResolvers.ProcessVectorSwizzle);
-      MethodProcessors.Add(typeof(Shader.SimpleIntrinsicFunction).Name, CreateSimpleIntrinsicType);
-      MethodProcessors.Add(typeof(Math.CompositeConstruct).Name, CreateCompositeConstructIntrinsic);
-      MethodProcessors.Add(typeof(Shader.SampledImageIntrinsicFunction).Name, SampledImageIntrinsicResolvers.CreateSampledImageIntrinsicFunction);
-      MethodProcessors.Add(typeof(Shader.ImageIntrinsicFunction).Name, ImageIntrinsicResolvers.CreateImageIntrinsicFunction);
-      MethodProcessors.Add(typeof(Shader.SimpleExtensionIntrinsic).Name, ExtensionIntrinsicResolvers.ProcessSimpleExtensionIntrinsic);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.IntegerPrimitive>(), IntegerResolvers.ProcessIntegerType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.FloatPrimitive>(), FloatResolvers.ProcessFloatType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.VectorPrimitive>(), VectorResolvers.ProcessVectorType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.MatrixPrimitive>(), MatrixResolvers.ProcessMatrixType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Shader.SamplerPrimitive>(), SamplerResolvers.ProcessSamplerType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Shader.ImagePrimitive>(), ImageResolvers.ProcessImageType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Shader.SampledImagePrimitive>(), SampledSamplerResolvers.ProcessSampledImageType);
+      FieldProcessors.Add(TypeAliases.GetFullTypeName<Math.Swizzle>(), VectorResolvers.ProcessVectorSwizzle);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.SimpleIntrinsicFunction>(), CreateSimpleIntrinsicType);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Math.CompositeConstruct>(), CreateCompositeConstructIntrinsic);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.SampledImageIntrinsicFunction>(), SampledImageIntrinsicResolvers.CreateSampledImageIntrinsicFunction);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.ImageIntrinsicFunction>(), ImageIntrinsicResolvers.CreateImageIntrinsicFunction);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.SimpleExtensionIntrinsic>(), ExtensionIntrinsicResolvers.ProcessSimpleExtensionIntrinsic);
     }
 
     public bool TryProcessIntrinsicMethod(FrontEndTranslator translator, IMethodSymbol methodSymbol)
     {
       foreach (var fieldAttribute in methodSymbol.GetAttributes())
       {
-        var processor = MethodProcessors.GetValueOrDefault(fieldAttribute.AttributeClass.Name);
+        var attributeName = TypeAliases.GetFullTypeName(fieldAttribute.AttributeClass);
+        var processor = MethodProcessors.GetValueOrDefault(attributeName);
         if (processor != null)
         {
           processor?.Invoke(translator, methodSymbol.ContainingType, methodSymbol, fieldAttribute);

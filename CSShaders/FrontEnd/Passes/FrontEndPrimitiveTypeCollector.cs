@@ -15,14 +15,14 @@ namespace CSShaders
   {
     Dictionary<string, int> PrimitiveAttributePriorities = new Dictionary<string, int>()
     {
-      {typeof(Math.IntegerPrimitive).Name, 0 },
-      {typeof(Math.FloatPrimitive).Name, 0 },
-      {typeof(Math.VectorPrimitive).Name, 1 },
+      { TypeAliases.GetFullTypeName<Math.IntegerPrimitive>(), 0 },
+      { TypeAliases.GetFullTypeName<Math.FloatPrimitive>(), 0 },
+      { TypeAliases.GetFullTypeName<Math.VectorPrimitive>(), 1 },
       // Matrices depend on vectors
-      {typeof(Math.MatrixPrimitive).Name, 2 },
-      {typeof(Shader.SamplerPrimitive).Name, 3 },
-      {typeof(Shader.ImagePrimitive).Name, 4 },
-      {typeof(Shader.SampledImagePrimitive).Name, 5 },
+      { TypeAliases.GetFullTypeName<Math.MatrixPrimitive>(), 2 },
+      { TypeAliases.GetFullTypeName<Shader.SamplerPrimitive>(), 3 },
+      { TypeAliases.GetFullTypeName<Shader.ImagePrimitive>(), 4 },
+      { TypeAliases.GetFullTypeName<Shader.SampledImagePrimitive>(), 5 },
     };
     public class PrimitiveData
     {
@@ -56,8 +56,9 @@ namespace CSShaders
       // If the type has a special primitive attribute then queue it up for processing
       foreach(var attribute in structSymbol.GetAttributes())
       {
-        int priority = 0;
-        if(PrimitiveAttributePriorities.TryGetValue(attribute.AttributeClass.Name, out priority))
+        int priority = 0; 
+        var attributeName = TypeAliases.GetFullTypeName(attribute.AttributeClass);
+        if (PrimitiveAttributePriorities.TryGetValue(attributeName, out priority))
         {
           var data = new PrimitiveData();
           data.Priority = priority;
@@ -87,7 +88,8 @@ namespace CSShaders
       // If there's a special resolver for this type then use that to get the shader type
       foreach (var attribute in typeSymbol.GetAttributes())
       {
-        var processor = SpecialResolvers.SpecialTypeCreationAttributeProcessors.GetValueOrDefault(attribute.AttributeClass.Name);
+        var attributeName = TypeAliases.GetFullTypeName(attribute.AttributeClass);
+        var processor = SpecialResolvers.SpecialTypeCreationAttributeProcessors.GetValueOrDefault(attributeName);
         shaderType = processor?.Invoke(mFrontEnd, typeSymbol, attribute);
         if (shaderType != null)
           return shaderType;

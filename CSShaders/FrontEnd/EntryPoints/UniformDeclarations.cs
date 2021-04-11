@@ -62,7 +62,7 @@ namespace CSShaders
 
       // If there's any [UniformInput] fields then group them all together in one buffer
       if (uniformInputFields.Count != 0)
-        CreateUniformInputBuffer(translator, interfaceInfo, shaderType.mMeta.mName, uniformInputFields, usedBindings);
+        CreateUniformInputBuffer(translator, interfaceInfo, shaderType.mMeta.TypeName, uniformInputFields, usedBindings);
     }
 
     public static UniformBufferInterface CreateUniformBuffer(FrontEndTranslator translator, EntryPointInterfaceInfo interfaceInfo, ShaderField field, Shader.UniformBuffer attribute, HashSet<UniformBindings> usedBindings)
@@ -73,7 +73,7 @@ namespace CSShaders
       usedBindings.Add(bindings);
 
       var uniformBuffer = interfaceInfo.UniformBuffers.GetOrCreate(bindings);
-      uniformBuffer.TypeName = field.mType.mMeta.mName;
+      uniformBuffer.TypeName = field.mType.mMeta.TypeName.Clone();
       uniformBuffer.InstanceName = string.Format("{0}_Instance", field.mType.mMeta.mName);
       uniformBuffer.GetOwnerDelegate = (FrontEndTranslator translator, UniformBufferInterface bufferInterface, ShaderOp ownerOp, FrontEndContext context) =>
       {
@@ -87,7 +87,7 @@ namespace CSShaders
       return uniformBuffer;
     }
 
-    public static UniformBufferInterface CreateUniformInputBuffer(FrontEndTranslator translator, EntryPointInterfaceInfo interfaceInfo, string typeName, List<(ShaderField Field, ShaderAttribute Attribute)> uniformInputFields, HashSet<UniformBindings> usedBindings)
+    public static UniformBufferInterface CreateUniformInputBuffer(FrontEndTranslator translator, EntryPointInterfaceInfo interfaceInfo, TypeName typeName, List<(ShaderField Field, ShaderAttribute Attribute)> uniformInputFields, HashSet<UniformBindings> usedBindings)
     {
       var materialBinding = new UniformBindings { DescriptorSet = 0 };
       materialBinding.BindingId = FindNextAvailableBindingId(usedBindings, materialBinding.DescriptorSet);
@@ -97,8 +97,8 @@ namespace CSShaders
       foreach (var uniformInputField in uniformInputFields)
       {
         var interfaceField = new ShaderInterfaceField() { ShaderField = uniformInputField.Field };
-        uniformInputBuffer.TypeName = string.Format("{0}_SharedMaterialBuffer", typeName);
-        uniformInputBuffer.InstanceName = string.Format("{0}_SharedMaterialBuffer_Instance", typeName);
+        uniformInputBuffer.TypeName = typeName.CloneAsAppended("_SharedMaterialBuffer");
+        uniformInputBuffer.InstanceName = string.Format("{0}_SharedMaterialBuffer_Instance", typeName.Name);
         uniformInputBuffer.Fields.Add(interfaceField);
       }
       return uniformInputBuffer;
@@ -141,13 +141,13 @@ namespace CSShaders
     {
       // Generate a unique buffer type instance. Buffer types are decorated in a way where they
       // can't used as normal structures. In addition, this helps with any duplicate buffer types.
-      string bufferName = uniformBuffer.TypeName;
+      var bufferName = uniformBuffer.TypeName.Clone();
       for(var i = 0; ; ++i)
       {
-        var interfaceStruct = translator.FindType(new TypeKey(bufferName));
+        var interfaceStruct = translator.FindType(new TypeKey(bufferName.FullName));
         if (interfaceStruct == null)
           break;
-        bufferName = $"{uniformBuffer.TypeName}_{i}";
+        bufferName.Name = $"{uniformBuffer.TypeName.Name}_{i}";
       }
 
       uniformBuffer.InterfaceInstance = EntryPointGenerationShared.GenerateInterfaceStructAndOp(translator, uniformBuffer.Fields.Fields, bufferName, uniformBuffer.InstanceName, StorageClass.Uniform);

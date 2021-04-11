@@ -15,7 +15,12 @@ namespace CSShaders
 
     public ShaderType CreatePrimitive(Type type, OpType opType)
     {
-      var shaderType = CreateType(new TypeKey(type), type.Name, opType, null);
+      return CreatePrimitive(type, opType, TypeAliases.GetTypeName(type));
+    }
+
+    public ShaderType CreatePrimitive(Type type, OpType opType, TypeName typeName)
+    {
+      var shaderType = CreateType(new TypeKey(type), typeName, opType, null);
       // Clear out the debug names for primitives. The disassembler names are best for primitives.
       shaderType.DebugInfo.Name = "";
       shaderType.FindPointerType(StorageClass.Function).DebugInfo.Name = "";
@@ -24,19 +29,20 @@ namespace CSShaders
 
     public ShaderType CreateType(ISymbol symbol, OpType opType)
     {
-      return CreateType(new TypeKey(symbol), symbol.Name, opType, symbol);
+      return CreateType(new TypeKey(symbol), TypeAliases.GetTypeName(symbol), opType, symbol);
     }
 
-    public ShaderType CreateType(TypeKey key, string typeName, OpType opType, ISymbol symbol)
+    public ShaderType CreateType(TypeKey key, TypeName typeName, OpType opType, ISymbol symbol)
     {
       var shaderType = mCurrentLibrary.CreateType(key);
-      shaderType.DebugInfo.Name = typeName;
-      shaderType.mMeta.mName = typeName;
+      shaderType.DebugInfo.Name = typeName.Name;
+      shaderType.mMeta.mName = typeName.Name;
+      shaderType.mMeta.TypeName = typeName.Clone();
       shaderType.mBaseType = opType;
       shaderType.StorageClassCollection = new ShaderTypeStorageClassCollection(shaderType);
 
       var pointerType = CreatePointerType(key, typeName);
-      pointerType.mMeta.mName = typeName + "_ptr";
+      pointerType.mMeta.mName = typeName.Name + "_ptr";
 
       return shaderType;
     }
@@ -59,9 +65,8 @@ namespace CSShaders
       return shaderType;
     }
 
-    public ShaderType CreatePointerType(TypeKey key, string typeName)
+    public ShaderType CreatePointerType(TypeKey key, TypeName typeName)
     {
-      string ptrTypeName = typeName + "_ptr";
       var baseType = mCurrentLibrary.FindType(key);
       var pointerType = new ShaderType();
       pointerType.mBaseType = OpType.Pointer;
@@ -70,9 +75,8 @@ namespace CSShaders
       return pointerType;
     }
 
-    public ShaderType FindOrCreatePointerType(TypeKey key, string typeName, StorageClass storageClass)
+    public ShaderType FindOrCreatePointerType(TypeKey key, TypeName typeName, StorageClass storageClass)
     {
-      string ptrTypeName = typeName + "_ptr";
       var baseType = mCurrentLibrary.FindType(key);
       return FindOrCreatePointerType(baseType, storageClass);
     }
@@ -156,7 +160,8 @@ namespace CSShaders
       var shaderFunctionType = mCurrentLibrary.FindType(new TypeKey(builder.ToString()));
       if(shaderFunctionType == null)
       {
-        shaderFunctionType = CreateType(new TypeKey(builder.ToString()), builder.ToString(), OpType.Function, null);
+        var functionTypeName = new TypeName { Name = builder.ToString() };
+        shaderFunctionType = CreateType(new TypeKey(builder.ToString()), functionTypeName, OpType.Function, null);
         shaderFunctionType.mParameters.Add(returnType);
         if (thisType != null)
         {
@@ -436,7 +441,7 @@ namespace CSShaders
       {
         var shaderAttribute = new ShaderAttribute();
         shaderAttributes.Add(shaderAttribute);
-        shaderAttribute.Name = attribute.AttributeClass.Name;
+        shaderAttribute.Name = TypeAliases.GetTypeName(attribute.AttributeClass);
         shaderAttribute.Attribute = attribute;
         
         foreach(var argument in attribute.NamedArguments)

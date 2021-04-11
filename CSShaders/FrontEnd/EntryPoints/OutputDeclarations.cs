@@ -10,7 +10,7 @@
       if (interfaceSet.Fields.Count == 0)
         return null;
 
-      var typeName = shaderType.mMeta.mName + "_Outputs";
+      var typeName = shaderType.mMeta.TypeName.CloneAsAppended("_Outputs");
       var instanceName = "Out";
       var instanceOp = EntryPointGenerationShared.GenerateInterfaceStructAndOp(translator, interfaceSet.Fields, typeName, instanceName, StorageClass.Output);
       Decorations.AddDecorationLocation(translator, instanceOp, 0, decorationsBlock);

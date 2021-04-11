@@ -20,11 +20,12 @@ namespace CSShaders
       // Load the attribute params if they exist. Note: This isn't really safe, but works for now.
       foreach (var attributeParam in attribute.ConstructorArguments)
       {
-        if (attributeParam.Type.Name == typeof(string).Name)
+        var argName = TypeAliases.GetTypeName(attributeParam.Type);
+        if (argName == TypeAliases.GetTypeName<string>())
           result.OpType = (OpInstructionType)Enum.Parse(typeof(OpInstructionType), attributeParam.Value as string, true);
-        else if (attributeParam.Type.Name == typeof(Shader.ImageOperands).Name)
+        else if (argName == TypeAliases.GetTypeName<Shader.ImageOperands>())
           result.Operands = (Shader.ImageOperands)attributeParam.Value;
-        else if (attributeParam.Type.Name == typeof(UInt32).Name)
+        else if (argName == TypeAliases.GetTypeName<UInt32>())
           result.OperandsLocation = (int)(UInt32)attributeParam.Value;
       }
       // Also try to resolve any named parameter arguments

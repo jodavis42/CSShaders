@@ -218,7 +218,7 @@ namespace CSShaders
     public bool IsValidClassDeclaration(ClassDeclarationSyntax node)
     {
       var symbol = GetDeclaredSymbol(node) as ITypeSymbol;
-      return symbol.BaseType.Name == typeof(Attribute).Name;
+      return TypeAliases.GetTypeName(symbol.BaseType) == TypeAliases.GetTypeName<Attribute>();
     }
 
     public IMethodSymbol FindDefaultConstructorSymbol(INamedTypeSymbol typeSymbol)
