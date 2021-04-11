@@ -8,7 +8,7 @@ namespace CSShaders
 {
   class FrontEndCommonPass : FrontEndPass
   {
-    public override void Visit(SyntaxNode? node)
+    public override void Visit(SyntaxNode node)
     {
       var oldPass = mContext.mCurrentPass;
       mContext.mCurrentPass = this;
