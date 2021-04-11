@@ -89,6 +89,11 @@ namespace CSShaders
       mKey = $"{fieldType}_{fieldName}";
     }
 
+    public FieldKey(TypeName fieldType, string fieldName)
+    {
+      mKey = $"{fieldType.FullName}_{fieldName}";
+    }
+
     public FieldKey(ShaderField field)
     {
       mKey = $"{field.mType.mMeta.mName}_{field.mMeta.mName}";

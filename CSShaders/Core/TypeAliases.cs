@@ -67,7 +67,8 @@ namespace CSShaders
       if (result != null)
         return result;
 
-      return new TypeName { Name = symbol.Name, Namespace = symbol.ContainingNamespace.ToString() };
+      var namespaceName = symbol.ContainingNamespace.IsGlobalNamespace ? null : symbol.ContainingNamespace.ToString();
+      return new TypeName { Name = symbol.Name, Namespace = namespaceName };
     }
 
     public static string GetFullTypeName(ISymbol symbol)

@@ -1,0 +1,42 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 26
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %GlobalNamespaceStruct_EntryPoint "GlobalNamespaceStruct_EntryPoint"
+               OpExecutionMode %GlobalNamespaceStruct_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %GlobalNamespaceStruct "GlobalNamespaceStruct"
+               OpName %GlobalNamespaceStruct_PreConstructor "GlobalNamespaceStruct_PreConstructor"
+               OpName %self "self"
+               OpName %GlobalNamespaceStruct_DefaultConstructor "GlobalNamespaceStruct_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %GlobalNamespaceStruct_EntryPoint "GlobalNamespaceStruct_EntryPoint"
+               OpName %self_1 "self"
+               OpName %GlobalNamespaceStruct_EntryPoint "GlobalNamespaceStruct_EntryPoint"
+               OpName %self_1 "self"
+%GlobalNamespaceStruct = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_GlobalNamespaceStruct = OpTypePointer Function %GlobalNamespaceStruct
+          %5 = OpTypeFunction %void %_ptr_Function_GlobalNamespaceStruct
+          %7 = OpTypeFunction %void
+%GlobalNamespaceStruct_PreConstructor = OpFunction %void None %5
+       %self = OpFunctionParameter %_ptr_Function_GlobalNamespaceStruct
+         %12 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%GlobalNamespaceStruct_DefaultConstructor = OpFunction %void None %5
+     %self_0 = OpFunctionParameter %_ptr_Function_GlobalNamespaceStruct
+         %17 = OpLabel
+         %18 = OpFunctionCall %void %GlobalNamespaceStruct_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%GlobalNamespaceStruct_EntryPoint = OpFunction %void None %7
+         %22 = OpLabel
+     %self_1 = OpVariable %_ptr_Function_GlobalNamespaceStruct Function
+         %24 = OpFunctionCall %void %GlobalNamespaceStruct_DefaultConstructor %self_1
+               OpReturn
+               OpFunctionEnd
