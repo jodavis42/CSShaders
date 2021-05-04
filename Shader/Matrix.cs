@@ -5,8 +5,9 @@ namespace Math
   {
     [Swizzle(0)] public Vector2 Column0;
     [Swizzle(1)] public Vector2 Column1;
-    
-    [Shader.SimpleIntrinsicFunction("OpCompositeConstruct")] public static Math.Float2x2 Construct(Math.Vector2 a, Math.Vector2 b)
+
+    [Shader.SimpleIntrinsicFunction("OpCompositeConstruct")]
+    public static Math.Float2x2 Construct(Math.Vector2 a, Math.Vector2 b)
     {
       var result = new Math.Float2x2();
       result.Column0 = a;
@@ -27,5 +28,10 @@ namespace Math
 
     [CompositeConstruct] public Float2x2(Math.Vector2 a, Math.Vector2 b) { this.Column0 = a; this.Column1 = b; }
 
+  }
+
+  [MatrixPrimitive(typeof(Vector4), 4)]
+  public struct Float4x4
+  {
   }
 }

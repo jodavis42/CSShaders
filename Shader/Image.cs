@@ -16,6 +16,11 @@
   {
   }
 
+  [ImagePrimitive(typeof(int), ImageDimension.Dim2D, ImageFormat.Unknown)]
+  public struct IntImage2d
+  {
+  }
+
   /// <summary>
   /// A combined 2d float image and sampler. All run-time sampling of an image must be done via a sampled image. 
   /// For convenience, a sampled image is a primitive that can also be bound to a shader so that run-time combinations don't have to be made.
