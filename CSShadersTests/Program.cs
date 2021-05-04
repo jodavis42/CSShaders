@@ -58,7 +58,7 @@ namespace CSShadersTests
         path = options.TestPath;
 
       var testRunner = new TestRunner() { ArtifactsDir = options.ArtifactsDir, VisualDiff = options.VisualDiff, Logger = context.Logger };
-      if(options.Verbose)
+      if (options.Verbose)
         testRunner.Logger.MessageVerbosity = ILogger.Verbosity.Verbose;
 
       context.Success = testRunner.Run(path);

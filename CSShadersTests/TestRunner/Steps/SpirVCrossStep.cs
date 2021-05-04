@@ -7,13 +7,15 @@
     public string SpvPathKey = DefaultSpvPathKey;
     public string OutPathKey = DefaultOutPathKey;
 
+    public string Stage = "";
+
     public override StepResult Run(Blackboard blackboard)
     {
       var logger = blackboard.Get<ILogger>("Logger");
       var spvPath = blackboard.Get<string>(SpvPathKey);
       var outPath = blackboard.Get<string>(OutPathKey);
       var tool = new SpirVCrossTool();
-      tool.Run(spvPath, outPath);
+      tool.Run(spvPath, outPath, Stage);
       return StepResult.Success;
     }
   }

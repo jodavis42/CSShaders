@@ -22,6 +22,8 @@ namespace CSShadersTests
 
       var rootPath = blackboard.Get<string>(RootPathKey);
       var targetPath = blackboard.Get<string>(TargetPathKey);
+      if(string.IsNullOrEmpty(targetPath))
+        return StepResult.Success;
 
       var fullResultDirectory = Path.GetDirectoryName(Path.Combine(targetPath, Path.GetRelativePath(rootPath, conditionalFile)));
       Directory.CreateDirectory(fullResultDirectory);
