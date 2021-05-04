@@ -10,6 +10,7 @@
     FragCoord = 15,
     PointCoord = 16,
     FrontFacing = 17,
+    FragDepth = 22,
     VertexIndex = 42,
     InstanceIndex = 43,
   }
