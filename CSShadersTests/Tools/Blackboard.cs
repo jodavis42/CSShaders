@@ -6,9 +6,10 @@ namespace CSShadersTests
   public class Blackboard
   {
     public enum AddMode { Error, Override, Ignore };
+    public AddMode DefaultAddMode = AddMode.Error;
     Dictionary<string, object> Objects = new Dictionary<string, object>();
 
-    public bool Add(string name, object value, AddMode addMode = AddMode.Error)
+    public bool Add(string name, object value, AddMode addMode)
     {
       bool alreadyExists = Objects.ContainsKey(name);
       if (alreadyExists)
@@ -23,9 +24,19 @@ namespace CSShadersTests
       return alreadyExists;
     }
 
-    public bool Add<T>(T value, AddMode addMode = AddMode.Error)
+    public bool Add(string name, object value)
+    {
+      return Add(name, value, DefaultAddMode);
+    }
+
+    public bool Add<T>(T value, AddMode addMode)
     {
       return Add(typeof(T).Name, value, addMode);
+    }
+
+    public bool Add<T>(T value)
+    {
+      return Add(value, DefaultAddMode);
     }
 
     public object Get(string name)

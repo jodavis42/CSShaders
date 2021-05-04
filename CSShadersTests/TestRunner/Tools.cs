@@ -149,5 +149,14 @@ namespace CSShadersTests
       string arguments = String.Format("\"{0}\" --output \"{1}\"", inputFile, outFile);
       RunProcessSimple(mExePath, arguments, false);
     }
+
+    public void Run(string inputFile, string outFile, string stage)
+    {
+      inputFile = Path.GetFullPath(inputFile);
+      string arguments = String.Format("\"{0}\" --output \"{1}\"", inputFile, outFile);
+      if (!string.IsNullOrEmpty(stage))
+        arguments += $" --stage {stage}";
+      RunProcessSimple(mExePath, arguments, false);
+    }
   }
 }
