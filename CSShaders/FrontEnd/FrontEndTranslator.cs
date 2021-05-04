@@ -443,8 +443,15 @@ namespace CSShaders
         shaderAttributes.Add(shaderAttribute);
         shaderAttribute.Name = TypeAliases.GetTypeName(attribute.AttributeClass);
         shaderAttribute.Attribute = attribute;
-        
-        foreach(var argument in attribute.NamedArguments)
+
+        foreach (var argument in attribute.ConstructorArguments)
+        {
+          var shaderAttributeParam = new ShaderAttributeParameter();
+          shaderAttribute.Parameters.Add(shaderAttributeParam);
+          if(argument.Kind != TypedConstantKind.Array)
+            shaderAttributeParam.Value = argument.Value;
+        }
+        foreach (var argument in attribute.NamedArguments)
         {
           var shaderAttributeParam = new ShaderAttributeParameter();
           shaderAttribute.Parameters.Add(shaderAttributeParam);
@@ -776,6 +783,11 @@ namespace CSShaders
       var block = new ShaderBlock();
       block.DebugInfo.Name = debugBlockName;
       return block;
+    }
+
+    public void SendTranslationError(ShaderCodeLocation location, string message)
+    {
+      CurrentProject.SendTranslationError(location, message);
     }
   }
 }
