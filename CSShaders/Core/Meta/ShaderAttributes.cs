@@ -69,6 +69,21 @@ namespace CSShaders
       return Contains(attributeType.Name);
     }
 
+    public ShaderAttribute FindFirstAttribute(TypeName attributeName)
+    {
+      foreach (var attribute in Attributes)
+      {
+        if (attribute.Name == attributeName)
+          return attribute;
+      }
+      return null;
+    }
+
+    public ShaderAttribute FindFirstAttribute(Type attributeType)
+    {
+      return FindFirstAttribute(TypeAliases.GetTypeName(attributeType));
+    }
+
     public void ForeachAttribute(TypeName attributeName, AttributeCallback callback)
     {
       foreach (var attribute in Attributes)
