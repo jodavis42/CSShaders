@@ -456,7 +456,7 @@ namespace CSShaders
           var shaderAttributeParam = new ShaderAttributeParameter();
           shaderAttribute.Parameters.Add(shaderAttributeParam);
           shaderAttributeParam.Name = argument.Key;
-          shaderAttributeParam.Value = argument.Value;
+          shaderAttributeParam.Value = argument.Value.Value;
         }
       }
       return shaderAttributes;
