@@ -27,14 +27,23 @@
 
       var inputsName = shaderType.mMeta.mName + "_Inputs";
       EntryPointGenerationShared.GenerateInterfaceGlobalFields(translator, interfaceSet.Fields, inputsName, "In", StorageClass.Input);
-      var location = 0;
       foreach (var inputField in interfaceSet)
       {
         var fieldOp = interfaceSet.GetFieldInstance(translator, inputField, null);
-        Decorations.AddDecorationLocation(translator, fieldOp, location, decorationsBlock);
-        ++location;
         declarationBlock.mLocalVariables.Add(fieldOp);
       }
+      Decorations.LocationCallback locationCallback = (ShaderField field, out int location, out int component) =>
+      {
+        location = component = -1;
+        var attribute = field.mMeta.mAttributes.FindFirstAttribute(typeof(Shader.StageInput));
+        if (attribute == null)
+          return false;
+        var parsedAttribute = AttributeExtensions.ParseStageInput(attribute);
+        location = parsedAttribute.Location;
+        component = parsedAttribute.Component;
+        return true;
+      };
+      Decorations.AddDecorationLocations(translator, shaderType, interfaceSet, locationCallback, decorationsBlock);
     }
 
     public static void GenerateCopyInputsFunction(FrontEndTranslator translator, ShaderType shaderType, ShaderEntryPointInfo entryPoint, EntryPointInterfaceInfo interfaceInfo)

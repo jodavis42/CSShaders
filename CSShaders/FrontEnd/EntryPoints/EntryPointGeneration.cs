@@ -75,7 +75,7 @@ namespace CSShaders
       EntryPointGenerationShared.GenerateHardwareBuiltIns(translator, interfaceInfo.HardwareBuiltInInputs, StorageClass.Input, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       InputDeclarations.GenerateInputStruct(translator, shaderType, interfaceInfo.StageInputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       EntryPointGenerationShared.GenerateHardwareBuiltIns(translator, interfaceInfo.HardwareBuiltInOutputs, StorageClass.Output, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
-      OutputDeclarations.GenerateOutputStruct(translator, shaderType, interfaceInfo.StageOutputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
+      OutputDeclarations.GenerateOutputFields(translator, shaderType, interfaceInfo.StageOutputs, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       UniformDeclarations.DeclareUniformBuffers(translator, interfaceInfo.UniformBuffers, entryPoint.mInterfaceVariables, entryPoint.mDecorations);
       UniformDeclarations.DeclareUniformConstants(translator, interfaceInfo.ConstantUniforms, entryPoint.mDecorations);
 
