@@ -78,9 +78,9 @@ namespace Utilities
       {
         LinkedListNode<(Key key, Value value)> outNode = null;
         if (!mMap.TryGetValue(key, out outNode))
-          return;
-
-        outNode.Value = (key, value);
+          Add(key, value);
+        else
+          outNode.Value = (key, value);
       }
     }
 
