@@ -458,6 +458,39 @@ namespace CSShaders
           shaderAttributeParam.Name = argument.Key;
           shaderAttributeParam.Value = argument.Value.Value;
         }
+
+        if (TypeAliases.GetFullTypeName(attribute.AttributeClass) == TypeAliases.GetFullTypeName<Shader.Input>())
+        {
+          var inputAttributes = new List<TypeName>
+          {
+            TypeAliases.GetTypeName<Shader.FragmentInput>(),
+            TypeAliases.GetTypeName<Shader.StageInput>(),
+            TypeAliases.GetTypeName<Shader.AppBuiltInInput>(),
+            TypeAliases.GetTypeName<Shader.HardwareBuiltInInput>(),
+            TypeAliases.GetTypeName<Shader.PropertyInput>(),
+          };
+          foreach (var inputAttribute in inputAttributes)
+          {
+            var clone = shaderAttribute.Clone();
+            clone.Name = inputAttribute;
+            shaderAttributes.Add(clone);
+          }
+        }
+        if (TypeAliases.GetFullTypeName(attribute.AttributeClass) == TypeAliases.GetFullTypeName<Shader.Output>())
+        {
+          var outputAttributes = new List<TypeName>
+          {
+            TypeAliases.GetTypeName<Shader.FragmentOutput>(),
+            TypeAliases.GetTypeName<Shader.StageOutput>(),
+            TypeAliases.GetTypeName<Shader.HardwareBuiltInOutput>(),
+          };
+          foreach (var outputAttribute in outputAttributes)
+          {
+            var clone = shaderAttribute.Clone();
+            clone.Name = outputAttribute;
+            shaderAttributes.Add(clone);
+          }
+        }
       }
       return shaderAttributes;
     }
