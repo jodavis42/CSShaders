@@ -14,15 +14,10 @@ struct Pixel
     TestStruct TestStruct;
 };
 
-struct Pixel_Outputs
-{
-    float Value;
-    float Value2;
-    vec2 V2;
-    TestStruct TestStruct;
-};
-
-layout(location = 0) out Pixel_Outputs Out;
+layout(location = 0) out float Value;
+layout(location = 1) out float Value2;
+layout(location = 2) out vec2 V2;
+layout(location = 3) out TestStruct TestStruct_1;
 
 void TestStruct_PreConstructor(inout TestStruct self)
 {
@@ -54,10 +49,10 @@ void Main(Pixel self)
 
 void Pixel_CopyOutputs(Pixel self)
 {
-    Out.Value = self.Value;
-    Out.Value2 = self.Value2;
-    Out.V2 = self.V2;
-    Out.TestStruct = self.TestStruct;
+    Value = self.Value;
+    Value2 = self.Value2;
+    V2 = self.V2;
+    TestStruct_1 = self.TestStruct;
 }
 
 void main()

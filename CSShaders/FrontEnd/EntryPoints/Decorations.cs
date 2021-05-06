@@ -39,6 +39,52 @@ namespace CSShaders
       translator.CreateOp(decorationsBlock, OpInstructionType.OpDecorate, null, new List<IShaderIR>() { instanceOp, decorationLocationLiteral, locationLiteral });
     }
 
+    public delegate bool LocationCallback(ShaderField field, out int location, out int component);
+
+    public static void AddDecorationLocations(FrontEndTranslator translator, ShaderType shaderType, ShaderInterfaceSet interfaceSet, LocationCallback locationCallback,  ShaderBlock decorationsBlock)
+    {
+      int GetNextLocation(Dictionary<int, ShaderInterfaceField> usedLocations, int currLocation)
+      {
+        while (usedLocations.ContainsKey(currLocation))
+          ++currLocation;
+        return currLocation;
+      };
+      var usedLocations = new Dictionary<int, ShaderInterfaceField>();
+      List<(ShaderInterfaceField Field, ShaderOp FieldOp)> unknownLocationFields = new List<(ShaderInterfaceField Field, ShaderOp FieldOp)>();
+      foreach (var field in interfaceSet)
+      {
+        var fieldOp = interfaceSet.GetFieldInstance(translator, field, null);
+
+        int location = -1;
+        int component = -1;
+        locationCallback(field.ShaderField, out location, out component);
+        if (location != -1)
+        {
+          Decorations.AddDecorationLocation(translator, fieldOp, location, decorationsBlock);
+          usedLocations.Add(location, field);
+          if(component != -1)
+            Decorations.AddDecorationComponent(translator, fieldOp, location, decorationsBlock);
+        }
+        else
+          unknownLocationFields.Add((field, fieldOp));
+      }
+
+      var nextLocation = 0;
+      foreach (var pair in unknownLocationFields)
+      {
+        nextLocation = GetNextLocation(usedLocations, nextLocation);
+        Decorations.AddDecorationLocation(translator, pair.FieldOp, nextLocation, decorationsBlock);
+        usedLocations.Add(nextLocation, pair.Field);
+      }
+    }
+
+    public static void AddDecorationComponent(FrontEndTranslator translator, ShaderOp instanceOp, int component, ShaderBlock decorationsBlock)
+    {
+      var decorationLocationLiteral = translator.CreateConstantLiteral((int)Spv.Decoration.DecorationComponent);
+      var componentLiteral = translator.CreateConstantLiteral(component);
+      translator.CreateOp(decorationsBlock, OpInstructionType.OpDecorate, null, new List<IShaderIR>() { instanceOp, decorationLocationLiteral, componentLiteral });
+    }
+
     public static void AddDecorationMemberOffset(FrontEndTranslator translator, ShaderType shaderType, int fieldIndex, UInt32 byteOffset, ShaderBlock decorationsBlock)
     {
       var decorationOffsetLiteral = translator.CreateConstantLiteral((int)Spv.Decoration.DecorationOffset);
@@ -134,4 +180,11 @@ namespace CSShaders
       }
     }
   }
+
+  public class InputOutputLocation
+  {
+    public int Location = -1;
+    public int Component = -1;
+  }
+
 }
