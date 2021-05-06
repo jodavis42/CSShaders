@@ -62,15 +62,17 @@ namespace Shader
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class Input : Attribute
   {
-    Input() { }
-    Input(string name) { }
+    string Name;
+    public Input() { }
+    public Input(string name) { Name = name; }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class Output : Attribute
   {
-    Output() { }
-    Output(string name) { }
+    string Name;
+    public Output() { }
+    public Output(string name) { Name = name; }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
@@ -95,21 +97,47 @@ namespace Shader
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class AppBuiltInInput : Attribute
   {
+    string Name;
+    public AppBuiltInInput() { }
+    public AppBuiltInInput(string name) { Name = name; }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class SpecConstantInput : Attribute
   {
+    string Name;
+    public SpecConstantInput() { }
+    public SpecConstantInput(string name) { Name = name; }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class FragmentInput : Attribute
   {
+    string Name;
+    public FragmentInput() { }
+    public FragmentInput(string name) { Name = name; }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class StageInput : Attribute
   {
+    public string Name;
+    public int Location = -1;
+    public int Component = -1;
+
+    public StageInput() { }
+    public StageInput(string name) { Name = name; }
+  }
+
+  [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+  public class PropertyInput : Attribute
+  {
+    public string PropertyName;
+    public PropertyInput() { }
+    public PropertyInput(string propertyName)
+    {
+      PropertyName = propertyName;
+    }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
@@ -117,15 +145,29 @@ namespace Shader
   {
     public HardwareBuiltinType InputType;
 
+    public HardwareBuiltInInput()
+    {
+    }
+
     public HardwareBuiltInInput(HardwareBuiltinType inputType)
     {
       InputType = inputType;
+    }
+
+    public HardwareBuiltInInput(string inputName)
+    {
     }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class StageOutput : Attribute
   {
+    public string Name;
+    public int Location = -1;
+    public int Component = -1;
+
+    public StageOutput() { }
+    public StageOutput(string name) { Name = name; }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
@@ -133,14 +175,25 @@ namespace Shader
   {
     public HardwareBuiltinType OutputType;
 
+    public HardwareBuiltInOutput()
+    {
+    }
+
     public HardwareBuiltInOutput(HardwareBuiltinType outputType)
     {
       OutputType = outputType;
+    }
+
+    public HardwareBuiltInOutput(string inputName)
+    {
     }
   }
 
   [System.AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
   public class FragmentOutput : Attribute
   {
+    string Name;
+    public FragmentOutput() { }
+    public FragmentOutput(string name) { Name = name; }
   }
 }
