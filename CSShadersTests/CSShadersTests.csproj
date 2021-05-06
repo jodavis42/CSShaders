@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Compositing\Compositing.csproj" />
     <ProjectReference Include="..\CSShaders\CSShaders.csproj" />
     <ProjectReference Include="..\Shader\Shader.csproj" />
   </ItemGroup>

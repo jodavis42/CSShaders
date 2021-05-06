@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shader", "Shader\Shader.csproj", "{2C2BDBF2-B55A-41BF-9BC6-BA057C856BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntrinsicsGenerators", "IntrinsicsGenerators\IntrinsicsGenerators.csproj", "{836FE5EE-9119-47FD-ADF0-F1F4D99F2743}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntrinsicsGenerators", "IntrinsicsGenerators\IntrinsicsGenerators.csproj", "{836FE5EE-9119-47FD-ADF0-F1F4D99F2743}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compositing", "Compositing\Compositing.csproj", "{6D312CA0-2602-4A4B-B154-E4C7036454E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{836FE5EE-9119-47FD-ADF0-F1F4D99F2743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{836FE5EE-9119-47FD-ADF0-F1F4D99F2743}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{836FE5EE-9119-47FD-ADF0-F1F4D99F2743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D312CA0-2602-4A4B-B154-E4C7036454E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D312CA0-2602-4A4B-B154-E4C7036454E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D312CA0-2602-4A4B-B154-E4C7036454E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D312CA0-2602-4A4B-B154-E4C7036454E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
