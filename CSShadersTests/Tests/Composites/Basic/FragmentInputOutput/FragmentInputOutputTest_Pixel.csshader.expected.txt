@@ -1,0 +1,21 @@
+[Shader.Pixel]
+public struct FragmentInputOutputTest_Pixel
+{
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.Scale = pixel0.Scale;
+    pixel1.Main();
+
+    Pixel2 pixel2 = new Pixel2();
+    pixel2.Scale = pixel1.Scale;
+    pixel2.Uv = pixel1.Uv;
+    pixel2.Color = pixel0.Color;
+    pixel2.Main();
+
+  }
+};

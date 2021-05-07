@@ -1,0 +1,6 @@
+public struct CameraData
+{
+   public float NearPlane;
+   public float FarPlane;
+   public Math.Vector2 ViewportSize;
+};

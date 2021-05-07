@@ -1,0 +1,23 @@
+[Shader.Vertex]
+public struct AppBuiltInInputTest_Vertex
+{
+  [Shader.UniformBuffer] public FrameData FrameData;
+  [Shader.UniformBuffer] public CameraData CameraData;
+  [Shader.UniformBuffer] public TransformData TransformData;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.FrameTime = this.FrameData.FrameTime;
+    vertex0.LogicTime = this.FrameData.LogicTime;
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.Time = this.FrameData.FrameTime;
+    vertex1.ViewportSize = this.CameraData.ViewportSize;
+    vertex1.LocalToWorld = this.TransformData.LocalToWorld;
+    vertex1.Main();
+
+  }
+};

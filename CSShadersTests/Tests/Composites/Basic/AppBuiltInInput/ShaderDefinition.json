@@ -1,0 +1,9 @@
+{
+  "Name": "AppBuiltInInputTest",
+  "Fragments": [
+    "Vertex0",
+    "Vertex1",
+    "Pixel0",
+    "Pixel1"
+  ]
+}

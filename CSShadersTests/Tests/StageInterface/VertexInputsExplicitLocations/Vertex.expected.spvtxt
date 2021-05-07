@@ -1,0 +1,134 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 96
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Vertex %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint" %Value %Value2 %V2 %TestStruct_0
+               OpSource Unknown 100
+               OpName %TestVectorPrimitive "TestVectorPrimitive"
+               OpName %TestVectorPrimitive "Vector2"
+               OpName %TestStruct "TestStruct"
+               OpMemberName %TestStruct 0 "V2"
+               OpMemberName %TestStruct 1 "Value"
+               OpName %Vertex "Vertex"
+               OpMemberName %Vertex 0 "Value"
+               OpMemberName %Vertex 1 "Value2"
+               OpMemberName %Vertex 2 "V2"
+               OpMemberName %Vertex 3 "TestStruct"
+               OpName %TestStruct_PreConstructor "TestStruct_PreConstructor"
+               OpName %self "self"
+               OpName %TestStruct_DefaultConstructor "TestStruct_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Vertex_PreConstructor "Vertex_PreConstructor"
+               OpName %self_1 "self"
+               OpName %tempTestStruct "tempTestStruct"
+               OpName %Vertex_DefaultConstructor "Vertex_DefaultConstructor"
+               OpName %self_2 "self"
+               OpName %Main "Main"
+               OpName %self_3 "self"
+               OpName %Vertex_CopyInputs "Vertex_CopyInputs"
+               OpName %self_4 "self"
+               OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %Value "Value"
+               OpName %Value2 "Value2"
+               OpName %V2 "V2"
+               OpName %TestStruct_0 "TestStruct"
+               OpName %Vertex_Main_EntryPoint "Vertex_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpDecorate %Value Location 1
+               OpDecorate %TestStruct_0 Location 3
+               OpDecorate %Value2 Location 0
+               OpDecorate %V2 Location 2
+       %uint = OpTypeInt 32 0
+      %float = OpTypeFloat 32
+%TestVectorPrimitive = OpTypeVector %float 2
+ %TestStruct = OpTypeStruct %TestVectorPrimitive %float
+       %void = OpTypeVoid
+%_ptr_Function_TestStruct = OpTypePointer Function %TestStruct
+         %11 = OpTypeFunction %void %_ptr_Function_TestStruct
+%_ptr_Function_float = OpTypePointer Function %float
+     %Vertex = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
+%_ptr_Function_Vertex = OpTypePointer Function %Vertex
+         %15 = OpTypeFunction %void %_ptr_Function_Vertex
+%_ptr_Input_float = OpTypePointer Input %float
+%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
+%_ptr_Input_TestVectorPrimitive = OpTypePointer Input %TestVectorPrimitive
+%_ptr_Input_TestStruct = OpTypePointer Input %TestStruct
+         %20 = OpTypeFunction %void
+    %float_0 = OpConstant %float 0
+     %uint_1 = OpConstant %uint 1
+    %float_1 = OpConstant %float 1
+     %uint_0 = OpConstant %uint 0
+     %uint_3 = OpConstant %uint 3
+     %uint_2 = OpConstant %uint 2
+      %Value = OpVariable %_ptr_Input_float Input
+     %Value2 = OpVariable %_ptr_Input_float Input
+         %V2 = OpVariable %_ptr_Input_TestVectorPrimitive Input
+%TestStruct_0 = OpVariable %_ptr_Input_TestStruct Input
+%TestStruct_PreConstructor = OpFunction %void None %11
+       %self = OpFunctionParameter %_ptr_Function_TestStruct
+         %35 = OpLabel
+         %36 = OpAccessChain %_ptr_Function_float %self %uint_1
+               OpStore %36 %float_0
+               OpReturn
+               OpFunctionEnd
+%TestStruct_DefaultConstructor = OpFunction %void None %11
+     %self_0 = OpFunctionParameter %_ptr_Function_TestStruct
+         %42 = OpLabel
+         %43 = OpFunctionCall %void %TestStruct_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+%Vertex_PreConstructor = OpFunction %void None %15
+     %self_1 = OpFunctionParameter %_ptr_Function_Vertex
+         %48 = OpLabel
+%tempTestStruct = OpVariable %_ptr_Function_TestStruct Function
+         %50 = OpAccessChain %_ptr_Function_float %self_1 %uint_0
+               OpStore %50 %float_1
+         %52 = OpAccessChain %_ptr_Function_float %self_1 %uint_1
+               OpStore %52 %float_1
+         %54 = OpFunctionCall %void %TestStruct_DefaultConstructor %tempTestStruct
+         %55 = OpLoad %TestStruct %tempTestStruct
+         %56 = OpAccessChain %_ptr_Function_TestStruct %self_1 %uint_3
+               OpStore %56 %55
+               OpReturn
+               OpFunctionEnd
+%Vertex_DefaultConstructor = OpFunction %void None %15
+     %self_2 = OpFunctionParameter %_ptr_Function_Vertex
+         %62 = OpLabel
+         %63 = OpFunctionCall %void %Vertex_PreConstructor %self_2
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %15
+     %self_3 = OpFunctionParameter %_ptr_Function_Vertex
+         %68 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%Vertex_CopyInputs = OpFunction %void None %15
+     %self_4 = OpFunctionParameter %_ptr_Function_Vertex
+         %73 = OpLabel
+         %74 = OpAccessChain %_ptr_Function_float %self_4 %uint_0
+         %75 = OpLoad %float %Value
+               OpStore %74 %75
+         %77 = OpAccessChain %_ptr_Function_float %self_4 %uint_1
+         %78 = OpLoad %float %Value2
+               OpStore %77 %78
+         %80 = OpAccessChain %_ptr_Function_TestVectorPrimitive %self_4 %uint_2
+         %81 = OpLoad %TestVectorPrimitive %V2
+               OpStore %80 %81
+         %83 = OpAccessChain %_ptr_Function_TestStruct %self_4 %uint_3
+         %84 = OpLoad %TestStruct %TestStruct_0
+               OpStore %83 %84
+               OpReturn
+               OpFunctionEnd
+%Vertex_Main_EntryPoint = OpFunction %void None %20
+         %89 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_Vertex Function
+         %91 = OpFunctionCall %void %Vertex_DefaultConstructor %self_5
+         %92 = OpFunctionCall %void %Vertex_CopyInputs %self_5
+         %93 = OpFunctionCall %void %Main %self_5
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,37 @@
+[Shader.Pixel]
+public struct InputOutputTest_Pixel
+{
+  [Shader.UniformBuffer] public FrameData FrameData;
+  [Shader.StageInput(Location = 0)] public float FrameTime;
+  [Shader.StageInput(Location = 1)] public Math.Vector4 CustomVertexProperty;
+  [Shader.StageInput(Location = 2)] public Math.Vector4 VertexStageOutput;
+  [Shader.UniformBufferField] public Math.Vector4 Pixel0_pixel0_CustomPixelProperty;
+  [Shader.HardwareBuiltInInput(Shader.HardwareBuiltinType.FragCoord)] public Math.Vector4 FragCoord;
+  [Shader.HardwareBuiltInOutput(Shader.HardwareBuiltinType.FragDepth)] public float FragDepth;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.LogicTime = this.FrameData.LogicTime;
+    pixel0.FrameTime = this.FrameTime;
+    pixel0.CustomVertexProperty = this.CustomVertexProperty;
+    pixel0.VertexStageOutput = this.VertexStageOutput;
+    pixel0.CustomPixelProperty = this.Pixel0_pixel0_CustomPixelProperty;
+    pixel0.FragCoord = this.FragCoord;
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.LogicTime = pixel0.LogicTime;
+    pixel1.FrameTime = pixel0.FrameTime;
+    pixel1.CustomVertexProperty = pixel0.CustomVertexProperty;
+    pixel1.VertexStageOutput = pixel0.VertexStageOutput;
+    pixel1.CustomPixelProperty = pixel0.CustomPixelProperty;
+    pixel1.FragCoord = pixel0.FragCoord;
+    pixel1.PixelFragmentOutput = pixel0.PixelFragmentOutput;
+    pixel1.FragDepth = pixel0.FragDepth;
+    pixel1.Main();
+
+    this.FragDepth = pixel1.FragDepth;
+  }
+};

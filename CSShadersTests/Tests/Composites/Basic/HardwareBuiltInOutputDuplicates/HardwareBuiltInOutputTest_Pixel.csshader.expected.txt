@@ -1,0 +1,17 @@
+[Shader.Pixel]
+public struct HardwareBuiltInOutputTest_Pixel
+{
+  [Shader.HardwareBuiltInOutput(Shader.HardwareBuiltinType.FragDepth)] public float FragDepth;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.Main();
+
+    this.FragDepth = pixel1.FragDepth;
+  }
+};
