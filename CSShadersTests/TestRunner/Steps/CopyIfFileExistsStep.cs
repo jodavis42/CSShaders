@@ -11,8 +11,8 @@ namespace CSShadersTests
     public string RootPathKey = DefaultRootPathKey;
     public string TargetPathKey = DefaultTargetPathKey;
 
-    public string ConditionalFileKey;
-    public List<string> FilePathKeysToCopy;
+    public string ConditionalFileKey = "";
+    public List<string> FilePathKeysToCopy = null;
 
     public override StepResult Run(Blackboard blackboard)
     {

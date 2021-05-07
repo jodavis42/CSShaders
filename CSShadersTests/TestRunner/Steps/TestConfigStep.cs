@@ -26,6 +26,8 @@
     public const string ActualDisassemblyPathKey = "ActualDisassemblyPath";
     public const string DiffDisassemblyPathKey = "DiffDisassemblyPath";
     public const string DiffDisassemblyKey = "DiffDisassembly";
+    public const string TestFailedKey = "TestFailed";
+
     public override StepResult Run(Blackboard blackboard)
     {
       var logger = blackboard.Get<ILogger>("Logger");

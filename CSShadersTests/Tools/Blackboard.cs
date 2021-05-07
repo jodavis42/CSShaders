@@ -49,6 +49,14 @@ namespace CSShadersTests
       return Get(name) as T;
     }
 
+    public T GetValue<T>(string name, T defaultValue = default) where T : struct
+    {
+      var result = Get(name);
+      if (result == null)
+        return defaultValue;
+      return (T)result;
+    }
+
     public T Get<T>() where T : class
     {
       return Get(typeof(T).Name) as T;

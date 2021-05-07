@@ -34,6 +34,9 @@ namespace CSShadersTests
       spirVBinaryBackend.Write(spirvWriter, shaderLibrary, translator);
       writer.Close();
 
+      var artifactsList = blackboard.Get<ArtifactsList>();
+      artifactsList.Add(spvPath);
+
       return StepResult.Success;
     }
   }

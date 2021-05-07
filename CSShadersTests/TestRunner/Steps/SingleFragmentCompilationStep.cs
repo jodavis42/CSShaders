@@ -20,6 +20,9 @@ namespace CSShadersTests
       generator.LoadFragmentFile(scriptFilePath);
       generator.CompileFragmentProject();
 
+      var artifactList = blackboard.Get<ArtifactsList>();
+      artifactList.Add(scriptFilePath);
+
       return StepResult.Success;
     }
   }
