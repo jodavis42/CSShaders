@@ -1,0 +1,32 @@
+[Shader.Vertex]
+public struct InputOutputTest_Vertex
+{
+  [Shader.UniformBuffer] public FrameData FrameData;
+  [Shader.HardwareBuiltInInput(Shader.HardwareBuiltinType.VertexIndex)] public int VertexIndex;
+  [Shader.UniformBufferField] public Math.Vector4 Vertex0_vertex0_CustomVertexProperty;
+  [Shader.HardwareBuiltInOutput(Shader.HardwareBuiltinType.Position)] public Math.Vector4 ApiPerspectivePosition;
+  [Shader.StageOutput(Location = 0)] public float FrameTime;
+  [Shader.StageOutput(Location = 1)] public Math.Vector4 CustomVertexProperty;
+  [Shader.StageOutput(Location = 2)] public Math.Vector4 VertexStageOutput;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.FrameTime = this.FrameData.FrameTime;
+    vertex0.VertexIndex = this.VertexIndex;
+    vertex0.CustomVertexProperty = this.Vertex0_vertex0_CustomVertexProperty;
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.FrameTime = vertex0.FrameTime;
+    vertex1.VertexIndex = vertex0.VertexIndex;
+    vertex1.CustomVertexProperty = vertex0.CustomVertexProperty;
+    vertex1.Main();
+
+    this.ApiPerspectivePosition = vertex1.ApiPerspectivePosition;
+    this.FrameTime = vertex1.FrameTime;
+    this.CustomVertexProperty = vertex1.CustomVertexProperty;
+    this.VertexStageOutput = vertex1.VertexStageOutput;
+  }
+};

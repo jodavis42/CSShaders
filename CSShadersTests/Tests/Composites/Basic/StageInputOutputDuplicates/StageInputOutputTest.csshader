@@ -1,0 +1,28 @@
+[Shader.Vertex]
+public struct Vertex0
+{
+  [Shader.StageOutput] public float FrameTime;
+
+  public void Main() {}
+}
+[Shader.Vertex]
+public struct Vertex1
+{
+  [Shader.StageOutput] public float FrameTime;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel0
+{
+  [Shader.StageInput] public float FrameTime;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel1
+{
+  [Shader.StageInput] public float FrameTime;
+
+  public void Main() {}
+}

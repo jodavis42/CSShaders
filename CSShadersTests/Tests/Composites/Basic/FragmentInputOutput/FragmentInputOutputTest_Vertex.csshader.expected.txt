@@ -1,0 +1,21 @@
+[Shader.Vertex]
+public struct FragmentInputOutputTest_Vertex
+{
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.Scale = vertex0.Scale;
+    vertex1.Main();
+
+    Vertex2 vertex2 = new Vertex2();
+    vertex2.Scale = vertex1.Scale;
+    vertex2.Uv = vertex1.Uv;
+    vertex2.Color = vertex0.Color;
+    vertex2.Main();
+
+  }
+};

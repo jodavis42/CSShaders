@@ -1,0 +1,24 @@
+[Shader.Vertex]
+public struct FragmentInputOutputTest_Vertex
+{
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.Value1 = vertex0.Value1;
+    vertex1.Value2 = vertex0.Value2;
+    vertex1.Value7 = vertex0.Value7;
+    vertex1.Main();
+
+    Vertex2 vertex2 = new Vertex2();
+    vertex2.Value1 = vertex1.Value1;
+    vertex2.Value2 = vertex0.Value2;
+    vertex2.Value5 = vertex0.Value5;
+    vertex2.Value7 = vertex1.Value7;
+    vertex2.Main();
+
+  }
+};

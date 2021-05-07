@@ -1,0 +1,8 @@
+[Shader.Pixel]
+public struct StageInputOutputTest_Pixel
+{
+  [Shader.EntryPoint]
+  void Main()
+  {
+  }
+};
