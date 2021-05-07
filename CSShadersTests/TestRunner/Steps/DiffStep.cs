@@ -8,6 +8,9 @@
     public string ActualFilePathKey;
     public bool VisualDisplay = false;
 
+    public const string DefaultDiffsGeneratedKey = "DiffsGeneratedKey";
+    public string DiffsGeneratedKey = DefaultDiffsGeneratedKey;
+
     public FileDiffStep(string expectedFilePathKey, string actualFilePathKey)
     {
       ExpectedFilePathKey = expectedFilePathKey;
@@ -31,16 +34,23 @@
         return StepResult.Failed;
       }
 
+      bool foundDiffs = blackboard.GetValue<bool>(DiffsGeneratedKey);
       var tool = new VisualDiffTool();
       tool.VisualDisplay = VisualDisplay;
       bool result = tool.Diff(expectedFilePath, actualFilePath);
       if(!result)
       {
+        foundDiffs = true;
         logger.Log($"Expected file '{expectedFilePath}' and actual file '{actualFilePath}' had differences", ILogger.Verbosity.Error);
         if (!string.IsNullOrWhiteSpace(tool.mDiffText))
           blackboard.Add(Key, tool.mDiffText);
       }
-      
+      blackboard.Add(DiffsGeneratedKey, foundDiffs, Blackboard.AddMode.Override);
+
+      var artifactList = blackboard.Get<ArtifactsList>();
+      artifactList.Add(expectedFilePath);
+      artifactList.Add(actualFilePath);
+
       return StepResult.Success;
     }
   }

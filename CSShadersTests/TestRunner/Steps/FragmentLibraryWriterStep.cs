@@ -22,6 +22,9 @@ namespace CSShadersTests
       spirVBinaryBackend.Write(spirvWriter, generator.FragmentLibrary, generator.FrontEnd);
       writer.Close();
 
+      var artifactList = blackboard.Get<ArtifactsList>();
+      artifactList.Add(spvPath);
+
       return StepResult.Success;
     }
   }

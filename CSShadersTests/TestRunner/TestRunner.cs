@@ -41,34 +41,15 @@ namespace CSShadersTests
       BasicPipeline.Steps.Add(new SpirVDisassemblerStep() { SpvPathKey = TestConfigStep.SpvBinaryPathKey });
       BasicPipeline.Steps.Add(new ValidatorDisassemblerMergerStep());
       BasicPipeline.Steps.Add(new FileWriterStep(ValidatorDisassemblerMergerStep.DefaultKey, TestConfigStep.ActualDisassemblyPathKey));
+      BasicPipeline.Steps.Add(new ArtifactListFilePathAppendStep { FilePathKey = TestConfigStep.ActualDisassemblyPathKey });
       BasicPipeline.Steps.Add(new SpirVCrossStep() { SpvPathKey = TestConfigStep.SpvBinaryPathKey, OutPathKey = TestConfigStep.ActualGlslPathKey });
-      BasicPipeline.Steps.Add(new FileDiffStep(TestConfigStep.ExpectedDisassemblyPathKey, TestConfigStep.ActualDisassemblyPathKey) { Key = TestConfigStep.DiffDisassemblyKey, VisualDisplay = VisualDiff });
+      BasicPipeline.Steps.Add(new FileDiffStep(TestConfigStep.ExpectedDisassemblyPathKey, TestConfigStep.ActualDisassemblyPathKey) { Key = TestConfigStep.DiffDisassemblyKey, VisualDisplay = VisualDiff, DiffsGeneratedKey = TestConfigStep.TestFailedKey });
       BasicPipeline.Steps.Add(new FileWriterStep(TestConfigStep.DiffDisassemblyKey, TestConfigStep.DiffDisassemblyPathKey));
-      BasicPipeline.Steps.Add(new FileDiffStep(TestConfigStep.ExpectedGlslPathKey, TestConfigStep.ActualGlslPathKey) { Key = TestConfigStep.DiffGlslKey, VisualDisplay = VisualDiff });
+      BasicPipeline.Steps.Add(new ArtifactListFilePathAppendStep { FilePathKey = TestConfigStep.DiffDisassemblyPathKey });
+      BasicPipeline.Steps.Add(new FileDiffStep(TestConfigStep.ExpectedGlslPathKey, TestConfigStep.ActualGlslPathKey) { Key = TestConfigStep.DiffGlslKey, VisualDisplay = VisualDiff, DiffsGeneratedKey = TestConfigStep.TestFailedKey });
       BasicPipeline.Steps.Add(new FileWriterStep(TestConfigStep.DiffGlslKey, TestConfigStep.DiffGlslPathKey));
-      if(!string.IsNullOrEmpty(ArtifactsDir))
-      {
-        BasicPipeline.Steps.Add(new CopyIfFileExistsStep
-        {
-          ConditionalFileKey = TestConfigStep.DiffDisassemblyPathKey,
-          FilePathKeysToCopy = new List<string>
-        {
-          TestConfigStep.DiffDisassemblyPathKey,
-          TestConfigStep.ExpectedDisassemblyPathKey,
-          TestConfigStep.ActualDisassemblyPathKey
-        }
-        });
-        BasicPipeline.Steps.Add(new CopyIfFileExistsStep
-        {
-          ConditionalFileKey = TestConfigStep.DiffGlslPathKey,
-          FilePathKeysToCopy = new List<string>
-        {
-          TestConfigStep.DiffGlslPathKey,
-          TestConfigStep.ExpectedGlslPathKey,
-          TestConfigStep.ActualGlslPathKey
-        }
-        });
-      }
+      BasicPipeline.Steps.Add(new ArtifactListFilePathAppendStep { FilePathKey = TestConfigStep.DiffGlslPathKey });
+      BasicPipeline.Steps.Add(new CopyArtifactsStep { Key = TestConfigStep.TestFailedKey });
     }
 
     void LoadCoreLibraries()
@@ -118,11 +99,13 @@ namespace CSShadersTests
       blackboard.Add(testData);
       blackboard.Add(FragmentLibraryWriterStep.DefaultGeneratorKey, SimpleGenerator);
       if(!string.IsNullOrEmpty(ArtifactsDir))
-        blackboard.Add(CopyIfFileExistsStep.DefaultTargetPathKey, ArtifactsDir);
-      blackboard.Add(CopyIfFileExistsStep.DefaultRootPathKey, Directory.GetCurrentDirectory());
+        blackboard.Add(CopyArtifactsStep.DefaultTargetPathKey, ArtifactsDir);
+      blackboard.Add(CopyArtifactsStep.DefaultRootPathKey, Directory.GetCurrentDirectory());
+      blackboard.Add(new ArtifactsList());
 
       var status = BasicPipeline.Run(blackboard);
-      if (status == StepResult.Failed || File.Exists(testData.DisassemblerTest.DiffFilePath) || File.Exists(testData.GlslTest.DiffFilePath))
+      var testsFailed = blackboard.GetValue<bool>(TestConfigStep.TestFailedKey);
+      if (status == StepResult.Failed || testsFailed == true)
         return false;
       return true;
     }
