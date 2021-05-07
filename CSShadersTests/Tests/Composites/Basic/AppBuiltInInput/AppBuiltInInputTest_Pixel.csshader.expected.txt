@@ -1,0 +1,23 @@
+[Shader.Pixel]
+public struct AppBuiltInInputTest_Pixel
+{
+  [Shader.UniformBuffer] public FrameData FrameData;
+  [Shader.UniformBuffer] public CameraData CameraData;
+  [Shader.UniformBuffer] public TransformData TransformData;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.FrameTime = this.FrameData.FrameTime;
+    pixel0.LogicTime = this.FrameData.LogicTime;
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.Time = this.FrameData.FrameTime;
+    pixel1.ViewportSize = this.CameraData.ViewportSize;
+    pixel1.LocalToWorld = this.TransformData.LocalToWorld;
+    pixel1.Main();
+
+  }
+};

@@ -1,0 +1,22 @@
+[Shader.Vertex]
+public struct StageInputOutputTest_Vertex
+{
+  [Shader.StageOutput(Location = 0)] public float Value1;
+  [Shader.StageOutput(Location = 1)] public float Value2;
+  [Shader.StageOutput(Location = 2)] public float Value3;
+  [Shader.StageOutput(Location = 3)] public float Value5;
+  [Shader.StageOutput(Location = 4)] public float Value8;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex vertex = new Vertex();
+    vertex.Main();
+
+    this.Value1 = vertex.V1;
+    this.Value2 = vertex.V23;
+    this.Value3 = vertex.V23;
+    this.Value5 = vertex.V5;
+    this.Value8 = vertex.V8;
+  }
+};

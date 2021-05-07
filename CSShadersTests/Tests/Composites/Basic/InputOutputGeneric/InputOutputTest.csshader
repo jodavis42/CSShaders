@@ -1,0 +1,59 @@
+[Shader.Vertex]
+public struct Vertex0
+{
+  // AppBuiltInInput: Vertex0 -> Vertex1 -> Pixel0 -> Pixel1
+  [Shader.Input][Shader.Output] public float FrameTime;
+  // HardwareBuiltInInput: Vertex0 -> Vertex1
+  [Shader.Input][Shader.Output] public int VertexIndex;
+  // PropertyInput: Vertex0 -> Vertex1 -> Pixel0 -> Pixel1
+  [Shader.Input][Shader.Output] public Math.Vector4 CustomVertexProperty;
+
+  public void Main() {}
+}
+[Shader.Vertex]
+public struct Vertex1
+{
+  [Shader.Input][Shader.Output] public float FrameTime;
+  [Shader.Input][Shader.Output] public int VertexIndex;
+  [Shader.Input][Shader.Output] public Math.Vector4 CustomVertexProperty;
+  // StageOutput: Vertex1 -> Pixel0 -> Pixel1
+  [Shader.Output] public Math.Vector4 VertexStageOutput;
+  // HardwareBuiltInOutput: Vertex -> VertexAssembler
+  [Shader.Output] public Math.Vector4 ApiPerspectivePosition;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel0
+{
+  // AppBuiltInInput: Pixel0 -> Pixel1
+  [Shader.Input][Shader.Output] public float LogicTime;
+  [Shader.Input][Shader.Output] public float FrameTime;
+  [Shader.Input][Shader.Output] public Math.Vector4 CustomVertexProperty;
+  [Shader.Input][Shader.Output] public Math.Vector4 VertexStageOutput;
+  // PropertyInput: Pixel0 -> Pixel1
+  [Shader.Input][Shader.Output] public Math.Vector4 CustomPixelProperty;
+  // HardwareBuiltInInput: Pixel0 -> Pixel1
+  [Shader.Input][Shader.Output] public Math.Vector4 FragCoord;
+  // FragmentOutput: Pixel0 -> Pixel1
+  [Shader.Output] public Math.Vector4 PixelFragmentOutput;
+  // HardwareBuiltInOutput: Pixel- -> Pixel1 -> Gpu
+  [Shader.Output] public float FragDepth;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel1
+{
+  [Shader.Input][Shader.Output] public float LogicTime;
+  [Shader.Input][Shader.Output] public float FrameTime;
+  [Shader.Input][Shader.Output] public Math.Vector4 CustomVertexProperty;
+  [Shader.Input][Shader.Output] public Math.Vector4 VertexStageOutput;
+  [Shader.Input][Shader.Output] public Math.Vector4 CustomPixelProperty;
+  [Shader.Input][Shader.Output] public Math.Vector4 FragCoord;
+  [Shader.Input] public Math.Vector4 PixelFragmentOutput;
+  // HardwareBuiltInOutput: Pixel1 -> Gpu
+  [Shader.Input][Shader.Output] public float FragDepth;
+
+  public void Main() {}
+}

@@ -1,0 +1,17 @@
+[Shader.Vertex]
+public struct StageInputOutputTest_Vertex
+{
+  [Shader.StageOutput(Location = 0)] public float FrameTime;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.Main();
+
+    this.FrameTime = vertex1.FrameTime;
+  }
+};

@@ -1,0 +1,23 @@
+[Shader.Pixel]
+public struct PropertyTest_Pixel
+{
+  [Shader.UniformBufferField] public float Pixel0_pixel0_Value;
+  [Shader.UniformBufferField] public float Pixel0_pixel0_Value2;
+  [Shader.UniformBufferField] public float Pixel1_pixel1_Value;
+  [Shader.UniformBufferField] public float Pixel1_pixel1_MyValue;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.Value = this.Pixel0_pixel0_Value;
+    pixel0.Value2 = this.Pixel0_pixel0_Value2;
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.Value = this.Pixel1_pixel1_Value;
+    pixel1.Value3 = this.Pixel1_pixel1_MyValue;
+    pixel1.Main();
+
+  }
+};

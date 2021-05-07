@@ -13,12 +13,14 @@ namespace CSShadersTests
     public Pipeline BasicPipeline;
     public string ArtifactsDir = null;
     public bool VisualDiff = false;
-    
+    CompositorTestRunner CompositorTestRunner;
+
     public bool Run(string path)
     {
       Success = true;
 
       CreateBasicPipeline();
+      CompositorTestRunner = new CompositorTestRunner(Logger, SimpleGenerator, ArtifactsDir, VisualDiff);
       SimpleGenerator.ErrorHandlers.Add(OnTranslationErrorLog);
       //SimpleGenerator.ErrorHandlers.Add(OnTranslationErrorThrowException);
       LoadCoreLibraries();
@@ -60,9 +62,14 @@ namespace CSShadersTests
 
     void RunTests(string path)
     {
-      foreach (var file in Directory.EnumerateFiles(path))
+      if (File.Exists(Path.Combine(path, "ShaderDefinition.json")))
+        Success &= CompositorTestRunner.RunTest(path);
+      else
       {
-        RunTest(file);
+        foreach (var file in Directory.EnumerateFiles(path))
+        {
+          RunTest(file);
+        }
       }
 
       foreach (var subDir in Directory.EnumerateDirectories(path))

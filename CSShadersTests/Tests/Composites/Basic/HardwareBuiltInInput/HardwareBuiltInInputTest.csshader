@@ -1,0 +1,48 @@
+[Shader.Vertex]
+public struct Vertex0
+{
+  [Shader.HardwareBuiltInInput] public int VertexIndex;
+
+  public void Main() {}
+}
+[Shader.Vertex]
+public struct Vertex1
+{
+  [Shader.HardwareBuiltInInput] public int InstanceId;
+  [Shader.HardwareBuiltInInput("VertexIndex")] public int VIndex;
+
+  public void Main() {}
+}
+[Shader.Vertex]
+public struct Vertex2
+{
+  // Both of these should not match due to wrong types
+  [Shader.HardwareBuiltInInput] public float VertIndex;
+  [Shader.HardwareBuiltInInput] public float InstanceId;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel0
+{
+  [Shader.HardwareBuiltInInput] public Math.Vector4 FragCoord;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel1
+{
+  [Shader.HardwareBuiltInInput] public Math.Vector2 PointCoord;
+  [Shader.HardwareBuiltInInput("FragCoord")] public Math.Vector4 fragCoord;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel2
+{
+  // Both of these should not match due to wrong types
+  [Shader.HardwareBuiltInInput] public float FragCoord;
+  [Shader.HardwareBuiltInInput] public float PointCoord;
+
+  public void Main() {}
+}

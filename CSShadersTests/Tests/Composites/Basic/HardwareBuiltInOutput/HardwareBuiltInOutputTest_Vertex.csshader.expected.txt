@@ -1,0 +1,22 @@
+[Shader.Vertex]
+public struct HardwareBuiltInOutputTest_Vertex
+{
+  [Shader.HardwareBuiltInOutput(Shader.HardwareBuiltinType.Position)] public Math.Vector4 ApiPerspectivePosition;
+  [Shader.HardwareBuiltInOutput(Shader.HardwareBuiltinType.PointSize)] public float PointSize;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.Main();
+
+    Vertex2 vertex2 = new Vertex2();
+    vertex2.Main();
+
+    this.ApiPerspectivePosition = vertex0.ApiPerspectivePosition;
+    this.PointSize = vertex1.PointSize;
+  }
+};

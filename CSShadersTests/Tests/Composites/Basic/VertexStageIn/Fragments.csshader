@@ -1,0 +1,8 @@
+[Shader.Vertex]
+public struct Vertex
+{
+  [Shader.StageInput] public Math.Vector2 Uv;
+  [Shader.StageInput] public Math.Vector3 LocalPosition;
+
+  public void Main() {}
+}

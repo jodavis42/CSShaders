@@ -1,0 +1,23 @@
+[Shader.Pixel]
+public struct HardwareBuiltInInputTest_Pixel
+{
+  [Shader.HardwareBuiltInInput(Shader.HardwareBuiltinType.FragCoord)] public Math.Vector4 FragCoord;
+  [Shader.HardwareBuiltInInput(Shader.HardwareBuiltinType.PointCoord)] public Math.Vector2 PointCoord;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.FragCoord = this.FragCoord;
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.PointCoord = this.PointCoord;
+    pixel1.fragCoord = this.FragCoord;
+    pixel1.Main();
+
+    Pixel2 pixel2 = new Pixel2();
+    pixel2.Main();
+
+  }
+};
