@@ -1,0 +1,127 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 95
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ElementAccessorGetSetMultipleTest_Main_EntryPoint "ElementAccessorGetSetMultipleTest_Main_EntryPoint"
+               OpExecutionMode %ElementAccessorGetSetMultipleTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %MyStruct "MyStruct"
+               OpMemberName %MyStruct 0 "value"
+               OpName %ElementAccessorGetSetMultipleTest "ElementAccessorGetSetMultipleTest"
+               OpName %MyStruct_PreConstructor "MyStruct_PreConstructor"
+               OpName %self "self"
+               OpName %MyStruct_DefaultConstructor "MyStruct_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %get_Item "get_Item"
+               OpName %self_1 "self"
+               OpName %y "y"
+               OpName %x "x"
+               OpName %set_Item "set_Item"
+               OpName %self_2 "self"
+               OpName %y_0 "y"
+               OpName %x_0 "x"
+               OpName %value "value"
+               OpName %ElementAccessorGetSetMultipleTest_PreConstructor "ElementAccessorGetSetMultipleTest_PreConstructor"
+               OpName %self_3 "self"
+               OpName %ElementAccessorGetSetMultipleTest_DefaultConstructor "ElementAccessorGetSetMultipleTest_DefaultConstructor"
+               OpName %self_4 "self"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %data "data"
+               OpName %tempMyStruct "tempMyStruct"
+               OpName %item00 "item00"
+               OpName %ElementAccessorGetSetMultipleTest_Main_EntryPoint "ElementAccessorGetSetMultipleTest_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %ElementAccessorGetSetMultipleTest_Main_EntryPoint "ElementAccessorGetSetMultipleTest_Main_EntryPoint"
+               OpName %self_6 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+      %int_1 = OpConstant %int 1
+   %MyStruct = OpTypeStruct %int
+       %void = OpTypeVoid
+%_ptr_Function_MyStruct = OpTypePointer Function %MyStruct
+         %12 = OpTypeFunction %void %_ptr_Function_MyStruct
+%_ptr_Function_int = OpTypePointer Function %int
+         %14 = OpTypeFunction %int %_ptr_Function_MyStruct %int %int
+         %16 = OpTypeFunction %void %_ptr_Function_MyStruct %int %int %int
+%ElementAccessorGetSetMultipleTest = OpTypeStruct
+%_ptr_Function_ElementAccessorGetSetMultipleTest = OpTypePointer Function %ElementAccessorGetSetMultipleTest
+         %20 = OpTypeFunction %void %_ptr_Function_ElementAccessorGetSetMultipleTest
+         %22 = OpTypeFunction %void
+%MyStruct_PreConstructor = OpFunction %void None %12
+       %self = OpFunctionParameter %_ptr_Function_MyStruct
+         %27 = OpLabel
+         %28 = OpAccessChain %_ptr_Function_int %self %uint_0
+               OpStore %28 %int_0
+               OpReturn
+               OpFunctionEnd
+%MyStruct_DefaultConstructor = OpFunction %void None %12
+     %self_0 = OpFunctionParameter %_ptr_Function_MyStruct
+         %34 = OpLabel
+         %35 = OpFunctionCall %void %MyStruct_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+   %get_Item = OpFunction %int None %14
+     %self_1 = OpFunctionParameter %_ptr_Function_MyStruct
+          %y = OpFunctionParameter %int
+          %x = OpFunctionParameter %int
+         %42 = OpLabel
+         %43 = OpAccessChain %_ptr_Function_int %self_1 %uint_0
+         %44 = OpLoad %int %43
+         %45 = OpIAdd %int %44 %y
+         %46 = OpIAdd %int %45 %x
+               OpReturnValue %46
+               OpFunctionEnd
+   %set_Item = OpFunction %void None %16
+     %self_2 = OpFunctionParameter %_ptr_Function_MyStruct
+        %y_0 = OpFunctionParameter %int
+        %x_0 = OpFunctionParameter %int
+      %value = OpFunctionParameter %int
+         %54 = OpLabel
+         %55 = OpIAdd %int %value %y_0
+         %56 = OpIAdd %int %55 %x_0
+         %57 = OpAccessChain %_ptr_Function_int %self_2 %uint_0
+               OpStore %57 %56
+               OpReturn
+               OpFunctionEnd
+%ElementAccessorGetSetMultipleTest_PreConstructor = OpFunction %void None %20
+     %self_3 = OpFunctionParameter %_ptr_Function_ElementAccessorGetSetMultipleTest
+         %63 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ElementAccessorGetSetMultipleTest_DefaultConstructor = OpFunction %void None %20
+     %self_4 = OpFunctionParameter %_ptr_Function_ElementAccessorGetSetMultipleTest
+         %68 = OpLabel
+         %69 = OpFunctionCall %void %ElementAccessorGetSetMultipleTest_PreConstructor %self_4
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %20
+     %self_5 = OpFunctionParameter %_ptr_Function_ElementAccessorGetSetMultipleTest
+         %74 = OpLabel
+       %data = OpVariable %_ptr_Function_MyStruct Function
+%tempMyStruct = OpVariable %_ptr_Function_MyStruct Function
+     %item00 = OpVariable %_ptr_Function_int Function
+         %78 = OpFunctionCall %void %MyStruct_DefaultConstructor %tempMyStruct
+         %79 = OpLoad %MyStruct %tempMyStruct
+               OpStore %data %79
+         %81 = OpFunctionCall %int %get_Item %data %int_0 %int_0
+               OpStore %item00 %81
+         %83 = OpLoad %int %item00
+         %84 = OpFunctionCall %void %set_Item %data %int_1 %int_1 %83
+         %85 = OpFunctionCall %int %get_Item %data %int_0 %int_1
+         %86 = OpFunctionCall %void %set_Item %data %int_1 %int_0 %85
+               OpReturn
+               OpFunctionEnd
+%ElementAccessorGetSetMultipleTest_Main_EntryPoint = OpFunction %void None %22
+         %90 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_ElementAccessorGetSetMultipleTest Function
+         %92 = OpFunctionCall %void %ElementAccessorGetSetMultipleTest_DefaultConstructor %self_6
+         %93 = OpFunctionCall %void %Main %self_6
+               OpReturn
+               OpFunctionEnd
