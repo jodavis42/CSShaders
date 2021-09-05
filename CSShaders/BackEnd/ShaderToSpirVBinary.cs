@@ -139,9 +139,7 @@ namespace CSShaders
       WriteHeader();
       WriteDebugInstructions();
       WriteDecorations();
-      WriteTypeDeclarations();
-      WriteConstants();
-      WriteGlobalStatics();
+      WriteTypesConstantsAndGlobals();
       WriteTypeFunctions();
     }
 
@@ -226,19 +224,20 @@ namespace CSShaders
 
     void WriteDebugInstructions()
     {
-      foreach (var type in mTypeCollector.mReferencedTypes)
+      foreach (var ir in mTypeCollector.mReferencedTypesConstantsAndGlobals)
       {
-        WriteDebugName(type, type.DebugInfo.Name);
-        for(var i = 0; i < type.mFields.Count; ++i)
-          WriteFieldDebugName(type, i, type.mFields[i], type.mFields[i].DebugInfo.Name);
+        if(ir is ShaderType type)
+        {
+          WriteDebugName(type, type.DebugInfo.Name);
+          for (var i = 0; i < type.mFields.Count; ++i)
+            WriteFieldDebugName(type, i, type.mFields[i], type.mFields[i].DebugInfo.Name);
+        }
+        else
+          WriteDebugName(ir, ir.DebugInfo.Name);
       }
       foreach (var function in mTypeCollector.mReferencedFunctions)
       {
         WriteDebugInstructions(function);
-      }
-      foreach (var globalStatic in mTypeCollector.mReferencedStatics)
-      {
-        WriteDebugName(globalStatic, globalStatic.DebugInfo.Name);
       }
       foreach (var entryPoint in mTypeCollector.mEntryPoints)
       {
@@ -316,109 +315,127 @@ namespace CSShaders
       }
     }
 
-    void WriteTypeDeclarations()
+    void WriteTypesConstantsAndGlobals()
     {
       var visitedTypeIds = new HashSet<UInt32>();
-      foreach (var type in mTypeCollector.mReferencedTypes)
-      {
-        // Handle types existing more than once (for primitive deduping)
-        var id = GetId(type);
-        if (visitedTypeIds.Contains(id))
-          continue;
-        visitedTypeIds.Add(id);
 
-        if (type.mBaseType == OpType.Void)
-        {
-          mWriter.WriteInstruction(2, Spv.Op.OpTypeVoid, GetId(type));
-        }
-        else if (type.mBaseType == OpType.Bool)
-        {
-          mWriter.WriteInstruction(2, Spv.Op.OpTypeBool, GetId(type));
-        }
-        else if (type.mBaseType == OpType.Int)
-        {
-          mWriter.WriteInstruction(4, Spv.Op.OpTypeInt, GetId(type));
-          WriteArgs(type.mParameters);
-        }
-        else if (type.mBaseType == OpType.Float)
-        {
-          mWriter.WriteInstruction(3, Spv.Op.OpTypeFloat, GetId(type));
-          WriteArgs(type.mParameters);
-        }
-        else if (type.mBaseType == OpType.Vector)
-        {
-          mWriter.WriteInstruction(4, Spv.Op.OpTypeVector, GetId(type));
-          WriteArgs(type.mParameters);
-        }
-        else if (type.mBaseType == OpType.Matrix)
-        {
-          mWriter.WriteInstruction(4, Spv.Op.OpTypeMatrix, GetId(type));
-          WriteArgs(type.mParameters);
-        }
-        else if (type.mBaseType == OpType.Pointer)
-        {
-          var dereferenceType = type.GetDereferenceType();
-          if (dereferenceType.mBaseType != OpType.Function)
-          {
-            var storageClass = ConvertStorageClass(type.mStorageClass);
-            mWriter.WriteInstruction(4, Spv.Op.OpTypePointer, GetId(type), (UInt32)storageClass, GetId(dereferenceType));
-          }
-        }
-        else if (type.mBaseType == OpType.Struct)
-        {
-          UInt16 instructionSize = (UInt16)(2 + type.mFields.Count);
-          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeStruct, GetId(type));
-          foreach (var field in type.mFields)
-          {
-            mWriter.Write(GetId(field.mType));
-          }
-        }
-        else if (type.mBaseType == OpType.Sampler)
-        {
-          UInt16 instructionSize = (UInt16)2;
-          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeSampler, GetId(type));
-        }
-        else if (type.mBaseType == OpType.Image)
-        {
-          UInt16 instructionSize = (UInt16)9;
-          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeImage, GetId(type));
-          WriteArgs(type.mParameters);
-        }
-        else if (type.mBaseType == OpType.SampledImage)
-        {
-          UInt16 instructionSize = (UInt16)3;
-          mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeSampledImage, GetId(type));
-          WriteArgs(type.mParameters);
-        }
-        else if (type.mBaseType == OpType.Function)
-        {
-          var instructionSize = 2 + type.mParameters.Count;
-          mWriter.WriteInstruction((UInt16)(instructionSize), Spv.Op.OpTypeFunction, GetId(type));
-          WriteArgs(type.mParameters);
-        }
+      foreach (var ir in mTypeCollector.mReferencedTypesConstantsAndGlobals)
+      {
+        if (ir is ShaderType type)
+          WriteTypeDeclaration(type, visitedTypeIds);
+        else if (ir is ShaderOp op)
+          WriteConstantOrGlobal(op);
         else
           throw new Exception();
       }
     }
 
-    void WriteConstants()
+    void WriteTypeDeclaration(ShaderType type, HashSet<UInt32> visitedTypeIds)
     {
-      foreach (var constantOp in mTypeCollector.mReferencedConstants)
+      // Handle types existing more than once (for primitive deduping)
+      var id = GetId(type);
+      if (visitedTypeIds.Contains(id))
+        return;
+      visitedTypeIds.Add(id);
+
+      if (type.mBaseType == OpType.Void)
       {
-        WriteOp(constantOp);
+        mWriter.WriteInstruction(2, Spv.Op.OpTypeVoid, GetId(type));
       }
+      else if (type.mBaseType == OpType.Bool)
+      {
+        mWriter.WriteInstruction(2, Spv.Op.OpTypeBool, GetId(type));
+      }
+      else if (type.mBaseType == OpType.Int)
+      {
+        mWriter.WriteInstruction(4, Spv.Op.OpTypeInt, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.Float)
+      {
+        mWriter.WriteInstruction(3, Spv.Op.OpTypeFloat, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.Vector)
+      {
+        mWriter.WriteInstruction(4, Spv.Op.OpTypeVector, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.Matrix)
+      {
+        mWriter.WriteInstruction(4, Spv.Op.OpTypeMatrix, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.Pointer)
+      {
+        var dereferenceType = type.GetDereferenceType();
+        if (dereferenceType.mBaseType != OpType.Function)
+        {
+          var storageClass = ConvertStorageClass(type.mStorageClass);
+          mWriter.WriteInstruction(4, Spv.Op.OpTypePointer, GetId(type), (UInt32)storageClass, GetId(dereferenceType));
+        }
+      }
+      else if (type.mBaseType == OpType.Array)
+      {
+        mWriter.WriteInstruction(4, Spv.Op.OpTypeArray, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.Struct)
+      {
+        UInt16 instructionSize = (UInt16)(2 + type.mFields.Count);
+        mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeStruct, GetId(type));
+        foreach (var field in type.mFields)
+        {
+          mWriter.Write(GetId(field.mType));
+        }
+      }
+      else if (type.mBaseType == OpType.Sampler)
+      {
+        UInt16 instructionSize = (UInt16)2;
+        mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeSampler, GetId(type));
+      }
+      else if (type.mBaseType == OpType.Image)
+      {
+        UInt16 instructionSize = (UInt16)9;
+        mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeImage, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.SampledImage)
+      {
+        UInt16 instructionSize = (UInt16)3;
+        mWriter.WriteInstruction(instructionSize, Spv.Op.OpTypeSampledImage, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else if (type.mBaseType == OpType.Function)
+      {
+        var instructionSize = 2 + type.mParameters.Count;
+        mWriter.WriteInstruction((UInt16)(instructionSize), Spv.Op.OpTypeFunction, GetId(type));
+        WriteArgs(type.mParameters);
+      }
+      else
+        throw new Exception();
     }
 
-    void WriteGlobalStatics()
+    void WriteConstantOrGlobal(ShaderOp op)
     {
-      foreach (var constantOp in mTypeCollector.mReferencedStatics)
-      {
-        mWriter.WriteInstruction((UInt16)(4), Spv.Op.OpVariable);
-        mWriter.Write(GetId(constantOp.mResultType));
-        mWriter.Write(GetId(constantOp));
-        var spirvStorageClass = ConvertStorageClass(constantOp.mResultType.mStorageClass);
-        mWriter.Write((UInt32)spirvStorageClass);
-      }
+      if (op.mOpType == OpInstructionType.OpVariable)
+        WriteGlobal(op);
+      else
+        WriteConstant(op);
+    }
+
+    void WriteConstant(ShaderOp constantOp)
+    {
+      WriteOp(constantOp);
+    }
+
+    void WriteGlobal(ShaderOp constantOp)
+    {
+      mWriter.WriteInstruction((UInt16)(4), Spv.Op.OpVariable);
+      mWriter.Write(GetId(constantOp.mResultType));
+      mWriter.Write(GetId(constantOp));
+      var spirvStorageClass = ConvertStorageClass(constantOp.mResultType.mStorageClass);
+      mWriter.Write((UInt32)spirvStorageClass);
     }
 
     void WriteTypeFunctions()

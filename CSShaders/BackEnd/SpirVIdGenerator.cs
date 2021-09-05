@@ -27,17 +27,9 @@ namespace CSShaders
       {
         GenerateIds(extLibraryImport);
       }
-      foreach (var type in typeCollector.mReferencedTypes)
+      foreach (var ir in typeCollector.mReferencedTypesConstantsAndGlobals)
       {
-        GenerateIds(type);
-      }
-      foreach (var constantOp in typeCollector.mReferencedConstants)
-      {
-        GenerateIds(constantOp);
-      }
-      foreach (var staticOp in typeCollector.mReferencedStatics)
-      {
-        GenerateIds(staticOp);
+        GenerateIds(ir);
       }
       foreach (var function in typeCollector.mReferencedFunctions)
       {

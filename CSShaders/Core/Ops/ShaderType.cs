@@ -76,6 +76,8 @@ namespace CSShaders
         var signedLiteral = mParameters[1] as ShaderConstantLiteral;
         return string.Format("{0}Int{1}", IsSignedInt(this) ? "" : "U", (uint)widthLiteral.mValue);
       }
+      if (mBaseType == OpType.Pointer)
+        return $"{mMeta.mName}*";
       return mMeta.mName;
     }
 
