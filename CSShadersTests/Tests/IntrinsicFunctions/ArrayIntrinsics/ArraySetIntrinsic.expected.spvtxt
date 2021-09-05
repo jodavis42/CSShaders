@@ -1,0 +1,106 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 80
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ArraySetIntrinsicTest_Main_EntryPoint "ArraySetIntrinsicTest_Main_EntryPoint"
+               OpExecutionMode %ArraySetIntrinsicTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FixedArrayFloat20 "FixedArrayFloat20"
+               OpName %ArraySetIntrinsicTest "ArraySetIntrinsicTest"
+               OpName %FixedArrayFloat20_PreConstructor "FixedArrayFloat20_PreConstructor"
+               OpName %self "self"
+               OpName %FixedArrayFloat20_DefaultConstructor "FixedArrayFloat20_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %set_Item "set_Item"
+               OpName %self_1 "self"
+               OpName %key "key"
+               OpName %value "value"
+               OpName %ArraySetIntrinsicTest_PreConstructor "ArraySetIntrinsicTest_PreConstructor"
+               OpName %self_2 "self"
+               OpName %ArraySetIntrinsicTest_DefaultConstructor "ArraySetIntrinsicTest_DefaultConstructor"
+               OpName %self_3 "self"
+               OpName %Main "Main"
+               OpName %self_4 "self"
+               OpName %data "data"
+               OpName %index "index"
+               OpName %ArraySetIntrinsicTest_Main_EntryPoint "ArraySetIntrinsicTest_Main_EntryPoint"
+               OpName %self_5 "self"
+               OpName %ArraySetIntrinsicTest_Main_EntryPoint "ArraySetIntrinsicTest_Main_EntryPoint"
+               OpName %self_5 "self"
+       %uint = OpTypeInt 32 0
+    %uint_20 = OpConstant %uint 20
+      %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+        %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+    %float_1 = OpConstant %float 1
+    %float_2 = OpConstant %float 2
+%FixedArrayFloat20 = OpTypeArray %float %uint_20
+       %void = OpTypeVoid
+%_ptr_Function_FixedArrayFloat20 = OpTypePointer Function %FixedArrayFloat20
+         %16 = OpTypeFunction %void %_ptr_Function_FixedArrayFloat20
+         %18 = OpTypeFunction %void %_ptr_Function_FixedArrayFloat20 %int %float
+%_ptr_Function_float = OpTypePointer Function %float
+%ArraySetIntrinsicTest = OpTypeStruct
+%_ptr_Function_ArraySetIntrinsicTest = OpTypePointer Function %ArraySetIntrinsicTest
+         %22 = OpTypeFunction %void %_ptr_Function_ArraySetIntrinsicTest
+%_ptr_Function_int = OpTypePointer Function %int
+         %24 = OpTypeFunction %void
+%FixedArrayFloat20_PreConstructor = OpFunction %void None %16
+       %self = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+         %29 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FixedArrayFloat20_DefaultConstructor = OpFunction %void None %16
+     %self_0 = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+         %34 = OpLabel
+         %35 = OpFunctionCall %void %FixedArrayFloat20_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+   %set_Item = OpFunction %void None %18
+     %self_1 = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+        %key = OpFunctionParameter %int
+      %value = OpFunctionParameter %float
+         %42 = OpLabel
+         %43 = OpAccessChain %_ptr_Function_float %self_1 %key
+               OpStore %43 %value
+               OpReturn
+               OpFunctionEnd
+%ArraySetIntrinsicTest_PreConstructor = OpFunction %void None %22
+     %self_2 = OpFunctionParameter %_ptr_Function_ArraySetIntrinsicTest
+         %49 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ArraySetIntrinsicTest_DefaultConstructor = OpFunction %void None %22
+     %self_3 = OpFunctionParameter %_ptr_Function_ArraySetIntrinsicTest
+         %54 = OpLabel
+         %55 = OpFunctionCall %void %ArraySetIntrinsicTest_PreConstructor %self_3
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %22
+     %self_4 = OpFunctionParameter %_ptr_Function_ArraySetIntrinsicTest
+         %60 = OpLabel
+       %data = OpVariable %_ptr_Function_FixedArrayFloat20 Function
+      %index = OpVariable %_ptr_Function_int Function
+         %63 = OpCompositeConstruct %FixedArrayFloat20 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0
+               OpStore %data %63
+               OpStore %index %int_0
+         %66 = OpLoad %int %index
+         %67 = OpAccessChain %_ptr_Function_float %data %66
+               OpStore %67 %float_1
+         %69 = OpAccessChain %_ptr_Function_float %data %int_0
+               OpStore %69 %float_2
+         %71 = OpFunctionCall %void %set_Item %data %int_0 %float_2
+               OpReturn
+               OpFunctionEnd
+%ArraySetIntrinsicTest_Main_EntryPoint = OpFunction %void None %24
+         %75 = OpLabel
+     %self_5 = OpVariable %_ptr_Function_ArraySetIntrinsicTest Function
+         %77 = OpFunctionCall %void %ArraySetIntrinsicTest_DefaultConstructor %self_5
+         %78 = OpFunctionCall %void %Main %self_5
+               OpReturn
+               OpFunctionEnd

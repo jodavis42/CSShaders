@@ -123,6 +123,7 @@ namespace CSShaders
       SimpleInstructions.Add(OpInstructionType.OpImageQueryLod, Spv.Op.OpImageQueryLod);
       SimpleInstructions.Add(OpInstructionType.OpImageQueryLevels, Spv.Op.OpImageQueryLevels);
       SimpleInstructions.Add(OpInstructionType.OpImageQuerySamples, Spv.Op.OpImageQuerySamples);
+      SimpleInstructions.Add(OpInstructionType.OpArrayLength, Spv.Op.OpArrayLength);
     }
 
     public void Write(SpirVStreamWriter writer, ShaderLibrary library, FrontEndTranslator frontEnd)

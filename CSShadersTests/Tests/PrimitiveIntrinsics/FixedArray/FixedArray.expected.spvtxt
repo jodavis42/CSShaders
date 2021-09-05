@@ -1,0 +1,126 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 98
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %FixedArrayPrimitiveDeclarationTest_Main_EntryPoint "FixedArrayPrimitiveDeclarationTest_Main_EntryPoint"
+               OpExecutionMode %FixedArrayPrimitiveDeclarationTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %FixedArrayFloat20 "FixedArrayFloat20"
+               OpName %FixedArrayPrimitiveDeclarationTest "FixedArrayPrimitiveDeclarationTest"
+               OpName %FixedArrayFloat20_PreConstructor "FixedArrayFloat20_PreConstructor"
+               OpName %self "self"
+               OpName %FixedArrayFloat20_DefaultConstructor "FixedArrayFloat20_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %Length "Length"
+               OpName %self_1 "self"
+               OpName %get_Item "get_Item"
+               OpName %self_2 "self"
+               OpName %key "key"
+               OpName %set_Item "set_Item"
+               OpName %self_3 "self"
+               OpName %key_0 "key"
+               OpName %value "value"
+               OpName %FixedArrayPrimitiveDeclarationTest_PreConstructor "FixedArrayPrimitiveDeclarationTest_PreConstructor"
+               OpName %self_4 "self"
+               OpName %FixedArrayPrimitiveDeclarationTest_DefaultConstructor "FixedArrayPrimitiveDeclarationTest_DefaultConstructor"
+               OpName %self_5 "self"
+               OpName %Main "Main"
+               OpName %self_6 "self"
+               OpName %data "data"
+               OpName %s "s"
+               OpName %FixedArrayPrimitiveDeclarationTest_Main_EntryPoint "FixedArrayPrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_7 "self"
+               OpName %FixedArrayPrimitiveDeclarationTest_Main_EntryPoint "FixedArrayPrimitiveDeclarationTest_Main_EntryPoint"
+               OpName %self_7 "self"
+       %uint = OpTypeInt 32 0
+    %uint_20 = OpConstant %uint 20
+      %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+        %int = OpTypeInt 32 1
+      %int_2 = OpConstant %int 2
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
+%FixedArrayFloat20 = OpTypeArray %float %uint_20
+       %void = OpTypeVoid
+%_ptr_Function_FixedArrayFloat20 = OpTypePointer Function %FixedArrayFloat20
+         %16 = OpTypeFunction %void %_ptr_Function_FixedArrayFloat20
+         %18 = OpTypeFunction %uint %_ptr_Function_FixedArrayFloat20
+         %20 = OpTypeFunction %float %_ptr_Function_FixedArrayFloat20 %int
+%_ptr_Function_float = OpTypePointer Function %float
+         %22 = OpTypeFunction %void %_ptr_Function_FixedArrayFloat20 %int %float
+%FixedArrayPrimitiveDeclarationTest = OpTypeStruct
+%_ptr_Function_FixedArrayPrimitiveDeclarationTest = OpTypePointer Function %FixedArrayPrimitiveDeclarationTest
+         %26 = OpTypeFunction %void %_ptr_Function_FixedArrayPrimitiveDeclarationTest
+         %28 = OpTypeFunction %void
+%FixedArrayFloat20_PreConstructor = OpFunction %void None %16
+       %self = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+         %33 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FixedArrayFloat20_DefaultConstructor = OpFunction %void None %16
+     %self_0 = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+         %38 = OpLabel
+         %39 = OpFunctionCall %void %FixedArrayFloat20_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+     %Length = OpFunction %uint None %18
+     %self_1 = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+         %44 = OpLabel
+               OpReturnValue %uint_20
+               OpFunctionEnd
+   %get_Item = OpFunction %float None %20
+     %self_2 = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+        %key = OpFunctionParameter %int
+         %50 = OpLabel
+         %51 = OpAccessChain %_ptr_Function_float %self_2 %key
+         %52 = OpLoad %float %51
+               OpReturnValue %52
+               OpFunctionEnd
+   %set_Item = OpFunction %void None %22
+     %self_3 = OpFunctionParameter %_ptr_Function_FixedArrayFloat20
+      %key_0 = OpFunctionParameter %int
+      %value = OpFunctionParameter %float
+         %59 = OpLabel
+         %60 = OpAccessChain %_ptr_Function_float %self_3 %key_0
+               OpStore %60 %value
+               OpReturn
+               OpFunctionEnd
+%FixedArrayPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %26
+     %self_4 = OpFunctionParameter %_ptr_Function_FixedArrayPrimitiveDeclarationTest
+         %66 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%FixedArrayPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %26
+     %self_5 = OpFunctionParameter %_ptr_Function_FixedArrayPrimitiveDeclarationTest
+         %71 = OpLabel
+         %72 = OpFunctionCall %void %FixedArrayPrimitiveDeclarationTest_PreConstructor %self_5
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %26
+     %self_6 = OpFunctionParameter %_ptr_Function_FixedArrayPrimitiveDeclarationTest
+         %77 = OpLabel
+       %data = OpVariable %_ptr_Function_FixedArrayFloat20 Function
+          %s = OpVariable %_ptr_Function_float Function
+         %80 = OpCompositeConstruct %FixedArrayFloat20 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0 %float_0
+               OpStore %data %80
+         %82 = OpFunctionCall %float %get_Item %data %int_2
+               OpStore %s %82
+         %84 = OpFunctionCall %float %get_Item %data %int_1
+               OpStore %s %84
+         %86 = OpFunctionCall %float %get_Item %data %int_0
+         %87 = OpLoad %float %s
+         %88 = OpFAdd %float %86 %87
+         %89 = OpFunctionCall %void %set_Item %data %int_0 %88
+               OpReturn
+               OpFunctionEnd
+%FixedArrayPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %28
+         %93 = OpLabel
+     %self_7 = OpVariable %_ptr_Function_FixedArrayPrimitiveDeclarationTest Function
+         %95 = OpFunctionCall %void %FixedArrayPrimitiveDeclarationTest_DefaultConstructor %self_7
+         %96 = OpFunctionCall %void %Main %self_7
+               OpReturn
+               OpFunctionEnd

@@ -1,0 +1,22 @@
+[Math.FixedArrayPrimitive(typeof(float), 20)]
+public struct FixedArrayFloat20
+{
+    [Shader.ArrayGetIntrinsic]
+    public extern float GetValue(int index);
+
+    public float this[int key] { get { return GetValue(key); } }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct ArrayGetIntrinsicTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        var data = new FixedArrayFloat20();
+        var index = 0;
+        var value = data.GetValue(index);
+        value = data.GetValue(0);
+        value = data[index];
+    }
+}

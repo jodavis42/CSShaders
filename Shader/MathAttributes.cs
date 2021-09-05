@@ -44,6 +44,17 @@ namespace Math
     }
   }
 
+  public class FixedArrayPrimitive : Attribute
+  {
+    Type ComponentType;
+    UInt32 ComponentCount;
+    public FixedArrayPrimitive(Type componentType, UInt32 componentCount)
+    {
+      ComponentType = componentType;
+      ComponentCount = componentCount;
+    }
+  }
+
   public class Swizzle : System.Attribute
   {
     public Swizzle(params UInt32[] list)

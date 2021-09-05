@@ -24,11 +24,14 @@ namespace CSShaders
       SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.FloatPrimitive>(), FloatResolvers.ProcessFloatType);
       SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.VectorPrimitive>(), VectorResolvers.ProcessVectorType);
       SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.MatrixPrimitive>(), MatrixResolvers.ProcessMatrixType);
+      SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Math.FixedArrayPrimitive>(), FixedArrayResolver.ProcessFixedArrayType);
       SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Shader.SamplerPrimitive>(), SamplerResolvers.ProcessSamplerType);
       SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Shader.ImagePrimitive>(), ImageResolvers.ProcessImageType);
       SpecialTypeCreationAttributeProcessors.Add(TypeAliases.GetFullTypeName<Shader.SampledImagePrimitive>(), SampledSamplerResolvers.ProcessSampledImageType);
       FieldProcessors.Add(TypeAliases.GetFullTypeName<Math.Swizzle>(), VectorResolvers.ProcessVectorSwizzle);
       MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.SimpleIntrinsicFunction>(), CreateSimpleIntrinsicType);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.ArrayGetIntrinsic>(), CreateArrayGetType);
+      MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.ArraySetIntrinsic>(), CreateArraySetType);
       MethodProcessors.Add(TypeAliases.GetFullTypeName<Math.CompositeConstruct>(), CreateCompositeConstructIntrinsic);
       MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.SampledImageIntrinsicFunction>(), SampledImageIntrinsicResolvers.CreateSampledImageIntrinsicFunction);
       MethodProcessors.Add(TypeAliases.GetFullTypeName<Shader.ImageIntrinsicFunction>(), ImageIntrinsicResolvers.CreateImageIntrinsicFunction);
@@ -62,6 +65,42 @@ namespace CSShaders
       ShaderLibrary.InstrinsicDelegate callback = (FrontEndTranslator translator, List<IShaderIR> arguments, FrontEndContext context) =>
       {
         SimpleValueTypeIntrinsic(translator, context, opType, shaderReturnType, arguments);
+      };
+      translator.mCurrentLibrary.CreateIntrinsicFunction(new FunctionKey(methodSymbol), callback);
+    }
+
+    /// <summary>
+    /// Creates an intrinsic to retrieve an element from an array. This unfortunately has to use OpAccessChain because the other 
+    /// instruction requires an integer literal, but OpAccessChain returns a pointer (which isn't exposed). This function will return the element as a value type.
+    /// </summary>
+    static public void CreateArrayGetType(FrontEndTranslator translator, INamedTypeSymbol typeSymbol, IMethodSymbol methodSymbol, AttributeData attribute)
+    {
+      var shaderReturnType = translator.FindType(new TypeKey(methodSymbol.ReturnType));
+      var pointerReturnType = shaderReturnType.FindPointerType(StorageClass.Function);
+
+      ShaderLibrary.InstrinsicDelegate callback = (FrontEndTranslator translator, List<IShaderIR> arguments, FrontEndContext context) =>
+      {
+        var selfOp = arguments[0];
+        var indexOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, arguments[1]);
+        var accessChainOp = translator.CreateOp(context.mCurrentBlock, OpInstructionType.OpAccessChain, pointerReturnType, new List<IShaderIR> { selfOp, indexOp });
+        // Always convert the pointer to a value type
+        var returnOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, accessChainOp);
+        context.Push(returnOp);
+      };
+      translator.mCurrentLibrary.CreateIntrinsicFunction(new FunctionKey(methodSymbol), callback);
+    }
+
+    static public void CreateArraySetType(FrontEndTranslator translator, INamedTypeSymbol typeSymbol, IMethodSymbol methodSymbol, AttributeData attribute)
+    {
+      // Do an access chain to get the element and then store the value inside the pointer
+      ShaderLibrary.InstrinsicDelegate callback = (FrontEndTranslator translator, List<IShaderIR> arguments, FrontEndContext context) =>
+      {
+        var selfOp = arguments[0];
+        var indexOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, arguments[1]);
+        var valueOp = translator.GetOrGenerateValueTypeFromIR(context.mCurrentBlock, arguments[2]);
+        var pointerType = valueOp.mResultType.FindPointerType(StorageClass.Function);
+        var accessChainOp = translator.CreateOp(context.mCurrentBlock, OpInstructionType.OpAccessChain, pointerType, new List<IShaderIR> { selfOp, indexOp });
+        translator.CreateStoreOp(context.mCurrentBlock, accessChainOp, valueOp);
       };
       translator.mCurrentLibrary.CreateIntrinsicFunction(new FunctionKey(methodSymbol), callback);
     }
