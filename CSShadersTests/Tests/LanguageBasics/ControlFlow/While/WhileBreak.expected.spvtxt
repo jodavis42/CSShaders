@@ -31,28 +31,28 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
  %WhileBreak = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_WhileBreak = OpTypePointer Function %WhileBreak
-          %9 = OpTypeFunction %void %_ptr_Function_WhileBreak
-         %11 = OpTypeFunction %int %_ptr_Function_WhileBreak
+         %11 = OpTypeFunction %void %_ptr_Function_WhileBreak
+         %13 = OpTypeFunction %int %_ptr_Function_WhileBreak
 %_ptr_Function_int = OpTypePointer Function %int
        %bool = OpTypeBool
-         %15 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-      %int_0 = OpConstant %int 0
-%WhileBreak_PreConstructor = OpFunction %void None %9
+         %17 = OpTypeFunction %void
+%WhileBreak_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_WhileBreak
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%WhileBreak_DefaultConstructor = OpFunction %void None %9
+%WhileBreak_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_WhileBreak
          %27 = OpLabel
          %28 = OpFunctionCall %void %WhileBreak_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%WhileBreak0 = OpFunction %int None %11
+%WhileBreak0 = OpFunction %int None %13
      %self_1 = OpFunctionParameter %_ptr_Function_WhileBreak
          %33 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -73,7 +73,7 @@
          %49 = OpLoad %int %a
                OpReturnValue %49
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_WhileBreak
          %54 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -81,7 +81,7 @@
                OpStore %ret %56
                OpReturn
                OpFunctionEnd
-%WhileBreak_Main_EntryPoint = OpFunction %void None %15
+%WhileBreak_Main_EntryPoint = OpFunction %void None %17
          %61 = OpLabel
      %self_3 = OpVariable %_ptr_Function_WhileBreak Function
          %63 = OpFunctionCall %void %WhileBreak_DefaultConstructor %self_3

@@ -25,27 +25,27 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
   %CrossTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_CrossTest = OpTypePointer Function %CrossTest
-         %10 = OpTypeFunction %void %_ptr_Function_CrossTest
+         %11 = OpTypeFunction %void %_ptr_Function_CrossTest
     %Vector3 = OpTypeVector %float 3
 %_ptr_Function_Vector3 = OpTypePointer Function %Vector3
         %int = OpTypeInt 32 1
-         %16 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%CrossTest_PreConstructor = OpFunction %void None %10
+         %17 = OpTypeFunction %void
+%CrossTest_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_CrossTest
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%CrossTest_DefaultConstructor = OpFunction %void None %10
+%CrossTest_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_CrossTest
          %27 = OpLabel
          %28 = OpFunctionCall %void %CrossTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %10
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_CrossTest
          %33 = OpLabel
  %vector3Val = OpVariable %_ptr_Function_Vector3 Function
@@ -57,7 +57,7 @@
                OpStore %vector3Val %39
                OpReturn
                OpFunctionEnd
-%CrossTest_Main_EntryPoint = OpFunction %void None %16
+%CrossTest_Main_EntryPoint = OpFunction %void None %17
          %44 = OpLabel
      %self_2 = OpVariable %_ptr_Function_CrossTest Function
          %46 = OpFunctionCall %void %CrossTest_DefaultConstructor %self_2

@@ -28,10 +28,11 @@
                OpName %OpLogicalEqualTest_Main_EntryPoint "OpLogicalEqualTest_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
 %OpLogicalEqualTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpLogicalEqualTest = OpTypePointer Function %OpLogicalEqualTest
-          %7 = OpTypeFunction %void %_ptr_Function_OpLogicalEqualTest
+          %8 = OpTypeFunction %void %_ptr_Function_OpLogicalEqualTest
 %_ptr_Function_bool = OpTypePointer Function %bool
        %uint = OpTypeInt 32 0
       %Bool2 = OpTypeVector %bool 2
@@ -40,20 +41,19 @@
 %_ptr_Function_Bool3 = OpTypePointer Function %Bool3
       %Bool4 = OpTypeVector %bool 4
 %_ptr_Function_Bool4 = OpTypePointer Function %Bool4
-         %17 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-%OpLogicalEqualTest_PreConstructor = OpFunction %void None %7
+         %18 = OpTypeFunction %void
+%OpLogicalEqualTest_PreConstructor = OpFunction %void None %8
        %self = OpFunctionParameter %_ptr_Function_OpLogicalEqualTest
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpLogicalEqualTest_DefaultConstructor = OpFunction %void None %7
+%OpLogicalEqualTest_DefaultConstructor = OpFunction %void None %8
      %self_0 = OpFunctionParameter %_ptr_Function_OpLogicalEqualTest
          %28 = OpLabel
          %29 = OpFunctionCall %void %OpLogicalEqualTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %8
      %self_1 = OpFunctionParameter %_ptr_Function_OpLogicalEqualTest
          %34 = OpLabel
     %boolVal = OpVariable %_ptr_Function_bool Function
@@ -85,7 +85,7 @@
                OpStore %bool4Val %60
                OpReturn
                OpFunctionEnd
-%OpLogicalEqualTest_Main_EntryPoint = OpFunction %void None %17
+%OpLogicalEqualTest_Main_EntryPoint = OpFunction %void None %18
          %65 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpLogicalEqualTest Function
          %67 = OpFunctionCall %void %OpLogicalEqualTest_DefaultConstructor %self_2

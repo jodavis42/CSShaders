@@ -42,13 +42,16 @@
                OpName %OpSelectTest_Main_EntryPoint "OpSelectTest_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %OpSelectTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpSelectTest = OpTypePointer Function %OpSelectTest
-         %13 = OpTypeFunction %void %_ptr_Function_OpSelectTest
+         %16 = OpTypeFunction %void %_ptr_Function_OpSelectTest
 %_ptr_Function_bool = OpTypePointer Function %bool
       %Bool2 = OpTypeVector %bool 2
 %_ptr_Function_Bool2 = OpTypePointer Function %Bool2
@@ -70,22 +73,19 @@
 %_ptr_Function_Vector3 = OpTypePointer Function %Vector3
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-         %33 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-      %int_0 = OpConstant %int 0
-    %float_0 = OpConstant %float 0
-%OpSelectTest_PreConstructor = OpFunction %void None %13
+         %36 = OpTypeFunction %void
+%OpSelectTest_PreConstructor = OpFunction %void None %16
        %self = OpFunctionParameter %_ptr_Function_OpSelectTest
          %41 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpSelectTest_DefaultConstructor = OpFunction %void None %13
+%OpSelectTest_DefaultConstructor = OpFunction %void None %16
      %self_0 = OpFunctionParameter %_ptr_Function_OpSelectTest
          %46 = OpLabel
          %47 = OpFunctionCall %void %OpSelectTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %13
+       %Main = OpFunction %void None %16
      %self_1 = OpFunctionParameter %_ptr_Function_OpSelectTest
          %52 = OpLabel
     %boolVal = OpVariable %_ptr_Function_bool Function
@@ -183,7 +183,7 @@
                OpStore %vector4Val %144
                OpReturn
                OpFunctionEnd
-%OpSelectTest_Main_EntryPoint = OpFunction %void None %33
+%OpSelectTest_Main_EntryPoint = OpFunction %void None %36
         %149 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpSelectTest Function
         %151 = OpFunctionCall %void %OpSelectTest_DefaultConstructor %self_2

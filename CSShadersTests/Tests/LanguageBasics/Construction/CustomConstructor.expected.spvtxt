@@ -35,25 +35,25 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-      %float = OpTypeFloat 32
-    %MyClass = OpTypeStruct %int %float
-       %void = OpTypeVoid
-%_ptr_Function_MyClass = OpTypePointer Function %MyClass
-         %11 = OpTypeFunction %void %_ptr_Function_MyClass
-%_ptr_Function_int = OpTypePointer Function %int
-%_ptr_Function_float = OpTypePointer Function %float
-         %13 = OpTypeFunction %void %_ptr_Function_MyClass %int %float
-%DefaultConstructorIntrinsic = OpTypeStruct
-%_ptr_Function_DefaultConstructorIntrinsic = OpTypePointer Function %DefaultConstructorIntrinsic
-         %17 = OpTypeFunction %void %_ptr_Function_DefaultConstructorIntrinsic
-         %19 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
      %uint_0 = OpConstant %uint 0
+      %float = OpTypeFloat 32
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
       %int_1 = OpConstant %int 1
     %float_2 = OpConstant %float 2
-%MyClass_PreConstructor = OpFunction %void None %11
+    %MyClass = OpTypeStruct %int %float
+       %void = OpTypeVoid
+%_ptr_Function_MyClass = OpTypePointer Function %MyClass
+         %17 = OpTypeFunction %void %_ptr_Function_MyClass
+%_ptr_Function_int = OpTypePointer Function %int
+%_ptr_Function_float = OpTypePointer Function %float
+         %19 = OpTypeFunction %void %_ptr_Function_MyClass %int %float
+%DefaultConstructorIntrinsic = OpTypeStruct
+%_ptr_Function_DefaultConstructorIntrinsic = OpTypePointer Function %DefaultConstructorIntrinsic
+         %23 = OpTypeFunction %void %_ptr_Function_DefaultConstructorIntrinsic
+         %25 = OpTypeFunction %void
+%MyClass_PreConstructor = OpFunction %void None %17
        %self = OpFunctionParameter %_ptr_Function_MyClass
          %30 = OpLabel
          %31 = OpAccessChain %_ptr_Function_int %self %uint_0
@@ -62,13 +62,13 @@
                OpStore %33 %float_0
                OpReturn
                OpFunctionEnd
-%MyClass_DefaultConstructor = OpFunction %void None %11
+%MyClass_DefaultConstructor = OpFunction %void None %17
      %self_0 = OpFunctionParameter %_ptr_Function_MyClass
          %39 = OpLabel
          %40 = OpFunctionCall %void %MyClass_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%MyClass_Constructor = OpFunction %void None %13
+%MyClass_Constructor = OpFunction %void None %19
      %self_1 = OpFunctionParameter %_ptr_Function_MyClass
      %intVal = OpFunctionParameter %int
    %floatVal = OpFunctionParameter %float
@@ -79,18 +79,18 @@
                OpStore %50 %floatVal
                OpReturn
                OpFunctionEnd
-%DefaultConstructorIntrinsic_PreConstructor = OpFunction %void None %17
+%DefaultConstructorIntrinsic_PreConstructor = OpFunction %void None %23
      %self_2 = OpFunctionParameter %_ptr_Function_DefaultConstructorIntrinsic
          %56 = OpLabel
                OpReturn
                OpFunctionEnd
-%DefaultConstructorIntrinsic_DefaultConstructor = OpFunction %void None %17
+%DefaultConstructorIntrinsic_DefaultConstructor = OpFunction %void None %23
      %self_3 = OpFunctionParameter %_ptr_Function_DefaultConstructorIntrinsic
          %61 = OpLabel
          %62 = OpFunctionCall %void %DefaultConstructorIntrinsic_PreConstructor %self_3
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %17
+       %Main = OpFunction %void None %23
      %self_4 = OpFunctionParameter %_ptr_Function_DefaultConstructorIntrinsic
          %67 = OpLabel
     %myClass = OpVariable %_ptr_Function_MyClass Function
@@ -100,7 +100,7 @@
                OpStore %myClass %71
                OpReturn
                OpFunctionEnd
-%DefaultConstructorIntrinsic_Main_EntryPoint = OpFunction %void None %19
+%DefaultConstructorIntrinsic_Main_EntryPoint = OpFunction %void None %25
          %76 = OpLabel
      %self_5 = OpVariable %_ptr_Function_DefaultConstructorIntrinsic Function
          %78 = OpFunctionCall %void %DefaultConstructorIntrinsic_DefaultConstructor %self_5

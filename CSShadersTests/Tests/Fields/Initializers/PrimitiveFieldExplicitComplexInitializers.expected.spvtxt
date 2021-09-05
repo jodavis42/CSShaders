@@ -34,60 +34,60 @@
                OpName %PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint "PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint"
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
-       %bool = OpTypeBool
-        %int = OpTypeInt 32 1
-      %float = OpTypeFloat 32
-%InitialValues = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_InitialValues = OpTypePointer Function %InitialValues
-         %13 = OpTypeFunction %void %_ptr_Function_InitialValues
-         %15 = OpTypeFunction %bool
-         %17 = OpTypeFunction %int
-         %19 = OpTypeFunction %uint
-         %21 = OpTypeFunction %float
-%PrimitiveFieldExplicitComplexInitializers = OpTypeStruct %bool %int %uint %float
-%_ptr_Function_PrimitiveFieldExplicitComplexInitializers = OpTypePointer Function %PrimitiveFieldExplicitComplexInitializers
-         %25 = OpTypeFunction %void %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
-%_ptr_Function_bool = OpTypePointer Function %bool
-%_ptr_Function_int = OpTypePointer Function %int
-%_ptr_Function_uint = OpTypePointer Function %uint
-%_ptr_Function_float = OpTypePointer Function %float
-         %27 = OpTypeFunction %void
      %uint_0 = OpConstant %uint 0
      %uint_1 = OpConstant %uint 1
      %uint_2 = OpConstant %uint 2
      %uint_3 = OpConstant %uint 3
+       %bool = OpTypeBool
       %false = OpConstantFalse %bool
+        %int = OpTypeInt 32 1
       %int_1 = OpConstant %int 1
+      %float = OpTypeFloat 32
     %float_3 = OpConstant %float 3
-%InitialValues_PreConstructor = OpFunction %void None %13
+%InitialValues = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_InitialValues = OpTypePointer Function %InitialValues
+         %20 = OpTypeFunction %void %_ptr_Function_InitialValues
+         %22 = OpTypeFunction %bool
+         %24 = OpTypeFunction %int
+         %26 = OpTypeFunction %uint
+         %28 = OpTypeFunction %float
+%PrimitiveFieldExplicitComplexInitializers = OpTypeStruct %bool %int %uint %float
+%_ptr_Function_PrimitiveFieldExplicitComplexInitializers = OpTypePointer Function %PrimitiveFieldExplicitComplexInitializers
+         %32 = OpTypeFunction %void %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
+%_ptr_Function_bool = OpTypePointer Function %bool
+%_ptr_Function_int = OpTypePointer Function %int
+%_ptr_Function_uint = OpTypePointer Function %uint
+%_ptr_Function_float = OpTypePointer Function %float
+         %34 = OpTypeFunction %void
+%InitialValues_PreConstructor = OpFunction %void None %20
        %self = OpFunctionParameter %_ptr_Function_InitialValues
          %39 = OpLabel
                OpReturn
                OpFunctionEnd
-%InitialValues_DefaultConstructor = OpFunction %void None %13
+%InitialValues_DefaultConstructor = OpFunction %void None %20
      %self_0 = OpFunctionParameter %_ptr_Function_InitialValues
          %44 = OpLabel
          %45 = OpFunctionCall %void %InitialValues_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-    %GetBool = OpFunction %bool None %15
+    %GetBool = OpFunction %bool None %22
          %49 = OpLabel
                OpReturnValue %false
                OpFunctionEnd
-     %GetInt = OpFunction %int None %17
+     %GetInt = OpFunction %int None %24
          %53 = OpLabel
                OpReturnValue %int_1
                OpFunctionEnd
-    %GetUint = OpFunction %uint None %19
+    %GetUint = OpFunction %uint None %26
          %57 = OpLabel
                OpReturnValue %uint_2
                OpFunctionEnd
-   %GetFloat = OpFunction %float None %21
+   %GetFloat = OpFunction %float None %28
          %61 = OpLabel
                OpReturnValue %float_3
                OpFunctionEnd
-%PrimitiveFieldExplicitComplexInitializers_PreConstructor = OpFunction %void None %25
+%PrimitiveFieldExplicitComplexInitializers_PreConstructor = OpFunction %void None %32
      %self_1 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
          %66 = OpLabel
          %67 = OpFunctionCall %bool %GetBool
@@ -104,18 +104,18 @@
                OpStore %77 %76
                OpReturn
                OpFunctionEnd
-%PrimitiveFieldExplicitComplexInitializers_DefaultConstructor = OpFunction %void None %25
+%PrimitiveFieldExplicitComplexInitializers_DefaultConstructor = OpFunction %void None %32
      %self_2 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
          %83 = OpLabel
          %84 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %25
+       %Main = OpFunction %void None %32
      %self_3 = OpFunctionParameter %_ptr_Function_PrimitiveFieldExplicitComplexInitializers
          %89 = OpLabel
                OpReturn
                OpFunctionEnd
-%PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint = OpFunction %void None %27
+%PrimitiveFieldExplicitComplexInitializers_Main_EntryPoint = OpFunction %void None %34
          %93 = OpLabel
      %self_4 = OpVariable %_ptr_Function_PrimitiveFieldExplicitComplexInitializers Function
          %95 = OpFunctionCall %void %PrimitiveFieldExplicitComplexInitializers_DefaultConstructor %self_4

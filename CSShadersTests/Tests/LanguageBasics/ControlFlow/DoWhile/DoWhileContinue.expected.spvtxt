@@ -30,28 +30,28 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
 %DoWhileContinue = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_DoWhileContinue = OpTypePointer Function %DoWhileContinue
-          %9 = OpTypeFunction %void %_ptr_Function_DoWhileContinue
-         %11 = OpTypeFunction %int %_ptr_Function_DoWhileContinue
+         %11 = OpTypeFunction %void %_ptr_Function_DoWhileContinue
+         %13 = OpTypeFunction %int %_ptr_Function_DoWhileContinue
 %_ptr_Function_int = OpTypePointer Function %int
        %bool = OpTypeBool
-         %15 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-      %int_0 = OpConstant %int 0
-%DoWhileContinue_PreConstructor = OpFunction %void None %9
+         %17 = OpTypeFunction %void
+%DoWhileContinue_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_DoWhileContinue
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%DoWhileContinue_DefaultConstructor = OpFunction %void None %9
+%DoWhileContinue_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_DoWhileContinue
          %27 = OpLabel
          %28 = OpFunctionCall %void %DoWhileContinue_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%DoWhileContinue0 = OpFunction %int None %11
+%DoWhileContinue0 = OpFunction %int None %13
      %self_1 = OpFunctionParameter %_ptr_Function_DoWhileContinue
          %33 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -70,7 +70,7 @@
          %47 = OpLoad %int %a
                OpReturnValue %47
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_DoWhileContinue
          %52 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -78,7 +78,7 @@
                OpStore %ret %54
                OpReturn
                OpFunctionEnd
-%DoWhileContinue_Main_EntryPoint = OpFunction %void None %15
+%DoWhileContinue_Main_EntryPoint = OpFunction %void None %17
          %59 = OpLabel
      %self_3 = OpVariable %_ptr_Function_DoWhileContinue Function
          %61 = OpFunctionCall %void %DoWhileContinue_DefaultConstructor %self_3

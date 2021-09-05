@@ -29,10 +29,11 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %OpFNegateTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpFNegateTest = OpTypePointer Function %OpFNegateTest
-          %9 = OpTypeFunction %void %_ptr_Function_OpFNegateTest
+         %10 = OpTypeFunction %void %_ptr_Function_OpFNegateTest
 %_ptr_Function_float = OpTypePointer Function %float
     %Vector2 = OpTypeVector %float 2
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
@@ -40,20 +41,19 @@
 %_ptr_Function_Vector3 = OpTypePointer Function %Vector3
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-         %17 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%OpFNegateTest_PreConstructor = OpFunction %void None %9
+         %18 = OpTypeFunction %void
+%OpFNegateTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_OpFNegateTest
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpFNegateTest_DefaultConstructor = OpFunction %void None %9
+%OpFNegateTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_OpFNegateTest
          %28 = OpLabel
          %29 = OpFunctionCall %void %OpFNegateTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_OpFNegateTest
          %34 = OpLabel
    %floatVal = OpVariable %_ptr_Function_float Function
@@ -81,7 +81,7 @@
                OpStore %vector4Val %56
                OpReturn
                OpFunctionEnd
-%OpFNegateTest_Main_EntryPoint = OpFunction %void None %17
+%OpFNegateTest_Main_EntryPoint = OpFunction %void None %18
          %61 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpFNegateTest Function
          %63 = OpFunctionCall %void %OpFNegateTest_DefaultConstructor %self_2

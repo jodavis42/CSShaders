@@ -30,10 +30,11 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %RefractTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_RefractTest = OpTypePointer Function %RefractTest
-         %10 = OpTypeFunction %void %_ptr_Function_RefractTest
+         %11 = OpTypeFunction %void %_ptr_Function_RefractTest
     %Vector2 = OpTypeVector %float 2
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
 %_ptr_Function_float = OpTypePointer Function %float
@@ -42,20 +43,19 @@
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
         %int = OpTypeInt 32 1
-         %20 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%RefractTest_PreConstructor = OpFunction %void None %10
+         %21 = OpTypeFunction %void
+%RefractTest_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_RefractTest
          %26 = OpLabel
                OpReturn
                OpFunctionEnd
-%RefractTest_DefaultConstructor = OpFunction %void None %10
+%RefractTest_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_RefractTest
          %31 = OpLabel
          %32 = OpFunctionCall %void %RefractTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %10
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_RefractTest
          %37 = OpLabel
  %vector2Val = OpVariable %_ptr_Function_Vector2 Function
@@ -86,7 +86,7 @@
                OpStore %vector4Val %62
                OpReturn
                OpFunctionEnd
-%RefractTest_Main_EntryPoint = OpFunction %void None %20
+%RefractTest_Main_EntryPoint = OpFunction %void None %21
          %67 = OpLabel
      %self_2 = OpVariable %_ptr_Function_RefractTest Function
          %69 = OpFunctionCall %void %RefractTest_DefaultConstructor %self_2

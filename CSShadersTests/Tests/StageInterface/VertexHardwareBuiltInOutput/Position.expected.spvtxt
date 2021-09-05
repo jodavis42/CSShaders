@@ -26,32 +26,32 @@
                OpDecorate %gl_Position BuiltIn Position
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
-    %Vector4 = OpTypeVector %float 4
-   %Position = OpTypeStruct %Vector4
-       %void = OpTypeVoid
-%_ptr_Function_Position = OpTypePointer Function %Position
-         %11 = OpTypeFunction %void %_ptr_Function_Position
-%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-%_ptr_Output_Vector4 = OpTypePointer Output %Vector4
-         %14 = OpTypeFunction %void
     %float_1 = OpConstant %float 1
     %float_2 = OpConstant %float 2
     %float_3 = OpConstant %float 3
     %float_4 = OpConstant %float 4
      %uint_0 = OpConstant %uint 0
+    %Vector4 = OpTypeVector %float 4
+   %Position = OpTypeStruct %Vector4
+       %void = OpTypeVoid
+%_ptr_Function_Position = OpTypePointer Function %Position
+         %16 = OpTypeFunction %void %_ptr_Function_Position
+%_ptr_Function_Vector4 = OpTypePointer Function %Vector4
+%_ptr_Output_Vector4 = OpTypePointer Output %Vector4
+         %19 = OpTypeFunction %void
 %gl_Position = OpVariable %_ptr_Output_Vector4 Output
-%Position_PreConstructor = OpFunction %void None %11
+%Position_PreConstructor = OpFunction %void None %16
        %self = OpFunctionParameter %_ptr_Function_Position
          %25 = OpLabel
                OpReturn
                OpFunctionEnd
-%Position_DefaultConstructor = OpFunction %void None %11
+%Position_DefaultConstructor = OpFunction %void None %16
      %self_0 = OpFunctionParameter %_ptr_Function_Position
          %30 = OpLabel
          %31 = OpFunctionCall %void %Position_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %16
      %self_1 = OpFunctionParameter %_ptr_Function_Position
          %36 = OpLabel
          %37 = OpCompositeConstruct %Vector4 %float_1 %float_2 %float_3 %float_4
@@ -59,7 +59,7 @@
                OpStore %38 %37
                OpReturn
                OpFunctionEnd
-%Position_CopyOutputs = OpFunction %void None %11
+%Position_CopyOutputs = OpFunction %void None %16
      %self_2 = OpFunctionParameter %_ptr_Function_Position
          %44 = OpLabel
          %45 = OpAccessChain %_ptr_Function_Vector4 %self_2 %uint_0
@@ -67,7 +67,7 @@
                OpStore %gl_Position %46
                OpReturn
                OpFunctionEnd
-%Position_Main_EntryPoint = OpFunction %void None %14
+%Position_Main_EntryPoint = OpFunction %void None %19
          %51 = OpLabel
      %self_3 = OpVariable %_ptr_Function_Position Function
          %53 = OpFunctionCall %void %Position_DefaultConstructor %self_3

@@ -25,34 +25,34 @@
                OpName %PrimitiveCasts_Main_EntryPoint "PrimitiveCasts_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %PrimitiveCasts = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_PrimitiveCasts = OpTypePointer Function %PrimitiveCasts
-         %13 = OpTypeFunction %void %_ptr_Function_PrimitiveCasts
+         %17 = OpTypeFunction %void %_ptr_Function_PrimitiveCasts
 %_ptr_Function_bool = OpTypePointer Function %bool
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Function_uint = OpTypePointer Function %uint
 %_ptr_Function_float = OpTypePointer Function %float
-         %15 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-      %int_0 = OpConstant %int 0
-     %uint_0 = OpConstant %uint 0
-    %float_0 = OpConstant %float 0
-%PrimitiveCasts_PreConstructor = OpFunction %void None %13
+         %19 = OpTypeFunction %void
+%PrimitiveCasts_PreConstructor = OpFunction %void None %17
        %self = OpFunctionParameter %_ptr_Function_PrimitiveCasts
          %24 = OpLabel
                OpReturn
                OpFunctionEnd
-%PrimitiveCasts_DefaultConstructor = OpFunction %void None %13
+%PrimitiveCasts_DefaultConstructor = OpFunction %void None %17
      %self_0 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
          %29 = OpLabel
          %30 = OpFunctionCall %void %PrimitiveCasts_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %13
+       %Main = OpFunction %void None %17
      %self_1 = OpFunctionParameter %_ptr_Function_PrimitiveCasts
          %35 = OpLabel
           %b = OpVariable %_ptr_Function_bool Function
@@ -107,7 +107,7 @@
                OpStore %f %84
                OpReturn
                OpFunctionEnd
-%PrimitiveCasts_Main_EntryPoint = OpFunction %void None %15
+%PrimitiveCasts_Main_EntryPoint = OpFunction %void None %19
          %89 = OpLabel
      %self_2 = OpVariable %_ptr_Function_PrimitiveCasts Function
          %91 = OpFunctionCall %void %PrimitiveCasts_DefaultConstructor %self_2

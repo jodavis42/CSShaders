@@ -44,33 +44,33 @@
                OpName %LogicalOr_Main_EntryPoint "LogicalOr_Main_EntryPoint"
                OpName %self_6 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
+       %true = OpConstantTrue %bool
   %LogicalOr = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_LogicalOr = OpTypePointer Function %LogicalOr
-          %7 = OpTypeFunction %void %_ptr_Function_LogicalOr
-          %9 = OpTypeFunction %bool %_ptr_Function_LogicalOr
+          %9 = OpTypeFunction %void %_ptr_Function_LogicalOr
+         %11 = OpTypeFunction %bool %_ptr_Function_LogicalOr
 %_ptr_Function_bool = OpTypePointer Function %bool
        %uint = OpTypeInt 32 0
-         %13 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-       %true = OpConstantTrue %bool
-%LogicalOr_PreConstructor = OpFunction %void None %7
+         %15 = OpTypeFunction %void
+%LogicalOr_PreConstructor = OpFunction %void None %9
        %self = OpFunctionParameter %_ptr_Function_LogicalOr
          %20 = OpLabel
                OpReturn
                OpFunctionEnd
-%LogicalOr_DefaultConstructor = OpFunction %void None %7
+%LogicalOr_DefaultConstructor = OpFunction %void None %9
      %self_0 = OpFunctionParameter %_ptr_Function_LogicalOr
          %25 = OpLabel
          %26 = OpFunctionCall %void %LogicalOr_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-    %GetBool = OpFunction %bool None %9
+    %GetBool = OpFunction %bool None %11
      %self_1 = OpFunctionParameter %_ptr_Function_LogicalOr
          %31 = OpLabel
                OpReturnValue %false
                OpFunctionEnd
- %LogicalOr0 = OpFunction %bool None %9
+ %LogicalOr0 = OpFunction %bool None %11
      %self_2 = OpFunctionParameter %_ptr_Function_LogicalOr
          %36 = OpLabel
      %tempOr = OpVariable %_ptr_Function_bool Function
@@ -86,7 +86,7 @@
          %47 = OpLoad %bool %tempOr
                OpReturnValue %47
                OpFunctionEnd
- %LogicalOr1 = OpFunction %bool None %9
+ %LogicalOr1 = OpFunction %bool None %11
      %self_3 = OpFunctionParameter %_ptr_Function_LogicalOr
          %52 = OpLabel
           %a = OpVariable %_ptr_Function_bool Function
@@ -108,7 +108,7 @@
          %69 = OpLoad %bool %tempOr_0
                OpReturnValue %69
                OpFunctionEnd
- %LogicalOr2 = OpFunction %bool None %9
+ %LogicalOr2 = OpFunction %bool None %11
      %self_4 = OpFunctionParameter %_ptr_Function_LogicalOr
          %74 = OpLabel
    %tempOr_1 = OpVariable %_ptr_Function_bool Function
@@ -126,7 +126,7 @@
          %87 = OpLoad %bool %tempOr_1
                OpReturnValue %87
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %9
      %self_5 = OpFunctionParameter %_ptr_Function_LogicalOr
          %92 = OpLabel
         %ret = OpVariable %_ptr_Function_bool Function
@@ -139,7 +139,7 @@
                OpStore %ret %99
                OpReturn
                OpFunctionEnd
-%LogicalOr_Main_EntryPoint = OpFunction %void None %13
+%LogicalOr_Main_EntryPoint = OpFunction %void None %15
         %104 = OpLabel
      %self_6 = OpVariable %_ptr_Function_LogicalOr Function
         %106 = OpFunctionCall %void %LogicalOr_DefaultConstructor %self_6

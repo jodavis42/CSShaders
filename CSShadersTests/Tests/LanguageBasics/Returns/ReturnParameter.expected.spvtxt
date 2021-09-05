@@ -27,32 +27,32 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
 %ReturnParameter = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_ReturnParameter = OpTypePointer Function %ReturnParameter
-          %9 = OpTypeFunction %void %_ptr_Function_ReturnParameter
-         %11 = OpTypeFunction %int %_ptr_Function_ReturnParameter %int
+         %10 = OpTypeFunction %void %_ptr_Function_ReturnParameter
+         %12 = OpTypeFunction %int %_ptr_Function_ReturnParameter %int
 %_ptr_Function_int = OpTypePointer Function %int
-         %13 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-%ReturnParameter_PreConstructor = OpFunction %void None %9
+         %14 = OpTypeFunction %void
+%ReturnParameter_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_ReturnParameter
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%ReturnParameter_DefaultConstructor = OpFunction %void None %9
+%ReturnParameter_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_ReturnParameter
          %24 = OpLabel
          %25 = OpFunctionCall %void %ReturnParameter_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%ReturnParam = OpFunction %int None %11
+%ReturnParam = OpFunction %int None %12
      %self_1 = OpFunctionParameter %_ptr_Function_ReturnParameter
       %value = OpFunctionParameter %int
          %31 = OpLabel
                OpReturnValue %value
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_2 = OpFunctionParameter %_ptr_Function_ReturnParameter
          %36 = OpLabel
       %param = OpVariable %_ptr_Function_int Function
@@ -63,7 +63,7 @@
                OpStore %i %41
                OpReturn
                OpFunctionEnd
-%ReturnParameter_Main_EntryPoint = OpFunction %void None %13
+%ReturnParameter_Main_EntryPoint = OpFunction %void None %14
          %46 = OpLabel
      %self_3 = OpVariable %_ptr_Function_ReturnParameter Function
          %48 = OpFunctionCall %void %ReturnParameter_DefaultConstructor %self_3

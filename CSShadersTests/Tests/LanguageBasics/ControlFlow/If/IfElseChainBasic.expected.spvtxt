@@ -52,33 +52,33 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-       %bool = OpTypeBool
-%IfElseChainBasic = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_IfElseChainBasic = OpTypePointer Function %IfElseChainBasic
-         %11 = OpTypeFunction %void %_ptr_Function_IfElseChainBasic
-         %13 = OpTypeFunction %int %_ptr_Function_IfElseChainBasic
-%_ptr_Function_int = OpTypePointer Function %int
-         %15 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
+       %bool = OpTypeBool
        %true = OpConstantTrue %bool
       %int_1 = OpConstant %int 1
       %false = OpConstantFalse %bool
       %int_2 = OpConstant %int 2
       %int_3 = OpConstant %int 3
       %int_4 = OpConstant %int 4
-%IfElseChainBasic_PreConstructor = OpFunction %void None %11
+%IfElseChainBasic = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IfElseChainBasic = OpTypePointer Function %IfElseChainBasic
+         %18 = OpTypeFunction %void %_ptr_Function_IfElseChainBasic
+         %20 = OpTypeFunction %int %_ptr_Function_IfElseChainBasic
+%_ptr_Function_int = OpTypePointer Function %int
+         %22 = OpTypeFunction %void
+%IfElseChainBasic_PreConstructor = OpFunction %void None %18
        %self = OpFunctionParameter %_ptr_Function_IfElseChainBasic
          %27 = OpLabel
                OpReturn
                OpFunctionEnd
-%IfElseChainBasic_DefaultConstructor = OpFunction %void None %11
+%IfElseChainBasic_DefaultConstructor = OpFunction %void None %18
      %self_0 = OpFunctionParameter %_ptr_Function_IfElseChainBasic
          %32 = OpLabel
          %33 = OpFunctionCall %void %IfElseChainBasic_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%IfElseChain0 = OpFunction %int None %13
+%IfElseChain0 = OpFunction %int None %20
      %self_1 = OpFunctionParameter %_ptr_Function_IfElseChainBasic
          %38 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -103,7 +103,7 @@
          %58 = OpLoad %int %a
                OpReturnValue %58
                OpFunctionEnd
-%IfElseChain1 = OpFunction %int None %13
+%IfElseChain1 = OpFunction %int None %20
      %self_2 = OpFunctionParameter %_ptr_Function_IfElseChainBasic
          %63 = OpLabel
         %a_0 = OpVariable %_ptr_Function_int Function
@@ -131,7 +131,7 @@
          %86 = OpLoad %int %a_0
                OpReturnValue %86
                OpFunctionEnd
-%IfElseChain2 = OpFunction %int None %13
+%IfElseChain2 = OpFunction %int None %20
      %self_3 = OpFunctionParameter %_ptr_Function_IfElseChainBasic
          %91 = OpLabel
         %a_1 = OpVariable %_ptr_Function_int Function
@@ -169,7 +169,7 @@
         %124 = OpLoad %int %a_1
                OpReturnValue %124
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %18
      %self_4 = OpFunctionParameter %_ptr_Function_IfElseChainBasic
         %129 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -182,7 +182,7 @@
                OpStore %ret %136
                OpReturn
                OpFunctionEnd
-%IfElseChainBasic_Main_EntryPoint = OpFunction %void None %15
+%IfElseChainBasic_Main_EntryPoint = OpFunction %void None %22
         %141 = OpLabel
      %self_5 = OpVariable %_ptr_Function_IfElseChainBasic Function
         %143 = OpFunctionCall %void %IfElseChainBasic_DefaultConstructor %self_5

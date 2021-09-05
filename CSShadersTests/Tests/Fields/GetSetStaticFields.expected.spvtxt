@@ -9,6 +9,10 @@
                OpEntryPoint Fragment %GetSetStaticFields_Main_EntryPoint "GetSetStaticFields_Main_EntryPoint" %BoolValue %IntValue %UIntValue %FloatValue
                OpExecutionMode %GetSetStaticFields_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
+               OpName %BoolValue "BoolValue"
+               OpName %IntValue "IntValue"
+               OpName %UIntValue "UIntValue"
+               OpName %FloatValue "FloatValue"
                OpName %GetSetStaticFields "GetSetStaticFields"
                OpName %GetSetStaticFields_PreConstructor "GetSetStaticFields_PreConstructor"
                OpName %self "self"
@@ -23,49 +27,45 @@
                OpName %GetSetStaticFields_InitGlobals "GetSetStaticFields_InitGlobals"
                OpName %GetSetStaticFields_Main_EntryPoint "GetSetStaticFields_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %BoolValue "BoolValue"
-               OpName %IntValue "IntValue"
-               OpName %UIntValue "UIntValue"
-               OpName %FloatValue "FloatValue"
                OpName %GetSetStaticFields_Main_EntryPoint "GetSetStaticFields_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %_ptr_Private_bool = OpTypePointer Private %bool
+  %BoolValue = OpVariable %_ptr_Private_bool Private
 %_ptr_Private_int = OpTypePointer Private %int
+   %IntValue = OpVariable %_ptr_Private_int Private
 %_ptr_Private_uint = OpTypePointer Private %uint
+  %UIntValue = OpVariable %_ptr_Private_uint Private
 %_ptr_Private_float = OpTypePointer Private %float
+ %FloatValue = OpVariable %_ptr_Private_float Private
 %GetSetStaticFields = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_GetSetStaticFields = OpTypePointer Function %GetSetStaticFields
-         %17 = OpTypeFunction %void %_ptr_Function_GetSetStaticFields
+         %25 = OpTypeFunction %void %_ptr_Function_GetSetStaticFields
 %_ptr_Function_bool = OpTypePointer Function %bool
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Function_uint = OpTypePointer Function %uint
 %_ptr_Function_float = OpTypePointer Function %float
-         %19 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-      %int_0 = OpConstant %int 0
-     %uint_0 = OpConstant %uint 0
-    %float_0 = OpConstant %float 0
-  %BoolValue = OpVariable %_ptr_Private_bool Private
-   %IntValue = OpVariable %_ptr_Private_int Private
-  %UIntValue = OpVariable %_ptr_Private_uint Private
- %FloatValue = OpVariable %_ptr_Private_float Private
-%GetSetStaticFields_PreConstructor = OpFunction %void None %17
+         %27 = OpTypeFunction %void
+%GetSetStaticFields_PreConstructor = OpFunction %void None %25
        %self = OpFunctionParameter %_ptr_Function_GetSetStaticFields
          %32 = OpLabel
                OpReturn
                OpFunctionEnd
-%GetSetStaticFields_DefaultConstructor = OpFunction %void None %17
+%GetSetStaticFields_DefaultConstructor = OpFunction %void None %25
      %self_0 = OpFunctionParameter %_ptr_Function_GetSetStaticFields
          %37 = OpLabel
          %38 = OpFunctionCall %void %GetSetStaticFields_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %17
+       %Main = OpFunction %void None %25
      %self_1 = OpFunctionParameter %_ptr_Function_GetSetStaticFields
          %43 = OpLabel
   %boolValue = OpVariable %_ptr_Function_bool Function
@@ -94,7 +94,7 @@
                OpStore %floatValue %66
                OpReturn
                OpFunctionEnd
-%GetSetStaticFields_InitGlobals = OpFunction %void None %19
+%GetSetStaticFields_InitGlobals = OpFunction %void None %27
          %71 = OpLabel
                OpStore %BoolValue %false
                OpStore %IntValue %int_0
@@ -102,7 +102,7 @@
                OpStore %FloatValue %float_0
                OpReturn
                OpFunctionEnd
-%GetSetStaticFields_Main_EntryPoint = OpFunction %void None %19
+%GetSetStaticFields_Main_EntryPoint = OpFunction %void None %27
          %79 = OpLabel
      %self_2 = OpVariable %_ptr_Function_GetSetStaticFields Function
          %81 = OpFunctionCall %void %GetSetStaticFields_InitGlobals

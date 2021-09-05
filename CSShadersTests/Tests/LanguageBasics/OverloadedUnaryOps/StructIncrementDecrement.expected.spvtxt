@@ -41,21 +41,21 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
-     %TestV2 = OpTypeStruct %float %float
-       %void = OpTypeVoid
-%_ptr_Function_TestV2 = OpTypePointer Function %TestV2
-          %9 = OpTypeFunction %void %_ptr_Function_TestV2
-%_ptr_Function_float = OpTypePointer Function %float
-         %11 = OpTypeFunction %TestV2 %TestV2
-%StructIncrementDecrement = OpTypeStruct
-%_ptr_Function_StructIncrementDecrement = OpTypePointer Function %StructIncrementDecrement
-         %15 = OpTypeFunction %void %_ptr_Function_StructIncrementDecrement
-         %17 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_0 = OpConstant %uint 0
      %uint_1 = OpConstant %uint 1
     %float_1 = OpConstant %float 1
-%TestV2_PreConstructor = OpFunction %void None %9
+     %TestV2 = OpTypeStruct %float %float
+       %void = OpTypeVoid
+%_ptr_Function_TestV2 = OpTypePointer Function %TestV2
+         %13 = OpTypeFunction %void %_ptr_Function_TestV2
+%_ptr_Function_float = OpTypePointer Function %float
+         %15 = OpTypeFunction %TestV2 %TestV2
+%StructIncrementDecrement = OpTypeStruct
+%_ptr_Function_StructIncrementDecrement = OpTypePointer Function %StructIncrementDecrement
+         %19 = OpTypeFunction %void %_ptr_Function_StructIncrementDecrement
+         %21 = OpTypeFunction %void
+%TestV2_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_TestV2
          %26 = OpLabel
          %27 = OpAccessChain %_ptr_Function_float %self %uint_0
@@ -64,13 +64,13 @@
                OpStore %29 %float_0
                OpReturn
                OpFunctionEnd
-%TestV2_DefaultConstructor = OpFunction %void None %9
+%TestV2_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_TestV2
          %35 = OpLabel
          %36 = OpFunctionCall %void %TestV2_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%op_Increment = OpFunction %TestV2 None %11
+%op_Increment = OpFunction %TestV2 None %15
       %value = OpFunctionParameter %TestV2
          %41 = OpLabel
      %result = OpVariable %_ptr_Function_TestV2 Function
@@ -89,7 +89,7 @@
          %55 = OpLoad %TestV2 %result
                OpReturnValue %55
                OpFunctionEnd
-%op_Decrement = OpFunction %TestV2 None %11
+%op_Decrement = OpFunction %TestV2 None %15
     %value_0 = OpFunctionParameter %TestV2
          %60 = OpLabel
    %result_0 = OpVariable %_ptr_Function_TestV2 Function
@@ -108,18 +108,18 @@
          %74 = OpLoad %TestV2 %result_0
                OpReturnValue %74
                OpFunctionEnd
-%StructIncrementDecrement_PreConstructor = OpFunction %void None %15
+%StructIncrementDecrement_PreConstructor = OpFunction %void None %19
      %self_1 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
          %79 = OpLabel
                OpReturn
                OpFunctionEnd
-%StructIncrementDecrement_DefaultConstructor = OpFunction %void None %15
+%StructIncrementDecrement_DefaultConstructor = OpFunction %void None %19
      %self_2 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
          %84 = OpLabel
          %85 = OpFunctionCall %void %StructIncrementDecrement_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %15
+       %Main = OpFunction %void None %19
      %self_3 = OpFunctionParameter %_ptr_Function_StructIncrementDecrement
          %90 = OpLabel
          %v2 = OpVariable %_ptr_Function_TestV2 Function
@@ -164,7 +164,7 @@
                OpStore %r %127
                OpReturn
                OpFunctionEnd
-%StructIncrementDecrement_Main_EntryPoint = OpFunction %void None %17
+%StructIncrementDecrement_Main_EntryPoint = OpFunction %void None %21
         %134 = OpLabel
      %self_4 = OpVariable %_ptr_Function_StructIncrementDecrement Function
         %136 = OpFunctionCall %void %StructIncrementDecrement_DefaultConstructor %self_4

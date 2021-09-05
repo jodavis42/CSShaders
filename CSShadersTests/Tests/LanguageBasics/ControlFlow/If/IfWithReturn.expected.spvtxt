@@ -26,26 +26,26 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
 %IfWithReturn = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_IfWithReturn = OpTypePointer Function %IfWithReturn
-          %9 = OpTypeFunction %void %_ptr_Function_IfWithReturn
-         %11 = OpTypeFunction %int %_ptr_Function_IfWithReturn
+         %10 = OpTypeFunction %void %_ptr_Function_IfWithReturn
+         %12 = OpTypeFunction %int %_ptr_Function_IfWithReturn
 %_ptr_Function_int = OpTypePointer Function %int
-         %13 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-%IfWithReturn_PreConstructor = OpFunction %void None %9
+         %14 = OpTypeFunction %void
+%IfWithReturn_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_IfWithReturn
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%IfWithReturn_DefaultConstructor = OpFunction %void None %9
+%IfWithReturn_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_IfWithReturn
          %24 = OpLabel
          %25 = OpFunctionCall %void %IfWithReturn_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%IfWithReturn0 = OpFunction %int None %11
+%IfWithReturn0 = OpFunction %int None %12
      %self_1 = OpFunctionParameter %_ptr_Function_IfWithReturn
          %30 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -53,7 +53,7 @@
          %33 = OpLoad %int %a
                OpReturnValue %33
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_2 = OpFunctionParameter %_ptr_Function_IfWithReturn
          %38 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -62,7 +62,7 @@
                OpStore %ret %41
                OpReturn
                OpFunctionEnd
-%IfWithReturn_Main_EntryPoint = OpFunction %void None %13
+%IfWithReturn_Main_EntryPoint = OpFunction %void None %14
          %46 = OpLabel
      %self_3 = OpVariable %_ptr_Function_IfWithReturn Function
          %48 = OpFunctionCall %void %IfWithReturn_DefaultConstructor %self_3

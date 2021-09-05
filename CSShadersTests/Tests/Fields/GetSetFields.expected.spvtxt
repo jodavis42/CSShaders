@@ -29,26 +29,26 @@
                OpName %GetSetFields_Main_EntryPoint "GetSetFields_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
        %uint = OpTypeInt 32 0
+     %uint_0 = OpConstant %uint 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+     %uint_3 = OpConstant %uint 3
 %GetSetFields = OpTypeStruct %bool %int %uint %float
        %void = OpTypeVoid
 %_ptr_Function_GetSetFields = OpTypePointer Function %GetSetFields
-         %13 = OpTypeFunction %void %_ptr_Function_GetSetFields
+         %20 = OpTypeFunction %void %_ptr_Function_GetSetFields
 %_ptr_Function_bool = OpTypePointer Function %bool
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Function_uint = OpTypePointer Function %uint
 %_ptr_Function_float = OpTypePointer Function %float
-         %15 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-     %uint_0 = OpConstant %uint 0
-      %int_0 = OpConstant %int 0
-     %uint_1 = OpConstant %uint 1
-     %uint_2 = OpConstant %uint 2
-    %float_0 = OpConstant %float 0
-     %uint_3 = OpConstant %uint 3
-%GetSetFields_PreConstructor = OpFunction %void None %13
+         %22 = OpTypeFunction %void
+%GetSetFields_PreConstructor = OpFunction %void None %20
        %self = OpFunctionParameter %_ptr_Function_GetSetFields
          %27 = OpLabel
          %28 = OpAccessChain %_ptr_Function_bool %self %uint_0
@@ -61,13 +61,13 @@
                OpStore %34 %float_0
                OpReturn
                OpFunctionEnd
-%GetSetFields_DefaultConstructor = OpFunction %void None %13
+%GetSetFields_DefaultConstructor = OpFunction %void None %20
      %self_0 = OpFunctionParameter %_ptr_Function_GetSetFields
          %40 = OpLabel
          %41 = OpFunctionCall %void %GetSetFields_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %13
+       %Main = OpFunction %void None %20
      %self_1 = OpFunctionParameter %_ptr_Function_GetSetFields
          %46 = OpLabel
   %boolValue = OpVariable %_ptr_Function_bool Function
@@ -108,7 +108,7 @@
                OpStore %floatValue %81
                OpReturn
                OpFunctionEnd
-%GetSetFields_Main_EntryPoint = OpFunction %void None %15
+%GetSetFields_Main_EntryPoint = OpFunction %void None %22
          %86 = OpLabel
      %self_2 = OpVariable %_ptr_Function_GetSetFields Function
          %88 = OpFunctionCall %void %GetSetFields_DefaultConstructor %self_2

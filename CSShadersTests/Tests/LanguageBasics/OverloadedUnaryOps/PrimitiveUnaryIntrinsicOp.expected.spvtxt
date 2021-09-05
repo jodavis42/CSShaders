@@ -24,26 +24,26 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
      %TestV2 = OpTypeVector %float 2
 %PrimitiveUnaryIntrinsicOp = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_PrimitiveUnaryIntrinsicOp = OpTypePointer Function %PrimitiveUnaryIntrinsicOp
-         %11 = OpTypeFunction %void %_ptr_Function_PrimitiveUnaryIntrinsicOp
+         %12 = OpTypeFunction %void %_ptr_Function_PrimitiveUnaryIntrinsicOp
 %_ptr_Function_TestV2 = OpTypePointer Function %TestV2
-         %13 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%PrimitiveUnaryIntrinsicOp_PreConstructor = OpFunction %void None %11
+         %14 = OpTypeFunction %void
+%PrimitiveUnaryIntrinsicOp_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_PrimitiveUnaryIntrinsicOp
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%PrimitiveUnaryIntrinsicOp_DefaultConstructor = OpFunction %void None %11
+%PrimitiveUnaryIntrinsicOp_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryIntrinsicOp
          %24 = OpLabel
          %25 = OpFunctionCall %void %PrimitiveUnaryIntrinsicOp_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %12
      %self_1 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryIntrinsicOp
          %30 = OpLabel
      %result = OpVariable %_ptr_Function_TestV2 Function
@@ -53,7 +53,7 @@
                OpStore %result %34
                OpReturn
                OpFunctionEnd
-%PrimitiveUnaryIntrinsicOp_Main_EntryPoint = OpFunction %void None %13
+%PrimitiveUnaryIntrinsicOp_Main_EntryPoint = OpFunction %void None %14
          %39 = OpLabel
      %self_2 = OpVariable %_ptr_Function_PrimitiveUnaryIntrinsicOp Function
          %41 = OpFunctionCall %void %PrimitiveUnaryIntrinsicOp_DefaultConstructor %self_2

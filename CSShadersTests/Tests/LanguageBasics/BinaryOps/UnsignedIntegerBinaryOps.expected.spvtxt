@@ -24,30 +24,30 @@
                OpName %UnsignedIntegerBinaryOps_Main_EntryPoint "UnsignedIntegerBinaryOps_Main_EntryPoint"
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
+     %uint_0 = OpConstant %uint 0
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
         %int = OpTypeInt 32 1
+      %int_2 = OpConstant %int 2
 %UnsignedIntegerBinaryOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_UnsignedIntegerBinaryOps = OpTypePointer Function %UnsignedIntegerBinaryOps
-         %11 = OpTypeFunction %void %_ptr_Function_UnsignedIntegerBinaryOps
+         %14 = OpTypeFunction %void %_ptr_Function_UnsignedIntegerBinaryOps
 %_ptr_Function_uint = OpTypePointer Function %uint
 %_ptr_Function_bool = OpTypePointer Function %bool
-         %13 = OpTypeFunction %void
-     %uint_0 = OpConstant %uint 0
-      %false = OpConstantFalse %bool
-      %int_2 = OpConstant %int 2
-%UnsignedIntegerBinaryOps_PreConstructor = OpFunction %void None %11
+         %16 = OpTypeFunction %void
+%UnsignedIntegerBinaryOps_PreConstructor = OpFunction %void None %14
        %self = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
          %21 = OpLabel
                OpReturn
                OpFunctionEnd
-%UnsignedIntegerBinaryOps_DefaultConstructor = OpFunction %void None %11
+%UnsignedIntegerBinaryOps_DefaultConstructor = OpFunction %void None %14
      %self_0 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
          %26 = OpLabel
          %27 = OpFunctionCall %void %UnsignedIntegerBinaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %14
      %self_1 = OpFunctionParameter %_ptr_Function_UnsignedIntegerBinaryOps
          %32 = OpLabel
           %u = OpVariable %_ptr_Function_uint Function
@@ -116,7 +116,7 @@
                OpStore %u %95
                OpReturn
                OpFunctionEnd
-%UnsignedIntegerBinaryOps_Main_EntryPoint = OpFunction %void None %13
+%UnsignedIntegerBinaryOps_Main_EntryPoint = OpFunction %void None %16
         %100 = OpLabel
      %self_2 = OpVariable %_ptr_Function_UnsignedIntegerBinaryOps Function
         %102 = OpFunctionCall %void %UnsignedIntegerBinaryOps_DefaultConstructor %self_2

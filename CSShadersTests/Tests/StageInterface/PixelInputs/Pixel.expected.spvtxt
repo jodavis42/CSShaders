@@ -24,6 +24,7 @@
                OpMemberName %Pixel_Inputs 1 "Value2"
                OpMemberName %Pixel_Inputs 2 "V2"
                OpMemberName %Pixel_Inputs 3 "TestStruct"
+               OpName %In "In"
                OpName %TestStruct_PreConstructor "TestStruct_PreConstructor"
                OpName %self "self"
                OpName %TestStruct_DefaultConstructor "TestStruct_DefaultConstructor"
@@ -39,50 +40,49 @@
                OpName %self_4 "self"
                OpName %Pixel_Main_EntryPoint "Pixel_Main_EntryPoint"
                OpName %self_5 "self"
-               OpName %In "In"
                OpName %Pixel_Main_EntryPoint "Pixel_Main_EntryPoint"
                OpName %self_5 "self"
                OpDecorate %Pixel_Inputs Block
                OpDecorate %In Location 0
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
-%TestVectorPrimitive = OpTypeVector %float 2
- %TestStruct = OpTypeStruct %TestVectorPrimitive %float
-       %void = OpTypeVoid
-%_ptr_Function_TestStruct = OpTypePointer Function %TestStruct
-         %11 = OpTypeFunction %void %_ptr_Function_TestStruct
-%_ptr_Function_float = OpTypePointer Function %float
-      %Pixel = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
-%_ptr_Function_Pixel = OpTypePointer Function %Pixel
-         %15 = OpTypeFunction %void %_ptr_Function_Pixel
-%_ptr_Input_float = OpTypePointer Input %float
-%Pixel_Inputs = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
-%_ptr_Input_Pixel_Inputs = OpTypePointer Input %Pixel_Inputs
-%_ptr_Input_TestVectorPrimitive = OpTypePointer Input %TestVectorPrimitive
-%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
-%_ptr_Input_TestStruct = OpTypePointer Input %TestStruct
-         %23 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
     %float_1 = OpConstant %float 1
      %uint_0 = OpConstant %uint 0
      %uint_3 = OpConstant %uint 3
      %uint_2 = OpConstant %uint 2
+%TestVectorPrimitive = OpTypeVector %float 2
+ %TestStruct = OpTypeStruct %TestVectorPrimitive %float
+       %void = OpTypeVoid
+%_ptr_Function_TestStruct = OpTypePointer Function %TestStruct
+         %17 = OpTypeFunction %void %_ptr_Function_TestStruct
+%_ptr_Function_float = OpTypePointer Function %float
+      %Pixel = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
+%_ptr_Function_Pixel = OpTypePointer Function %Pixel
+         %21 = OpTypeFunction %void %_ptr_Function_Pixel
+%_ptr_Input_float = OpTypePointer Input %float
+%Pixel_Inputs = OpTypeStruct %float %float %TestVectorPrimitive %TestStruct
+%_ptr_Input_Pixel_Inputs = OpTypePointer Input %Pixel_Inputs
+%_ptr_Input_TestVectorPrimitive = OpTypePointer Input %TestVectorPrimitive
+%_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
+%_ptr_Input_TestStruct = OpTypePointer Input %TestStruct
+         %29 = OpTypeFunction %void
          %In = OpVariable %_ptr_Input_Pixel_Inputs Input
-%TestStruct_PreConstructor = OpFunction %void None %11
+%TestStruct_PreConstructor = OpFunction %void None %17
        %self = OpFunctionParameter %_ptr_Function_TestStruct
          %35 = OpLabel
          %36 = OpAccessChain %_ptr_Function_float %self %uint_1
                OpStore %36 %float_0
                OpReturn
                OpFunctionEnd
-%TestStruct_DefaultConstructor = OpFunction %void None %11
+%TestStruct_DefaultConstructor = OpFunction %void None %17
      %self_0 = OpFunctionParameter %_ptr_Function_TestStruct
          %42 = OpLabel
          %43 = OpFunctionCall %void %TestStruct_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%Pixel_PreConstructor = OpFunction %void None %15
+%Pixel_PreConstructor = OpFunction %void None %21
      %self_1 = OpFunctionParameter %_ptr_Function_Pixel
          %48 = OpLabel
 %tempTestStruct = OpVariable %_ptr_Function_TestStruct Function
@@ -96,18 +96,18 @@
                OpStore %56 %55
                OpReturn
                OpFunctionEnd
-%Pixel_DefaultConstructor = OpFunction %void None %15
+%Pixel_DefaultConstructor = OpFunction %void None %21
      %self_2 = OpFunctionParameter %_ptr_Function_Pixel
          %62 = OpLabel
          %63 = OpFunctionCall %void %Pixel_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %15
+       %Main = OpFunction %void None %21
      %self_3 = OpFunctionParameter %_ptr_Function_Pixel
          %68 = OpLabel
                OpReturn
                OpFunctionEnd
-%Pixel_CopyInputs = OpFunction %void None %15
+%Pixel_CopyInputs = OpFunction %void None %21
      %self_4 = OpFunctionParameter %_ptr_Function_Pixel
          %73 = OpLabel
          %74 = OpAccessChain %_ptr_Input_float %In %uint_0
@@ -128,7 +128,7 @@
                OpStore %87 %88
                OpReturn
                OpFunctionEnd
-%Pixel_Main_EntryPoint = OpFunction %void None %23
+%Pixel_Main_EntryPoint = OpFunction %void None %29
          %93 = OpLabel
      %self_5 = OpVariable %_ptr_Function_Pixel Function
          %95 = OpFunctionCall %void %Pixel_DefaultConstructor %self_5

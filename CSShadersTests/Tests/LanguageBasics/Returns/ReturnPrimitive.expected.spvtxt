@@ -25,31 +25,31 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
 %ReturnPrimitive = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_ReturnPrimitive = OpTypePointer Function %ReturnPrimitive
-          %9 = OpTypeFunction %void %_ptr_Function_ReturnPrimitive
-         %11 = OpTypeFunction %int %_ptr_Function_ReturnPrimitive
+         %10 = OpTypeFunction %void %_ptr_Function_ReturnPrimitive
+         %12 = OpTypeFunction %int %_ptr_Function_ReturnPrimitive
 %_ptr_Function_int = OpTypePointer Function %int
-         %13 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-%ReturnPrimitive_PreConstructor = OpFunction %void None %9
+         %14 = OpTypeFunction %void
+%ReturnPrimitive_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_ReturnPrimitive
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%ReturnPrimitive_DefaultConstructor = OpFunction %void None %9
+%ReturnPrimitive_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
          %24 = OpLabel
          %25 = OpFunctionCall %void %ReturnPrimitive_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-  %IntReturn = OpFunction %int None %11
+  %IntReturn = OpFunction %int None %12
      %self_1 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
          %30 = OpLabel
                OpReturnValue %int_1
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_2 = OpFunctionParameter %_ptr_Function_ReturnPrimitive
          %35 = OpLabel
           %i = OpVariable %_ptr_Function_int Function
@@ -57,7 +57,7 @@
                OpStore %i %37
                OpReturn
                OpFunctionEnd
-%ReturnPrimitive_Main_EntryPoint = OpFunction %void None %13
+%ReturnPrimitive_Main_EntryPoint = OpFunction %void None %14
          %42 = OpLabel
      %self_3 = OpVariable %_ptr_Function_ReturnPrimitive Function
          %44 = OpFunctionCall %void %ReturnPrimitive_DefaultConstructor %self_3

@@ -23,25 +23,25 @@
                OpName %BooleanBinaryOps_Main_EntryPoint "BooleanBinaryOps_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
 %BooleanBinaryOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_BooleanBinaryOps = OpTypePointer Function %BooleanBinaryOps
-          %7 = OpTypeFunction %void %_ptr_Function_BooleanBinaryOps
+          %8 = OpTypeFunction %void %_ptr_Function_BooleanBinaryOps
 %_ptr_Function_bool = OpTypePointer Function %bool
-          %9 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-%BooleanBinaryOps_PreConstructor = OpFunction %void None %7
+         %10 = OpTypeFunction %void
+%BooleanBinaryOps_PreConstructor = OpFunction %void None %8
        %self = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
          %15 = OpLabel
                OpReturn
                OpFunctionEnd
-%BooleanBinaryOps_DefaultConstructor = OpFunction %void None %7
+%BooleanBinaryOps_DefaultConstructor = OpFunction %void None %8
      %self_0 = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
          %20 = OpLabel
          %21 = OpFunctionCall %void %BooleanBinaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %8
      %self_1 = OpFunctionParameter %_ptr_Function_BooleanBinaryOps
          %26 = OpLabel
           %b = OpVariable %_ptr_Function_bool Function
@@ -62,7 +62,7 @@
                OpStore %r %41
                OpReturn
                OpFunctionEnd
-%BooleanBinaryOps_Main_EntryPoint = OpFunction %void None %9
+%BooleanBinaryOps_Main_EntryPoint = OpFunction %void None %10
          %46 = OpLabel
      %self_2 = OpVariable %_ptr_Function_BooleanBinaryOps Function
          %48 = OpFunctionCall %void %BooleanBinaryOps_DefaultConstructor %self_2

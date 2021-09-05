@@ -24,26 +24,26 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+      %int_1 = OpConstant %int 1
    %Unsigned = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_Unsigned = OpTypePointer Function %Unsigned
-          %9 = OpTypeFunction %void %_ptr_Function_Unsigned
+         %11 = OpTypeFunction %void %_ptr_Function_Unsigned
 %_ptr_Function_int = OpTypePointer Function %int
-         %11 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-      %int_1 = OpConstant %int 1
-%Unsigned_PreConstructor = OpFunction %void None %9
+         %13 = OpTypeFunction %void
+%Unsigned_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_Unsigned
          %18 = OpLabel
                OpReturn
                OpFunctionEnd
-%Unsigned_DefaultConstructor = OpFunction %void None %9
+%Unsigned_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_Unsigned
          %23 = OpLabel
          %24 = OpFunctionCall %void %Unsigned_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_Unsigned
          %29 = OpLabel
           %u = OpVariable %_ptr_Function_int Function
@@ -82,7 +82,7 @@
                OpStore %r %60
                OpReturn
                OpFunctionEnd
-%Unsigned_Main_EntryPoint = OpFunction %void None %11
+%Unsigned_Main_EntryPoint = OpFunction %void None %13
          %67 = OpLabel
      %self_2 = OpVariable %_ptr_Function_Unsigned Function
          %69 = OpFunctionCall %void %Unsigned_DefaultConstructor %self_2

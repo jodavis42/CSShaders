@@ -23,32 +23,32 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %ImplicitDefaultConstructorFloatIntrinsic = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic = OpTypePointer Function %ImplicitDefaultConstructorFloatIntrinsic
-          %9 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
+         %10 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
 %_ptr_Function_float = OpTypePointer Function %float
-         %11 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%ImplicitDefaultConstructorFloatIntrinsic_PreConstructor = OpFunction %void None %9
+         %12 = OpTypeFunction %void
+%ImplicitDefaultConstructorFloatIntrinsic_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
          %17 = OpLabel
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor = OpFunction %void None %9
+%ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
          %22 = OpLabel
          %23 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic
          %28 = OpLabel
     %myFloat = OpVariable %_ptr_Function_float Function
                OpStore %myFloat %float_0
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint = OpFunction %void None %11
+%ImplicitDefaultConstructorFloatIntrinsic_Main_EntryPoint = OpFunction %void None %12
          %34 = OpLabel
      %self_2 = OpVariable %_ptr_Function_ImplicitDefaultConstructorFloatIntrinsic Function
          %36 = OpFunctionCall %void %ImplicitDefaultConstructorFloatIntrinsic_DefaultConstructor %self_2

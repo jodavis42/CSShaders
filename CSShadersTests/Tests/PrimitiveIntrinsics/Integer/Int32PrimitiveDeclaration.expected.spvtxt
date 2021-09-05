@@ -24,32 +24,32 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %Int32 = OpTypeInt 32 1
+    %Int32_0 = OpConstant %Int32 0
 %Int32PrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_Int32PrimitiveDeclarationTest = OpTypePointer Function %Int32PrimitiveDeclarationTest
-          %9 = OpTypeFunction %void %_ptr_Function_Int32PrimitiveDeclarationTest
+         %10 = OpTypeFunction %void %_ptr_Function_Int32PrimitiveDeclarationTest
 %_ptr_Function_Int32 = OpTypePointer Function %Int32
-         %11 = OpTypeFunction %void
-    %Int32_0 = OpConstant %Int32 0
-%Int32PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
+         %12 = OpTypeFunction %void
+%Int32PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
          %17 = OpLabel
                OpReturn
                OpFunctionEnd
-%Int32PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
+%Int32PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
          %22 = OpLabel
          %23 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_Int32PrimitiveDeclarationTest
          %28 = OpLabel
    %int32Val = OpVariable %_ptr_Function_Int32 Function
                OpStore %int32Val %Int32_0
                OpReturn
                OpFunctionEnd
-%Int32PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
+%Int32PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %12
          %34 = OpLabel
      %self_2 = OpVariable %_ptr_Function_Int32PrimitiveDeclarationTest Function
          %36 = OpFunctionCall %void %Int32PrimitiveDeclarationTest_DefaultConstructor %self_2

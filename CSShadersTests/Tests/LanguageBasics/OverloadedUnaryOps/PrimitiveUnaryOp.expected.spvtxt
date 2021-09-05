@@ -26,33 +26,33 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
      %TestV2 = OpTypeVector %float 2
-          %7 = OpTypeFunction %TestV2 %TestV2
+          %8 = OpTypeFunction %TestV2 %TestV2
 %PrimitiveUnaryOp = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_PrimitiveUnaryOp = OpTypePointer Function %PrimitiveUnaryOp
-         %13 = OpTypeFunction %void %_ptr_Function_PrimitiveUnaryOp
+         %14 = OpTypeFunction %void %_ptr_Function_PrimitiveUnaryOp
 %_ptr_Function_TestV2 = OpTypePointer Function %TestV2
-         %15 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%op_UnaryNegation = OpFunction %TestV2 None %7
+         %16 = OpTypeFunction %void
+%op_UnaryNegation = OpFunction %TestV2 None %8
       %value = OpFunctionParameter %TestV2
          %21 = OpLabel
          %22 = OpFNegate %TestV2 %value
                OpReturnValue %22
                OpFunctionEnd
-%PrimitiveUnaryOp_PreConstructor = OpFunction %void None %13
+%PrimitiveUnaryOp_PreConstructor = OpFunction %void None %14
        %self = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
          %27 = OpLabel
                OpReturn
                OpFunctionEnd
-%PrimitiveUnaryOp_DefaultConstructor = OpFunction %void None %13
+%PrimitiveUnaryOp_DefaultConstructor = OpFunction %void None %14
      %self_0 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
          %32 = OpLabel
          %33 = OpFunctionCall %void %PrimitiveUnaryOp_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %13
+       %Main = OpFunction %void None %14
      %self_1 = OpFunctionParameter %_ptr_Function_PrimitiveUnaryOp
          %38 = OpLabel
      %result = OpVariable %_ptr_Function_TestV2 Function
@@ -61,7 +61,7 @@
                OpStore %result %41
                OpReturn
                OpFunctionEnd
-%PrimitiveUnaryOp_Main_EntryPoint = OpFunction %void None %15
+%PrimitiveUnaryOp_Main_EntryPoint = OpFunction %void None %16
          %46 = OpLabel
      %self_2 = OpVariable %_ptr_Function_PrimitiveUnaryOp Function
          %48 = OpFunctionCall %void %PrimitiveUnaryOp_DefaultConstructor %self_2

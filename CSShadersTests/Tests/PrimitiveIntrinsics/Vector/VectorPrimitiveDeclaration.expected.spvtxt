@@ -24,26 +24,26 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %TestVectorPrimitive = OpTypeVector %float 2
 %VectorPrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_VectorPrimitiveDeclarationTest = OpTypePointer Function %VectorPrimitiveDeclarationTest
-         %11 = OpTypeFunction %void %_ptr_Function_VectorPrimitiveDeclarationTest
+         %12 = OpTypeFunction %void %_ptr_Function_VectorPrimitiveDeclarationTest
 %_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
-         %13 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%VectorPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %11
+         %14 = OpTypeFunction %void
+%VectorPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_VectorPrimitiveDeclarationTest
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%VectorPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %11
+%VectorPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_VectorPrimitiveDeclarationTest
          %24 = OpLabel
          %25 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %12
      %self_1 = OpFunctionParameter %_ptr_Function_VectorPrimitiveDeclarationTest
          %30 = OpLabel
     %vector0 = OpVariable %_ptr_Function_TestVectorPrimitive Function
@@ -51,7 +51,7 @@
                OpStore %vector0 %32
                OpReturn
                OpFunctionEnd
-%VectorPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %13
+%VectorPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %14
          %37 = OpLabel
      %self_2 = OpVariable %_ptr_Function_VectorPrimitiveDeclarationTest Function
          %39 = OpFunctionCall %void %VectorPrimitiveDeclarationTest_DefaultConstructor %self_2

@@ -67,34 +67,34 @@
                OpName %ShortCircuitIf_Main_EntryPoint "ShortCircuitIf_Main_EntryPoint"
                OpName %self_5 "self"
        %bool = OpTypeBool
-       %uint = OpTypeInt 32 0
-        %int = OpTypeInt 32 1
-%ShortCircuitIf = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_ShortCircuitIf = OpTypePointer Function %ShortCircuitIf
-         %11 = OpTypeFunction %void %_ptr_Function_ShortCircuitIf
-         %13 = OpTypeFunction %int %_ptr_Function_ShortCircuitIf
-%_ptr_Function_bool = OpTypePointer Function %bool
-%_ptr_Function_int = OpTypePointer Function %int
-         %15 = OpTypeFunction %void
        %true = OpConstantTrue %bool
       %false = OpConstantFalse %bool
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
       %int_0 = OpConstant %int 0
       %int_3 = OpConstant %int 3
       %int_1 = OpConstant %int 1
       %int_2 = OpConstant %int 2
-%ShortCircuitIf_PreConstructor = OpFunction %void None %11
+%ShortCircuitIf = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ShortCircuitIf = OpTypePointer Function %ShortCircuitIf
+         %17 = OpTypeFunction %void %_ptr_Function_ShortCircuitIf
+         %19 = OpTypeFunction %int %_ptr_Function_ShortCircuitIf
+%_ptr_Function_bool = OpTypePointer Function %bool
+%_ptr_Function_int = OpTypePointer Function %int
+         %21 = OpTypeFunction %void
+%ShortCircuitIf_PreConstructor = OpFunction %void None %17
        %self = OpFunctionParameter %_ptr_Function_ShortCircuitIf
          %26 = OpLabel
                OpReturn
                OpFunctionEnd
-%ShortCircuitIf_DefaultConstructor = OpFunction %void None %11
+%ShortCircuitIf_DefaultConstructor = OpFunction %void None %17
      %self_0 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
          %31 = OpLabel
          %32 = OpFunctionCall %void %ShortCircuitIf_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%ShortCircuitIf0 = OpFunction %int None %13
+%ShortCircuitIf0 = OpFunction %int None %19
      %self_1 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
          %37 = OpLabel
         %lhs = OpVariable %_ptr_Function_bool Function
@@ -121,7 +121,7 @@
    %ifMerge0 = OpLabel
                OpReturnValue %int_3
                OpFunctionEnd
-%ShortCircuitIf1 = OpFunction %int None %13
+%ShortCircuitIf1 = OpFunction %int None %19
      %self_2 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
          %64 = OpLabel
       %lhs_0 = OpVariable %_ptr_Function_bool Function
@@ -168,7 +168,7 @@
  %ifMerge0_0 = OpLabel
                OpReturnValue %int_3
                OpFunctionEnd
-%ShortCircuitIf2 = OpFunction %int None %13
+%ShortCircuitIf2 = OpFunction %int None %19
      %self_3 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
         %111 = OpLabel
       %lhs_1 = OpVariable %_ptr_Function_bool Function
@@ -217,7 +217,7 @@
  %ifMerge0_1 = OpLabel
                OpUnreachable
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %17
      %self_4 = OpFunctionParameter %_ptr_Function_ShortCircuitIf
         %160 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -230,7 +230,7 @@
                OpStore %ret %167
                OpReturn
                OpFunctionEnd
-%ShortCircuitIf_Main_EntryPoint = OpFunction %void None %15
+%ShortCircuitIf_Main_EntryPoint = OpFunction %void None %21
         %172 = OpLabel
      %self_5 = OpVariable %_ptr_Function_ShortCircuitIf Function
         %174 = OpFunctionCall %void %ShortCircuitIf_DefaultConstructor %self_5

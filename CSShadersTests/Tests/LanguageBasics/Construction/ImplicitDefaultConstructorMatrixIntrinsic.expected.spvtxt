@@ -25,27 +25,27 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
          %V2 = OpTypeVector %float 2
        %M2x2 = OpTypeMatrix %V2 2
 %ImplicitDefaultConstructorMatrixIntrinsic = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic = OpTypePointer Function %ImplicitDefaultConstructorMatrixIntrinsic
-         %13 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
+         %14 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
 %_ptr_Function_M2x2 = OpTypePointer Function %M2x2
-         %15 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor = OpFunction %void None %13
+         %16 = OpTypeFunction %void
+%ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor = OpFunction %void None %14
        %self = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
          %21 = OpLabel
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor = OpFunction %void None %13
+%ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor = OpFunction %void None %14
      %self_0 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
          %26 = OpLabel
          %27 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %13
+       %Main = OpFunction %void None %14
      %self_1 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic
          %32 = OpLabel
    %myMatrix = OpVariable %_ptr_Function_M2x2 Function
@@ -54,7 +54,7 @@
                OpStore %myMatrix %35
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint = OpFunction %void None %15
+%ImplicitDefaultConstructorMatrixIntrinsic_Main_EntryPoint = OpFunction %void None %16
          %40 = OpLabel
      %self_2 = OpVariable %_ptr_Function_ImplicitDefaultConstructorMatrixIntrinsic Function
          %42 = OpFunctionCall %void %ImplicitDefaultConstructorMatrixIntrinsic_DefaultConstructor %self_2

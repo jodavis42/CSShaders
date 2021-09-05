@@ -30,22 +30,22 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+     %uint_1 = OpConstant %uint 1
     %MyClass = OpTypeStruct %int %float
        %void = OpTypeVoid
 %_ptr_Function_MyClass = OpTypePointer Function %MyClass
-         %11 = OpTypeFunction %void %_ptr_Function_MyClass
+         %15 = OpTypeFunction %void %_ptr_Function_MyClass
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Function_float = OpTypePointer Function %float
 %ImplicitDefaultConstructor = OpTypeStruct
 %_ptr_Function_ImplicitDefaultConstructor = OpTypePointer Function %ImplicitDefaultConstructor
-         %15 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructor
-         %17 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-     %uint_0 = OpConstant %uint 0
-    %float_0 = OpConstant %float 0
-     %uint_1 = OpConstant %uint 1
-%MyClass_PreConstructor = OpFunction %void None %11
+         %19 = OpTypeFunction %void %_ptr_Function_ImplicitDefaultConstructor
+         %21 = OpTypeFunction %void
+%MyClass_PreConstructor = OpFunction %void None %15
        %self = OpFunctionParameter %_ptr_Function_MyClass
          %26 = OpLabel
          %27 = OpAccessChain %_ptr_Function_int %self %uint_0
@@ -54,31 +54,31 @@
                OpStore %29 %float_0
                OpReturn
                OpFunctionEnd
-%MyClass_DefaultConstructor = OpFunction %void None %11
+%MyClass_DefaultConstructor = OpFunction %void None %15
      %self_0 = OpFunctionParameter %_ptr_Function_MyClass
          %35 = OpLabel
          %36 = OpFunctionCall %void %MyClass_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructor_PreConstructor = OpFunction %void None %15
+%ImplicitDefaultConstructor_PreConstructor = OpFunction %void None %19
      %self_1 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructor
          %41 = OpLabel
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructor_DefaultConstructor = OpFunction %void None %15
+%ImplicitDefaultConstructor_DefaultConstructor = OpFunction %void None %19
      %self_2 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructor
          %46 = OpLabel
          %47 = OpFunctionCall %void %ImplicitDefaultConstructor_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %15
+       %Main = OpFunction %void None %19
      %self_3 = OpFunctionParameter %_ptr_Function_ImplicitDefaultConstructor
          %52 = OpLabel
     %myClass = OpVariable %_ptr_Function_MyClass Function
          %54 = OpFunctionCall %void %MyClass_DefaultConstructor %myClass
                OpReturn
                OpFunctionEnd
-%ImplicitDefaultConstructor_Main_EntryPoint = OpFunction %void None %17
+%ImplicitDefaultConstructor_Main_EntryPoint = OpFunction %void None %21
          %58 = OpLabel
      %self_4 = OpVariable %_ptr_Function_ImplicitDefaultConstructor Function
          %60 = OpFunctionCall %void %ImplicitDefaultConstructor_DefaultConstructor %self_4

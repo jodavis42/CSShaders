@@ -25,28 +25,28 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
 %FloatBinaryOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_FloatBinaryOps = OpTypePointer Function %FloatBinaryOps
-         %11 = OpTypeFunction %void %_ptr_Function_FloatBinaryOps
+         %13 = OpTypeFunction %void %_ptr_Function_FloatBinaryOps
 %_ptr_Function_float = OpTypePointer Function %float
 %_ptr_Function_bool = OpTypePointer Function %bool
-         %13 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-      %false = OpConstantFalse %bool
-%FloatBinaryOps_PreConstructor = OpFunction %void None %11
+         %15 = OpTypeFunction %void
+%FloatBinaryOps_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_FloatBinaryOps
          %20 = OpLabel
                OpReturn
                OpFunctionEnd
-%FloatBinaryOps_DefaultConstructor = OpFunction %void None %11
+%FloatBinaryOps_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
          %25 = OpLabel
          %26 = OpFunctionCall %void %FloatBinaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %13
      %self_1 = OpFunctionParameter %_ptr_Function_FloatBinaryOps
          %31 = OpLabel
           %f = OpVariable %_ptr_Function_float Function
@@ -97,7 +97,7 @@
                OpStore %b %76
                OpReturn
                OpFunctionEnd
-%FloatBinaryOps_Main_EntryPoint = OpFunction %void None %13
+%FloatBinaryOps_Main_EntryPoint = OpFunction %void None %15
          %81 = OpLabel
      %self_2 = OpVariable %_ptr_Function_FloatBinaryOps Function
          %83 = OpFunctionCall %void %FloatBinaryOps_DefaultConstructor %self_2

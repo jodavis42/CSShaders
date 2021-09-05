@@ -40,43 +40,43 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-      %float = OpTypeFloat 32
-       %bool = OpTypeBool
-    %Struct1 = OpTypeStruct %int
-       %void = OpTypeVoid
-%_ptr_Function_Struct1 = OpTypePointer Function %Struct1
-         %13 = OpTypeFunction %void %_ptr_Function_Struct1
-%_ptr_Function_int = OpTypePointer Function %int
-    %Struct2 = OpTypeStruct %Struct1 %float
-%_ptr_Function_Struct2 = OpTypePointer Function %Struct2
-         %17 = OpTypeFunction %void %_ptr_Function_Struct2
-%_ptr_Function_float = OpTypePointer Function %float
-%NestedStructs = OpTypeStruct %bool %Struct2 %Struct1 %float
-%_ptr_Function_NestedStructs = OpTypePointer Function %NestedStructs
-         %21 = OpTypeFunction %void %_ptr_Function_NestedStructs
-%_ptr_Function_bool = OpTypePointer Function %bool
-         %23 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
      %uint_0 = OpConstant %uint 0
+      %float = OpTypeFloat 32
     %float_0 = OpConstant %float 0
      %uint_1 = OpConstant %uint 1
+       %bool = OpTypeBool
       %false = OpConstantFalse %bool
      %uint_2 = OpConstant %uint 2
      %uint_3 = OpConstant %uint 3
-%Struct1_PreConstructor = OpFunction %void None %13
+    %Struct1 = OpTypeStruct %int
+       %void = OpTypeVoid
+%_ptr_Function_Struct1 = OpTypePointer Function %Struct1
+         %20 = OpTypeFunction %void %_ptr_Function_Struct1
+%_ptr_Function_int = OpTypePointer Function %int
+    %Struct2 = OpTypeStruct %Struct1 %float
+%_ptr_Function_Struct2 = OpTypePointer Function %Struct2
+         %24 = OpTypeFunction %void %_ptr_Function_Struct2
+%_ptr_Function_float = OpTypePointer Function %float
+%NestedStructs = OpTypeStruct %bool %Struct2 %Struct1 %float
+%_ptr_Function_NestedStructs = OpTypePointer Function %NestedStructs
+         %28 = OpTypeFunction %void %_ptr_Function_NestedStructs
+%_ptr_Function_bool = OpTypePointer Function %bool
+         %30 = OpTypeFunction %void
+%Struct1_PreConstructor = OpFunction %void None %20
        %self = OpFunctionParameter %_ptr_Function_Struct1
          %35 = OpLabel
          %36 = OpAccessChain %_ptr_Function_int %self %uint_0
                OpStore %36 %int_0
                OpReturn
                OpFunctionEnd
-%Struct1_DefaultConstructor = OpFunction %void None %13
+%Struct1_DefaultConstructor = OpFunction %void None %20
      %self_0 = OpFunctionParameter %_ptr_Function_Struct1
          %42 = OpLabel
          %43 = OpFunctionCall %void %Struct1_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%Struct2_PreConstructor = OpFunction %void None %17
+%Struct2_PreConstructor = OpFunction %void None %24
      %self_1 = OpFunctionParameter %_ptr_Function_Struct2
          %48 = OpLabel
 %tempStruct1 = OpVariable %_ptr_Function_Struct1 Function
@@ -88,13 +88,13 @@
                OpStore %54 %float_0
                OpReturn
                OpFunctionEnd
-%Struct2_DefaultConstructor = OpFunction %void None %17
+%Struct2_DefaultConstructor = OpFunction %void None %24
      %self_2 = OpFunctionParameter %_ptr_Function_Struct2
          %60 = OpLabel
          %61 = OpFunctionCall %void %Struct2_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-%NestedStructs_PreConstructor = OpFunction %void None %21
+%NestedStructs_PreConstructor = OpFunction %void None %28
      %self_3 = OpFunctionParameter %_ptr_Function_NestedStructs
          %66 = OpLabel
 %tempStruct2 = OpVariable %_ptr_Function_Struct2 Function
@@ -113,13 +113,13 @@
                OpStore %79 %float_0
                OpReturn
                OpFunctionEnd
-%NestedStructs_DefaultConstructor = OpFunction %void None %21
+%NestedStructs_DefaultConstructor = OpFunction %void None %28
      %self_4 = OpFunctionParameter %_ptr_Function_NestedStructs
          %85 = OpLabel
          %86 = OpFunctionCall %void %NestedStructs_PreConstructor %self_4
                OpReturn
                OpFunctionEnd
-%NestedStructs_EntryPoint = OpFunction %void None %23
+%NestedStructs_EntryPoint = OpFunction %void None %30
          %90 = OpLabel
      %self_5 = OpVariable %_ptr_Function_NestedStructs Function
          %92 = OpFunctionCall %void %NestedStructs_DefaultConstructor %self_5

@@ -25,32 +25,32 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
        %Int8 = OpTypeInt 8 1
+     %Int8_0 = OpConstant %Int8 0
 %Int8PrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_Int8PrimitiveDeclarationTest = OpTypePointer Function %Int8PrimitiveDeclarationTest
-          %9 = OpTypeFunction %void %_ptr_Function_Int8PrimitiveDeclarationTest
+         %10 = OpTypeFunction %void %_ptr_Function_Int8PrimitiveDeclarationTest
 %_ptr_Function_Int8 = OpTypePointer Function %Int8
-         %11 = OpTypeFunction %void
-     %Int8_0 = OpConstant %Int8 0
-%Int8PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
+         %12 = OpTypeFunction %void
+%Int8PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_Int8PrimitiveDeclarationTest
          %17 = OpLabel
                OpReturn
                OpFunctionEnd
-%Int8PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
+%Int8PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_Int8PrimitiveDeclarationTest
          %22 = OpLabel
          %23 = OpFunctionCall %void %Int8PrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_Int8PrimitiveDeclarationTest
          %28 = OpLabel
     %int8Val = OpVariable %_ptr_Function_Int8 Function
                OpStore %int8Val %Int8_0
                OpReturn
                OpFunctionEnd
-%Int8PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
+%Int8PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %12
          %34 = OpLabel
      %self_2 = OpVariable %_ptr_Function_Int8PrimitiveDeclarationTest Function
          %36 = OpFunctionCall %void %Int8PrimitiveDeclarationTest_DefaultConstructor %self_2

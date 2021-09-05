@@ -36,30 +36,30 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %OpOuterProductTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpOuterProductTest = OpTypePointer Function %OpOuterProductTest
-          %9 = OpTypeFunction %void %_ptr_Function_OpOuterProductTest
+         %10 = OpTypeFunction %void %_ptr_Function_OpOuterProductTest
     %Vector2 = OpTypeVector %float 2
    %Float2x2 = OpTypeMatrix %Vector2 2
 %_ptr_Function_Float2x2 = OpTypePointer Function %Float2x2
-         %15 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
+         %16 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
-         %17 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
-         %19 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%OpOuterProductTest_PreConstructor = OpFunction %void None %9
+         %18 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
+         %20 = OpTypeFunction %void
+%OpOuterProductTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_OpOuterProductTest
          %25 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpOuterProductTest_DefaultConstructor = OpFunction %void None %9
+%OpOuterProductTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_OpOuterProductTest
          %30 = OpLabel
          %31 = OpFunctionCall %void %OpOuterProductTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_OpOuterProductTest
          %36 = OpLabel
 %float2x2Val = OpVariable %_ptr_Function_Float2x2 Function
@@ -75,7 +75,7 @@
                OpStore %float2x2Val %46
                OpReturn
                OpFunctionEnd
-%Float2x2_Constructor = OpFunction %void None %15
+%Float2x2_Constructor = OpFunction %void None %16
      %self_2 = OpFunctionParameter %_ptr_Function_Float2x2
       %value = OpFunctionParameter %float
          %53 = OpLabel
@@ -88,7 +88,7 @@
                OpStore %self_2 %59
                OpReturn
                OpFunctionEnd
-%Float2x2_Constructor_0 = OpFunction %void None %17
+%Float2x2_Constructor_0 = OpFunction %void None %18
      %self_3 = OpFunctionParameter %_ptr_Function_Float2x2
         %m00 = OpFunctionParameter %float
         %m01 = OpFunctionParameter %float
@@ -101,7 +101,7 @@
                OpStore %self_3 %72
                OpReturn
                OpFunctionEnd
-%OpOuterProductTest_Main_EntryPoint = OpFunction %void None %19
+%OpOuterProductTest_Main_EntryPoint = OpFunction %void None %20
          %77 = OpLabel
      %self_4 = OpVariable %_ptr_Function_OpOuterProductTest Function
          %79 = OpFunctionCall %void %OpOuterProductTest_DefaultConstructor %self_4

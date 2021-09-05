@@ -26,26 +26,26 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %TestVectorPrimitive = OpTypeVector %float 2
 %VectorPrimitivePropertySwizzlesTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_VectorPrimitivePropertySwizzlesTest = OpTypePointer Function %VectorPrimitivePropertySwizzlesTest
-         %11 = OpTypeFunction %void %_ptr_Function_VectorPrimitivePropertySwizzlesTest
+         %12 = OpTypeFunction %void %_ptr_Function_VectorPrimitivePropertySwizzlesTest
 %_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
-         %13 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%VectorPrimitivePropertySwizzlesTest_PreConstructor = OpFunction %void None %11
+         %14 = OpTypeFunction %void
+%VectorPrimitivePropertySwizzlesTest_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_VectorPrimitivePropertySwizzlesTest
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%VectorPrimitivePropertySwizzlesTest_DefaultConstructor = OpFunction %void None %11
+%VectorPrimitivePropertySwizzlesTest_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_VectorPrimitivePropertySwizzlesTest
          %24 = OpLabel
          %25 = OpFunctionCall %void %VectorPrimitivePropertySwizzlesTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %12
      %self_1 = OpFunctionParameter %_ptr_Function_VectorPrimitivePropertySwizzlesTest
          %30 = OpLabel
     %vector0 = OpVariable %_ptr_Function_TestVectorPrimitive Function
@@ -71,7 +71,7 @@
                OpStore %vector0 %50
                OpReturn
                OpFunctionEnd
-%VectorPrimitivePropertySwizzlesTest_Main_EntryPoint = OpFunction %void None %13
+%VectorPrimitivePropertySwizzlesTest_Main_EntryPoint = OpFunction %void None %14
          %55 = OpLabel
      %self_2 = OpVariable %_ptr_Function_VectorPrimitivePropertySwizzlesTest Function
          %57 = OpFunctionCall %void %VectorPrimitivePropertySwizzlesTest_DefaultConstructor %self_2

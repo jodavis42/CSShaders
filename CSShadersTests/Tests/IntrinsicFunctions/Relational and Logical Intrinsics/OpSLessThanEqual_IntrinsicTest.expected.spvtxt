@@ -35,12 +35,14 @@
                OpName %OpSLessThanEqualTest_Main_EntryPoint "OpSLessThanEqualTest_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
 %OpSLessThanEqualTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpSLessThanEqualTest = OpTypePointer Function %OpSLessThanEqualTest
-         %11 = OpTypeFunction %void %_ptr_Function_OpSLessThanEqualTest
+         %13 = OpTypeFunction %void %_ptr_Function_OpSLessThanEqualTest
 %_ptr_Function_bool = OpTypePointer Function %bool
 %_ptr_Function_int = OpTypePointer Function %int
       %Bool2 = OpTypeVector %bool 2
@@ -55,21 +57,19 @@
 %_ptr_Function_Bool4 = OpTypePointer Function %Bool4
    %Integer4 = OpTypeVector %int 4
 %_ptr_Function_Integer4 = OpTypePointer Function %Integer4
-         %25 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-      %int_0 = OpConstant %int 0
-%OpSLessThanEqualTest_PreConstructor = OpFunction %void None %11
+         %27 = OpTypeFunction %void
+%OpSLessThanEqualTest_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_OpSLessThanEqualTest
          %32 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpSLessThanEqualTest_DefaultConstructor = OpFunction %void None %11
+%OpSLessThanEqualTest_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_OpSLessThanEqualTest
          %37 = OpLabel
          %38 = OpFunctionCall %void %OpSLessThanEqualTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %13
      %self_1 = OpFunctionParameter %_ptr_Function_OpSLessThanEqualTest
          %43 = OpLabel
     %boolVal = OpVariable %_ptr_Function_bool Function
@@ -112,7 +112,7 @@
                OpStore %bool4Val %80
                OpReturn
                OpFunctionEnd
-%OpSLessThanEqualTest_Main_EntryPoint = OpFunction %void None %25
+%OpSLessThanEqualTest_Main_EntryPoint = OpFunction %void None %27
          %85 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpSLessThanEqualTest Function
          %87 = OpFunctionCall %void %OpSLessThanEqualTest_DefaultConstructor %self_2

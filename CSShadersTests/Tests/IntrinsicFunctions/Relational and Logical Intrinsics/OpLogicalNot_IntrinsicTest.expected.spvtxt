@@ -28,10 +28,11 @@
                OpName %OpLogicalNotTest_Main_EntryPoint "OpLogicalNotTest_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
 %OpLogicalNotTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpLogicalNotTest = OpTypePointer Function %OpLogicalNotTest
-          %7 = OpTypeFunction %void %_ptr_Function_OpLogicalNotTest
+          %8 = OpTypeFunction %void %_ptr_Function_OpLogicalNotTest
 %_ptr_Function_bool = OpTypePointer Function %bool
        %uint = OpTypeInt 32 0
       %Bool2 = OpTypeVector %bool 2
@@ -40,20 +41,19 @@
 %_ptr_Function_Bool3 = OpTypePointer Function %Bool3
       %Bool4 = OpTypeVector %bool 4
 %_ptr_Function_Bool4 = OpTypePointer Function %Bool4
-         %17 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-%OpLogicalNotTest_PreConstructor = OpFunction %void None %7
+         %18 = OpTypeFunction %void
+%OpLogicalNotTest_PreConstructor = OpFunction %void None %8
        %self = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpLogicalNotTest_DefaultConstructor = OpFunction %void None %7
+%OpLogicalNotTest_DefaultConstructor = OpFunction %void None %8
      %self_0 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
          %28 = OpLabel
          %29 = OpFunctionCall %void %OpLogicalNotTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %8
      %self_1 = OpFunctionParameter %_ptr_Function_OpLogicalNotTest
          %34 = OpLabel
     %boolVal = OpVariable %_ptr_Function_bool Function
@@ -81,7 +81,7 @@
                OpStore %bool4Val %56
                OpReturn
                OpFunctionEnd
-%OpLogicalNotTest_Main_EntryPoint = OpFunction %void None %17
+%OpLogicalNotTest_Main_EntryPoint = OpFunction %void None %18
          %61 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpLogicalNotTest Function
          %63 = OpFunctionCall %void %OpLogicalNotTest_DefaultConstructor %self_2

@@ -57,28 +57,28 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
     %WhileIf = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_WhileIf = OpTypePointer Function %WhileIf
-          %9 = OpTypeFunction %void %_ptr_Function_WhileIf
-         %11 = OpTypeFunction %int %_ptr_Function_WhileIf
+         %11 = OpTypeFunction %void %_ptr_Function_WhileIf
+         %13 = OpTypeFunction %int %_ptr_Function_WhileIf
 %_ptr_Function_int = OpTypePointer Function %int
        %bool = OpTypeBool
-         %15 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-      %int_0 = OpConstant %int 0
-%WhileIf_PreConstructor = OpFunction %void None %9
+         %17 = OpTypeFunction %void
+%WhileIf_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_WhileIf
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%WhileIf_DefaultConstructor = OpFunction %void None %9
+%WhileIf_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_WhileIf
          %27 = OpLabel
          %28 = OpFunctionCall %void %WhileIf_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-   %WhileIf0 = OpFunction %int None %11
+   %WhileIf0 = OpFunction %int None %13
      %self_1 = OpFunctionParameter %_ptr_Function_WhileIf
          %33 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -109,7 +109,7 @@
          %59 = OpLoad %int %a
                OpReturnValue %59
                OpFunctionEnd
-   %WhileIf1 = OpFunction %int None %11
+   %WhileIf1 = OpFunction %int None %13
      %self_2 = OpFunctionParameter %_ptr_Function_WhileIf
          %64 = OpLabel
         %a_0 = OpVariable %_ptr_Function_int Function
@@ -140,7 +140,7 @@
          %90 = OpLoad %int %a_0
                OpReturnValue %90
                OpFunctionEnd
-   %WhileIf2 = OpFunction %int None %11
+   %WhileIf2 = OpFunction %int None %13
      %self_3 = OpFunctionParameter %_ptr_Function_WhileIf
          %95 = OpLabel
         %a_1 = OpVariable %_ptr_Function_int Function
@@ -183,7 +183,7 @@
         %133 = OpLoad %int %a_1
                OpReturnValue %133
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_4 = OpFunctionParameter %_ptr_Function_WhileIf
         %138 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -196,7 +196,7 @@
                OpStore %ret %145
                OpReturn
                OpFunctionEnd
-%WhileIf_Main_EntryPoint = OpFunction %void None %15
+%WhileIf_Main_EntryPoint = OpFunction %void None %17
         %150 = OpLabel
      %self_5 = OpVariable %_ptr_Function_WhileIf Function
         %152 = OpFunctionCall %void %WhileIf_DefaultConstructor %self_5

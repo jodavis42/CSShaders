@@ -36,31 +36,31 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %MatrixInverseTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_MatrixInverseTest = OpTypePointer Function %MatrixInverseTest
-         %10 = OpTypeFunction %void %_ptr_Function_MatrixInverseTest
+         %11 = OpTypeFunction %void %_ptr_Function_MatrixInverseTest
     %Vector2 = OpTypeVector %float 2
    %Float2x2 = OpTypeMatrix %Vector2 2
 %_ptr_Function_Float2x2 = OpTypePointer Function %Float2x2
-         %16 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
+         %17 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
-         %18 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
+         %19 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
         %int = OpTypeInt 32 1
-         %22 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%MatrixInverseTest_PreConstructor = OpFunction %void None %10
+         %23 = OpTypeFunction %void
+%MatrixInverseTest_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_MatrixInverseTest
          %28 = OpLabel
                OpReturn
                OpFunctionEnd
-%MatrixInverseTest_DefaultConstructor = OpFunction %void None %10
+%MatrixInverseTest_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_MatrixInverseTest
          %33 = OpLabel
          %34 = OpFunctionCall %void %MatrixInverseTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %10
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_MatrixInverseTest
          %39 = OpLabel
 %float2x2Val = OpVariable %_ptr_Function_Float2x2 Function
@@ -72,7 +72,7 @@
                OpStore %float2x2Val %45
                OpReturn
                OpFunctionEnd
-%Float2x2_Constructor = OpFunction %void None %16
+%Float2x2_Constructor = OpFunction %void None %17
      %self_2 = OpFunctionParameter %_ptr_Function_Float2x2
       %value = OpFunctionParameter %float
          %52 = OpLabel
@@ -85,7 +85,7 @@
                OpStore %self_2 %58
                OpReturn
                OpFunctionEnd
-%Float2x2_Constructor_0 = OpFunction %void None %18
+%Float2x2_Constructor_0 = OpFunction %void None %19
      %self_3 = OpFunctionParameter %_ptr_Function_Float2x2
         %m00 = OpFunctionParameter %float
         %m01 = OpFunctionParameter %float
@@ -98,7 +98,7 @@
                OpStore %self_3 %71
                OpReturn
                OpFunctionEnd
-%MatrixInverseTest_Main_EntryPoint = OpFunction %void None %22
+%MatrixInverseTest_Main_EntryPoint = OpFunction %void None %23
          %76 = OpLabel
      %self_4 = OpVariable %_ptr_Function_MatrixInverseTest Function
          %78 = OpFunctionCall %void %MatrixInverseTest_DefaultConstructor %self_4

@@ -28,10 +28,11 @@
                OpName %OpLogicalOrTest_Main_EntryPoint "OpLogicalOrTest_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
 %OpLogicalOrTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpLogicalOrTest = OpTypePointer Function %OpLogicalOrTest
-          %7 = OpTypeFunction %void %_ptr_Function_OpLogicalOrTest
+          %8 = OpTypeFunction %void %_ptr_Function_OpLogicalOrTest
 %_ptr_Function_bool = OpTypePointer Function %bool
        %uint = OpTypeInt 32 0
       %Bool2 = OpTypeVector %bool 2
@@ -40,20 +41,19 @@
 %_ptr_Function_Bool3 = OpTypePointer Function %Bool3
       %Bool4 = OpTypeVector %bool 4
 %_ptr_Function_Bool4 = OpTypePointer Function %Bool4
-         %17 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-%OpLogicalOrTest_PreConstructor = OpFunction %void None %7
+         %18 = OpTypeFunction %void
+%OpLogicalOrTest_PreConstructor = OpFunction %void None %8
        %self = OpFunctionParameter %_ptr_Function_OpLogicalOrTest
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpLogicalOrTest_DefaultConstructor = OpFunction %void None %7
+%OpLogicalOrTest_DefaultConstructor = OpFunction %void None %8
      %self_0 = OpFunctionParameter %_ptr_Function_OpLogicalOrTest
          %28 = OpLabel
          %29 = OpFunctionCall %void %OpLogicalOrTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %8
      %self_1 = OpFunctionParameter %_ptr_Function_OpLogicalOrTest
          %34 = OpLabel
     %boolVal = OpVariable %_ptr_Function_bool Function
@@ -85,7 +85,7 @@
                OpStore %bool4Val %60
                OpReturn
                OpFunctionEnd
-%OpLogicalOrTest_Main_EntryPoint = OpFunction %void None %17
+%OpLogicalOrTest_Main_EntryPoint = OpFunction %void None %18
          %65 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpLogicalOrTest Function
          %67 = OpFunctionCall %void %OpLogicalOrTest_DefaultConstructor %self_2

@@ -23,26 +23,26 @@
                OpName %StructWithPrimitiveFields_EntryPoint "StructWithPrimitiveFields_EntryPoint"
                OpName %self_1 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
        %uint = OpTypeInt 32 0
+     %uint_0 = OpConstant %uint 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+     %uint_3 = OpConstant %uint 3
 %StructWithPrimitiveFields = OpTypeStruct %bool %int %uint %float
        %void = OpTypeVoid
 %_ptr_Function_StructWithPrimitiveFields = OpTypePointer Function %StructWithPrimitiveFields
-         %13 = OpTypeFunction %void %_ptr_Function_StructWithPrimitiveFields
+         %20 = OpTypeFunction %void %_ptr_Function_StructWithPrimitiveFields
 %_ptr_Function_bool = OpTypePointer Function %bool
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Function_uint = OpTypePointer Function %uint
 %_ptr_Function_float = OpTypePointer Function %float
-         %15 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-     %uint_0 = OpConstant %uint 0
-      %int_0 = OpConstant %int 0
-     %uint_1 = OpConstant %uint 1
-     %uint_2 = OpConstant %uint 2
-    %float_0 = OpConstant %float 0
-     %uint_3 = OpConstant %uint 3
-%StructWithPrimitiveFields_PreConstructor = OpFunction %void None %13
+         %22 = OpTypeFunction %void
+%StructWithPrimitiveFields_PreConstructor = OpFunction %void None %20
        %self = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
          %27 = OpLabel
          %28 = OpAccessChain %_ptr_Function_bool %self %uint_0
@@ -55,13 +55,13 @@
                OpStore %34 %float_0
                OpReturn
                OpFunctionEnd
-%StructWithPrimitiveFields_DefaultConstructor = OpFunction %void None %13
+%StructWithPrimitiveFields_DefaultConstructor = OpFunction %void None %20
      %self_0 = OpFunctionParameter %_ptr_Function_StructWithPrimitiveFields
          %40 = OpLabel
          %41 = OpFunctionCall %void %StructWithPrimitiveFields_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%StructWithPrimitiveFields_EntryPoint = OpFunction %void None %15
+%StructWithPrimitiveFields_EntryPoint = OpFunction %void None %22
          %45 = OpLabel
      %self_1 = OpVariable %_ptr_Function_StructWithPrimitiveFields Function
          %47 = OpFunctionCall %void %StructWithPrimitiveFields_DefaultConstructor %self_1
