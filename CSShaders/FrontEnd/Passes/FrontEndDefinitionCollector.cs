@@ -38,14 +38,20 @@ namespace CSShaders
 
     public ShaderFunction VisitMethod(BaseMethodDeclarationSyntax node)
     {
+      var shaderFunction = FindFunction(node);
+      VisitMethod(node, shaderFunction);
+      return shaderFunction;
+    }
+
+    public void VisitMethod(CSharpSyntaxNode node, ShaderFunction shaderFunction)
+    {
       var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node) as IMethodSymbol;
       
       // Handle intrinsics. If we have a resolver for a special handler then call that and return.
       if (SpecialResolvers.TryProcessIntrinsicMethod(mFrontEnd, fnSymbol))
-        return null;
+        return;
 
       // Add the current function as the active one and the parameter
-      var shaderFunction = FindFunction(node);
       mContext.mCurrentFunction = shaderFunction;
 
       // Start writing out the parameters (so the parameter block is the active one)
@@ -60,15 +66,19 @@ namespace CSShaders
         mContext.mThisOp = selfOp;
       }
       // Add the function parameter ops
-      foreach (var parameter in node.ParameterList.Parameters)
+      foreach (var parameter in fnSymbol.Parameters)
       {
-        var parameterSymbol = GetDeclaredSymbol(parameter) as IParameterSymbol;
-        var parameterType = FindParameterType(parameter);
+        var parameterType = FindParameterType(mFrontEnd.mCurrentLibrary.FindType(new TypeKey(parameter.Type)), parameter);
         var paramOp = CreateOp(mContext.mCurrentBlock, OpInstructionType.OpFunctionParameter, parameterType, null);
-        ExtractDebugInfo(paramOp, parameter);
-        paramOp.DebugInfo.Name = parameterSymbol.Name;
+        
+        // Extract the debug info. We can't get this from the node because the node isn't always a method with arguments.
+        // // If this is a get/set then the arguments are implicit and there's no location to look at.
+        if (parameter.Locations != null && parameter.Locations.Length != 0)
+          paramOp.DebugInfo.Location = parameter.Locations[0];
+        paramOp.DebugInfo.Name = parameter.Name;
+
         // Also map parameter symbols in this scope to their ops so we can look them up later when visiting identifiers
-        mContext.mSymbolToIRMap.Add(parameterSymbol, paramOp);
+        mContext.mSymbolToIRMap.Add(parameter, paramOp);
       }
 
       // Now set the body as the current scope and visit the function
@@ -83,8 +93,16 @@ namespace CSShaders
       mContext.mThisOp = null;
       mContext.mCurrentBlock = null;
       mContext.mCurrentFunction = null;
+    }
 
-      return shaderFunction;
+    public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+    {
+      var symbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
+      if (symbol == null)
+        return;
+
+      var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(symbol));
+      VisitMethod(node, shaderFunction);
     }
 
     public override void VisitConversionOperatorDeclaration(ConversionOperatorDeclarationSyntax node)
