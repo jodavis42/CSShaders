@@ -1,0 +1,11 @@
+{
+  "Name": "HardwareBuiltInInputTest",
+  "Fragments": [
+    "Vertex0",
+    "Vertex1",
+    "Vertex2",
+    "Pixel0",
+    "Pixel1",
+    "Pixel2"
+  ]
+}

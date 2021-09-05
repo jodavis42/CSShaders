@@ -1,0 +1,24 @@
+[Shader.Pixel]
+public struct FragmentInputOutputTest_Pixel
+{
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.Value1 = pixel0.Value1;
+    pixel1.Value2 = pixel0.Value2;
+    pixel1.Value7 = pixel0.Value7;
+    pixel1.Main();
+
+    Pixel2 pixel2 = new Pixel2();
+    pixel2.Value1 = pixel1.Value1;
+    pixel2.Value2 = pixel0.Value2;
+    pixel2.Value5 = pixel0.Value5;
+    pixel2.Value7 = pixel1.Value7;
+    pixel2.Main();
+
+  }
+};

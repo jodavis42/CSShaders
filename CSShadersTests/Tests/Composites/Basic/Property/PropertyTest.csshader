@@ -1,0 +1,32 @@
+[Shader.Vertex]
+public struct Vertex0
+{
+  [Shader.PropertyInput] public float Value = 0.0f;
+  [Shader.PropertyInput] public float Value2 = 0.0f;
+
+  public void Main() {}
+}
+[Shader.Vertex]
+public struct Vertex1
+{
+  [Shader.PropertyInput] public float Value = 0.0f;
+  [Shader.PropertyInput("MyValue")] public float Value3 = 0.0f;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel0
+{
+  [Shader.PropertyInput] public float Value = 0.0f;
+  [Shader.PropertyInput] public float Value2 = 0.0f;
+
+  public void Main() {}
+}
+[Shader.Pixel]
+public struct Pixel1
+{
+  [Shader.PropertyInput] public float Value = 0.0f;
+  [Shader.PropertyInput("MyValue")] public float Value3 = 0.0f;
+
+  public void Main() {}
+}

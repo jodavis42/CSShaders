@@ -1,0 +1,7 @@
+public struct TransformData
+{
+   public Math.Float4x4 LocalToWorld;
+   public Math.Float4x4 WorldToView;
+   public Math.Float4x4 ViewToPerspective;
+   public Math.Float4x4 LocalToPerspective;
+};

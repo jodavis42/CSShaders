@@ -1,0 +1,140 @@
+[Shader.Vertex]
+public struct Vertex1
+{
+  // Out 1, InOut 2, In 3 (1->2->3)
+  [Shader.FragmentOutput("Value1")] public float V1Value1;
+  // Out 1, In 2, In 3 (1->2; 1->3)
+  [Shader.FragmentOutput("Value2")] public float V1Value2;
+  
+  // Out 1 (V3,V4), In 2(V3), In 3(V4) (1:V34->2:V3, 1:V34->3:V4)
+  [Shader.FragmentOutput("Value3")][Shader.FragmentOutput("Value4")] public float V1Value34;
+  
+  // Out 1 (R2), In 1 (R) (mismatched types)
+  [Shader.FragmentOutput("Value6")] public Math.Vector2 V1Value6;
+  // Out 1, In 1 (mismatched override names but same var names)
+  [Shader.FragmentOutput("V1Value7")] public Math.Vector2 Value7;
+  
+  // Out 1, InOut 2, In 3 (1->2->3) (after other properties)
+  [Shader.FragmentOutput("Value8")] public float V1Value8;
+  
+  public void Main()
+  {
+    
+  }
+}
+
+[Shader.Vertex]
+public struct Vertex2
+{
+  // Out 1, InOut 2, In 3 (1->2->3)
+  [Shader.FragmentInput("Value1")][Shader.FragmentOutput("Value1")] public float V2Value1;
+  // Out 1, In 2, In 3 (1->2; 1->3)
+  [Shader.FragmentInput("Value2")] public float V2Value2;
+  
+  // Out 1 (V3,V4), In 2(V3), In 3(V4) (1:V34->2:V3, 1:V34->3:V4)
+  [Shader.FragmentInput("Value3")] public float V2Value3;
+  
+  // Out 1 (R2), In 1 (R) (mismatched types)
+  [Shader.FragmentInput("Value6")] public float V2Value6;
+  // Out 1, In 1 (mismatched override names but same var names)
+  [Shader.FragmentInput("V2Value7")] public Math.Vector2 Value7;
+  
+  // Out 1, InOut 2, In 3 (1->2->3) (after other properties)
+  [Shader.FragmentInput("Value8")][Shader.FragmentOutput("Value8")] public float V2Value8;
+  
+  public void Main()
+  {
+    
+  }
+}
+
+[Shader.Vertex]
+public struct Vertex3
+{
+  // Out 1, InOut 2, In 3 (1->2->3)
+  [Shader.FragmentInput("Value1")] public float V3Value1;
+  // Out 1, In 2, In 3 (1->2; 1->3)
+  [Shader.FragmentInput("Value2")] public float V3Value2;
+  
+  // Out 1 (V3,V4), In 2(V3), In 3(V4) (1:V34->2:V3, 1:V34->3:V4)
+  [Shader.FragmentInput("Value4")] public float V3Value4;
+  
+  // Out 1, InOut 2, In 3 (1->2->3) (after other properties)
+  [Shader.FragmentInput("Value8")] public float V3Value8;
+  
+  public void Main()
+  {
+    
+  }
+}
+
+[Shader.Pixel]
+public struct Pixel1
+{
+  // Out 1, InOut 2, In 3 (1->2->3)
+  [Shader.FragmentOutput("Value1")] public float V1Value1;
+  // Out 1, In 2, In 3 (1->2; 1->3)
+  [Shader.FragmentOutput("Value2")] public float V1Value2;
+  
+  // Out 1 (V3,V4), In 2(V3), In 3(V4) (1:V34->2:V3, 1:V34->3:V4)
+  [Shader.FragmentOutput("Value3")][Shader.FragmentOutput("Value4")] public float V1Value34;
+  
+  // Out 1 (R2), In 1 (R) (mismatched types)
+  [Shader.FragmentOutput("Value6")] public Math.Vector2 V1Value6;
+  // Out 1, In 1 (mismatched override names but same var names)
+  [Shader.FragmentOutput("V1Value7")] public Math.Vector2 Value7;
+  
+  // Out 1, InOut 2, In 3 (1->2->3) (after other properties)
+  [Shader.FragmentOutput("Value8")] public float V1Value8;
+  
+  public void Main()
+  {
+    
+  }
+}
+
+[Shader.Pixel]
+public struct Pixel2
+{
+  // Out 1, InOut 2, In 3 (1->2->3)
+  [Shader.FragmentInput("Value1")][Shader.FragmentOutput("Value1")] public float V2Value1;
+  // Out 1, In 2, In 3 (1->2; 1->3)
+  [Shader.FragmentInput("Value2")] public float V2Value2;
+  
+  // Out 1 (V3,V4), In 2(V3), In 3(V4) (1:V34->2:V3, 1:V34->3:V4)
+  [Shader.FragmentInput("Value3")] public float V2Value3;
+  
+  // Out 1 (R2), In 1 (R) (mismatched types)
+  [Shader.FragmentInput("Value6")] public float V2Value6;
+  // Out 1, In 1 (mismatched override names but same var names)
+  [Shader.FragmentInput("V2Value7")] public Math.Vector2 Value7;
+  
+  // Out 1, InOut 2, In 3 (1->2->3) (after other properties)
+  [Shader.FragmentInput("Value8")][Shader.FragmentOutput("Value8")] public float V2Value8;
+  
+  public void Main()
+  {
+    
+  }
+}
+
+[Shader.Pixel]
+public struct Pixel3
+{
+  // Out 1, InOut 2, In 3 (1->2->3)
+  [Shader.FragmentInput("Value1")] public float V3Value1;
+  // Out 1, In 2, In 3 (1->2; 1->3)
+  [Shader.FragmentInput("Value2")] public float V3Value2;
+  
+  // Out 1 (V3,V4), In 2(V3), In 3(V4) (1:V34->2:V3, 1:V34->3:V4)
+  [Shader.FragmentInput("Value4")] public float V3Value4;
+  
+  // Out 1, InOut 2, In 3 (1->2->3) (after other properties)
+  [Shader.FragmentInput("Value8")] public float V3Value8;
+  
+  public void Main()
+  {
+    
+  }
+}
+

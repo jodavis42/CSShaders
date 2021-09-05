@@ -1,0 +1,22 @@
+[Shader.Pixel]
+public struct StageInputOutputTest_Pixel
+{
+  [Shader.StageInput(Location = 0)] public float Value1;
+  [Shader.StageInput(Location = 1)] public float Value2;
+  [Shader.StageInput(Location = 2)] public float Value3;
+  [Shader.StageInput(Location = 3)] public float Value5;
+  [Shader.StageInput(Location = 4)] public float Value8;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel pixel = new Pixel();
+    pixel.P1 = this.Value1;
+    pixel.P2 = this.Value2;
+    pixel.P3 = this.Value3;
+    pixel.V45 = this.Value5;
+    pixel.P8 = this.Value8;
+    pixel.Main();
+
+  }
+};

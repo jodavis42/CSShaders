@@ -1,0 +1,16 @@
+[Shader.Vertex]
+public struct StageInputOutputTest_Vertex
+{
+  [Shader.StageInput(Location = 0)] public Math.Vector2 Uv;
+  [Shader.StageInput(Location = 2)] public Math.Vector3 LocalPosition;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex vertex = new Vertex();
+    vertex.Uv = this.Uv;
+    vertex.LocalPosition = this.LocalPosition;
+    vertex.Main();
+
+  }
+};

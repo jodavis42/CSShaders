@@ -1,0 +1,19 @@
+[Shader.Pixel]
+public struct StageInputOutputTest_Pixel
+{
+  [Shader.StageInput(Location = 0)] public float FrameTime;
+  [Shader.StageInput(Location = 1)] public Math.Vector4 Color;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Pixel0 pixel0 = new Pixel0();
+    pixel0.FrameTime = this.FrameTime;
+    pixel0.Main();
+
+    Pixel1 pixel1 = new Pixel1();
+    pixel1.Color = this.Color;
+    pixel1.Main();
+
+  }
+};

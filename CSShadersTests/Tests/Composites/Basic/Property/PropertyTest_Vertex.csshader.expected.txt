@@ -1,0 +1,23 @@
+[Shader.Vertex]
+public struct PropertyTest_Vertex
+{
+  [Shader.UniformBufferField] public float Vertex0_vertex0_Value;
+  [Shader.UniformBufferField] public float Vertex0_vertex0_Value2;
+  [Shader.UniformBufferField] public float Vertex1_vertex1_Value;
+  [Shader.UniformBufferField] public float Vertex1_vertex1_MyValue;
+
+  [Shader.EntryPoint]
+  void Main()
+  {
+    Vertex0 vertex0 = new Vertex0();
+    vertex0.Value = this.Vertex0_vertex0_Value;
+    vertex0.Value2 = this.Vertex0_vertex0_Value2;
+    vertex0.Main();
+
+    Vertex1 vertex1 = new Vertex1();
+    vertex1.Value = this.Vertex1_vertex1_Value;
+    vertex1.Value3 = this.Vertex1_vertex1_MyValue;
+    vertex1.Main();
+
+  }
+};

@@ -1,0 +1,46 @@
+[Shader.Vertex]
+public struct Vertex
+{
+  // Out Vertex, In Pixel
+  [Shader.StageOutput("Value1")] public float V1;
+  
+  // Out Vertex (V2,V3), In Pixel(P2), In Pixel(P3)
+  [Shader.StageOutput("Value2")][Shader.StageOutput("Value3")] public float V23;
+  
+  // Out Vertex (V5), In Pixel(P4)(P5) (Resovle V5 -> P45)
+  [Shader.StageOutput("Value5")] public float V5;
+  
+  // Out Vertex (R2), In Pixel (R) (mismatched types)
+  [Shader.StageOutput("Value6")] public Math.Vector2 V6;
+  // Out 1, In 1 (mismatched override names but same var names)
+  [Shader.StageOutput("V7")] public float Value7;
+  
+  // Out Vertex, In Pixel after other properties)
+  [Shader.StageOutput("Value8")] public float V8;
+
+  public void Main() {}
+}
+
+[Shader.Pixel]
+public struct Pixel
+{
+  // Out Vertex, In Pixel
+  [Shader.StageInput("Value1")] public float P1;
+  
+  // Out Vertex (V2,V3), In Pixel(P2), In Pixel(P3)
+  [Shader.StageInput("Value2")] public float P2;
+  [Shader.StageInput("Value3")] public float P3;
+  
+  // Out Vertex (V5), In Pixel(P4)(P5) (Resovle V5 -> P45)
+  [Shader.StageInput("Value4")][Shader.StageInput("Value5")] public float V45;
+  
+  // Out Vertex (R2), In Pixel (R) (mismatched types)
+  [Shader.StageInput("Value6")] public float P6;
+  // Out 1, In 1 (mismatched override names but same var names)
+  [Shader.StageInput("P7")] public float Value7;
+  
+  // Out Vertex, In Pixel after other properties)
+  [Shader.StageInput("Value8")] public float P8;
+
+  public void Main() {}
+}
