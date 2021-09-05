@@ -96,6 +96,22 @@ namespace CSShaders
       CreateFunction(node, functionName, returnType);
     }
 
+    public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+    {
+      // If this is a get/set accessor, build a function from the parameters
+      var symbol = GetDeclaredSymbol(node);
+      if (symbol is IMethodSymbol methodSymbol)
+      {
+        var parameters = new List<ShaderType>();
+        foreach (var param in methodSymbol.Parameters)
+          parameters.Add(mFrontEnd.mCurrentLibrary.FindType(new TypeKey(param.Type)));
+        var returnType = mFrontEnd.mCurrentLibrary.FindType(new TypeKey(methodSymbol.ReturnType));
+        CreateFunction(node, methodSymbol, symbol.Name, returnType, parameters);
+      }
+      else
+        base.VisitAccessorDeclaration(node);
+    }
+
     public override void VisitConversionOperatorDeclaration(ConversionOperatorDeclarationSyntax node)
     {
       // Don't process intrinsics

@@ -116,6 +116,16 @@ namespace CSShaders
         }
         throw new Exception("ToDo");
       }
+      else if (symbol is IMethodSymbol methodSymbol)
+      {
+        // Directly accessing a non static method inside of a class. Push the this on the stack
+        if (!methodSymbol.IsStatic)
+        {
+          mContext.Push(mContext.mThisOp);
+          return;
+        }
+        throw new Exception("ToDo");
+      }
       else if(symbol is ILocalSymbol localSymbol)
       {
         mContext.Push(FindIRFromSymbol(localSymbol));
@@ -169,7 +179,7 @@ namespace CSShaders
 
       if (symbol is IMethodSymbol methodSymbol)
       {
-        base.VisitMemberAccessExpression(node);
+        base.Visit(node.Expression);
         return;
       }
       else if (symbol is IFieldSymbol fieldSymbol)
@@ -221,6 +231,23 @@ namespace CSShaders
         // @JoshD: Handle property getter/setter function calls
       }
       throw new Exception();
+    }
+
+    // Handle operator[]
+    public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
+    {
+      var symbol = GetSymbol(node);
+      if (symbol is IPropertySymbol propertySymbol)
+      {
+        var shaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(new FunctionKey(propertySymbol.GetMethod));
+        var selfOp = WalkAndGetResult(node.Expression);
+        var argumentList = new List<IShaderIR>();
+        foreach (var arg in node.ArgumentList.Arguments)
+          argumentList.Add(WalkAndGetResult(arg));
+
+        var fnReturn = mFrontEnd.GenerateFunctionCall(shaderFunction, selfOp, argumentList, mContext);
+        mContext.Push(fnReturn);
+      }
     }
 
     public override void VisitLiteralExpression(LiteralExpressionSyntax node)
@@ -276,9 +303,36 @@ namespace CSShaders
             return;
         }
       }
+      // We have to do the same thing for operator[] in the case of something like "array[0] = value"
+      else if(node.Left is ElementAccessExpressionSyntax elementAccessNode)
+      {
+        FunctionKey functionKey = null;
+        // Try and get the function key for this symbol depending on if it's a field, property, etc...
+        if (leftSymbol is IPropertySymbol propertySymbol && !propertySymbol.IsReadOnly)
+          functionKey = new FunctionKey(propertySymbol.SetMethod);
+        else if (leftSymbol is IFieldSymbol fieldSymbol)
+          functionKey = new FunctionKey(fieldSymbol);
+        // If we found a function key, then try and use it call the setter 
+        if (functionKey != null)
+        {
+          var setterShaderFunction = mFrontEnd.mCurrentLibrary.FindFunction(functionKey);
+          if (setterShaderFunction != null)
+          {
+            var lhsInstanceIR = WalkAndGetResult(elementAccessNode.Expression);
+            // Unpack all of the arguments
+            var arguments = new List<IShaderIR>();
+            foreach (var arg in elementAccessNode.ArgumentList.Arguments)
+              arguments.Add(WalkAndGetResult(arg));
+            // Then add the right-hand side as the last arg and call the function
+            arguments.Add(rightIR);
+            GenerateFunctionCall(setterShaderFunction, lhsInstanceIR, arguments);
+            return;
+          }
+        }
+      }
 
       // Load the left if we didn't already
-      if(leftIR == null)
+      if (leftIR == null)
         leftIR = WalkAndGetResult(node.Left);
 
       var rightValueOp = mFrontEnd.GetOrGenerateValueTypeFromIR(mContext.mCurrentBlock, rightIR);

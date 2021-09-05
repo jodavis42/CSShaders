@@ -261,17 +261,24 @@ namespace CSShaders
 
     public ShaderFunction CreateFunction(BaseMethodDeclarationSyntax node, string fnName, ShaderType returnType)
     {
-      var owningType = mContext.mCurrentType;
-      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
-
-      // Collect function return and parameter types from the syntax node
-      var thisType = fnSymbol.IsStatic ? null : owningType.FindPointerType(StorageClass.Function);
       var paramTypes = new List<ShaderType>();
       foreach (var parameter in node.ParameterList.Parameters)
       {
         var parameterType = FindParameterType(parameter);
         paramTypes.Add(parameterType);
       }
+
+      var fnSymbol = mFrontEnd.mSemanticModel.GetDeclaredSymbol(node);
+      return CreateFunction(node, fnSymbol, fnName, returnType, paramTypes);
+    }
+
+    public ShaderFunction CreateFunction(CSharpSyntaxNode node, IMethodSymbol fnSymbol, string fnName, ShaderType returnType, List<ShaderType> paramTypes)
+    {
+      var owningType = mContext.mCurrentType;
+
+      // Collect function return and parameter types from the syntax node
+      var thisType = fnSymbol.IsStatic ? null : owningType.FindPointerType(StorageClass.Function);
+      
 
       var shaderFunction = mFrontEnd.CreateFunctionAndType(owningType, returnType, fnName, thisType, paramTypes);
       ParseAttributes(shaderFunction.mMeta, fnSymbol);
