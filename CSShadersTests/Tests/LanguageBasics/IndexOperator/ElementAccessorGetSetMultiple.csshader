@@ -1,0 +1,22 @@
+public struct MyStruct
+{
+    int value;
+    public int this[int y, int x]
+    {
+      get { return value + y + x; }
+      set { this.value = value + y + x; }
+    }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct ElementAccessorGetSetMultipleTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        var data = new MyStruct();
+        var item00 = data[0, 0];
+        data[1, 1] = item00;
+        data[1, 0] = data[0, 1];
+    }
+}

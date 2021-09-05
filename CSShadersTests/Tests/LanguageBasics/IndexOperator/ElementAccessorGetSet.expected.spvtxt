@@ -1,0 +1,121 @@
+; SPIR-V
+; Version: 1.4
+; Generator: Khronos; 0
+; Bound: 91
+; Schema: 0
+               OpCapability Shader
+               OpCapability Linkage
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %ElementAccessorGetSetTest_Main_EntryPoint "ElementAccessorGetSetTest_Main_EntryPoint"
+               OpExecutionMode %ElementAccessorGetSetTest_Main_EntryPoint OriginUpperLeft
+               OpSource Unknown 100
+               OpName %MyStruct "MyStruct"
+               OpMemberName %MyStruct 0 "value"
+               OpName %ElementAccessorGetSetTest "ElementAccessorGetSetTest"
+               OpName %MyStruct_PreConstructor "MyStruct_PreConstructor"
+               OpName %self "self"
+               OpName %MyStruct_DefaultConstructor "MyStruct_DefaultConstructor"
+               OpName %self_0 "self"
+               OpName %get_Item "get_Item"
+               OpName %self_1 "self"
+               OpName %key "key"
+               OpName %set_Item "set_Item"
+               OpName %self_2 "self"
+               OpName %key_0 "key"
+               OpName %value "value"
+               OpName %ElementAccessorGetSetTest_PreConstructor "ElementAccessorGetSetTest_PreConstructor"
+               OpName %self_3 "self"
+               OpName %ElementAccessorGetSetTest_DefaultConstructor "ElementAccessorGetSetTest_DefaultConstructor"
+               OpName %self_4 "self"
+               OpName %Main "Main"
+               OpName %self_5 "self"
+               OpName %data "data"
+               OpName %tempMyStruct "tempMyStruct"
+               OpName %item0 "item0"
+               OpName %ElementAccessorGetSetTest_Main_EntryPoint "ElementAccessorGetSetTest_Main_EntryPoint"
+               OpName %self_6 "self"
+               OpName %ElementAccessorGetSetTest_Main_EntryPoint "ElementAccessorGetSetTest_Main_EntryPoint"
+               OpName %self_6 "self"
+       %uint = OpTypeInt 32 0
+        %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
+      %int_1 = OpConstant %int 1
+   %MyStruct = OpTypeStruct %int
+       %void = OpTypeVoid
+%_ptr_Function_MyStruct = OpTypePointer Function %MyStruct
+         %12 = OpTypeFunction %void %_ptr_Function_MyStruct
+%_ptr_Function_int = OpTypePointer Function %int
+         %14 = OpTypeFunction %int %_ptr_Function_MyStruct %int
+         %16 = OpTypeFunction %void %_ptr_Function_MyStruct %int %int
+%ElementAccessorGetSetTest = OpTypeStruct
+%_ptr_Function_ElementAccessorGetSetTest = OpTypePointer Function %ElementAccessorGetSetTest
+         %20 = OpTypeFunction %void %_ptr_Function_ElementAccessorGetSetTest
+         %22 = OpTypeFunction %void
+%MyStruct_PreConstructor = OpFunction %void None %12
+       %self = OpFunctionParameter %_ptr_Function_MyStruct
+         %27 = OpLabel
+         %28 = OpAccessChain %_ptr_Function_int %self %uint_0
+               OpStore %28 %int_0
+               OpReturn
+               OpFunctionEnd
+%MyStruct_DefaultConstructor = OpFunction %void None %12
+     %self_0 = OpFunctionParameter %_ptr_Function_MyStruct
+         %34 = OpLabel
+         %35 = OpFunctionCall %void %MyStruct_PreConstructor %self_0
+               OpReturn
+               OpFunctionEnd
+   %get_Item = OpFunction %int None %14
+     %self_1 = OpFunctionParameter %_ptr_Function_MyStruct
+        %key = OpFunctionParameter %int
+         %41 = OpLabel
+         %42 = OpAccessChain %_ptr_Function_int %self_1 %uint_0
+         %43 = OpLoad %int %42
+         %44 = OpIAdd %int %43 %key
+               OpReturnValue %44
+               OpFunctionEnd
+   %set_Item = OpFunction %void None %16
+     %self_2 = OpFunctionParameter %_ptr_Function_MyStruct
+      %key_0 = OpFunctionParameter %int
+      %value = OpFunctionParameter %int
+         %51 = OpLabel
+         %52 = OpIAdd %int %key_0 %value
+         %53 = OpAccessChain %_ptr_Function_int %self_2 %uint_0
+               OpStore %53 %52
+               OpReturn
+               OpFunctionEnd
+%ElementAccessorGetSetTest_PreConstructor = OpFunction %void None %20
+     %self_3 = OpFunctionParameter %_ptr_Function_ElementAccessorGetSetTest
+         %59 = OpLabel
+               OpReturn
+               OpFunctionEnd
+%ElementAccessorGetSetTest_DefaultConstructor = OpFunction %void None %20
+     %self_4 = OpFunctionParameter %_ptr_Function_ElementAccessorGetSetTest
+         %64 = OpLabel
+         %65 = OpFunctionCall %void %ElementAccessorGetSetTest_PreConstructor %self_4
+               OpReturn
+               OpFunctionEnd
+       %Main = OpFunction %void None %20
+     %self_5 = OpFunctionParameter %_ptr_Function_ElementAccessorGetSetTest
+         %70 = OpLabel
+       %data = OpVariable %_ptr_Function_MyStruct Function
+%tempMyStruct = OpVariable %_ptr_Function_MyStruct Function
+      %item0 = OpVariable %_ptr_Function_int Function
+         %74 = OpFunctionCall %void %MyStruct_DefaultConstructor %tempMyStruct
+         %75 = OpLoad %MyStruct %tempMyStruct
+               OpStore %data %75
+         %77 = OpFunctionCall %int %get_Item %data %int_0
+               OpStore %item0 %77
+         %79 = OpLoad %int %item0
+         %80 = OpFunctionCall %void %set_Item %data %int_1 %79
+         %81 = OpFunctionCall %int %get_Item %data %int_1
+         %82 = OpFunctionCall %void %set_Item %data %int_0 %81
+               OpReturn
+               OpFunctionEnd
+%ElementAccessorGetSetTest_Main_EntryPoint = OpFunction %void None %22
+         %86 = OpLabel
+     %self_6 = OpVariable %_ptr_Function_ElementAccessorGetSetTest Function
+         %88 = OpFunctionCall %void %ElementAccessorGetSetTest_DefaultConstructor %self_6
+         %89 = OpFunctionCall %void %Main %self_6
+               OpReturn
+               OpFunctionEnd
