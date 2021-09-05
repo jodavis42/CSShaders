@@ -83,7 +83,7 @@ namespace CSShaders
 
     public bool IsPrimitiveType()
     {
-      return !(mBaseType == OpType.Struct || mBaseType == OpType.Pointer || mBaseType == OpType.Function);
+      return !(mBaseType == OpType.Struct || mBaseType == OpType.Pointer || mBaseType == OpType.Function || mBaseType == OpType.Array);
     }
 
     public UInt32 ComputeByteSize()

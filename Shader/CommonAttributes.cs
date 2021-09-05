@@ -34,6 +34,18 @@ namespace Shader
     }
   }
 
+  [System.AttributeUsage(AttributeTargets.Method)]
+  public class ArrayGetIntrinsic : Attribute
+  {
+    
+  }
+
+  [System.AttributeUsage(AttributeTargets.Method)]
+  public class ArraySetIntrinsic : Attribute
+  {
+
+  }
+
   /// <summary>
   /// Marks a type as requiring a certain shader capability (e.g. 16-bit floats).
   /// This is currently required by the user as opposed to being automatically added.

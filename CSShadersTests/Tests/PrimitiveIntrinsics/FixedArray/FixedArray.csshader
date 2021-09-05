@@ -1,0 +1,38 @@
+[Math.FixedArrayPrimitive(typeof(float), 20)]
+public struct FixedArrayFloat20
+{
+    public uint Length() { return 20u; }
+    
+
+    [Shader.ArrayGetIntrinsic]
+    public extern float GetValue(int index);
+    [Shader.ArraySetIntrinsic]
+    public extern void SetValue(int index, float value);
+
+    public float this[int key]
+    {
+      get { return GetValue(key); }
+      set { SetValue(key, value); }
+        //get => GetValue(key);
+        //set => SetValue(key, value);
+    }
+}
+
+[Shader.UnitTest][Shader.Pixel]
+struct FixedArrayPrimitiveDeclarationTest
+{
+    [Shader.EntryPoint]
+    public void Main()
+    {
+        var data = new FixedArrayFloat20();
+        //var length = data.Length();
+        //int index = 1;
+        //var item = data.GetValue(index);
+        //data.SetValue(index, item);
+        
+        var s = data[2];
+        s = data[1];
+        data[0] += s;
+        //data.SetValue(2u, item);
+    }
+}
