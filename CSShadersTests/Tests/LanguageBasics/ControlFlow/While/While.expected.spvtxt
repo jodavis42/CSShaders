@@ -31,28 +31,28 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
   %WhileTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_WhileTest = OpTypePointer Function %WhileTest
-          %9 = OpTypeFunction %void %_ptr_Function_WhileTest
-         %11 = OpTypeFunction %int %_ptr_Function_WhileTest
+         %11 = OpTypeFunction %void %_ptr_Function_WhileTest
+         %13 = OpTypeFunction %int %_ptr_Function_WhileTest
 %_ptr_Function_int = OpTypePointer Function %int
        %bool = OpTypeBool
-         %15 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-      %int_0 = OpConstant %int 0
-%WhileTest_PreConstructor = OpFunction %void None %9
+         %17 = OpTypeFunction %void
+%WhileTest_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_WhileTest
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%WhileTest_DefaultConstructor = OpFunction %void None %9
+%WhileTest_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_WhileTest
          %27 = OpLabel
          %28 = OpFunctionCall %void %WhileTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-     %While0 = OpFunction %int None %11
+     %While0 = OpFunction %int None %13
      %self_1 = OpFunctionParameter %_ptr_Function_WhileTest
          %33 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -76,7 +76,7 @@
          %52 = OpLoad %int %a
                OpReturnValue %52
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_WhileTest
          %57 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -84,7 +84,7 @@
                OpStore %ret %59
                OpReturn
                OpFunctionEnd
-%WhileTest_Main_EntryPoint = OpFunction %void None %15
+%WhileTest_Main_EntryPoint = OpFunction %void None %17
          %64 = OpLabel
      %self_3 = OpVariable %_ptr_Function_WhileTest Function
          %66 = OpFunctionCall %void %WhileTest_DefaultConstructor %self_3

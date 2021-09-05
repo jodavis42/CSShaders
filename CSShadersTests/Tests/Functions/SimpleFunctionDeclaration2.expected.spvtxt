@@ -26,32 +26,32 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
 %SimpleFunctionDeclaration2 = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_SimpleFunctionDeclaration2 = OpTypePointer Function %SimpleFunctionDeclaration2
-          %9 = OpTypeFunction %void %_ptr_Function_SimpleFunctionDeclaration2
-         %11 = OpTypeFunction %int %_ptr_Function_SimpleFunctionDeclaration2 %int
+         %10 = OpTypeFunction %void %_ptr_Function_SimpleFunctionDeclaration2
+         %12 = OpTypeFunction %int %_ptr_Function_SimpleFunctionDeclaration2 %int
 %_ptr_Function_int = OpTypePointer Function %int
-         %13 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-%SimpleFunctionDeclaration2_PreConstructor = OpFunction %void None %9
+         %14 = OpTypeFunction %void
+%SimpleFunctionDeclaration2_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
          %19 = OpLabel
                OpReturn
                OpFunctionEnd
-%SimpleFunctionDeclaration2_DefaultConstructor = OpFunction %void None %9
+%SimpleFunctionDeclaration2_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
          %24 = OpLabel
          %25 = OpFunctionCall %void %SimpleFunctionDeclaration2_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-   %GetValue = OpFunction %int None %11
+   %GetValue = OpFunction %int None %12
      %self_1 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
       %value = OpFunctionParameter %int
          %31 = OpLabel
                OpReturnValue %value
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_2 = OpFunctionParameter %_ptr_Function_SimpleFunctionDeclaration2
          %36 = OpLabel
     %value_0 = OpVariable %_ptr_Function_int Function
@@ -59,7 +59,7 @@
                OpStore %value_0 %38
                OpReturn
                OpFunctionEnd
-%SimpleFunctionDeclaration2_Main_EntryPoint = OpFunction %void None %13
+%SimpleFunctionDeclaration2_Main_EntryPoint = OpFunction %void None %14
          %43 = OpLabel
      %self_3 = OpVariable %_ptr_Function_SimpleFunctionDeclaration2 Function
          %45 = OpFunctionCall %void %SimpleFunctionDeclaration2_DefaultConstructor %self_3

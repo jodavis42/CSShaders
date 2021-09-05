@@ -156,33 +156,33 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-       %bool = OpTypeBool
-%IfNestedStress = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_IfNestedStress = OpTypePointer Function %IfNestedStress
-         %11 = OpTypeFunction %void %_ptr_Function_IfNestedStress
-         %13 = OpTypeFunction %int %_ptr_Function_IfNestedStress
-%_ptr_Function_int = OpTypePointer Function %int
-         %15 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
+       %bool = OpTypeBool
        %true = OpConstantTrue %bool
       %int_1 = OpConstant %int 1
       %false = OpConstantFalse %bool
       %int_2 = OpConstant %int 2
       %int_3 = OpConstant %int 3
       %int_4 = OpConstant %int 4
-%IfNestedStress_PreConstructor = OpFunction %void None %11
+%IfNestedStress = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_IfNestedStress = OpTypePointer Function %IfNestedStress
+         %18 = OpTypeFunction %void %_ptr_Function_IfNestedStress
+         %20 = OpTypeFunction %int %_ptr_Function_IfNestedStress
+%_ptr_Function_int = OpTypePointer Function %int
+         %22 = OpTypeFunction %void
+%IfNestedStress_PreConstructor = OpFunction %void None %18
        %self = OpFunctionParameter %_ptr_Function_IfNestedStress
          %27 = OpLabel
                OpReturn
                OpFunctionEnd
-%IfNestedStress_DefaultConstructor = OpFunction %void None %11
+%IfNestedStress_DefaultConstructor = OpFunction %void None %18
      %self_0 = OpFunctionParameter %_ptr_Function_IfNestedStress
          %32 = OpLabel
          %33 = OpFunctionCall %void %IfNestedStress_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%IfNestedStress0 = OpFunction %int None %13
+%IfNestedStress0 = OpFunction %int None %20
      %self_1 = OpFunctionParameter %_ptr_Function_IfNestedStress
          %38 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -215,7 +215,7 @@
          %66 = OpLoad %int %a
                OpReturnValue %66
                OpFunctionEnd
-%IfNestedStress1 = OpFunction %int None %13
+%IfNestedStress1 = OpFunction %int None %20
      %self_2 = OpFunctionParameter %_ptr_Function_IfNestedStress
          %71 = OpLabel
         %one = OpVariable %_ptr_Function_int Function
@@ -361,7 +361,7 @@
         %212 = OpLoad %int %result
                OpReturnValue %212
                OpFunctionEnd
-%IfNestedStress2 = OpFunction %int None %13
+%IfNestedStress2 = OpFunction %int None %20
      %self_3 = OpFunctionParameter %_ptr_Function_IfNestedStress
         %217 = OpLabel
       %one_0 = OpVariable %_ptr_Function_int Function
@@ -873,7 +873,7 @@
         %724 = OpLoad %int %result_0
                OpReturnValue %724
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %18
      %self_4 = OpFunctionParameter %_ptr_Function_IfNestedStress
         %729 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -886,7 +886,7 @@
                OpStore %ret %736
                OpReturn
                OpFunctionEnd
-%IfNestedStress_Main_EntryPoint = OpFunction %void None %15
+%IfNestedStress_Main_EntryPoint = OpFunction %void None %22
         %741 = OpLabel
      %self_5 = OpVariable %_ptr_Function_IfNestedStress Function
         %743 = OpFunctionCall %void %IfNestedStress_DefaultConstructor %self_5

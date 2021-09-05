@@ -11,6 +11,10 @@
                OpSource Unknown 100
                OpName %FloatImage2d "FloatImage2d"
                OpName %FloatSampledImage2d "FloatSampledImage2d"
+               OpName %SampledImage0 "SampledImage0"
+               OpName %SampledImage1 "SampledImage1"
+               OpName %SampledImage2 "SampledImage2"
+               OpName %SampledImage3 "SampledImage3"
                OpName %DescriptorSetBindingIds "DescriptorSetBindingIds"
                OpName %DescriptorSetBindingIds_PreConstructor "DescriptorSetBindingIds_PreConstructor"
                OpName %self "self"
@@ -20,10 +24,6 @@
                OpName %self_1 "self"
                OpName %DescriptorSetBindingIds_Main_EntryPoint "DescriptorSetBindingIds_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %SampledImage0 "SampledImage0"
-               OpName %SampledImage1 "SampledImage1"
-               OpName %SampledImage2 "SampledImage2"
-               OpName %SampledImage3 "SampledImage3"
                OpName %DescriptorSetBindingIds_Main_EntryPoint "DescriptorSetBindingIds_Main_EntryPoint"
                OpName %self_2 "self"
                OpDecorate %SampledImage0 DescriptorSet 0
@@ -39,32 +39,32 @@
 %FloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
 %FloatSampledImage2d = OpTypeSampledImage %FloatImage2d
 %_ptr_UniformConstant_FloatSampledImage2d = OpTypePointer UniformConstant %FloatSampledImage2d
-%DescriptorSetBindingIds = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_DescriptorSetBindingIds = OpTypePointer Function %DescriptorSetBindingIds
-         %14 = OpTypeFunction %void %_ptr_Function_DescriptorSetBindingIds
-         %16 = OpTypeFunction %void
 %SampledImage0 = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
 %SampledImage1 = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
 %SampledImage2 = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
 %SampledImage3 = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
-%DescriptorSetBindingIds_PreConstructor = OpFunction %void None %14
+%DescriptorSetBindingIds = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_DescriptorSetBindingIds = OpTypePointer Function %DescriptorSetBindingIds
+         %18 = OpTypeFunction %void %_ptr_Function_DescriptorSetBindingIds
+         %20 = OpTypeFunction %void
+%DescriptorSetBindingIds_PreConstructor = OpFunction %void None %18
        %self = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
          %25 = OpLabel
                OpReturn
                OpFunctionEnd
-%DescriptorSetBindingIds_DefaultConstructor = OpFunction %void None %14
+%DescriptorSetBindingIds_DefaultConstructor = OpFunction %void None %18
      %self_0 = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
          %30 = OpLabel
          %31 = OpFunctionCall %void %DescriptorSetBindingIds_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %14
+       %Main = OpFunction %void None %18
      %self_1 = OpFunctionParameter %_ptr_Function_DescriptorSetBindingIds
          %36 = OpLabel
                OpReturn
                OpFunctionEnd
-%DescriptorSetBindingIds_Main_EntryPoint = OpFunction %void None %16
+%DescriptorSetBindingIds_Main_EntryPoint = OpFunction %void None %20
          %40 = OpLabel
      %self_2 = OpVariable %_ptr_Function_DescriptorSetBindingIds Function
          %42 = OpFunctionCall %void %DescriptorSetBindingIds_DefaultConstructor %self_2

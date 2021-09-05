@@ -31,43 +31,43 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %TestVectorPrimitive = OpTypeVector %float 2
 %TestMatrixPrimitive = OpTypeMatrix %TestVectorPrimitive 2
 %_ptr_Function_TestMatrixPrimitive = OpTypePointer Function %TestMatrixPrimitive
-          %9 = OpTypeFunction %TestVectorPrimitive %_ptr_Function_TestMatrixPrimitive
+         %10 = OpTypeFunction %TestVectorPrimitive %_ptr_Function_TestMatrixPrimitive
 %MatrixPrimitiveImplicitExplicitThisTests = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests = OpTypePointer Function %MatrixPrimitiveImplicitExplicitThisTests
-         %15 = OpTypeFunction %void %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
+         %16 = OpTypeFunction %void %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
 %_ptr_Function_TestVectorPrimitive = OpTypePointer Function %TestVectorPrimitive
-         %17 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%FieldThisExplicit = OpFunction %TestVectorPrimitive None %9
+         %18 = OpTypeFunction %void
+%FieldThisExplicit = OpFunction %TestVectorPrimitive None %10
        %self = OpFunctionParameter %_ptr_Function_TestMatrixPrimitive
          %23 = OpLabel
          %24 = OpLoad %TestMatrixPrimitive %self
          %25 = OpCompositeExtract %TestVectorPrimitive %24 0
                OpReturnValue %25
                OpFunctionEnd
-%FieldThisImplicit = OpFunction %TestVectorPrimitive None %9
+%FieldThisImplicit = OpFunction %TestVectorPrimitive None %10
      %self_0 = OpFunctionParameter %_ptr_Function_TestMatrixPrimitive
          %30 = OpLabel
          %31 = OpLoad %TestMatrixPrimitive %self_0
          %32 = OpCompositeExtract %TestVectorPrimitive %31 0
                OpReturnValue %32
                OpFunctionEnd
-%MatrixPrimitiveImplicitExplicitThisTests_PreConstructor = OpFunction %void None %15
+%MatrixPrimitiveImplicitExplicitThisTests_PreConstructor = OpFunction %void None %16
      %self_1 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
          %37 = OpLabel
                OpReturn
                OpFunctionEnd
-%MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor = OpFunction %void None %15
+%MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor = OpFunction %void None %16
      %self_2 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
          %42 = OpLabel
          %43 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %15
+       %Main = OpFunction %void None %16
      %self_3 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests
          %48 = OpLabel
     %matrix0 = OpVariable %_ptr_Function_TestMatrixPrimitive Function
@@ -82,7 +82,7 @@
                OpStore %fieldThisImplicit %57
                OpReturn
                OpFunctionEnd
-%MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint = OpFunction %void None %17
+%MatrixPrimitiveImplicitExplicitThisTests_Main_EntryPoint = OpFunction %void None %18
          %62 = OpLabel
      %self_4 = OpVariable %_ptr_Function_MatrixPrimitiveImplicitExplicitThisTests Function
          %64 = OpFunctionCall %void %MatrixPrimitiveImplicitExplicitThisTests_DefaultConstructor %self_4

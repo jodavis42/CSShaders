@@ -10,9 +10,13 @@
                OpExecutionMode %ImagePrimitiveDeclarationTest_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %SimpleFloatImage2d "SimpleFloatImage2d"
+               OpName %SimpleFloatImage2d_0 "SimpleFloatImage2d"
                OpName %SimpleFloatImage3d "SimpleFloatImage3d"
+               OpName %SimpleFloatImage3d_0 "SimpleFloatImage3d"
                OpName %SimpleIntImage2d_Rgba8 "SimpleIntImage2d_Rgba8"
+               OpName %SimpleIntImage2d_Rgba8_0 "SimpleIntImage2d_Rgba8"
                OpName %ComplexIntImage2d_Rgba8 "ComplexIntImage2d_Rgba8"
+               OpName %ComplexIntImage2d_Rgba8_0 "ComplexIntImage2d_Rgba8"
                OpName %ImagePrimitiveDeclarationTest "ImagePrimitiveDeclarationTest"
                OpName %ImagePrimitiveDeclarationTest_PreConstructor "ImagePrimitiveDeclarationTest_PreConstructor"
                OpName %self "self"
@@ -20,44 +24,40 @@
                OpName %self_0 "self"
                OpName %ImagePrimitiveDeclarationTest_EntryPoint "ImagePrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
-               OpName %SimpleFloatImage2d_0 "SimpleFloatImage2d"
-               OpName %SimpleFloatImage3d_0 "SimpleFloatImage3d"
-               OpName %SimpleIntImage2d_Rgba8_0 "SimpleIntImage2d_Rgba8"
-               OpName %ComplexIntImage2d_Rgba8_0 "ComplexIntImage2d_Rgba8"
                OpName %ImagePrimitiveDeclarationTest_EntryPoint "ImagePrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
 %SimpleFloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
 %_ptr_UniformConstant_SimpleFloatImage2d = OpTypePointer UniformConstant %SimpleFloatImage2d
+%SimpleFloatImage2d_0 = OpVariable %_ptr_UniformConstant_SimpleFloatImage2d UniformConstant
 %SimpleFloatImage3d = OpTypeImage %float 3D 0 0 0 1 Unknown
 %_ptr_UniformConstant_SimpleFloatImage3d = OpTypePointer UniformConstant %SimpleFloatImage3d
+%SimpleFloatImage3d_0 = OpVariable %_ptr_UniformConstant_SimpleFloatImage3d UniformConstant
         %int = OpTypeInt 32 1
 %SimpleIntImage2d_Rgba8 = OpTypeImage %int 2D 0 0 0 1 Rgba8
 %_ptr_UniformConstant_SimpleIntImage2d_Rgba8 = OpTypePointer UniformConstant %SimpleIntImage2d_Rgba8
+%SimpleIntImage2d_Rgba8_0 = OpVariable %_ptr_UniformConstant_SimpleIntImage2d_Rgba8 UniformConstant
 %ComplexIntImage2d_Rgba8 = OpTypeImage %int 2D 1 0 0 1 Rgba8
 %_ptr_UniformConstant_ComplexIntImage2d_Rgba8 = OpTypePointer UniformConstant %ComplexIntImage2d_Rgba8
+%ComplexIntImage2d_Rgba8_0 = OpVariable %_ptr_UniformConstant_ComplexIntImage2d_Rgba8 UniformConstant
 %ImagePrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_ImagePrimitiveDeclarationTest = OpTypePointer Function %ImagePrimitiveDeclarationTest
-         %23 = OpTypeFunction %void %_ptr_Function_ImagePrimitiveDeclarationTest
-         %25 = OpTypeFunction %void
-%SimpleFloatImage2d_0 = OpVariable %_ptr_UniformConstant_SimpleFloatImage2d UniformConstant
-%SimpleFloatImage3d_0 = OpVariable %_ptr_UniformConstant_SimpleFloatImage3d UniformConstant
-%SimpleIntImage2d_Rgba8_0 = OpVariable %_ptr_UniformConstant_SimpleIntImage2d_Rgba8 UniformConstant
-%ComplexIntImage2d_Rgba8_0 = OpVariable %_ptr_UniformConstant_ComplexIntImage2d_Rgba8 UniformConstant
-%ImagePrimitiveDeclarationTest_PreConstructor = OpFunction %void None %23
+         %27 = OpTypeFunction %void %_ptr_Function_ImagePrimitiveDeclarationTest
+         %29 = OpTypeFunction %void
+%ImagePrimitiveDeclarationTest_PreConstructor = OpFunction %void None %27
        %self = OpFunctionParameter %_ptr_Function_ImagePrimitiveDeclarationTest
          %34 = OpLabel
                OpReturn
                OpFunctionEnd
-%ImagePrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %23
+%ImagePrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %27
      %self_0 = OpFunctionParameter %_ptr_Function_ImagePrimitiveDeclarationTest
          %39 = OpLabel
          %40 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%ImagePrimitiveDeclarationTest_EntryPoint = OpFunction %void None %25
+%ImagePrimitiveDeclarationTest_EntryPoint = OpFunction %void None %29
          %44 = OpLabel
      %self_1 = OpVariable %_ptr_Function_ImagePrimitiveDeclarationTest Function
          %46 = OpFunctionCall %void %ImagePrimitiveDeclarationTest_DefaultConstructor %self_1

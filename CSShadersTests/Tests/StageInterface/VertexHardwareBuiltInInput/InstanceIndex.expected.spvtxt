@@ -26,30 +26,30 @@
                OpDecorate %gl_InstanceIndex BuiltIn InstanceIndex
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
+     %uint_0 = OpConstant %uint 0
 %InstanceIndexTest = OpTypeStruct %int
        %void = OpTypeVoid
 %_ptr_Function_InstanceIndexTest = OpTypePointer Function %InstanceIndexTest
-          %9 = OpTypeFunction %void %_ptr_Function_InstanceIndexTest
+         %11 = OpTypeFunction %void %_ptr_Function_InstanceIndexTest
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Input_int = OpTypePointer Input %int
-         %12 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-     %uint_0 = OpConstant %uint 0
+         %14 = OpTypeFunction %void
 %gl_InstanceIndex = OpVariable %_ptr_Input_int Input
-%InstanceIndexTest_PreConstructor = OpFunction %void None %9
+%InstanceIndexTest_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_InstanceIndexTest
          %20 = OpLabel
          %21 = OpAccessChain %_ptr_Function_int %self %uint_0
                OpStore %21 %int_0
                OpReturn
                OpFunctionEnd
-%InstanceIndexTest_DefaultConstructor = OpFunction %void None %9
+%InstanceIndexTest_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
          %27 = OpLabel
          %28 = OpFunctionCall %void %InstanceIndexTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
          %33 = OpLabel
       %index = OpVariable %_ptr_Function_int Function
@@ -58,7 +58,7 @@
                OpStore %index %36
                OpReturn
                OpFunctionEnd
-%InstanceIndexTest_CopyInputs = OpFunction %void None %9
+%InstanceIndexTest_CopyInputs = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_InstanceIndexTest
          %42 = OpLabel
          %43 = OpAccessChain %_ptr_Function_int %self_2 %uint_0
@@ -66,7 +66,7 @@
                OpStore %43 %44
                OpReturn
                OpFunctionEnd
-%InstanceIndexTest_Main_EntryPoint = OpFunction %void None %12
+%InstanceIndexTest_Main_EntryPoint = OpFunction %void None %14
          %49 = OpLabel
      %self_3 = OpVariable %_ptr_Function_InstanceIndexTest Function
          %51 = OpFunctionCall %void %InstanceIndexTest_DefaultConstructor %self_3

@@ -24,25 +24,25 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
 %IntegerCompoundAssignmentOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_IntegerCompoundAssignmentOps = OpTypePointer Function %IntegerCompoundAssignmentOps
-          %9 = OpTypeFunction %void %_ptr_Function_IntegerCompoundAssignmentOps
+         %10 = OpTypeFunction %void %_ptr_Function_IntegerCompoundAssignmentOps
 %_ptr_Function_int = OpTypePointer Function %int
-         %11 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-%IntegerCompoundAssignmentOps_PreConstructor = OpFunction %void None %9
+         %12 = OpTypeFunction %void
+%IntegerCompoundAssignmentOps_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
          %17 = OpLabel
                OpReturn
                OpFunctionEnd
-%IntegerCompoundAssignmentOps_DefaultConstructor = OpFunction %void None %9
+%IntegerCompoundAssignmentOps_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
          %22 = OpLabel
          %23 = OpFunctionCall %void %IntegerCompoundAssignmentOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_IntegerCompoundAssignmentOps
          %28 = OpLabel
           %i = OpVariable %_ptr_Function_int Function
@@ -91,7 +91,7 @@
                OpStore %r %71
                OpReturn
                OpFunctionEnd
-%IntegerCompoundAssignmentOps_Main_EntryPoint = OpFunction %void None %11
+%IntegerCompoundAssignmentOps_Main_EntryPoint = OpFunction %void None %12
          %76 = OpLabel
      %self_2 = OpVariable %_ptr_Function_IntegerCompoundAssignmentOps Function
          %78 = OpFunctionCall %void %IntegerCompoundAssignmentOps_DefaultConstructor %self_2

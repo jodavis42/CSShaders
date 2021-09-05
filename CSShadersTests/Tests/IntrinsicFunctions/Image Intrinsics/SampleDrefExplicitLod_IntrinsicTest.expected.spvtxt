@@ -10,8 +10,11 @@
                OpExecutionMode %OpImageSampleDrefExplicitLodTest_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %FloatImage2d "FloatImage2d"
+               OpName %FloatImage2dVal "FloatImage2dVal"
                OpName %Sampler "Sampler"
+               OpName %SamplerVal "SamplerVal"
                OpName %FloatSampledImage2d "FloatSampledImage2d"
+               OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
                OpName %OpImageSampleDrefExplicitLodTest "OpImageSampleDrefExplicitLodTest"
                OpName %Vector2 "Vector2"
                OpName %FloatSampledImage2d "GeneratedSampledImage_CSShaders.ShaderType"
@@ -25,43 +28,40 @@
                OpName %vector2Val "vector2Val"
                OpName %OpImageSampleDrefExplicitLodTest_Main_EntryPoint "OpImageSampleDrefExplicitLodTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %FloatImage2dVal "FloatImage2dVal"
-               OpName %SamplerVal "SamplerVal"
-               OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
                OpName %OpImageSampleDrefExplicitLodTest_Main_EntryPoint "OpImageSampleDrefExplicitLodTest_Main_EntryPoint"
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %FloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
 %_ptr_UniformConstant_FloatImage2d = OpTypePointer UniformConstant %FloatImage2d
+%FloatImage2dVal = OpVariable %_ptr_UniformConstant_FloatImage2d UniformConstant
     %Sampler = OpTypeSampler
 %_ptr_UniformConstant_Sampler = OpTypePointer UniformConstant %Sampler
+ %SamplerVal = OpVariable %_ptr_UniformConstant_Sampler UniformConstant
 %FloatSampledImage2d = OpTypeSampledImage %FloatImage2d
 %_ptr_UniformConstant_FloatSampledImage2d = OpTypePointer UniformConstant %FloatSampledImage2d
+%FloatSampledImage2dVal = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
 %OpImageSampleDrefExplicitLodTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpImageSampleDrefExplicitLodTest = OpTypePointer Function %OpImageSampleDrefExplicitLodTest
-         %18 = OpTypeFunction %void %_ptr_Function_OpImageSampleDrefExplicitLodTest
+         %22 = OpTypeFunction %void %_ptr_Function_OpImageSampleDrefExplicitLodTest
 %_ptr_Function_float = OpTypePointer Function %float
     %Vector2 = OpTypeVector %float 2
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
-         %22 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%FloatImage2dVal = OpVariable %_ptr_UniformConstant_FloatImage2d UniformConstant
- %SamplerVal = OpVariable %_ptr_UniformConstant_Sampler UniformConstant
-%FloatSampledImage2dVal = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
-%OpImageSampleDrefExplicitLodTest_PreConstructor = OpFunction %void None %18
+         %26 = OpTypeFunction %void
+%OpImageSampleDrefExplicitLodTest_PreConstructor = OpFunction %void None %22
        %self = OpFunctionParameter %_ptr_Function_OpImageSampleDrefExplicitLodTest
          %31 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpImageSampleDrefExplicitLodTest_DefaultConstructor = OpFunction %void None %18
+%OpImageSampleDrefExplicitLodTest_DefaultConstructor = OpFunction %void None %22
      %self_0 = OpFunctionParameter %_ptr_Function_OpImageSampleDrefExplicitLodTest
          %36 = OpLabel
          %37 = OpFunctionCall %void %OpImageSampleDrefExplicitLodTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %18
+       %Main = OpFunction %void None %22
      %self_1 = OpFunctionParameter %_ptr_Function_OpImageSampleDrefExplicitLodTest
          %42 = OpLabel
    %floatVal = OpVariable %_ptr_Function_float Function
@@ -85,7 +85,7 @@
                OpStore %floatVal %60
                OpReturn
                OpFunctionEnd
-%OpImageSampleDrefExplicitLodTest_Main_EntryPoint = OpFunction %void None %22
+%OpImageSampleDrefExplicitLodTest_Main_EntryPoint = OpFunction %void None %26
          %65 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpImageSampleDrefExplicitLodTest Function
          %67 = OpFunctionCall %void %OpImageSampleDrefExplicitLodTest_DefaultConstructor %self_2

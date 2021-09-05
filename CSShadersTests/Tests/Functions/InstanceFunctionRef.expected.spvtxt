@@ -26,34 +26,34 @@
                OpName %self_3 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_3 = OpConstant %int 3
+      %int_1 = OpConstant %int 1
 %InstanceFunctionRef = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_InstanceFunctionRef = OpTypePointer Function %InstanceFunctionRef
-          %9 = OpTypeFunction %void %_ptr_Function_InstanceFunctionRef
+         %11 = OpTypeFunction %void %_ptr_Function_InstanceFunctionRef
 %_ptr_Function_int = OpTypePointer Function %int
-         %11 = OpTypeFunction %void %_ptr_Function_InstanceFunctionRef %_ptr_Function_int
-         %13 = OpTypeFunction %void
-      %int_3 = OpConstant %int 3
-      %int_1 = OpConstant %int 1
-%InstanceFunctionRef_PreConstructor = OpFunction %void None %9
+         %13 = OpTypeFunction %void %_ptr_Function_InstanceFunctionRef %_ptr_Function_int
+         %15 = OpTypeFunction %void
+%InstanceFunctionRef_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_InstanceFunctionRef
          %20 = OpLabel
                OpReturn
                OpFunctionEnd
-%InstanceFunctionRef_DefaultConstructor = OpFunction %void None %9
+%InstanceFunctionRef_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_InstanceFunctionRef
          %25 = OpLabel
          %26 = OpFunctionCall %void %InstanceFunctionRef_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-    %TestFn1 = OpFunction %void None %11
+    %TestFn1 = OpFunction %void None %13
      %self_1 = OpFunctionParameter %_ptr_Function_InstanceFunctionRef
       %value = OpFunctionParameter %_ptr_Function_int
          %32 = OpLabel
                OpStore %value %int_3
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_2 = OpFunctionParameter %_ptr_Function_InstanceFunctionRef
          %38 = OpLabel
     %value_0 = OpVariable %_ptr_Function_int Function
@@ -61,7 +61,7 @@
          %41 = OpFunctionCall %void %TestFn1 %self_2 %value_0
                OpReturn
                OpFunctionEnd
-%InstanceFunctionRef_Main_EntryPoint = OpFunction %void None %13
+%InstanceFunctionRef_Main_EntryPoint = OpFunction %void None %15
          %45 = OpLabel
      %self_3 = OpVariable %_ptr_Function_InstanceFunctionRef Function
          %47 = OpFunctionCall %void %InstanceFunctionRef_DefaultConstructor %self_3

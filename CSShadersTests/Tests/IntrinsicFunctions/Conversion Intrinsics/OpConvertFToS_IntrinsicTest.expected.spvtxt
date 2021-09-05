@@ -36,11 +36,13 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %OpConvertFToSTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpConvertFToSTest = OpTypePointer Function %OpConvertFToSTest
-         %11 = OpTypeFunction %void %_ptr_Function_OpConvertFToSTest
+         %13 = OpTypeFunction %void %_ptr_Function_OpConvertFToSTest
 %_ptr_Function_int = OpTypePointer Function %int
 %_ptr_Function_float = OpTypePointer Function %float
    %Integer2 = OpTypeVector %int 2
@@ -55,21 +57,19 @@
 %_ptr_Function_Integer4 = OpTypePointer Function %Integer4
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-         %25 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-    %float_0 = OpConstant %float 0
-%OpConvertFToSTest_PreConstructor = OpFunction %void None %11
+         %27 = OpTypeFunction %void
+%OpConvertFToSTest_PreConstructor = OpFunction %void None %13
        %self = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
          %32 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpConvertFToSTest_DefaultConstructor = OpFunction %void None %11
+%OpConvertFToSTest_DefaultConstructor = OpFunction %void None %13
      %self_0 = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
          %37 = OpLabel
          %38 = OpFunctionCall %void %OpConvertFToSTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %13
      %self_1 = OpFunctionParameter %_ptr_Function_OpConvertFToSTest
          %43 = OpLabel
      %intVal = OpVariable %_ptr_Function_int Function
@@ -108,7 +108,7 @@
                OpStore %integer4Val %76
                OpReturn
                OpFunctionEnd
-%OpConvertFToSTest_Main_EntryPoint = OpFunction %void None %25
+%OpConvertFToSTest_Main_EntryPoint = OpFunction %void None %27
          %81 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpConvertFToSTest Function
          %83 = OpFunctionCall %void %OpConvertFToSTest_DefaultConstructor %self_2

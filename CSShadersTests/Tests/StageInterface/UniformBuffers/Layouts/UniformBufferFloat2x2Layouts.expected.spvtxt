@@ -35,6 +35,9 @@
                OpMemberName %Float2x2Buffer2_0 0 "Value0"
                OpMemberName %Float2x2Buffer2_0 1 "Value1"
                OpMemberName %Float2x2Buffer2_0 2 "Float2x2"
+               OpName %Float2x2Buffer0_Instance "Float2x2Buffer0_Instance"
+               OpName %Float2x2Buffer1_Instance "Float2x2Buffer1_Instance"
+               OpName %Float2x2Buffer2_Instance "Float2x2Buffer2_Instance"
                OpName %Float2x2Buffer0_PreConstructor "Float2x2Buffer0_PreConstructor"
                OpName %self "self"
                OpName %Float2x2Buffer0_DefaultConstructor "Float2x2Buffer0_DefaultConstructor"
@@ -60,9 +63,6 @@
                OpName %self_8 "self"
                OpName %UniformBufferFloat2x2Layouts_Main_EntryPoint "UniformBufferFloat2x2Layouts_Main_EntryPoint"
                OpName %self_9 "self"
-               OpName %Float2x2Buffer0_Instance "Float2x2Buffer0_Instance"
-               OpName %Float2x2Buffer1_Instance "Float2x2Buffer1_Instance"
-               OpName %Float2x2Buffer2_Instance "Float2x2Buffer2_Instance"
                OpName %UniformBufferFloat2x2Layouts_Main_EntryPoint "UniformBufferFloat2x2Layouts_Main_EntryPoint"
                OpName %self_9 "self"
                OpDecorate %Float2x2Buffer0_0 DescriptorSet 0
@@ -91,22 +91,26 @@
                OpMemberDecorate %Float2x2Buffer2_0 2 ColMajor
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
 %TestVector2 = OpTypeVector %float 2
 %TestFloat2x2 = OpTypeMatrix %TestVector2 2
 %Float2x2Buffer0 = OpTypeStruct %TestFloat2x2 %TestFloat2x2
        %void = OpTypeVoid
 %_ptr_Function_Float2x2Buffer0 = OpTypePointer Function %Float2x2Buffer0
-         %13 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer0
+         %17 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer0
 %Float2x2Buffer1 = OpTypeStruct %float %TestFloat2x2
 %_ptr_Function_Float2x2Buffer1 = OpTypePointer Function %Float2x2Buffer1
-         %17 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer1
+         %21 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer1
 %_ptr_Function_float = OpTypePointer Function %float
 %Float2x2Buffer2 = OpTypeStruct %float %float %TestFloat2x2
 %_ptr_Function_Float2x2Buffer2 = OpTypePointer Function %Float2x2Buffer2
-         %21 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer2
+         %25 = OpTypeFunction %void %_ptr_Function_Float2x2Buffer2
 %UniformBufferFloat2x2Layouts = OpTypeStruct %Float2x2Buffer0 %Float2x2Buffer1 %Float2x2Buffer2
 %_ptr_Function_UniformBufferFloat2x2Layouts = OpTypePointer Function %UniformBufferFloat2x2Layouts
-         %25 = OpTypeFunction %void %_ptr_Function_UniformBufferFloat2x2Layouts
+         %29 = OpTypeFunction %void %_ptr_Function_UniformBufferFloat2x2Layouts
 %_ptr_Uniform_TestFloat2x2 = OpTypePointer Uniform %TestFloat2x2
 %Float2x2Buffer0_0 = OpTypeStruct %TestFloat2x2 %TestFloat2x2
 %_ptr_Uniform_Float2x2Buffer0_0 = OpTypePointer Uniform %Float2x2Buffer0_0
@@ -116,39 +120,35 @@
 %_ptr_Uniform_Float2x2Buffer1_0 = OpTypePointer Uniform %Float2x2Buffer1_0
 %Float2x2Buffer2_0 = OpTypeStruct %float %float %TestFloat2x2
 %_ptr_Uniform_Float2x2Buffer2_0 = OpTypePointer Uniform %Float2x2Buffer2_0
-         %38 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-     %uint_0 = OpConstant %uint 0
-     %uint_1 = OpConstant %uint 1
-     %uint_2 = OpConstant %uint 2
+         %42 = OpTypeFunction %void
 %Float2x2Buffer0_Instance = OpVariable %_ptr_Uniform_Float2x2Buffer0_0 Uniform
 %Float2x2Buffer1_Instance = OpVariable %_ptr_Uniform_Float2x2Buffer1_0 Uniform
 %Float2x2Buffer2_Instance = OpVariable %_ptr_Uniform_Float2x2Buffer2_0 Uniform
-%Float2x2Buffer0_PreConstructor = OpFunction %void None %13
+%Float2x2Buffer0_PreConstructor = OpFunction %void None %17
        %self = OpFunctionParameter %_ptr_Function_Float2x2Buffer0
          %50 = OpLabel
                OpReturn
                OpFunctionEnd
-%Float2x2Buffer0_DefaultConstructor = OpFunction %void None %13
+%Float2x2Buffer0_DefaultConstructor = OpFunction %void None %17
      %self_0 = OpFunctionParameter %_ptr_Function_Float2x2Buffer0
          %55 = OpLabel
          %56 = OpFunctionCall %void %Float2x2Buffer0_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%Float2x2Buffer1_PreConstructor = OpFunction %void None %17
+%Float2x2Buffer1_PreConstructor = OpFunction %void None %21
      %self_1 = OpFunctionParameter %_ptr_Function_Float2x2Buffer1
          %61 = OpLabel
          %62 = OpAccessChain %_ptr_Function_float %self_1 %uint_0
                OpStore %62 %float_0
                OpReturn
                OpFunctionEnd
-%Float2x2Buffer1_DefaultConstructor = OpFunction %void None %17
+%Float2x2Buffer1_DefaultConstructor = OpFunction %void None %21
      %self_2 = OpFunctionParameter %_ptr_Function_Float2x2Buffer1
          %68 = OpLabel
          %69 = OpFunctionCall %void %Float2x2Buffer1_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-%Float2x2Buffer2_PreConstructor = OpFunction %void None %21
+%Float2x2Buffer2_PreConstructor = OpFunction %void None %25
      %self_3 = OpFunctionParameter %_ptr_Function_Float2x2Buffer2
          %74 = OpLabel
          %75 = OpAccessChain %_ptr_Function_float %self_3 %uint_0
@@ -157,13 +157,13 @@
                OpStore %77 %float_0
                OpReturn
                OpFunctionEnd
-%Float2x2Buffer2_DefaultConstructor = OpFunction %void None %21
+%Float2x2Buffer2_DefaultConstructor = OpFunction %void None %25
      %self_4 = OpFunctionParameter %_ptr_Function_Float2x2Buffer2
          %83 = OpLabel
          %84 = OpFunctionCall %void %Float2x2Buffer2_PreConstructor %self_4
                OpReturn
                OpFunctionEnd
-%UniformBufferFloat2x2Layouts_PreConstructor = OpFunction %void None %25
+%UniformBufferFloat2x2Layouts_PreConstructor = OpFunction %void None %29
      %self_5 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
          %89 = OpLabel
 %tempFloat2x2Buffer0 = OpVariable %_ptr_Function_Float2x2Buffer0 Function
@@ -183,18 +183,18 @@
                OpStore %103 %102
                OpReturn
                OpFunctionEnd
-%UniformBufferFloat2x2Layouts_DefaultConstructor = OpFunction %void None %25
+%UniformBufferFloat2x2Layouts_DefaultConstructor = OpFunction %void None %29
      %self_6 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
         %109 = OpLabel
         %110 = OpFunctionCall %void %UniformBufferFloat2x2Layouts_PreConstructor %self_6
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %25
+       %Main = OpFunction %void None %29
      %self_7 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
         %115 = OpLabel
                OpReturn
                OpFunctionEnd
-%UniformBufferFloat2x2Layouts_CopyInputs = OpFunction %void None %25
+%UniformBufferFloat2x2Layouts_CopyInputs = OpFunction %void None %29
      %self_8 = OpFunctionParameter %_ptr_Function_UniformBufferFloat2x2Layouts
         %120 = OpLabel
         %121 = OpAccessChain %_ptr_Function_Float2x2Buffer0 %self_8 %uint_0
@@ -230,7 +230,7 @@
                OpStore %149 %150
                OpReturn
                OpFunctionEnd
-%UniformBufferFloat2x2Layouts_Main_EntryPoint = OpFunction %void None %38
+%UniformBufferFloat2x2Layouts_Main_EntryPoint = OpFunction %void None %42
         %155 = OpLabel
      %self_9 = OpVariable %_ptr_Function_UniformBufferFloat2x2Layouts Function
         %157 = OpFunctionCall %void %UniformBufferFloat2x2Layouts_DefaultConstructor %self_9

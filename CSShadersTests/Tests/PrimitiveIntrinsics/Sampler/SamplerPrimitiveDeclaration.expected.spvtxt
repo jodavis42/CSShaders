@@ -10,6 +10,7 @@
                OpExecutionMode %SamplerPrimitiveDeclarationTest_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %TestSamplerPrimitive "TestSamplerPrimitive"
+               OpName %Sampler "Sampler"
                OpName %SamplerPrimitiveDeclarationTest "SamplerPrimitiveDeclarationTest"
                OpName %SamplerPrimitiveDeclarationTest_PreConstructor "SamplerPrimitiveDeclarationTest_PreConstructor"
                OpName %self "self"
@@ -17,29 +18,28 @@
                OpName %self_0 "self"
                OpName %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
-               OpName %Sampler "Sampler"
                OpName %SamplerPrimitiveDeclarationTest_EntryPoint "SamplerPrimitiveDeclarationTest_EntryPoint"
                OpName %self_1 "self"
 %TestSamplerPrimitive = OpTypeSampler
 %_ptr_UniformConstant_TestSamplerPrimitive = OpTypePointer UniformConstant %TestSamplerPrimitive
+    %Sampler = OpVariable %_ptr_UniformConstant_TestSamplerPrimitive UniformConstant
 %SamplerPrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_SamplerPrimitiveDeclarationTest = OpTypePointer Function %SamplerPrimitiveDeclarationTest
-          %8 = OpTypeFunction %void %_ptr_Function_SamplerPrimitiveDeclarationTest
-         %10 = OpTypeFunction %void
-    %Sampler = OpVariable %_ptr_UniformConstant_TestSamplerPrimitive UniformConstant
-%SamplerPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %8
+          %9 = OpTypeFunction %void %_ptr_Function_SamplerPrimitiveDeclarationTest
+         %11 = OpTypeFunction %void
+%SamplerPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
        %self = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
          %16 = OpLabel
                OpReturn
                OpFunctionEnd
-%SamplerPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %8
+%SamplerPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
      %self_0 = OpFunctionParameter %_ptr_Function_SamplerPrimitiveDeclarationTest
          %21 = OpLabel
          %22 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%SamplerPrimitiveDeclarationTest_EntryPoint = OpFunction %void None %10
+%SamplerPrimitiveDeclarationTest_EntryPoint = OpFunction %void None %11
          %26 = OpLabel
      %self_1 = OpVariable %_ptr_Function_SamplerPrimitiveDeclarationTest Function
          %28 = OpFunctionCall %void %SamplerPrimitiveDeclarationTest_DefaultConstructor %self_1

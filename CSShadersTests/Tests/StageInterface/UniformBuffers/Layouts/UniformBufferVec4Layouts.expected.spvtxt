@@ -45,6 +45,10 @@
                OpMemberName %Vec4Buffer3_0 1 "Value1"
                OpMemberName %Vec4Buffer3_0 2 "Value2"
                OpMemberName %Vec4Buffer3_0 3 "TestVector4"
+               OpName %Vec4Buffer0_Instance "Vec4Buffer0_Instance"
+               OpName %Vec4Buffer1_Instance "Vec4Buffer1_Instance"
+               OpName %Vec4Buffer2_Instance "Vec4Buffer2_Instance"
+               OpName %Vec4Buffer3_Instance "Vec4Buffer3_Instance"
                OpName %Vec4Buffer0_PreConstructor "Vec4Buffer0_PreConstructor"
                OpName %self "self"
                OpName %Vec4Buffer0_DefaultConstructor "Vec4Buffer0_DefaultConstructor"
@@ -75,10 +79,6 @@
                OpName %self_10 "self"
                OpName %UniformBufferVec4Layouts_Main_EntryPoint "UniformBufferVec4Layouts_Main_EntryPoint"
                OpName %self_11 "self"
-               OpName %Vec4Buffer0_Instance "Vec4Buffer0_Instance"
-               OpName %Vec4Buffer1_Instance "Vec4Buffer1_Instance"
-               OpName %Vec4Buffer2_Instance "Vec4Buffer2_Instance"
-               OpName %Vec4Buffer3_Instance "Vec4Buffer3_Instance"
                OpName %UniformBufferVec4Layouts_Main_EntryPoint "UniformBufferVec4Layouts_Main_EntryPoint"
                OpName %self_11 "self"
                OpDecorate %Vec4Buffer0_0 DescriptorSet 0
@@ -106,24 +106,29 @@
                OpMemberDecorate %Vec4Buffer3_0 3 Offset 16
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+     %uint_2 = OpConstant %uint 2
+     %uint_3 = OpConstant %uint 3
 %TestVector4 = OpTypeVector %float 4
 %Vec4Buffer0 = OpTypeStruct %TestVector4 %TestVector4
        %void = OpTypeVoid
 %_ptr_Function_Vec4Buffer0 = OpTypePointer Function %Vec4Buffer0
-         %11 = OpTypeFunction %void %_ptr_Function_Vec4Buffer0
+         %16 = OpTypeFunction %void %_ptr_Function_Vec4Buffer0
 %Vec4Buffer1 = OpTypeStruct %float %TestVector4
 %_ptr_Function_Vec4Buffer1 = OpTypePointer Function %Vec4Buffer1
-         %15 = OpTypeFunction %void %_ptr_Function_Vec4Buffer1
+         %20 = OpTypeFunction %void %_ptr_Function_Vec4Buffer1
 %_ptr_Function_float = OpTypePointer Function %float
 %Vec4Buffer2 = OpTypeStruct %float %float %TestVector4
 %_ptr_Function_Vec4Buffer2 = OpTypePointer Function %Vec4Buffer2
-         %19 = OpTypeFunction %void %_ptr_Function_Vec4Buffer2
+         %24 = OpTypeFunction %void %_ptr_Function_Vec4Buffer2
 %Vec4Buffer3 = OpTypeStruct %float %float %float %TestVector4
 %_ptr_Function_Vec4Buffer3 = OpTypePointer Function %Vec4Buffer3
-         %23 = OpTypeFunction %void %_ptr_Function_Vec4Buffer3
+         %28 = OpTypeFunction %void %_ptr_Function_Vec4Buffer3
 %UniformBufferVec4Layouts = OpTypeStruct %Vec4Buffer0 %Vec4Buffer1 %Vec4Buffer2 %Vec4Buffer3
 %_ptr_Function_UniformBufferVec4Layouts = OpTypePointer Function %UniformBufferVec4Layouts
-         %27 = OpTypeFunction %void %_ptr_Function_UniformBufferVec4Layouts
+         %32 = OpTypeFunction %void %_ptr_Function_UniformBufferVec4Layouts
 %_ptr_Uniform_TestVector4 = OpTypePointer Uniform %TestVector4
 %Vec4Buffer0_0 = OpTypeStruct %TestVector4 %TestVector4
 %_ptr_Uniform_Vec4Buffer0_0 = OpTypePointer Uniform %Vec4Buffer0_0
@@ -135,41 +140,36 @@
 %_ptr_Uniform_Vec4Buffer2_0 = OpTypePointer Uniform %Vec4Buffer2_0
 %Vec4Buffer3_0 = OpTypeStruct %float %float %float %TestVector4
 %_ptr_Uniform_Vec4Buffer3_0 = OpTypePointer Uniform %Vec4Buffer3_0
-         %43 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-     %uint_0 = OpConstant %uint 0
-     %uint_1 = OpConstant %uint 1
-     %uint_2 = OpConstant %uint 2
-     %uint_3 = OpConstant %uint 3
+         %48 = OpTypeFunction %void
 %Vec4Buffer0_Instance = OpVariable %_ptr_Uniform_Vec4Buffer0_0 Uniform
 %Vec4Buffer1_Instance = OpVariable %_ptr_Uniform_Vec4Buffer1_0 Uniform
 %Vec4Buffer2_Instance = OpVariable %_ptr_Uniform_Vec4Buffer2_0 Uniform
 %Vec4Buffer3_Instance = OpVariable %_ptr_Uniform_Vec4Buffer3_0 Uniform
-%Vec4Buffer0_PreConstructor = OpFunction %void None %11
+%Vec4Buffer0_PreConstructor = OpFunction %void None %16
        %self = OpFunctionParameter %_ptr_Function_Vec4Buffer0
          %57 = OpLabel
                OpReturn
                OpFunctionEnd
-%Vec4Buffer0_DefaultConstructor = OpFunction %void None %11
+%Vec4Buffer0_DefaultConstructor = OpFunction %void None %16
      %self_0 = OpFunctionParameter %_ptr_Function_Vec4Buffer0
          %62 = OpLabel
          %63 = OpFunctionCall %void %Vec4Buffer0_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%Vec4Buffer1_PreConstructor = OpFunction %void None %15
+%Vec4Buffer1_PreConstructor = OpFunction %void None %20
      %self_1 = OpFunctionParameter %_ptr_Function_Vec4Buffer1
          %68 = OpLabel
          %69 = OpAccessChain %_ptr_Function_float %self_1 %uint_0
                OpStore %69 %float_0
                OpReturn
                OpFunctionEnd
-%Vec4Buffer1_DefaultConstructor = OpFunction %void None %15
+%Vec4Buffer1_DefaultConstructor = OpFunction %void None %20
      %self_2 = OpFunctionParameter %_ptr_Function_Vec4Buffer1
          %75 = OpLabel
          %76 = OpFunctionCall %void %Vec4Buffer1_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-%Vec4Buffer2_PreConstructor = OpFunction %void None %19
+%Vec4Buffer2_PreConstructor = OpFunction %void None %24
      %self_3 = OpFunctionParameter %_ptr_Function_Vec4Buffer2
          %81 = OpLabel
          %82 = OpAccessChain %_ptr_Function_float %self_3 %uint_0
@@ -178,13 +178,13 @@
                OpStore %84 %float_0
                OpReturn
                OpFunctionEnd
-%Vec4Buffer2_DefaultConstructor = OpFunction %void None %19
+%Vec4Buffer2_DefaultConstructor = OpFunction %void None %24
      %self_4 = OpFunctionParameter %_ptr_Function_Vec4Buffer2
          %90 = OpLabel
          %91 = OpFunctionCall %void %Vec4Buffer2_PreConstructor %self_4
                OpReturn
                OpFunctionEnd
-%Vec4Buffer3_PreConstructor = OpFunction %void None %23
+%Vec4Buffer3_PreConstructor = OpFunction %void None %28
      %self_5 = OpFunctionParameter %_ptr_Function_Vec4Buffer3
          %96 = OpLabel
          %97 = OpAccessChain %_ptr_Function_float %self_5 %uint_0
@@ -195,13 +195,13 @@
                OpStore %101 %float_0
                OpReturn
                OpFunctionEnd
-%Vec4Buffer3_DefaultConstructor = OpFunction %void None %23
+%Vec4Buffer3_DefaultConstructor = OpFunction %void None %28
      %self_6 = OpFunctionParameter %_ptr_Function_Vec4Buffer3
         %107 = OpLabel
         %108 = OpFunctionCall %void %Vec4Buffer3_PreConstructor %self_6
                OpReturn
                OpFunctionEnd
-%UniformBufferVec4Layouts_PreConstructor = OpFunction %void None %27
+%UniformBufferVec4Layouts_PreConstructor = OpFunction %void None %32
      %self_7 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
         %113 = OpLabel
 %tempVec4Buffer0 = OpVariable %_ptr_Function_Vec4Buffer0 Function
@@ -226,18 +226,18 @@
                OpStore %132 %131
                OpReturn
                OpFunctionEnd
-%UniformBufferVec4Layouts_DefaultConstructor = OpFunction %void None %27
+%UniformBufferVec4Layouts_DefaultConstructor = OpFunction %void None %32
      %self_8 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
         %138 = OpLabel
         %139 = OpFunctionCall %void %UniformBufferVec4Layouts_PreConstructor %self_8
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %27
+       %Main = OpFunction %void None %32
      %self_9 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
         %144 = OpLabel
                OpReturn
                OpFunctionEnd
-%UniformBufferVec4Layouts_CopyInputs = OpFunction %void None %27
+%UniformBufferVec4Layouts_CopyInputs = OpFunction %void None %32
     %self_10 = OpFunctionParameter %_ptr_Function_UniformBufferVec4Layouts
         %149 = OpLabel
         %150 = OpAccessChain %_ptr_Function_Vec4Buffer0 %self_10 %uint_0
@@ -290,7 +290,7 @@
                OpStore %195 %196
                OpReturn
                OpFunctionEnd
-%UniformBufferVec4Layouts_Main_EntryPoint = OpFunction %void None %43
+%UniformBufferVec4Layouts_Main_EntryPoint = OpFunction %void None %48
         %201 = OpLabel
     %self_11 = OpVariable %_ptr_Function_UniformBufferVec4Layouts Function
         %203 = OpFunctionCall %void %UniformBufferVec4Layouts_DefaultConstructor %self_11

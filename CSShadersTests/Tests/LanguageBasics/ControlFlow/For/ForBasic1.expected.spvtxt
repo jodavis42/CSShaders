@@ -63,29 +63,29 @@
                OpName %self_6 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-  %ForBasic1 = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_ForBasic1 = OpTypePointer Function %ForBasic1
-          %9 = OpTypeFunction %void %_ptr_Function_ForBasic1
-         %11 = OpTypeFunction %int %_ptr_Function_ForBasic1
-%_ptr_Function_int = OpTypePointer Function %int
-       %bool = OpTypeBool
-         %15 = OpTypeFunction %void
      %int_10 = OpConstant %int 10
       %int_1 = OpConstant %int 1
       %int_0 = OpConstant %int 0
-%ForBasic1_PreConstructor = OpFunction %void None %9
+  %ForBasic1 = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ForBasic1 = OpTypePointer Function %ForBasic1
+         %12 = OpTypeFunction %void %_ptr_Function_ForBasic1
+         %14 = OpTypeFunction %int %_ptr_Function_ForBasic1
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %18 = OpTypeFunction %void
+%ForBasic1_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_ForBasic1
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%ForBasic1_DefaultConstructor = OpFunction %void None %9
+%ForBasic1_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_ForBasic1
          %28 = OpLabel
          %29 = OpFunctionCall %void %ForBasic1_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %For0 = OpFunction %int None %11
+       %For0 = OpFunction %int None %14
      %self_1 = OpFunctionParameter %_ptr_Function_ForBasic1
          %34 = OpLabel
       %count = OpVariable %_ptr_Function_int Function
@@ -118,7 +118,7 @@
          %62 = OpLoad %int %result
                OpReturnValue %62
                OpFunctionEnd
-       %For1 = OpFunction %int None %11
+       %For1 = OpFunction %int None %14
      %self_2 = OpFunctionParameter %_ptr_Function_ForBasic1
          %67 = OpLabel
     %count_0 = OpVariable %_ptr_Function_int Function
@@ -149,7 +149,7 @@
          %93 = OpLoad %int %result_0
                OpReturnValue %93
                OpFunctionEnd
-       %For2 = OpFunction %int None %11
+       %For2 = OpFunction %int None %14
      %self_3 = OpFunctionParameter %_ptr_Function_ForBasic1
          %98 = OpLabel
     %count_1 = OpVariable %_ptr_Function_int Function
@@ -183,7 +183,7 @@
         %127 = OpLoad %int %result_1
                OpReturnValue %127
                OpFunctionEnd
-       %For3 = OpFunction %int None %11
+       %For3 = OpFunction %int None %14
      %self_4 = OpFunctionParameter %_ptr_Function_ForBasic1
         %132 = OpLabel
     %count_2 = OpVariable %_ptr_Function_int Function
@@ -213,7 +213,7 @@
         %157 = OpLoad %int %result_2
                OpReturnValue %157
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %12
      %self_5 = OpFunctionParameter %_ptr_Function_ForBasic1
         %162 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -228,7 +228,7 @@
                OpStore %ret %171
                OpReturn
                OpFunctionEnd
-%ForBasic1_Main_EntryPoint = OpFunction %void None %15
+%ForBasic1_Main_EntryPoint = OpFunction %void None %18
         %176 = OpLabel
      %self_6 = OpVariable %_ptr_Function_ForBasic1 Function
         %178 = OpFunctionCall %void %ForBasic1_DefaultConstructor %self_6

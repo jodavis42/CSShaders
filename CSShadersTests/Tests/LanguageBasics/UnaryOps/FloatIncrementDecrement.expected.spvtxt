@@ -24,26 +24,26 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
+    %float_1 = OpConstant %float 1
 %FloatIncementDecrement = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_FloatIncementDecrement = OpTypePointer Function %FloatIncementDecrement
-          %9 = OpTypeFunction %void %_ptr_Function_FloatIncementDecrement
+         %11 = OpTypeFunction %void %_ptr_Function_FloatIncementDecrement
 %_ptr_Function_float = OpTypePointer Function %float
-         %11 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-    %float_1 = OpConstant %float 1
-%FloatIncementDecrement_PreConstructor = OpFunction %void None %9
+         %13 = OpTypeFunction %void
+%FloatIncementDecrement_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
          %18 = OpLabel
                OpReturn
                OpFunctionEnd
-%FloatIncementDecrement_DefaultConstructor = OpFunction %void None %9
+%FloatIncementDecrement_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
          %23 = OpLabel
          %24 = OpFunctionCall %void %FloatIncementDecrement_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_1 = OpFunctionParameter %_ptr_Function_FloatIncementDecrement
          %29 = OpLabel
           %f = OpVariable %_ptr_Function_float Function
@@ -82,7 +82,7 @@
                OpStore %r %60
                OpReturn
                OpFunctionEnd
-%FloatIncementDecrement_Main_EntryPoint = OpFunction %void None %11
+%FloatIncementDecrement_Main_EntryPoint = OpFunction %void None %13
          %67 = OpLabel
      %self_2 = OpVariable %_ptr_Function_FloatIncementDecrement Function
          %69 = OpFunctionCall %void %FloatIncementDecrement_DefaultConstructor %self_2

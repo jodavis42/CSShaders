@@ -71,28 +71,28 @@
                OpName %self_6 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
 %DoWhileNested = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_DoWhileNested = OpTypePointer Function %DoWhileNested
-          %9 = OpTypeFunction %void %_ptr_Function_DoWhileNested
-         %11 = OpTypeFunction %int %_ptr_Function_DoWhileNested
+         %11 = OpTypeFunction %void %_ptr_Function_DoWhileNested
+         %13 = OpTypeFunction %int %_ptr_Function_DoWhileNested
 %_ptr_Function_int = OpTypePointer Function %int
        %bool = OpTypeBool
-         %15 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-      %int_0 = OpConstant %int 0
-%DoWhileNested_PreConstructor = OpFunction %void None %9
+         %17 = OpTypeFunction %void
+%DoWhileNested_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_DoWhileNested
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%DoWhileNested_DefaultConstructor = OpFunction %void None %9
+%DoWhileNested_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_DoWhileNested
          %27 = OpLabel
          %28 = OpFunctionCall %void %DoWhileNested_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%DoWhileNested0 = OpFunction %int None %11
+%DoWhileNested0 = OpFunction %int None %13
      %self_1 = OpFunctionParameter %_ptr_Function_DoWhileNested
          %33 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -130,7 +130,7 @@
          %66 = OpLoad %int %a
                OpReturnValue %66
                OpFunctionEnd
-%DoWhileNested1 = OpFunction %int None %11
+%DoWhileNested1 = OpFunction %int None %13
      %self_2 = OpFunctionParameter %_ptr_Function_DoWhileNested
          %71 = OpLabel
         %a_0 = OpVariable %_ptr_Function_int Function
@@ -165,7 +165,7 @@
         %101 = OpLoad %int %a_0
                OpReturnValue %101
                OpFunctionEnd
-%DoWhileNested2 = OpFunction %int None %11
+%DoWhileNested2 = OpFunction %int None %13
      %self_3 = OpFunctionParameter %_ptr_Function_DoWhileNested
         %106 = OpLabel
         %a_1 = OpVariable %_ptr_Function_int Function
@@ -200,7 +200,7 @@
         %136 = OpLoad %int %a_1
                OpReturnValue %136
                OpFunctionEnd
-%DoWhileNested3 = OpFunction %int None %11
+%DoWhileNested3 = OpFunction %int None %13
      %self_4 = OpFunctionParameter %_ptr_Function_DoWhileNested
         %141 = OpLabel
         %a_2 = OpVariable %_ptr_Function_int Function
@@ -232,7 +232,7 @@
         %168 = OpLoad %int %a_2
                OpReturnValue %168
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_5 = OpFunctionParameter %_ptr_Function_DoWhileNested
         %173 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -247,7 +247,7 @@
                OpStore %ret %182
                OpReturn
                OpFunctionEnd
-%DoWhileNested_Main_EntryPoint = OpFunction %void None %15
+%DoWhileNested_Main_EntryPoint = OpFunction %void None %17
         %187 = OpLabel
      %self_6 = OpVariable %_ptr_Function_DoWhileNested Function
         %189 = OpFunctionCall %void %DoWhileNested_DefaultConstructor %self_6

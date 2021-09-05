@@ -54,28 +54,28 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_1 = OpConstant %int 1
+      %int_0 = OpConstant %int 0
   %DoWhileIf = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_DoWhileIf = OpTypePointer Function %DoWhileIf
-          %9 = OpTypeFunction %void %_ptr_Function_DoWhileIf
-         %11 = OpTypeFunction %int %_ptr_Function_DoWhileIf
+         %11 = OpTypeFunction %void %_ptr_Function_DoWhileIf
+         %13 = OpTypeFunction %int %_ptr_Function_DoWhileIf
 %_ptr_Function_int = OpTypePointer Function %int
        %bool = OpTypeBool
-         %15 = OpTypeFunction %void
-      %int_1 = OpConstant %int 1
-      %int_0 = OpConstant %int 0
-%DoWhileIf_PreConstructor = OpFunction %void None %9
+         %17 = OpTypeFunction %void
+%DoWhileIf_PreConstructor = OpFunction %void None %11
        %self = OpFunctionParameter %_ptr_Function_DoWhileIf
          %22 = OpLabel
                OpReturn
                OpFunctionEnd
-%DoWhileIf_DefaultConstructor = OpFunction %void None %9
+%DoWhileIf_DefaultConstructor = OpFunction %void None %11
      %self_0 = OpFunctionParameter %_ptr_Function_DoWhileIf
          %27 = OpLabel
          %28 = OpFunctionCall %void %DoWhileIf_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
- %DoWhileIf0 = OpFunction %int None %11
+ %DoWhileIf0 = OpFunction %int None %13
      %self_1 = OpFunctionParameter %_ptr_Function_DoWhileIf
          %33 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -104,7 +104,7 @@
          %57 = OpLoad %int %a
                OpReturnValue %57
                OpFunctionEnd
- %DoWhileIf1 = OpFunction %int None %11
+ %DoWhileIf1 = OpFunction %int None %13
      %self_2 = OpFunctionParameter %_ptr_Function_DoWhileIf
          %62 = OpLabel
         %a_0 = OpVariable %_ptr_Function_int Function
@@ -133,7 +133,7 @@
          %86 = OpLoad %int %a_0
                OpReturnValue %86
                OpFunctionEnd
- %DoWhileIf2 = OpFunction %int None %11
+ %DoWhileIf2 = OpFunction %int None %13
      %self_3 = OpFunctionParameter %_ptr_Function_DoWhileIf
          %91 = OpLabel
         %a_1 = OpVariable %_ptr_Function_int Function
@@ -174,7 +174,7 @@
         %127 = OpLoad %int %a_1
                OpReturnValue %127
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %11
      %self_4 = OpFunctionParameter %_ptr_Function_DoWhileIf
         %132 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -187,7 +187,7 @@
                OpStore %ret %139
                OpReturn
                OpFunctionEnd
-%DoWhileIf_Main_EntryPoint = OpFunction %void None %15
+%DoWhileIf_Main_EntryPoint = OpFunction %void None %17
         %144 = OpLabel
      %self_5 = OpVariable %_ptr_Function_DoWhileIf Function
         %146 = OpFunctionCall %void %DoWhileIf_DefaultConstructor %self_5

@@ -23,25 +23,25 @@
                OpName %BooleanUnaryOps_Main_EntryPoint "BooleanUnaryOps_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
 %BooleanUnaryOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_BooleanUnaryOps = OpTypePointer Function %BooleanUnaryOps
-          %7 = OpTypeFunction %void %_ptr_Function_BooleanUnaryOps
+          %8 = OpTypeFunction %void %_ptr_Function_BooleanUnaryOps
 %_ptr_Function_bool = OpTypePointer Function %bool
-          %9 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-%BooleanUnaryOps_PreConstructor = OpFunction %void None %7
+         %10 = OpTypeFunction %void
+%BooleanUnaryOps_PreConstructor = OpFunction %void None %8
        %self = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
          %15 = OpLabel
                OpReturn
                OpFunctionEnd
-%BooleanUnaryOps_DefaultConstructor = OpFunction %void None %7
+%BooleanUnaryOps_DefaultConstructor = OpFunction %void None %8
      %self_0 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
          %20 = OpLabel
          %21 = OpFunctionCall %void %BooleanUnaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %8
      %self_1 = OpFunctionParameter %_ptr_Function_BooleanUnaryOps
          %26 = OpLabel
           %b = OpVariable %_ptr_Function_bool Function
@@ -52,7 +52,7 @@
                OpStore %r %31
                OpReturn
                OpFunctionEnd
-%BooleanUnaryOps_Main_EntryPoint = OpFunction %void None %9
+%BooleanUnaryOps_Main_EntryPoint = OpFunction %void None %10
          %36 = OpLabel
      %self_2 = OpVariable %_ptr_Function_BooleanUnaryOps Function
          %38 = OpFunctionCall %void %BooleanUnaryOps_DefaultConstructor %self_2

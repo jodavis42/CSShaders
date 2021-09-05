@@ -33,29 +33,29 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
        %bool = OpTypeBool
+       %true = OpConstantTrue %bool
+      %int_1 = OpConstant %int 1
     %IfBasic = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_IfBasic = OpTypePointer Function %IfBasic
-         %11 = OpTypeFunction %void %_ptr_Function_IfBasic
-         %13 = OpTypeFunction %int %_ptr_Function_IfBasic
+         %14 = OpTypeFunction %void %_ptr_Function_IfBasic
+         %16 = OpTypeFunction %int %_ptr_Function_IfBasic
 %_ptr_Function_int = OpTypePointer Function %int
-         %15 = OpTypeFunction %void
-      %int_0 = OpConstant %int 0
-       %true = OpConstantTrue %bool
-      %int_1 = OpConstant %int 1
-%IfBasic_PreConstructor = OpFunction %void None %11
+         %18 = OpTypeFunction %void
+%IfBasic_PreConstructor = OpFunction %void None %14
        %self = OpFunctionParameter %_ptr_Function_IfBasic
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%IfBasic_DefaultConstructor = OpFunction %void None %11
+%IfBasic_DefaultConstructor = OpFunction %void None %14
      %self_0 = OpFunctionParameter %_ptr_Function_IfBasic
          %28 = OpLabel
          %29 = OpFunctionCall %void %IfBasic_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-        %If0 = OpFunction %int None %13
+        %If0 = OpFunction %int None %16
      %self_1 = OpFunctionParameter %_ptr_Function_IfBasic
          %34 = OpLabel
           %a = OpVariable %_ptr_Function_int Function
@@ -69,7 +69,7 @@
          %43 = OpLoad %int %a
                OpReturnValue %43
                OpFunctionEnd
-        %If1 = OpFunction %int None %13
+        %If1 = OpFunction %int None %16
      %self_2 = OpFunctionParameter %_ptr_Function_IfBasic
          %48 = OpLabel
         %a_0 = OpVariable %_ptr_Function_int Function
@@ -86,7 +86,7 @@
          %60 = OpLoad %int %a_0
                OpReturnValue %60
                OpFunctionEnd
-       %Main = OpFunction %void None %11
+       %Main = OpFunction %void None %14
      %self_3 = OpFunctionParameter %_ptr_Function_IfBasic
          %65 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -97,7 +97,7 @@
                OpStore %ret %70
                OpReturn
                OpFunctionEnd
-%IfBasic_Main_EntryPoint = OpFunction %void None %15
+%IfBasic_Main_EntryPoint = OpFunction %void None %18
          %75 = OpLabel
      %self_4 = OpVariable %_ptr_Function_IfBasic Function
          %77 = OpFunctionCall %void %IfBasic_DefaultConstructor %self_4

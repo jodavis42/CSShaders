@@ -11,6 +11,7 @@
                OpSource Unknown 100
                OpName %SimpleFloatImage2d "SimpleFloatImage2d"
                OpName %SimpleSampledFloatImage2d "SimpleSampledFloatImage2d"
+               OpName %SimpleSampledFloatImage2d_0 "SimpleSampledFloatImage2d"
                OpName %SimpleImageIntrinsicFunction "SimpleImageIntrinsicFunction"
                OpName %Vector2 "Vector2"
                OpName %Vector4 "Vector4"
@@ -24,37 +25,36 @@
                OpName %value "value"
                OpName %SimpleImageIntrinsicFunction_Main_EntryPoint "SimpleImageIntrinsicFunction_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %SimpleSampledFloatImage2d_0 "SimpleSampledFloatImage2d"
                OpName %SimpleImageIntrinsicFunction_Main_EntryPoint "SimpleImageIntrinsicFunction_Main_EntryPoint"
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %SimpleFloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
 %SimpleSampledFloatImage2d = OpTypeSampledImage %SimpleFloatImage2d
 %_ptr_UniformConstant_SimpleSampledFloatImage2d = OpTypePointer UniformConstant %SimpleSampledFloatImage2d
+%SimpleSampledFloatImage2d_0 = OpVariable %_ptr_UniformConstant_SimpleSampledFloatImage2d UniformConstant
 %SimpleImageIntrinsicFunction = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_SimpleImageIntrinsicFunction = OpTypePointer Function %SimpleImageIntrinsicFunction
-         %14 = OpTypeFunction %void %_ptr_Function_SimpleImageIntrinsicFunction
+         %16 = OpTypeFunction %void %_ptr_Function_SimpleImageIntrinsicFunction
     %Vector2 = OpTypeVector %float 2
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-         %20 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%SimpleSampledFloatImage2d_0 = OpVariable %_ptr_UniformConstant_SimpleSampledFloatImage2d UniformConstant
-%SimpleImageIntrinsicFunction_PreConstructor = OpFunction %void None %14
+         %22 = OpTypeFunction %void
+%SimpleImageIntrinsicFunction_PreConstructor = OpFunction %void None %16
        %self = OpFunctionParameter %_ptr_Function_SimpleImageIntrinsicFunction
          %27 = OpLabel
                OpReturn
                OpFunctionEnd
-%SimpleImageIntrinsicFunction_DefaultConstructor = OpFunction %void None %14
+%SimpleImageIntrinsicFunction_DefaultConstructor = OpFunction %void None %16
      %self_0 = OpFunctionParameter %_ptr_Function_SimpleImageIntrinsicFunction
          %32 = OpLabel
          %33 = OpFunctionCall %void %SimpleImageIntrinsicFunction_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %14
+       %Main = OpFunction %void None %16
      %self_1 = OpFunctionParameter %_ptr_Function_SimpleImageIntrinsicFunction
          %38 = OpLabel
         %uvs = OpVariable %_ptr_Function_Vector2 Function
@@ -67,7 +67,7 @@
                OpStore %value %45
                OpReturn
                OpFunctionEnd
-%SimpleImageIntrinsicFunction_Main_EntryPoint = OpFunction %void None %20
+%SimpleImageIntrinsicFunction_Main_EntryPoint = OpFunction %void None %22
          %50 = OpLabel
      %self_2 = OpVariable %_ptr_Function_SimpleImageIntrinsicFunction Function
          %52 = OpFunctionCall %void %SimpleImageIntrinsicFunction_DefaultConstructor %self_2

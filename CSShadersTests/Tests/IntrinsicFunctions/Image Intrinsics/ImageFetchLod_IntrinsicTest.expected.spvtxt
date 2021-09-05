@@ -10,7 +10,9 @@
                OpExecutionMode %OpImageFetchTest_Main_EntryPoint OriginUpperLeft
                OpSource Unknown 100
                OpName %FloatImage2d "FloatImage2d"
+               OpName %FloatImage2dVal "FloatImage2dVal"
                OpName %FloatSampledImage2d "FloatSampledImage2d"
+               OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
                OpName %OpImageFetchTest "OpImageFetchTest"
                OpName %Vector4 "Vector4"
                OpName %Integer2 "Integer2"
@@ -25,43 +27,41 @@
                OpName %intVal "intVal"
                OpName %OpImageFetchTest_Main_EntryPoint "OpImageFetchTest_Main_EntryPoint"
                OpName %self_2 "self"
-               OpName %FloatImage2dVal "FloatImage2dVal"
-               OpName %FloatSampledImage2dVal "FloatSampledImage2dVal"
                OpName %OpImageFetchTest_Main_EntryPoint "OpImageFetchTest_Main_EntryPoint"
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
         %int = OpTypeInt 32 1
+      %int_0 = OpConstant %int 0
 %FloatImage2d = OpTypeImage %float 2D 0 0 0 1 Unknown
 %_ptr_UniformConstant_FloatImage2d = OpTypePointer UniformConstant %FloatImage2d
+%FloatImage2dVal = OpVariable %_ptr_UniformConstant_FloatImage2d UniformConstant
 %FloatSampledImage2d = OpTypeSampledImage %FloatImage2d
 %_ptr_UniformConstant_FloatSampledImage2d = OpTypePointer UniformConstant %FloatSampledImage2d
+%FloatSampledImage2dVal = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
 %OpImageFetchTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpImageFetchTest = OpTypePointer Function %OpImageFetchTest
-         %17 = OpTypeFunction %void %_ptr_Function_OpImageFetchTest
+         %21 = OpTypeFunction %void %_ptr_Function_OpImageFetchTest
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
    %Integer2 = OpTypeVector %int 2
 %_ptr_Function_Integer2 = OpTypePointer Function %Integer2
 %_ptr_Function_int = OpTypePointer Function %int
-         %23 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-      %int_0 = OpConstant %int 0
-%FloatImage2dVal = OpVariable %_ptr_UniformConstant_FloatImage2d UniformConstant
-%FloatSampledImage2dVal = OpVariable %_ptr_UniformConstant_FloatSampledImage2d UniformConstant
-%OpImageFetchTest_PreConstructor = OpFunction %void None %17
+         %27 = OpTypeFunction %void
+%OpImageFetchTest_PreConstructor = OpFunction %void None %21
        %self = OpFunctionParameter %_ptr_Function_OpImageFetchTest
          %32 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpImageFetchTest_DefaultConstructor = OpFunction %void None %17
+%OpImageFetchTest_DefaultConstructor = OpFunction %void None %21
      %self_0 = OpFunctionParameter %_ptr_Function_OpImageFetchTest
          %37 = OpLabel
          %38 = OpFunctionCall %void %OpImageFetchTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %17
+       %Main = OpFunction %void None %21
      %self_1 = OpFunctionParameter %_ptr_Function_OpImageFetchTest
          %43 = OpLabel
  %vector4Val = OpVariable %_ptr_Function_Vector4 Function
@@ -85,7 +85,7 @@
                OpStore %vector4Val %61
                OpReturn
                OpFunctionEnd
-%OpImageFetchTest_Main_EntryPoint = OpFunction %void None %23
+%OpImageFetchTest_Main_EntryPoint = OpFunction %void None %27
          %66 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpImageFetchTest Function
          %68 = OpFunctionCall %void %OpImageFetchTest_DefaultConstructor %self_2

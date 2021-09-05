@@ -28,10 +28,11 @@
                OpName %OpAllTest_Main_EntryPoint "OpAllTest_Main_EntryPoint"
                OpName %self_2 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
   %OpAllTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpAllTest = OpTypePointer Function %OpAllTest
-          %7 = OpTypeFunction %void %_ptr_Function_OpAllTest
+          %8 = OpTypeFunction %void %_ptr_Function_OpAllTest
 %_ptr_Function_bool = OpTypePointer Function %bool
        %uint = OpTypeInt 32 0
       %Bool2 = OpTypeVector %bool 2
@@ -40,20 +41,19 @@
 %_ptr_Function_Bool3 = OpTypePointer Function %Bool3
       %Bool4 = OpTypeVector %bool 4
 %_ptr_Function_Bool4 = OpTypePointer Function %Bool4
-         %17 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-%OpAllTest_PreConstructor = OpFunction %void None %7
+         %18 = OpTypeFunction %void
+%OpAllTest_PreConstructor = OpFunction %void None %8
        %self = OpFunctionParameter %_ptr_Function_OpAllTest
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpAllTest_DefaultConstructor = OpFunction %void None %7
+%OpAllTest_DefaultConstructor = OpFunction %void None %8
      %self_0 = OpFunctionParameter %_ptr_Function_OpAllTest
          %28 = OpLabel
          %29 = OpFunctionCall %void %OpAllTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %8
      %self_1 = OpFunctionParameter %_ptr_Function_OpAllTest
          %34 = OpLabel
     %boolVal = OpVariable %_ptr_Function_bool Function
@@ -78,7 +78,7 @@
                OpStore %boolVal %53
                OpReturn
                OpFunctionEnd
-%OpAllTest_Main_EntryPoint = OpFunction %void None %17
+%OpAllTest_Main_EntryPoint = OpFunction %void None %18
          %58 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpAllTest Function
          %60 = OpFunctionCall %void %OpAllTest_DefaultConstructor %self_2

@@ -24,32 +24,32 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
     %Float32 = OpTypeFloat 32
+  %Float32_0 = OpConstant %Float32 0
 %Float32PrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_Float32PrimitiveDeclarationTest = OpTypePointer Function %Float32PrimitiveDeclarationTest
-          %9 = OpTypeFunction %void %_ptr_Function_Float32PrimitiveDeclarationTest
+         %10 = OpTypeFunction %void %_ptr_Function_Float32PrimitiveDeclarationTest
 %_ptr_Function_Float32 = OpTypePointer Function %Float32
-         %11 = OpTypeFunction %void
-  %Float32_0 = OpConstant %Float32 0
-%Float32PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %9
+         %12 = OpTypeFunction %void
+%Float32PrimitiveDeclarationTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
          %17 = OpLabel
                OpReturn
                OpFunctionEnd
-%Float32PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %9
+%Float32PrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
          %22 = OpLabel
          %23 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_Float32PrimitiveDeclarationTest
          %28 = OpLabel
  %float32Val = OpVariable %_ptr_Function_Float32 Function
                OpStore %float32Val %Float32_0
                OpReturn
                OpFunctionEnd
-%Float32PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %11
+%Float32PrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %12
          %34 = OpLabel
      %self_2 = OpVariable %_ptr_Function_Float32PrimitiveDeclarationTest Function
          %36 = OpFunctionCall %void %Float32PrimitiveDeclarationTest_DefaultConstructor %self_2

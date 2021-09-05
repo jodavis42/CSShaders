@@ -25,27 +25,27 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %TestVectorPrimitive = OpTypeVector %float 2
 %TestMatrixPrimitive = OpTypeMatrix %TestVectorPrimitive 2
 %MatrixPrimitiveDeclarationTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_MatrixPrimitiveDeclarationTest = OpTypePointer Function %MatrixPrimitiveDeclarationTest
-         %13 = OpTypeFunction %void %_ptr_Function_MatrixPrimitiveDeclarationTest
+         %14 = OpTypeFunction %void %_ptr_Function_MatrixPrimitiveDeclarationTest
 %_ptr_Function_TestMatrixPrimitive = OpTypePointer Function %TestMatrixPrimitive
-         %15 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%MatrixPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %13
+         %16 = OpTypeFunction %void
+%MatrixPrimitiveDeclarationTest_PreConstructor = OpFunction %void None %14
        %self = OpFunctionParameter %_ptr_Function_MatrixPrimitiveDeclarationTest
          %21 = OpLabel
                OpReturn
                OpFunctionEnd
-%MatrixPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %13
+%MatrixPrimitiveDeclarationTest_DefaultConstructor = OpFunction %void None %14
      %self_0 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveDeclarationTest
          %26 = OpLabel
          %27 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %13
+       %Main = OpFunction %void None %14
      %self_1 = OpFunctionParameter %_ptr_Function_MatrixPrimitiveDeclarationTest
          %32 = OpLabel
     %matrix0 = OpVariable %_ptr_Function_TestMatrixPrimitive Function
@@ -54,7 +54,7 @@
                OpStore %matrix0 %35
                OpReturn
                OpFunctionEnd
-%MatrixPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %15
+%MatrixPrimitiveDeclarationTest_Main_EntryPoint = OpFunction %void None %16
          %40 = OpLabel
      %self_2 = OpVariable %_ptr_Function_MatrixPrimitiveDeclarationTest Function
          %42 = OpFunctionCall %void %MatrixPrimitiveDeclarationTest_DefaultConstructor %self_2

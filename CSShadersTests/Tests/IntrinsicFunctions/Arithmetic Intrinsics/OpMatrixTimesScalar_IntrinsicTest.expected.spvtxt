@@ -36,31 +36,31 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %OpMatrixTimesScalarTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpMatrixTimesScalarTest = OpTypePointer Function %OpMatrixTimesScalarTest
-          %9 = OpTypeFunction %void %_ptr_Function_OpMatrixTimesScalarTest
+         %10 = OpTypeFunction %void %_ptr_Function_OpMatrixTimesScalarTest
     %Vector2 = OpTypeVector %float 2
    %Float2x2 = OpTypeMatrix %Vector2 2
 %_ptr_Function_Float2x2 = OpTypePointer Function %Float2x2
-         %15 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
+         %16 = OpTypeFunction %void %_ptr_Function_Float2x2 %float
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
-         %17 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
+         %18 = OpTypeFunction %void %_ptr_Function_Float2x2 %float %float %float %float
 %_ptr_Function_float = OpTypePointer Function %float
-         %19 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%OpMatrixTimesScalarTest_PreConstructor = OpFunction %void None %9
+         %20 = OpTypeFunction %void
+%OpMatrixTimesScalarTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_OpMatrixTimesScalarTest
          %25 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpMatrixTimesScalarTest_DefaultConstructor = OpFunction %void None %9
+%OpMatrixTimesScalarTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_OpMatrixTimesScalarTest
          %30 = OpLabel
          %31 = OpFunctionCall %void %OpMatrixTimesScalarTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_OpMatrixTimesScalarTest
          %36 = OpLabel
 %float2x2Val = OpVariable %_ptr_Function_Float2x2 Function
@@ -75,7 +75,7 @@
                OpStore %float2x2Val %45
                OpReturn
                OpFunctionEnd
-%Float2x2_Constructor = OpFunction %void None %15
+%Float2x2_Constructor = OpFunction %void None %16
      %self_2 = OpFunctionParameter %_ptr_Function_Float2x2
       %value = OpFunctionParameter %float
          %52 = OpLabel
@@ -88,7 +88,7 @@
                OpStore %self_2 %58
                OpReturn
                OpFunctionEnd
-%Float2x2_Constructor_0 = OpFunction %void None %17
+%Float2x2_Constructor_0 = OpFunction %void None %18
      %self_3 = OpFunctionParameter %_ptr_Function_Float2x2
         %m00 = OpFunctionParameter %float
         %m01 = OpFunctionParameter %float
@@ -101,7 +101,7 @@
                OpStore %self_3 %71
                OpReturn
                OpFunctionEnd
-%OpMatrixTimesScalarTest_Main_EntryPoint = OpFunction %void None %19
+%OpMatrixTimesScalarTest_Main_EntryPoint = OpFunction %void None %20
          %76 = OpLabel
      %self_4 = OpVariable %_ptr_Function_OpMatrixTimesScalarTest Function
          %78 = OpFunctionCall %void %OpMatrixTimesScalarTest_DefaultConstructor %self_4

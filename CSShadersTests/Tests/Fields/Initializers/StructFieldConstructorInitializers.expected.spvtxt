@@ -33,33 +33,33 @@
                OpName %self_5 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-  %SubStruct = OpTypeStruct %int
-       %void = OpTypeVoid
-%_ptr_Function_SubStruct = OpTypePointer Function %SubStruct
-          %9 = OpTypeFunction %void %_ptr_Function_SubStruct
-%_ptr_Function_int = OpTypePointer Function %int
-         %11 = OpTypeFunction %void %_ptr_Function_SubStruct %int
-%StructFieldConstructorInitializers = OpTypeStruct %SubStruct
-%_ptr_Function_StructFieldConstructorInitializers = OpTypePointer Function %StructFieldConstructorInitializers
-         %15 = OpTypeFunction %void %_ptr_Function_StructFieldConstructorInitializers
-         %17 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
      %uint_0 = OpConstant %uint 0
       %int_1 = OpConstant %int 1
-%SubStruct_PreConstructor = OpFunction %void None %9
+  %SubStruct = OpTypeStruct %int
+       %void = OpTypeVoid
+%_ptr_Function_SubStruct = OpTypePointer Function %SubStruct
+         %12 = OpTypeFunction %void %_ptr_Function_SubStruct
+%_ptr_Function_int = OpTypePointer Function %int
+         %14 = OpTypeFunction %void %_ptr_Function_SubStruct %int
+%StructFieldConstructorInitializers = OpTypeStruct %SubStruct
+%_ptr_Function_StructFieldConstructorInitializers = OpTypePointer Function %StructFieldConstructorInitializers
+         %18 = OpTypeFunction %void %_ptr_Function_StructFieldConstructorInitializers
+         %20 = OpTypeFunction %void
+%SubStruct_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_SubStruct
          %25 = OpLabel
          %26 = OpAccessChain %_ptr_Function_int %self %uint_0
                OpStore %26 %int_0
                OpReturn
                OpFunctionEnd
-%SubStruct_DefaultConstructor = OpFunction %void None %9
+%SubStruct_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_SubStruct
          %32 = OpLabel
          %33 = OpFunctionCall %void %SubStruct_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%SubStruct_Constructor = OpFunction %void None %11
+%SubStruct_Constructor = OpFunction %void None %14
      %self_1 = OpFunctionParameter %_ptr_Function_SubStruct
       %value = OpFunctionParameter %int
          %39 = OpLabel
@@ -67,7 +67,7 @@
                OpStore %40 %value
                OpReturn
                OpFunctionEnd
-%StructFieldConstructorInitializers_PreConstructor = OpFunction %void None %15
+%StructFieldConstructorInitializers_PreConstructor = OpFunction %void None %18
      %self_2 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
          %46 = OpLabel
 %tempSubStruct = OpVariable %_ptr_Function_SubStruct Function
@@ -77,18 +77,18 @@
                OpStore %50 %49
                OpReturn
                OpFunctionEnd
-%StructFieldConstructorInitializers_DefaultConstructor = OpFunction %void None %15
+%StructFieldConstructorInitializers_DefaultConstructor = OpFunction %void None %18
      %self_3 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
          %56 = OpLabel
          %57 = OpFunctionCall %void %StructFieldConstructorInitializers_PreConstructor %self_3
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %15
+       %Main = OpFunction %void None %18
      %self_4 = OpFunctionParameter %_ptr_Function_StructFieldConstructorInitializers
          %62 = OpLabel
                OpReturn
                OpFunctionEnd
-%StructFieldConstructorInitializers_Main_EntryPoint = OpFunction %void None %17
+%StructFieldConstructorInitializers_Main_EntryPoint = OpFunction %void None %20
          %66 = OpLabel
      %self_5 = OpVariable %_ptr_Function_StructFieldConstructorInitializers Function
          %68 = OpFunctionCall %void %StructFieldConstructorInitializers_DefaultConstructor %self_5

@@ -58,33 +58,33 @@
                OpName %ComplexLogicalAndOr_Main_EntryPoint "ComplexLogicalAndOr_Main_EntryPoint"
                OpName %self_6 "self"
        %bool = OpTypeBool
+      %false = OpConstantFalse %bool
+       %true = OpConstantTrue %bool
 %ComplexLogicalAndOr = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_ComplexLogicalAndOr = OpTypePointer Function %ComplexLogicalAndOr
-          %7 = OpTypeFunction %void %_ptr_Function_ComplexLogicalAndOr
-          %9 = OpTypeFunction %bool %_ptr_Function_ComplexLogicalAndOr
+          %9 = OpTypeFunction %void %_ptr_Function_ComplexLogicalAndOr
+         %11 = OpTypeFunction %bool %_ptr_Function_ComplexLogicalAndOr
 %_ptr_Function_bool = OpTypePointer Function %bool
        %uint = OpTypeInt 32 0
-         %13 = OpTypeFunction %void
-      %false = OpConstantFalse %bool
-       %true = OpConstantTrue %bool
-%ComplexLogicalAndOr_PreConstructor = OpFunction %void None %7
+         %15 = OpTypeFunction %void
+%ComplexLogicalAndOr_PreConstructor = OpFunction %void None %9
        %self = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
          %20 = OpLabel
                OpReturn
                OpFunctionEnd
-%ComplexLogicalAndOr_DefaultConstructor = OpFunction %void None %7
+%ComplexLogicalAndOr_DefaultConstructor = OpFunction %void None %9
      %self_0 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
          %25 = OpLabel
          %26 = OpFunctionCall %void %ComplexLogicalAndOr_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-    %GetBool = OpFunction %bool None %9
+    %GetBool = OpFunction %bool None %11
      %self_1 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
          %31 = OpLabel
                OpReturnValue %false
                OpFunctionEnd
-%LogicalOrAnd0 = OpFunction %bool None %9
+%LogicalOrAnd0 = OpFunction %bool None %11
      %self_2 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
          %36 = OpLabel
      %tempOr = OpVariable %_ptr_Function_bool Function
@@ -111,7 +111,7 @@
          %58 = OpLoad %bool %tempOr
                OpReturnValue %58
                OpFunctionEnd
-%LogicalOrAnd1 = OpFunction %bool None %9
+%LogicalOrAnd1 = OpFunction %bool None %11
      %self_3 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
          %63 = OpLabel
    %tempOr_0 = OpVariable %_ptr_Function_bool Function
@@ -138,7 +138,7 @@
          %85 = OpLoad %bool %tempAnd_0
                OpReturnValue %85
                OpFunctionEnd
-%LogicalOrAnd2 = OpFunction %bool None %9
+%LogicalOrAnd2 = OpFunction %bool None %11
      %self_4 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
          %90 = OpLabel
    %tempOr_1 = OpVariable %_ptr_Function_bool Function
@@ -178,7 +178,7 @@
         %125 = OpLoad %bool %tempAnd_1
                OpReturnValue %125
                OpFunctionEnd
-       %Main = OpFunction %void None %7
+       %Main = OpFunction %void None %9
      %self_5 = OpFunctionParameter %_ptr_Function_ComplexLogicalAndOr
         %130 = OpLabel
         %ret = OpVariable %_ptr_Function_bool Function
@@ -191,7 +191,7 @@
                OpStore %ret %137
                OpReturn
                OpFunctionEnd
-%ComplexLogicalAndOr_Main_EntryPoint = OpFunction %void None %13
+%ComplexLogicalAndOr_Main_EntryPoint = OpFunction %void None %15
         %142 = OpLabel
      %self_6 = OpVariable %_ptr_Function_ComplexLogicalAndOr Function
         %144 = OpFunctionCall %void %ComplexLogicalAndOr_DefaultConstructor %self_6

@@ -29,10 +29,11 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
  %OpFRemTest = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_OpFRemTest = OpTypePointer Function %OpFRemTest
-          %9 = OpTypeFunction %void %_ptr_Function_OpFRemTest
+         %10 = OpTypeFunction %void %_ptr_Function_OpFRemTest
 %_ptr_Function_float = OpTypePointer Function %float
     %Vector2 = OpTypeVector %float 2
 %_ptr_Function_Vector2 = OpTypePointer Function %Vector2
@@ -40,20 +41,19 @@
 %_ptr_Function_Vector3 = OpTypePointer Function %Vector3
     %Vector4 = OpTypeVector %float 4
 %_ptr_Function_Vector4 = OpTypePointer Function %Vector4
-         %17 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%OpFRemTest_PreConstructor = OpFunction %void None %9
+         %18 = OpTypeFunction %void
+%OpFRemTest_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_OpFRemTest
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%OpFRemTest_DefaultConstructor = OpFunction %void None %9
+%OpFRemTest_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_OpFRemTest
          %28 = OpLabel
          %29 = OpFunctionCall %void %OpFRemTest_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_OpFRemTest
          %34 = OpLabel
    %floatVal = OpVariable %_ptr_Function_float Function
@@ -85,7 +85,7 @@
                OpStore %vector4Val %60
                OpReturn
                OpFunctionEnd
-%OpFRemTest_Main_EntryPoint = OpFunction %void None %17
+%OpFRemTest_Main_EntryPoint = OpFunction %void None %18
          %65 = OpLabel
      %self_2 = OpVariable %_ptr_Function_OpFRemTest Function
          %67 = OpFunctionCall %void %OpFRemTest_DefaultConstructor %self_2

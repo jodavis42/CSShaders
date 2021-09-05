@@ -24,25 +24,25 @@
                OpName %self_2 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
+    %float_0 = OpConstant %float 0
 %FloatUnaryOps = OpTypeStruct
        %void = OpTypeVoid
 %_ptr_Function_FloatUnaryOps = OpTypePointer Function %FloatUnaryOps
-          %9 = OpTypeFunction %void %_ptr_Function_FloatUnaryOps
+         %10 = OpTypeFunction %void %_ptr_Function_FloatUnaryOps
 %_ptr_Function_float = OpTypePointer Function %float
-         %11 = OpTypeFunction %void
-    %float_0 = OpConstant %float 0
-%FloatUnaryOps_PreConstructor = OpFunction %void None %9
+         %12 = OpTypeFunction %void
+%FloatUnaryOps_PreConstructor = OpFunction %void None %10
        %self = OpFunctionParameter %_ptr_Function_FloatUnaryOps
          %17 = OpLabel
                OpReturn
                OpFunctionEnd
-%FloatUnaryOps_DefaultConstructor = OpFunction %void None %9
+%FloatUnaryOps_DefaultConstructor = OpFunction %void None %10
      %self_0 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
          %22 = OpLabel
          %23 = OpFunctionCall %void %FloatUnaryOps_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %10
      %self_1 = OpFunctionParameter %_ptr_Function_FloatUnaryOps
          %28 = OpLabel
           %f = OpVariable %_ptr_Function_float Function
@@ -53,7 +53,7 @@
                OpStore %r %33
                OpReturn
                OpFunctionEnd
-%FloatUnaryOps_Main_EntryPoint = OpFunction %void None %11
+%FloatUnaryOps_Main_EntryPoint = OpFunction %void None %12
          %38 = OpLabel
      %self_2 = OpVariable %_ptr_Function_FloatUnaryOps Function
          %40 = OpFunctionCall %void %FloatUnaryOps_DefaultConstructor %self_2

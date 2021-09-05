@@ -35,20 +35,20 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
       %float = OpTypeFloat 32
-     %TestV2 = OpTypeStruct %float %float
-       %void = OpTypeVoid
-%_ptr_Function_TestV2 = OpTypePointer Function %TestV2
-          %9 = OpTypeFunction %void %_ptr_Function_TestV2
-%_ptr_Function_float = OpTypePointer Function %float
-         %11 = OpTypeFunction %TestV2 %TestV2
-%StructUnaryOp = OpTypeStruct
-%_ptr_Function_StructUnaryOp = OpTypePointer Function %StructUnaryOp
-         %15 = OpTypeFunction %void %_ptr_Function_StructUnaryOp
-         %17 = OpTypeFunction %void
     %float_0 = OpConstant %float 0
      %uint_0 = OpConstant %uint 0
      %uint_1 = OpConstant %uint 1
-%TestV2_PreConstructor = OpFunction %void None %9
+     %TestV2 = OpTypeStruct %float %float
+       %void = OpTypeVoid
+%_ptr_Function_TestV2 = OpTypePointer Function %TestV2
+         %12 = OpTypeFunction %void %_ptr_Function_TestV2
+%_ptr_Function_float = OpTypePointer Function %float
+         %14 = OpTypeFunction %TestV2 %TestV2
+%StructUnaryOp = OpTypeStruct
+%_ptr_Function_StructUnaryOp = OpTypePointer Function %StructUnaryOp
+         %18 = OpTypeFunction %void %_ptr_Function_StructUnaryOp
+         %20 = OpTypeFunction %void
+%TestV2_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_TestV2
          %25 = OpLabel
          %26 = OpAccessChain %_ptr_Function_float %self %uint_0
@@ -57,13 +57,13 @@
                OpStore %28 %float_0
                OpReturn
                OpFunctionEnd
-%TestV2_DefaultConstructor = OpFunction %void None %9
+%TestV2_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_TestV2
          %34 = OpLabel
          %35 = OpFunctionCall %void %TestV2_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%op_UnaryNegation = OpFunction %TestV2 None %11
+%op_UnaryNegation = OpFunction %TestV2 None %14
       %value = OpFunctionParameter %TestV2
          %40 = OpLabel
      %result = OpVariable %_ptr_Function_TestV2 Function
@@ -82,18 +82,18 @@
          %54 = OpLoad %TestV2 %result
                OpReturnValue %54
                OpFunctionEnd
-%StructUnaryOp_PreConstructor = OpFunction %void None %15
+%StructUnaryOp_PreConstructor = OpFunction %void None %18
      %self_1 = OpFunctionParameter %_ptr_Function_StructUnaryOp
          %59 = OpLabel
                OpReturn
                OpFunctionEnd
-%StructUnaryOp_DefaultConstructor = OpFunction %void None %15
+%StructUnaryOp_DefaultConstructor = OpFunction %void None %18
      %self_2 = OpFunctionParameter %_ptr_Function_StructUnaryOp
          %64 = OpLabel
          %65 = OpFunctionCall %void %StructUnaryOp_PreConstructor %self_2
                OpReturn
                OpFunctionEnd
-       %Main = OpFunction %void None %15
+       %Main = OpFunction %void None %18
      %self_3 = OpFunctionParameter %_ptr_Function_StructUnaryOp
          %70 = OpLabel
    %result_0 = OpVariable %_ptr_Function_TestV2 Function
@@ -104,7 +104,7 @@
                OpStore %result_0 %75
                OpReturn
                OpFunctionEnd
-%StructUnaryOp_Main_EntryPoint = OpFunction %void None %17
+%StructUnaryOp_Main_EntryPoint = OpFunction %void None %20
          %80 = OpLabel
      %self_4 = OpVariable %_ptr_Function_StructUnaryOp Function
          %82 = OpFunctionCall %void %StructUnaryOp_DefaultConstructor %self_4

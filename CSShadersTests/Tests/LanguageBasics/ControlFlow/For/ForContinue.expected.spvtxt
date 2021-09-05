@@ -43,29 +43,29 @@
                OpName %self_4 "self"
        %uint = OpTypeInt 32 0
         %int = OpTypeInt 32 1
-%ForContinue = OpTypeStruct
-       %void = OpTypeVoid
-%_ptr_Function_ForContinue = OpTypePointer Function %ForContinue
-          %9 = OpTypeFunction %void %_ptr_Function_ForContinue
-         %11 = OpTypeFunction %int %_ptr_Function_ForContinue %int
-%_ptr_Function_int = OpTypePointer Function %int
-       %bool = OpTypeBool
-         %15 = OpTypeFunction %void
       %int_0 = OpConstant %int 0
       %int_1 = OpConstant %int 1
      %int_10 = OpConstant %int 10
-%ForContinue_PreConstructor = OpFunction %void None %9
+%ForContinue = OpTypeStruct
+       %void = OpTypeVoid
+%_ptr_Function_ForContinue = OpTypePointer Function %ForContinue
+         %12 = OpTypeFunction %void %_ptr_Function_ForContinue
+         %14 = OpTypeFunction %int %_ptr_Function_ForContinue %int
+%_ptr_Function_int = OpTypePointer Function %int
+       %bool = OpTypeBool
+         %18 = OpTypeFunction %void
+%ForContinue_PreConstructor = OpFunction %void None %12
        %self = OpFunctionParameter %_ptr_Function_ForContinue
          %23 = OpLabel
                OpReturn
                OpFunctionEnd
-%ForContinue_DefaultConstructor = OpFunction %void None %9
+%ForContinue_DefaultConstructor = OpFunction %void None %12
      %self_0 = OpFunctionParameter %_ptr_Function_ForContinue
          %28 = OpLabel
          %29 = OpFunctionCall %void %ForContinue_PreConstructor %self_0
                OpReturn
                OpFunctionEnd
-%ForContinue0 = OpFunction %int None %11
+%ForContinue0 = OpFunction %int None %14
      %self_1 = OpFunctionParameter %_ptr_Function_ForContinue
       %count = OpFunctionParameter %int
          %35 = OpLabel
@@ -92,7 +92,7 @@
          %56 = OpLoad %int %result
                OpReturnValue %56
                OpFunctionEnd
-%ForContinue1 = OpFunction %int None %11
+%ForContinue1 = OpFunction %int None %14
      %self_2 = OpFunctionParameter %_ptr_Function_ForContinue
     %count_0 = OpFunctionParameter %int
          %62 = OpLabel
@@ -122,7 +122,7 @@
          %86 = OpLoad %int %result_0
                OpReturnValue %86
                OpFunctionEnd
-       %Main = OpFunction %void None %9
+       %Main = OpFunction %void None %12
      %self_3 = OpFunctionParameter %_ptr_Function_ForContinue
          %91 = OpLabel
         %ret = OpVariable %_ptr_Function_int Function
@@ -133,7 +133,7 @@
                OpStore %ret %96
                OpReturn
                OpFunctionEnd
-%ForContinue_Main_EntryPoint = OpFunction %void None %15
+%ForContinue_Main_EntryPoint = OpFunction %void None %18
         %101 = OpLabel
      %self_4 = OpVariable %_ptr_Function_ForContinue Function
         %103 = OpFunctionCall %void %ForContinue_DefaultConstructor %self_4
