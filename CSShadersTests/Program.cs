@@ -17,6 +17,10 @@ namespace CSShadersTests
     public bool Verbose { get; set; } = false;
     [Option("visualDiff", Required = false, HelpText = "Should a visual differ be used")]
     public bool VisualDiff { get; set; } = false;
+    [Option("visualDiffTool", Required = false, HelpText = "Path to the visual diff tool to use")]
+    public string VisualDiffTool { get; set; } = null;
+    [Option("visualDiffToolArgs", Required = false, HelpText = "Arguments to use for the visual diff tool")]
+    public string VisualDiffToolArgs { get; set; } = null;
   }
 
   public class Context
@@ -57,7 +61,18 @@ namespace CSShadersTests
       if (!string.IsNullOrWhiteSpace(options.TestPath))
         path = options.TestPath;
 
-      var testRunner = new TestRunner() { ArtifactsDir = options.ArtifactsDir, VisualDiff = options.VisualDiff, Logger = context.Logger };
+
+      if (!string.IsNullOrEmpty(options.VisualDiffTool))
+        ToolSettings.VisualDiffToolPath = options.VisualDiffTool;
+      if (!string.IsNullOrEmpty(options.VisualDiffToolArgs))
+        ToolSettings.VisualDiffToolArgs = options.VisualDiffToolArgs;
+
+      var testRunner = new TestRunner()
+      {
+        ArtifactsDir = options.ArtifactsDir,
+        VisualDiff = options.VisualDiff,
+        Logger = context.Logger
+      };
       if (options.Verbose)
         testRunner.Logger.MessageVerbosity = ILogger.Verbosity.Verbose;
 

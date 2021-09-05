@@ -6,6 +6,12 @@ using System.Text;
 
 namespace CSShadersTests
 {
+  public static class ToolSettings
+  {
+    public static string VisualDiffToolPath = Path.Combine("Tools", "DiffUtil", "diff.exe");
+    public static string VisualDiffToolArgs = "\"{0}\" \"{1}\"";
+  }
+
   public class CommandLineTool
   {
     static protected string GenerateFilePath(string filePath, string newExtension, bool emitToTempDir = false)
@@ -65,8 +71,8 @@ namespace CSShadersTests
   public class VisualDiffTool : DiffTool
   {
     public bool VisualDisplay = false;
-    public string DiffToolLocation = "tortoisemerge.exe";
-    public string Arguments = "\"{0}\" \"{1}\"";
+    public string DiffToolLocation = ToolSettings.VisualDiffToolPath; 
+    public string Arguments = ToolSettings.VisualDiffToolArgs;
     public override bool Diff(string expected, string actual)
     {
       if (!File.Exists(expected))
