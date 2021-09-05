@@ -20,8 +20,8 @@ namespace CSShaders
       }
       foreach (var staticField in mOwningLibrary.mStaticGlobals.Values)
       {
-        mReferencedStatics.Add(staticField.InstanceOp);
         Visit(staticField.InstanceOp);
+        mReferencedTypesConstantsAndGlobals.Add(staticField.InstanceOp);
       }
       foreach (var type in mOwningLibrary.GetTypes())
       {
@@ -55,7 +55,7 @@ namespace CSShaders
       Visit(type.mParameters);
       Visit(type.mFields);
       // Only add this as a reference type once we finish walking fields/parameters. This is so we have guaranteed visit any nested types (or dereference types).
-      mReferencedTypes.Add(type);
+      mReferencedTypesConstantsAndGlobals.Add(type);
       VisitRequiredCapabilities(type);
 
       // Now visit the body of the functions and all of their ops
@@ -145,9 +145,10 @@ namespace CSShaders
 
     public void Visit(ShaderOp shaderOp)
     {
-      if (IsConstantOp(shaderOp))
-        mReferencedConstants.Add(shaderOp);
       Visit(shaderOp.mResultType);
+      if (IsConstantOp(shaderOp))
+        mReferencedTypesConstantsAndGlobals.Add(shaderOp);
+      
       foreach (var param in shaderOp.mParameters)
         Visit(param);
     }
@@ -161,9 +162,9 @@ namespace CSShaders
     {
       mEntryPoints.Add(entryPointInfo);
       foreach (var variable in entryPointInfo.mGlobalVariablesBlock.mLocalVariables)
-        mReferencedStatics.Add(variable as ShaderOp);
+        mReferencedTypesConstantsAndGlobals.Add(variable);
       foreach (var variable in entryPointInfo.mInterfaceVariables.mLocalVariables)
-        mReferencedStatics.Add(variable as ShaderOp);
+        mReferencedTypesConstantsAndGlobals.Add(variable);
       Visit(entryPointInfo.mGlobalVariablesBlock);
       Visit(entryPointInfo.mInterfaceVariables);
       Visit(entryPointInfo.mEntryPointFunction);
@@ -181,10 +182,8 @@ namespace CSShaders
 
     // Need a separate set to prevent infinite recursion but to not control the added order
     HashSet<ShaderType> mProcessedTypes = new HashSet<ShaderType>();
-    public OrderedSet<ShaderType> mReferencedTypes = new OrderedSet<ShaderType>();
     public OrderedSet<ShaderFunction> mReferencedFunctions = new OrderedSet<ShaderFunction>();
-    public OrderedSet<ShaderOp> mReferencedStatics = new OrderedSet<ShaderOp>();
-    public OrderedSet<ShaderOp> mReferencedConstants = new OrderedSet<ShaderOp>();
+    public OrderedSet<IShaderIR> mReferencedTypesConstantsAndGlobals = new OrderedSet<IShaderIR>();
     public OrderedSet<ExtensionLibraryImportOp> mReferencedExtensionLibraryImports = new OrderedSet<ExtensionLibraryImportOp>();
     public OrderedSet<ShaderEntryPointInfo> mEntryPoints = new OrderedSet<ShaderEntryPointInfo>();
     public OrderedSet<Spv.Capability> RequiredCapabilities = new OrderedSet<Spv.Capability>();

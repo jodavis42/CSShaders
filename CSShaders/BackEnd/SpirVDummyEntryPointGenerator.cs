@@ -7,10 +7,13 @@ namespace CSShaders
     public void CreateDummyEntryPoint(TypeDependencyCollector typeCollector, ShaderLibrary library, FrontEndTranslator frontEnd)
     {
       var unitTestTypes = new List<ShaderType>();
-      foreach (var type in typeCollector.mReferencedTypes)
+      foreach (var ir in typeCollector.mReferencedTypesConstantsAndGlobals)
       {
-        if (type.mMeta.mAttributes.Contains("UnitTest") && type.mEntryPoints.Count == 0)
-          unitTestTypes.Add(type);
+        if(ir is ShaderType type)
+        {
+          if (type.mMeta.mAttributes.Contains("UnitTest") && type.mEntryPoints.Count == 0)
+            unitTestTypes.Add(type);
+        }
       }
       foreach (var type in unitTestTypes)
         CreateDummyEntryPoint(typeCollector, library, frontEnd, type);
